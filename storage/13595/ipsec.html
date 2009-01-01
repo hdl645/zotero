@@ -1,0 +1,779 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.linuxdocs.info/linux-docs/bsd/Handbook/ipsec.html">
+<meta name="wpd_url" content="http://www.linuxdocs.info/linux-docs/bsd/Handbook/ipsec.html">
+<meta name="wpd_date" content="2008-06-02T16:59Z">
+
+
+
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>VPN over IPsec</title>
+<meta name="generator" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="FreeBSD 使用手册" href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/index.html">
+<link rel="UP" title="安全" href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/security.html">
+<link rel="PREVIOUS" title="OpenSSL" href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssl.html">
+<link rel="NEXT" title="OpenSSH" href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssh.html">
+
+
+
+<link rel="stylesheet" type="text/css" href="ipsec.css" media="all">
+</head>
+<body class="SECT1" text="#000000" vlink="#840084" alink="#0000ff" bgcolor="#ffffff" link="#0000ff">
+<div class="NAVHEADER">
+<table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<th colspan="3" align="center">FreeBSD 使用手册</th>
+</tr>
+
+<tr>
+<td valign="bottom" width="10%" align="left"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssl.html" accesskey="P">后退</a></td>
+<td valign="bottom" width="80%" align="center">章 14. 安全</td>
+<td valign="bottom" width="10%" align="right"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssh.html" accesskey="N">前进</a></td>
+</tr>
+</tbody></table>
+
+<hr width="100%" align="left">
+</div>
+
+<div class="SECT1">
+<h1 class="SECT1"><a id="IPSEC" name="IPSEC">14.10. VPN over IPsec</a></h1>
+
+<i class="AUTHORGROUP"><span class="CONTRIB">Written by</span> Nik Clayton.</i> 
+
+<p>Creating a VPN between two networks, separated by the Internet, using FreeBSD
+gateways.</p>
+
+<div class="SECT2">
+<h2 class="SECT2"><a id="AEN20578" name="AEN20578">14.10.1. Understanding IPsec</a></h2>
+
+<i class="AUTHORGROUP"><span class="CONTRIB">Written by</span> Hiten M. Pandya.</i> 
+
+<p>This section will guide you through the process of setting up IPsec, and to use it in
+an environment which consists of FreeBSD and <b class="APPLICATION"><span class="TRADEMARK">Microsoft</span>&reg;&nbsp;<span class="TRADEMARK">Windows</span>&reg;
+2000/XP</b> machines, to make them communicate securely. In order to set up IPsec, it is
+necessary that you are familiar with the concepts of building a custom kernel (see <a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/kernelconfig.html">&micro;&Uacute; 8 章</a>).</p>
+
+<p><span class="emphasis"><i class="EMPHASIS">IPsec</i></span> is a protocol which sits
+on top of the Internet Protocol (IP) layer. It allows two or more hosts to communicate in
+a secure manner (hence the name). The FreeBSD IPsec ``network stack'' is based on the <a href="http://www.kame.net/" target="_top">KAME</a> implementation, which has support for
+both protocol families, IPv4 and IPv6.</p>
+
+<div class="NOTE">
+<blockquote class="NOTE">
+<p><b>注:</b> FreeBSD 5.X contains a ``hardware accelerated'' IPsec stack, known as
+``Fast IPsec'', that was obtained from OpenBSD. It employs cryptographic hardware
+(whenever possible) via the <span class="CITEREFENTRY"><span class="REFENTRYTITLE">crypto</span>(4)</span> subsystem to optimize the performance of
+IPsec. This subsystem is new, and does not support all the features that are available in
+the KAME version of IPsec. However, in order to enable hardware-accelerated IPsec, the
+following kernel option has to be added to your kernel configuration file:</p>
+
+<pre class="SCREEN">options      FAST_IPSEC  # new IPsec (cannot define w/ IPSEC)
+       
+</pre>
+
+<p>Note, that it is not currently possible to use the ``Fast IPsec'' subsystem in lue
+with the KAME implementation of IPsec. Consult the <span class="CITEREFENTRY"><span class="REFENTRYTITLE">fast_ipsec</span>(4)</span> manual page for more information.</p>
+</blockquote>
+</div>
+
+<p>IPsec consists of two sub-protocols:</p>
+
+<ul>
+<li>
+<p><span class="emphasis"><i class="EMPHASIS">Encapsulated Security Payload
+(ESP)</i></span>, protects the IP packet data from third party interference, by
+encrypting the contents using symmetric cryptography algorithms (like Blowfish,
+3DES).</p>
+</li>
+
+<li>
+<p><span class="emphasis"><i class="EMPHASIS">Authentication Header (AH)</i></span>,
+protects the IP packet header from third party interference and spoofing, by computing a
+cryptographic checksum and hashing the IP packet header fields with a secure hashing
+function. This is then followed by an additional header that contains the hash, to allow
+the information in the packet to be authenticated.</p>
+</li>
+</ul>
+
+<p><acronym class="ACRONYM">ESP</acronym> and <acronym class="ACRONYM">AH</acronym> can
+either be used together or separately, depending on the environment.</p>
+
+<p>IPsec can either be used to directly encrypt the traffic between two hosts (known as
+<span class="emphasis"><i class="EMPHASIS">Transport Mode</i></span>); or to build
+``virtual tunnels'' between two subnets, which could be used for secure communication
+between two corporate networks (known as <span class="emphasis"><i class="EMPHASIS">Tunnel Mode</i></span>). The latter is more commonly known as a <span class="emphasis"><i class="EMPHASIS">Virtual Private Network (VPN)</i></span>. The <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ipsec</span>(4)</span> manual page
+should be consulted for detailed information on the IPsec subsystem in FreeBSD.</p>
+
+<p>To add IPsec support to your kernel, add the following options to your kernel
+configuration file:</p>
+
+<pre class="SCREEN">options   IPSEC        #IP security
+options   IPSEC_ESP    #IP security (crypto; define w/ IPSEC)
+     
+</pre>
+
+<p>If IPsec debugging support is desired, the following kernel option should also be
+added:</p>
+
+<pre class="SCREEN">options   IPSEC_DEBUG  #debug for IP security
+     
+</pre>
+</div>
+
+<div class="SECT2">
+<h2 class="SECT2"><a id="AEN20634" name="AEN20634">14.10.2. The Problem</a></h2>
+
+<p>There's no standard for what constitutes a VPN. VPNs can be implemented using a number
+of different technologies, each of which have their own strengths and weaknesses. This
+article presents a number of scenarios, and strategies for implementing a VPN for each
+scenario.</p>
+</div>
+
+<div class="SECT2">
+<h2 class="SECT2"><a id="AEN20637" name="AEN20637">14.10.3. Scenario #1: Two networks,
+connected to the Internet, to behave as one</a></h2>
+
+<p>This is the scenario that caused me to first investigating VPNs. The premise is as
+follows:</p>
+
+<ul>
+<li>
+<p>You have at least two sites</p>
+</li>
+
+<li>
+<p>Both sites are using IP internally</p>
+</li>
+
+<li>
+<p>Both sites are connected to the Internet, through a gateway that is running
+FreeBSD.</p>
+</li>
+
+<li>
+<p>The gateway on each network has at least one public IP address.</p>
+</li>
+
+<li>
+<p>The internal addresses of the two networks can be public or private IP addresses, it
+doesn't matter. You can be running NAT on the gateway machine if necessary.</p>
+</li>
+
+<li>
+<p>The internal IP addresses of the two networks <span class="emphasis"><i class="EMPHASIS">do not collide</i></span>. While I expect it is theoretically possible
+to use a combination of VPN technology and NAT to get this to work, I expect it to be a
+configuration nightmare.</p>
+</li>
+</ul>
+
+<p>If you find that you are trying to connect two networks, both of which, internally,
+use the same private IP address range (e.g., both of them use <tt class="HOSTID">192.168.1.x</tt>), then one of the networks will have to be
+renumbered.</p>
+
+<p>The network topology might look something like this:</p>
+
+<p><img src="ipsec-network.png" align="center"></p>
+
+<p>Notice the two public IP addresses. I'll use the letters to refer to them in the rest
+of this article. Anywhere you see those letters in this article, replace them with your
+own public IP addresses. Note also that internally, the two gateway machines have .1 IP
+addresses, and that the two networks have different private IP addresses (<tt class="HOSTID">192.168.1.x</tt> and <tt class="HOSTID">192.168.2.x</tt> respectively).
+All the machines on the private networks have been configured to use the <tt class="HOSTID">.1</tt> machine as their default gateway.</p>
+
+<p>The intention is that, from a network point of view, each network should view the
+machines on the other network as though they were directly attached the same router --
+albeit a slightly slow router with an occasional tendency to drop packets.</p>
+
+<p>This means that (for example), machine <tt class="HOSTID">192.168.1.20</tt> should be
+able to run</p>
+
+<pre class="PROGRAMLISTING">ping 192.168.2.34
+</pre>
+
+<p>and have it work, transparently. <span class="TRADEMARK">Windows</span> machines
+should be able to see the machines on the other network, browse file shares, and so on,
+in exactly the same way that they can browse machines on the local network.</p>
+
+<p>And the whole thing has to be secure. This means that traffic between the two networks
+has to be encrypted.</p>
+
+<p>Creating a VPN between these two networks is a multi-step process. The stages are as
+follows:</p>
+
+<ol type="1">
+<li>
+<p>Create a ``virtual'' network link between the two networks, across the Internet. Test
+it, using tools like <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ping</span>(8)</span>, to make sure it works.</p>
+</li>
+
+<li>
+<p>Apply security policies to ensure that traffic between the two networks is
+transparently encrypted and decrypted as necessary. Test this, using tools like <span class="CITEREFENTRY"><span class="REFENTRYTITLE">tcpdump</span>(1)</span>, to ensure that
+traffic is encrypted.</p>
+</li>
+
+<li>
+<p>Configure additional software on the FreeBSD gateways, to allow <span class="TRADEMARK">Windows</span> machines to see one another across the VPN.</p>
+</li>
+</ol>
+
+<div class="SECT3">
+<h3 class="SECT3"><a id="AEN20689" name="AEN20689">14.10.3.1. Step 1: Creating and
+testing a ``virtual'' network link</a></h3>
+
+<p>Suppose that you were logged in to the gateway machine on network #1 (with public IP
+address <tt class="HOSTID">A.B.C.D</tt>, private IP address <tt class="HOSTID">192.168.1.1</tt>), and you ran <tt class="COMMAND">ping 192.168.2.1</tt>,
+which is the private address of the machine with IP address <tt class="HOSTID">W.X.Y.Z</tt>. What needs to happen in order for this to work?</p>
+
+<ol type="1">
+<li>
+<p>The gateway machine needs to know how to reach <tt class="HOSTID">192.168.2.1</tt>. In
+other words, it needs to have a route to <tt class="HOSTID">192.168.2.1</tt>.</p>
+</li>
+
+<li>
+<p>Private IP addresses, such as those in the <tt class="HOSTID">192.168.x</tt> range are
+not supposed to appear on the Internet at large. Instead, each packet you send to <tt class="HOSTID">192.168.2.1</tt> will need to be wrapped up inside another packet. This
+packet will need to appear to be from <tt class="HOSTID">A.B.C.D</tt>, and it will have
+to be sent to <tt class="HOSTID">W.X.Y.Z</tt>. This process is called <i class="FIRSTTERM">encapsulation</i>.</p>
+</li>
+
+<li>
+<p>Once this packet arrives at <tt class="HOSTID">W.X.Y.Z</tt> it will need to
+``unencapsulated'', and delivered to <tt class="HOSTID">192.168.2.1</tt>.</p>
+</li>
+</ol>
+
+<p>You can think of this as requiring a ``tunnel'' between the two networks. The two
+``tunnel mouths'' are the IP addresses <tt class="HOSTID">A.B.C.D</tt> and <tt class="HOSTID">W.X.Y.Z</tt>, and the tunnel must be told the addresses of the private IP
+addresses that will be allowed to pass through it. The tunnel is used to transfer traffic
+with private IP addresses across the public Internet.</p>
+
+<p>This tunnel is created by using the generic interface, or <tt class="DEVICENAME">gif</tt> devices on FreeBSD. As you can imagine, the <tt class="DEVICENAME">gif</tt> interface on each gateway host must be configured with four
+IP addresses; two for the public IP addresses, and two for the private IP addresses.</p>
+
+<p>Support for the gif device must be compiled in to the FreeBSD kernel on both machines.
+You can do this by adding the line:</p>
+
+<pre class="PROGRAMLISTING">pseudo-device gif
+</pre>
+
+<p>to the kernel configuration files on both machines, and then compile, install, and
+reboot as normal.</p>
+
+<p>Configuring the tunnel is a two step process. First the tunnel must be told what the
+outside (or public) IP addresses are, using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">gifconfig</span>(8)</span>. Then the private IP addresses must be
+configured using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ifconfig</span>(8)</span>.</p>
+
+<div class="NOTE">
+<blockquote class="NOTE">
+<p><b>注:</b> In FreeBSD&nbsp;5.X, the functionality provided by the <span class="CITEREFENTRY"><span class="REFENTRYTITLE">gifconfig</span>(8)</span> utility has
+been merged into <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ifconfig</span>(8)</span>.</p>
+</blockquote>
+</div>
+
+<p>On the gateway machine on network #1 you would run the following two commands to
+configure the tunnel.</p>
+
+<pre class="PROGRAMLISTING">gifconfig gif0 A.B.C.D W.X.Y.Z
+ifconfig gif0 inet 192.168.1.1 192.168.2.1 netmask 0xffffffff
+     
+</pre>
+
+<p>On the other gateway machine you run the same commands, but with the order of the IP
+addresses reversed.</p>
+
+<pre class="PROGRAMLISTING">gifconfig gif0 W.X.Y.Z A.B.C.D
+ifconfig gif0 inet 192.168.2.1 192.168.1.1 netmask 0xffffffff
+     
+</pre>
+
+<p>You can then run:</p>
+
+<pre class="PROGRAMLISTING">gifconfig gif0
+</pre>
+
+<p>to see the configuration. For example, on the network #1 gateway, you would see
+this:</p>
+
+<pre class="SCREEN"><samp class="PROMPT">#</samp> <kbd class="USERINPUT">gifconfig gif0</kbd>
+gif0: flags=8011&lt;UP,POINTTOPOINT,MULTICAST&gt; mtu 1280
+inet 192.168.1.1 --&gt; 192.168.2.1 netmask 0xffffffff
+physical address inet A.B.C.D --&gt; W.X.Y.Z
+     
+</pre>
+
+<p>As you can see, a tunnel has been created between the physical addresses <tt class="HOSTID">A.B.C.D</tt> and <tt class="HOSTID">W.X.Y.Z</tt>, and the traffic allowed
+through the tunnel is that between <tt class="HOSTID">192.168.1.1</tt> and <tt class="HOSTID">192.168.2.1</tt>.</p>
+
+<p>This will also have added an entry to the routing table on both machines, which you
+can examine with the command <tt class="COMMAND">netstat -rn</tt>. This output is from
+the gateway host on network #1.</p>
+
+<pre class="SCREEN"><samp class="PROMPT">#</samp> <kbd class="USERINPUT">netstat -rn</kbd>
+Routing tables
+
+Internet:
+Destination      Gateway       Flags    Refs    Use    Netif  Expire
+...
+192.168.2.1      192.168.1.1   UH        0        0    gif0
+...
+     
+</pre>
+
+<p>As the ``Flags'' value indicates, this is a host route, which means that each gateway
+knows how to reach the other gateway, but they do not know how to reach the rest of their
+respective networks. That problem will be fixed shortly.</p>
+
+<p>It is likely that you are running a firewall on both machines. This will need to be
+circumvented for your VPN traffic. You might want to allow all traffic between both
+networks, or you might want to include firewall rules that protect both ends of the VPN
+from one another.</p>
+
+<p>It greatly simplifies testing if you configure the firewall to allow all traffic
+through the VPN. You can always tighten things up later. If you are using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ipfw</span>(8)</span> on the gateway
+machines then a command like</p>
+
+<pre class="PROGRAMLISTING">ipfw add 1 allow ip from any to any via gif0
+</pre>
+
+<p>will allow all traffic between the two end points of the VPN, without affecting your
+other firewall rules. Obviously you will need to run this command on both gateway
+hosts.</p>
+
+<p>This is sufficient to allow each gateway machine to ping the other. On <tt class="HOSTID">192.168.1.1</tt>, you should be able to run</p>
+
+<pre class="PROGRAMLISTING">ping 192.168.2.1
+</pre>
+
+<p>and get a response, and you should be able to do the same thing on the other gateway
+machine.</p>
+
+<p>However, you will not be able to reach internal machines on either network yet. This
+is because of the routing -- although the gateway machines know how to reach one another,
+they do not know how to reach the network behind each one.</p>
+
+<p>To solve this problem you must add a static route on each gateway machine. The command
+to do this on the first gateway would be:</p>
+
+<pre class="PROGRAMLISTING">route add 192.168.2.0 192.168.2.1 netmask 0xffffff00
+     
+</pre>
+
+<p>This says ``In order to reach the hosts on the network <tt class="HOSTID">192.168.2.0</tt>, send the packets to the host <tt class="HOSTID">192.168.2.1</tt>''. You will need to run a similar command on the other
+gateway, but with the <tt class="HOSTID">192.168.1.x</tt> addresses instead.</p>
+
+<p>IP traffic from hosts on one network will now be able to reach hosts on the other
+network.</p>
+
+<p>That has now created two thirds of a VPN between the two networks, in as much as it is
+``virtual'' and it is a ``network''. It is not private yet. You can test this using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ping</span>(8)</span> and <span class="CITEREFENTRY"><span class="REFENTRYTITLE">tcpdump</span>(1)</span>. Log in to the
+gateway host and run</p>
+
+<pre class="PROGRAMLISTING">tcpdump dst host 192.168.2.1
+</pre>
+
+<p>In another log in session on the same host run</p>
+
+<pre class="PROGRAMLISTING">ping 192.168.2.1
+</pre>
+
+<p>You will see output that looks something like this:</p>
+
+<pre class="PROGRAMLISTING">16:10:24.018080 192.168.1.1 &gt; 192.168.2.1: icmp: echo request
+16:10:24.018109 192.168.1.1 &gt; 192.168.2.1: icmp: echo reply
+16:10:25.018814 192.168.1.1 &gt; 192.168.2.1: icmp: echo request
+16:10:25.018847 192.168.1.1 &gt; 192.168.2.1: icmp: echo reply
+16:10:26.028896 192.168.1.1 &gt; 192.168.2.1: icmp: echo request
+16:10:26.029112 192.168.1.1 &gt; 192.168.2.1: icmp: echo reply
+     
+</pre>
+
+<p>As you can see, the ICMP messages are going back and forth unencrypted. If you had
+used the <var class="OPTION">-s</var> parameter to <span class="CITEREFENTRY"><span class="REFENTRYTITLE">tcpdump</span>(1)</span> to grab more bytes of data from the
+packets you would see more information.</p>
+
+<p>Obviously this is unacceptable. The next section will discuss securing the link
+between the two networks so that it all traffic is automatically encrypted.</p>
+
+<p><b>Summary:</b></p>
+
+<ul>
+<li>
+<p>Configure both kernels with ``pseudo-device gif''.</p>
+</li>
+
+<li>
+<p>Edit <tt class="FILENAME">/etc/rc.conf</tt> on gateway host #1 and add the following
+lines (replacing IP addresses as necessary).</p>
+
+<pre class="PROGRAMLISTING">gifconfig_gif0="A.B.C.D W.X.Y.Z"
+ifconfig_gif0="inet 192.168.1.1 192.168.2.1 netmask 0xffffffff"
+static_routes="vpn"
+route_vpn="192.168.2.0 192.168.2.1 netmask 0xffffff00"
+         
+</pre>
+</li>
+
+<li>
+<p>Edit your firewall script (<tt class="FILENAME">/etc/rc.firewall</tt>, or similar) on
+both hosts, and add</p>
+
+<pre class="PROGRAMLISTING">ipfw add 1 allow ip from any to any via gif0
+</pre>
+</li>
+
+<li>
+<p>Make similar changes to <tt class="FILENAME">/etc/rc.conf</tt> on gateway host #2,
+reversing the order of IP addresses.</p>
+</li>
+</ul>
+</div>
+
+<div class="SECT3">
+<h3 class="SECT3"><a id="AEN20818" name="AEN20818">14.10.3.2. Step 2: Securing the
+link</a></h3>
+
+<p>To secure the link we will be using IPsec. IPsec provides a mechanism for two hosts to
+agree on an encryption key, and to then use this key in order to encrypt data between the
+two hosts.</p>
+
+<p>The are two areas of configuration to be considered here.</p>
+
+<ol type="1">
+<li>
+<p>There must be a mechanism for two hosts to agree on the encryption mechanism to use.
+Once two hosts have agreed on this mechanism there is said to be a ``security
+association'' between them.</p>
+</li>
+
+<li>
+<p>There must be a mechanism for specifying which traffic should be encrypted. Obviously,
+you don't want to encrypt all your outgoing traffic -- you only want to encrypt the
+traffic that is part of the VPN. The rules that you put in place to determine what
+traffic will be encrypted are called ``security policies''.</p>
+</li>
+</ol>
+
+<p>Security associations and security policies are both maintained by the kernel, and can
+be modified by userland programs. However, before you can do this you must configure the
+kernel to support IPsec and the Encapsulated Security Payload (ESP) protocol. This is
+done by configuring a kernel with:</p>
+
+<pre class="PROGRAMLISTING">options IPSEC
+options IPSEC_ESP
+      
+</pre>
+
+<p>and recompiling, reinstalling, and rebooting. As before you will need to do this to
+the kernels on both of the gateway hosts.</p>
+
+<p>You have two choices when it comes to setting up security associations. You can
+configure them by hand between two hosts, which entails choosing the encryption
+algorithm, encryption keys, and so forth, or you can use daemons that implement the
+Internet Key Exchange protocol (IKE) to do this for you.</p>
+
+<p>I recommend the latter. Apart from anything else, it is easier to set up.</p>
+
+<p>Editing and displaying security policies is carried out using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">setkey</span>(8)</span>. By analogy, <tt class="COMMAND">setkey</tt> is to the kernel's security policy tables as <span class="CITEREFENTRY"><span class="REFENTRYTITLE">route</span>(8)</span> is to the
+kernel's routing tables. <tt class="COMMAND">setkey</tt> can also display the current
+security associations, and to continue the analogy further, is akin to <tt class="COMMAND">netstat -r</tt> in that respect.</p>
+
+<p>There are a number of choices for daemons to manage security associations with
+FreeBSD. This article will describe how to use one of these, racoon. racoon is in the
+FreeBSD ports collection, in the security/ category, and is installed in the usual
+way.</p>
+
+<p>racoon must be run on both gateway hosts. On each host it is configured with the IP
+address of the other end of the VPN, and a secret key (which you choose, and must be the
+same on both gateways).</p>
+
+<p>The two daemons then contact one another, confirm that they are who they say they are
+(by using the secret key that you configured). The daemons then generate a new secret
+key, and use this to encrypt the traffic over the VPN. They periodically change this
+secret, so that even if an attacker were to crack one of the keys (which is as
+theoretically close to unfeasible as it gets) it won't do them much good -- by the time
+they've cracked the key the two daemons have chosen another one.</p>
+
+<p>racoon's configuration is stored in <tt class="FILENAME">${PREFIX}/etc/racoon</tt>.
+You should find a configuration file there, which should not need to be changed too much.
+The other component of racoon's configuration, which you will need to change, is the
+``pre-shared key''.</p>
+
+<p>The default racoon configuration expects to find this in the file <tt class="FILENAME">${PREFIX}/etc/racoon/psk.txt</tt>. It is important to note that the
+pre-shared key is <span class="emphasis"><i class="EMPHASIS">not</i></span> the key that
+will be used to encrypt your traffic across the VPN link, it is simply a token that
+allows the key management daemons to trust one another.</p>
+
+<p><tt class="FILENAME">psk.txt</tt> contains a line for each remote site you are dealing
+with. In this example, where there are two sites, each <tt class="FILENAME">psk.txt</tt>
+file will contain one line (because each end of the VPN is only dealing with one other
+end).</p>
+
+<p>On gateway host #1 this line should look like this:</p>
+
+<pre class="PROGRAMLISTING">W.X.Y.Z            secret
+</pre>
+
+<p>That is, the <span class="emphasis"><i class="EMPHASIS">public</i></span> IP address
+of the remote end, whitespace, and a text string that provides the secret. Obviously, you
+shouldn't use ``secret'' as your key -- the normal rules for choosing a password
+apply.</p>
+
+<p>On gateway host #2 the line would look like this</p>
+
+<pre class="PROGRAMLISTING">A.B.C.D            secret
+</pre>
+
+<p>That is, the public IP address of the remote end, and the same secret key. <tt class="FILENAME">psk.txt</tt> must be mode <var class="LITERAL">0600</var> (i.e., only
+read/write to <tt class="USERNAME">root</tt>) before racoon will run.</p>
+
+<p>You must run racoon on both gateway machines. You will also need to add some firewall
+rules to allow the IKE traffic, which is carried over UDP to the ISAKMP (Internet
+Security Association Key Management Protocol) port. Again, this should be fairly early in
+your firewall ruleset.</p>
+
+<pre class="PROGRAMLISTING">ipfw add 1 allow udp from A.B.C.D to W.X.Y.Z isakmp
+ipfw add 1 allow udp from W.X.Y.Z to A.B.C.D isakmp
+      
+</pre>
+
+<p>Once racoon is running you can try pinging one gateway host from the other. The
+connection is still not encrypted, but racoon will then set up the security associations
+between the two hosts -- this might take a moment, and you may see this as a short delay
+before the ping commands start responding.</p>
+
+<p>Once the security association has been set up you can view it using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">setkey</span>(8)</span>. Run</p>
+
+<pre class="PROGRAMLISTING">setkey -D
+</pre>
+
+<p>on either host to view the security association information.</p>
+
+<p>That's one half of the problem. They other half is setting your security policies.</p>
+
+<p>To create a sensible security policy, let's review what's been set up so far. This
+discussions hold for both ends of the link.</p>
+
+<p>Each IP packet that you send out has a header that contains data about the packet. The
+header includes the IP addresses of both the source and destination. As we already know,
+private IP addresses, such as the <tt class="HOSTID">192.168.x.y</tt> range are not
+supposed to appear on the public Internet. Instead, they must first be encapsulated
+inside another packet. This packet must have the public source and destination IP
+addresses substituted for the private addresses.</p>
+
+<p>So if your outgoing packet started looking like this:</p>
+
+<p><img src="ipsec-out-pkt.png" align="center"></p>
+
+<p>Then it will be encapsulated inside another packet, looking something like this:</p>
+
+<p><img src="ipsec-encap-pkt.png" align="center"></p>
+
+<p>This encapsulation is carried out by the <tt class="DEVICENAME">gif</tt> device. As
+you can see, the packet now has real IP addresses on the outside, and our original packet
+has been wrapped up as data inside the packet that will be put out on the Internet.</p>
+
+<p>Obviously, we want all traffic between the VPNs to be encrypted. You might try putting
+this in to words, as:</p>
+
+<p>``If a packet leaves from <tt class="HOSTID">A.B.C.D</tt>, and it is destined for <tt class="HOSTID">W.X.Y.Z</tt>, then encrypt it, using the necessary security
+associations.''</p>
+
+<p>``If a packet arrives from <tt class="HOSTID">W.X.Y.Z</tt>, and it is destined for <tt class="HOSTID">A.B.C.D</tt>, then decrypt it, using the necessary security
+associations.''</p>
+
+<p>That's close, but not quite right. If you did this, all traffic to and from <tt class="HOSTID">W.X.Y.Z</tt>, even traffic that was not part of the VPN, would be
+encrypted. That's not quite what you want. The correct policy is as follows</p>
+
+<p>``If a packet leaves from <tt class="HOSTID">A.B.C.D</tt>, and that packet is
+encapsulating another packet, and it is destined for <tt class="HOSTID">W.X.Y.Z</tt>,
+then encrypt it, using the necessary security associations.''</p>
+
+<p>``If a packet arrives from <tt class="HOSTID">W.X.Y.Z</tt>, and that packet is
+encapsulating another packet, and it is destined for <tt class="HOSTID">A.B.C.D</tt>,
+then encrypt it, using the necessary security associations.''</p>
+
+<p>A subtle change, but a necessary one.</p>
+
+<p>Security policies are also set using <span class="CITEREFENTRY"><span class="REFENTRYTITLE">setkey</span>(8)</span>. <span class="CITEREFENTRY"><span class="REFENTRYTITLE">setkey</span>(8)</span> features a configuration language for
+defining the policy. You can either enter configuration instructions via stdin, or you
+can use the <var class="OPTION">-f</var> option to specify a filename that contains
+configuration instructions.</p>
+
+<p>The configuration on gateway host #1 (which has the public IP address <tt class="HOSTID">A.B.C.D</tt>) to force all outbound traffic to <tt class="HOSTID">W.X.Y.Z</tt> to be encrypted is:</p>
+
+<pre class="PROGRAMLISTING">spdadd A.B.C.D/32 W.X.Y.Z/32 ipencap -P out ipsec esp/tunnel/A.B.C.D-W.X.Y.Z/require;
+      
+</pre>
+
+<p>Put these commands in a file (e.g., <tt class="FILENAME">/etc/ipsec.conf</tt>) and
+then run</p>
+
+<pre class="SCREEN"><samp class="PROMPT">#</samp> <kbd class="USERINPUT">setkey -f /etc/ipsec.conf</kbd>
+</pre>
+
+<p><var class="OPTION">spdadd</var> tells <span class="CITEREFENTRY"><span class="REFENTRYTITLE">setkey</span>(8)</span> that we want to add a rule to the secure
+policy database. The rest of this line specifies which packets will match this policy.
+<tt class="HOSTID">A.B.C.D/32</tt> and <tt class="HOSTID">W.X.Y.Z/32</tt> are the IP
+addresses and netmasks that identify the network or hosts that this policy will apply to.
+In this case, we want it to apply to traffic between these two hosts. <var class="OPTION">ipencap</var> tells the kernel that this policy should only apply to
+packets that encapsulate other packets. <var class="OPTION">-P out</var> says that this
+policy applies to outgoing packets, and <var class="OPTION">ipsec</var> says that the
+packet will be secured.</p>
+
+<p>The second line specifies how this packet will be encrypted. <var class="OPTION">esp</var> is the protocol that will be used, while <var class="OPTION">tunnel</var> indicates that the packet will be further encapsulated in an
+IPsec packet. The repeated use of <tt class="HOSTID">A.B.C.D</tt> and <tt class="HOSTID">W.X.Y.Z</tt> is used to select the security association to use, and the
+final <var class="OPTION">require</var> mandates that packets must be encrypted if they
+match this rule.</p>
+
+<p>This rule only matches outgoing packets. You will need a similar rule to match
+incoming packets.</p>
+
+<pre class="PROGRAMLISTING">spdadd W.X.Y.Z/32 A.B.C.D/32 ipencap -P in ipsec esp/tunnel/W.X.Y.Z-A.B.C.D/require;
+</pre>
+
+<p>Note the <var class="OPTION">in</var> instead of <var class="OPTION">out</var> in this
+case, and the necessary reversal of the IP addresses.</p>
+
+<p>The other gateway host (which has the public IP address <tt class="HOSTID">W.X.Y.Z</tt>) will need similar rules.</p>
+
+<pre class="PROGRAMLISTING">spdadd W.X.Y.Z/32 A.B.C.D/32 ipencap -P out ipsec esp/tunnel/W.X.Y.Z-A.B.C.D/require;
+spdadd A.B.C.D/32 W.X.Y.Z/32 ipencap -P in ipsec esp/tunnel/A.B.C.D-W.X.Y.Z/require;
+</pre>
+
+<p>Finally, you need to add firewall rules to allow ESP and IPENCAP packets back and
+forth. These rules will need to be added to both hosts.</p>
+
+<pre class="PROGRAMLISTING">ipfw add 1 allow esp from A.B.C.D to W.X.Y.Z
+ipfw add 1 allow esp from W.X.Y.Z to A.B.C.D
+ipfw add 1 allow ipencap from A.B.C.D to W.X.Y.Z
+ipfw add 1 allow ipencap from W.X.Y.Z to A.B.C.D
+      
+</pre>
+
+<p>Because the rules are symmetric you can use the same rules on each gateway host.</p>
+
+<p>Outgoing packets will now look something like this:</p>
+
+<p><img src="ipsec-crypt-pkt.png" align="center"></p>
+
+<p>When they are received by the far end of the VPN they will first be decrypted (using
+the security associations that have been negotiated by racoon). Then they will enter the
+<tt class="DEVICENAME">gif</tt> interface, which will unwrap the second layer, until you
+are left with the innermost packet, which can then travel in to the inner network.</p>
+
+<p>You can check the security using the same <span class="CITEREFENTRY"><span class="REFENTRYTITLE">ping</span>(8)</span> test from earlier. First, log in to the <tt class="HOSTID">A.B.C.D</tt> gateway machine, and run:</p>
+
+<pre class="PROGRAMLISTING">tcpdump dst host 192.168.2.1
+</pre>
+
+<p>In another log in session on the same host run</p>
+
+<pre class="PROGRAMLISTING">ping 192.168.2.1
+</pre>
+
+<p>This time you should see output like the following:</p>
+
+<pre class="PROGRAMLISTING">XXX tcpdump output
+</pre>
+
+<p>Now, as you can see, <span class="CITEREFENTRY"><span class="REFENTRYTITLE">tcpdump</span>(1)</span> shows the ESP packets. If you try to
+examine them with the <var class="OPTION">-s</var> option you will see (apparently)
+gibberish, because of the encryption.</p>
+
+<p>Congratulations. You have just set up a VPN between two remote sites.</p>
+
+<p><b>Summary</b></p>
+
+<ul>
+<li>
+<p>Configure both kernels with:</p>
+
+<pre class="PROGRAMLISTING">options IPSEC
+options IPSEC_ESP
+         
+</pre>
+</li>
+
+<li>
+<p>Install <a href="http://www.freebsd.org/cgi/url.cgi?ports/security/racoon/pkg-descr"><tt class="FILENAME">security/racoon</tt></a>. Edit <tt class="FILENAME">${PREFIX}/etc/racoon/psk.txt</tt> on both gateway hosts, adding an entry
+for the remote host's IP address and a secret key that they both know. Make sure this
+file is mode 0600.</p>
+</li>
+
+<li>
+<p>Add the following lines to <tt class="FILENAME">/etc/rc.conf</tt> on each host:</p>
+
+<pre class="PROGRAMLISTING">ipsec_enable="YES"
+ipsec_file="/etc/ipsec.conf"
+         
+</pre>
+</li>
+
+<li>
+<p>Create an <tt class="FILENAME">/etc/ipsec.conf</tt> on each host that contains the
+necessary spdadd lines. On gateway host #1 this would be:</p>
+
+<pre class="PROGRAMLISTING">spdadd A.B.C.D/32 W.X.Y.Z/32 ipencap -P out ipsec
+  esp/tunnel/A.B.C.D-W.X.Y.Z/require;
+spdadd W.X.Y.Z/32 A.B.C.D/32 ipencap -P in ipsec
+  esp/tunnel/W.X.Y.Z-A.B.C.D/require;
+</pre>
+
+<p>On gateway host #2 this would be:</p>
+
+<pre class="PROGRAMLISTING">spdadd W.X.Y.Z/32 A.B.C.D/32 ipencap -P out ipsec
+  esp/tunnel/W.X.Y.Z-A.B.C.D/require;
+spdadd A.B.C.D/32 W.X.Y.Z/32 ipencap -P in ipsec
+  esp/tunnel/A.B.C.D-W.X.Y.Z/require;
+</pre>
+</li>
+
+<li>
+<p>Add firewall rules to allow IKE, ESP, and IPENCAP traffic to both hosts:</p>
+
+<pre class="PROGRAMLISTING">ipfw add 1 allow udp from A.B.C.D to W.X.Y.Z isakmp
+ipfw add 1 allow udp from W.X.Y.Z to A.B.C.D isakmp
+ipfw add 1 allow esp from A.B.C.D to W.X.Y.Z
+ipfw add 1 allow esp from W.X.Y.Z to A.B.C.D
+ipfw add 1 allow ipencap from A.B.C.D to W.X.Y.Z
+ipfw add 1 allow ipencap from W.X.Y.Z to A.B.C.D
+         
+</pre>
+</li>
+</ul>
+
+<p>The previous two steps should suffice to get the VPN up and running. Machines on each
+network will be able to refer to one another using IP addresses, and all traffic across
+the link will be automatically and securely encrypted.</p>
+</div>
+</div>
+</div>
+
+<div class="NAVFOOTER">
+<hr width="100%" align="left">
+<table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td valign="top" width="33%" align="left"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssl.html" accesskey="P">后退</a></td>
+<td valign="top" width="34%" align="center"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/index.html" accesskey="H">起点</a></td>
+<td valign="top" width="33%" align="right"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/openssh.html" accesskey="N">前进</a></td>
+</tr>
+
+<tr>
+<td valign="top" width="33%" align="left">OpenSSL</td>
+<td valign="top" width="34%" align="center"><a href="http://www.linuxdocs.info/linux-docs/bsd/Handbook/security.html" accesskey="U">上一级</a></td>
+<td valign="top" width="33%" align="right">OpenSSH</td>
+</tr>
+</tbody></table>
+</div>
+</body>
+</html>

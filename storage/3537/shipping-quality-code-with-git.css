@@ -1,0 +1,106 @@
+
+/* ::::: http://redhatmagazine.com/wp-content/themes/rhm2.0/rhmag.css ::::: */
+
+.marginFive { margin: 0pt 5px; }
+.truth, .devfu, .fedora { padding: 0.2em; margin-bottom: 0.5em; font-family: helvetica,arial,sans-serif; }
+.colTitle { margin: 0pt 0pt 0pt 3px; font-size: small; font-weight: bold; text-transform: uppercase; }
+.truth { background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); }
+.devfu { background-color: rgb(255, 204, 0); color: rgb(0, 0, 0); }
+.fedora { background-color: rgb(149, 212, 223); color: rgb(0, 0, 0); }
+.truth ul, .devfu ul, .fedora ul { margin: 0pt; list-style-type: none; list-style-image: none; list-style-position: outside; padding-left: 0px; }
+.truth ul li, .devfu ul li, .fedora ul li { margin: 0pt 0pt 7px 3px; font-size: x-small; }
+.devfu a, .fedora a { color: rgb(0, 0, 0); }
+.truth a { color: rgb(255, 255, 255); }
+.colType { color: rgb(0, 0, 0); }
+.colTypeWhite { color: rgb(255, 255, 255); }
+.colMore { border-top: 1px solid rgb(153, 153, 153); text-align: right; margin-bottom: 1em; }
+.colMore a { margin-top: 0.1em; font-style: italic; font-size: small; }
+.colTwoTitle { border-top: 3px solid rgb(153, 153, 153); }
+.QoD { font-size: x-small; }
+.QoDcite { font-size: small; font-weight: bold; font-style: italic; margin-left: 25px; margin-top: 0pt; }
+#threeColThree h2 { font-size: 9pt; text-transform: uppercase; }
+#threeColTwo h2 { font-family: helvetica,arial,sans-serif; font-size: medium; }
+#threeColThree h2 { margin-left: 5px; }
+#threeColThree ul { list-style-type: none; padding-left: 5px; margin-left: 0pt; }
+#threeColThree ul li { font-size: small; margin-left: 0pt; }
+ul.bold li { font-weight: bold; }
+ul.ital li { font-weight: bold; font-style: italic; }
+ul.tags li { margin: 0pt; padding: 0pt 3px 0pt 0pt; display: inline; font-size: smaller; }
+#threeColThree hr { margin: 0pt auto 0pt 8px; width: 75px; text-align: left; color: rgb(0, 0, 0); height: 1px; }
+.rhmagArticle, .post { border-bottom: 1px solid rgb(153, 153, 153); margin: 5px; padding: 0.25em 0px 0px; clear: both; }
+.rhmagArticle h1#content, .post h1#content { margin: 0pt; font-size: x-large; }
+.rhmagArticle h3, .post h3 { margin: 0pt 0pt 0pt 3px; color: rgb(0, 0, 0); font-size: medium; }
+.rhmagArticle h4#byline, .post h4#byline { margin: 0pt 0pt 5px; color: rgb(102, 102, 102); font-size: small; font-weight: bold; }
+.rhmagArticle h4.byline { margin: 0pt 0pt 5px 3px; color: rgb(102, 102, 102); font-size: x-small; font-weight: bold; }
+.rhmagArticle h2, .post h2 { margin: 0.2em 0.2em 5px; font-size: large; font-weight: bold; }
+.rhmagArticle p, .post p { font-size: small; margin-left: 5px; margin-right: 0.2em; }
+.artFunct { text-align: right; }
+.artItem { padding-right: 1em; }
+.artItem a { text-decoration: none; color: rgb(102, 102, 102); font-size: x-small; }
+.artItem a:hover { color: rgb(0, 0, 0); }
+.alignLeft { margin: 3px 10px 0pt 0pt; padding: 0pt; float: left; }
+.alignRight { margin: 3px 0pt 0pt 10px; padding: 0pt; float: right; }
+.question { margin: 0pt; padding: 0pt; font-style: italic; color: rgb(102, 102, 102); }
+.answer { margin: 0.5em 0pt 1em; padding: 0pt; }
+div.caption { background-image: none; font-size: x-small; font-weight: bold; font-style: normal; color: rgb(102, 102, 102); margin-bottom: 1.6em; }
+tt, code { font-size: medium; font-weight: bold; }
+pre { border-top: 3px solid rgb(153, 153, 153); border-bottom: 1px solid rgb(153, 153, 153); margin: 1.5em 0pt 0.5em; padding: 0.25em 4px; overflow: auto; background-color: rgb(255, 255, 255); font-size: medium; white-space: pre-wrap; }
+p.authorblurb { font-size: x-small; }
+blockquote.kbase_legal { margin: 0pt; font-size: x-small; font-style: italic; }
+table { width: 100%; }
+dl.contents { border: 1px solid black; margin: 1em; padding: 0.5em; }
+dl.contents dt { font-size: smaller; }
+#article span.dropCap { margin: -25px 3px 0pt 0pt; float: left; color: silver; font-size: 70px; font-family: Times,serif,Georgia; }
+blockquote.quoteMedRight { background: transparent url('open_quote.jpg') no-repeat scroll left top; width: 250px; float: right; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 0px; margin-bottom: 0px; }
+blockquote.quoteSmallRight { background: transparent url('open_quote.jpg') no-repeat scroll left top; width: 200px; float: right; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 0px; margin-bottom: 0px; }
+div.quoteClose { padding: 10px 34px; background: transparent url('close_quote.jpg') no-repeat scroll right bottom; font-size: 1.7em; text-align: center; font-family: Times,serif,Georgia; float: right; color: rgb(153, 153, 153); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adnote, .adnoteOnGreen, .adwarning, .adtip, .adcaution, .adimportant { border: 1px dotted rgb(204, 0, 0); margin: 0pt 20px 1.6em 0px; padding: 10px 5px 15px 60px; }
+.adnote dt, .adnoteOnGreen dt, .adwarning dt, .adtip dt, .adcaution dt, .adimportant dt { margin: 0pt; padding: 0pt 0.5em 0pt 0pt; float: left; color: rgb(204, 0, 0); font-weight: bold; }
+.adnote dd, .adwarning dd, .adtip dd, .adcaution dd, .adimportant dd { border: 1px solid white; margin: 0pt; padding: 0pt; }
+.adnoteOnGreen dd { border: 1px solid rgb(158, 190, 101); margin: 0pt; padding: 0pt; }
+.adnote { background: transparent url('rhmag_note.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adnoteOnGreen { background: transparent url('rhmag_noteongreen.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adwarning { background: transparent url('rhmag_warning.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adtip { background: transparent url('rhmag_tip.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adnote, .adnoteOnGreen, .adwarning, .adtip, .adcaution, .adimportant { border: 1px dotted rgb(204, 0, 0); margin: 0pt 20px 1.6em 0px; padding: 10px 5px 15px 60px; }
+.adnote dt, .adnoteOnGreen dt, .adwarning dt, .adtip dt, .adcaution dt, .adimportant dt { margin: 0pt; padding: 0pt 0.5em 0pt 0pt; float: left; color: rgb(204, 0, 0); font-weight: bold; }
+.adnote dd, .adwarning dd, .adtip dd, .adcaution dd, .adimportant dd { border: 1px solid white; margin: 0pt; padding: 0pt; }
+.adnoteOnGreen dd { border: 1px solid rgb(158, 190, 101); margin: 0pt; padding: 0pt; }
+.adnote { background: transparent url('rhmag_note.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adnoteOnGreen { background: transparent url('rhmag_noteongreen.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adwarning { background: transparent url('rhmag_warning.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adtip { background: transparent url('rhmag_tip.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+dcaution { background: transparent url('rhmag_caution.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.adimportant { background: transparent url('rhmag_important.gif') no-repeat scroll 10px 8px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.staffLeft {  }
+div.staffLeft img { margin: 0pt 30px 10px 0pt; float: left; }
+div.staffLeft img.margin15 { margin-right: 15px; }
+.HRBox2 { padding-bottom: 10px; }
+
+/* ::::: http://redhatmagazine.com/wp-content/themes/rhm2.0/style.css ::::: */
+
+body { background-color: rgb(144, 144, 144); font-family: liberation-sans,helvetica,arial,sans-serif; }
+a { text-decoration: none; color: rgb(33, 146, 220); }
+img { border: medium none ; }
+ul li { font-size: small; }
+ul.linkage li { list-style-image: url('bullet_arrowblue.png'); }
+ul.linkage a { text-decoration: none; }
+ul.linkage a:hover { text-decoration: underline; }
+#header { border-bottom: 4px solid rgb(204, 0, 0); margin: 0pt auto; background-color: rgb(255, 255, 255); width: 800px; height: 120px; font-size: smaller; font-weight: bold; }
+#wrapper { margin: 0pt auto; background: transparent url('background_rhm_800.png') repeat-y scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 800px; }
+#footer { margin: 0pt auto; font-size: smaller; width: 800px; clear: both; }
+#footer a { color: rgb(0, 34, 102); }
+.clearWrap:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.clearWrap { display: inline-block; }
+.clearWrap { display: block; }
+#mastheadWWW, #mastheadRHM, .mastheadGreyBar, #mastheadLogo { border: medium none ; margin: 5px; vertical-align: middle; }
+#mastheadWWW, #mastheadLogo { margin-left: 10px; }
+#mastheadInfo { margin: 10px 0pt 0pt 200px; font-family: helvetica,arial,sans-serif; font-size: x-small; vertical-align: middle; font-weight: normal; }
+.mastheadRSS { margin-top: 10px; }
+#mastheadLeft { float: left; }
+#mastheadRight { float: right; vertical-align: middle; margin-right: 10px; margin-top: 1em; }
+#threeColOne { float: left; width: 400px; background-color: rgb(255, 255, 255); }
+#threeColTwo { float: left; margin-left: 5px; width: 220px; background-color: rgb(255, 255, 255); }
+#threeColThree { float: left; margin-left: 5px; width: 170px; background-color: rgb(255, 255, 255); font-family: helvetica,arial,sans-serif; }
+#twoColOne { float: left; width: 625px; background-color: rgb(255, 255, 255); }
+#twoColTwo { float: left; margin-left: 5px; width: 170px; background-color: rgb(255, 255, 255); }

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://book.git-scm.com/4_rebasing.html">
+<meta name="wpd_url" content="http://book.git-scm.com/4_rebasing.html">
+<meta name="wpd_date" content="2008-07-18T16:06Z">
+
+
+
+	<title>Git Book - Rebasing</title>
+	<meta name="" http-equiv="content-language" content="en">
+	
+	<link rel="icon" href="about:blank?favicon.png" type="image/png">
+	
+  
+  <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	
+	
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="4_rebasing.css" media="all">
+</head>
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="http://book.git-scm.com/4_ignoring_files.html">Prev</a>  <a href="http://book.git-scm.com/4_interactive_rebasing.html">Next</a></div>
+    <div class="title"><a href="http://book.git-scm.com/index.html">Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br>
+  </div>
+  
+  <div class="span-21">
+    <h2> Rebasing </h2>
+
+<p>Suppose that you create a branch "mywork" on a remote-tracking branch
+"origin".</p>
+
+<pre><code>$ git checkout -b mywork origin
+</code></pre>
+
+<p></p><div class="center"><img src="rebase0.png"></div>
+
+<p>Now you do some work, creating two new commits.</p>
+
+<pre><code>$ vi file.txt
+$ git commit
+$ vi otherfile.txt
+$ git commit
+...
+</code></pre>
+
+<p>Meanwhile, someone else does some work creating two new commits on the origin
+branch too. This means both 'origin' and 'mywork' has advanced, which means 
+the work has diverged.</p>
+
+<p></p><div class="center"><img src="rebase1.png"></div>
+
+<p>At this point, you could use "pull" to merge your changes back in;
+the result would create a new merge commit, like this:</p>
+
+<p></p><div class="center"><img src="rebase2.png"></div>
+
+<p>However, if you prefer to keep the history in mywork a simple series of
+commits without any merges, you may instead choose to use
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html">git rebase</a>:</p>
+
+<pre><code>$ git checkout mywork
+$ git rebase origin
+</code></pre>
+
+<p>This will remove each of your commits from mywork, temporarily saving
+them as patches (in a directory named ".git/rebase"), update mywork to
+point at the latest version of origin, then apply each of the saved
+patches to the new mywork.<br>
+</p>
+
+<p></p><div class="center"><img src="rebase3.png"></div>
+
+<p>Once the ref ('mywork') is updated to point to the newly created commit 
+objects, your older commits will be abandoned.  They will likely be
+removed if you run a pruning garbage collection. (see <a href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">git gc</a>)</p>
+
+<p></p><div class="center"><img src="rebase4.png"></div>
+
+<p>So now we can look at the difference in our history between running a merge
+and running a rebase:</p>
+
+<p></p><div class="center"><img src="rebase5.png"></div>
+
+<p>In the process of the rebase, it may discover conflicts.  In that case it will stop
+and allow you to fix the conflicts; after fixing conflicts, use "git-add"
+to update the index with those contents, and then, instead of
+running git-commit, just run</p>
+
+<pre><code>$ git rebase --continue
+</code></pre>
+
+<p>and git will continue applying the rest of the patches.</p>
+
+<p>At any point you may use the <code>--abort</code> option to abort this process and
+return mywork to the state it had before you started the rebase:</p>
+
+<pre><code>$ git rebase --abort
+</code></pre>
+
+<p></p><div class="gitcast">
+        <a style="left: 697px ! important; top: 0px ! important;" title="請按這裡用 Adblock Plus 封鎖此物件" class="abp-objtab-06075104099596071 visible ontop" href="http://gitcasts.com/flowplayer/FlowPlayerLight.swf?config=%7Bembedded%3Atrue%2CbaseURL%3A%27http%3A%2F%2Fgitcasts%2Ecom%2Fflowplayer%27%2CvideoFile%3A%27http%3A%2F%2Fmedia%2Egitcasts%2Ecom%2Fc7-rebase%2Eflv%27%2CautoBuffering%3Afalse%2CautoPlay%3Afalse%7D"></a><div style="overflow: visible; padding-left: 620px; display: block; position: relative; width: 0px; height: 0px; left: 0px; top: 0px; z-index: 65535; opacity: 0.5;"></div><embed src="flowplayerlight.swf" scale="noscale" bgcolor="111111" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" allownetworking="all" pluginspage="http://www.macromedia.com/go/getflashplayer" width="620" height="445">
+        <br>"GitCast #7: Rebasing"
+        </div>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr>
+    <div class="center"><a href="http://book.git-scm.com/4_ignoring_files.html">Prev</a>  <a href="http://book.git-scm.com/4_interactive_rebasing.html">Next</a></div>
+    <hr>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com/"><img src="github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+</body>
+</html>

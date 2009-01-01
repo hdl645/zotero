@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00000.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00000.html">
+<meta name="wpd_date" content="2008-06-03T02:09Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: Re: IPSec Passthrough -->
+<!--X-From-R13: Hvanl Y @nyynzbguh <ivanl&#45;epNangherfbsg.arg> -->
+<!--X-Date: Thu, 1 May 2003 02:58:18 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1051769403.1131.40.camel@lima.royalchallenge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1772A2E865ABD411B18900508BB1B88F05ED7D8C@SVARLEXC07 -->
+<!--X-Head-End-->
+
+
+
+<title>Re: IPSec Passthrough</title>
+<link rev="made" href="mailto:vinay-rc@naturesoft.net">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[Date Prev][<a href="http://www.ox.org/ipsec/2003/05/msg00001.html">Date Next</a>][Thread Prev][<a href="http://www.ox.org/ipsec/2003/05/msg00010.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00000">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00000">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Mark Siler &lt;<a href="mailto:msiler@hcin.net">msiler@hcin.net</a>&gt;</li>
+<li><em>Subject</em>: Re: IPSec Passthrough</li>
+<li><em>From</em>: Vinay K Nallamothu &lt;<a href="mailto:vinay-rc@naturesoft.net">vinay-rc@naturesoft.net</a>&gt;</li>
+<li><em>Date</em>: 01 May 2003 11:40:03 +0530</li>
+<li><em>Cc</em>: <a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a></li>
+<li><em>In-Reply-To</em>: &lt;1772A2E865ABD411B18900508BB1B88F05ED7D8C@SVARLEXC07&gt;</li>
+<li><em>References</em>: &lt;1772A2E865ABD411B18900508BB1B88F05ED7D8C@SVARLEXC07&gt;</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>On Wed, 2003-04-30 at 20:37, Mark Siler wrote:
+&gt; I'm curious on how IPSec passthrough works.  I know AH prevents a
+&gt; traditional NAT from occurring, but how do the SOHO routers (Linksys,
+&gt; D-Link, Ascend, etc) accomplish the IPSec passthrough?
+
+These devices track the IPsec connections by looking at the SPI in
+IKE/ESP headers.
+
+When they first see the IKE packets from the client behind the NAT they
+note down the SPI value, client address and then masquarade the packet
+as usual with its own IP.
+
+When they see the packets from the remote IPsec peer, it looks into the
+table using SPI and replaces the destination with client's IP.
+
+This mechanism works only with ESP and not with AH which is fine as most
+of the road warriors connect to IPsec gateways.
+
+You can get more details about this in sections 9.0 to 9.3 of
+draft-ietf-ipsec-ikev2-tutorial-01.txt.
+
+&gt;  Do they
+&gt; encapsulate the entire IPSec packet from the client?
+No
+
+&gt;  I keep reading
+&gt; about a Transparent Mode and Tunnel Mode,
+For NAT-T unware IPsec peers, the above mentioned mechanism is not
+visible and hence called transparent. Further this works only when the
+client behind the NAT is a road warrior.
+
+
+vinay
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00010" href="http://www.ox.org/ipsec/2003/05/msg00010.html">Re: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Joshua Graessley &lt;jgraessley@apple.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00001.html">IPSec iterated tunneling</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00010.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00000"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00000"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

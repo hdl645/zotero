@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/GitTips">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/GitTips">
+<meta name="wpd_date" content="2008-07-08T16:33Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>GitTips - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/GitTips?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/GitTips?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/GitTips?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="GitTips.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/GitTips">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/GitTips?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/GitTips?action=fullsearch&value=linkto%3A%22GitTips%22&context=180">GitTips</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/GitTips">GitTips</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitTips?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitTips">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line867"><strong>Table of contents:</strong> <span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span></p><p class="line867"></p><div class="table-of-contents"><p class="table-of-contents-heading">Contents</p><ol><li><a href="#head-820f5bc1330c942db5e6073142241bd7f6fae984">General</a><ol><li><a href="#head-15a42d8c07aa7245c7b5eaabe36f0fcc0f9f544e">How to fix the most recent commit</a></li><li><a href="#head-9f87cd21bcdf081a61c29985604ff4be35a5e6c0">How to change commits deeper in history</a></li><li><a href="#head-ecd0af2de870c6bbf8865cdf8ea78f4f1abcac84">How to get only merges in gitk?</a></li><li><a href="#head-db2d6a5dc94fad89510a532f19cab4d9757a84b3">What to do if you have realized that you are on wrong branch?</a></li><li><a href="#head-9f79516c05f0c1b51945b848adb3dd1c5a2bf016">How to compare two local repositories</a></li><li><a href="#head-1cdd4ab777e74f12d1ffa7f0a793e46dd06e5945">How to use git to track OpenDocument (OpenOffice, Koffice) files?</a></li><li><a href="#head-0af0339a50a87f0c3431b1bd0211aadb7a753a99">How to remove all files which are missing from working directory?</a></li><li><a href="#head-fae1e43f6b069c263582e713d6fc3716e22e9c31">How to ignore files which are "Untracked" now?</a></li><li><a href="#head-298e165a6d643635c24da2c08b0b26d63f24a671">How to unpack all branches?</a></li><li><a href="#head-79e977f684ee2263a1f8e5e78db93edf7d2e11f3">How to find a commit for a shortened git-describe string</a></li></ol></li><li><a href="#head-2d6f4e683e6590e8c1532b372d7a1aea84ad3729">Configuration</a><ol><li><a href="#head-3c5dc96de238659115a81c33b9ba383a1d01170f">How to upgrade repository config to use post-1.5.0 features?</a></li></ol></li><li><a href="#head-929f4b9f21815e9b311edf745203c79882cff431">StGIT</a><ol><li><a href="#head-8e71c3bdda0c372b79e33f5a3fedaf22c4c6f944">How to rebase StGIT stack?</a></li></ol></li><li><a href="#head-9c81cafdecb2078f93ac55efa31e21b7dbae79f7">Web</a><ol><li><a href="#head-deb908d62375b8ad3ab4db46c593841853c32425">How to generate RSS feed off-line?</a></li><li><a href="#head-d4fc2b8ac8f185d89fb81ecc206379f1fd410e53">How to push/pull via ssh to host behind gateway?</a></li><li><a href="#head-09f587b7791b46d995947704f9ddc4958dff54c3">How to pass ssh options in git?</a></li></ol></li><li><a href="#head-b4d938d46925c47a0484856f8fac2d1a5902cc4b">Mail</a><ol><li><a href="#head-a015948617d9becbdc9836776f96ad244ba87cb8">Using msmtp to send your patches</a></li></ol></li></ol></div> <span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-6"></span></p><ul><li style="list-style-type: none;"><p class="line891"><strong>See also:</strong> <span class="anchor" id="line-7"></span><span class="anchor" id="line-8"></span></p></li><li class="gap"><p class="line891"><a href="http://git.or.cz/gitwiki/GitFaq">GitFaq</a> (Frequently Asked Questions) page. <span class="anchor" id="line-9"></span></p></li><li><p class="line891"><a href="http://git.or.cz/gitwiki/GitWorkflows">GitWorkflows</a> which attempts to decribe actual, useful, real-world things that people do with git, step by step. <span class="anchor" id="line-10"></span></p></li><li><p class="line891"><a href="http://git.or.cz/gitwiki/ExampleScripts">ExampleScripts</a> - You can do a lot by writing a simple script. <span class="anchor" id="line-11"></span></p></li><li><p class="line891"><a href="http://git.or.cz/gitwiki/Aliases">Aliases</a> are very powerful ways to avoid writing a script. <span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span></p></li></ul><p class="line867">
+</p><h1 id="head-820f5bc1330c942db5e6073142241bd7f6fae984">General</h1>
+<span class="anchor" id="line-14"></span><span class="anchor" id="line-15"></span><p class="line867"><span class="anchor" id="--amend"></span> <span class="anchor" id="line-16"></span>
+</p><h2 id="head-15a42d8c07aa7245c7b5eaabe36f0fcc0f9f544e">How to fix the most recent commit</h2>
+<span class="anchor" id="line-17"></span><p class="line874">Git allows you to easily fix up the most recent commit you've made on a branch with the --amend option: <span class="anchor" id="line-18"></span><span class="anchor" id="line-19"></span></p><p class="line874">For example the following command will allow you to alter the commit message at the top of current head: <span class="anchor" id="line-20"></span><span class="anchor" id="line-21"></span></p><p class="line867"><span class="anchor" id="line-22"></span></p><pre>$ git commit --amend
+<span class="anchor" id="line-23"></span></pre><span class="anchor" id="line-24"></span><p class="line874">while <span class="anchor" id="line-25"></span><span class="anchor" id="line-26"></span></p><p class="line867"><span class="anchor" id="line-27"></span></p><pre>$ git commit -s --amend
+<span class="anchor" id="line-28"></span></pre><span class="anchor" id="line-29"></span><p class="line874">will let you alter the commit message and will also automatically add a sign-off message for you. <span class="anchor" id="line-30"></span><span class="anchor" id="line-31"></span></p><p class="line867"><span class="anchor" id="rewrite-hist"></span> <span class="anchor" id="line-32"></span>
+</p><h2 id="head-9f87cd21bcdf081a61c29985604ff4be35a5e6c0">How to change commits deeper in history</h2>
+<span class="anchor" id="line-33"></span><p class="line874">Since history in Git is immutable, fixing anything but the most recent commit (commit which is not branch head) requires that the history is rewritten from the changed commit and forward. <span class="anchor" id="line-34"></span><span class="anchor" id="line-35"></span></p><p class="line862">You can use <a class="nonexistent" href="http://git.or.cz/gitwiki/StGIT">StGIT</a> for that, initialize branch if necessary, uncommitting up to the commit you want to change, pop to it if necessary, make a change then refresh patch (with <tt>-e</tt> option if you want to correct commit message), then push everything and stg commit. <span class="anchor" id="line-36"></span><span class="anchor" id="line-37"></span></p><p class="line862">Or you can use rebase to do that. Create new temporary branch, rewind it to the commit you want to change using <tt>git&nbsp;reset&nbsp;--hard</tt>, change that commit (it would be top of current head), then rebase branch on top of changed commit, using <tt>git&nbsp;rebase&nbsp;--onto&nbsp;&lt;tmp&nbsp;branch&gt;&nbsp;&lt;commit&nbsp;after&nbsp;changed&gt;&nbsp;&lt;branch&gt;</tt>. <span class="anchor" id="line-38"></span><span class="anchor" id="line-39"></span></p><p class="line862">Or you can use <tt>git&nbsp;rebase&nbsp;--interactive</tt>, which allows various modifications like patch re-ordering, collapsing, ... <span class="anchor" id="line-40"></span><span class="anchor" id="line-41"></span></p><p class="line867"><tt>git&nbsp;filter-branch</tt> can also be usefull. It has been ported from the obsoleted <a href="http://git.or.cz/gitwiki/Cogito">Cogito</a>'s <a class="http" href="http://www.kernel.org/git/?p=cogito/cogito-doc.git;a=blob;hb=HEAD;f=txt/cg-admin-rewritehist.1.txt">cg-admin-rewritehist(1)</a>. <span class="anchor" id="line-42"></span><span class="anchor" id="line-43"></span></p><p class="line867"><span class="anchor" id="only-merges"></span> <span class="anchor" id="line-44"></span>
+</p><h2 id="head-ecd0af2de870c6bbf8865cdf8ea78f4f1abcac84">How to get only merges in gitk?</h2>
+<span class="anchor" id="line-45"></span><p class="line874">With recent version of git you can use <span class="anchor" id="line-46"></span><span class="anchor" id="line-47"></span></p><p class="line867"><span class="anchor" id="line-48"></span></p><pre>gitk --full-history -- a//b
+<span class="anchor" id="line-49"></span></pre><span class="anchor" id="line-50"></span><p class="line874">which will give you each commit that changes that nonexistent file (because there can't be file with double slash in name in git repository), and the full commit history for those (i.e. all the merges). <span class="anchor" id="line-51"></span><span class="anchor" id="line-52"></span></p><p class="line874">If you use "git log", you also need to add "--parents" while gitk will do it for you. <span class="anchor" id="line-53"></span><span class="anchor" id="line-54"></span></p><p class="line867"><span class="anchor" id="wrong-branch"></span> <span class="anchor" id="line-55"></span>
+</p><h2 id="head-db2d6a5dc94fad89510a532f19cab4d9757a84b3">What to do if you have realized that you are on wrong branch?</h2>
+<span class="anchor" id="line-56"></span><p class="line874">If you have not commited your changes yet, it is enough to <span class="anchor" id="line-57"></span><span class="anchor" id="line-58"></span></p><p class="line867"><span class="anchor" id="line-59"></span></p><pre>git checkout -m &lt;correct-branch&gt;
+<span class="anchor" id="line-60"></span></pre><span class="anchor" id="line-61"></span><p class="line862">(if you use <a href="http://git.or.cz/gitwiki/Git">core Git</a> at leastv1.4.1-rc2). <span class="anchor" id="line-62"></span><span class="anchor" id="line-63"></span></p><p class="line862">(<a href="http://git.or.cz/gitwiki/Cogito">Cogito</a> users will do '<tt>cg&nbsp;switch&nbsp;&lt;correct-branch&gt;</tt>') <span class="anchor" id="line-64"></span><span class="anchor" id="line-65"></span></p><p class="line862">Let's assume that you wanted your changes to go on top of <em>&lt;current&gt;</em>, but by accident you committed your changes on top of <em>&lt;master&gt;</em> for example, and that the commit before your commits (the tip of <em>&lt;master&gt;</em> branch should be) is <em>&lt;before&gt;</em>. Let as assume that all changes are committed, and the working dir is clean. <span class="anchor" id="line-66"></span><span class="anchor" id="line-67"></span></p><p class="line874">First, create temporary branch (just in case), e.g. <span class="anchor" id="line-68"></span><span class="anchor" id="line-69"></span></p><p class="line867"><span class="anchor" id="line-70"></span></p><pre>git branch &lt;tmpBranch&gt;
+<span class="anchor" id="line-71"></span></pre><span class="anchor" id="line-72"></span><p class="line862">Then you can reset <em>&lt;master&gt;</em> branch to correct commit <span class="anchor" id="line-73"></span><span class="anchor" id="line-74"></span></p><p class="line867"><span class="anchor" id="line-75"></span></p><pre>git reset &lt;before&gt;
+<span class="anchor" id="line-76"></span></pre><span class="anchor" id="line-77"></span><p class="line862">Move temporary branch to correct branch, i.e. <em>&lt;current&gt;</em>, using <span class="anchor" id="line-78"></span><span class="anchor" id="line-79"></span></p><p class="line867"><span class="anchor" id="line-80"></span></p><pre>git rebase --onto &lt;current&gt; &lt;master&gt; &lt;tmpBranch&gt;
+<span class="anchor" id="line-81"></span></pre><span class="anchor" id="line-82"></span><p class="line862">After resolving all conflict what is left is to fast-forward <em>&lt;current&gt;</em> to correct commit, and remove temporary branch <span class="anchor" id="line-83"></span><span class="anchor" id="line-84"></span></p><p class="line867"><span class="anchor" id="line-85"></span></p><pre>git checkout &lt;current&gt;
+<span class="anchor" id="line-86"></span>git reset --hard &lt;tmpBranch&gt;
+<span class="anchor" id="line-87"></span>git branch -d &lt;tmpBranch&gt;
+<span class="anchor" id="line-88"></span></pre><span class="anchor" id="line-89"></span><p class="line862">I'm not sure if <tt>--hard</tt> option is really needed. <span class="anchor" id="line-90"></span><span class="anchor" id="line-91"></span></p><p class="line867"><span class="anchor" id="diff-repositories"></span> <span class="anchor" id="line-92"></span>
+</p><h2 id="head-9f79516c05f0c1b51945b848adb3dd1c5a2bf016">How to compare two local repositories</h2>
+<span class="anchor" id="line-93"></span><p class="line862">In <a href="http://git.or.cz/gitwiki/Git">Git</a> you can use, being in one of repositories <span class="anchor" id="line-94"></span><span class="anchor" id="line-95"></span></p><p class="line867"><span class="anchor" id="line-96"></span></p><pre>GIT_ALTERNATE_OBJECT_DIRECTORIES=../repo/.git/objects git-diff-tree $(GIT_DIR=../repo/.git git rev-parse --verify HEAD) HEAD
+<span class="anchor" id="line-97"></span></pre><span class="anchor" id="line-98"></span><p class="line862">if you want to compare current repository with <tt>../repo/</tt> repository. <span class="anchor" id="line-99"></span><span class="anchor" id="line-100"></span></p><p class="line862">In the obsoleted <a href="http://git.or.cz/gitwiki/Cogito">Cogito</a> you would nearly exactly the same <span class="anchor" id="line-101"></span><span class="anchor" id="line-102"></span></p><p class="line867"><span class="anchor" id="line-103"></span></p><pre>GIT_ALTERNATE_OBJECT_DIRECTORIES=../repo/.git/objects cg-diff -r `GIT_DIR=../repo/.git cg-object-id -c HEAD`..HEAD
+<span class="anchor" id="line-104"></span></pre><span class="anchor" id="line-105"></span><span class="anchor" id="line-106"></span><p class="line867"><span class="anchor" id="opendocument"></span> <span class="anchor" id="line-107"></span>
+</p><h2 id="head-1cdd4ab777e74f12d1ffa7f0a793e46dd06e5945">How to use git to track OpenDocument (OpenOffice, Koffice) files?</h2>
+<span class="anchor" id="line-108"></span><p class="line862">To view plaintext diff of <a class="nonexistent" href="http://git.or.cz/gitwiki/OpenDocument">OpenDocument</a> files in Git, you can use the GIT_EXTERNAL_DIFF environment variable. First, install : <span class="anchor" id="line-109"></span><span class="anchor" id="line-110"></span></p><ul><li><p class="line891"><a class="http" href="http://stosberg.net/odt2txt/">odt2txt</a>: A simple (and stupid) converter from <a class="nonexistent" href="http://git.or.cz/gitwiki/OpenDocument">OpenDocument</a> to plain text <span class="anchor" id="line-111"></span></p></li><li><p class="line891"><a class="http" href="http://www-verimag.imag.fr/%7Emoy/opendocument/git-oodiff">git-oodiff</a>: Wrapper script for odt2txt and diff. <span class="anchor" id="line-112"></span></p></li></ul><p class="line874">You can now, for example, do <span class="anchor" id="line-113"></span><span class="anchor" id="line-114"></span></p><p class="line867"><span class="anchor" id="line-115"></span></p><pre>$ GIT_EXTERNAL_DIFF=git-oodiff git diff
+<span class="anchor" id="line-116"></span>git-oodiff presentation-expl.odp presentation-expl.odp
+<span class="anchor" id="line-117"></span>--- a/presentation-expl.odp
+<span class="anchor" id="line-118"></span>+++ b/presentation-expl.odp
+<span class="anchor" id="line-119"></span>@@ -3,7 +3,7 @@
+<span class="anchor" id="line-120"></span>
+<span class="anchor" id="line-121"></span>   First item
+<span class="anchor" id="line-122"></span>
+<span class="anchor" id="line-123"></span>-  First version of second item
+<span class="anchor" id="line-124"></span>+  Second version of second item
+<span class="anchor" id="line-125"></span>
+<span class="anchor" id="line-126"></span>   Last item
+<span class="anchor" id="line-127"></span>
+<span class="anchor" id="line-128"></span></pre><span class="anchor" id="line-129"></span><p class="line862">Now, let's automate this a bit more. Add this to your <a class="http" href="http://www-verimag.imag.fr/%7Emoy/opendocument/git-oodiff">~/.gitconfig</a> (or .git/config): <span class="anchor" id="line-130"></span><span class="anchor" id="line-131"></span></p><p class="line867"><span class="anchor" id="line-132"></span></p><pre>[diff "oodiff"]
+<span class="anchor" id="line-133"></span>        command=git-oodiff
+<span class="anchor" id="line-134"></span></pre><span class="anchor" id="line-135"></span><p class="line862">This defines a "oodiff" diff driver, that you can now use in <a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/gitattributes.html">.gitattributes</a> (at the root of your working tree, or in $GIT_DIR/info/attributes) <span class="anchor" id="line-136"></span><span class="anchor" id="line-137"></span></p><p class="line867"><span class="anchor" id="line-138"></span></p><pre>*.odp  diff=oodiff
+<span class="anchor" id="line-139"></span>*.odt  diff=oodiff
+<span class="anchor" id="line-140"></span>*.ods  diff=oodiff
+<span class="anchor" id="line-141"></span></pre><span class="anchor" id="line-142"></span><p class="line874">Now, git will use this oodiff driver for any file whose name ends with .odp, .odt, or .ods. <span class="anchor" id="line-143"></span><span class="anchor" id="line-144"></span></p><p class="line862">(this is also documented <a class="http" href="http://www-verimag.imag.fr/%7Emoy/opendocument/">here</a>). <span class="anchor" id="line-145"></span><span class="anchor" id="line-146"></span></p><p class="line867"><span class="anchor" id="git rm ."></span> <span class="anchor" id="line-147"></span>
+</p><h2 id="head-0af0339a50a87f0c3431b1bd0211aadb7a753a99">How to remove all files which are missing from working directory?</h2>
+<span class="anchor" id="line-148"></span><p class="line867"><span class="anchor" id="line-149"></span></p><pre>git ls-files -z --deleted | git update-index -z --remove --stdin
+<span class="anchor" id="line-150"></span></pre><span class="anchor" id="line-151"></span><span class="anchor" id="line-152"></span><p class="line867">
+</p><h2 id="head-fae1e43f6b069c263582e713d6fc3716e22e9c31">How to ignore files which are "Untracked" now?</h2>
+<span class="anchor" id="line-153"></span><p class="line867"><span class="anchor" id="line-154"></span></p><pre>$ git ls-files -o --exclude-standard &gt;&gt; .gitignore
+<span class="anchor" id="line-155"></span>$ $EDITOR .gitignore
+<span class="anchor" id="line-156"></span></pre><span class="anchor" id="line-157"></span><p class="line862">(note : <tt>--exclude-standard</tt> is not yet in a released version of git as of november 2007, you'll have to use <tt>--exclude-from=.gitignore&nbsp;--exclude-from=.git/info/exclude&nbsp;...</tt> if you don't have it). <span class="anchor" id="line-158"></span><span class="anchor" id="line-159"></span></p><p class="line867">
+</p><h2 id="head-298e165a6d643635c24da2c08b0b26d63f24a671">How to unpack all branches?</h2>
+<span class="anchor" id="line-160"></span><p class="line874">For example if you have realized that you repository must be accessible by older dumb clients, or some script you use doesn't understand packed refs. <span class="anchor" id="line-161"></span><span class="anchor" id="line-162"></span></p><pre>git for-each-ref refs/heads |    \
+<span class="anchor" id="line-163"></span>  ( x=`git rev-parse --git-dir`; \
+<span class="anchor" id="line-164"></span>    while read id junk ref; do   \
+<span class="anchor" id="line-165"></span>      echo $id &gt; "$x/$ref";      \
+<span class="anchor" id="line-166"></span>    done )
+<span class="anchor" id="line-167"></span></pre><span class="anchor" id="line-168"></span><span class="anchor" id="line-169"></span><span class="anchor" id="line-170"></span><p class="line867">
+</p><h2 id="head-79e977f684ee2263a1f8e5e78db93edf7d2e11f3">How to find a commit for a shortened git-describe string</h2>
+<span class="anchor" id="line-171"></span><p class="line862">For your local <img alt="(!)" src="idea.png" title="(!)" width="15" height="15"> repository you can get the commit for a string like v2.6.26-rc9-56 by the following command : <span class="anchor" id="line-172"></span><span class="anchor" id="line-173"></span></p><pre>git rev-list --all v2.6.26-rc9.. | xargs git describe | grep '\-56\-'
+<span class="anchor" id="line-174"></span></pre><span class="anchor" id="line-175"></span><span class="anchor" id="line-176"></span><p class="line867">
+</p><h1 id="head-2d6f4e683e6590e8c1532b372d7a1aea84ad3729">Configuration</h1>
+<span class="anchor" id="line-177"></span><span class="anchor" id="line-178"></span><p class="line867"><span class="anchor" id="upgrade-to-post-1.5.0"></span> <span class="anchor" id="line-179"></span>
+</p><h2 id="head-3c5dc96de238659115a81c33b9ba383a1d01170f">How to upgrade repository config to use post-1.5.0 features?</h2>
+<span class="anchor" id="line-180"></span><p class="line862">Updating a pre-1.5.0 <a href="http://git.or.cz/gitwiki/Git">Git</a> repository to be like a 1.5.0 (and later) style repository basically means rewriting the remotes (.git/info/remotes/) into .git/config, setting up wildcard tracking branches under refs/remotes and deleting the old tracking branches from the refs/heads namespace. <span class="anchor" id="line-181"></span><span class="anchor" id="line-182"></span></p><p class="line862">The following shell script can be used to upgrade <strong>non-bare</strong> <img alt="(!)" src="idea.png" title="(!)" width="15" height="15"> repository (with a working directory) to post-1.5.0 style, to be able to use new features: <span class="anchor" id="line-183"></span><span class="anchor" id="line-184"></span></p><p class="line867"><span class="anchor" id="line-185"></span></p><pre>#!/bin/sh
+<span class="anchor" id="line-186"></span>##
+<span class="anchor" id="line-187"></span>## Upgrades a pre-1.5.0 repository to a 1.5.0-style layout.
+<span class="anchor" id="line-188"></span>## Use at your own risk.
+<span class="anchor" id="line-189"></span>##
+<span class="anchor" id="line-190"></span>sh remotes2config.sh # from git.git/contrib
+<span class="anchor" id="line-191"></span>git config core.bare false
+<span class="anchor" id="line-192"></span>git config core.logallrefupdates true
+<span class="anchor" id="line-193"></span>for r in `git remote`
+<span class="anchor" id="line-194"></span>do
+<span class="anchor" id="line-195"></span>  old="`git config --get-all remote.$r.fetch | sed s,^.*:refs/heads/,,`"
+<span class="anchor" id="line-196"></span>  if [ -z "$old" ]
+<span class="anchor" id="line-197"></span>  then
+<span class="anchor" id="line-198"></span>    echo "No fetch lines for $r."
+<span class="anchor" id="line-199"></span>    continue
+<span class="anchor" id="line-200"></span>  fi
+<span class="anchor" id="line-201"></span>  echo "Converting $r..."
+<span class="anchor" id="line-202"></span>  git config --replace-all remote.$r.fetch +refs/heads/*:refs/remotes/$r/*
+<span class="anchor" id="line-203"></span>  git fetch $r
+<span class="anchor" id="line-204"></span>  for r in $old
+<span class="anchor" id="line-205"></span>  do
+<span class="anchor" id="line-206"></span>    case "$r" in
+<span class="anchor" id="line-207"></span>    *:*) echo "Not deleting $r" ;;
+<span class="anchor" id="line-208"></span>    *) git branch -D $r ;;
+<span class="anchor" id="line-209"></span>    esac
+<span class="anchor" id="line-210"></span>  done
+<span class="anchor" id="line-211"></span>done
+<span class="anchor" id="line-212"></span></pre><span class="anchor" id="line-213"></span><p class="line862">This script requires <a class="http" href="http://git.kernel.org/?p=git/git.git;a=blob_plain;h=master;f=contrib/remotes2config.sh">remotes2config.sh</a> conversion tool by Johannes Schindelin, which can be found in the <em>contrib</em> area of git.git repository. <span class="anchor" id="line-214"></span><span class="anchor" id="line-215"></span></p><ul><li><p class="line891"><a class="http" href="http://permalink.gmane.org/gmane.comp.version-control.git/42176">Upgrade to 1.5.0 utility</a> post by Shawn O. Pearce on Git mailing list <span class="anchor" id="line-216"></span><span class="anchor" id="line-217"></span><span class="anchor" id="line-218"></span></p></li></ul><p class="line867">
+</p><h1 id="head-929f4b9f21815e9b311edf745203c79882cff431">StGIT</h1>
+<span class="anchor" id="line-219"></span><span class="anchor" id="line-220"></span><p class="line867"><span class="anchor" id="stg-rebase"></span> <span class="anchor" id="line-221"></span>
+</p><h2 id="head-8e71c3bdda0c372b79e33f5a3fedaf22c4c6f944">How to rebase StGIT stack?</h2>
+<span class="anchor" id="line-222"></span><p class="line862">If you have &lt;n&gt; patches on stack, and you want to rebase it (for example because git branch got rebased, or you want to base stack on different branch) <span class="anchor" id="line-223"></span><span class="anchor" id="line-224"></span></p><p class="line867"><span class="anchor" id="line-225"></span></p><pre>stg pop -a
+<span class="anchor" id="line-226"></span>git reset --hard &lt;new_base&gt;
+<span class="anchor" id="line-227"></span>stg push -n &lt;n&gt;
+<span class="anchor" id="line-228"></span></pre><span class="anchor" id="line-229"></span><span class="anchor" id="line-230"></span><span class="anchor" id="line-231"></span><p class="line867">
+</p><h1 id="head-9c81cafdecb2078f93ac55efa31e21b7dbae79f7">Web</h1>
+<span class="anchor" id="line-232"></span><span class="anchor" id="line-233"></span><p class="line867"><span class="anchor" id="RSS"></span> <span class="anchor" id="line-234"></span>
+</p><h2 id="head-deb908d62375b8ad3ab4db46c593841853c32425">How to generate RSS feed off-line?</h2>
+<span class="anchor" id="line-235"></span><p class="line862">You can either adapt <a class="http" href="http://bent.latency.net/git2rss">git2rss</a> tool by Bennett Todd to your needs (which is mentioned on <a href="http://git.or.cz/gitwiki/InterfacesFrontendsAndTools#git2rss">Interfaces Frontends And Tools</a> page), or use <em>gitweb</em> to do that, running it as a script. Assuming that <tt>gitweb.cgi</tt> is setup correctly, you can use: <span class="anchor" id="line-236"></span><span class="anchor" id="line-237"></span></p><p class="line867"><span class="anchor" id="line-238"></span></p><pre>env REQUEST_METHOD=GET QUERY_STRING='p=git/git.git;a=rss' \
+<span class="anchor" id="line-239"></span>./gitweb.cgi | tail -n +2</pre><span class="anchor" id="line-240"></span><p class="line862">where of course instead of <tt>git/git.git</tt> you put project (git repository) you are interested in. <span class="anchor" id="line-241"></span><span class="anchor" id="line-242"></span></p><p class="line867"><span class="anchor" id="SSH-tunnel"></span> <span class="anchor" id="line-243"></span>
+</p><h2 id="head-d4fc2b8ac8f185d89fb81ecc206379f1fd410e53">How to push/pull via ssh to host behind gateway?</h2>
+<span class="anchor" id="line-244"></span><p class="line862">There are two possible solutions. With first, using <tt>Proxy</tt><tt>Command</tt> option of ssh, you can connect to the entire network behind firewall. In your ssh configuration file, for example <tt>~/.ssh/config</tt> put the following: <span class="anchor" id="line-245"></span><span class="anchor" id="line-246"></span></p><p class="line867"><span class="anchor" id="line-247"></span></p><pre>Host *.foo.internal
+<span class="anchor" id="line-248"></span>     ProxyCommand ssh gateway.foo.com exec nc %h %p</pre><span class="anchor" id="line-249"></span><p class="line862">(where <tt>'%h'</tt> expands to the host you connect to, and <tt>'%p'</tt> to the port you are using). You have to have <tt>nc</tt> (<a class="http" href="http://www.vulnwatch.org/netcat/">netcat</a> or <a class="http" href="http://netcat.sourceforge.net/">GNU Netcat</a>) installed on gateway, but this should be no problem as it is 22K binary. Note that path is expanded on local side, while it should be to file on gateway side. <span class="anchor" id="line-250"></span><span class="anchor" id="line-251"></span></p><p class="line862">Second is slightly faster, doesn't need any tool besides ssh, but you have to run port forwarding command before connecting, must make sure that ssh tunnel is up, and must be set up host for host. In your ssh configuration file, for example <tt>~/.ssh/config</tt> put the following: <span class="anchor" id="line-252"></span><span class="anchor" id="line-253"></span></p><p class="line867"><span class="anchor" id="line-254"></span></p><pre>Host hostname
+<span class="anchor" id="line-255"></span>     NoHostAuthenticationForLocalhost yes
+<span class="anchor" id="line-256"></span>     HostName localhost
+<span class="anchor" id="line-257"></span>     Port 2222</pre><span class="anchor" id="line-258"></span><p class="line874">where `hostname' is the name you would be using for connecting. Before trying to connect to host begind gateway, you must run <span class="anchor" id="line-259"></span><span class="anchor" id="line-260"></span></p><p class="line867"><span class="anchor" id="line-261"></span></p><pre>ssh -f -N -L 2222:host.foo.internal:22 username@gateway.foo.com
+<span class="anchor" id="line-262"></span></pre><span class="anchor" id="line-263"></span><p class="line862">Of course port numbers must match (and port number should be above 1024 if you won't be running ssh tunnel as root). If you have sufficiently new ssh, you can add <tt>'-M'</tt> option, for use with <tt>Control</tt><tt>Master</tt> option. You can also use <a class="http" href="http://www.harding.motd.ca/autossh/">autossh</a> for running port forwarding/ssh tunnel. <span class="anchor" id="line-264"></span><span class="anchor" id="line-265"></span></p><p class="line867"><span class="anchor" id="SSH-options"></span> <span class="anchor" id="line-266"></span>
+</p><h2 id="head-09f587b7791b46d995947704f9ddc4958dff54c3">How to pass ssh options in git?</h2>
+<span class="anchor" id="line-267"></span><p class="line874">You can set the path of the ssh executable to use with the GIT_SSH environment variable. Create a shell script like <span class="anchor" id="line-268"></span><span class="anchor" id="line-269"></span></p><p class="line867"><span class="anchor" id="line-270"></span></p><pre>#!/bin/sh
+<span class="anchor" id="line-271"></span>exec ssh --your-options-- "$@"
+<span class="anchor" id="line-272"></span></pre><span class="anchor" id="line-273"></span><p class="line874">and make GIT_SSH point to it. <span class="anchor" id="line-274"></span><span class="anchor" id="line-275"></span></p><p class="line874">But if you have just a couple of "standard" setups, then it's really better to use a ".ssh/config" file instead. If you want to use different options "dynamically" (the same host, different options), you can just use different "fake hostnames". For example, you can do <span class="anchor" id="line-276"></span><span class="anchor" id="line-277"></span></p><p class="line867"><span class="anchor" id="line-278"></span></p><pre>Host private.host.com
+<span class="anchor" id="line-279"></span>        User myname
+<span class="anchor" id="line-280"></span>        Hostname host.com
+<span class="anchor" id="line-281"></span>        IdentityFile /home/myname/.ssh/private-identity
+<span class="anchor" id="line-282"></span>Host public.host.com
+<span class="anchor" id="line-283"></span>        User groupname
+<span class="anchor" id="line-284"></span>        Hostname host.com
+<span class="anchor" id="line-285"></span>        IdentityFile /home/myname/.ssh/public-identity
+<span class="anchor" id="line-286"></span></pre><span class="anchor" id="line-287"></span><p class="line874">and now you can ssh to "host.com" using different identities by just using "private.host.com" and "public.host.com" respectively. <span class="anchor" id="line-288"></span><span class="anchor" id="line-289"></span><span class="anchor" id="line-290"></span></p><p class="line867">
+</p><h1 id="head-b4d938d46925c47a0484856f8fac2d1a5902cc4b">Mail</h1>
+<span class="anchor" id="line-291"></span><span class="anchor" id="line-292"></span><p class="line867"><span class="anchor" id="msmtp"></span> <span class="anchor" id="line-293"></span>
+</p><h2 id="head-a015948617d9becbdc9836776f96ad244ba87cb8">Using msmtp to send your patches</h2>
+<span class="anchor" id="line-294"></span><p class="line874">Mailing off a set of patches to a mailing list can be quite neatly done by git-send-email. One of the problems you may encounter there is figuring out which machine is going to send your mail. I tried smtp.gmail.com, but that one requires tls and a password, and git-send-email could not handle that. <span class="anchor" id="line-295"></span><span class="anchor" id="line-296"></span></p><p class="line862">A neat little program, msmtp <a class="http" href="http://msmtp.sourceforge.net/">http://msmtp.sourceforge.net/</a> can help you there. Install and configure a .msmtprc file in your home directory, the likes of: <span class="anchor" id="line-297"></span><span class="anchor" id="line-298"></span></p><p class="line867"><span class="anchor" id="line-299"></span></p><pre># Example for a user configuration file
+<span class="anchor" id="line-300"></span># Set default values for all following accounts.
+<span class="anchor" id="line-301"></span>defaults
+<span class="anchor" id="line-302"></span>tls on
+<span class="anchor" id="line-303"></span>tls_trust_file /etc/pki/tls/certs/ca-bundle.crt
+<span class="anchor" id="line-304"></span>logfile ~/.msmtp.log
+<span class="anchor" id="line-305"></span># My email service
+<span class="anchor" id="line-306"></span>account gmail
+<span class="anchor" id="line-307"></span>host smtp.gmail.com
+<span class="anchor" id="line-308"></span>port 587
+<span class="anchor" id="line-309"></span>from some.user.name@gmail.com
+<span class="anchor" id="line-310"></span>auth on
+<span class="anchor" id="line-311"></span>user some.user.name@gmail.com
+<span class="anchor" id="line-312"></span>password my-secret
+<span class="anchor" id="line-313"></span># Set a default account
+<span class="anchor" id="line-314"></span>account default : gmail
+<span class="anchor" id="line-315"></span></pre><span class="anchor" id="line-316"></span><p class="line874">This takes gmail as an example. The ca-bundle.crt is the file with CA certificates for Fedora Core 6, for other distros you might have to dig it up from somewhere else. On Ubuntu /etc/ssl/certs/ca-certificates.crt should be used, for example. Now, by giving the full path name to the msmtp program as smtp server to git-send-email, you can send the patches through gmail or some other smtp account with TLS and/or user authentication. <span class="anchor" id="line-317"></span><span class="anchor" id="line-318"></span></p><p class="line867"><span class="anchor" id="line-319"></span></p><pre>git-send-email --smtp-server /usr/local/bin/msmtp &lt;file|directory&gt;
+<span class="anchor" id="line-320"></span></pre><span class="anchor" id="line-321"></span><p class="line874">An alternative to setting --smtp-server each time is to set the global sendemail.smtpserver value. <span class="anchor" id="line-322"></span><span class="anchor" id="line-323"></span></p><p class="line867"><span class="anchor" id="line-324"></span></p><pre>git-config --global sendemail.smtpserver /usr/local/bin/msmtp
+<span class="anchor" id="line-325"></span></pre><span class="anchor" id="line-326"></span><p class="line874">Another option is to configure a local smtp server on your machine, using a well-known SMTP server as smarthost. Then, all applications using localhost as a mail server (e.g. /usr/bin/mail) will work. <span class="anchor" id="line-327"></span><span class="anchor" id="line-328"></span></p><p class="line874">On OS X with macports, msmtp can be installed with 'sudo port install msmtp', and '/usr/share/curl/curl-ca-bundle.crt' should work for tls_trust_file. <span class="anchor" id="line-329"></span><span class="anchor" id="line-330"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-331"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a> <span class="anchor" id="line-332"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">GitTips  (上次是 <span title="??? @ c131175.adsl.hansenet.de[213.39.131.175]">c131175</span> 在 2008-07-12 13:58:06 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitTips?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitTips?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitTips">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

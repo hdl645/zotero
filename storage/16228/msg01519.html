@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01519.html">
+<meta name="wpd_url" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01519.html">
+<meta name="wpd_date" content="2008-06-03T03:03Z">
+<!-- MHonArc v2.5.14 -->
+<!--X-Subject: RE: Looking for info on ipsec passthrough (or passthru?) -->
+<!--X-From-R13: [vpury qr Ybavat <zqxbavatNinaraohet.pbz> -->
+<!--X-Date: Wed, 30 Aug 2000 15:16:44 &#45;0700 (PDT) -->
+<!--X-Message-Id: B58A778AE8E8D211B6C700805FE69B1A02F5B349@ex&#45;nl&#45;u1.vanenburg.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+
+
+<title>RE: Looking for info on ipsec passthrough (or passthru?)</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">Date Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01520.html">Date Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01521.html">Thread Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01522.html">Thread Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01519">Date Index</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01519">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: Looking for info on ipsec passthrough (or passthru?)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: "'John C. Day'" &lt;<a href="mailto:JCDay@DOMAIN.HIDDEN">JCDay@xxxxxxxxx</a>&gt;,       "Strahm, Bill" &lt;<a href="mailto:bill.strahm@DOMAIN.HIDDEN">bill.strahm@xxxxxxxxx</a>&gt;, <a href="mailto:ipsec@DOMAIN.HIDDEN">ipsec@xxxxxxxxxxxxxxxxx</a></li>
+<li><em>Subject</em>: RE: Looking for info on ipsec passthrough (or passthru?)</li>
+<li><em>From</em>: Michel de Koning &lt;<a href="mailto:mdkoning@DOMAIN.HIDDEN">mdkoning@xxxxxxxxxxxxx</a>&gt;</li>
+<li><em>Date</em>: Wed, 30 Aug 2000 22:58:34 +0200</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@DOMAIN.HIDDEN">owner-ipsec@xxxxxxxxxxxxxxxxx</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Hi John,
+
+currently we are testing (playing with) an Altiga / Cisco 3000 vpn
+concentrator. It allows IPsec Passthru Nat. haven't read everything yet, but
+the principle is that is uses UDP instead of TCP for the IPSec packets. As
+soon as we have tested it I will let you know.
+
+Must say this Altiga box is really great so far, the bad thing is it does
+not support win2000 clients unless you use certificates, this because
+win2000 client does not support mode-config. Cisco says "the altiga client
+for win2000 will ship in october"......
+
+Usually when cisco buys something you have to wait for version 2 before it
+will really work :-), let's wait and see..
+
+We had the Altiga up and running with NT4 using PPTP and after that IPSec
+within an afternoon. And this was before reading the documentation! Look at
+it I would say
+
+
+Michel
+
+-----Oorspronkelijk bericht-----
+Van: John C. Day [<a href="mailto:JCDay@JCDay.com">mailto:JCDay@JCDay.com</a>]
+Verzonden: Wednesday, August 30, 2000 6:03 PM
+Aan: Strahm, Bill; ipsec@lists.tislabs.com
+Onderwerp: RE: Looking for info on ipsec passthrough (or passthru?)
+
+
+Thanks for the response, Bill.
+
+What I'm looking for is something which will enable me to use an IPSec VPN 
+client (Cisco/Altiga) from a privately addressed machine at home which sits 
+behind the Linksys device which in turn is connected to my DSL 
+bridge.   The VPN server sits (or will sit, to be more accurate - it's 
+ordered but not in hand yet) on our corporate DMZ .
+
+Would you guess this passthru feature enables such a connection?  I.e., it 
+NATs everything other than what it sees on the VPN port?  While a hack, 
+that would seem to accomplish what we need.  Is there better way to do 
+it?  Thanks.
+
+John
+
+
+
+
+At 08:45 AM 8/30/00, you wrote:
+&gt;Ok, I looked it up and think I know what "passthru" is.
+&gt;
+&gt;Getting IPsec through NAT is a VERY hard problem.  There isn't an easy way
+&gt;of associating (on the wire) that a packet with an SPI of this value needs
+&gt;to be demultiplexed to this destination because a packet with another SPI
+&gt;went through the NAT gateway...
+&gt;
+&gt;Passthru is one way of solving this, basically saying all IPsec traffic
+&gt;flows through the NAT to this 1 destination.
+&gt;
+&gt;Passthru is a hack until something like RSIP becomes a reality.
+&gt;
+&gt;Bill
+&gt;
+&gt;______________________________________________
+&gt;Bill Strahm        Programming today is a race between
+&gt;bill.strahm@      software engineers striving to build
+&gt;intel.com           bigger and better idiot-proof programs,
+&gt;(503) 264-4632   and the Universe trying to produce
+&gt;             bigger and better idiots.  So far, the
+&gt;                         Universe is winning.--Rich Cook
+&gt;I am not speaking for Intel.  And Intel rarely speaks for me
+&gt;
+&gt;
+&gt; &gt; -----Original Message-----
+&gt; &gt; From: John C. Day [<a href="mailto:JCDay@JCDay.com">mailto:JCDay@JCDay.com</a>]
+&gt; &gt; Sent: Tuesday, August 29, 2000 3:56 PM
+&gt; &gt; To: ipsec@lists.tislabs.com
+&gt; &gt; Subject: Looking for info on ipsec passthrough (or passthru?)
+&gt; &gt;
+&gt; &gt;
+&gt; &gt; Greetings.  I'm poking around looking for information on
+&gt; &gt; "IPSec passthru",
+&gt; &gt; which I saw mentioned on <a href="http://www.linksys.com/">http://www.linksys.com</a> ("Firmware
+&gt; &gt; upgrade - IPSec
+&gt; &gt; passthru now supported").
+&gt; &gt;
+&gt; &gt; I searched the archive files of
+&gt; &gt; <a href="ftp://ftp.tis.com/pub/lists/ipsec/ipsec.0001">ftp://ftp.tis.com/pub/lists/ipsec/ipsec.0001</a> through ipsec.0008 but I
+&gt; &gt; couldn't locate the string "passthr" anywhere in those.   I
+&gt; &gt; also checked
+&gt; &gt; rfc2401 without success, but I'm guessing it's a feature/spec
+&gt; &gt; that's been
+&gt; &gt; introduced recently.
+&gt; &gt;
+&gt; &gt; Using google I did find a couple of mentions of it in news
+&gt; &gt; groups, but I
+&gt; &gt; wasn't able to locate an rfc or other doc which describes
+&gt; &gt; what it's for and
+&gt; &gt; how it's to be implemented.
+&gt; &gt;
+&gt; &gt; Any pointers?   Thanks.
+&gt; &gt;
+&gt; &gt; John
+&gt; &gt;
+&gt; &gt; --
+&gt; &gt;
+&gt; &gt; John C. Day
+&gt; &gt; Gilroy, CA
+&gt; &gt; <a href="http://www.jcday.com/">http://www.JCDay.com</a>
+&gt; &gt;
+&gt; &gt;
+
+
+--
+
+John C. Day
+Gilroy, CA
+<a href="http://www.jcday.com/">http://www.JCDay.com</a>
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01520.html">RFC2401 Questions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01521.html">Re: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01522.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01519"><strong>Date</strong></a></li>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01519"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-6.html">
+<meta name="wpd_url" content="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-6.html">
+<meta name="wpd_date" content="2008-06-04T09:55Z">
+
+
+
+ <meta name="GENERATOR" content="SGML-Tools 1.0.9">
+ <title>Linux VPN Masquerade HOWTO: IPsec masquerade technical notes and special security considerations</title>
+ <link href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-5.html" rel="previous">
+ <link href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc6" rel="contents">
+</head>
+<body>
+
+Next
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-5.html">Previous</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc6">Contents</a>
+<hr>
+<h2><a name="s6">6. IPsec masquerade technical notes and special security considerations</a></h2>
+
+<p>
+</p><h2><a name="ss6.1">6.1 Limitations and weaknesses of IPsec masquerade</a>
+</h2>
+
+<p>Traffic that uses the AH protocol <em>cannot</em> be masqueraded. The AH
+protocol incorporates a cryptographic checksum across the IP addresses that
+the masquerade gateway cannot correctly regenerate. Thus, all masqueraded
+AH traffic will be discarded as having invalid checksums.
+</p><p>IPsec traffic  using transport-mode ESP also cannot be reliably masqueraded.
+Transport mode ESP essentially encrypts everything after the IP header.
+Since, for example, the TCP and UDP checksums include the IP source and
+destination addresses, and the TCP/UDP checksum is within the encrypted
+payload and thus cannot be recalculated after the masquerade gateway alters
+the IP addresses, the TCP/UDP header will fail the checksum test at the
+remote gateway and the packet will be discarded. Protocols that do not
+include information about the source or destination IP addresses may
+successfully use masqueraded transport mode.
+</p><p>Apart from these limitations, IPsec masquerade is secure and reliable when
+only one IPsec host is being masqueraded at a time, or when each
+masqueraded host is communicating with a different remote host. When more
+than one masqueraded host is communicating with the same remote host, a few
+weaknesses show up:
+</p><p>
+</p><ul>
+<li> Transport-mode communications are subject to collisions.
+<p>If two or more masqueraded hosts are using transport mode to communicate
+with the same remote host, and the security policy of the remote host permits
+multiple transport-mode sessions with the same peer, it is possible for
+sessions to experience collisions. This happens because the IP
+address of the <em>masquerading gateway</em> will be used to identify the
+sessions, and any other identifying information cannot be masqueraded
+because it is within the encrypted portion of the packet.
+</p><p>If the remote host's security policy does not permit multiple
+transport-mode sessions with the same peer, the situation is even worse:
+the more-recently-negotiated transport mode session will likely completely
+take over <em>all</em> of the traffic from the older session, causing the
+older session to "go dead". While the established sessions
+from the older transport-mode IPsec session may be quickly reset if the
+remote host isn't expecting to receive the traffic, at least one packet of
+information will be sent to the wrong host. This information will probably
+be discarded by the recipient, but it will still be sent.
+</p><p><em>Thus, a transport-mode collision may result in leaking of information
+between the two sessions or termination of one or both sessions.</em> Using
+IPsec in transport mode via a masquerading gateway is <em>not
+recommended</em> if there is the possibility that other transport mode
+IPsec sessions will be attempted via the same masquerading gateway to the
+same remote IPsec host.
+</p><p>IPsec using tunnel mode with extruded network addressing (where the masqueraded
+IPsec host is assigned an IP address from the remote host's network) is
+<em>not</em> subject to these problems, as the IP addresses assigned from
+the remote network will be used to identify the sessions instead of using
+the IP address of the masquerading host.
+</p><p>
+</p><p>
+
+</p></li><li> ISAKMP communications are subject to cookie collisions.
+<p>If two or more masqueraded hosts establishing a session to the same remote
+host happen to select the same initiator cookie when initiating ISAKMP
+traffic, the masquerading gateway will route all of the ISAKMP traffic to
+the second host. There is a 1 in 2^64 (i.e. very small) chance of this
+collision happening for each host, at the time of establishing the initial
+ISAKMP connection.
+</p><p>Correcting this requires including the responder cookie in the key used to
+route inbound ISAKMP traffic. This modification is incorporated into
+IPsec masquerade for the 2.2.x kernel, and the short window between the
+time the masqueraded host initiates the ISAKMP exchange and the remote host
+responds is covered by discarding any new ISAKMP traffic that would collide
+with the current outstanding traffic. This modification will be backported
+to the 2.0.x code soon.
+</p><p>
+</p><p>
+
+</p></li><li> There may be a collision between SPI values on inbound traffic.
+<p>Two or more masqueraded IPsec hosts communicating with the same remote
+IPsec host may negotiate to use the same SPI value for inbound traffic. If
+this happens the masquerading gateway will route all of the inbound traffic
+to the first host to receive any inbound traffic using that SPI. The
+possibility of this happening is about 1 in 2^32 for each outstanding
+ESP session, and may occur on any rekey.
+</p><p>Since the SPI values refer to different SAs having different encryption
+keys the first host will not be able to decrypt the data intended for the
+other hosts, so no data leakage will occur. There is no way for the
+masquerading gateway to detect or prevent this collision. The only way to
+prevent this collision is for the remote IPsec host to check the SPI value
+proposed by the masqueraded host to see if that SPI value is already in use
+by another SA from the same IP address. It is not likely that this will be
+done, since it imposes more overhead on an already expensive operation (the
+rekey) to benefit a small percentage of users in case of a relatively rare
+event.
+</p><p>
+</p><p>
+
+</p></li><li> Inbound and outbound SPI values may be misassociated.
+<p>This is discussed in detail in the next section.
+</p><p>
+
+</p></li></ul>
+<p>To avoid these problems the 2.2.x code by default prevents the
+establishment of multiple connections to the same remote host. If the
+weaknesses exposed by multiple connections to the same remote host are
+acceptable, you can enable "parallel sessions".
+</p><p>Blocking parallel sessions for security reasons can be annoying: there is
+no way for the IPsec masquerade code to sniff the session and see when it
+is terminating, so the masquerade table entries will persist for the IPsec
+<layer id="google-toolbar-hilite-1" style="background-color: Fuchsia; color: black;">Masq</layer> Table Lifetime even if the session terminates immediately after it is
+established. If parallel sessions are prevented, this means that the
+server will be unavailable to other clients until the <layer id="google-toolbar-hilite-2" style="background-color: Fuchsia; color: black;">masq</layer> table entry for
+the most recent session has timed out and been deleted. This can be up to
+several hours.
+</p><p>
+</p><p>
+</p><h2><a name="ss6.2">6.2 Proper routing of inbound encrypted traffic</a>
+</h2>
+
+<p>The portion of the ISAKMP key exchange where the ESP SPI values are
+communicated is encrypted, so the ESP SPI values must be determined by
+inspection of the actual ESP traffic. Also, the outbound ESP traffic does
+not contain any indication of what the inbound SPI will be. This means
+there is no perfectly reliable way to associate inbound ESP traffic with
+outbound ESP traffic.
+</p><p>IPsec <layer id="google-toolbar-hilite-3" style="background-color: Fuchsia; color: black;">masq</layer> attempts to associate inbound and outbound ESP traffic by
+serializing initial ESP traffic on a by-remote-host basis. What this
+means is:
+</p><p>
+</p><ul>
+<li>If an outbound ESP packet with an SPI value that has not previously
+been seen (or whose masquerade table entry has expired) is received (which
+shall hereafter be called an "initial packet"), a masquerade
+table entry for that SourceAddr+SPI+DestAddr combination is created. It is
+marked as "outstanding", that is, no inbound ESP traffic has been
+received for it yet. This is done by setting the "inbound SPI"
+value in the <layer id="google-toolbar-hilite-4" style="background-color: Fuchsia; color: black;">masq</layer> table entry to zero, which is a value reserved for uses
+such as this. This will happen at the initiation of a new ESP connection
+and at regular intervals when an existing ESP connection rekeys.
+<p>
+
+</p></li><li>As long as the <layer id="google-toolbar-hilite-5" style="background-color: Fuchsia; color: black;">masq</layer> table entry is outstanding, no other initial ESP
+packets for the <em>same remote host</em> will be processed. The packets
+are immediately discarded, and a system log entry is made saying the
+traffic is temporarily blocked. This also applies to initial traffic from
+the same masqueraded host going to the same remote host if the SPI values
+differ. Traffic to other remote hosts, and traffic where both SPI values
+are known ("established" traffic) is not affected by this.
+<p>
+
+</p></li><li>This could easily lead to a Denial of Service of the remote host, so
+this outstanding ESP <layer id="google-toolbar-hilite-6" style="background-color: Fuchsia; color: black;">masq</layer> table entry is given a short lifetime, and only a
+limited number of retries of the same traffic are allowed. This permits
+round-robin access to the remote host if several masqueraded hosts are
+attempting to initialize simultaneously and responses aren't coming back
+very quickly, for example due to network congestion or a slow remote host.
+The retry limitation begins once there is a collision, so the masqueraded
+IPsec host can wait as long as necessary for a reply until there's a need
+for serialization.
+<p>
+
+</p></li><li>When an ESP packet from the outstanding remote host is received and
+the SPI value does not appear in any <layer id="google-toolbar-hilite-7" style="background-color: Fuchsia; color: black;">masq</layer> table entry, it is assumed that
+the packet is the response to the outstanding initial packet. The SPI value
+is stored in that <layer id="google-toolbar-hilite-8" style="background-color: Fuchsia; color: black;">masq</layer> table entry, thus associating the SPI values, and
+the inbound ESP traffic is routed to the masqueraded host. At this point
+another initial packet for the remote server may be processed.
+<p>
+
+</p></li><li>Any ESP traffic with a zero SPI value is discarded as invalid, per
+the RFC requirements.</li>
+</ul>
+<p>
+</p><p>There are several ways this can fail to associate traffic properly:
+</p><p>
+</p><ul>
+<li>Network delays or a slow remote host can cause the response to the
+first initial packet to be delayed long enough that the init <layer id="google-toolbar-hilite-9" style="background-color: Fuchsia; color: black;">masq</layer> table
+entry expires and a different masqueraded host is given a chance to
+initialize. This could cause the response to be associated with the wrong
+outbound SPI, which would cause inbound traffic to be routed to the wrong
+masqueraded host. If this happens the masqueraded host receiving the
+traffic in error will discard it because it has an unexpected SPI value,
+and everybody will eventually time out, rekey and try again. This can be
+addressed by editing <code>/usr/src/<layer id="google-toolbar-hilite-0" style="background-color: Yellow; color: black;">linux</layer>/net/ipv4/ip_<layer id="google-toolbar-hilite-10" style="background-color: Fuchsia; color: black;">masq</layer>.c</code>
+(<code>ip_<layer id="google-toolbar-hilite-11" style="background-color: Fuchsia; color: black;">masq</layer>_ipsec.c</code> in 2.2.x) and increasing the INIT lifetime or the
+number of INIT retries permitted, at the cost of increasing the blocking
+(and DoS) window.
+<p>
+
+</p></li><li>Sessions idle or semi-idle (with infrequent inbound traffic and
+no outbound traffic) for a long period of time may be idle long enough for
+the <layer id="google-toolbar-hilite-12" style="background-color: Fuchsia; color: black;">masq</layer> table entry to expire. If the remote host sends traffic to an
+established yet <layer id="google-toolbar-hilite-13" style="background-color: Fuchsia; color: black;">masq</layer>-expired session while an outstanding init to the same
+remote host is underway, the traffic may be misrouted for the same reason
+as described above. This can be addressed by making sure the <code>IPsec <layer id="google-toolbar-hilite-14" style="background-color: Fuchsia; color: black;">Masq</layer>
+Table Lifetime</code> kernel configuration parameter is slightly longer than the
+rekey interval, which is the longest time any given SPI pair should be used.
+The problem here is that you may not know all of the rekey intervals if
+you're masquerading for many remote servers, or some may have their rekey
+intervals set to unreasonably high values, such as several hours.
+<p>
+
+</p></li><li>If there is a delay between a rekey and the transmission of outbound
+ESP traffic using the new SPI, and during this delay inbound ESP traffic
+using the new SPI is received, there will be no <layer id="google-toolbar-hilite-15" style="background-color: Fuchsia; color: black;">masq</layer> table entry describing
+how to route the inbound traffic. If another masqueraded host has a pending
+init with the same remote host, the traffic will be misassociated. Note
+that serialization of ESP initial traffic <em>does not</em> affect ISAKMP
+rekey traffic.</li>
+</ul>
+<p>The best solution is to have some way to preload the <layer id="google-toolbar-hilite-16" style="background-color: Fuchsia; color: black;">masq</layer> table with the
+properly associated out-SPI/in-SPI pair or some other mapping of
+remote_host + inbound_SPI to masqueraded_host. This cannot be done by
+inspecting the ISAKMP key exchange, as it is encrypted. It may be possible
+to use RSIP (a.k.a. Host-NAT) to communicate with the masqueraded IPsec
+host and request notification of SPI information once it has been
+negotiated. This is being investigated. If something is done to implement
+this it will be done no sooner than the 2.3.x series, as RSIP is a fairly
+complex client/server NAT protocol.
+</p><p>When an inbound ESP packet with a new SPI is received the masquerading
+firewall attempts to guess which masqueraded host(s) the unassociated
+inbound traffic is intended for. If the inbound ESP traffic is not matched
+to an established session or a pending session initialization, then the
+packet is sent to the masqueraded host(s) who most recently rekeyed with
+that remote host. The "incorrect" masqueraded hosts will discard
+the traffic as being improperly encrypted, and the "correct" host
+will get its data. When the "correct" host responds, the normal
+ESP init serialization process occurs.
+</p><p>
+</p><p>
+</p><hr>
+Next
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-5.html">Previous</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc6">Contents</a>
+</body>
+</html>

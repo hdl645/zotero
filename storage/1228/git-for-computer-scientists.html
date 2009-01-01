@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://eagain.net/articles/git-for-computer-scientists/">
+<meta name="wpd_url" content="http://eagain.net/articles/git-for-computer-scientists/">
+<meta name="wpd_date" content="2008-07-08T16:36Z">
+
+
+
+  
+    <title>Tv's cobweb: Git for Computer Scientists</title>
+    
+    <link href="mailto:tv@eagain.net" rev="made">
+    <link href="http://eagain.net/" rel="start">
+    <link href="about:blank?favicon.ico" rel="shortcut icon" type="image/x-icon">
+    
+    
+  <script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="git-for-computer-scientists.css" media="all">
+</head>
+<body>
+    <div class="body">
+      <div class="content">
+        <h1 class="main-heading">Tv's cobweb: Git for Computer Scientists</h1>
+        <div class="main">
+          <div class="hentry">
+            <div class="entry-content">
+              <div class="abstract topic">
+                <p class="topic-title first">Abstract</p>
+                <p>Quick introduction to <a class="reference" href="http://git.or.cz/">git</a> internals for people who are not
+scared by words like <a class="reference" href="http://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed Acyclic Graph</a>.</p>
+              </div>
+              <div class="section">
+                <h1>
+                  <a id="storage" name="storage">Storage</a>
+                </h1>
+                <p>In simplified form, git object storage is "just" a DAG of objects,
+with a handful of different types of objects. They are all stored
+compressed and identified by an SHA-1 hash (that, incidentally,
+<em>isn't</em> the SHA-1 of the contents of the file they represent, but
+of their representation in git).</p>
+                <div class="figure">
+                  <img alt="git-storage.1.png" src="git-storage.1.png">
+                  <p class="caption"><tt class="docutils literal"><span class="pre">blob</span></tt>: The simplest object, just a bunch of bytes. This is often
+a file, but can be a symlink or pretty much anything else. The
+object that points to the <tt class="docutils literal"><span class="pre">blob</span></tt> determines the semantics.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-storage.2.png" src="git-storage.2.png">
+                  <p class="caption"><tt class="docutils literal"><span class="pre">tree</span></tt>: Directories are represented by <tt class="docutils literal"><span class="pre">tree</span></tt> object. They
+refer to <tt class="docutils literal"><span class="pre">blob</span></tt>s that have the contents of files (filename,
+access mode, etc is all stored in the <tt class="docutils literal"><span class="pre">tree</span></tt>), and to other
+<tt class="docutils literal"><span class="pre">tree</span></tt>s for subdirectories.</p>
+                  <div class="legend">
+
+When a node points to another node in the DAG, it <em>depends</em> on the
+other node: it cannot exist without it. Nodes that nothing points
+to can be garbage collected with <tt class="docutils literal"><span class="pre">git</span><span class="pre">gc</span></tt>, or rescued much like
+filesystem inodes with no filenames pointing to them with <tt class="docutils literal"><span class="pre">git</span><span class="pre">lost-found</span></tt>.</div>
+                </div>
+                <div class="figure">
+                  <img alt="git-storage.3.png" src="git-storage.3.png">
+                  <p class="caption"><tt class="docutils literal"><span class="pre">commit</span></tt>: A <tt class="docutils literal"><span class="pre">commit</span></tt> refers to a <tt class="docutils literal"><span class="pre">tree</span></tt> that represents the
+state of the files at the time of the commit. It also refers to
+0..<cite>n</cite> other <tt class="docutils literal"><span class="pre">commit</span></tt>s that are its parents. More than one
+parent means the commit is a merge, no parents means it is an
+initial commit, and interestingly there can be more than one
+initial commit; this usually means two separate projects
+merged. The body of the <tt class="docutils literal"><span class="pre">commit</span></tt> object is the commit message.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-storage.4.png" src="git-storage.4.png">
+                  <p class="caption"><cite>refs</cite>: References, or heads or branches, are like post-it notes
+slapped on a node in the DAG. Where as the DAG only gets added to
+and existing nodes cannot be mutated, the post-its can be moved
+around freely. They don't get stored in the history, and they
+aren't directly transferred between repositories. They act as sort
+of bookmarks, "I'm working here".</p>
+                  <div class="legend">
+                    <p><tt class="docutils literal"><span class="pre">git</span><span class="pre">commit</span></tt> adds a node to the DAG and moves the post-it note
+for current branch to this new node.</p>
+                    <p>The <tt class="docutils literal"><span class="pre">HEAD</span></tt> ref is special in that it actually points to another
+ref. It is a pointer to the currently active branch. Normal refs
+are actually in a namespace <tt class="docutils literal"><span class="pre">heads/XXX</span></tt>, but you can often skip
+the <tt class="docutils literal"><span class="pre">heads/</span></tt> part.</p>
+                  </div>
+                </div>
+                <div class="figure">
+                  <img alt="git-storage.5.png" src="git-storage.5.png">
+                  <p class="caption"><cite>remote refs</cite>: Remote references are post-it notes of a different
+color. The difference to normal <cite>refs</cite> is the different namespace,
+and the fact that remote refs are essentially controlled by the
+remote server. <tt class="docutils literal"><span class="pre">git</span><span class="pre">fetch</span></tt> updates them.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-storage.6.png" src="git-storage.6.png">
+                  <p class="caption"><tt class="docutils literal"><span class="pre">tag</span></tt>: A <tt class="docutils literal"><span class="pre">tag</span></tt> is both a node in the DAG and a post-it note (of
+yet another color). A <tt class="docutils literal"><span class="pre">tag</span></tt> points to a <tt class="docutils literal"><span class="pre">commit</span></tt>, and includes
+an optional message and a GPG signature.</p>
+                  <div class="legend">
+
+The post-it is just a fast way to access the tag, and if lost can
+be recovered from just the DAG with <tt class="docutils literal"><span class="pre">git</span><span class="pre">lost-found</span></tt>.</div>
+                </div>
+                <p>The nodes in the DAG can be moved from repository to repository, can
+be stored in more effective form (packs), and unused nodes can be
+garbage collected. But in the end, a <tt class="docutils literal"><span class="pre">git</span></tt> repository is always just
+a DAG and post-its.</p>
+              </div>
+              <div class="section">
+                <h1>
+                  <a id="history" name="history">History</a>
+                </h1>
+                <p>So, armed with that knowledge on how <tt class="docutils literal"><span class="pre">git</span></tt> stores the version
+history, how do we visualize things like merges, and how does <tt class="docutils literal"><span class="pre">git</span></tt>
+differ from tools that try to manage history as linear changes per
+branch.</p>
+                <div class="figure">
+                  <img alt="git-history.1.png" src="git-history.1.png">
+                  <p class="caption">This is the simplest repository. We have <tt class="docutils literal"><span class="pre">clone</span></tt>d a remote repository
+with one commit in it.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.2.png" src="git-history.2.png">
+                  <p class="caption">Here we have <tt class="docutils literal"><span class="pre">fetch</span></tt>ed the remote and received one new commit
+from the remote, but have not merged it yet.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.3.png" src="git-history.3.png">
+                  <p class="caption">The situation after <tt class="docutils literal"><span class="pre">git</span><span class="pre">merge</span><span class="pre">remotes/MYSERVER/master</span></tt>. As the
+merge was a <cite>fast forward</cite> (that is, we had no new commits in our
+local branch), the only thing that happened was moving our post-it
+note and changing the files in our working directory respectively.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.4.png" src="git-history.4.png">
+                  <p class="caption">One local <tt class="docutils literal"><span class="pre">git</span><span class="pre">commit</span></tt> and a <tt class="docutils literal"><span class="pre">git</span><span class="pre">fetch</span></tt> later. We have both a
+new local commit and a new remote commit. Clearly, a merge is
+needed.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.5.png" src="git-history.5.png">
+                  <p class="caption">Results of <tt class="docutils literal"><span class="pre">git</span><span class="pre">merge</span><span class="pre">remotes/MYSERVER/master</span></tt>. Because we had
+new local commits, this wasn't a <cite>fast forward</cite>, but an actual new
+<tt class="docutils literal"><span class="pre">commit</span></tt> node was created in the DAG. Note how it has two parent
+<tt class="docutils literal"><span class="pre">commit</span></tt>s.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.6.png" src="git-history.6.png">
+                  <p class="caption">Here's what the tree will look after a few commits on both branches
+and another merge. See the "stitching" pattern emerge? The <tt class="docutils literal"><span class="pre">git</span></tt>
+DAG records exactly what the history of actions taken was.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.7.png" src="git-history.7.png">
+                  <p class="caption">The "stitching" pattern is somewhat tedious to read. If you have not
+yet published your branch, or have clearly communicated that others
+should not base their work on it, you have an alternative. You can
+<tt class="docutils literal"><span class="pre">rebase</span></tt> your branch, where instead of merging, your commit is
+replaced by another commit with a different parent, and your branch
+is moved there.</p>
+                  <div class="legend">
+                    <p>Your old commit(s) will remain in the DAG until garbage collected.
+Ignore them for now, but just know there's a way out if you screwed
+up totally. If you have extra post-its pointing to your old commit,
+they will remain pointing to it, and keep your old commit alive
+indefinitely. That can be fairly confusing, though.</p>
+                    <p>Don't rebase branches that others have created new commits on top
+of. It is possible to recover from that, it's not hard, but the
+extra work needed can be frustrating.</p>
+                  </div>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.8.png" src="git-history.8.png">
+                  <p class="caption">The situation after garbage collecting (or just ignoring the
+unreachable commit), and creating a new commit on top of your
+<tt class="docutils literal"><span class="pre">rebase</span></tt>d branch.</p>
+                </div>
+                <div class="figure">
+                  <img alt="git-history.9.png" src="git-history.9.png">
+                  <p class="caption"><tt class="docutils literal"><span class="pre">rebase</span></tt> also knows how to rebase multiple commits with one
+command.</p>
+                </div>
+                <p>That's the end of our brief intro to <tt class="docutils literal"><span class="pre">git</span></tt> for people who are not
+intimidated by computer science. Hope it helped!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+
+	Powered by atomat.
+      </div>
+      <div class="sidebar tab-selection">
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/about"><span class="header">About</span>
+	      About me and this site
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/blog"><span class="header">Blog</span>
+	      A journal of my thoughts and things in my life
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="active" href="http://eagain.net/articles"><span class="header">Articles</span>
+	      Collection of articles I've published
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/talks"><span class="header">Talks</span>
+	      Presentations I have delivered recently
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/software"><span class="header">Software</span>
+	      Software I have written
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/links"><span class="header">Links</span>
+	      My link collection
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/cam"><span class="header">Photos</span>
+	      My picture collection, featuring the two chihuahua dogs Nano and Pico, totalling just over 4kg.
+	    </a>
+        </div>
+        <div class="sidebar-section">
+          <a class="not-active" href="http://eagain.net/video"><span class="header">Videos</span>
+	      My video collection, starring the dogs again. Hosted by Revver.
+	    </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

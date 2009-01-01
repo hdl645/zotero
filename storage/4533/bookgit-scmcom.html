@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://book.git-scm.com/">
+<meta name="wpd_url" content="http://book.git-scm.com/">
+<meta name="wpd_date" content="2008-07-08T16:34Z">
+
+
+
+	<title>Git Community Book</title>
+	<meta name="" http-equiv="content-language" content="en">
+	
+	<link rel="icon" href="about:blank?favicon.png" type="image/png">
+	
+  
+  <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	
+	<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="jquery.corner.js"></script>
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="bookgit-scmcom.css" media="all">
+</head>
+<body>
+<div class="container showgrids">
+
+  <div class="span-21 header">
+    <a href="http://book.git-scm.com/"><img alt="Git Community Book" src="header-book.gif"></a>
+  </div>
+
+  <div class="span-21 navbar">
+    <div id="toc">
+      <ul class="a-documentation">
+      	<li id="m-index"><a href="http://git-scm.com/">Home</a></li>
+      	<li id="m-about"><a href="http://git-scm.com/about">About Git</a></li>
+      	<li id="m-documentation"><a href="http://git-scm.com/documentation">Documentation</a></li>
+      	<li id="m-download"><a href="http://git-scm.com/download">Download</a></li>
+      	<li id="m-tools"><a href="http://git-scm.com/tools">Related Tools</a></li>
+      	<li id="m-wiki"><a href="http://git.or.cz/gitwiki">Wiki</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="span-21">
+    <br>
+  </div>
+  
+  <div class="span-14">
+    <div style="border-color: -moz-use-text-color rgb(51, 51, 51); border-top: 0pt none; border-bottom: 0pt none; padding: 0px; position: relative; background-position: 0px -9px;" id="book-intro"><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; top: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 0px; background-position: -494px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 0px; left: 0px; background-position: -494px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 1px; background-position: -495px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 0px; left: 1px; background-position: -495px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 2px; background-position: -496px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 0px; left: 2px; background-position: -496px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 2px; left: 3px; background-position: -497px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 1px; left: 3px; background-position: -497px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 0px; left: 3px; background-position: -497px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 2px; left: 4px; background-position: -498px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 1px; left: 4px; background-position: -498px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 3px; left: 5px; background-position: -499px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.749016; top: 2px; left: 5px; background-position: -499px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 1px; left: 5px; background-position: -499px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 5px; left: 6px; background-position: -500px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 4px; left: 6px; background-position: -500px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 3px; left: 6px; background-position: -500px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 2px; left: 6px; background-position: -500px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 7px; left: 7px; background-position: -501px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 6px; left: 7px; background-position: -501px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 5px; left: 7px; background-position: -501px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 4px; left: 7px; background-position: -501px -4px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 7px; background-position: -7px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 0px; left: 7px; background-position: -7px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 6px; background-position: -6px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 0px; left: 6px; background-position: -6px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 1px; left: 5px; background-position: -5px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 0px; left: 5px; background-position: -5px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 2px; left: 4px; background-position: -4px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 1px; left: 4px; background-position: -4px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 0px; left: 4px; background-position: -4px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 2px; left: 3px; background-position: -3px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 1px; left: 3px; background-position: -3px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 3px; left: 2px; background-position: -2px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.749016; top: 2px; left: 2px; background-position: -2px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 1px; left: 2px; background-position: -2px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 5px; left: 1px; background-position: -1px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 4px; left: 1px; background-position: -1px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 3px; left: 1px; background-position: -1px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 2px; left: 1px; background-position: -1px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 7px; left: 0px; background-position: 0px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 6px; left: 0px; background-position: 0px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 5px; left: 0px; background-position: 0px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 4px; left: 0px; background-position: 0px -4px;"></div></div><div style="border-top: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(255, 233, 183); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px;"></div></div><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; bottom: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 0px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 7px; left: 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 7px; left: 1px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 7px; left: 2px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 6px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 7px; left: 3px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 6px; left: 4px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.749016; top: 5px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 6px; left: 5px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 3px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 4px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 5px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 0px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 1px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 2px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 3px; left: 7px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 7px; background-position: -7px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 7px; left: 7px; background-position: -7px -187px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 6px; background-position: -6px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 7px; left: 6px; background-position: -6px -187px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 5px; background-position: -5px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 7px; left: 5px; background-position: -5px -187px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 4px; background-position: -4px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 6px; left: 4px; background-position: -4px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 7px; left: 4px; background-position: -4px -187px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 3px; background-position: -3px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 6px; left: 3px; background-position: -3px -187px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 2px; background-position: -2px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.749016; top: 5px; left: 2px; background-position: -2px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 6px; left: 2px; background-position: -2px -187px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); top: 0px; left: 1px; background-position: -1px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.99544; top: 3px; left: 1px; background-position: -1px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.586601; top: 4px; left: 1px; background-position: -1px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.0357088; top: 5px; left: 1px; background-position: -1px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.968627; top: 0px; left: 0px; background-position: 0px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.84161; top: 1px; left: 0px; background-position: 0px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.581083; top: 2px; left: 0px; background-position: 0px -187px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(255, 233, 183); opacity: 0.181667; top: 3px; left: 0px; background-position: 0px -187px;"></div></div><div style="border-bottom: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(255, 233, 183); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px; background-position: -8px -178px;"></div></div><div style="margin: 0pt; padding: 10px;"><div style="position: relative; float: left; width: 100%; margin-top: -8px; margin-bottom: -8px;">
+      <h3>The Git Community Book</h3>
+      <p>
+
+        Welcome to the Git Community Book.
+        This book has been built by dozens of people in the Git community, and
+        is meant to help you learn how to use Git as quickly and easily as possible.
+      </p>
+      <p>
+
+        If you see anything out of date, have a suggestion on how to improve it,
+        or would like to help add to the book,
+        please see the <a href="http://github.com/schacon/gitscm/wikis/how-to-contribute">How to Contribute</a> page, or just send
+        <a href="mailto:schacon@gmail.com">our maintainer</a> a note.
+    </p></div><div style="clear: both;"></div></div></div>
+  </div>
+
+  <div class="span-7 last">
+    <div style="border-color: -moz-use-text-color rgb(51, 51, 51); border-top: 0pt none; border-bottom: 0pt none; padding: 0px; position: relative; background-position: 0px -9px;" id="new-to-git"><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; top: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 0px; background-position: -228px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 0px; left: 0px; background-position: -228px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 1px; background-position: -229px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 0px; left: 1px; background-position: -229px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 2px; background-position: -230px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 0px; left: 2px; background-position: -230px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 2px; left: 3px; background-position: -231px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 1px; left: 3px; background-position: -231px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 0px; left: 3px; background-position: -231px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 2px; left: 4px; background-position: -232px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 1px; left: 4px; background-position: -232px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 3px; left: 5px; background-position: -233px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.749016; top: 2px; left: 5px; background-position: -233px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 1px; left: 5px; background-position: -233px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 5px; left: 6px; background-position: -234px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 4px; left: 6px; background-position: -234px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 3px; left: 6px; background-position: -234px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 2px; left: 6px; background-position: -234px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 7px; left: 7px; background-position: -235px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 6px; left: 7px; background-position: -235px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 5px; left: 7px; background-position: -235px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 4px; left: 7px; background-position: -235px -4px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 7px; background-position: -7px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 0px; left: 7px; background-position: -7px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 6px; background-position: -6px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 0px; left: 6px; background-position: -6px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 1px; left: 5px; background-position: -5px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 0px; left: 5px; background-position: -5px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 2px; left: 4px; background-position: -4px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 1px; left: 4px; background-position: -4px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 0px; left: 4px; background-position: -4px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 2px; left: 3px; background-position: -3px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 1px; left: 3px; background-position: -3px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 3px; left: 2px; background-position: -2px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.749016; top: 2px; left: 2px; background-position: -2px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 1px; left: 2px; background-position: -2px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 5px; left: 1px; background-position: -1px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 4px; left: 1px; background-position: -1px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 3px; left: 1px; background-position: -1px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 2px; left: 1px; background-position: -1px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 7px; left: 0px; background-position: 0px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 6px; left: 0px; background-position: 0px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 5px; left: 0px; background-position: 0px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 4px; left: 0px; background-position: 0px -4px;"></div></div><div style="border-top: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(181, 70, 63); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px;"></div></div><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; bottom: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 0px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 7px; left: 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 7px; left: 1px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 7px; left: 2px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 6px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 7px; left: 3px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 6px; left: 4px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.749016; top: 5px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 6px; left: 5px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 3px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 4px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 5px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 0px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 1px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 2px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 3px; left: 7px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 7px; background-position: -7px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 7px; left: 7px; background-position: -7px -166px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 6px; background-position: -6px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 7px; left: 6px; background-position: -6px -166px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 5px; background-position: -5px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 7px; left: 5px; background-position: -5px -166px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 4px; background-position: -4px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 6px; left: 4px; background-position: -4px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 7px; left: 4px; background-position: -4px -166px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 3px; background-position: -3px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 6px; left: 3px; background-position: -3px -166px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 2px; background-position: -2px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.749016; top: 5px; left: 2px; background-position: -2px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 6px; left: 2px; background-position: -2px -166px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); top: 0px; left: 1px; background-position: -1px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.99544; top: 3px; left: 1px; background-position: -1px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.586601; top: 4px; left: 1px; background-position: -1px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.0357088; top: 5px; left: 1px; background-position: -1px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.968627; top: 0px; left: 0px; background-position: 0px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.84161; top: 1px; left: 0px; background-position: 0px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.581083; top: 2px; left: 0px; background-position: 0px -166px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(181, 70, 63); opacity: 0.181667; top: 3px; left: 0px; background-position: 0px -166px;"></div></div><div style="border-bottom: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(181, 70, 63); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px; background-position: -8px -157px;"></div></div><div style="margin: 0pt; padding: 10px 10px 15px;"><div style="position: relative; float: left; width: 100%; margin-top: -8px; margin-bottom: -8px;">
+      <h3>New to Git?</h3>
+      <div class="inner">
+        <p>If you want to really understand Git, 
+          You may want to start at <a href="http://book.git-scm.com/1_welcome_to_git.html">the beginning</a>.</p>
+        <p>
+
+          If you just want to jump right in, you can skip right to <a href="http://book.git-scm.com/2_setup_and_initialization.html">setting it up</a>.
+        </p>
+      </div>
+    </div><div style="clear: both;"></div></div></div>
+  </div>
+
+  
+  <div class="span-21">
+    <table>
+ <tbody><tr>
+  <td valign="top">
+   <h3 class="title">
+
+1. Introduction   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/1_welcome_to_git.html">
+
+Welcome to Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/1_the_git_object_model.html">
+
+The Git Object Model     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/1_git_directory_and_working_directory.html">
+
+Git Directory and Working Directory     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/1_the_git_index.html">
+
+The Git Index     </a></td>
+    </tr>
+   </tbody></table>
+   <h3 class="title">
+
+2. First Time   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/2_installing_git.html">
+
+Installing Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/2_setup_and_initialization.html">
+
+Setup and Initialization     </a></td>
+    </tr>
+   </tbody></table>
+   <h3 class="title">
+
+3. Basic Usage   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_getting_a_git_repository.html">
+
+Getting a Git Repository     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_normal_workflow.html">
+
+Normal Workflow     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_basic_branching_and_merging.html">
+
+Basic Branching and Merging     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_reviewing_history_-_git_log.html">
+
+Reviewing History - Git Log     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_comparing_commits_-_git_diff.html">
+
+Comparing Commits - Git Diff     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_distributed_workflows.html">
+
+Distributed Workflows     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/3_git_tag.html">
+
+Git Tag     </a></td>
+    </tr>
+   </tbody></table>
+   <h3 class="title">
+
+4. Intermediate Usage   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_ignoring_files.html">
+
+Ignoring files     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_rebasing.html">
+
+Rebasing     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_interactive_rebasing.html">
+
+Interactive Rebasing     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_interactive_adding.html">
+
+Interactive Adding     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_stashing.html">
+
+Stashing     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_git_treeishes.html">
+
+Git Treeishes     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_tracking_branches.html">
+
+Tracking Branches     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_finding_in_git_grep.html">
+
+Finding in Git Grep     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_advanced_git_log.html">
+
+Advanced Git Log     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_undoing_in_git_-_reset_and_revert.html">
+
+Undoing in Git - Reset and Revert     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_maintaining_git.html">
+
+Maintaining Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/4_setting_up_a_public_repository.html">
+
+Setting Up A Public Repository     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/4_git_workflows.html">
+
+Git Workflows     </a></td>
+    </tr>
+   </tbody></table>
+  </td>
+  <td valign="top">
+   <h3 class="title">
+
+5. Advanced Git   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/5_creating_new_empty_branches.html">
+
+Creating New Empty Branches     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/5_advanced_branching_and_merging.html">
+
+Advanced Branching And Merging     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/5_finding_issues_-_git_bisect.html">
+
+Finding Issues - Git Bisect     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/5_finding_issues_-_git_blame.html">
+
+Finding Issues - Git Blame     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/5_git_and_email.html">
+
+Git and Email     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/5_customizing_git.html">
+
+Customizing Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/5_git_hooks.html">
+
+Git Hooks     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/5_recovering_corrupted_objects.html">
+
+Recovering Corrupted Objects     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/5_advanced_merging.html">
+
+Advanced Merging     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/5_submodules.html">
+
+Submodules     </a></td>
+    </tr>
+   </tbody></table>
+   <h3 class="title">
+
+6. Working with Git   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/6_git_on_windows.html">
+
+Git on Windows     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_stacked_git.html">
+
+Stacked Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_capistrano_and_git.html">
+
+Capistrano and Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_subversion_integration.html">
+
+Subversion Integration     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_subversion_migration.html">
+
+Subversion Migration     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_graphical_git.html">
+
+Graphical Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_hosting_git.html">
+
+Hosting Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_alternative_uses.html">
+
+Alternative Uses     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_ruby_and_git.html">
+
+Ruby and Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_perl_and_git.html">
+
+Perl and Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_python_and_git.html">
+
+Python and Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/6_git_and_editors.html">
+
+Git and Editors     </a></td>
+    </tr>
+   </tbody></table>
+   <h3 class="title">
+
+7. Internals and Plumbing   </h3>
+   <table>
+    <tbody><tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/7_how_git_stores_objects.html">
+
+How Git Stores Objects     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/7_browsing_git_objects.html">
+
+Browsing Git Objects     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/7_git_references.html">
+
+Git References     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link done" href="http://book.git-scm.com/7_the_git_index.html">
+
+The Git Index     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/7_working_with_packfiles.html">
+
+Working With Packfiles     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/7_raw_git.html">
+
+Raw Git     </a></td>
+    </tr>
+    <tr>
+     <td>
+      <a class="chapter-link todo" href="http://book.git-scm.com/7_git_protocol.html">
+
+Git Protocol     </a></td>
+    </tr>
+   </tbody></table>
+  </td>
+ </tr>
+</tbody></table>
+<to_s>
+
+  </to_s></div>
+  
+  <div style="border-color: -moz-use-text-color rgb(51, 51, 51); border-top: 0pt none; border-bottom: 0pt none; padding: 0px; position: relative; background-position: 0px -9px;" class="span-17 footer"><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; top: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 0px; background-position: -628px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 0px; left: 0px; background-position: -628px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 1px; background-position: -629px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 0px; left: 1px; background-position: -629px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 2px; background-position: -630px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 0px; left: 2px; background-position: -630px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 2px; left: 3px; background-position: -631px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 1px; left: 3px; background-position: -631px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 0px; left: 3px; background-position: -631px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 2px; left: 4px; background-position: -632px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 1px; left: 4px; background-position: -632px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 3px; left: 5px; background-position: -633px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.749016; top: 2px; left: 5px; background-position: -633px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 1px; left: 5px; background-position: -633px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 5px; left: 6px; background-position: -634px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 4px; left: 6px; background-position: -634px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 3px; left: 6px; background-position: -634px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 2px; left: 6px; background-position: -634px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 7px; left: 7px; background-position: -635px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 6px; left: 7px; background-position: -635px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 5px; left: 7px; background-position: -635px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 4px; left: 7px; background-position: -635px -4px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; top: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 7px; background-position: -7px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 0px; left: 7px; background-position: -7px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 6px; background-position: -6px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 0px; left: 6px; background-position: -6px 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 1px; left: 5px; background-position: -5px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 0px; left: 5px; background-position: -5px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 2px; left: 4px; background-position: -4px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 1px; left: 4px; background-position: -4px -1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 0px; left: 4px; background-position: -4px 0px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 2px; left: 3px; background-position: -3px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 1px; left: 3px; background-position: -3px -1px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 3px; left: 2px; background-position: -2px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.749016; top: 2px; left: 2px; background-position: -2px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 1px; left: 2px; background-position: -2px -1px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 5px; left: 1px; background-position: -1px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 4px; left: 1px; background-position: -1px -4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 3px; left: 1px; background-position: -1px -3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 2px; left: 1px; background-position: -1px -2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 7px; left: 0px; background-position: 0px -7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 6px; left: 0px; background-position: 0px -6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 5px; left: 0px; background-position: 0px -5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 4px; left: 0px; background-position: 0px -4px;"></div></div><div style="border-top: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(227, 209, 133); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px;"></div></div><div style="overflow: hidden; width: 100%; font-size: 1px; position: absolute; padding-left: 0pt; padding-right: 0pt; height: 8px; bottom: -8px; left: 0px;"><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; right: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 0px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 7px; left: 0px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 1px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 7px; left: 1px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 2px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 7px; left: 2px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 6px; left: 3px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 7px; left: 3px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 4px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 6px; left: 4px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.749016; top: 5px; left: 5px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 6px; left: 5px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 3px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 4px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 5px; left: 6px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 0px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 1px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 2px; left: 7px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 3px; left: 7px;"></div></div><div style="overflow: hidden; height: 8px; width: 8px; position: absolute; font-size: 1px; bottom: 0pt; left: 0pt;"><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 7px; background-position: -7px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 7px; left: 7px; background-position: -7px -49px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 6px; background-position: -6px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 7px; left: 6px; background-position: -6px -49px;"></div><div style="overflow: hidden; height: 7px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 5px; background-position: -5px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 7px; left: 5px; background-position: -5px -49px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 4px; background-position: -4px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 6px; left: 4px; background-position: -4px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 7px; left: 4px; background-position: -4px -49px;"></div><div style="overflow: hidden; height: 6px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 3px; background-position: -3px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 6px; left: 3px; background-position: -3px -49px;"></div><div style="overflow: hidden; height: 5px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 2px; background-position: -2px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.749016; top: 5px; left: 2px; background-position: -2px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 6px; left: 2px; background-position: -2px -49px;"></div><div style="overflow: hidden; height: 3px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); top: 0px; left: 1px; background-position: -1px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.99544; top: 3px; left: 1px; background-position: -1px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.586601; top: 4px; left: 1px; background-position: -1px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.0357088; top: 5px; left: 1px; background-position: -1px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.968627; top: 0px; left: 0px; background-position: 0px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.84161; top: 1px; left: 0px; background-position: 0px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.581083; top: 2px; left: 0px; background-position: 0px -49px;"></div><div style="overflow: hidden; height: 1px; width: 1px; position: absolute; font-size: 1px; background-color: rgb(227, 209, 133); opacity: 0.181667; top: 3px; left: 0px; background-position: 0px -49px;"></div></div><div style="border-bottom: 0px solid rgb(51, 51, 51); overflow: hidden; position: relative; font-size: 1px; background-color: rgb(227, 209, 133); background-repeat: repeat; height: 8px; margin-left: 8px; margin-right: 8px; background-position: -8px -40px;"></div></div><div style="margin: 0pt; padding: 0pt;"><div style="position: relative; float: left; width: 100%; margin-top: -8px; margin-bottom: -8px;">
+  	<div class="menu">
+
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div><div style="clear: both;"></div></div></div>
+  <div class="span-4 last center">
+    <a href="http://github.com/"><img src="github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+
+  $(function() {
+    $('#book-intro').corner();
+    $('#new-to-git').corner();
+    $('.footer').corner();
+  });
+</script>
+
+</body>
+</html>

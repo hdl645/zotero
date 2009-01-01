@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039244.html">
+<meta name="wpd_url" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039244.html">
+<meta name="wpd_date" content="2008-06-03T02:11Z">
+
+
+ 
+   <title> IPSec passthrough with iptables
+   </title>
+   <link rel="Index" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/index.html">
+   <link rel="made" href="mailto:Antony%40Soft-Solutions.co.uk">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">
+   <link rel="Next" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>IPSec passthrough with iptables
+   </h1>
+    <b>Antony Stone
+    </b> 
+    <a href="mailto:Antony%40Soft-Solutions.co.uk" title="IPSec passthrough with iptables">Antony@Soft-Solutions.co.uk
+       </a><br>
+    <i>Tue, 15 Oct 2002 14:00:50 +0100</i>
+    <p></p><ul>
+        <li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">IPSec passthrough with iptables
+</a></li>
+        <li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39244">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39244">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39244">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39244">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>On Tuesday 15 October 2002 12:09 pm, George Agnelli wrote:
+
+&gt;<i> I'm having a similar problem and am not very experienced yet with iptab=
+</i>les.
+&gt;<i>
+</i>&gt;<i> &gt; Make sure you are forwarding (both ways :-) protocol 50 (ESP), protoc=
+</i>ol
+&gt;<i> &gt; 51 (AH) and UDP sport 500 / dport 500 (IKE).
+</i>&gt;<i>
+</i>&gt;<i> Could you show me the best way to write this in iptables syntax?
+</i>
+iptables -A FORWARD -p esp -j ACCEPT
+iptables -A FORWARD -p ah -j ACCEPT
+iptables -A FORWARD -p udp --sport 500 --dport 500 -j ACCEPT
+
+You may wish to add some -s and/or -d source & destination address=20
+restrictions on the above rules, eg:
+
+iptables -A FORWARD -p esp -s a.b.c.d -d w.x.y.z -j ACCEPT
+iptables -A FORWARD -p esp -s w.x.y.z -d a.b.c.d -j ACCEPT
+
+where a.b.c.d and w.x.y.z are the two IPsec gateways which need to=20
+communicate.
+
+Antony.
+
+--=20
+
+This email is intended for the use of the individual addressee(s) named a=
+bove=20
+and may contain information that is confidential, privileged or unsuitabl=
+e=20
+for overly sensitive persons with low self-esteem, no sense of humour, or=
+=20
+irrational religious beliefs.
+
+If you have received this email in error, you are required to shred it=20
+immediately, add some nutmeg, three egg whites and a dessertspoonful of=20
+caster sugar. =A0 Whisk until soft peaks form, then place in a warm oven =
+for 40=20
+minutes. =A0 Remove promptly and let stand for 2 hours before adding some=
+=20
+decorative kiwi fruit and cream. =A0 Then notify me immediately by return=
+ email=20
+and eat the original message.
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">IPSec passthrough with iptables
+</a></li>
+	<li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39244">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39244">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39244">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39244">[ author ]</a>
+         </li>
+       </ul>
+</body>
+</html>

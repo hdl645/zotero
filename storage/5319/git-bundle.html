@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="file:///C:/Program%20Files/Git/doc/git/html/git-bundle.html">
+<meta name="wpd_url" content="file:///C:/Program%20Files/Git/doc/git/html/git-bundle.html">
+<meta name="wpd_date" content="2008-08-02T16:22Z">
+
+
+
+
+<meta name="generator" content="AsciiDoc 7.0.2">
+
+<title>git-bundle(1)</title>
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="git-bundle.css" media="all">
+</head>
+<body>
+<div id="header">
+<h1>
+
+git-bundle(1) Manual Page
+</h1>
+<h2>NAME</h2>
+<div class="sectionbody">
+<p>git-bundle -
+   Move objects and refs by archive
+</p>
+</div>
+</div>
+<h2>SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="verseblock">
+<div class="content"><em>git-bundle</em> create &lt;file&gt; &lt;git-rev-list args&gt;
+<em>git-bundle</em> verify &lt;file&gt;
+<em>git-bundle</em> list-heads &lt;file&gt; [refname&hellip;]
+<em>git-bundle</em> unbundle &lt;file&gt; [refname&hellip;]</div></div>
+</div>
+<h2>DESCRIPTION</h2>
+<div class="sectionbody">
+<p>Some workflows require that one or more branches of development on one
+machine be replicated on another machine, but the two machines cannot
+be directly connected so the interactive git protocols (git, ssh,
+rsync, http) cannot be used.  This command provides support for
+git-fetch and git-pull to operate by packaging objects and references
+in an archive at the originating machine, then importing those into
+another repository using <a href="file:///C:/Program%20Files/Git/doc/git/html/git-fetch.html">git-fetch(1)</a> and <a href="file:///C:/Program%20Files/Git/doc/git/html/git-pull.html">git-pull(1)</a>
+after moving the archive by some means (i.e., by sneakernet).  As no
+direct connection between repositories exists, the user must specify a
+basis for the bundle that is held by the destination repository: the
+bundle assumes that all objects in the basis are already in the
+destination repository.</p>
+</div>
+<h2>OPTIONS</h2>
+<div class="sectionbody">
+<dl>
+<dt>
+
+create &lt;file&gt;
+</dt>
+<dd>
+<p>
+
+       Used to create a bundle named <em>file</em>.  This requires the
+       git-rev-list arguments to define the bundle contents.
+</p>
+</dd>
+<dt>
+
+verify &lt;file&gt;
+</dt>
+<dd>
+<p>
+
+       Used to check that a bundle file is valid and will apply
+       cleanly to the current repository.  This includes checks on the
+       bundle format itself as well as checking that the prerequisite
+       commits exist and are fully linked in the current repository.
+       git-bundle prints a list of missing commits, if any, and exits
+       with non-zero status.
+</p>
+</dd>
+<dt>
+
+list-heads &lt;file&gt;
+</dt>
+<dd>
+<p>
+
+       Lists the references defined in the bundle.  If followed by a
+       list of references, only references matching those given are
+       printed out.
+</p>
+</dd>
+<dt>
+
+unbundle &lt;file&gt;
+</dt>
+<dd>
+<p>
+
+       Passes the objects in the bundle to <a href="file:///C:/Program%20Files/Git/doc/git/html/git-index-pack.html">git-index-pack(1)</a>
+       for storage in the repository, then prints the names of all
+       defined references. If a reflist is given, only references
+       matching those in the given list are printed. This command is
+       really plumbing, intended to be called only by
+       <a href="file:///C:/Program%20Files/Git/doc/git/html/git-fetch.html">git-fetch(1)</a>.
+</p>
+</dd>
+<dt>
+
+[git-rev-list-args&hellip;]
+</dt>
+<dd>
+<p>
+
+       A list of arguments, acceptable to git-rev-parse and
+       git-rev-list, that specify the specific objects and references
+       to transport.  For example, "master~10..master" causes the
+       current master reference to be packaged along with all objects
+       added since its 10th ancestor commit.  There is no explicit
+       limit to the number of references and objects that may be
+       packaged.
+</p>
+</dd>
+<dt>
+
+[refname&hellip;]
+</dt>
+<dd>
+<p>
+
+       A list of references used to limit the references reported as
+       available. This is principally of use to git-fetch, which
+       expects to receive only those references asked for and not
+       necessarily everything in the pack (in this case, git-bundle is
+       acting like <a href="file:///C:/Program%20Files/Git/doc/git/html/git-fetch-pack.html">git-fetch-pack(1)</a>).
+</p>
+</dd>
+</dl>
+</div>
+<h2>SPECIFYING REFERENCES</h2>
+<div class="sectionbody">
+<p>git-bundle will only package references that are shown by
+git-show-ref: this includes heads, tags, and remote heads.  References
+such as master~1 cannot be packaged, but are perfectly suitable for
+defining the basis.  More than one reference may be packaged, and more
+than one basis can be specified.  The objects packaged are those not
+contained in the union of the given bases.  Each basis can be
+specified explicitly (e.g., ^master~10), or implicitly (e.g.,
+master~10..master, master --since=10.days.ago).</p>
+<p>It is very important that the basis used be held by the destination.
+It is okay to err on the side of conservatism, causing the bundle file
+to contain objects already in the destination as these are ignored
+when unpacking at the destination.</p>
+</div>
+<h2>EXAMPLE</h2>
+<div class="sectionbody">
+<p>Assume two repositories exist as R1 on machine A, and R2 on machine B.
+For whatever reason, direct connection between A and B is not allowed,
+but we can move data from A to B via some mechanism (CD, email, etc).
+We want to update R2 with developments made on branch master in R1.</p>
+<p>To create the bundle you have to specify the basis. You have some options:</p>
+<ul>
+<li>
+<p>
+
+Without basis.
+</p>
+<p>This is useful when sending the whole history.</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git bundle create mybundle master</tt></pre>
+</div></div>
+<ul>
+<li>
+<p>
+
+Using temporally tags.
+</p>
+<p>We set a tag in R1 (lastR2bundle) after the previous such transport,
+and move it afterwards to help build the bundle.</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git-bundle create mybundle master ^lastR2bundle
+$ git tag -f lastR2bundle master</tt></pre>
+</div></div>
+<ul>
+<li>
+<p>
+
+Using a tag present in both repositories
+</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git bundle create mybundle master ^v1.0.0</tt></pre>
+</div></div>
+<ul>
+<li>
+<p>
+
+A basis based on time.
+</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git bundle create mybundle master --since=10.days.ago</tt></pre>
+</div></div>
+<ul>
+<li>
+<p>
+
+With a limit on the number of commits
+</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git bundle create mybundle master -n 10</tt></pre>
+</div></div>
+<p>Then you move mybundle from A to B, and in R2 on B:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git-bundle verify mybundle
+$ git-fetch mybundle master:localRef</tt></pre>
+</div></div>
+<p>With something like this in the config in R2:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[remote "bundle"]
+    url = /home/me/tmp/file.bdl
+    fetch = refs/heads/*:refs/remotes/origin/*</tt></pre>
+</div></div>
+<p>You can first sneakernet the bundle file to ~/tmp/file.bdl and
+then these commands on machine B:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git ls-remote bundle
+$ git fetch bundle
+$ git pull bundle</tt></pre>
+</div></div>
+<p>would treat it as if it is talking with a remote side over the
+network.</p>
+</div>
+<h2>Author</h2>
+<div class="sectionbody">
+<p>Written by Mark Levedahl &lt;mdl123@verizon.net&gt;</p>
+</div>
+<h2>GIT</h2>
+<div class="sectionbody">
+<p>Part of the <a href="file:///C:/Program%20Files/Git/doc/git/html/git.html">git(1)</a> suite</p>
+</div>
+<div id="footer">
+<div id="footer-text">
+
+Last updated 08-Jun-2008 01:33:22 UTC
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://jonas.iki.fi/git_guides/HTML/git_guide/">
+<meta name="wpd_url" content="http://jonas.iki.fi/git_guides/HTML/git_guide/">
+<meta name="wpd_date" content="2008-07-08T16:36Z">
+
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+
+
+<title>Git in a Nutshell</title>
+<meta name="description" content="Git in a Nutshell">
+<meta name="keywords" content="git_guide">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+
+<meta name="generator" content="LaTeX2HTML v2002-2-1">
+<meta name="" http-equiv="Content-Style-Type" content="text/css">
+
+
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="git_guide.css" media="all">
+</head>
+<body>
+
+<div class="navigation"><!--Navigation Panel-->
+<img alt="next_inactive" src="nx_grp_g.png" width="81" align="bottom" border="0" height="24"> 
+<img alt="up" src="up_g.png" width="26" align="bottom" border="0" height="24"> 
+<img alt="previous" src="prev_g.png" width="63" align="bottom" border="0" height="24">   
+<br>
+<br>
+<br></div>
+<!--End of Navigation Panel-->
+
+
+
+
+[R]
+
+<p>
+
+</p><p>
+
+For Normal People (tm)
+
+2007
+
+</p><h3>Abstract:</h3>
+<div class="ABSTRACT">Rev 0.5.5:
+<br><tt>git clone http://git.jonas.iki.fi/git_guides.git</tt>
+<br>
+Corrections and improvements are most welcome via e-mail using the
+<tt>git format-patch</tt> facility.</div>
+<p>
+
+</p><p>
+</p><h1 align="center">Git in a Nutshell</h1>
+<div class="author_info">
+
+<p align="center"><strong><i class="sans">Jonas Jus&eacute;lius</i></strong></p>
+<p align="left"><small><tt>&lt;jonas.juselius@chem.uit.no&gt;</tt>
+<br><i class="sans">Centre for Theoretical and Computational Chemistry</i>
+<br><i class="sans">University of Troms&Atilde;&cedil;</i>
+<br><i class="sans">N-9037 University of Troms&Atilde;&cedil;, Norway</i>
+</small></p>
+</div>
+<br>
+
+<h2><a name="SECTION00010000000000000000">
+
+Contents</a>
+</h2>
+<!--Table of Contents-->
+
+<ul class="TofC">
+<li><a name="tex2html48" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00030000000000000000">Introduction to git</a>
+<ul>
+<li><a name="tex2html49" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00031000000000000000">Creating a repository</a>
+</li><li><a name="tex2html50" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00032000000000000000">Cloning a repository</a>
+</li><li><a name="tex2html51" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00033000000000000000">Working in a repository</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html52" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00040000000000000000">Basic git</a>
+<ul>
+<li><a name="tex2html53" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00041000000000000000">Branches</a>
+</li><li><a name="tex2html54" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00042000000000000000">Merging</a>
+</li><li><a name="tex2html55" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00043000000000000000">Tags</a>
+</li><li><a name="tex2html56" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00044000000000000000">Moving, renaming and deleting files</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html57" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00050000000000000000">Working with remote repositories</a>
+<ul>
+<li><a name="tex2html58" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00051000000000000000">Remote branches in git</a>
+</li><li><a name="tex2html59" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00052000000000000000">Tracking remote branches</a>
+</li><li><a name="tex2html60" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00053000000000000000">Publishing changes</a>
+</li><li><a name="tex2html61" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00054000000000000000">Creating remote branches</a>
+</li><li><a name="tex2html62" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00055000000000000000">Deleting remote branches and tags</a>
+</li><li><a name="tex2html63" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00056000000000000000">Cleaning up</a>
+</li><li><a name="tex2html64" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00057000000000000000">The aim of the game</a>
+</li><li><a name="tex2html65" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00058000000000000000">A word of advice</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html66" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00060000000000000000">Examining repositories</a>
+<ul>
+<li><a name="tex2html67" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00061000000000000000">Examining logs and changes</a>
+</li><li><a name="tex2html68" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00062000000000000000">Examining changes</a>
+</li><li><a name="tex2html69" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00063000000000000000">Searching a repository</a>
+</li><li><a name="tex2html70" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00064000000000000000">Who to blame</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html71" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00070000000000000000">Using git for collaboration</a>
+</li><li><a name="tex2html72" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00080000000000000000">Advanced git</a>
+<ul>
+<li><a name="tex2html73" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00081000000000000000">Configuring git</a>
+</li><li><a name="tex2html74" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00082000000000000000">Resolving conflicts</a>
+</li><li><a name="tex2html75" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00083000000000000000">Specifying revisions</a>
+</li><li><a name="tex2html76" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00084000000000000000">Cherry picking</a>
+</li><li><a name="tex2html77" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00085000000000000000">Stashing</a>
+</li><li><a name="tex2html78" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00086000000000000000">Repository maintenance</a>
+</li><li><a name="tex2html79" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00087000000000000000">Exporting a repository</a>
+</li><li><a name="tex2html80" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00088000000000000000">Finding bugs</a>
+</li><li><a name="tex2html81" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION00089000000000000000">Undoing commits and resetting</a>
+</li><li><a name="tex2html82" href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#SECTION000810000000000000000">Working with multiple remotes</a>
+</li></ul></li></ul>
+<!--End of Table of Contents-->
+
+<p>
+
+</p><h1><a name="SECTION00020000000000000000">
+
+About this document</a>
+</h1>
+The intent of this document is to give an overview of git and to explain some of
+the aspects of working with git that I feel are somewhat poorly explained
+elsewhere. 
+What I feel is missing is a manual which explains what the commands are for,
+how the pieces fit together and how to actually work with git on a daily
+basis. This guide has been written with an audience consisting of the typical
+academic programmer in mind, and relies implicitly on a repository setup as
+outlined in the ``Git to CVS Migration Guide''.
+
+<p>
+
+All git commands have excellent man pages explaining in
+excruciating detail the particular command. As you read through this manual,
+it might be a good idea to have a quick look at the corresponding manual pages of
+the commands, just to give you an idea of more advanced features lurking under
+the surface. For example, get all available information on the
+<tt>git checkout</tt> command, run
+</p><pre>$ man git-checkout
+</pre>
+Don't get overwhelmed by the amount of detail in the man pages. As
+you gain experience and confidence working with git you will learn to
+appreciate the finer details. Don't panic.
+
+<p>
+
+Finally a disclaimer. I'm not an expert on git, nor do I have a huge
+experience working with git. All comments, corrections and suggestions are 
+most welcome!
+
+</p><p>
+
+</p><h1><a name="SECTION00030000000000000000">
+
+Introduction to git</a>
+</h1>
+Git is a very powerful, easy to use and flexible revision control system.
+Although git has many advanced and flexible features, most basic  day-to-day
+operations are very simple to use. 
+
+<p>
+
+Git has been designed in very UNIX-like fashion; it's built from a set of
+small, efficient programs which do one thing, and do it well. By combining
+these programs, new high-level commands can be created to do more or less any
+desired task. This structure is reflected in how git commands are executed.
+There are usually two equivalent ways of executing a command, either by
+executing the command directly
+</p><pre>$ git-command args ...
+</pre>
+or by using the <tt>git</tt> command which wraps the most common commands for a
+more CVS-like interface
+<pre>$ git command args ...
+</pre>
+In this guide I'll use the second form throughout, mostly because modern
+shells like <tt>zsh</tt> and <tt>bash</tt> have command line
+completion features which interact very nicely with the <tt>git</tt> wrapper.
+
+<p>
+
+</p><h2><a name="SECTION00031000000000000000">
+
+Creating a repository</a>
+</h2>
+Git makes it very easy to put projects (code, manuscripts, or whatever) under
+revision control. Suppose you have a directory which contains a number of
+files you want to have under revision control. The first step is to remove all
+files that should not be under revision control, i.e. files that can be
+generated from source (.o, .pdf, ...). When you have a ``clean'' directory
+tree, simply in the top level project directory run
+<pre>$ git init
+$ git add .
+$ git commit
+# edit the commit message, save and quit.
+</pre>
+That's it! 
+If you don't want to clean your project directory
+you can instead specify the files to include by explicitly giving the file
+names to <tt>git add</tt> instead of the current directory ('.')
+
+<p>
+
+Running <tt>git init</tt> in a directory sets up the repository and the
+necessary files in a directory named .git/ in the current directory.
+Since everything is contained in the project directory, no special permissions
+or groups are needed. 
+
+</p><p>
+
+</p><h2><a name="SECTION00032000000000000000">
+
+Cloning a repository</a>
+</h2>
+Ok, so you have a repository on a server somewhere, and you want to get your own
+working copy and dig in! Git supports many different protocols (http, ssh,
+git...), but for simplicity I'll assume you have ssh access to the server.
+To get your own repository, simply run
+<pre>$ git clone me@myserver:/path/to/myrepo .
+</pre>
+This creates a directory called myrepo, with a copy of the remote
+repository in the current directory.
+
+<p>
+
+Git is quite different from CVS in most respects. When you clone a repository
+you get the WHOLE repository, everything, not just a working copy like in CVS!
+<tt>git clone</tt> is in principle almost the same as doing a<a name="tex2html1" href="#foot56"><sup><span class="arabic">1</span></sup></a> 
+</p><pre>$ scp -r me@myserver:/path/to/myrepo .
+</pre>
+Within this personal repository you can do <span class="textit">whatever</span> you like, i.e.
+create branches, delete branches, tags, and of course commit as much as you
+like. It's only when you push to the master that others can see your
+changes.  In fact, your (cloned) repository can act as a master for someone
+else! The division into master and client is really quite blurred and
+artificial in git.  When you clone a repository, the new copy will contain
+administrative information in .git/config about where it was cloned from, and
+has a slightly modified branch structure (as you will see), but apart from
+that it's identical to its parent. And where we humans can't choose nor
+change who our parents are, git has no problem in changing or removing the
+parent(s).
+
+<p>
+
+</p><h2><a name="SECTION00033000000000000000">
+
+Working in a repository</a>
+</h2>
+With your repository in place, working with git is very easy. Work and edit
+your files, and whenever you have completed something to the point you think
+it could be worthy of a save, simply run
+<pre>$ git commit -a
+# edit the commit message, and save
+</pre>
+A commit does not make your changes public. The commits are local to your
+repository, and unless you let somebody clone or pull changes from you,
+they will remain hidden until you decide to publish them by pushing them
+to a common server.
+
+<p>
+
+</p><h1><a name="SECTION00040000000000000000">
+
+Basic git</a>
+</h1>
+The most basic operation under a revision control system is saving the state of
+a project as a new revision. When you create new files  
+these also need to be placed under revision control. This is done with
+<pre>$ git add file(s)
+</pre>
+This marks the files to be added to the repository next time you run 
+<tt>git commit</tt>. 
+
+<p>
+
+In fact, you can run <tt>git add</tt> on files already
+under revision control in the repository, to selectively mark them for
+inclusion in the next commit. This is known as <span class="textit">staging</span> files for a
+commit. We thus have a number of ways of marking files for a commit, either by
+directly specifying the files to <tt>git commit</tt> or by first adding them
+with <tt>git add</tt> and then running <tt>git commit</tt> without any files. 
+
+</p><p>
+
+</p><h2><a name="SECTION00041000000000000000">
+
+Branches</a>
+</h2>
+The use of branches is where git probably differs most from CVS to most users.
+Under git branches are used extensively, and they are essentially
+free. It costs nearly nothing to create branches, both in terms of time and
+disk space. Also, there is no need to tag first and branch second, like in CVS.
+
+<p>
+
+It's very easy to create a new branch under git
+</p><pre>$ git branch foobar
+</pre>
+This creates a branch named foobar which will be an exact copy of the latest
+revision of the current branch. To start working under this new branch you
+much first do a checkout
+<pre>$ git checkout foobar
+</pre>
+This command switches to the new branch, and updates the files in the source
+tree to the HEAD of the branch (HEAD is a symbolic tag representing
+the current branch). For more detailed information on
+how to specify revisions see section&nbsp;<a href="#sec:revision">6.3</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:revision"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>.
+
+<p>
+
+The checkout command is thus very
+different from the <tt>cvs checkout</tt> command.
+Since branches are so cheap and easy to use, it's often convenient to create a
+new branch for a specific task. Such branches are known as topic branches.
+Branches are also good for experimentation; suppose you have a wild idea you
+want to try out, just create a branch, and discard it if it doesn't work out.
+Suppose we want to base the experiment on a branch named 'work', here is how to
+create and switch branch in one go:
+</p><pre>$ git checkout -b wildidea work
+# work, test, commit, work... realise it was a bad idea
+$ git checkout work
+# delete the wildidea branch
+$ git branch -d wildidea
+</pre>
+Deleting the branch 'wildidea' not only deletes the branch, but actually the
+whole commit history and all changes on the branch, so you will never be able
+to get back that information. So be sure that you are not throwing away
+something you might want to save.
+
+<p>
+
+</p><h2><a name="SECTION00042000000000000000"></a>
+<a name="sec:merge"></a>
+<br>
+Merging
+</h2>
+Obviously branches would be very cumbersome to work with unless it would be
+nearly trivial to incorporate changes in one branch into another. Git provides
+two main ways<a name="tex2html2" href="#foot359"><sup><span class="arabic">2</span></sup></a> to do this; merging and cherry
+picking (for more information on cherry picking see section&nbsp;<a href="#sec:cherry">6.4</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:cherry"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>).
+
+<p>
+
+Merging is the main mechanism for incorporating changes from one branch 
+into another. Merging is trivial if you work in a slightly disciplined
+way, avoiding making changes to the same files in different branches without
+synchronising first. Of course, it's not a problem modifying the same files,
+but then you will have to select by hand which changes to retain. For more
+information on how to resolve conflicts see section&nbsp;<a href="#sec:conflict">6.2</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:conflict"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>.
+
+</p><p>
+
+Suppose that the branch 'wildidea' in the previous section worked out, and
+that you want to merge the changes back into the 'work' branch:
+</p><pre>$ git checkout work
+$ git merge wildidea
+</pre>
+If the work branch has not been changed since wildidea was created from it, 
+this brings the work branch into 
+the exact same state as the  wildidea branch. If, on the other hand, the work
+branch has changed two things can happen: The changes do not overlap and the
+changes in wildidea are cleanly incorporated. If the same file in both
+branches have changed you will have a conflict which needs to be resolved
+(see section&nbsp;<a href="#sec:conflict">6.2</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:conflict"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>).
+
+<p>
+
+Branch names don't have to be simple strings. In fact you can create branches
+with sub-branches exactly like a directory tree. This can be useful if there
+are many developers sharing a master repository. Every developer has
+his/her own branch tree, e.g.
+</p><pre>$ git branch $USER/work
+$ git branch $USER/crazy_stuff
+...
+</pre>
+
+<p>
+
+As a last point, it's actually possible to merge many branches in one merge
+operation.  Such a merge is called an octopus merge, see the
+<tt>git-merge</tt> man page for more info.
+
+</p><p>
+
+</p><h2><a name="SECTION00043000000000000000">
+
+Tags</a>
+</h2>
+Tagging is a way of specifying a symbolic name to a specific revision (state) 
+of the source tree. This makes it much easier to access that particular
+revision later. 
+
+<p>
+
+Tags should not be checked out directly, rather used to create branches
+starting at the specified tag.
+For example, it's a good idea to tag every release of a
+project. Later if someone finds a bug, it's easy to either go back to that
+state or to create a bugfix branch.
+</p><pre>$ git tag version-1.12
+...
+$ git branch bugfix-1.12 version-1.12
+$ git checkout bugfix-1.12
+</pre>
+Tags are not specific to a particular branch, but by using
+``directory tree'' like names one can emulate branch tags
+<pre>$ git checkout crazy_stuff
+$ git tag crazy_stuff/pre-release1
+</pre>
+Tags can also be specified retroactively by specifying a revision
+<pre>$ git tag working-version7 HEAD~42
+</pre>
+Finally, tags are deleted by running
+<pre>$ git tag -d working-version7
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00044000000000000000">
+
+Moving, renaming and deleting files</a>
+</h2>
+As projects evolve, it often becomes necessary to move, rename or even retire 
+files. For example, to rename and move a file in the repository do 
+<pre>$ git mv foo.py raboof/bar.py
+</pre>
+If you want to delete a file or directory use
+<pre>$ git rm myfile
+</pre>
+Note that this does not delete the file irrevocably, since going back to a
+previous revision will bring it back (as it should).
+
+<p>
+
+</p><h1><a name="SECTION00050000000000000000">
+
+Working with remote repositories</a>
+</h1>
+Even though revision control can be very useful in a one-man universe, it's
+when collaborating with others that git reveals its true power.
+The two basic operations when working with a remote repository are the pull
+and push operations, to retrieve and publish changes, respectively. Still, it's
+good to keep in mind that your own repository is a full-fledged repository,
+even when you are working with a remote repository. The only difference to
+the ``master'' repository is that a symbolic pointer called 'origin' is set
+up to point back to where the repository was cloned from<a name="tex2html3" href="#foot360"><sup><span class="arabic">3</span></sup></a>.
+The symbolic name 'origin' is simply a shorthand for the url of the remote
+repository, i.e. if you do <tt>git clone me@repos.foo.org/proj.git</tt>, then
+'origin' is set to <tt>me@repos.foo.org/proj.git</tt>.
+
+<p>
+
+</p><h2><a name="SECTION00051000000000000000"></a>
+<a name="sec:branch"></a>
+<br>
+Remote branches in git
+</h2>
+When you clone a repository, the repository you cloned will be referred to as
+a remote repository (even if it's on the same machine). The default remote
+repository is called 'origin'. The repository you just cloned has at least one
+branch ('master'), but probably more.
+When you clone a repository all the branches in that repository are renamed 
+in your local copy by prefixing the branch name with '<tt>origin/</tt>'. Thus,
+the 'master' branch in the remote repository will be named 'origin/master' in
+your local copy.
+These branches are called 'remote
+branches' or 'remote-tracking branches', 
+to distinguish them from <span class="textit">your</span> local
+branches. The point of having these branches is that after an update, 
+they will always be in the exact same state as the corresponding branch in the 
+remote repository, i.e. they track the remote repository.
+
+<p>
+
+To view all remote branches, run
+</p><pre>$ git branch -r
+</pre>
+Whenever you run
+<tt>git fetch origin</tt> <span class="textit">all</span> remote branches and tags 
+are updated to the exact
+state of the remote repository. You can inspect the changes on those
+branches by either using <tt>gitk</tt>, or a combination of <tt>git log</tt>,
+<tt>git whatchanged</tt>, <tt>git diff</tt> and <tt>git annotate</tt> (see
+section&nbsp;<a href="#sec:examine">4</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:examine"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>).
+For example, to inspect the latest changes on the most important remote branch:
+<pre>$ git fetch origin
+$ gitk origin/master
+</pre>
+Note that <tt>git fetch</tt> updates the remote
+tracking branches, not your working branches!  Never, ever, checkout a remote
+branch directly unless you absolutely want trouble. 
+
+<p>
+
+</p><h2><a name="SECTION00052000000000000000">
+
+Tracking remote branches</a>
+</h2>
+In order to incorporate changes in remote branches you need to merge your
+working copy with the remote branch, e.g. 
+<pre>$ git checkout mybranch
+$ git merge origin/master
+</pre>
+If you get a conflict, run
+<tt>git mergetool</tt> which will fire up the merge tool of your choice. When
+you have resolved all issues, run <tt>git commit</tt> to complete the merge 
+(see section&nbsp;<a href="#sec:conflict">6.2</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:conflict"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>).
+
+<p>
+
+The <tt>git pull</tt> command basically does a <tt>git fetch</tt> and
+<tt>git merge</tt> in one go. I recommend you <span class="textit">do not</span> use it unless you
+very carefully read the man page first, since it has some pitfalls!
+
+</p><p>
+
+As mentioned earlier, never work on a remote branch directly! This will
+cause terrible problems when you try to sync with the remote repository.
+Instead create a local branch <span class="textit">from</span> the remote branch and do your work
+on it instead: 
+</p><pre>$ git branch foobar origin/foobar
+$ git checkout foobar
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00053000000000000000">
+
+Publishing changes</a>
+</h2>
+At some point you will hopefully have produced a nice set of commits, leading
+up to something you find worthy of sharing with others. Before you
+push your changes to the remote server it is essential that you make sure that 
+you are in sync with the branch you are going to push to. For a push to work
+it must result in a so called fast-forward merge.
+
+<p>
+<span class="textit">Fast-forward</span><a name="143"></a> means that the files the files on
+the other branch have not changed since the last pull. If a push fails
+because it is not fast-forward, you must first fetch, merge and possible
+resolve any conflicts before (re)doing the push.
+
+</p><p>
+
+When pushing changes I recommend being very explicit in order to avoid any
+surprises, e.g. to push the changes on mybranch to an <span class="textit">existing</span> branch
+called myuserid in the repository where we cloned from (i.e. origin) 
+</p><pre>$ git push origin mybranch:myuserid
+</pre>
+If you have created tags that you want to make public you need to push them
+explicitly
+<pre>$ git push --tags origin
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00054000000000000000">
+
+Creating remote branches</a>
+</h2> 
+To create a new branch on a remote server, git
+requires a very explicit syntax. To create a remote 
+branch and push the specified branch to it, do
+<pre>$ git push origin &lt;branch&gt;:refs/heads/&lt;branch&gt;
+</pre>
+As a technical side note, the 'refs/heads' syntax refers to the actual
+directory structure in the internal git repository in .git/.
+Once you have created the branch, you can
+use the same syntax as when operating on local branches. 
+
+<p>
+
+</p><h2><a name="SECTION00055000000000000000">
+
+Deleting remote branches and tags</a>
+</h2>
+If you for some reason want to delete a branch
+on the remote server, just push an empty branch to the remote branch:
+<pre>$ git push origin :&lt;branch&gt;
+</pre>
+
+<p>
+
+To delete a tag on the master you need to explicitly push an empty tag
+</p><pre>$ git push origin :refs/tags/&lt;tag&gt;
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00056000000000000000">
+
+Cleaning up</a>
+</h2>
+Branches come and go. Some branches have very long lifetimes and others just
+exist for a short while. When remote branches get deleted, git does not
+automatically register this when you do a <tt>git fetch</tt>, it just ignores
+them. Thus, the number of stale remote branches can grow, cluttering the
+branch listings. To get rid of all these stale branches simply run 
+<pre>$ git remote prune
+</pre>
+To delete single stale branch you can use
+<pre>$ git branch -d -r &lt;remote&gt;/&lt;branch&gt;
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00057000000000000000">
+
+The aim of the game</a>
+</h2>
+With so many possibilities for organising both repositories and branches it's
+important not to forget that the ultimate aim should be to get your beautiful
+new features merged with the master branch on the master server! It's like the
+musketeers, ``All for one, one for all!''. 
+
+<p>
+
+It's important to update often from the master repository, partly not to drift
+too far away from the master branch, and also to incorporate all bug fixes
+etc. At the same time it's also important to push to the master often and in
+small increments, since this makes it a lot easier for other developers to
+stay in sync with <span class="textit">your</span> work.
+
+</p><p>
+
+</p><h2><a name="SECTION00058000000000000000">
+
+A word of advice</a>
+</h2>
+Git might seem a bit overwhelming in the beginning, so here are
+some recommendations for how to work with git until you get used to it:
+When you clone a remote master repository, you will get a set of remote
+branches (see section&nbsp;<a href="#sec:branch">3.1</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:branch"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a> for more info on branches), and one
+local working branch called 'master'. This branch is in the exact state of
+the remote master branch (i.e. 'origin/master' and 'master' are identical). I
+suggest you keep it this way, and create a new working branch for yourself, 
+e.g.
+<pre>$ git checkout -b work
+</pre>
+which creates branch 'work' and checks it out in one go.
+Now work like you normally do, and every now and then (every morning for
+example) run
+<pre>$ git fetch origin
+$ gitk origin/master      
+# if you like what you see
+$ git pull origin master
+</pre>
+Every time you have made changes which can be considered complete in some
+sense (you know best), do a commit 
+<pre>$ git status
+# hmm, what did I actually change?
+$ git diff
+# oh yes...
+$ git add file(s)
+$ git commit
+</pre>
+It's much better with many small commits
+than a few big commits as you will see in section&nbsp;<a href="#sec:cherry">6.4</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:cherry"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>.
+Small commits matters also for commit review, and when finding bugs
+using <tt>git bisect</tt> (see section&nbsp;<a href="#sec:bisect">6.8</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:bisect"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>), or for <tt>git blame</tt> 
+analysis (see section&nbsp;<a href="#sec:blame">4.4</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:blame"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>).
+
+<p>
+
+</p><h1><a name="SECTION00060000000000000000"></a>
+<a name="sec:examine"></a>
+<br>
+Examining repositories
+</h1>
+Every now and then, on a more or less daily basis, I tend to forget which
+files I have modified so far. This frequently happens during debugging
+sessions, where you easily end up all over the place in the hunt for the
+offending piece of code. Then it can be highly convenient to get a listing 
+of files which have changed since the last commit. If you run
+<pre>$ git status
+</pre>
+you will get a compact status report of which files have modifications, which
+files are not under revision control and files staged for a commit (with
+<tt>git add</tt>) but not committed yet. Often you have a bunch of files that
+should not be under revision control and that you really don't care about,
+e.g.  object files and the like. To avoid having git status always list these
+files you can edit the file .gitignore in the project directory and
+list files and file patterns (one per line) that you want to ignore:
+<pre># example .gitignore file
+*.[oa]
+*~
+*.bak
+</pre>
+Have a look at <tt>man gitignore</tt> for a detailed description of how 
+patterns are interpreted.
+It's usually a good idea to place the .gitignore file under revision 
+control too. 
+
+<p>
+
+</p><h2><a name="SECTION00061000000000000000">
+
+Examining logs and changes</a>
+</h2>
+Often it's nice to be able to browse the commit logs on a branch, either
+to identify a particular commit or just to see what others might have
+committed. To view the commit log run
+<pre>$ git log
+</pre>
+If the information provided by git log is not enough, and viewing actual
+changes is too much, then
+<pre>$ git whatchanged
+</pre>
+shows the commit log <span class="textit">including</span> a listing of which files had
+modifications in a particular commit. 
+
+<p>
+
+</p><h2><a name="SECTION00062000000000000000">
+
+Examining changes</a>
+</h2>
+One of the most important aspects of revision control is that it allows you to
+follow how files change over time. We have already looked at how to examine
+the development history through logs and by listing which files have changed.
+We shall now turn our focus on how to examine how the actual files change
+between revisions. For this purpose git provides a very powerful command:
+<pre>$ git diff
+</pre>
+Simply running this command without any arguments prints out the differences
+between your working copy and the last checked in (staged) 
+version<a name="tex2html5" href="#foot198"><sup><span class="arabic">4</span></sup></a>.
+This can be
+extremely useful at times. <tt>git diff</tt> can also show differences between
+arbitrary revisions, branches, tags and so on. To view the differences
+between two branches
+<pre>$ git diff branch1 branch2
+</pre>
+
+<p>
+
+Alternatively, when you finally have located a commit or a file revision that
+you want to examine in some detail, the versatile <tt>git show</tt> command
+can be useful.  <tt>git show</tt> is also convenient for retrieving older
+revisions of <span class="textit">files</span>. Since git only deals with whole revisions, i.e. the
+<span class="textit">state</span> of the repository at a given time, it's in principle not possible
+to retrieve the revision of a single file. Sometimes however it's convenient
+to be able to reset a single file to an older state.  So for example to save a
+particular file 7 revisions back:
+</p><pre>$ git show HEAD~7:foobar.c &gt;foobar~7.c
+</pre>
+If you want to reset a file to given state, you can directly use
+<pre>$ git checkout HEAD~7 foobar.c
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00063000000000000000">
+
+Searching a repository</a>
+</h2>
+Quite often one has a need to search all or some of the files in a source
+tree for a particular string. Of course, it's reasonably simple to quickly
+filter the relevant files on the command line and <tt>grep</tt> for the
+string. Things become substantially more complicated if you want to search in 
+an older revision. Luckily, git has a simple solution:
+<pre>$ git grep regexp
+</pre>
+This will match the regexp for all files in the current revision.
+<tt>git grep</tt> has a lot of flags to limit and refine searches.
+
+<p>
+
+</p><h2><a name="SECTION00064000000000000000"></a>
+<a name="sec:blame"></a>
+<br>
+Who to blame
+</h2>
+We have all been there, someone has messed up your code and you don't know who
+to blame<a name="tex2html6" href="#foot217"><sup><span class="arabic">5</span></sup></a>.
+Fortunately git comes to our rescue:
+<pre>$ git blame file
+</pre>
+This command prints out the file with every line nicely annotated with who 
+changed it and when.
+You can also use
+<pre>$ git gui blame file
+</pre>
+for graphical blame.
+
+<p>
+
+If you want to find what commit introduced given change, you can use
+so called <span class="textit">pickaxe</span><a name="223"></a> search:
+</p><pre>$ git log -S'&lt;changed line&gt;' file
+</pre>
+
+<p>
+
+</p><h1><a name="SECTION00070000000000000000">
+
+Using git for collaboration</a>
+</h1>
+Revision management goes well beyond just source code management for a group
+of programmers. Revision management is useful for most tasks which are
+expected to evolve with time, like for example manuscripts.
+Since git is very easy to set up, and supports a wide range of communication
+protocols, git can be useful for many collaborative tasks. In the following
+section we will examine how git can be used to collaborate in a highly
+disconnected environment, where none of the participants have access to a
+common server or each other's machines. This is a typical situation which
+arises for shorter-term projects, like when collaborating on a scientific
+manuscript. To facilitate this situation git offers a powerful e-mail facility
+for communication changes.
+
+<p>
+
+Suppose you are working on a LaTeX manuscript and you want to have the whole
+manuscript under revision control:
+</p><pre>$ cd ~/tex/manus/
+$ git init
+$ git add manus.tex fig1.ps fig2.ps
+$ git commit
+</pre>
+That's it! Now you can work happily, and remember to commit every now and then
+so that you always can go back in history if you need to. 
+
+<p>
+
+At the point when you are ready to send the manuscript to your collaborators,
+you can make an archive of the whole project and
+send it by email to your collaborators<a name="tex2html8" href="#foot229"><sup><span class="arabic">6</span></sup></a>. 
+</p><pre>$ cd /tmp
+$ git clone ~/tex/manus
+$ tar vfcz manus.tgz manus
+$ rm -rf manus
+# mail and attach /tmp/manus.tgz
+</pre>
+Alternatively you can use <tt>git bundle</tt> described below.
+
+<p>
+
+Now you and your collaborators continue to work the manuscript. After some
+time, and a number of commits, it's time to share your changes with the 
+others. The first step is to identify the commits you want to send. The
+commits can easily be identified by running <tt>git log</tt>. Suppose you have
+made 3 commits since you last distributed your changes:
+</p><pre>$ mkdir patches/
+$ git format-patch -3
+</pre>
+This creates 3 patch files in the current directory, which now can be attached
+and sent to your collaborators using your favourite mailer. Alternatively you
+can use <tt>git send-email</tt> to do the job.
+<pre>$ git send-email --subject '[PATCH] my latest changes' --to foo@bar.org \
+  --cc raboof@foobar.edu *.patch
+$ rm *.patch
+</pre>
+<tt>git send-mail</tt> can also be configured using <tt>git configure</tt> to
+avoid having to write the long command line every time.
+
+<p>
+
+When you receive changes from your collaborators by e-mail, just save the
+mail(s) in your project directory and apply the changes:
+</p><pre>$ git am --3way mailfile(s)
+$ rm mailfile(s)
+</pre>
+It might be a good idea to create and switch to a temporary branch before 
+applying the patches, since this gives you a better possibility to inspect the 
+changes before merging them with your main branch. Obviously, if there is a
+conflict it has to be resolved like normal. When the conflict has been
+resolved, you can continue the merge with <tt>git am -continue</tt>.
+
+<p>
+
+</p><h3><a name="SECTION00070100000000000000">
+
+Using bundles</a>
+</h3>
+Alternatively you can use <tt>git bundle</tt> for off-line
+transport. 
+Instead of creating an archive, you can create an initial bundle with
+<pre>$ git bundle create manus.bndl master
+$ git tag -f sent-manus master
+# second command marks when we send bundle
+</pre>
+The receiving side would do
+<pre>$ git bundle verify manus.bndl
+$ git fetch manus.bndl master:from-him/master
+</pre>
+
+<p>
+
+If you want to send changes since last bundle, do
+</p><pre>$ git bundle create manus.bndl sent-manus..master
+$ git tag -f sent-manus master
+# second command marks when we send bundle
+</pre>
+The receiving side does the same as before.
+
+<p>
+
+</p><h1><a name="SECTION00080000000000000000">
+
+Advanced git</a>
+</h1>
+
+<h2><a name="SECTION00081000000000000000">
+
+Configuring git</a>
+</h2>
+Git uses a number of config files, system
+wide, per user and per repository (see the git config man page for more info).
+As a minimum you should set the following options:
+<pre>$ git config --global user.name "Your Name"
+$ git config --global user.email "my@email.com"
+</pre>
+These options are written in&nbsp;/.gitconfig, and are used by git to ensure that
+your commit messages are sensible, since user names and mail addresses are not
+necessarily set properly on all machines. In addition you might want to enable
+the following options as well:
+<pre>$ git config --global color.branch auto
+$ git config --global color.status auto
+$ git config --global color.diff false
+</pre>
+If you want beautifully colored diffs, you probably need to add the '-R' flag
+to the <tt>LESS</tt> environment variable, and change 'false' to 'auto'.
+
+<p>
+
+If you want to use some external (graphical) merge tool to resolve conflicts:
+</p><pre>$ git config --global merge.tool meld
+</pre>
+<tt>meld</tt> is a fantastic merge tool, and I strongly suggest you have a
+look at it.  Other possibilities are <tt>kdiff3</tt> and <tt>xxdiff</tt>.
+
+<p>
+
+Git has many tunable bells and whistles. Please refer to the git configure
+man page for a more complete listing of configurable options.
+
+</p><p>
+
+</p><h2><a name="SECTION00082000000000000000"></a>
+<a name="sec:conflict"></a>
+<br>
+Resolving conflicts
+</h2>
+Every now and then you end up in a situation where files have overlapping or
+incompatible changes. This will be flagged as a conflict by git, and you will
+have to resolve the conflict before you can proceed. When you get a conflict,
+git will insert markers in the file showing where the conflict occurred. For
+example, working on branch foobar, you merge with changes on the master branch
+and get a conflict. The problematic section in the offending file looks like
+this:
+<pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:foobar
+This is the stuff I have in my working copy in branch foobar...
+=======
+This is what master currently looks like. Now you need to edit the file, pick
+the part you want to retain and remove all the markers.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; master:foobar
+</pre>
+After you have resolved the conflict in your favorite editor, save and
+recommit:
+<pre>$ git add &lt;file&gt;
+$ git commit
+</pre>
+A more convenient way to handle conflicting merges is to configure
+<tt>git mergetool</tt> to launch your favourite diff/merge tool:
+<pre># this only needs to be configured once
+$ git configure --global merge.tool meld
+$ git mergetool
+$ git commmit
+</pre>
+If you are not familiar with the general purpose graphical diff- and merge
+tool <tt>meld</tt> I warmly recommend that you familiarise yourself with this
+excellent piece of software!
+
+<p>
+
+</p><h2><a name="SECTION00083000000000000000"></a>
+<a name="sec:revision"></a>
+<br>
+Specifying revisions
+</h2>
+Being able to specify revisions is important whenever we want to in any way 
+access older revisions. Git has a number of different ways of specifying a
+certain revision, some which we have seen already:
+
+<ol>
+<li>A branch name
+</li>
+<li>A tag
+</li>
+<li>The symbolic name HEAD
+</li>
+<li>A revision relative to a branch, tag or HEAD
+</li>
+<li>The SHA1 hash of a commit	
+</li>
+</ol>
+The two first forms are pretty obvious, but the others need a bit of
+explanation. The symbolic name HEAD will always points to current
+checked out branch.  HEAD is mostly useful to specify
+older revisions relative to it. There are a number of ways to specify
+a relative revision, e.g to specify the parent revision (i.e. one below HEAD)
+<pre>git show HEAD~1
+</pre>
+The general syntax is
+<pre>git show &lt;HEAD|tag|branch|SHA1&gt;~N
+</pre>
+For more details see the <tt>git-rev-parse</tt> man page,
+specifically the section ``Specifying revisions''.
+
+<p>
+
+Every commit (every object in fact) is internally identified by a
+cryptography-strength one-way SHA1 hash consisting of 40 hexdigits, which
+<span class="textit">uniquely</span> identifies any commit (or file). These hexdigits can be found
+by running 
+</p><pre>$ git log
+commit 3ff678cc8abc29db9cb33ec9ca4e468496cb8063
+Author: Jonas Juselius &lt;jonas@iki.fi&gt;
+Date:   Fri Nov 16 12:47:47 2007 +0100
+
+    Updated .pdf version.
+
+...
+$
+</pre>
+where the first line of every log entry starts with the commit label and the
+hexdigit identifying that particular revision.
+
+<p>
+
+Wherever a revision is needed one can give
+the SHA1 hash to exactly specify the revision (in fact, the first 6-8
+hexdigits are usually enough)
+</p><pre>git checkout bed6ba53
+</pre>
+
+<p>
+
+Sometimes it's practical to be able to specify a revision range to limit the
+output
+</p><pre>git diff HEAD~4..HEAD~1
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00084000000000000000"></a>
+<a name="sec:cherry"></a>
+<br>
+Cherry picking
+</h2>
+There are lots nice tricks we can play with
+branches. Suppose you want to try out some idea, but you don't know exactly
+how it will work out. Create a new branch from your current working branch and
+check it out:
+<pre>$ git branch foobar
+$ git checkout foobar
+</pre>
+Now work hard and commit often. If it turns out that everything is good, and
+you want to keep all changes, merge them with your working branch and push
+them to the master:
+<pre>$ git checkout work
+$ git merge foobar
+$ git push origin work:myuserid
+</pre>
+Now you can delete the foobar branch for ever and all times
+<pre>$ git branch -d foobar
+</pre>
+If, on the other hand it turns out that you had a crackpot idea, and you
+don't want to see any of it anymore, delete the branch and all changes,
+commits and everything on the branch will be gone for ever! No trace of it.
+But what if there are partially useful changes to foobar that you want to
+keep, before discarding the rest? Well that's when small commits are useful
+because you can cherry pick! Checkout your work branch, fire up gitk on foobar,
+and find the commits you like to keep. Every commit is identified by a long
+SHA1 hash (a long sequence of numbers and letters). Now cherry pick the
+commits you want into the work branch:
+<pre>$ git checkout work
+$ gitk foobar &
+# find commit, copy the SHA1 hash with the mouse
+$ git cherry-pick SHA1
+</pre>
+Repeat the cherry pick as many times you like. As you see, git gives a lot of
+flexibility by using branches. Just be a bit careful in the beginning not to
+make a mess and lose track of what you are doing. 
+
+<p>
+
+</p><h2><a name="SECTION00085000000000000000">
+
+Stashing</a>
+</h2>
+Sometimes when you are working on a branch you temporarily need to switch to
+another branch to test something, or maybe fix a bug. In a situation like this
+you cannot just checkout the other branch, since then all your local changes
+would get lost (don't worry, git will not allow you to do this). However, you
+might not want to commit your changes either, since they are not ready or
+complete. In situations like this git allows you to temporarily commit your
+changes in a ``stash''. Running <tt>git stash</tt> saves your latest changes
+and resets the current branch to it's latest checked in state (the HEAD). When
+you are ready to continue working you just apply changes in the stash.
+<pre>$ git stash save
+$ git stash list
+stash@{0}: WIP on mybranch: ad6d0aa... foo
+$ git checkout other branch
+...
+$ git checkout mybranch
+$ git stash apply
+$ git stash clear
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00086000000000000000">
+
+Repository maintenance</a>
+</h2>
+When git was conceived, it was based on a very simple scheme for storing
+revisions to files in the repository. Instead of actually figuring out how
+files changed between revisions and just storing the differences, git just
+stored a (compressed) copy of the whole file! This is obviously quite simple and efficient,
+but very wasteful in terms of storage space. It also becomes inefficient as
+the number of files in the repository grows. 
+
+<p>
+
+Modern versions of git still retains this simple storage scheme by default.
+This means that as your repository evolves with time it will grow
+substantially in size. Fortunately git provides commands to convert the
+individual objects in the database into a <span class="textit">pack</span> file, which stores only
+the differences between revisions. Once the pack has been generated, all the
+old objects are unnecessary and can be pruned:
+</p><pre>$ git repack
+$ git prune
+</pre>
+In fact, git has a simpler command which will do this in one go, and
+perform additional optimisations on the repository. To ``garbage collect'' and
+fully optimise your repository run
+<pre>$ git gc --prune --aggressive
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00087000000000000000">
+
+Exporting a repository</a>
+</h2>
+Sometimes you want to package your source, e.g. for an official release, but
+you certainly don't want to include the whole repository in the package. One
+way to do this is to simply make a copy of the repository, checkout the right
+branch, clean out all
+generated and unnecessary files, delete the .git directory and make a tar
+file. This process is much simplified using the <tt>git archive</tt> which
+will create a .tar or .zip file of the wanted revision on the fly
+<pre># to create a uncompressed archive
+$ git archive --prefix=myprog-1.42/ HEAD &gt;../myprog_1.42.tar
+# compressed archive are also trivial
+$ git archive --prefix=myprog-1.42/ HEAD |gzip -c &gt;../myprog_1.42.tgz
+</pre>
+This creates an archive of the latest version (HEAD) on the current branch.
+You can specify any branch specifier or tag you like to export some other
+version.
+Please note the trailing '/' in the prefix, without it you will get a bit of a
+surprise...
+
+<p>
+
+</p><h2><a name="SECTION00088000000000000000"></a>
+<a name="sec:bisect"></a>
+<br>
+Finding bugs
+</h2>
+Everyone doing software development either alone, or in a group have been in
+the situation where a bug is suddenly found, with very little clue when
+it has been introduced, much less where it might be. It can be very tedious to
+go back and figure out where and when the bug was introduced. Fortunately git
+has a very clever mechanism to aid us in the process, using the command
+<tt>git bisect</tt>. The way it work is by tagging a starting revision as bad,
+and then tag some <span class="textit">known, working</span> revision as good.  <tt>git
+bisect</tt> will checkout a new revision, and then you compile, test and mark it
+as either good or bad. A few of these cycles, and the offending revision is
+found! Here is the process:
+
+<p>
+</p><pre>$ git bisect start 
+$ git bisect bad # current rev is bad
+$ git bisect good version-1.21 # tagged version 1.21 works, guaranteed!
+# now git will checkout a new revision 
+$ make; test.sh 
+# bad?
+$ git bisect bad
+$ make; test.sh
+...
+</pre>
+In fact, git will allow you to automate the whole process! If your test script
+can determine if a version is working or not, then just let your script return
+0 if the revision is working and 1 it's bad, and run
+<pre>$ git bisect start 
+$ git bisect run ./test.sh
+</pre>
+So, now that you have found the offending revision you probably want to go 
+back to the latest revision and start debugging properly. To do this just
+execute
+<pre>$ git bisect reset
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00089000000000000000">
+
+Undoing commits and resetting</a>
+</h2>
+Sometimes we screw up. It's embarrassing. And we don't want anybody to know
+about it. Like committing something we should not have, or even worse,
+misspelling a commit message. Whatever. Or maybe we want to undo a merge or a
+pull which screwed up our repository, causing tons of conflicts or breaking
+things badly. There are two commands for undoing commits, <tt>git revert</tt>
+and <tt>git reset</tt>. These two differ in the sense that <tt>git revert</tt>
+will undo changes in a controlled, and in itself reversible manner, whereas
+<tt>git reset</tt> resets the branch to a specified state without leaving any
+trace in the history. Even if you reset, it's still possible to recover
+the ``lost'' commits through the reflog facility (see below). 
+
+<p>
+
+Suppose you have been working for a while, committing regularly, and after a
+while you realise that everything you have done the last few commits is utter
+garbage, and you want to go back 3 revisions and start over:
+</p><pre>$ git revert HEAD~3
+</pre>
+This resets your working copy to the specified revision, and commits the
+changes the revert introduced. Hence, you can go back when you realise that
+the garbage you had produced actually was gold after all.
+
+<p>
+
+Another scenario is when you realise you have an embarrassing typo in a commit
+message, or that you forgot to include a file in the commit, or committed
+too many files. Obviously you can always revert, but that's really quite
+unnecessary and does not really achieve what you want. In this situation you
+would do a soft reset, which means that the HEAD revision is reset to point to 
+another resent revision, but your <span class="textit">working copy</span> is left intact. To undo
+a commit in this manner you would do the following:
+</p><pre>$ git commit file1 file2 
+# uups, let's undo the commit message, and edit file1 and add file3 
+$ vim file1 
+$ git add file3
+$ git commit --amend file1 file2 file3
+</pre>
+
+<p>
+
+If you really, really want to reset the state of both the repository and your
+working copy you need to do a hard reset. Be warned, a hard reset throws away
+all commits and all changes to your files up to the specified revision forever. 
+There is no way of getting the information back again. To do a hard reset and
+go two revisions back, and at the same time also reset your working copy to
+that state:
+</p><pre>$ git reset --hard HEAD~2
+</pre>
+If you for some reason suddenly realise that the reset was a mistake, and you
+want to go back to where you were before the reset, you can 
+reset back to the reflog HEAD:
+<pre>$ git reset --hard HEAD@{1}
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION000810000000000000000"></a>
+<a name="sec:remotes"></a>
+<br>
+Working with multiple remotes
+</h2>
+Git provides a lot more flexibility than CVS. Due to it's distributed nature
+it's actually possible to have multiple ``master'' servers, or more
+accurately, multiple remote repositories. 
+A typical situation when it can be desirable with many remotes, is when the
+central master server has limited push access, e.g. to ensure that only
+working code is distributed to other developers. In a situation like this one
+can set up multiple remotes to point to the repositories of the
+people one is collaborating closely with.
+
+<p>
+
+The default remote repository is
+called 'origin', but you can attach as many remotes as you like. To register a
+new remote repository, simply run
+</p><pre>$ git remote add &lt;name&gt; &lt;myserver&gt;:/path/to/git/proj.git
+</pre>
+
+<p>
+
+Now when you fetch, pull and push use your new remote-tag <tt>&lt;name&gt;</tt> instead 
+of <tt>origin</tt> to the corresponding command. The new development cycle will
+typically be something like
+</p><pre>$ git pull origin master
+# do some work
+$ git push myremote mybranch:mybranch
+# or to push all branches automatically
+$ git push --all myremote
+</pre>
+
+<p>
+
+A good solution might be to have a central storage area, with a true ``master'' 
+repository, to which only a few people have write access to. The other
+developers can create their own personal repositories in the storage area, and
+have full access to that repository. By setting up the <tt>gitweb</tt>
+interface it becomes very easy to track what everybody is doing through 
+the web.
+
+</p><p>
+
+To set up your own sub-master repository follow these steps:
+</p><pre>$ ssh &lt;myserver&gt;
+$ cd /path/to/repos
+$ mkdir $USER
+$ git clone -s -l --bare proj.git $USER/proj.git
+$ cd $USER/proj.git 
+$ git branch -a 
+# remove any branches and tags you do not care about
+$ git branch -D &lt;branch branch...&gt;
+$ git tag -d &lt;tag tag...&gt;
+# edit description (for gitweb) to your liking 
+$ vi description
+</pre>
+The -s and -l options to <tt>git clone</tt> will cause git to set up the
+repository to use the master's object database as much as possible, so that it
+will take up very little space. 
+
+<p>
+
+</p><h1><a name="SECTION00090000000000000000">
+
+About this document ...</a>
+</h1>
+ <strong>Git in a Nutshell</strong><p>
+
+This document was generated using the
+<a href="http://www.latex2html.org/"><strong>LaTeX</strong>2<tt>HTML</tt></a> translator Version 2002-2-1 (1.71)
+</p><p>
+
+Copyright &copy; 1993, 1994, 1995, 1996,
+Nikos Drakos, 
+Computer Based Learning Unit, University of Leeds.
+<br>
+Copyright &copy; 1997, 1998, 1999,
+<a href="http://www.maths.mq.edu.au/%7Eross/">Ross Moore</a>, 
+Mathematics Department, Macquarie University, Sydney.
+</p><p>
+
+The command line arguments were: <br>
+ <strong>latex2html</strong> <tt>-local_icons -dir HTML/git_guide -split 0 git_guide.tex</tt>
+</p><p>
+
+The translation was initiated by Jonas Juselius on 2008-03-14
+<br></p><hr><h4>Footnotes</h4>
+<dl>
+<dt><a name="foot56">... a</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html1"><sup><span class="arabic">1</span></sup></a></dt>
+<dd>
+
+Actually git clone is a bit more selective, and it also sets up various
+administrative information, etc.
+
+</dd>
+<dt><a name="foot359">... ways</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html2"><sup><span class="arabic">2</span></sup></a></dt>
+<dd>Actually, there is a third way called rebasing, but
+that method is for experts only. See the <tt>git rebase</tt> man page for more
+info.
+
+</dd>
+<dt><a name="foot360">... from</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html3"><sup><span class="arabic">3</span></sup></a></dt>
+<dd>You can in
+fact set up multiple remote repositories if you like, see section&nbsp;<a href="#sec:remotes">6.10</a>, p.&nbsp;<a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#sec:remotes"><img alt="[*]" src="crossref.png" align="bottom" border="1"></a>
+
+</dd>
+<dt><a name="foot198">...
+version</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html5"><sup><span class="arabic">4</span></sup></a></dt>
+<dd>A technical detail, which most people safely can ignore:
+git-diff shows difference between the index (staging area) and the working copy,
+not between the HEAD (last commit) and the working copy.
+
+</dd>
+<dt><a name="foot217">... blame</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html6"><sup><span class="arabic">5</span></sup></a></dt>
+<dd>This is because in 9 out of 10 cases it's you yourself,
+with a perfect, albeit short, memory.
+
+</dd>
+<dt><a name="foot229">... collaborators</a><a href="http://jonas.iki.fi/git_guides/HTML/git_guide/git_guide.html#tex2html8"><sup><span class="arabic">6</span></sup></a></dt>
+<dd>If the file is very big it's
+probably better to provide a (hidden) link to your home page, as many mail
+servers will not accept excessively large files
+
+</dd>
+</dl>
+<div class="navigation"><hr>
+<!--Navigation Panel-->
+<img alt="next_inactive" src="nx_grp_g.png" width="81" align="bottom" border="0" height="24"> 
+<img alt="up" src="up_g.png" width="26" align="bottom" border="0" height="24"> 
+<img alt="previous" src="prev_g.png" width="63" align="bottom" border="0" height="24">   
+<br></div>
+<!--End of Navigation Panel-->
+<address>
+
+Jonas Juselius
+2008-03-14
+</address>
+</body>
+</html>

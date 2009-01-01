@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://forum.openwrt.org/viewtopic.php?pid=19315">
+<meta name="wpd_url" content="http://forum.openwrt.org/viewtopic.php?pid=19315">
+<meta name="wpd_date" content="2008-06-03T02:05Z">
+
+
+
+
+
+<title>OpenWrt / VPN/iptables issues - Nortel VPN passthrough, DMZ</title>
+
+
+<link rel="stylesheet" type="text/css" href="viewtopic.css" media="all">
+</head>
+<body>
+
+<div id="punwrap">
+<div id="punviewtopic" class="pun">
+
+<div id="brdheader" class="block">
+	<div class="box">
+		<div id="brdtitle" class="inbox">
+			<h1><span>OpenWrt</span></h1>
+			<p><span>Wireless Freedom</span></p>
+		</div>
+		<div id="brdmenu" class="inbox">
+			<ul>
+				<li id="navindex"><a href="http://forum.openwrt.org/index.php">Index</a></li>
+				<li id="navuserlist"><a href="http://forum.openwrt.org/userlist.php">User list</a></li>
+				<li id="navsearch"><a href="http://forum.openwrt.org/search.php">Search</a></li>
+				<li id="navregister"><a href="http://forum.openwrt.org/register.php">Register</a></li>
+				<li id="navlogin"><a href="http://forum.openwrt.org/login.php">Login</a></li>
+			</ul>
+		</div>
+		<div id="brdwelcome" class="inbox">
+			<p>You are not logged in.</p>
+		</div>
+	</div>
+</div>
+
+<div id="announce" class="block">
+	<h2><span>Announcement</span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div>Latest: <a href="http://kamikaze.openwrt.org/7.09">7.09</a>. Please read before posting - <br>
+<a href="http://openwrt.org/support">Forum Rules</a> | <b><a href="http://forum.openwrt.org/viewtopic.php?id=3474">Common mistakes</a></b> | <a href="http://wiki.openwrt.org/">Documentation</a> | <b><a href="http://wiki.openwrt.org/Faq">Faq</a></b> | <a href="https://dev.openwrt.org/report/11">Bug reports</a></div>
+		</div>
+	</div>
+</div>
+
+<div class="linkst">
+	<div class="inbox">
+		<p class="pagelink conl">Pages: <strong>1</strong></p>
+		<p class="postlink conr">&nbsp;</p>
+		<ul><li><a href="http://forum.openwrt.org/index.php">Index</a></li><li>&nbsp;&raquo;&nbsp;<a href="http://forum.openwrt.org/viewforum.php?id=1">General Discussion (WhiteRussian)</a></li><li>&nbsp;&raquo;&nbsp;VPN/iptables issues - Nortel VPN passthrough, DMZ</li></ul>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="p19034" class="blockpost rowodd firstpost">
+	<h2><span><span class="conr"><a href="http://forum.openwrt.org/viewtopic.php?pid=19034#p19034">#1</a>&nbsp;</span><a href="http://forum.openwrt.org/viewtopic.php?pid=19034#p19034">2006-01-16 09:00:15</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postleft">
+				<dl>
+					<dt><strong><a href="http://forum.openwrt.org/profile.php?id=4333">ziesemer</a></strong></dt>
+					<dd class="usertitle"><strong>Member</strong></dd>
+					<dd class="postavatar"></dd>
+					<dd>From: Wausau, WI</dd>
+					<dd>Registered: 2006-01-09</dd>
+					<dd>Posts: 31</dd>
+					<dd class="usercontacts"><a href="http://www.ziesemer.com/">Website</a></dd>
+				</dl>
+			</div>
+			<div class="postright">
+				<h3>VPN/iptables issues - Nortel VPN passthrough, DMZ</h3>
+				<div class="postmsg">
+					<p>I'm attempting to use a Nortel Contivity VPN Client on a box behind OpenWRT, still a mostly default setup on WhiteRussian RC4.&nbsp; (And unfortunately, there doesn't seem to be any "NAT Traversal" option available on my client configuration.)<br><br>The problem starts when I try to setup "DMZ" forwarding.&nbsp; (See <a href="http://forum.openwrt.org/viewtopic.php?id=4030">http://forum.openwrt.org/viewtopic.php?id=4030</a> for more details.)&nbsp; The moment I do this, I start seeing the following errors, as reported by tcpdump:<br></p><div class="codebox"><div class="incqbox"><h4>Code:</h4><div class="scrollbox" style="height: 9em;"><pre>tcpdump -i vlan1 host (vpn) -N
+...
+01:13:47.298478 IP (vpn) &gt; (my_wan_ip): ESP(spi=0x...,seq=0x1)
+01:13:47.299151 IP (my_wan_ip) &gt; (vpn): icmp 128: (my_wan_ip) protocol 50 port 58887 unreachable</pre></div></div></div><p>(Sometimes it just says "protocol 50 unreachable" without the port #, sometimes it shows it with as above - not sure why...)<br><br>Here's the relevant information from my firewall.user:<br><br></p><div class="codebox"><div class="incqbox"><h4>Code:</h4><div class="scrollbox" style="height: 18em;"><pre>### IPSEC-DMZ Fix
+iptables -t nat -A postrouting_rule -p esp -j ACCEPT
+
+### Allow ping from WAN for testing.
+iptables -A input_rule -d $WAN_IP -p icmp --icmp-type echo-request -j ACCEPT
+
+### DMZ (should be placed after port forwarding / accept rules)
+iptables -t nat -A prerouting_rule -d $WAN_IP -j DNAT --to $DMZ_IP
+iptables        -A forwarding_rule -d $DMZ_IP -j ACCEPT
+iptables -t nat -A postrouting_rule -s (my subnet) -d $DMZ_IP -j MASQUERADE</pre></div></div></div><p>Here's the interesting part:&nbsp; Having this in /etc/firewall.user during reboot seems to cause the VPN to fail regardless of whatever I do later.&nbsp; If I use the default firewall.user, reboot, copy it to /tmp, make changes, then run the script, things seem to work fine.&nbsp; I've repeated this with duplicate results several times.&nbsp; Even having the above changes in /etc/firewall.user, and calling it again doesn't work - having the changes there during boot seems to be the issue.<br><br>Is there something happening differently between having this run during reboot or configuring it later?&nbsp; Supposedly everything in iptables is being flushed due to the -F's at the top of the file.<br><br>(Note that this did NOT work any better under the native Linksys firmware - which is reason that compelled me to try OpenWrt in the first place.&nbsp; At least here, I have the ability to debug...)<br><br>Edit:<br>Another thing I just found.&nbsp; Looking at the tcpdump logs again, sometimes the logs show everything coming from me as having my external WAN IP address - other times they are appearing as having the computer's LAN IP address.&nbsp; I've not been able to find a reason for this one way or another.&nbsp; I'm really down to only trying to configurations - my modified version (above) and the default from /rom/etc/firewall.user.&nbsp; However, I may see either the WAN or LAN IP address under either firewall.user version.&nbsp; I have NO IDEA why this changes.&nbsp; (2 configuration possibilities seem to be resulting in 6+ types of packet dumps.)<br><br>Any suggestions would be greatly appreciated - thanks!!</p>
+					<p class="postedit"><em>Last edited by ziesemer (2006-01-16 09:55:07)</em></p>
+				</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="postfootleft"><p>Offline</p></div>
+			<div class="postfootright"><div>&nbsp;</div></div>
+		</div>
+	</div>
+</div>
+
+<div id="p19315" class="blockpost roweven">
+	<h2><span><span class="conr"><a href="http://forum.openwrt.org/viewtopic.php?pid=19315#p19315">#2</a>&nbsp;</span><a href="http://forum.openwrt.org/viewtopic.php?pid=19315#p19315">2006-01-19 04:46:26</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postleft">
+				<dl>
+					<dt><strong><a href="http://forum.openwrt.org/profile.php?id=4333">ziesemer</a></strong></dt>
+					<dd class="usertitle"><strong>Member</strong></dd>
+					<dd class="postavatar"></dd>
+					<dd>From: Wausau, WI</dd>
+					<dd>Registered: 2006-01-09</dd>
+					<dd>Posts: 31</dd>
+					<dd class="usercontacts"><a href="http://www.ziesemer.com/">Website</a></dd>
+				</dl>
+			</div>
+			<div class="postright">
+				<h3> Re: VPN/iptables issues - Nortel VPN passthrough, DMZ</h3>
+				<div class="postmsg">
+					<p>I GOT IT!!<br><br>The following line added underneath the "### Port forwarding" section in the default /etc/firewall.user did the trick:<br><br></p><div class="codebox"><div class="incqbox"><h4>Code:</h4><div class="scrollbox" style="height: 4.5em;"><pre>iptables -t nat -A prerouting_rule -p esp -j ACCEPT</pre></div></div></div><p>Why?<br>(Here's my attempt - please feel free to correct me, as I'm still trying to understand all the details.)<br><br>Enabling "DMZ" in the default /etc/firewall.user would try to DNAT and forward ALL incoming packets, including esp, which won't work for a few reasons.&nbsp; First, the DMZ host may not be the same client attempting to make a VPN connection.&nbsp; Second, trying to use NAT changes the destination address of the packets, and with esp packets, this invalidates the checksum.&nbsp; Including the above prerouting_rule before the related DMZ rule will exclude esp packets from being DNAT'd and forwarded, and instead go back to the default target of ACCEPT.<br><br>My postrouting_rule attempt didn't hurt anything, but wasn't necessary, as all packets going out to vlan1 (the WAN) are already masqueraded.<br><br>I AM CURIOUS as to how the esp packets ever make it back to the client from the VPN server.&nbsp; As seen through tcpdump, the incoming packets are only marked with a destination of the WAN IP address.&nbsp; There are no visible port numbers to NAT by, as they are encrypted within esp.&nbsp; Is there something that keeps track of the outgoing spi and maybe seq #'s to forward them back to the originating client?</p>
+				</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="postfootleft"><p>Offline</p></div>
+			<div class="postfootright"><div>&nbsp;</div></div>
+		</div>
+	</div>
+</div>
+
+<div id="p19481" class="blockpost rowodd">
+	<h2><span><span class="conr"><a href="http://forum.openwrt.org/viewtopic.php?pid=19481#p19481">#3</a>&nbsp;</span><a href="http://forum.openwrt.org/viewtopic.php?pid=19481#p19481">2006-01-21 12:25:38</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postleft">
+				<dl>
+					<dt><strong><a href="http://forum.openwrt.org/profile.php?id=288">danversj</a></strong></dt>
+					<dd class="usertitle"><strong>Member</strong></dd>
+					<dd class="postavatar"></dd>
+					<dd>From: Melbourne, Australia</dd>
+					<dd>Registered: 2004-07-27</dd>
+					<dd>Posts: 178</dd>
+					<dd class="usercontacts"><a href="http://freenetjazz.blogspot.com/">Website</a></dd>
+				</dl>
+			</div>
+			<div class="postright">
+				<h3> Re: VPN/iptables issues - Nortel VPN passthrough, DMZ</h3>
+				<div class="postmsg">
+					<p>Hi zeismer,<br><br>It just so happens I'm trying to do the exact same thing as you.&nbsp; I'm using the Nortel [Contivity VPN client on a laptop and I'm running a wl500g with RC4 on it as my internet router.<br><br>Is the </p><div class="codebox"><div class="incqbox"><h4>Code:</h4><div class="scrollbox" style="height: 4.5em;"><pre>iptables -t nat -A prerouting_rule -p esp -j ACCEPT</pre></div></div></div><p>rule the only custom rule in either your firewall.user or S45firewall scripts?<br>I ask because I have added that rule to my firewall.user and I can't get it to work.&nbsp; Are you using DMZ or port-forwarding do deal with NAT?&nbsp; IPSEC apparently uses UDP port 500, I've tried port-forwarding this port to my VPN client laptop and it doesn't work then either.</p>
+				</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="postfootleft"><p>Offline</p></div>
+			<div class="postfootright"><div>&nbsp;</div></div>
+		</div>
+	</div>
+</div>
+
+<div id="p19510" class="blockpost roweven">
+	<h2><span><span class="conr"><a href="http://forum.openwrt.org/viewtopic.php?pid=19510#p19510">#4</a>&nbsp;</span><a href="http://forum.openwrt.org/viewtopic.php?pid=19510#p19510">2006-01-21 21:39:10</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postleft">
+				<dl>
+					<dt><strong><a href="http://forum.openwrt.org/profile.php?id=4333">ziesemer</a></strong></dt>
+					<dd class="usertitle"><strong>Member</strong></dd>
+					<dd class="postavatar"></dd>
+					<dd>From: Wausau, WI</dd>
+					<dd>Registered: 2006-01-09</dd>
+					<dd>Posts: 31</dd>
+					<dd class="usercontacts"><a href="http://www.ziesemer.com/">Website</a></dd>
+				</dl>
+			</div>
+			<div class="postright">
+				<h3> Re: VPN/iptables issues - Nortel VPN passthrough, DMZ</h3>
+				<div class="postmsg">
+					<p>First of all, try this with a default /etc/firewall.user.&nbsp; Copy the one from /rom/etc/firewall.user to be sure.&nbsp; It should work fine.&nbsp; If not, there's another problem here...<br><br>The only reason I needed my above fix was because I enabled DMZ for other reasons (my only applicable change being the uncommenting of the default DMZ rules at the bottom of the file).&nbsp; By doing this, I effectively broke the default rules that handled things properly for IPSEC VPN.&nbsp; By placing the above rule somewhere above the DMZ rules, anything matching "-p esp" will no longer be handled and broke by the DMZ rules.&nbsp; Read through my attempt at "Why" above.<br><br>As for UDP 500, I'd definitely try to stop forwarding that - I'm guessing it's causing more problems than it's solving.&nbsp; When using tcpdump to watch the traffic on my router while troubleshooting this, nothing seen as UDP 500 was a problem.&nbsp; As I recall, the only thing seen as UDP 500 is the initial key exchange (IKE) which completed without any issues.&nbsp; The problems started happening after that, but while the packets may have still been UDP 500, they are encapsulated using ESP, so UDP 500 no longer even applies.</p>
+				</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="postfootleft"><p>Offline</p></div>
+			<div class="postfootright"><div>&nbsp;</div></div>
+		</div>
+	</div>
+</div>
+
+<div class="postlinksb">
+	<div class="inbox">
+		<p class="postlink conr">&nbsp;</p>
+		<p class="pagelink conl">Pages: <strong>1</strong></p>
+		<ul><li><a href="http://forum.openwrt.org/index.php">Index</a></li><li>&nbsp;&raquo;&nbsp;<a href="http://forum.openwrt.org/viewforum.php?id=1">General Discussion (WhiteRussian)</a></li><li>&nbsp;&raquo;&nbsp;VPN/iptables issues - Nortel VPN passthrough, DMZ</li></ul>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="brdfooter" class="block">
+	<h2><span>Board footer</span></h2>
+	<div class="box">
+		<div class="inbox">
+
+			<div class="conl">
+				<form id="qjump" method="get" action="http://forum.openwrt.org/viewforum.php">
+					<div><label>Jump to
+					<br><select name="id" onchange="window.location=('viewforum.php?id='+this.options[this.selectedIndex].value)">
+						<optgroup label="News">
+							<option value="11">News</option>
+						</optgroup>
+						<optgroup label="Kamikaze">
+							<option value="10">General Discussion (Kamikaze)</option>
+						</optgroup>
+						<optgroup label="Community">
+							<option value="17">Howtos and Documentation</option>
+							<option value="16">Community Releases / Announcements</option>
+							<option value="15">Hardware Hacking</option>
+							<option value="14">(un)wanted hardware</option>
+						</optgroup>
+						<optgroup label="WhiteRussian">
+							<option value="1" selected="selected">General Discussion (WhiteRussian)</option>
+							<option value="2">Developers Only</option>
+						</optgroup>
+						<optgroup label="(Archived forums - read only)">
+							<option value="8">* Moderated</option>
+							<option value="3">NetGear DG834G</option>
+							<option value="4">GIGABYTE</option>
+					</optgroup>
+					</select>
+					<input value=" Go " accesskey="g" type="submit">
+					</label></div>
+				</form>
+			</div>
+			<p class="conr">Powered by <a href="http://www.punbb.org/">PunBB</a><br>&copy; Copyright 2002&ndash;2005 Rickard Andersson</p>
+			<div class="clearer"></div>
+		</div>
+	</div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

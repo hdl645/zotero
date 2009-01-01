@@ -1,0 +1,198 @@
+
+/* ::::: http://git.or.cz/wiki/modern/css/common.css ::::: */
+
+html { background-color: white; color: black; font-family: Arial,Lucida Grande,sans-serif; font-size: 1em; }
+body { margin: 0pt; }
+a { color: rgb(0, 68, 179); }
+a:visited { color: rgb(89, 123, 179); }
+a.nonexistent, a.badinterwiki { color: gray; }
+a.www:before { margin: 0pt 0.2em; content: url('moin-www.png'); }
+a.http:before { margin: 0pt 0.2em; content: url('moin-www.png'); }
+a.https:before { margin: 0pt 0.2em; content: url('moin-www.png'); }
+a.file:before { margin: 0pt 0.2em; content: url('moin-ftp.png'); }
+a.ftp:before { margin: 0pt 0.2em; content: url('moin-ftp.png'); }
+a.nntp:before { margin: 0pt 0.2em; content: url('moin-news.png'); }
+a.news:before { margin: 0pt 0.2em; content: url('moin-news.png'); }
+a.telnet:before { margin: 0pt 0.2em; content: url('moin-telnet.png'); }
+a.irc:before { margin: 0pt 0.2em; content: url('moin-telnet.png'); }
+a.mailto:before { margin: 0pt 0.2em; content: url('moin-email.png'); }
+a.attachment:before { margin: 0pt 0.2em; content: url('moin-attach.png'); }
+a.badinterwiki:before { margin: 0pt 0.2em; content: url('moin-inter.png'); }
+a.interwiki:before { margin: 0pt 0.2em; content: url('moin-inter.png'); }
+* html a.www { background: transparent url('moin-www.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.http { background: transparent url('moin-www.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.https { background: transparent url('moin-www.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.file { background: transparent url('moin-ftp.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.ftp { background: transparent url('moin-ftp.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.nntp { background: transparent url('moin-news.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.news { background: transparent url('moin-news.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.telnet { background: transparent url('moin-telnet.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.irc { background: transparent url('moin-telnet.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.mailto { background: transparent url('moin-email.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.attachment { background: transparent url('moin-attach.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.badinterwiki { background: transparent url('moin-inter.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+* html a.interwiki { background: transparent url('moin-inter.png') no-repeat scroll left center; padding-left: 14px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+li p { margin: 0.25em 0pt; }
+li.gap { margin-top: 0.5em; }
+dt { margin-top: 0.5em; font-weight: bold; }
+dd { margin-top: 0pt; margin-bottom: 0pt; }
+dd p { margin: 0.25em 0pt; }
+a, img, img.drawing { border: 0pt none ; }
+pre { border: 1pt solid rgb(174, 189, 204); padding: 5pt; background-color: rgb(243, 245, 247); font-family: courier,monospace; white-space: pre-wrap; }
+pre.comment { border: 0pt none ; margin: 0pt; padding: 0pt; background-color: rgb(204, 204, 204); color: red; }
+pre.comment:before { content: url('attention.png'); }
+table { margin: 0.5em 0pt 0pt 0.5em; border-collapse: collapse; }
+td { border: 1pt solid rgb(173, 185, 204); padding: 0.25em 0.5em; }
+td p { margin: 0pt; padding: 0pt; }
+.table-of-contents { border: 1px solid rgb(187, 187, 187); margin: 0.5em; color: black; background-color: rgb(238, 238, 238); font-size: small; text-align: left; padding-left: 2em; width: 50%; }
+.table-of-contents ol { margin: 0pt 0pt 0pt 1em; list-style-type: decimal; }
+.table-of-contents ul { margin: 0pt; list-style-type: none; }
+.table-of-contents-heading { margin: 0pt; padding: 0pt; font-weight: bold; }
+.footnotes div { border-top: 1pt solid gray; width: 5em; }
+.footnotes ul { margin: 0pt 0pt 1em; padding: 0pt 2em; list-style-type: none; list-style-image: none; list-style-position: outside; }
+.footnotes li {  }
+.info { float: right; font-size: 0.7em; color: gray; }
+#pageinfo { margin-top: 2em; }
+.seperator { color: gray; }
+#pagebottom { clear: both; }
+hr { border: 0pt none ; height: 1pt; background-color: rgb(156, 156, 156); }
+.hr1 { height: 2pt; }
+.hr2 { height: 3pt; }
+.hr3 { height: 4pt; }
+.hr4 { height: 5pt; }
+.hr5 { height: 6pt; }
+.hr6 { height: 7pt; }
+.u { text-decoration: underline; }
+.strike { text-decoration: line-through; }
+.warning { color: red; }
+.error { color: red; }
+strong.highlight { padding: 1pt; background-color: rgb(204, 224, 255); }
+.rcrss { margin: 0pt; float: right; }
+.recentchanges[dir="rtl"] .rcrss { float: left; }
+.recentchanges table { clear: both; }
+.recentchanges td { border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color rgb(230, 234, 240); border-width: medium medium 1pt; background: rgb(242, 244, 247) none repeat scroll 0% 0%; vertical-align: top; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.rcdaybreak td { border: medium none ; background: rgb(184, 197, 217) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.rcdaybreak td a { font-size: 0.88em; }
+.rcicon1, .rcicon2 { text-align: center; }
+.rcpagelink { width: 33%; }
+.rctime { font-size: 0.88em; white-space: nowrap; }
+.rceditor { white-space: nowrap; font-size: 0.88em; }
+.rccomment { width: 50%; color: gray; font-size: 0.88em; }
+.userpref table, .userpref td { border: medium none ; }
+div.codearea { border: 1pt solid rgb(174, 189, 204); margin: 0.5em 0pt; padding: 0pt; background-color: rgb(243, 245, 247); color: black; }
+div.codearea pre { border: medium none ; margin: 0pt; padding: 10pt; }
+a.codenumbers { margin: 0pt 10pt; font-size: 0.85em; color: gray; }
+div.codearea pre span.LineNumber { color: gray; }
+div.codearea pre span.ID { color: rgb(0, 0, 0); }
+div.codearea pre span.Operator { color: rgb(0, 0, 192); }
+div.codearea pre span.Char { color: rgb(0, 64, 128); }
+div.codearea pre span.Comment { color: rgb(0, 128, 0); }
+div.codearea pre span.Number { color: rgb(0, 128, 192); }
+div.codearea pre span.String { color: rgb(0, 64, 128); }
+div.codearea pre span.SPChar { color: rgb(0, 0, 192); }
+div.codearea pre span.ResWord { color: rgb(160, 0, 0); }
+div.codearea pre span.ConsWord { color: rgb(0, 128, 128); font-weight: bold; }
+div.codearea pre span.Error { border: 1.5pt solid rgb(255, 0, 0); color: rgb(255, 128, 128); }
+div.codearea pre span.ResWord2 { color: rgb(0, 128, 255); font-weight: bold; }
+div.codearea pre span.Special { color: rgb(0, 0, 255); }
+div.codearea pre span.Preprc { color: rgb(128, 57, 153); }
+.searchresults dt { margin-top: 1em; font-weight: normal; }
+.searchresults dd { font-size: 0.85em; }
+a.cal-emptyday { color: rgb(119, 119, 119); text-align: center; }
+a.cal-usedday { color: rgb(0, 0, 0); font-weight: bold; text-align: center; }
+td.cal-workday { background-color: rgb(221, 221, 255); text-align: center; }
+td.cal-weekend { background-color: rgb(255, 221, 221); text-align: center; }
+td.cal-today { border-style: solid; border-width: 2pt; background-color: rgb(204, 255, 204); text-align: center; }
+td.cal-invalidday { background-color: rgb(204, 204, 204); }
+a.cal-link { color: rgb(0, 0, 0); text-decoration: none; }
+th.cal-header { background-color: rgb(221, 187, 255); text-align: center; }
+table.tip { border-style: solid; border-width: 1px; color: black; background-color: rgb(255, 136, 136); font-size: small; font-weight: normal; }
+th.tip { background-color: rgb(255, 68, 68); font-weight: bold; text-align: center; }
+td.tip { text-align: left; }
+[dir="rtl"] td.tip { text-align: right; }
+
+/* ::::: http://git.or.cz/wiki/modern/css/screen.css ::::: */
+
+body { border: 0pt none ; padding: 0pt; }
+a:link { text-decoration: none; }
+a:link:hover, a:link:active { text-decoration: underline; color: green; }
+a:visited { text-decoration: none; color: blue; }
+a:visited:hover { text-decoration: none; color: red; }
+input {  }
+textarea { font-size: 1em; font-family: monospace; }
+.disabled { color: gray; }
+#header { margin: 1px; padding: 1px; background: rgb(231, 231, 231) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 1.1em; }
+#logo { margin: 5px 10px; padding: 0pt; float: left; font-size: 1.4em; line-height: 1em; font-weight: bold; }
+[dir="rtl"] #logo { float: right; }
+#logo img { vertical-align: middle; }
+#logo a { color: black; text-decoration: none; }
+#username { margin: 5px 12px; padding: 0pt; display: inline; text-align: right; font-size: 0.82em; white-space: nowrap; }
+[dir="rtl"] #username { margin: 5px 0px; text-align: left; }
+#username li { padding: 0pt 0.5em 0pt 0pt; display: inline; }
+#username form { display: inline; }
+#username input { border: medium none ; margin: 0pt; padding: 0pt; background: rgb(231, 231, 231) none repeat scroll 0% 0%; display: inline; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: blue; font-size: 0.82em; cursor: pointer; }
+#username input:hover { color: red; }
+#searchform { margin: 5px 10px; padding: 0pt; float: right; white-space: nowrap; font-size: 0.82em; }
+[dir="rtl"] #searchform { float: left; }
+#searchform form div { display: inline; }
+#pagetrail { margin: 5px 12px; padding: 0pt; clear: right; display: inline; font-size: 0.88em; }
+[dir="rtl"] #pagetrail { clear: left; }
+#interwiki { margin: 5px 12px; display: inline; font-size: 1em; }
+[dir="rtl"] #interwiki { margin: 5px 0px; display: inline; font-size: 1em; }
+#interwiki span:after { content: ":"; }
+#locationline { padding: 0pt; clear: right; }
+[dir="rtl"] #locationline { clear: left; }
+#pagelocation { margin: 5px 12px; padding: 0pt; display: inline; font-size: 1.5em; }
+#pagetrail li, #pagelocation li { margin: 0pt; display: inline; }
+#pagetrail li:after { content: " » "; }
+[dir="rtl"] #pagetrail li:after { content: " « "; }
+#pagetrail li:last-child:after { content: ""; }
+* html #pagetrail li, * html #pagelocation li { border-left: 1px solid rgb(170, 170, 170); padding: 0pt 0.3em; }
+#pagelocation li:after { content: "/ "; }
+[dir="rtl"] #pagelocation li:after { content: " \ "; }
+#pagelocation li:last-child:after { content: ""; }
+#navibar { margin: 0pt; padding: 0pt 10px; clear: both; display: block; font-size: 0.82em; }
+#navibar li { border-style: solid solid none; border-color: rgb(156, 156, 156) rgb(156, 156, 156) -moz-use-text-color; border-width: 1px 1px medium; margin: 0pt 2px; padding: 2px 5px; float: left; display: inline; white-space: nowrap; }
+[dir="rtl"] #navibar li { float: right; }
+#navibar li.wikilink { background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#navibar li.userlink { background: rgb(230, 234, 240) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#navibar a, #navibar a:visited { color: black; text-decoration: none; }
+#navibar li.current a { font-weight: bold; }
+#navibar li:hover { background: rgb(204, 204, 204) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#navibar li.current, #navibar li.current:hover { background: rgb(129, 187, 242) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#pageline { border-bottom: 1px solid rgb(156, 156, 156); margin: 0pt; padding: 0pt; background: rgb(129, 187, 242) none repeat scroll 0% 0%; clear: both; width: 100%; height: 4px; line-height: 4px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.editbar { margin: 0pt; padding: 0pt 8px; background: white none repeat scroll 0% 0%; clear: both; display: block; white-space: nowrap; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 0.8em; }
+.editbar form, .editbar form div { margin: 0pt; display: inline; }
+.editbar li { margin: 4px 6px; padding: 0pt; display: inline; }
+[dir="rtl"] .editbar li { float: right; }
+#header .editbar { border-bottom: 1px dotted rgb(156, 156, 156); }
+#footer .editbar { border-top: 1px dotted rgb(156, 156, 156); border-bottom: 1px solid rgb(156, 156, 156); }
+.editbar a, .editbar a:visited { color: rgb(0, 68, 179); }
+#message { border-bottom: 1px solid rgb(201, 201, 201); margin: 0pt; padding: 5px 10px; background: rgb(230, 234, 240) none repeat scroll 0% 0%; clear: both; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#message p { margin: 5px 0pt; padding: 0pt; }
+#message div.buttons { font-weight: normal; }
+.dialog form { margin: 0pt 15px; }
+.dialog td { border: medium none ; padding: 5px; }
+.dialog td.label { text-align: right; font-weight: bold; width: 25%; }
+[dir="rtl"] .dialog td.label { text-align: left; }
+.dialog td.content input { width: 100%; }
+#page { margin: 0pt; padding: 2px 20px 20px; background-color: white; }
+#editor-textarea, #editor-help { border: 1px solid rgb(140, 172, 187); padding: 3px; font-family: monospace; color: black; background-color: white; width: 100%; margin-top: 0.5em; }
+#editor-help { font-size: small; background-color: rgb(238, 238, 255); }
+#editor-comment { border: 1px solid rgb(140, 172, 187); padding: 1px; font-size: 100%; color: black; background-color: white; vertical-align: middle; display: inline; width: 70%; }
+#preview, #previewbelow { border: 1px solid rgb(108, 118, 128); padding: 10px 30px 20px; background: transparent url('draft.png') repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-top: 0.5em; }
+input.button {  }
+#footer { margin: 0pt; padding: 0pt; clear: both; }
+#credits, #version, #timings { margin: 5px 10px; padding: 0pt; text-align: center; font-size: 0.88em; color: rgb(108, 118, 128); }
+#credits li, #timings li { margin: 0pt 4px; padding: 0pt 2px; display: inline; }
+#credits img { vertical-align: middle; }
+.diff { width: 99%; }
+.diff-header { font-weight: bold; }
+.diff-title { background-color: rgb(192, 192, 192); }
+.diff-added { background-color: rgb(224, 255, 224); vertical-align: sub; }
+.diff-removed { background-color: rgb(255, 255, 224); vertical-align: sub; }
+.diff-added span { background-color: rgb(128, 255, 128); }
+.diff-removed span { background-color: rgb(255, 255, 128); }
+table.navigation { margin: 2px; float: right; }
+* html span.anchor { display: none; }
+* html div#page, * html div#header { height: 0.001%; }

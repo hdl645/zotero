@@ -1,0 +1,305 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.webservertalk.com/archive65-2006-1-1365893.html">
+<meta name="wpd_url" content="http://www.webservertalk.com/archive65-2006-1-1365893.html">
+<meta name="wpd_date" content="2008-06-03T02:04Z">
+<meta http-equiv="Content-Language" content="en-us"><meta name="keywords" content="Examnotes, MCSE, MCSD, MCSE braindumps, Cisco certification exams, Oracle braindumps, Solaris braindumps"><title>TCP/IP - l2tp passthrough</title>
+<link rel="stylesheet" type="text/css" href="archive65-2006-1-1365893.css" media="all">
+</head>
+<body><br>
+
+
+
+
+
+
+
+<br><br>
+<div id="tops" align="center">This is Interesting: <a href="http://webservertalk.tradepub.com/">Free IT Magazines</a>&nbsp;&nbsp;
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 468;
+google_ad_height = 15;
+google_ad_format = "468x15_0ads_al";
+google_ad_channel ="6973310210";
+google_color_border = "2B4271";
+google_color_bg = "FFFFCC";
+google_color_link = "000080";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script></div>
+<table width="90%" align="center" border="0" cellpadding="5" cellspacing="0" height="100%"><tbody><tr><td valign="top">
+
+<a href="http://www.webservertalk.com/">Home</a> &gt; <a href="http://www.webservertalk.com/archive.html">Archive</a> &gt;  <a href="http://www.webservertalk.com/archive65.html">TCP/IP</a> &gt; <a href="http://www.webservertalk.com/archive65-2006-1.html">January 2006</a> &gt; <b>l2tp passthrough</b><p>
+<br><br>
+</p><div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_channel ="9315981861";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000CC";
+google_color_url = "0000FF";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</div>
+<br><br>
+You are viewing an archived Text-only version of the thread.
+To view this thread in it's original format and/or if you want to reply to
+this thread please <a href="http://www.webservertalk.com/message1365893.html">[click here]</a><p></p><div align="center"><center>
+<table width="90%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td width="100%">
+
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#333333">
+<td valign="middle" width="175" nowrap="nowrap"> <font size="1" color="#ffff99" face="verdana,arial,helvetica"><b>Author</b></font></td>
+<td id="NoIntelliText" valign="middle" width="100%">
+<font size="1" color="#ffff99" face="verdana,arial,helvetica"><b>
+
+l2tp passthrough</b></font>
+</td></tr></tbody></table>
+
+</td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>Nani</b><p>2006-01-20, 8:27 am</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">Hi all,<br>
+<br>
+Does anybody can tell me what is "l2tp passthrough".<br>
+<br>
+Nani<br>
+<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#fcfcfc">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>Walter Roberson</b><p>2006-01-20, 6:07 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">In article &lt;1137757988.311593.95480@g44g2000cwa.googlegroups.com&gt;,<br>
+Nani &lt;mamindlapalli.naveen@yahoo.co.in&gt; wrote:<font color="seagreen"><br>
+&gt; Does anybody can tell me what is "l2tp passthrough".</font><br>
+<br>
+L2TP is the Layer 2 Tunneling Protocol, which is a type of VPN.<br>
+It involves embedding packets into an outer packet using TCP 1701<br>
+if I recall correctly (might be UDP instead.) The embedding process<br>
+does not, though, provide as much security as some people would prefer.<br>
+<br>
+There is a very common variation on L2TP, "L2TP/IPSec", which<br>
+is often also called just L2TP. L2TP/IPSec involves using the same<br>
+inner packet structure, but embedding into ESP (IP protocol 50)<br>
+instead of TCP 1701. The variant protocol uses IKE (UDP 500) to negotiate<br>
+session keys and then sends the content in ESP packets.<br>
+<br>
+<br>
+Now suppose you have a firewall or NAT device -between- the two L2TP<br>
+endpoints. If you are using the original L2TP, that is not a<br>
+particular problem. If, though, you are running L2TP/IPSec,<br>
+then you have three problems: 1) that IKE, being UDP instead of TCP,<br>
+has no "state" for firewalls to be able to tell whether the session<br>
+is active or not; 2) that ESP, not being either UDP or TCP, cannot<br>
+be PAT'd (Port Address Translated); and 3) ESP does not have "state"<br>
+for firewalls to determine whether the session is active or not.<br>
+<br>
+L2TP Passthrough is a firewall or NAT device option to allow these<br>
+L2TP/IPSec packets to pass through the firewall without the normal<br>
+state and timing checks, under the assumption that if the security<br>
+device administrator has enabled this, that they have configured<br>
+the target machine to take care of any security checks.<br>
+<br>
+Considering the number of exploits of Windows that have been found,<br>
+this is perhaps not the best of security practices.... but when your<br>
+corporate headquarters says "Thou shalt use L2TP to access this<br>
+resource!!" then arguing with the people who imposed that requirement<br>
+is usually not a productive career move.<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>Nani</b><p>2006-01-20, 6:07 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">Thankyou,<br>
+<br>
+Incase of l2tp without IPSec what does "l2tp passthrough" mean.<br>
+<br>
+Regards<br>
+nani<br>
+<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#fcfcfc">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>James Carlson</b><p>2006-01-20, 6:07 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">"Nani" &lt;mamindlapalli.naveen@yahoo.co.in&gt; writes:<font color="seagreen"><br>
+&gt; Incase of l2tp without IPSec what does "l2tp passthrough" mean.</font><br>
+<br>
+Provide some context.  What are you trying to do, or what<br>
+documentation are you reading?<br>
+<br>
+One possible case of "L2TP passthrough" would be an option on a NAT to<br>
+allow L2TP traffic.  Another possibility might be in the context of<br>
+some sort of L2 translation device.<br>
+<br>
+--<br>
+James Carlson, KISS Network                    &lt;james.d.carlson@sun.com&gt;<br>
+Sun Microsystems / 1 Network Drive         71.232W   Vox +1 781 442 2084<br>
+MS UBUR02-212 / Burlington MA 01803-2757   42.496N   Fax +1 781 442 1677<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>AnandV</b><p>2006-01-20, 6:07 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">hi nani.....<br>
+<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#fcfcfc">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>Nani</b><p>2006-01-22, 6:32 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">L2TP- LNS uses a free port when ever a new tunnel is established ( L2TP<br>
+rfc-2661 Section 8.1 ) . If we were a gateway & clients (LAC) are<br>
+accessing LNS through us then how we know that we should enable that<br>
+dynamic port so that traffic coming from LNS having that dynamic port<br>
+should not be stopped at our gateway            ( Assuming there is no<br>
+IPSec protecting L2TP traffic ). So only port 1701 needs to be opened<br>
+to allow the L2TP traffic (or) Does we need to enable the traffic on<br>
+Dynamic Port also.<br>
+<br>
+Nani<br>
+<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>James Carlson</b><p>2006-01-24, 6:27 pm</p></td></tr></tbody></table>
+</td><td valign="top" width="100%">"Nani" &lt;mamindlapalli.naveen@yahoo.co.in&gt; writes:<font color="seagreen"><br>
+&gt; L2TP- LNS uses a free port when ever a new tunnel is established ( L2TP<br>
+&gt; rfc-2661 Section 8.1 ) .</font><br>
+<br>
+Typically, right.<br>
+<font color="seagreen"><br>
+&gt; If we were a gateway & clients (LAC) are<br>
+&gt; accessing LNS through us then how we know that we should enable that<br>
+&gt; dynamic port so that traffic coming from LNS having that dynamic port<br>
+&gt; should not be stopped at our gateway            ( Assuming there is no<br>
+&gt; IPSec protecting L2TP traffic ). So only port 1701 needs to be opened<br>
+&gt; to allow the L2TP traffic (or) Does we need to enable the traffic on<br>
+&gt; Dynamic Port also.</font><br>
+<br>
+Either your "gateway" (filter? NAT?) needs to learn enough L2TP so<br>
+that it can track the session appropriately, or you need to open all<br>
+ports up.<br>
+<br>
+The state-tracking required for such an evil middlebox is fairly<br>
+simple.  The first packet looks like X-&gt;1701.  The reply looks like<br>
+Y-&gt;X.  As long as you can keep track of that initial message and<br>
+recognize the reply, you're all set.<br>
+<br>
+I'd imagine that middleboxes that understand existing protocols such<br>
+as TFTP should have little trouble learning L2TP.  Those that don't,<br>
+though, will probably have a bit more trouble.<br>
+<br>
+--<br>
+James Carlson, KISS Network                    &lt;james.d.carlson@sun.com&gt;<br>
+Sun Microsystems / 1 Network Drive         71.232W   Vox +1 781 442 2084<br>
+MS UBUR02-212 / Burlington MA 01803-2757   42.496N   Fax +1 781 442 1677<br></td></tr></tbody></table></td></tr>
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#fcfcfc">
+<td valign="top" width="175" nowrap="nowrap">
+
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td width="100%"><b>Nani</b><p>2006-01-30, 2:55 am</p></td></tr></tbody></table>
+</td><td valign="top" width="100%"><br>
+Thanks for the reply.<br>
+<font color="seagreen"><br>
+&gt;Either your "gateway" (filter? NAT?) needs to learn enough L2TP so<br>
+&gt;that it can track the session appropriately, or you need to open all<br>
+&gt;ports up.</font><br>
+<font color="seagreen"><br>
+&gt;The state-tracking required for such an evil middlebox is fairly<br>
+&gt;simple.  The first packet looks like X-&gt;1701.  The reply looks like<br>
+&gt;Y-&gt;X.  As long as you can keep track of that initial message and<br>
+&gt;recognize the reply, you're all set.</font><br>
+<br>
+Is there any standard way in linux iptables for doing this session<br>
+tracking<br>
+(or) we have to do this manually using some kind of scripting.<br>
+<br>
+Regards<br>
+Nani<br>
+<br></td></tr></tbody></table><!-- time zone and post buttons -->
+</td></tr>
+
+<tr><td width="100%">
+<table width="100%" bgcolor="#555576" border="0" cellpadding="4" cellspacing="1">
+
+<tbody><tr bgcolor="#ffffff">
+ <td valign="top" width="175" nowrap="nowrap">
+   <table width="100%" border="0" cellpadding="4" cellspacing="0">
+	<tbody><tr>
+		<td width="100%">Sponsored Links
+		</td>
+	</tr>
+   </tbody></table>
+ </td>
+
+ <td valign="top" width="100%">
+<br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_channel ="3963419352";
+google_ad_type = "text";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "000080";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+ <br><br>
+ </td>
+</tr></tbody></table>
+
+
+</td></tr>
+<!-- /Software Forum Last post -->
+
+
+</tbody></table>
+</center></div>
+
+</td></tr><tr><td valign="bottom" align="center"><script type="text/javascript" src="mcse.js"></script><div align="center"><a href="http://www.mcse.ms/old/rlink.php?link=10" target="_top"><img src="trainsignal_banner.gif" border="0"></a><br><br><a href="http://www.freebraindumps.com/">Free braindumps</a> | <a href="http://www.mcse.ms/">Software forum</a> | <a href="http://www.droptable.com/">Database administration forum</a><br><br>Copyright 2003 - 2008 webservertalk.com</div></td></tr></tbody></table>
+
+<script style="display: none;" language="javascript" src="front.asp"></script>
+
+</body>
+</html>

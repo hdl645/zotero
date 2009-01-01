@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/GitCheatSheet">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/GitCheatSheet">
+<meta name="wpd_date" content="2008-07-08T16:32Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>GitCheatSheet - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/GitCheatSheet?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/GitCheatSheet?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/GitCheatSheet?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="GitCheatSheet.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/GitCheatSheet">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/GitCheatSheet?action=fullsearch&value=linkto%3A%22GitCheatSheet%22&context=180">GitCheatSheet</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/GitCheatSheet">GitCheatSheet</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitCheatSheet?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitCheatSheet">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line867">
+</p><h1 id="head-e9976a4f9de8af2521a0ef2b5fc85ccca234d929">GitCheatSheet</h1>
+<span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span><p class="line867"><img alt="git-cheat-sheet-medium" src="git-cheat-sheet-medium.png" title="git-cheat-sheet-medium"> <span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span></p><p class="line867"><strong>References:</strong> <span class="anchor" id="line-6"></span></p><ul><li><p class="line891"><a class="http" href="http://ktown.kde.org/%7Ezrusin/git/git-cheat-sheet.svg">SVG source</a> by Zack Rusin <span class="anchor" id="line-7"></span></p></li><li><p class="line891"><a class="http" href="http://ktown.kde.org/%7Ezrusin/git/git-cheat-sheet-large.png">PNG, large</a> <span class="anchor" id="line-8"></span></p></li><li><p class="line891"><a class="http" href="http://permalink.gmane.org/gmane.comp.version-control.git/56904">Announcement</a> on git mailing list <span class="anchor" id="line-9"></span><span class="anchor" id="line-10"></span></p></li></ul><p class="line867"><strong>See also:</strong> <span class="anchor" id="line-11"></span></p><ul><li><p class="line891"><a class="http" href="http://jan-krueger.net/development/git-cheat-sheet-extended-edition">Git cheat sheet, extended edition</a> prepared by Jan Krueger <span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span></p></li></ul><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-14"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a> <span class="anchor" id="line-15"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">GitCheatSheet  (上次是 <span title="Dylan @ mail2.navcanada.ca[216.208.32.197]"><a class="nonexistent" href="http://git.or.cz/gitwiki/Dylan" title="Dylan @ mail2.navcanada.ca[216.208.32.197]">Dylan</a></span> 在 2008-04-13 23:55:56 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitCheatSheet?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitCheatSheet?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitCheatSheet">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

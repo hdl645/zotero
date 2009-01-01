@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <title>Error 404: Page Not Found</title>
+  <meta name="keywords" content="ISA Server, firewall, microsoft, network security, windows 2000, addons, tutorials, server, isa, 2000, security, tips, internet security and acceleration server">
+  <meta name="description" content="With Microsoft ISA Server Firewall related FAQ's, add-on software listings, tutorials, tips, how to's, books, message boards, discussion lists and more about the new Microsoft ISA server 2000">
+  <link type="text/css" rel="stylesheet" href="/css/site-isa/screen.css"	media="screen" title="Screen default"><link type="text/css" rel="stylesheet" href="/css/site-isa/print.css"	media="print"  title="Print default">
+  <link type="text/css" rel="stylesheet" href="http://www.techgenix.com/auto/index.asp" media="screen">
+
+  <link rel="alternate" type="application/rss+xml" title="IsaServer RSS Feed" href="http://rss.isaserver.org/allnews.xml" />
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <script type="text/javascript" src="/js/utils.js"></script>
+
+</head>
+<body>
+ <div id="ww-wrapper">
+
+  <div id="main-banner">
+    		<script type="text/javascript" src="http://banman.isoftmarketing.com/a.aspx?ZoneID=10&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057488&amp;Task=Get&amp;IFR=False"></script><noscript>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=10&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057488&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=10&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057488&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+</noscript>
+
+  </div>
+
+  <div id="ww-header">
+   <ul>
+    <li><a href="/articles_tutorials/">Articles</a></li>
+    <li><a href="/authors/">Authors</a></li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="/pages/books.asp">Books</a></li>
+    <!-- li><a href="/pages/certification.asp">Certification</a></li -->
+    <li><a href="/pages/events.asp">Events</a></li>
+    <li><a href="/faq/">FAQs</a></li>
+    <!-- li><a href="/articles/Gaming.html">Gaming</a></li -->
+    <li><a href="/hardware/">Hardware</a></li>
+    <li><a href="/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org/">Message Boards</a></li>
+    <li><a href="/pages/newsletter.asp">Newsletter</a></li>
+    <li><a class="ww-rsslink"  href="http://rss.techgenix.com/">RSS</a></li>
+    <!-- li><a href="/Thomas_Shinder/">Shinder Section</a></li -->
+    <li class="ww-last"><a href="/software/">Software</a></li>
+   </ul>
+
+   <p id="ww-logo">
+    <a href="/"><img src="/img/logo-isa.gif" alt="IsaServer logo" width="260" height="60"></a>
+   </p>
+
+   <form id="ww-search" action="/search.asp">
+    <p>
+      <label for="ww-search-input"><span>Site Search</span><input id="ww-search-input" name = "s" class="i-text" value="Search Site" onfocus = 'if (this.value == "Search Site") this.value = "";' /></label>
+      <input type="submit" value="" class="i-submit" />
+    </p>
+    <p class="sf-advs"><a href="/search-adv.asp">Advanced Search</a></p>
+   </form>
+  </div>
+
+  
+
+  <div id="ww-container">
+   <div id="ww-cont-one">
+    <div id="ww-cont-two">
+
+     <div id="ww-content">
+
+
+<h2>404 Error Message: Page Not Found</h2>
+<p>Sorry, the page you have requested cannot be found on <a href="http://www.isaserver.org/">http://www.isaserver.org/</a>.</p>
+<p>It is possible that you typed the address incorrectly, or that the page no longer exists.</p>
+<p>In 10 seconds you will be redirected to the ISAServer.org home page</p>
+<p>Please use the site navigation bar or search feature above to find the page you require.</p>
+<p>Thank you.</p>
+<script type="text/javascript" for="window" event="onload">
+  setTimeout("window.location.href = '/';", 10*1000 );
+</script>
+
+
+<!-- End content -->
+      <div id="ww-featured-links">
+       <h1>Featured Links*</h1>
+       <div id="featured-links">
+        		<script type="text/javascript" src="http://banman.isoftmarketing.com/SponsorshipNoRotate.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057504&amp;Total=0"></script><noscript>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057504&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057504&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057505&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057505&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057506&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057506&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057507&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057507&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057508&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057508&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+</noscript>
+
+       </div>
+       <script type="text/javascript"><!--
+        FeaturedLinksParser();
+       // --></script>
+      </div>
+
+
+      <br style="clear:both;">
+
+      <div id="extfoot-newsletter-subsr"> <h1>Receive all the latest articles by email!</h1> <p>Receive Real-Time &amp; Monthly ISAserver.org article updates in your mailbox. Enter your email below!<br>Click for <a target="_blank" href="http://www.isaserver.org/ISAserver.org-Real-Time-Article-Update-Newsletter-Sample.htm">Real-Time sample</a> &amp; <a target="_blank" href="http://www.isaserver.org/ISAserver.org-Monthly-Article-Update-Newsletter-Sample.htm">Monthly sample</a></p> <form action="http://www.techgenix.com/newsletter/subscribe.aspx?Task=Join" method="post">  <p>   <input value="Check" name="JoinType" type="hidden">    <input name="IDList" value="5,6" type="hidden">   <input name="NewsletterListID_5" value="ON" type="hidden">   <input name="NewsletterListID_6" value="ON" type="hidden">   <input value="{D67B20E7-F97D-4537-AFD6-90940C9D0FED}" name="SID" type="hidden">    <input value="HTML" name="DeliveryFormat" type="hidden">   <input class="i-text" name="Email" value="Enter Email" onfocus = 'if (this.value == "Enter Email") this.value = "";'>   <input class="i-image" src="/img/but-subscribe2.gif" value="Subscribe" type="image">  </p> </form></div><div id="extfoot-forum"> <h1>Become an ISAserver.org member!</h1> <p>Discuss your ISA Server issues with thousands of other ISA Server experts. <a href="http://forums.isaserver.org/register.aspx">Click here</a> to join!</p></div>
+
+     </div>
+
+    </div>
+   </div>
+
+<!-- begin right sidebars -->
+
+   <div class="ww-sidebar" id="sb-community-area">
+    <h3><a href="http://forums.isaserver.org/">Community Area</a></h3>
+    <p id="sb-in">
+      <a href="http://forums.isaserver.org/loginflat.aspx">Log in</a>
+      <span class="ww-div">|</span>
+      <a href="http://forums.isaserver.org/register.aspx">Register</a>
+    </p>
+
+    <p id="sb-out">
+      <a href="http://forums.isaserver.org/editprofile.aspx">My Account</a>
+      <span class="ww-div">|</span>
+      <a href="http://forums.isaserver.org/redirect.aspx">Log out</a>
+    </p>
+    <script type="text/javascript" src="http://forums.isaserver.org/ism-script.aspx"></script>
+   </div>
+
+
+
+   <div  class="ww-sidebar" id="ads-block-top">
+     		<script type="text/javascript" src="http://banman.isoftmarketing.com/a.aspx?ZoneID=35&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057504&amp;Task=Get&amp;IFR=False"></script><noscript>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=35&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057504&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=35&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057504&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div  class="ww-sidebar" id="ads-block">
+     		<script type="text/javascript" src="http://banman.isoftmarketing.com/a.aspx?ZoneID=11&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057504&amp;Task=Get&amp;IFR=False"></script><noscript>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=11&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057504&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=11&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057504&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div  class="ww-sidebar" id="ads-block-bottom">
+     <h3>Solution Center</h3>
+     <div  class="ww-sidebar" id="ads-block-bottom-script">
+      		<script type="text/javascript" src="http://banman.isoftmarketing.com/SponsorshipNoRotate.aspx?ZoneID=34&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057504&amp;Total=0"></script>
+     </div>
+     <script type="text/javascript"><!--
+        SolutionCenterParser();
+     // --></script>
+   </div>
+
+<!-- end right sidebars -->
+
+  </div>
+
+<!-- begin left sidebars -->
+
+   <ul class="ww-sidebar" id="ww-menu" onclick="treeClick(event);">
+    <li class="ww-collapse"><a href="#">Articles &amp; Tutorials</a>
+     <ul>
+      	<li><a href = "/articles_tutorials/certification/">Certification</a></li>
+	<li><a href = "/articles_tutorials/configuration_alternative_products/">Configuration - Alt. Products &amp; Platforms</a></li>
+	<li><a href = "/articles_tutorials/configuration_general/">Configuration - General</a></li>
+	<li><a href = "/articles_tutorials/configuration_security/">Configuration - Security</a></li>
+	<li><a href = "/articles_tutorials/general/">General</a></li>
+	<li><a href = "/articles_tutorials/general_guides_and_articles/">General Guides and Articles</a></li>
+	<li><a href = "/articles_tutorials/installation_and_planning/">Installation &amp; Planning</a></li>
+	<li><a href = "/articles_tutorials/miscellaneous/">Miscellaneous</a></li>
+	<li><a href = "/articles_tutorials/non_ISA_tutorials/">Non-ISAserver.org Tutorials</a></li>
+	<li><a href = "/articles_tutorials/Product_Reviews/">Product Reviews</a></li>
+	<li class="ww-last"><a href = "/articles_tutorials/publishing/">Publishing</a></li>
+
+     </ul>
+    </li>
+    <li class="ww-collapse"><a href="#">Authors</a>
+     <ul>
+      	<li><a href = "/Thomas_Shinder/">Thomas Shinder</a></li>
+	<li><a href = "/Marc_Grote/">Marc Grote</a></li>
+	<li><a href = "/Ricky_M_Magalhaes/">Ricky M. Magalhaes</a></li>
+	<li class="ww-last"><a href = "/Stefaan_Pouseele/">Stefaan Pouseele</a></li>
+
+     </ul>
+    </li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="/pages/books.asp">Books</a></li>
+    <li class="ww-collapse"><a href="#">Hardware</a>
+     <ul>
+      	<li><a href = "/hardware/ISA-Appliances/">ISA Appliances</a></li>
+	<li class="ww-last"><a href = "/hardware/SSL-Acceleration/">SSL Acceleration</a></li>
+
+     </ul>
+    </li>
+    <li><a href="/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org">Message Boards</a></li>
+    <li><a href="/pages/newsletter.asp">Newsletter Signup</a></li>
+    <li><a href="http://rss.isaserver.org">RSS Feed</a></li>
+    <li class="ww-collapse"><a href="#">Software</a>
+     <ul>
+      	<li><a href = "/software/ISA/Access-Control/">Access Control</a></li>
+	<li><a href = "/software/ISA/Anti-Virus/">Anti Virus</a></li>
+	<li><a href = "/software/ISA/Authentication/">Authentication</a></li>
+	<li><a href = "/software/ISA/Bandwidth-Control/">Bandwidth Control</a></li>
+	<li><a href = "/software/ISA/Caching/">Caching</a></li>
+	<li><a href = "/software/ISA/Content-Security/">Content Security</a></li>
+	<li><a href = "/software/ISA/Free-Tools/">Free Tools</a></li>
+	<li><a href = "/software/ISA/Intrusion-Detection/">Intrusion Detection</a></li>
+	<li><a href = "/software/ISA/Misc.-ISA-server-software/">Misc. ISA server software</a></li>
+	<li><a href = "/software/ISA/Monitoring-&amp;-Admin/">Monitoring &amp; Admin</a></li>
+	<li><a href = "/software/ISA/Reporting/">Reporting</a></li>
+	<li class="ww-last"><a href = "/software/ISA/Security-Services/">Security Services</a></li>
+
+     </ul>
+    </li>
+   </ul>
+
+   <script type="text/javascript">treeParse();</script>
+
+
+   <div class="ww-sidebar" id="sb-featured-product">
+    <h3>Featured Products</h3>
+    		<script type="text/javascript" src="http://banman.isoftmarketing.com/SponsorshipNoRotate.aspx?ZoneID=12&amp;SiteID=1&amp;PageID=5532&amp;CountImpressions=True&amp;Random=1215051057504&amp;Total=0"></script><noscript>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057504&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057504&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&amp;SiteID=1&amp;PageID=5532&amp;Task=Click&amp;Random=1215051057505&amp;Mode=HTML" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&amp;SiteID=1&amp;PageID=5532&amp;Random=1215051057505&amp;Task=Get&amp;Mode=HTML" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div class="ww-sidebar" id="sb-featured-book">
+    <h3>Featured Book</h3>
+    <p>
+     <a href="http://www.amazon.com/exec/obidos/ASIN/1597491993/isaserver1-20/">
+      <img src="http://www.isaserver.org/img/upl/ISA%2020061192113992767.gif" width="73" height="94" alt="">
+     </a>
+     <br />
+     Order today <a href="http://www.amazon.com/exec/obidos/ASIN/1597491993/isaserver1-20/">Amazon.com</a>
+    </p>
+   </div>
+
+   <div class="ww-sidebar" id="sb-poll">
+	<h3>Readers' Choice</h3>
+	<form method="POST" action="http://www.ISAserver.org/poll/vote.asp">
+	<p id="pl-question"><input type="hidden" name="QID" value="123" /><strong>Which is your preferred ISA Server reporting solution?</strong></p>
+		<ul>
+		<li><label for="pl-item-1562"><input id="pl-item-1562" name="AID" type="radio" value="1562"><span>bt-LogAnalyzer</span></label></li>
+		<li><label for="pl-item-1563"><input id="pl-item-1563" name="AID" type="radio" value="1563"><span>Cyfin Reporter</span></label></li>
+		<li><label for="pl-item-1564"><input id="pl-item-1564" name="AID" type="radio" value="1564"><span>LK Log Scan</span></label></li>
+		<li><label for="pl-item-1565"><input id="pl-item-1565" name="AID" type="radio" value="1565"><span>ProxyInspector</span></label></li>
+		<li><label for="pl-item-1566"><input id="pl-item-1566" name="AID" type="radio" value="1566"><span>Quest InTrust</span></label></li>
+		<li><label for="pl-item-1567"><input id="pl-item-1567" name="AID" type="radio" value="1567"><span>SmartFilter SmartReporter</span></label></li>
+		<li><label for="pl-item-1568"><input id="pl-item-1568" name="AID" type="radio" value="1568"><span>WebSpy Insight</span></label></li>
+		<li id="pl-question-other">
+			<label for="pl-item-0"><input id="pl-item-0" name="AID" type="radio" value="1569"><span>Other</span></label>
+			<input id="pl-other" name="other" type="text" value="please specify" onfocus="if (this.defaultValue==this.value) { this.value = ''; }" />
+		</li>
+		</ul>
+	<p id="pl-submit"><input type="submit" value="Vote!"></p>
+	</form>
+</div>
+
+
+   <div class="ww-sidebar" id="sb-recommended-sites">
+    <h3>TechGenix Sites</h3>
+    <dl class="techgenix-sites">
+     <!-- dt><a href="http://www.isaserver.org">ISAserver.org</a></dt>
+     <dd><a href="http://www.isaserver.org">The No.1 ISA Server 2006 / 2004 / 2000 resource site.</a></dd -->
+     <dt><a href="http://www.msexchange.org">MSExchange.org</a></dt>
+     <dd><a href="http://www.msexchange.org">The leading Microsoft Exchange Server 2007 / 2003 / 2000 resource site.</a></dd>
+     <dt><a href="http://www.windowsecurity.com">WindowSecurity.com</a></dt>
+     <dd><a href="http://www.windowsecurity.com">Network Security &amp; Information Security resource for IT administrators.</a></dd>
+     <dt><a href="http://www.windowsnetworking.com">WindowsNetworking.com</a></dt>
+     <dd><a href="http://www.windowsnetworking.com">Windows Server 2008 / 2003 &amp; Windows Vista networking resource site.</a></dd>
+     <dt><a href="http://www.virtualizationadmin.com/">VirtualizationAdmin.com</a></dt>
+     <dd><a href="http://www.virtualizationadmin.com/">The essential Virtualization resource site for administrators.</a></dd>
+    </dl>
+   </div>
+<!-- end left sidebars -->
+
+
+
+  <div id="ww-footer">
+   <ul>
+    <li><a href="/articles_tutorials/">Articles</a></li>
+    <li><a href="/authors/">Authors</a></li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="/pages/books.asp">Books</a></li>
+    <!-- li><a href="/pages/certification.asp">Certification</a></li -->
+    <li><a href="/pages/events.asp">Events</a></li>
+    <li><a href="/faq/">FAQs</a></li>
+    <!-- li><a href="/articles/Gaming.html">Gaming</a></li -->
+    <li><a href="/hardware/">Hardware</a></li>
+    <li><a href="/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org/">Message Boards</a></li>
+    <li><a href="/pages/newsletter.asp">Newsletter</a></li>
+    <li><a class="ww-rsslink"  href="http://rss.techgenix.com/">RSS</a></li>
+    <!-- li><a href="/Thomas_Shinder/">Shinder Section</a></li -->
+    <li class="ww-last"><a href="/software/">Software</a></li>
+   </ul>
+
+   <p class="notice">
+    <a href="http://www.techgenix.com/aboutus.htm">About Us</a> :
+    <script type="text/javascript">ShowEmail('info/isaserver|org','Email us');</script> :
+    <a href="/software/submissionform.asp">Product Submission Form</a> :
+    <a href="http://www.techgenix.com/advert/index.htm">Advertising Information</a>
+    <br />
+    ISAserver.org is in no way affiliated with Microsoft Corp. *Links are sponsored by advertisers.
+   </p>
+
+   <address id="ww-copyright">Copyright &copy; 2008 <a href="http://www.techgenix.com">TechGenix Ltd.</a> All rights reserved.
+    Please read our <a href="/pages/privacy.asp">Privacy Policy</a> and <a href="/pages/terms.asp">Terms &amp; Conditions</a>.
+   </address>
+
+  </div>
+
+
+ </div>
+
+<!--  -->
+
+<script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-313036-1");
+pageTracker._initData();
+pageTracker._setDomainName("isaserver.org"); 
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+
+

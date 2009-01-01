@@ -1,0 +1,11 @@
+
+/* ::::: http://ratings.lycos.com/css/lycosRating.css ::::: */
+
+div.lr_rating, tr.lr_label td { font-family: "Arial",sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 9px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(103, 103, 103); }
+div.lr_rating { background: transparent url('bg_131x21.gif') no-repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 131px; height: 21px; }
+div.lr_main { padding: 1px 0pt 0pt 43px; }
+div.lr_pop_top { border-bottom: 1px solid rgb(209, 207, 207); padding: 4px; background: rgb(242, 242, 243) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.lr_pop { border: 1px solid rgb(209, 207, 207); margin: 20px 0pt 0pt 5px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; position: absolute; width: 120px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; display: none; }
+div.lr_pop_bot div { padding: 0pt 6px 2px; }
+img.lr_star, img.lr_stars, img.lr_arrow { border: 0pt none ; }
+img.lr_arrow { margin: 0pt 10px 3px 5px; width: 7px; height: 7px; }

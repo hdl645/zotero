@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://nscsysop.hypermart.net/vpnnat.html">
+<meta name="wpd_url" content="http://nscsysop.hypermart.net/vpnnat.html">
+<meta name="wpd_date" content="2008-06-03T02:10Z">
+
+
+
+
+<meta content="text/html; charset=iso-8859-1">
+<meta content="Craig Johnson, Caterina Luppi" name="Author">
+<title>Routers that work/don't work with VPN over NAT</title>
+
+<link rel="stylesheet" type="text/css" href="vpnnat.css" media="all">
+</head>
+<body class="c32">
+<h1>VPN over NAT - Issues with Cable Modem/DSL Routers - Jan 14, 2008</h1>
+
+<!-- Latest Update -->
+<h2>Latest Update: (Previous updates at bottom of page)</h2>
+
+<p class="c8"><b>Jan. 14, 2008</b> - Added Netgear WNR854T router with firmware 
+1.4.23NA to the Good Router List<br>
+</p>
+
+
+<!-- Bad Router List -->
+<h2><a name="badrouters"></a>Routers That Do Not Work With VPN Over NAT</h2>
+
+<p class="c8">Note: This list may be dependent on the firmware revision used on the router. 
+<b>Please report the model number and firmware</b> in place on the router in the Novell Public Forums so
+that this list can be updated as needed.<br>
+<br>
+IPSec Passthru Note - I have recently found that at least some routers need to have 
+IPSec passthrough (passthru) enabled for BorderManager 3.8 IKE-based Client-Site 
+VPN to work.   Please enable it and test before giving up on the router.  Some 
+of the routers on this list may have been fine if that setting was enabled, but 
+that test may not have been performed before a user emailed me with a bad 
+router update.<br>
+<br>
+This is not an all-inclusive list, and it is being compiled on the feedback from Novell Public Forum 
+users. If you know that one of these models does in fact work with BorderManager 3.6 VPN over NAT,
+please notify the sysops in the BorderManager public forums immediately so that we can correct this 
+list. We (Sysops) expect that firmware revisions to correct some problem will eventually make this
+list go away.  It is also possible that users reporting these routers to us have not configured 
+them properly, though default settings should work.<br>
+<br>
+</p>
+
+<ul>
+
+<li>2wire HP1000sw DSLfirewall/router (not sure what firmware - this was reported Jan 10, 2004)</li>
+
+<li>Belkin wireless router model F5D8230-4, sticker on botton says version 2000</li>
+
+<li>Dlink 614+ rev B, firmware 3.42</li>
+
+<li>Draytek Vigor 2200</li>
+
+<li>Linksys WAG54v2, firmware 1.01.17.</li>
+
+<li>Linksys WAG54gx2, firmware 1.00.09.</li>
+
+<li>Linksys WRT54GS v5, firmware 1.05 (or 1.5?).</li>
+
+<li>Linksys BEFSR41 (4-port switch), firmware <u>before</u> 1.38.6, dated 5.15.01.</li>
+
+<li>Linksys BEFR81 (8-port switch), firmware up through ???? (Probably will be same as 1-port and 4-port versions)</li>
+
+<li>Netgear WGT624 (v2) - Almost no one I know has gotten VPN to work over this router, until a 
+report came in on Jan 18, 2005 about a V3 version.  See the working list below, but beware of this 
+router.  Apparently, some older Netgear WGT624 v.1 routers DID work, but later firmware revisions 
+broke VPN do to the router changing UDP source ports. </li>
+
+<li>TrendWare TW100-BRF114 - firmware revision unknown (Dec, 2004).</li>
+</ul>
+
+
+<p class="c8">I am unsure about the other Linksys routers such as the BEFN2PS4, BEFSRU31, BEFW11P1, 
+BEFW11S4, and HPRO200. I strongly suspect they will work as long as they have the latest firmware
+upgrade.<br>
+</p>
+
+<!-- Good Router List -->
+<h2><a name="goodrouters"></a>Routers That Work With Client-Site VPN Over NAT</h2>
+
+<p class="c8">Note: This list may be dependent on the firmware revision used on the router. 
+<b>Please report the model number and firmware</b> in place on the router in the Novell Public Forums so
+that this list can be updated as needed.<br>
+<br>
+Personally, I have used a Linksys BEFSR11 and later a Netgear RP614v2 successfully with both legacy- 
+and NMAS-mode VPN connections, over a cable modem. In fact, I go through a BorderManager static
+NAT hop, and then through dynamic NAT on the router to get to the Internet. As of this writing (Nov. 
+10, 2004), the firmware revision on my current router (Netgear RP614v2) is 5.20_RC3NA Apr 23,
+2004.<br>
+</p>
+
+<ul>
+
+<li>3COM - Office Connect Wireless 11B Cable DSL Gateway, Model 3CRWE53172, software version: v1.00, boot loader version: 1.01, hardware version: 01 </li>
+
+<li>3COM - Office Connect Wireless 11B Cable DSL Gateway, Model 3CRWE51196, software version: v1.04.01, boot loader version: 1.01, hardware version: 01.  Both hardwired and wireless.</li>
+
+<li>Airlink 101 (54Mbps 4port + wireless router), firmware 1.6.5, as long as 
+IPSec passthrough is enabled (for BM 3.8 IKE VPN).</li>
+
+<li>Asus AAM6000EV, tested with firmware version 71205a10</li>
+
+<li>Belkin wireless router model F5D7230-4, firmware version 4.00.03</li>
+
+<li>Belkin wireless router model F5D8230-4, sticker on botton says version 1002</li>
+
+<li>Billion 7402 v2</li>
+
+<li>Cisco (not sure which models, but the Cisco 677 does work for sure)</li>
+
+<li>D-Link, 604, firmware unknown</li>
+
+<li>D-Link, 624, firmware unknown</li>
+
+<li>D-Link, at least Dl 704, firmware 2.50, build 9</li>
+
+<li>Draytek Vigor 2600 (firmware unknown)<br>
+</li>
+
+<li>DynaLink (Askey) RTA 020</li>
+
+<li>Linksys BEFSR11, with firmware 1.40.3 (Oct 23, 2001) and possibly some earlier revisions</li>
+
+<li>Linksys BEFSR41, revision 2 with firmware 1.46.2 or later</li>
+
+<li>Linksys BEFSR41 with firmware 1.38.6 or later</li>
+
+<li>Linksys BEFSR81 with firmware 2.40.2</li>
+
+<li>Linksys BEFCMU10 (not sure what firmware - this was reported Jan 12, 2004)</li>
+
+<li>Linksys DSL Wireless modem BEFW11S4 - latest firmware as of Aprril 24, 2006</li>
+
+<li>Linksys WRT54G, with firmware supplied by <a href="http://www.sveasoft.com/">http://www.sveasoft.com/</a></li>
+
+<li>Linksys WRT54GS, firmware unknown</li>
+
+<li>Linksys WRV54G, firmware 2.36</li>
+
+<li>Linksys WRT54GL, firmware v4.30.0, Sep. 23, 2005</li>
+
+<li>Netgear DG814, firmware unknown</li>
+
+<li>Netgear DG834B ADSL Modem Router</li>
+
+<li>Netgear FWG114P, firmware v2.0_10</li>
+
+<li>Netgear MR314, firmware 3.26</li>
+
+<li>Netgear RT311 and RT314</li>
+
+<li>Netgear RO318, firmware 3.26</li>
+
+<li>Netgear FR314, firmware 3.26</li>
+
+<li>Netgear RP114, firmware 3.26</li>
+
+<li>Netgear FR114P, firmware 1.4 R17 (beta as of Jan 29, 2003)<br>
+</li>
+
+<li>Netgear RP614, firmware 4.11<br>
+</li>
+
+<li>Netgear RP614v2, firmware 5.20_RC3NA Apr 23,2004<br>
+</li>
+
+<li>Netgear WGR614v4, firmware V5.0_02</li>
+
+<li>netgear WGR614v5, 'with the latest firmware version 1.09. Previous versions did not work'</li>
+
+<li>Netgear WGT624, V3, firmware V4.2.6_1.0.1 - Note: This router has been a 
+real problem and earlier versions are likely not to work</li>
+
+<li>Netgear WNR854T, firmware 1.4.23NA<br>
+</li>
+
+<li>Netopia R9100, firmware V4.8.2</li>
+
+<li>Orinoco RG1000 wireless gateway</li>
+
+<li>Telocity home gateway</li>
+
+<li>Siemens SE505</li>
+
+<li>Siemens SE515</li>
+
+<li>Siemens SX550<br>
+</li>
+
+<li>Siemens SX550i</li>
+
+<li>Siemens CX550</li>
+
+<li>SMC 7004BR</li>
+
+<li>SMC 7008BR</li>
+
+<li>SMC Barricade SMC7004ABR</li>
+
+<li>Solwise SAR705 (said to work with British Telecom ADSL)<br>
+</li>
+</ul>
+
+<p class="c8">We need more information to make this list more complete, so if you have a Cable Modem/DSL router, please post the information as to whether it works or not to us in the Novell Public
+Forums!</p>
+
+<!-- General Notes -->
+<h2>Some General Notes & Comments</h2>
+
+<p class="c8">Normally I don't have to change any default settings on routers 
+to get Client-Site VPN to work over them.<br>
+<br>
+Oct 12, 2006 - An exception to the above statement has to do with BorderManager 
+3.8 Client-Site VPN, when using NMAS (IKE) mode to connect (instead of 
+compatiblity mode): <b>You must enable IPSec passthru on the router.</b>  If you do 
+not, you may be able to authenticate and make a C2S VPN connection, but not be 
+able to ping any hosts on the protected network.  Some routers will have 
+IPSec passthru enabled by default, and some won't.<br>
+<br>
+One Novell forums user reported that he had problems with VPN when using routers configured to give 
+out DHCP addresses with no expiration.  (Normally lease time on a DHCP lease is 3 days).  He said 
+that once he put on an expiration time for the leases that VPN started working OK.<br>
+<br>
+Mar. 11, 2006 - I have been struggling to get Client-Site VPN working through a 
+Xincom router set up using multidmz mode to forward all packets to a BM 3.8 
+server.  It works fine when I connect if my client is behind a NetWare server 
+doing NAT. It seems not to work for almost all other cases. (Update: I got this 
+to work by enabling IPSec passthru on the Xincom router.)
+</p>
+
+
+<!-- Router Config Help -->
+<h2>Router Configuration Help</h2>
+
+<p class="c8">Here are some links to web sites with tips (and some patches) for various routers:<br>
+ <b>General Help:</b> <a href="http://www.practicallynetworked.com/">http://www.practicallynetworked.com/</a><br>
+<b>Linksys specific help</b>: <a href="http://www.practicallynetworked.com/support/linksys_router_help_pg2.htm">http://www.practicallynetworked.com/support/linksys_router_help_pg2.htm</a><br>
+<b>3rd-Party Firmware for Linksys Routers:</b> <a href="http://www.sveasoft.com/">http://www.sveasoft.com/</a><br>
+</p>
+
+<!-- Problems with Linksys Routers -->
+<h2>Problems with older Linksys routers and the BorderManager 3.6 Client-to-Site VPN</h2>
+
+<p class="c8">Thanks to Caterina Luppi for this tip! <i>(Some of this information is now obsolete. Some newer Linksys routers will work with VPN, while others may need a firmware update.)</i></p>
+
+<p class="c41">BorderManager 3.6 allows you to establish the client-to-site VPN even if the client is behind a device performing NAT, like the DSL routers used to connect for home usage.
+Nevertheless, not all the routers and devices performing NAT are compatible with the BorderManager 3.6 VPN.<br>
+<br>
+The Linksys 4-port and 8-port Cable Modem/DSL routers are known to break the Client-to-Site VPN because of the UDP checksumming performed by the router itself. The Client-to-Site VPN across a NAT
+device uses UDP 2010 packets to carry the SKIP packets used for the encryption key exchange. Unfortunately these packets don't pass the UDP checksumming test, and they get dropped at the router. Note
+that in the configuration of the router, the UDP checksumming APPEARS TO BE DISABLED while it is still taking place.<br>
+<br>
+For the time being I don't recommend using this model of router if you are planning to connect to a BorderManager Client-to-Site VPN.<br>
+<br>
+The Cisco, D-Link and Netgear DSL routers, on the other hand, are known to work perfectly with the BorderManager 3.6 VPN.<br>
+<br>
+If you are using other models of DSL routers, please, report your experience in the VPN section of the Novell Support connection forums, and we will add your model of router to this list.<br>
+<br>
+Note: Some people have reported problems going through Linux Masquerading as well, due to some port translation taking place. More on this issue as information comes in to the Novell Public
+Forums.<br>
+</p>
+
+<!-- Older Updates -->
+<hr size="5" width="100%">
+<h2>Older updates:</h2>
+
+<p class="c8"><b>Apr. 6, 2007</b> - Added Linksys WAG54v2, firmware revision 1.01.17 to the Bad 
+Router List<br>
+
+</p><p class="c8"><b>Dec. 17, 2006</b> - Added Linksys WAG54gx2 to the Bad Router 
+List<br>
+</p>
+
+<p class="c8"><b>Oct 12, 2006</b> - Added IPSec passthru note, and Airlink 101 
+route to Good Router List<br>
+</p>
+
+<p class="c8"><b>May 18, 2006</b> - Added WGR614v5 with the latest firmware version 1.09 - Thanks 
+Barry Akin!<br>
+</p>
+
+<p class="c8"><b>May 1, 2006</b> - Added Linksys DSL Wireless modem BEFW11S4 to the working list.  
+Also added NETGEAR DG834B ADSL Modem Router (not the GB, GTB or PNB .. just B) to the working 
+list - Thanks Sascha Kauschka!<br>
+
+</p><p class="c8"><b>Mar. 13 2006</b> - Added Linksys WRT54GL to the working list.  Thanks Kevin Carr!<br>
+<br>
+Added Billion 7402 v2 to the working list.  Thanks Laura Buckley!
+</p>
+
+<p class="c8"><b>Mar. 13 2006</b> - Added  Linksys WRT54GS v5 to the not-working list.  Thanks John 
+Donnelly!<br>
+</p>
+
+<p class="c8"><b>Mar. 11 2006</b> - Added Belkin F5D8230-4 information to each list.  Added 
+information below the lists about possibly having problems if using DHCP with a non-expiring lease.<br>
+</p>
+
+<p class="c8"><b>Feb. 24 2006</b> - Added Dlink 614 rev B, firmware 3.42 to the not working list.  
+Added Linksys BEFSR41 Version 2, firmware 1.46.2 to the working list.<br>
+</p>
+
+<p class="c8"><b>Jan. 19 2005</b> - Added Netgear WGR614v4 to the working list.<br>
+</p>
+
+<p class="c8"><b>Jan. 18 2005</b> - Added Netgear WGT624 to the working list, with one particular firmware.<br>
+</p>
+
+<p class="c8"><b>Dec. 16, 2004</b> - Added Linksys WRV54G to the 'works OK' list.<br>
+</p>
+
+<p class="c8"><b>Dec. 11, 2004</b> - Added Belkin wireless router model F5D7230-4 to the 'Works OK' list.  Also DLink 604 and 624.<br>
+</p>
+
+<p class="c8"><b>Dec. 3, 2004</b> - Added 3COM Model 3CRWE51196 to the 'Works OK' list.<br>
+</p>
+
+<p class="c8"><b>Dec. 2, 2004</b> - Added TrendWare TW100-BRF114 to the 'Doesn't Work' list, and added 3COM Model 3CRWE53172 to the 'Works OK' list.<br>
+</p>
+
+<p class="c8"><b>Nov. 9, 2004</b> - Interesting post in the forum on the Linksys WRT54G router. Updating the firmware to a 3rd-party company version got the VPN to work. See <a href="http://www.sveasoft.com/">http://www.sveasoft.com/</a> .<br>
+</p>
+
+<p class="c8"><b>Oct 25, 2004</b> - Added several Siemens routers to the 'works OK list'.<br>
+<br>
+<b>Aug 14, 2004</b> - Removed Netgear WGT624 (v2) 4-port 108MB 802.11g wireless router from the 'works OK' list and replaced it with the Netgear RP614v2 router. I mistakenly mixed up these two
+routers when I updated this site on Aug 4, 2004. (I tested the RP614v2 myself, in both SKIP and IKE modes). I have not yet tested the WGT624 (wireless) router with VPN.<br>
+<br>
+<b>Feb 5, 2004 -</b> Removed Linksys BEFCMU10 from 'doesn't work' list and added it to 'works OK list'. User reporting the problem found that the issue he was having was with a personal firewall
+product, not the Linksys.<br>
+<br>
+<b>Jan 12, 2003</b> Added Linksys BEFCMU10 to list of "doesn't work" routers.<br>
+<br>
+<b>Jan 10, 2004 -</b> Added 2wire HP1000sw DSL firewall/router to list of "doesn't work" routers.<br>
+<br>
+<b>Apr. 3</b> - Added Netgear DG814 and Draytek Vigor 2600<br>
+<br>
+<b>Jan. 29, 2003</b> - Added Netgear FR114P<br>
+<br>
+<b>Oct. 15, 2002</b> - added Netgear RP614<br>
+<br>
+<b>Oct. 8, 2002</b> - Added Solwise SAR705.<br>
+<br>
+<b>May 22, 2002 -</b> Added Asus AAM6000EV DSL modem/router.<br>
+<br>
+<b>Apr. 29, 2002 - removed</b> Netgear RP114 from the not-working list and put it on the working list, after getting some better testing done...<br>
+<b>Apr. 17, 2002</b> - Added Netgear FR314 to the working list.<br>
+<br>
+<b>Apr. 9, 2002</b> - Added Netgear RP114, latest Firmware (3.26) to the 'not-working' list.<br>
+<br>
+<b>Jan. 14</b> - Added DynaLink (Askey) RTA 020 to list of working routers.<br>
+<br>
+<b>Dec. 21</b> - Updated with some information on the Linksys 1-port BEFSR11 (which I use).<br>
+<br>
+<b>Nov. 12</b> - Added Netgear RT314 to compatible list.<br>
+<br>
+<b>Sept. 4</b> - Added Draytek Vigor 2200 to the list of routers that don't work. Added SMC Barricade SMC7004ABR to the list of those that do work with NAT.<br>
+<br>
+<b>August 2</b> - Cisco 677 added to list of routers known to work with VPN over NAT.<br>
+<br>
+<b>June 28 -</b> See the URL's at the bottom of this page. Linksys has released a 1.39 firmware patch, which appears to make the beta patch mentioned below obsolete.<br>
+<br>
+<b>May 17, 2001</b>. A new (beta) firmware revison for Linksys routers, 1.38.6 with a date of 5/15/01, has been tested by a forum user on a Linksys BEFSR41, and afterwards, VPN over NAT worked! This
+was a beta release revision on May 17, 2001.<br>
+<br>
+</p>
+
+<!-- Footer Link to Main Page -->
+<hr size="5" width="100%">
+<p class="c9"><a href="http://nscsysop.hypermart.net/index.html">Return to the Main Page</a></p>
+<br>
+
+</body>
+</html>

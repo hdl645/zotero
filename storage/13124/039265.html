@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039265.html">
+<meta name="wpd_url" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039265.html">
+<meta name="wpd_date" content="2008-06-03T02:59Z">
+
+
+ 
+   <title> IPSec passthrough with iptables
+   </title>
+   <link rel="Index" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/index.html">
+   <link rel="made" href="mailto:Antony%40Soft-Solutions.co.uk">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">
+   <link rel="Next" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039234.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>IPSec passthrough with iptables
+   </h1>
+    <b>Antony Stone
+    </b> 
+    <a href="mailto:Antony%40Soft-Solutions.co.uk" title="IPSec passthrough with iptables">Antony@Soft-Solutions.co.uk
+       </a><br>
+    <i>Wed, 16 Oct 2002 09:41:25 +0100</i>
+    <p></p><ul>
+        <li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">IPSec passthrough with iptables
+</a></li>
+        <li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039234.html">PPTP Conntrack
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39265">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39265">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39265">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39265">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>On Wednesday 16 October 2002 4:45 am, David A Golden wrote:
+
+&gt;<i> Just to muddy the waters, through experimentation, I have found that using
+</i>&gt;<i> Checkpoint SecuRemote (on windows) behind a Linux netfilter firewall, I can
+</i>&gt;<i> achieve an IPSEC connection using just:
+</i>&gt;<i>
+</i>&gt;<i> iptables -A FORWARD -s $INTERNAL_NET -j ACCEPT
+</i>&gt;<i> iptables -A FORWARD -d $INTERNAL_NET -m state --state ESTABLISHED,RELATED \
+</i>&gt;<i>          -j ACCEPT
+</i>&gt;<i>
+</i>&gt;<i> I.e. explicit per-protocol forwarding seems unnecessary.  (Though you might
+</i>&gt;<i> want to be explicit for security/control reasons.)
+</i>
+Well, quite.
+
+We suggested some rules which would allow IPsec through your firewall, but 
+which would at least block a few other protocols.   We also weren't sure 
+whether you were initiating the IPsec connection from the inside or the 
+outside of your firewall (it's clearly the inside, if the above rules work).
+
+If you prefer to allow *every* protocol out of your network, then this 
+includes IPsec, so you don't need to do anything specific.
+
+Good that you have things working - now to consider how secure you want it...
+
+Antony.
+
+-- 
+
+Anything that improbable is effectively impossible.
+
+ - Murray Gell-Mann, Nobel Prizewinner in Physics
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">IPSec passthrough with iptables
+</a></li>
+	<li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039234.html">PPTP Conntrack
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39265">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39265">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39265">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39265">[ author ]</a>
+         </li>
+       </ul>
+</body>
+</html>

@@ -1,0 +1,1615 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:ie="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci997245,00.html">
+<meta name="wpd_url" content="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci997245,00.html">
+<meta name="wpd_date" content="2008-06-03T02:31Z">
+<!-- Vignette V/5 Sat Jun 28 14:15:59 2008 -->
+
+	
+
+
+<title>
+
+	
+		
+		     Why don't NAT Traversal and IPsec Passthrough work together? </title>
+<script type="text/javascript" src="jquery-latest.pack.js"></script>
+<script type="text/javascript" src="tt_thickbox-compressed.js"></script>
+
+<meta name="description" content="">
+<meta name="keywords" content="searchNetworking.com, Network planning, Network design, Internetworking, encryption, Intrusion detection, VoIP, Internet telephony, QoS, Router, Switch, Virtual private network, VPN, LAN, WAN, 802.11, Wireless LAN, MPLS, Netware, subnet, Denial of service, Gigabit Ethernet, ATM, Frame relay, Token ring, Layer 3 switching, Security, Certification, Training, Testing, Disaster recovery, Network management, Cisco, CCNA, CCNP, CCDP, CCIE, OSI, Catalyst, Nortel, Lucent, IOS, IP, TCP|IP, UDP, IPv6, Troubleshooting, DNS, DHCP, Configuration, Remote access" lang="en-us">
+
+<meta name="ctype" content="Expert Response">
+<meta name="cdate" content="08/05/2004">
+<meta name="adate" content="06/12/2028">
+<meta name="url" content="http://searchNetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci997245,00.html">
+<meta name="site" content="SEARCHNETWORKING.COM">
+<meta name="cgroup" content="Expert Advice">
+<meta name="robots" content="noodp">
+
+<link rel="stylesheet" type="text/css" href="0,289625,sid7_gci997245,00.css" media="all">
+</head>
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0">
+<a name="top"></a> 
+<script language="Javascript" src="0,296650,sid7,00.js"></script>
+ 
+<script language="Javascript">
+
+<!--	
+	var JSdigitalGuideID = "7";
+	var JSisHomePage = ""; //true/false
+	var JSexternal = "false"; //true/false
+	var JSpopUp = "-1";
+	var JSmembersOnly = "referrer";
+	var JSsponsoredContent = "";
+	var JSmembersLoginURL = "/loginMembersOnly/1,289498,sid7_gci997245,00.html";
+	var JSIPCmembersOnly = "";
+	var JSIPCmembersLoginURL = "";
+	var JSwebReportingContentCategory = "";
+	var tt_rptInfoCenterMLC = "";
+	var JSmboxBannerName = "searchNetworking_ATE_Content_Banner";
+	if (JSmboxBannerName != "") {
+		// Gutter mbox name is based on Banner mbox
+		var JSmboxGutterName = JSmboxBannerName.replace(/Banner/,"Gutter");
+	}
+	
+	var JSv3ic = false;
+
+				//webReporting variables
+				var wrCmpStartPage = false;
+				var wrCmpGoalPage = false;
+				var wrFunnelValue = "";
+				var wrCmpGoalPageValue = "";
+				var wrCmpLocalName = "";
+				var wrCmpLocalNameBase = "";
+				var wrCmpCookieValue = (document.cookie.indexOf("CMP=") != -1) ? document.cookie.substring(document.cookie.indexOf("CMP=") + 4, document.cookie.length) : "";
+				if (wrCmpCookieValue.indexOf(";") != -1) wrCmpCookieValue = wrCmpCookieValue.substring(0,wrCmpCookieValue.indexOf(";"));
+				var cmpValue = "";
+				var cmpGoalValue = "";
+				var newCmpCookieValue = "";
+				
+				//goalPage
+				if (wrCmpGoalPageValue != "" && wrCmpCookieValue != "") { //page specified the campaign name and a cookie value exists
+					if (wrCmpCookieValue.indexOf(wrCmpGoalPageValue) != -1) { //goal specified is contained in the campaign cookie
+						cmpGoalValue = wrCmpGoalPageValue;
+						newCmpCookieValue = newCmpCookieValue.replace(wrCmpGoalPageValue,"");
+						if (newCmpCookieValue.indexOf(",") != -1) newCmpCookieValue = newCmpCookieValue.replace(",","");
+						document.cookie = "CMP=" + newCmpCookieValue + "; path=/";
+					}
+				} else if (wrCmpGoalPage && wrCmpCookieValue != "") { //this is a goal page, but the page has not specified the campaign
+					cmpGoalValue = wrCmpCookieValue;
+					document.cookie = "CMP=; path=/";
+				} else {}
+				
+				//startPage
+				if (wrCmpStartPage) { //page specified that this page is a campaign start page
+					if (window.location.search.indexOf("TTCMP=") != -1) { //campaign name in url parameter
+						cmpWLS = unescape(window.location.search);
+						cmpValue = unescape(cmpWLS.substring(cmpWLS.indexOf("TTCMP=") + 6, cmpWLS.length));
+						if (cmpValue.indexOf("&") != -1) cmpValue = cmpValue.substring(0,cmpValue.indexOf("&"));
+						document.cookie = "CMP=" + cmpValue + "; path=/";
+					} else if (wrCmpLocalName != "") { // page specified the campaign name
+						cmpValue = wrCmpLocalName;
+						document.cookie = "CMP=" + wrCmpLocalName + "; path=/";
+					} else if (wrCmpCookieValue != "") { //start page, nothing specified, use cookie value
+						cmpValue = wrCmpCookieValue;
+						document.cookie = "CMP=" + cmpValue + "; path=/";
+					} else {}
+				}
+
+	/*
+		Header and Footer switches on/off with defaults set in /pageScripts
+		These do not have to be declared unless overriding a default.
+	*/
+	var JSadFooter = "off";
+	
+	//Advertising variables
+	if (document.layers) var ADlayer = new Object();
+	if (typeof adVibe == "undefined") var adVibe = "on";
+	if (typeof adPageID == "undefined") var adPageID = Math.round(Math.random() * 100000000);
+	var adVibeInfo = new String();
+
+	var JSsponsorBanner = "on";
+	var JSad9Type = "2";
+	var JSad9SiteValue = "snet";
+	var JSad9AreaValue = "ate";
+	var JSad9PositionValue = "vendorOffer_2";
+	var JSad9SiteName = "";
+	var JSad9PageName = "";
+	var JSad9Width = "550";
+	var JSad9Height = "33";
+	var JSad9Tile = "1";
+	var JSad9KW = "";
+	var JSad9KV = "";
+	var JSad9INT = "ist";
+var JSadInterstitial = "on";
+var JSadPrestitial = "on";
+
+	var JSleaderBoard = "on";
+	var JSad12Type = "2";
+	var JSad12SiteValue = "snet";
+	var JSad12AreaValue = "ate";
+	var JSad12PositionValue = "leaderBoard_3";
+	var JSad12SiteName = "";
+	var JSad12PageName = "";
+	var JSad12Width = "728";
+	var JSad12Height = "90";
+	var JSad12Tile = "2";
+	var JSad12KW = "";
+	var JSad12KV = "";
+	var JSad12INT = "";
+
+	var JSadCategory = "ate";
+	var JSshowInfoLink = "false";
+	var JSadTaxID = "";
+	var JSinfoCenterID = "";
+	var JSinfoCenterName = "";
+
+				// begin header HITBOX vars
+				<!-- templateContentCategory:  -->
+				var searchTotal = '';
+				var tt_hbxTemplateID = '155';
+				var tt_hbxApplicationPath = '/expertKnowledgeBase';
+				var tt_hbxSitePath = '/searchNetworking';
+				var tt_hbxExtraAcct = false;
+				var tt_dartTAX_id = '299293';
+				if(typeof cl_id_299293 == "undefined") {
+				var tt_hbxCL_id = 'NONE';
+				var tt_hbxCL_name = '';
+				var cl_exclusive = 'N';
+				var tt_hbxMLC = '/CL-NONE/VPN Trou-299293';
+				} else {
+				var tt_hbxCL_id = cl_id_299293;
+				var tt_hbxCL_name = cl_name_299293;
+				var cl_exclusive = cl_excl_299293;
+				var tt_hbxMLC = '/CL-' + tt_hbxCL_name + '-' + tt_hbxCL_id + '/VPN Trou-299293';
+				}
+				var tt_hbx404 = false;
+				var tt_hbxGCI = '997245';
+				var tt_hbxWORD = '';
+				// end header HITBOX vars
+				var r6x_gci = "997245";
+				var r6x_tax = "";
+				var r6x_clu = "";
+				if (typeof cl_id_ != "undefined" && "" != "") r6x_clu = cl_id_;
+				
+// -->
+</script>
+<script language="Javascript" src="0,294327,sid7,00.js"></script>
+
+
+
+
+
+	
+	<script type="text/javascript" src="mbox.js"></script>
+	<script type="text/javascript" src="0,297040,sid7,00.js"></script>
+	<div style="visibility: visible; display: block;" class="mboxDefault"></div>
+	<script type="text/javascript">
+
+	mboxCreate('global');
+	var mboxConv = getURLParamValue('mboxConv');
+	if (mboxConv != "") {
+		// always write out the conversion mboxes, don't look for an 'on' switch
+		document.write('<div class="mboxDefault"></div>');
+		mboxCreate(mboxConv);
+	}
+	</script><div id="mboxMarker-global-0" style="visibility: hidden; display: none;"></div><script src="standard" language="JavaScript"></script>
+	
+
+<table width="776" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="100%" background="" bgcolor="#ffffff"><table class="colorPortfolioBand" width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr class=""><td colspan="4"><img src="spacer.gif" width="1" height="3"></td></tr>
+	<tr class="colorPortfolioBand">
+		<td><img src="spacer.gif" width="5" height="15"></td>
+		<td width="100%"><span class="a2"><span class="textOnColorPortfolioBand"></span></span></td>
+		<td class="a2" align="right" nowrap="nowrap">
+			<script language="Javascript">
+
+			<!--
+				function OPEN_FIXED_WIDTH_TABLE_DISPLAY_CODE_0() {return ""}
+				document.write(((USERINFO == "on") ? '<span class="textOnColorPortfolioBand">'+((loggedIn != -1) ? '<i>You\'re logged in as:</i> <b>'+DisplayName+'</b>&nbsp;'+
+				'<a href="/register/1,289568,sid7,00.html" class="textOnColorPortfolioBand"><span class="a2">Edit your Profile</span></a>&nbsp;<span class="yellow">|</span>&nbsp;'+
+				'<a href="'+((ALTLOGOUT != "no") ? ALTLOGOUT : '/logout/1,289500,sid7,00.html')+'" class="textOnColorPortfolioBand"><span class="a2">Log-out</span></a>' :
+				'<a href="/register/1,289568,sid7,00.html" class="textOnColorPortfolioBand"><span class="a2">Activate your FREE membership today</span></a>&nbsp;<span class="yellow">|</span>&nbsp;'+
+				'<a href="'+((ALTLOGIN != "no") ? ALTLOGIN : '/login/1,289498,sid7,00.html')+'" class="textOnColorPortfolioBand"><span class="a2">Log-in</span></a>')+'</span>' : '&nbsp;'));
+			// -->
+			</script><span class="textOnColorPortfolioBand"><i>You're logged in as:</i> <b>Hung-De Liu</b>&nbsp;<a href="http://searchnetworking.techtarget.com/register/1,289568,sid7,00.html" class="textOnColorPortfolioBand"><span class="a2">Edit your Profile</span></a>&nbsp;<span class="yellow">|</span>&nbsp;<a href="http://searchnetworking.techtarget.com/logout/1,289500,sid7,00.html" class="textOnColorPortfolioBand"><span class="a2">Log-out</span></a></span>
+		</td>
+		<td><img src="spacer.gif" width="5" height="1"></td>
+	</tr>
+	
+	<tr class="colorPortfolioBand"><td colspan="4"><img src="spacer.gif" width="1" height="3"></td></tr>
+	<tr class="color1"><td colspan="4"><img src="spacer.gif" width="1" height="1"></td></tr>
+	<tr class="colorPortfolioBand"><td colspan="4"><img src="spacer.gif" width="1" height="1"></td></tr>
+	</tbody></table>
+<script language="Javascript">
+
+<!--
+	PORTFOLIOBAND = "off";
+	PAGE_HEADER();
+// -->
+</script><!--WEBSIDESTORY CODE HBX1.0 (Universal)-->
+<!--COPYRIGHT 1997-2004 WEBSIDESTORY,INC. ALL RIGHTS RESERVED. U.S.PATENT No. 6,393,479B1. MORE INFO:http://websidestory.com/privacy-->
+<script language="javascript">
+
+var _hbEC=0,_hbE=new Array;function _hbEvent(a,b){b=_hbE[_hbEC++]=new Object();b._N=a;b._C=0;return b;}
+var hbx=_hbEvent("pv");hbx.vpc="HBX0100u";hbx.gn="ehg-techtarget.hitbox.com";
+//BEGIN EDITABLE SECTION
+//CONFIGURATION VARIABLES
+if(typeof tt_hbxTemplateID == "undefined") var tt_hbxTemplateID = "";
+if(typeof tt_hbxApplicationPath == "undefined") var tt_hbxApplicationPath = "";
+if(typeof tt_hbxSitePath == "undefined") var tt_hbxSitePath = "/searchNetworking";
+if(typeof tt_hbxExtraAcct == "undefined") var tt_hbxExtraAcct = false;
+if(typeof tt_rptSiteRollUpID == "undefined") var tt_rptSiteRollUpID = "";
+if(typeof tt_hbxMLC == "undefined") var tt_hbxMLC = "";
+if(typeof tt_hbx404 == "undefined") var tt_hbx404 = false;
+if(typeof JSv3ic == "undefined") var JSv3ic = false;
+if(typeof tt_hbxWORD == "undefined") var tt_hbxWORD = "";
+hbx.acct=tt_rptSiteID + ";" + tt_rptGlobalID;//ACCOUNT NUMBER(S)
+if(tt_hbxExtraAcct) hbx.acct+= ";" + tt_rptExtraID;
+if(tt_rptSiteRollUpID != "") hbx.acct+= ";" + tt_rptSiteRollUpID;
+hbx.pn = ""; //pagename 
+var wlp = window.location.pathname.replace(eval("/\\//g"),"-");
+wlp = wlp.substring(1,wlp.length);
+if (wlh.indexOf("knowledgestorm") != -1) wlp = "knowledgestorm-" + wlp;
+var oidValue = ""; 
+//get path name and oid value
+if (tt_hbxTemplateID == "195") {
+	hbx.pn = "home";
+} else if (tt_hbxTemplateID == "359") {
+	hbx.pn = "whome";
+} else if (tt_hbxTemplateID == "1128") {
+	hbx.pn = "magHome";
+} else if (wlp == "/") {
+	hbx.pn = "home";
+} else if (wlp.indexOf("-0,") != -1) {
+	hbx.pn = wlp.substring(0, wlp.indexOf("-0,"));
+	oidValue = wlp.substring(wlp.indexOf("-0,"),wlp.length);
+	oidSplit = oidValue.split(",");
+	oidValue = oidSplit[2];
+	hbx.pn += "--" + oidValue;
+} else if (wlp.indexOf("-1,") != -1) {
+	hbx.pn = wlp.substring(0,wlp.indexOf("-1,"));
+	oidValue = wlp.substring(wlp.indexOf("-1,"),wlp.length);
+	oidSplit = oidValue.split(",");
+	oidValue = oidSplit[2];
+	hbx.pn += "--" + oidValue;
+} else {
+	hbx.pn = wlp;
+}
+//add URL parameters
+var searchValueOffer = getURLParam("offer");
+var searchValueTrack = getURLParam("track");
+var searchValueS = getURLParam("s");
+if (searchValueOffer != "") hbx.pn += "--" + searchValueOffer;
+if (searchValueTrack != "") hbx.pn += "--" + searchValueTrack;
+if (searchValueS != "") hbx.pn += "--" + searchValueS;
+hbx.pn = hbx.pn.replace(eval("/%/g"),".");
+if(tt_hbxMLC == "") hbx.mlc = "*"; else hbx.mlc = "";
+hbx.mlc+=tt_hbxMLC + ";" + tt_hbxSitePath + tt_hbxMLC;//MULTI-LEVEL CONTENT CATEGORY
+if(tt_hbxExtraAcct) { if(JSv3ic == true) hbx.mlc+=";" + tt_hbxMLC + tt_hbxSitePath; else hbx.mlc+=";" + tt_hbxApplicationPath + tt_hbxSitePath; }
+hbx.pndef="title";//DEFAULT PAGE NAME
+hbx.ctdef="full";//DEFAULT CONTENT CATEGORY
+//OPTIONAL PAGE VARIABLES
+//ACTION SETTINGS
+hbx.lt="auto";//LINK TRACKING
+hbx.dlf="n";//DOWNLOAD FILTER
+hbx.dft="n";//DOWNLOAD FILE NAMING
+hbx.elf="n";//EXIT LINK FILTER
+//SEGMENTS AND FUNNELS
+hbx.seg=getVisitorSegment();//VISITOR SEGMENTATION
+hbx.fnl=(typeof wrFunnelValue == "undefined") ? "" : wrFunnelValue;//FUNNELS
+//CAMPAIGNS
+hbx.cmp=(typeof cmpValue == "undefined") ? "" : cmpValue;//CAMPAIGN ID
+hbx.gp=(typeof cmpGoalValue == "undefined") ? "" : cmpGoalValue;//CAMPAIGN GOAL
+hbx.fv="n";//FORM VALIDATION MINIMUM ELEMENTS OR SUBMIT FUNCTION NAME
+hbx.dcmp="";//DYNAMIC CAMPAIGN ID
+hbx.hqsp="ATTR";//RESPONSE ATTRIBUTE IN QUERY
+hbx.fv="";//FORM VALIDATION MINIMUM ELEMENTS OR SUBMIT FUNCTION NAME
+hbx.cmpn="";//CAMPAIGN ID IN QUERY
+hbx.dcmpn="";//DYNAMIC CAMPAIGN ID IN QUERY
+hbx.dcmpe="";//DYNAMIC CAMPAIGN EXPIRATION
+hbx.dcmpre="";//DYNAMIC CAMPAIGN RESPONSE EXPIRATION
+hbx.hra="";//RESPONSE ATTRIBUTE
+hbx.hqsr="";//RESPONSE ATTRIBUTE IN REFERRAL QUERY
+hbx.hlt="";//LEAD TRACKING
+hbx.hla="";//LEAD ATTRIBUTE
+hbx.gpn="";//CAMPAIGN GOAL IN QUERY
+hbx.hcn="";//CONVERSION ATTRIBUTE
+hbx.hcv="";//CONVERSION VALUE
+hbx.cp="null";//LEGACY CAMPAIGN
+hbx.cpd="";//CAMPAIGN DOMAIN
+//INTERNAL SEARCH
+var ttSearchQuery=getURLParamValue("query");
+if(ttSearchQuery!="") {
+var ev1=_hbEvent("search");
+ev1.keywords=ttSearchQuery.replace(" ","+");
+if(typeof searchTotal == "undefined") var searchTotal = "";
+if(searchTotal == "") {
+ev1.results="0";} else {
+ev1.results=searchTotal;}
+}
+//CUSTOM VARIABLES
+var asrcParam = getURLParamValue("asrc");
+var asrc_und_1_pos = asrcParam.indexOf("_");
+var asrcLast2 = asrcParam.substring(asrc_und_1_pos+1,asrcParam.length);
+var asrc_und_2_pos = asrcLast2.indexOf("_");
+var asrc_src = asrcParam.substr(0,asrc_und_1_pos);
+var asrc_vehicle = asrcLast2.substr(0,asrc_und_2_pos);
+var asrc_vid = asrcLast2.substr(asrc_und_2_pos+1,asrcLast2.length);
+var psrcParam = getURLParamValue("psrc");
+if (psrcParam.indexOf("_") != -1) psrcParam = psrcParam.substring(0,psrcParam.indexOf("_")) + "|" + psrcParam.substring(psrcParam.indexOf("_")+1, psrcParam.length);hbx.ci="";//CUSTOMER ID
+if(asrc_src != "") hbx.hc1=asrc_src + "|searchNetworking-" + asrc_vehicle + "-" + asrc_vid + "-" + tt_hbxGCI;//CUSTOM 1
+else hbx.hc1="";//CUSTOM 1 if no src
+hbx.hc2=psrcParam;//CUSTOM 2
+hbx.hc3=tt_hbxSitePath;//CUSTOM 3
+if(JSv3ic == true) hbx.hc3 += tt_hbxMLC; else hbx.hc3 += tt_hbxApplicationPath;
+hbx.hc3+="|" + tt_hbxGCI;
+hbx.hc4="";//CUSTOM 4
+hbx.hc5="";//CUSTOM 5
+var cv=_hbEvent("cv");cv.c5 = (tt_hbxWORD == "") ? "" : "word|" + unescape(tt_hbxWORD);
+cv.c6="";cv.c7="";cv.c8="";cv.c9="";hbx.hrf=(hbx.pn.indexOf("prestitial") != -1) ? "" : unescape(getCookieValue("adPreR"));//CUSTOM REFERRER
+hbx.pec="";//ERROR CODES
+if (document.cookie.indexOf("wrData=on") != -1 || window.location.search.indexOf("wrData=on") != -1) {
+	window.alert("HITBOX DATA \n accounts (hbx.acct) = " + hbx.acct + "\n pagename (hbx.pn) = " + hbx.pn + "\n hbx.mlc = " + hbx.mlc + "\n visitor segment (hbx.seg) = " + hbx.seg + "\n funnel id (hbx.fnl) = " + hbx.fnl + "\n campaign page (hbx.cmp) = " + hbx.cmp + "\n goal page (hbx.gp) = " + hbx.gp + "\n custom metric 1 (hbx.hc1) =" + hbx.hc1 + "\n custom metric 2 (hbx.hc2) = " + hbx.hc2 + "\n custom metric 3 (hbx.hc3) = " + hbx.hc3 + "\n custom metric 4 (hbx.hc4) = " + hbx.hc4 + "\n custom metric 5 (hbx.hc5) = " + hbx.hc5 + "\n custom metric 5 (cv.c5) = " + cv.c5 + "\n custom metric 6 (cv.c6) = " + cv.c6+ "\n custom metric 7 (cv.c7) = " + cv.c7+ "\n custom metric 8 (cv.c8) = " + cv.c8+ "\n custom metric 9 (cv.c9) = " + cv.c9 );
+}
+//INSERT CUSTOM EVENTS
+//delete referrer cookie
+if (hbx.pn.indexOf("prestitial") == -1 && cookieExists("adPreR") != -1) document.cookie = "adPreR=;path=/;domain=.techtarget.com;expires=Thu, 01-Jan-1970 00:00:01 GMT;";
+//END EDITABLE SECTION
+//REQUIRED SECTION. CHANGE "YOURSERVER" TO VALID LOCATION ON YOUR WEB SERVER (HTTPS IF FROM SECURE SERVER)
+</script><script language="javascript1.1" defer="defer" src="hbx.js"></script>
+<!--END WEBSIDESTORY CODE-->
+<script type="text/javascript">if (typeof tt_dartTAX_id == "undefined") var tt_dartTAX_id = "";
+if (getCookieValue("tt_ut") != "" && tt_dartTAX_id != "") { 
+document.write("<img src="+clicktrackIMG+"?u="+getCookieValue('tt_ut')+"&t="+tt_dartTAX_id+"&r="+Math.round(Math.random() * 1000000)+" height=1 width=1 border=0>");
+}
+</script><img src="activity.jpg" width="1" border="0" height="1">
+<table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr class="colorHeader"><td><img src="spacer.gif" alt="" width="4" height="39"></td><td valign="top" width="100%"><img src="spacer.gif" alt="" width="1" height="6"><br><a href="http://searchnetworking.techtarget.com/home/0,289692,sid7,00.html"><img src="header_logo.gif" alt="" border="0"></a></td><td rowspan="2" valign="top" align="right" background="about:blank?header_background.gif"><map name="headermap"><area shape="rect" coords="115,36 194,47" href="http://searchnetworking.techtarget.com/mediaPopup/0,295511,sid7_tab2,00.html" alt="Conferences" target="mediaPopup" onclick="window.open('about:blank','mediaPopup','width=388,height=388,menubar=no,resizable=no,status=no,titlebar=no,scrollbars=no')"><area shape="rect" coords="202,36 261,47" href="http://searchnetworking.techtarget.com/mediaPopup/0,295511,sid7_tab3,00.html" alt="Web Sites" target="mediaPopup" onclick="window.open('about:blank','mediaPopup','width=388,height=388,menubar=no,resizable=no,status=no,titlebar=no,scrollbars=no')"><area shape="default" nohref="" alt=""></map><img src="header_medialinks_cw.gif" ismap="ismap" usemap="#headermap" alt="TechTarget Networking Media" width="300" border="0" height="59"></td></tr><tr class="colorHeader"><td><img src="spacer.gif" alt="" width="4" height="20"></td><td valign="top"><img src="spacer.gif" alt="" width="51" height="6"><a href="http://www.techtarget.com/"><img src="header_tagline.gif" alt="Part of the TechTarget Network of Enterprise IT Web Sites" border="0"></a></td></tr><tr class="color0"><td colspan="3"><img src="spacer.gif" alt="" width="1" border="0" height="3"></td></tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr class="colorC"><td colspan="7"><img src="spacer.gif" alt="" width="1" height="10"></td><td rowspan="99" width="100%"><img src="spacer.gif" alt="" width="2" height="1"></td></tr><tr class="colorF"><td><img src="spacer.gif" alt="" width="1" height="1"></td><td><img src="spacer.gif" alt="" width="19" height="1"></td><td><img src="spacer.gif" alt="" width="2" height="1"></td><td><img src="spacer.gif" alt="" width="728" height="1"></td><td><img src="spacer.gif" alt="" width="2" height="1"></td><td><img src="spacer.gif" alt="" width="19" height="1"></td><td><img src="spacer.gif" alt="" width="1" height="1"></td></tr><tr><td class="colorF"><img src="spacer.gif" alt="" width="1" height="1"></td><td valign="top" align="center" background="about:blank?background_ad_side_728_90.gif"><img style="display: none;" src="ad_sideheader_728_90.gif" alt="" width="19" border="0" height="90"></td><td class="colorF"><img src="spacer.gif" alt="" width="1" height="1"></td><td><iframe style="display: none;" src="0,289625,sid7_gci997245,00_1.html" name="frame_leaderBoard_3" id="fra728x90" border="0" marginheight="0" marginwidth="0" scrolling="no" width="728" frameborder="0" height="90">&lt;a href="http://ad.doubleclick.net/jump/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;iid=;iin=;rci=;nl=;ses=;track=;sz=728x90;dcopt=ist;ptile=3;ord=55696179?"&gt;&lt;img src="http://ad.doubleclick.net/ad/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;iid=;iin=;rci=;nl=;ses=;track=;sz=728x90;dcopt=ist;ptile=3;ord=55696179?" width="728" height="90" border="0"&gt;&lt;/a&gt;</iframe></td><td class="colorF"><img src="spacer.gif" alt="" width="1" height="1"></td><td valign="top" align="center" background="about:blank?background_ad_side_728_90.gif"><img name="toggle728x90" src="spacer.gif" alt="" width="19" border="0" height="90"></td><td class="colorF"><img src="spacer.gif" alt="" width="1" height="1"></td></tr><tr class="colorF"><td colspan="7"><img src="spacer.gif" alt="" width="1" height="1"></td></tr><tr class="colorC"><td colspan="7"><img src="spacer.gif" alt="" width="1" height="10"></td></tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr class="color0"><td><img src="spacer.gif" alt="" width="1" height="3"></td></tr></tbody></table><div class="colorNav"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr class="colorNav"><td><img src="spacer.gif" alt="" width="8" height="1"></td><td><a href="http://searchnetworking.techtarget.com/home/0,289692,sid7,00.html"><img src="homenav_home.gif" alt="Home" width="30" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/news/0,289141,sid7,00.html"><img src="homenav_news.gif" alt="News" width="30" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/topicsMain/0,295490,sid7,00.html"><img src="homenav_topics.gif" alt="Topics" width="37" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/ITKnowledgeExchange/0,294907,sid7,00.html"><img src="homenav_itke.gif" alt="ITKnowledge Exchange" width="135" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/tips/0,289484,sid7,00.html"><img src="homenav_tips.gif" alt="Tips" width="23" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/expert/Knowledgebase/0,289622,sid7,00.html"><img src="homenav_ate.gif" alt="Ask the Experts" width="94" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/webcasts/0,295024,sid7,00.html?asrc=SS_NAV_WC"><img src="homenav_webcasts.gif" alt="Webcasts" width="57" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.bitpipe.com/?asrc=SS_NAV_WP"><img src="homenav_whitepapers.gif" alt="White Papers" width="76" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.bitpipe.com/itdownloads?asrc=SS_NAV_DL"><img src="homenav_npt.gif" alt="Networking Product Trials" border="0" height="22"></a></td><td><img src="spacer.gif" alt="" width="8" height="1"></td></tr></tbody></table></div><table width="100%" border="0" cellpadding="0" cellspacing="0"><form name="search" action="http://searchnetworking.techtarget.com/search/1,293876,sid7,00.html" method="get"></form><tbody><tr class="color0"><td><img src="spacer.gif" alt="" width="7" height="25"></td><td class="a2" nowrap="nowrap"><span class="textF"><b>SEARCH this site and the web</b></span></td><td><img src="spacer.gif" alt="" width="9" height="1"></td><td><input name="query" size="8" class="i3width125" type="text"></td><td><img src="spacer.gif" alt="" width="7" height="1"></td><td><input src="button_search_cccccc.gif" type="image"></td><td><img src="spacer.gif" alt="" width="9" height="1"></td><td nowrap="nowrap"><a href="http://searchnetworking.techtarget.com/integratedSearchAdvanced/0,289518,sid7,00.html" class="textF"><span class="a1">ADVANCED SEARCH</span></a>&nbsp;&nbsp;<span class="textF"><span class="a2">|</span></span>&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/siteIndex/0,294352,sid7,00.html" class="textF"><span class="a1">SITE INDEX</span></a></td><td width="100%"><img src="spacer.gif" alt="" width="1" height="1"></td><td><a href="http://www.google.com/"><img src="searchpoweredbygoogle_onblack.gif" alt="Search Powered by Google" width="147" border="0" height="23"></a></td><td><img src="spacer.gif" alt="" width="3" height="1"></td></tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3"><img src="spacer.gif" width="1" height="15"></td></tr><tr><td><img src="spacer.gif" width="5" height="1"></td><td class="color4" width="100%"><table width="100%" border="0" cellpadding="0" cellspacing="1"><tbody><tr bgcolor="#ffffff"><td><img src="platinum_site_sponsor.gif" width="77" height="33"></td><td width="100%"><iframe style="display: none;" src="0,289625,sid7_gci997245,00_2.html" border="0" marginheight="0" marginwidth="0" scrolling="no" width="550" frameborder="0" height="33">
+
+&lt;a href='http://ad.doubleclick.net/jump/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;sz=550x33;dcopt=;ptile=2;iid=;iin=;rci=;nl=;ses=;track=;ord=55696179?'&gt;
+&lt;img src='http://ad.doubleclick.net/ad/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;sz=550x33;dcopt=;ptile=2;iid=;iin=;rci=;nl=;ses=;track=;ord=55696179?' width='550' height='33' border='0'&gt;&lt;/a&gt;
+</iframe>
+</td></tr></tbody></table></td><td><img src="spacer.gif" width="5" height="1"></td></tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><img src="spacer.gif" width="5" height="1"></td><td width="100%"><script language="javascript">ttWriteMboxDiv(JSmboxBannerName);ttWriteMboxContent(JSmboxBannerName);</script><div style="visibility: visible; display: block;" class="mboxDefault"></div><div id="mboxMarker-searchNetworking_ATE_Content_Banner-0" style="visibility: hidden; display: none;"></div><script src="standard_002.dat" language="JavaScript"></script></td><td><img src="spacer.gif" width="5" height="1"></td></tr></tbody></table>
+
+
+
+
+ 
+ 
+		
+
+
+	
+	
+  
+<!-- BEGIN: BreadCrumb Splash -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr><td colspan="2"><img src="spacer.gif" width="1" height="5"></td></tr>
+	<tr>
+		<td><img src="spacer.gif" width="7" height="1"></td>
+		<td class="a2" name="breadcrumbCell" valign="top" width="100%"><a name="breadcrumb_0" href="http://searchnetworking.techtarget.com/home/0,289692,sid7,00.html" class="breadcrumbRed"> Home</a> &gt; <a name="breadcrumb_1" href="http://searchnetworking.techtarget.com/expert/Knowledgebase/0,289622,sid7,00.html" class="breadcrumbGray"> Ask the Networking Experts</a> &gt; <a name="breadcrumb_2" href="http://searchnetworking.techtarget.com/expert/KnowledgebaseCategory/0,289620,sid7_tax296082,00.html" class="breadcrumbGray"> VPNs with Lisa Phifer Questions & Answers</a> &gt; <b class="breadcrumbGray">  Why don't NAT Traversal and IPsec Passthrough work together?</b></td>
+	</tr>
+	<tr><td colspan="2"><img src="spacer.gif" width="1" height="5"></td></tr>
+</tbody></table>
+<!-- END: BreadCrumb Splash -->
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td rowspan="99"><img src="spacer.gif" alt="" width="5" height="1"></td>
+		<td colspan="2" width="100%"><img src="spacer.gif" alt="" width="1" height="3"></td>
+		<td rowspan="99"><img src="spacer.gif" alt="" width="5" height="1"></td>
+	</tr>
+	<!-- Content Type and Email/iCopy Toolbar Begin -->
+	<tr>
+		<td class="a6" valign="bottom"><span class="a6"><b>Ask The Networking Expert: Questions & Answers</b></span></td>
+		<td align="right">
+
+	<!-- BEGIN: Email A Friend & iCopyright Toolbar -->
+<table align="right" border="0" cellpadding="0" cellspacing="0">
+<form name="emaillink" method="post" action="http://searchnetworking.techtarget.com/emailAFriend/1,289150,sid7,00.html" onsubmit="return false;"></form>
+	<tbody><tr>
+	
+		<!-- BEGIN: Email A Friend -->
+		
+		  <script language="JavaScript">
+
+		<!--
+		function JSsendform() {
+			document.emaillink.fullurl.value = location.href;
+			document.emaillink.emailpath.value = "SearchNetworking.com : Ask the experts : Questions & Answers : VPNs with Lisa Phifer";
+			document.emaillink.subject.value = "The SearchNetworking.com : Ask the experts : Questions & Answers : VPNs with Lisa Phifer";
+			document.emaillink.submit();
+		}
+		//-->
+		</script>
+		<input name="subject" size="50" type="hidden">
+		<input name="emailpath" size="60" type="hidden">
+		<input size="50" name="fullurl" type="hidden">
+		<td align="right" nowrap="nowrap"><a href="javascript:JSsendform();"><img src="envelope_small.gif" alt="" align="bottom" border="0"></a><img src="spacer.gif" alt="" width="1" height="1"></td>
+		<td nowrap="nowrap"><a href="javascript:JSsendform();" class="textRed"><span class="a1">EMAIL THIS</span></a></td>
+		
+		<!-- END: Email A Friend -->
+		<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+		  </tr>
+</tbody></table>
+<!-- END: Email A Friend & iCopyright Toolbar -->
+</td>
+	</tr>
+	<!-- Content Type and Email/iCopy Toolbar End -->
+	<tr>
+		<td><img src="spacer.gif" alt="" width="1" height="3"></td>
+	</tr>
+	<!-- Gray Bar Begin -->
+	<tr class="color9">
+		<td colspan="2"><img src="spacer.gif" alt="" width="1" height="1"></td>
+	</tr>
+	<tr class="colorC">
+		<td colspan="2"><img src="spacer.gif" alt="" width="1" height="15"></td>
+	</tr>
+	<tr class="color9">
+		<td colspan="2"><img src="spacer.gif" alt="" width="1" height="1"></td>
+	</tr>
+	<!-- Gray Bar End -->
+	<tr>
+		<td colspan="4"><img src="spacer.gif" alt="" width="1" height="1"></td>
+	</tr>
+</tbody></table>  
+	 
+	
+		 <table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td valign="top" width="100%">
+	
+			<table width="100%" border="0" cellpadding="0" cellspacing="5">
+				<tbody><tr><td colspan="3" width="100%"><h1 class="a4">Why don't NAT Traversal and IPsec Passthrough work together?</h1></td></tr>
+				<tr>
+	
+					<td valign="top" width="75"><img src="lphifer-sm.jpg" alt="Lisa Phifer" width="75" height="98"></td>
+	  <td valign="top" width="350"><span class="a1"><span class="text6">EXPERT RESPONSE FROM:</span> <a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseBio/0,289623,sid7_cid426751,00.html"><b>Lisa Phifer</b></a> 							
+	 <br><img src="spacer.gif" alt="" width="5" height="5"><br>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				 			<!-- Pose a Question -->
+							<tbody><tr>	
+	 <td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebasePoseQuestion/0,289624,sid7_tax296082,00.html"><img src="arrow_next_red.gif" border="0"></a></td>
+								<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+								<td width="100%" nowrap="nowrap"><a href="http://searchnetworking.techtarget.com/expert/KnowledgebasePoseQuestion/0,289624,sid7_tax296082,00.html" class="textRed"><span class="a2">Pose a Question</span></a></td>
+							</tr>
+							<tr><td colspan="3"><img src="spacer.gif" alt="" width="5" height="1"></td></tr>
+							<!-- Other Categories -->								
+							<tr>
+	 <td><a href="http://searchnetworking.techtarget.com/expert/Knowledgebase/0,289622,sid7,00.html"><img src="arrow_next_red.gif" border="0"></a></td>
+								<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+								<td width="100%" nowrap="nowrap"><a href="http://searchnetworking.techtarget.com/expert/Knowledgebase/0,289622,sid7,00.html" class="textRed"><span class="a2">Other Networking Categories</span></a></td>
+							</tr>
+							<tr><td colspan="3"><img src="spacer.gif" alt="" width="5" height="1"></td></tr>
+							<!-- Meet all Experts -->
+							<tr>
+								<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseBios/0,289621,sid7,00.html"><img src="arrow_next_red.gif" border="0"></a></td>
+								<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+								<td width="100%" nowrap="nowrap"><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseBios/0,289621,sid7,00.html" class="textRed"><span class="a2">Meet all Networking Experts</span></a></td>
+							</tr>
+							<!-- Become an Expert Begin -->
+							<tr>
+	 <td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseRecruitment/1,289629,sid7,00.html"><img src="arrow_next_red.gif" border="0"></a></td>
+								<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+								<td width="100%" nowrap="nowrap"><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseRecruitment/1,289629,sid7,00.html" class="textRed"><span class="a2">Become an Expert for this site</span></a></td>
+							</tr>
+							<!-- Become an Expert End -->
+						</tbody></table>
+					</span></td>
+				</tr>
+			</tbody></table>
+	
+			<table width="100%" border="0" cellpadding="0" cellspacing="2">
+				<tbody><tr>
+					<td><img src="spacer.gif" alt="" width="5" height="3"></td>
+					<td colspan="2">
+	
+
+	
+	  
+	  	
+		
+
+
+	<!-- RSS Row Begin -->
+	</td></tr><tr>
+		<td colspan="5"><br>
+ <!-- RSS Begin -->
+	<img src="spacer.gif" width="1" border="0" height="2"><br>
+	<table border="0" cellpadding="0" cellspacing="0">
+
+ 		
+			<!-- BEGIN: Social Bookmarking -->
+		<tbody><tr>
+			<td colspan="2">
+
+
+	
+	 
+	
+		 
+		 
+		         <!-- BEGIN: Digg This Bookmark -->
+<a href="http://digg.com/submit?phase=2&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F&topic=tech_news&bodytext=Q%2E%20I%20have%20NAT%20Traversal%20enabled%20on%20my%20firewall%2DA%20for%20dialup%20to%20LAN%20VPN%2E%20In%20front%20of%20the%20VPN%20client%2C%20the%20firewall%2DB%20has%20IPsec%20Passthrough%20enabled%2E%20I%27ve%20read%20many%20documents%20that%20state%20that%20NAT%20Traversal%20and%20IPsec%20Passthrough%20together%20don%27t%20work%2C%20so%20I%27ve%20disabled%20the%20IPsec%20Passthrough%20in%20firewall%2DB%20to%20make%20the%20tunnel%20work%2E%20But%20my%20client%20needs%20a%20solid%20reason%20for%20disabling%20the%20IPsec%20Passthrough%20feature%20as%20he%20is%20not%20convinced%20by%20it%2E%20Could%20you%20explain%20this%20to%20me%3FnA%2E%20NAT%20Traversal%20and%20IPsec%20Passthrough%20are%20two%20different%20solutions%20to%20tunneling%20encrypted%20packets%20through%20an%20NAT%2Ding%20device%20like%20a%20firewall%2E%20%20You%20should%20not%20need%20to%20disable%20IPsec%20Passthrough%20to%20use%20NAT%20Traversal%3B%20in%20general%2C%20they%20should%20have%20no%20impact%20on%20each%20other%2E%3Cp%3E%0A%0AVPN%20Passthrough%20deals%20with%20the%20fact%20that%20encrypted%20IPsec%20%28ESP%29%20or%20PPTP%20%28GRE%29%20packets%20don%27t%20carry%20cleartext%20source%20and%20destination%20ports%20like%20unencrypted%20TCP%2FUDP%20packets%20do%2E%20%20Many%2Dto%2Done%20outbound%20NAT%20translates%20both%20IP%20address%20and%20port%20number%2C%20letting%20many%20sessions%20share%20the%20same%20public%20IP%20address%2E%20%20A%20VPN%20client%20can%20usually%20establish%20an%20IPsec%20or%20PPTP%20tunnel%20because%20control%20traffic%20is%20sent%20using%20standard%20UDP%20or%20TCP%20packets%20that%20are%20NAT%27ed%20without%20difficulty%2E%20%20However%2C%20once%20the%20tunnel%20is%20up%2C%20the%20NAT%2Ding%20device%20doesn%27t%20know%20what%20to%20do%20with%20incoming%20ESP%20or%20GRE%20packets%2C%20or%20how%20to%20port%2Dtranslate%20outgoing%20ESP%20or%20GRE%20packets%2E%20%20Turning%20on%20VPN%20Passthrough%20instructs%20the%20NAT%20to%20%22pass%20through%22%20outbound%20ESP%20or%20GRE%20without%20trying%20to%20translate%20a%20port%20number%2C%20and%20to%20correlate%20incoming%20ESP%20or%20GRE%20packets%20to%20the%20VPN%20client%20they%20belong%20to%20without%20using%20a%20port%20number%2E%20%20How%20Passthrough%20works%20depends%20on%20the%20product%2C%20particularly%20with%20respect%20to%20correlating%20more%20than%20one%20tunnel%2E%3Cp%3E%0A%0ANAT%20Traversal%20takes%20a%20different%20approach%2E%20%20Instead%20of%20requiring%20the%20NAT%2Ding%20device%20to%20do%20something%20unusual%2C%20NAT%20Traversal%20makes%20the%20IPsec%20ESP%20traffic%20look%20like%20any%20other%20UDP%20traffic%2E%20%20NAT%20Traversal%20requires%20cooperation%20on%20both%20endpoints%20of%20the%20tunnel%3A%20the%20VPN%20client%20and%20the%20VPN%20gateway%2E%20%20During%20IPsec%20tunnel%20establishment%2C%20those%20endpoints%20detect%20the%20presence%20of%20a%20NAT%2Ding%20device%20between%20them%20and%20agree%20to%20use%20a%20particular%20version%20of%20NAT%20Traversal%2E%20%20After%20the%20tunnel%20is%20up%2C%20the%20sender%20takes%20every%20ESP%20packet%20and%20wraps%20it%20inside%20a%20UDP%20header%20before%20sending%20it%2E%20%20The%20NAT%2Ding%20device%20receives%20and%20forwards%20the%20UDP%2Dencapsulated%20ESP%20packet%20in%20the%20usual%20way%2C%20translating%20both%20the%20IP%20address%20and%20cleartext%20UDP%20port%2E%20%20The%20receiver%20strips%20off%20the%20UDP%20header%2C%20then%20processes%20the%20ESP%20packet%2E%3Cp%3E%0A%0AWhy%20would%20VPN%20Passthrough%20and%20NAT%20Traversal%20interfere%20with%20each%20other%3F%20%20A%20VPN%20client%20and%20gateway%20using%20NAT%20Traversal%20encapsulates%20ESP%20or%20GRE%20inside%20a%20UDP%20header%2C%20so%20the%20NAT%2Ding%20device%20never%20receives%20any%20ESP%20or%20GRE%20packets%20to%20%22pass%20through%2E%22%20%20If%20you%20run%20into%20a%20conflict%20between%20the%20two%2C%20it%20may%20be%20the%20way%20a%20particular%20NAT%2Ding%20device%27s%20Passthrough%20implementation%20handles%20VPN%20control%20traffic%20or%20a%20firewall%20rule%20that%20filters%20packets%20sent%20on%20the%20UDP%20port%20used%20by%20NAT%2DTraversal%2E" target="_new"><img src="digg_icon.gif" valign="bottom" width="16" border="0" height="16"></a>
+<a href="http://digg.com/submit?phase=2&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F&topic=tech_news&bodytext=Q%2E%20I%20have%20NAT%20Traversal%20enabled%20on%20my%20firewall%2DA%20for%20dialup%20to%20LAN%20VPN%2E%20In%20front%20of%20the%20VPN%20client%2C%20the%20firewall%2DB%20has%20IPsec%20Passthrough%20enabled%2E%20I%27ve%20read%20many%20documents%20that%20state%20that%20NAT%20Traversal%20and%20IPsec%20Passthrough%20together%20don%27t%20work%2C%20so%20I%27ve%20disabled%20the%20IPsec%20Passthrough%20in%20firewall%2DB%20to%20make%20the%20tunnel%20work%2E%20But%20my%20client%20needs%20a%20solid%20reason%20for%20disabling%20the%20IPsec%20Passthrough%20feature%20as%20he%20is%20not%20convinced%20by%20it%2E%20Could%20you%20explain%20this%20to%20me%3FnA%2E%20NAT%20Traversal%20and%20IPsec%20Passthrough%20are%20two%20different%20solutions%20to%20tunneling%20encrypted%20packets%20through%20an%20NAT%2Ding%20device%20like%20a%20firewall%2E%20%20You%20should%20not%20need%20to%20disable%20IPsec%20Passthrough%20to%20use%20NAT%20Traversal%3B%20in%20general%2C%20they%20should%20have%20no%20impact%20on%20each%20other%2E%3Cp%3E%0A%0AVPN%20Passthrough%20deals%20with%20the%20fact%20that%20encrypted%20IPsec%20%28ESP%29%20or%20PPTP%20%28GRE%29%20packets%20don%27t%20carry%20cleartext%20source%20and%20destination%20ports%20like%20unencrypted%20TCP%2FUDP%20packets%20do%2E%20%20Many%2Dto%2Done%20outbound%20NAT%20translates%20both%20IP%20address%20and%20port%20number%2C%20letting%20many%20sessions%20share%20the%20same%20public%20IP%20address%2E%20%20A%20VPN%20client%20can%20usually%20establish%20an%20IPsec%20or%20PPTP%20tunnel%20because%20control%20traffic%20is%20sent%20using%20standard%20UDP%20or%20TCP%20packets%20that%20are%20NAT%27ed%20without%20difficulty%2E%20%20However%2C%20once%20the%20tunnel%20is%20up%2C%20the%20NAT%2Ding%20device%20doesn%27t%20know%20what%20to%20do%20with%20incoming%20ESP%20or%20GRE%20packets%2C%20or%20how%20to%20port%2Dtranslate%20outgoing%20ESP%20or%20GRE%20packets%2E%20%20Turning%20on%20VPN%20Passthrough%20instructs%20the%20NAT%20to%20%22pass%20through%22%20outbound%20ESP%20or%20GRE%20without%20trying%20to%20translate%20a%20port%20number%2C%20and%20to%20correlate%20incoming%20ESP%20or%20GRE%20packets%20to%20the%20VPN%20client%20they%20belong%20to%20without%20using%20a%20port%20number%2E%20%20How%20Passthrough%20works%20depends%20on%20the%20product%2C%20particularly%20with%20respect%20to%20correlating%20more%20than%20one%20tunnel%2E%3Cp%3E%0A%0ANAT%20Traversal%20takes%20a%20different%20approach%2E%20%20Instead%20of%20requiring%20the%20NAT%2Ding%20device%20to%20do%20something%20unusual%2C%20NAT%20Traversal%20makes%20the%20IPsec%20ESP%20traffic%20look%20like%20any%20other%20UDP%20traffic%2E%20%20NAT%20Traversal%20requires%20cooperation%20on%20both%20endpoints%20of%20the%20tunnel%3A%20the%20VPN%20client%20and%20the%20VPN%20gateway%2E%20%20During%20IPsec%20tunnel%20establishment%2C%20those%20endpoints%20detect%20the%20presence%20of%20a%20NAT%2Ding%20device%20between%20them%20and%20agree%20to%20use%20a%20particular%20version%20of%20NAT%20Traversal%2E%20%20After%20the%20tunnel%20is%20up%2C%20the%20sender%20takes%20every%20ESP%20packet%20and%20wraps%20it%20inside%20a%20UDP%20header%20before%20sending%20it%2E%20%20The%20NAT%2Ding%20device%20receives%20and%20forwards%20the%20UDP%2Dencapsulated%20ESP%20packet%20in%20the%20usual%20way%2C%20translating%20both%20the%20IP%20address%20and%20cleartext%20UDP%20port%2E%20%20The%20receiver%20strips%20off%20the%20UDP%20header%2C%20then%20processes%20the%20ESP%20packet%2E%3Cp%3E%0A%0AWhy%20would%20VPN%20Passthrough%20and%20NAT%20Traversal%20interfere%20with%20each%20other%3F%20%20A%20VPN%20client%20and%20gateway%20using%20NAT%20Traversal%20encapsulates%20ESP%20or%20GRE%20inside%20a%20UDP%20header%2C%20so%20the%20NAT%2Ding%20device%20never%20receives%20any%20ESP%20or%20GRE%20packets%20to%20%22pass%20through%2E%22%20%20If%20you%20run%20into%20a%20conflict%20between%20the%20two%2C%20it%20may%20be%20the%20way%20a%20particular%20NAT%2Ding%20device%27s%20Passthrough%20implementation%20handles%20VPN%20control%20traffic%20or%20a%20firewall%20rule%20that%20filters%20packets%20sent%20on%20the%20UDP%20port%20used%20by%20NAT%2DTraversal%2E" target="_new"><span class="a2">Digg This!</span></a>
+		   <!-- END: Digg This Bookmark -->
+ &nbsp;&nbsp;   <!-- BEGIN: StumbleUpon -->
+		 <a target="_new" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><img src="stumbleit.gif" alt="StumbleUpon Toolbar" valign="bottom" border="0"></a>&nbsp;<a target="_new" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><span class="a2">StumbleUpon</span></a>
+		 <!-- END: StumbleUpon -->
+ &nbsp;&nbsp; 
+<!-- BEGIN: Delicious Bookmark -->
+<a target="_new" href="http://del.icio.us/post?v=4&noui&jump=close&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><img src="delicious.png" alt="Bookmark with Delicious" valign="bottom" width="16" border="0" height="16"></a>&nbsp;<a target="_new" href="http://del.icio.us/post?v=4&noui&jump=close&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><span class="a2">Del.icio.us</span></a>
+<!-- END: Delicious Bookmark -->
+  &nbsp;&nbsp;  </td>
+			
+		</tr>
+		<!-- END: Social Bookmarking -->
+ </tbody></table>
+	<img src="spacer.gif" alt="" width="1" height="15"><br>
+	<!-- RSS End -->
+
+
+			<br>
+		</td>
+	</tr>
+	<!-- RSS Row End -->
+  
+				
+				<!-- Question Begin -->
+				<tr>
+					<td class="carrot" valign="top">&gt;</td>
+					<td class="body" valign="top" width="100%">
+						<table width="100%" border="0">
+							<tbody><tr>
+								<td class="body" valign="top">
+									<span class="a1"><span class="text6">
+
+	
+		QUESTION POSED ON: 05 August    2004  </span></span><br>
+									<b>I have NAT Traversal enabled on my firewall-A for dialup to LAN VPN. In front of the VPN client, the firewall-B has IPsec Passthrough enabled. I've read many documents that state that NAT Traversal and IPsec Passthrough together don't work, so I've disabled the IPsec Passthrough in firewall-B to make the tunnel work. But my client needs a solid reason for disabling the IPsec Passthrough feature as he is not convinced by it. Could you explain this to me?</b>
+								</td>
+							</tr>
+						</tbody></table>
+						<br>
+					</td>
+				</tr>
+				<!-- Question End -->
+				<!-- Response Begin -->
+				<tr>
+					<td class="carrot" valign="top">&gt;</td>
+					<td class="body" valign="top">
+						<table width="100%" border="0">
+							<tbody><tr>
+								<td class="body" valign="top">
+									<span class="a1"><span class="text6">EXPERT RESPONSE</span></span><br>
+								
+									<script language="javascript">
+
+										ttWriteMboxDiv('searchNetworking_ATE_Content_Body');
+										ttWriteMboxContent('searchNetworking_ATE_Content_Body');
+									</script><div style="visibility: visible; display: block;" id="mboxImported-searchNetworking_ATE_Content_Body-0"><!-- Offer Id: 10385  --><script type="text/javascript">
+
+function writeLink() {
+    var link = "http://mbox5.offermatica.com/m2/techtarget/ubox/page" + 
+    "?mbox=dice" + "&mboxSession=" + mboxFactoryDefault.getSessionId().getId() + 
+    "&mboxPC=" + mboxFactoryDefault.getPCId().getId() + "&mboxXDomain=disabled" + 
+    "&mboxDefault=";
+    
+    var domain = document.domain;
+    var diceLink = "http://ad.doubleclick.net/clk;201022079;26352982;z?http://seeker.dice.com/jobsearch/servlet/JobSearch?op=300&N=0&Hf=0&NUM_PER_PAGE=30&Ntk=JobSearchRanking&Ntx=mode+matchall&AREA_CODES=&AC_COUNTRY=1525&QUICK=1&ZIPCODE=&RADIUS=64.37376&ZC_COUNTRY=0&COUNTRY=1525&STAT_PROV=0&METRO_AREA=33.78715899%2C-84.39164034&TRAVEL=0&TAXTERM=0&SORTSPEC=0&FRMT=0&DAYSBACK=30&LOCATION_OPTION=2&FREE_TEXT=networking&SEARCH.x=12&SEARCH.y=5" + "&WHERE=" + document.getElementById('zip').value;
+    
+    link = link + escape(diceLink);   
+    document.location.replace(link);
+}
+
+function mboxWriteTrackedLink(clickedMboxName, linkURL, linkTextOrImage){
+  document.write("<a href='#' " + "onclick='javascript:writeLink()'" + "'>" + linkTextOrImage + "</a>");
+}
+</script>
+
+<table width="200" align="left" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td colspan="3"><img src="spacer_002.gif" width="1" height="5"></td>
+	</tr>
+	<tr>
+		<td><img src="spacer_002.gif" width="5" height="1"></td>
+		<td>
+			<table style="border: 1px solid black;" border="0" cellpadding="0" cellspacing="0">
+				<tbody><tr>
+					<td colspan="3" class="color1"><img src="spacer_002.gif" width="190" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="color1"><img src="spacer_002.gif" width="1" height="2"></td>
+				</tr>
+				<tr>
+					<td class="color1"><img src="spacer_002.gif" width="5" height="1"></td>
+					<td class="color1"><span class="a4"><span class="textF"><b>New!<br>Networking Job Bank</b></span></span></td>
+					<td class="color1"><img src="spacer_002.gif" width="5" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="color1"><img src="spacer_002.gif" width="1" height="3"></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="color0"><img src="spacer_002.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+					<td><img src="spacer_002.gif" width="3" height="1"></td>
+					<td><span class="a5"><span class="text0"><b>Find Networking jobs near you.</b></span></span></td>
+					<td><img src="spacer_002.gif" width="5" height="1"></td></tr></tbody></table></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="10"></td>
+				</tr>
+				<tr>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+					<td align="center"><input id="zip"></td>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="2"></td>
+				</tr>
+				<tr>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+					<td align="center"><span class="a2"><b>Enter Location:</b> (City, State or ZIP)</span></td>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="12"></td>
+				</tr>
+				<tr>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+					<td align="center">
+<script type="text/javascript">
+
+mboxWriteTrackedLink('dice','http://ad.doubleclick.net/clk;201022079;26352982;z?http://www.dice.com','<img src="http://media.techtarget.com/digitalguide/images/Misc/dice_search_now.gif" alt="" border="0">');
+</script><a href="#" onclick="javascript:writeLink()"><img src="dice_search_now.gif" alt="" border="0"></a>
+
+</td>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="10"></td>
+				</tr>
+				<tr>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+					<td><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><span class="a2"><i>powered by:</i></span></td><td><img src="spacer_002.gif" width="3" height="1"></td><td><img src="dice_logo_2.gif" alt=""></td></tr></tbody></table></td>
+					<td><img src="spacer_002.gif" width="5" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="spacer_002.gif" width="1" height="10"></td>
+				</tr>
+			</tbody></table>
+		</td>
+		<td><img src="spacer_002.gif" width="5" height="1"></td>
+	</tr><tr>
+		<td colspan="3"><img src="spacer_002.gif" width="1" height="5"></td>
+	</tr>
+</tbody></table>
+</div><div id="mboxMarker-searchNetworking_ATE_Content_Body-0" style="visibility: hidden; display: none;"></div><script src="standard_003.dat" language="JavaScript"></script>										
+								 NAT Traversal and IPsec Passthrough are two different solutions to tunneling encrypted packets through an NAT-ing device like a firewall.  You should not need to disable IPsec Passthrough to use NAT Traversal; in general, they should have no impact on each other.<p>
+
+
+VPN Passthrough deals with the fact that encrypted IPsec (ESP) or PPTP (GRE) packets don't carry cleartext source and destination ports like unencrypted TCP/UDP packets do.  Many-to-one outbound NAT translates both IP address and port number, letting many sessions share the same public IP address.  A VPN client can usually establish an IPsec or PPTP tunnel because control traffic is sent using standard UDP or TCP packets that are NAT'ed without difficulty.  However, once the tunnel is up, the NAT-ing device doesn't know what to do with incoming ESP or GRE packets, or how to port-translate outgoing ESP or GRE packets.  Turning on VPN Passthrough instructs the NAT to "pass through" outbound ESP or GRE without trying to translate a port number, and to correlate incoming ESP or GRE packets to the VPN client they belong to without using a port number.  How Passthrough works depends on the product, particularly with respect to correlating more than one tunnel.</p><p>
+
+
+NAT Traversal takes a different approach.  Instead of requiring the NAT-ing device to do something unusual, NAT Traversal makes the IPsec ESP traffic look like any other UDP traffic.  NAT Traversal requires cooperation on both endpoints of the tunnel: the VPN client and the VPN gateway.  During IPsec tunnel establishment, those endpoints detect the presence of a NAT-ing device between them and agree to use a particular version of NAT Traversal.  After the tunnel is up, the sender takes every ESP packet and wraps it inside a UDP header before sending it.  The NAT-ing device receives and forwards the UDP-encapsulated ESP packet in the usual way, translating both the IP address and cleartext UDP port.  The receiver strips off the UDP header, then processes the ESP packet.</p><p>
+
+
+Why would VPN Passthrough and NAT Traversal interfere with each other?  A VPN client and gateway using NAT Traversal encapsulates ESP or GRE inside a UDP header, so the NAT-ing device never receives any ESP or GRE packets to "pass through."  If you run into a conflict between the two, it may be the way a particular NAT-ing device's Passthrough implementation handles VPN control traffic or a firewall rule that filters packets sent on the UDP port used by NAT-Traversal. </p>
+								</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				<!-- Response End -->
+				<tr>
+					<td></td>
+					<td>
+							
+							      
+
+
+	   <!-- Vignette V/5 Wed Jul 02 22:35:42 2008 -->
+
+ 
+
+
+<!-- searchNetworking.techtarget.com, searchNetworking, generated on July 02, 2008, by scorpio-->
+ 
+
+
+	
+	
+		 
+		  
+		  
+
+
+	
+
+
+
+	<!-- BEGIN: Social Bookmarking -->
+	
+	 <br><table border="0">
+	
+		<tbody><tr>
+			<td colspan="2">
+			
+	
+	
+	 
+	
+		 
+		 
+		         <!-- BEGIN: Digg This Bookmark -->
+<a href="http://digg.com/submit?phase=2&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F&topic=tech_news&bodytext=Q%2E%20I%20have%20NAT%20Traversal%20enabled%20on%20my%20firewall%2DA%20for%20dialup%20to%20LAN%20VPN%2E%20In%20front%20of%20the%20VPN%20client%2C%20the%20firewall%2DB%20has%20IPsec%20Passthrough%20enabled%2E%20I%27ve%20read%20many%20documents%20that%20state%20that%20NAT%20Traversal%20and%20IPsec%20Passthrough%20together%20don%27t%20work%2C%20so%20I%27ve%20disabled%20the%20IPsec%20Passthrough%20in%20firewall%2DB%20to%20make%20the%20tunnel%20work%2E%20But%20my%20client%20needs%20a%20solid%20reason%20for%20disabling%20the%20IPsec%20Passthrough%20feature%20as%20he%20is%20not%20convinced%20by%20it%2E%20Could%20you%20explain%20this%20to%20me%3FnA%2E%20NAT%20Traversal%20and%20IPsec%20Passthrough%20are%20two%20different%20solutions%20to%20tunneling%20encrypted%20packets%20through%20an%20NAT%2Ding%20device%20like%20a%20firewall%2E%20%20You%20should%20not%20need%20to%20disable%20IPsec%20Passthrough%20to%20use%20NAT%20Traversal%3B%20in%20general%2C%20they%20should%20have%20no%20impact%20on%20each%20other%2E%3Cp%3E%0A%0AVPN%20Passthrough%20deals%20with%20the%20fact%20that%20encrypted%20IPsec%20%28ESP%29%20or%20PPTP%20%28GRE%29%20packets%20don%27t%20carry%20cleartext%20source%20and%20destination%20ports%20like%20unencrypted%20TCP%2FUDP%20packets%20do%2E%20%20Many%2Dto%2Done%20outbound%20NAT%20translates%20both%20IP%20address%20and%20port%20number%2C%20letting%20many%20sessions%20share%20the%20same%20public%20IP%20address%2E%20%20A%20VPN%20client%20can%20usually%20establish%20an%20IPsec%20or%20PPTP%20tunnel%20because%20control%20traffic%20is%20sent%20using%20standard%20UDP%20or%20TCP%20packets%20that%20are%20NAT%27ed%20without%20difficulty%2E%20%20However%2C%20once%20the%20tunnel%20is%20up%2C%20the%20NAT%2Ding%20device%20doesn%27t%20know%20what%20to%20do%20with%20incoming%20ESP%20or%20GRE%20packets%2C%20or%20how%20to%20port%2Dtranslate%20outgoing%20ESP%20or%20GRE%20packets%2E%20%20Turning%20on%20VPN%20Passthrough%20instructs%20the%20NAT%20to%20%22pass%20through%22%20outbound%20ESP%20or%20GRE%20without%20trying%20to%20translate%20a%20port%20number%2C%20and%20to%20correlate%20incoming%20ESP%20or%20GRE%20packets%20to%20the%20VPN%20client%20they%20belong%20to%20without%20using%20a%20port%20number%2E%20%20How%20Passthrough%20works%20depends%20on%20the%20product%2C%20particularly%20with%20respect%20to%20correlating%20more%20than%20one%20tunnel%2E%3Cp%3E%0A%0ANAT%20Traversal%20takes%20a%20different%20approach%2E%20%20Instead%20of%20requiring%20the%20NAT%2Ding%20device%20to%20do%20something%20unusual%2C%20NAT%20Traversal%20makes%20the%20IPsec%20ESP%20traffic%20look%20like%20any%20other%20UDP%20traffic%2E%20%20NAT%20Traversal%20requires%20cooperation%20on%20both%20endpoints%20of%20the%20tunnel%3A%20the%20VPN%20client%20and%20the%20VPN%20gateway%2E%20%20During%20IPsec%20tunnel%20establishment%2C%20those%20endpoints%20detect%20the%20presence%20of%20a%20NAT%2Ding%20device%20between%20them%20and%20agree%20to%20use%20a%20particular%20version%20of%20NAT%20Traversal%2E%20%20After%20the%20tunnel%20is%20up%2C%20the%20sender%20takes%20every%20ESP%20packet%20and%20wraps%20it%20inside%20a%20UDP%20header%20before%20sending%20it%2E%20%20The%20NAT%2Ding%20device%20receives%20and%20forwards%20the%20UDP%2Dencapsulated%20ESP%20packet%20in%20the%20usual%20way%2C%20translating%20both%20the%20IP%20address%20and%20cleartext%20UDP%20port%2E%20%20The%20receiver%20strips%20off%20the%20UDP%20header%2C%20then%20processes%20the%20ESP%20packet%2E%3Cp%3E%0A%0AWhy%20would%20VPN%20Passthrough%20and%20NAT%20Traversal%20interfere%20with%20each%20other%3F%20%20A%20VPN%20client%20and%20gateway%20using%20NAT%20Traversal%20encapsulates%20ESP%20or%20GRE%20inside%20a%20UDP%20header%2C%20so%20the%20NAT%2Ding%20device%20never%20receives%20any%20ESP%20or%20GRE%20packets%20to%20%22pass%20through%2E%22%20%20If%20you%20run%20into%20a%20conflict%20between%20the%20two%2C%20it%20may%20be%20the%20way%20a%20particular%20NAT%2Ding%20device%27s%20Passthrough%20implementation%20handles%20VPN%20control%20traffic%20or%20a%20firewall%20rule%20that%20filters%20packets%20sent%20on%20the%20UDP%20port%20used%20by%20NAT%2DTraversal%2E" target="_new"><img src="digg_icon.gif" valign="bottom" width="16" border="0" height="16"></a>
+<a href="http://digg.com/submit?phase=2&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F&topic=tech_news&bodytext=Q%2E%20I%20have%20NAT%20Traversal%20enabled%20on%20my%20firewall%2DA%20for%20dialup%20to%20LAN%20VPN%2E%20In%20front%20of%20the%20VPN%20client%2C%20the%20firewall%2DB%20has%20IPsec%20Passthrough%20enabled%2E%20I%27ve%20read%20many%20documents%20that%20state%20that%20NAT%20Traversal%20and%20IPsec%20Passthrough%20together%20don%27t%20work%2C%20so%20I%27ve%20disabled%20the%20IPsec%20Passthrough%20in%20firewall%2DB%20to%20make%20the%20tunnel%20work%2E%20But%20my%20client%20needs%20a%20solid%20reason%20for%20disabling%20the%20IPsec%20Passthrough%20feature%20as%20he%20is%20not%20convinced%20by%20it%2E%20Could%20you%20explain%20this%20to%20me%3FnA%2E%20NAT%20Traversal%20and%20IPsec%20Passthrough%20are%20two%20different%20solutions%20to%20tunneling%20encrypted%20packets%20through%20an%20NAT%2Ding%20device%20like%20a%20firewall%2E%20%20You%20should%20not%20need%20to%20disable%20IPsec%20Passthrough%20to%20use%20NAT%20Traversal%3B%20in%20general%2C%20they%20should%20have%20no%20impact%20on%20each%20other%2E%3Cp%3E%0A%0AVPN%20Passthrough%20deals%20with%20the%20fact%20that%20encrypted%20IPsec%20%28ESP%29%20or%20PPTP%20%28GRE%29%20packets%20don%27t%20carry%20cleartext%20source%20and%20destination%20ports%20like%20unencrypted%20TCP%2FUDP%20packets%20do%2E%20%20Many%2Dto%2Done%20outbound%20NAT%20translates%20both%20IP%20address%20and%20port%20number%2C%20letting%20many%20sessions%20share%20the%20same%20public%20IP%20address%2E%20%20A%20VPN%20client%20can%20usually%20establish%20an%20IPsec%20or%20PPTP%20tunnel%20because%20control%20traffic%20is%20sent%20using%20standard%20UDP%20or%20TCP%20packets%20that%20are%20NAT%27ed%20without%20difficulty%2E%20%20However%2C%20once%20the%20tunnel%20is%20up%2C%20the%20NAT%2Ding%20device%20doesn%27t%20know%20what%20to%20do%20with%20incoming%20ESP%20or%20GRE%20packets%2C%20or%20how%20to%20port%2Dtranslate%20outgoing%20ESP%20or%20GRE%20packets%2E%20%20Turning%20on%20VPN%20Passthrough%20instructs%20the%20NAT%20to%20%22pass%20through%22%20outbound%20ESP%20or%20GRE%20without%20trying%20to%20translate%20a%20port%20number%2C%20and%20to%20correlate%20incoming%20ESP%20or%20GRE%20packets%20to%20the%20VPN%20client%20they%20belong%20to%20without%20using%20a%20port%20number%2E%20%20How%20Passthrough%20works%20depends%20on%20the%20product%2C%20particularly%20with%20respect%20to%20correlating%20more%20than%20one%20tunnel%2E%3Cp%3E%0A%0ANAT%20Traversal%20takes%20a%20different%20approach%2E%20%20Instead%20of%20requiring%20the%20NAT%2Ding%20device%20to%20do%20something%20unusual%2C%20NAT%20Traversal%20makes%20the%20IPsec%20ESP%20traffic%20look%20like%20any%20other%20UDP%20traffic%2E%20%20NAT%20Traversal%20requires%20cooperation%20on%20both%20endpoints%20of%20the%20tunnel%3A%20the%20VPN%20client%20and%20the%20VPN%20gateway%2E%20%20During%20IPsec%20tunnel%20establishment%2C%20those%20endpoints%20detect%20the%20presence%20of%20a%20NAT%2Ding%20device%20between%20them%20and%20agree%20to%20use%20a%20particular%20version%20of%20NAT%20Traversal%2E%20%20After%20the%20tunnel%20is%20up%2C%20the%20sender%20takes%20every%20ESP%20packet%20and%20wraps%20it%20inside%20a%20UDP%20header%20before%20sending%20it%2E%20%20The%20NAT%2Ding%20device%20receives%20and%20forwards%20the%20UDP%2Dencapsulated%20ESP%20packet%20in%20the%20usual%20way%2C%20translating%20both%20the%20IP%20address%20and%20cleartext%20UDP%20port%2E%20%20The%20receiver%20strips%20off%20the%20UDP%20header%2C%20then%20processes%20the%20ESP%20packet%2E%3Cp%3E%0A%0AWhy%20would%20VPN%20Passthrough%20and%20NAT%20Traversal%20interfere%20with%20each%20other%3F%20%20A%20VPN%20client%20and%20gateway%20using%20NAT%20Traversal%20encapsulates%20ESP%20or%20GRE%20inside%20a%20UDP%20header%2C%20so%20the%20NAT%2Ding%20device%20never%20receives%20any%20ESP%20or%20GRE%20packets%20to%20%22pass%20through%2E%22%20%20If%20you%20run%20into%20a%20conflict%20between%20the%20two%2C%20it%20may%20be%20the%20way%20a%20particular%20NAT%2Ding%20device%27s%20Passthrough%20implementation%20handles%20VPN%20control%20traffic%20or%20a%20firewall%20rule%20that%20filters%20packets%20sent%20on%20the%20UDP%20port%20used%20by%20NAT%2DTraversal%2E" target="_new"><span class="a2">Digg This!</span></a>
+		   <!-- END: Digg This Bookmark -->
+ &nbsp;&nbsp;   <!-- BEGIN: StumbleUpon -->
+		 <a target="_new" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><img src="stumbleit.gif" alt="StumbleUpon Toolbar" valign="bottom" border="0"></a>&nbsp;<a target="_new" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><span class="a2">StumbleUpon</span></a>
+		 <!-- END: StumbleUpon -->
+ &nbsp;&nbsp;  
+<!-- BEGIN: Delicious Bookmark -->
+<a target="_new" href="http://del.icio.us/post?v=4&noui&jump=close&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><img src="delicious.png" alt="Bookmark with Delicious" valign="bottom" width="16" border="0" height="16"></a>&nbsp;<a target="_new" href="http://del.icio.us/post?v=4&noui&jump=close&url=http%3A%2F%2FsearchNetworking%2Etechtarget%2Ecom%2Fexpert%2FKnowledgebaseAnswer%2F0%2C289625%2Csid7%5Fgci997245%2C00%2Ehtml&title=Why+don%27t+NAT+Traversal+and+IPsec+Passthrough+work+together%3F"><span class="a2">Del.icio.us</span></a>
+<!-- END: Delicious Bookmark -->
+  &nbsp;&nbsp;   </td>
+			
+		</tr>
+
+ </tbody></table>
+	 <!--END: Social Bookmarking -->
+	 <br><br>
+
+
+	
+	 <!-- begin Google AdSense -->
+	<script>
+
+	<!--
+	function ss(w){window.status=w;return true;}
+	function cs(){window.status='';}
+	function ga(o,e){
+		if (document.getElementById){
+			a=o.id.substring(1);
+			p="";
+			g=e.target;
+				if(g){
+					t=g.id;f=g.parentNode;
+						if(f)p=f.id;
+					}
+				else{t=e.srcElement.id;}
+					if(t==a||p==a)return;location.href=document.getElementById(a).href
+		}
+	}
+	//-->
+	</script>
+	
+	<script language="JavaScript">
+
+	<!--
+	function google_ad_request_done(google_ads) {
+		var i;
+		if(google_ads.length > 0) {
+			document.write('<!-- begin Google AdSense writes -->');
+			document.write('<table width="100%" cellspacing="0" cellpadding="0" border="0">');
+			document.write('<tr>');
+			document.write('<td align="right" valign="top"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="2">
+<img src="http://media.techtarget.com/digitalguide/images/Misc/splash_icon_related_links.gif" width="13" height="13"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+			document.write('<td><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="5" height="1"></td>');
+			document.write('<td class="colorback"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+			document.write('<td><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="5" height="1"></td>');
+			document.write('<td width="100%" class="textHighlite"><b>NETWORKING RELATED LINKS</b></td>');
+			document.write('</tr>');
+
+			document.write('<tr>');
+			document.write('<td align="right" valign="top"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="2">
+<img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+			document.write('<td><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="5" height="1"></td>');
+			document.write('<td class="colorback"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+			document.write('<td><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="5" height="25"></td>');
+			document.write('<td width="100%" class="a3"><b>Ads by Google</b></td>');
+			document.write('</tr>');
+
+			document.write('<tr>');
+			document.write('<td colspan="2"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="5"></td>');
+			document.write('<td class="colorback"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+			document.write('<td colspan="2"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="1"></td>');
+			document.write('</tr>');
+
+		    for(i = 0; i < google_ads.length; ++i) {
+				document.write('<!-- begin ad -->');
+				document.write('<tr>');
+				document.write('<td colspan="2"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="1"></td>');
+				document.write('<td class="colorback"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+				document.write('<td><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="1"></td>');
+				document.write('		<td width="100%" style="cursor:pointer; cursor:hand" onMouseOver="return ss(\'' + google_ads[i].visible_url + '\')" onMouseOut="cs()" onClick="window.location.href=\'' + google_ads[i].url + '\'">');
+				document.write('<a href="' + google_ads[i].url + '"><b>' + google_ads[i].line1 + '</b></a>
+');
+				document.write('			<span class="a3">' + google_ads[i].line2 + '');
+				document.write('			' + google_ads[i].line3 + '
+');
+				document.write('					<a href="' + google_ads[i].url + '" class="green"><span class="nunder"><span class="a3">' + google_ads[i].visible_url + '</span></span></a></span>');
+				document.write('</td>');
+				document.write('</tr>');
+				document.write('<tr>');
+				document.write('<td colspan="2"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="15"></td>');
+				document.write('<td class="colorback"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="2" height="1"></td>');
+				document.write('<td colspan="2"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="1"></td>');
+				document.write('</tr>');
+				document.write('<!-- end ad -->');
+			}
+			document.write('<tr><td colspan="5"><img src="http://media.techtarget.com/searchNetworking/images/spacer.gif" width="1" height="15"></td></tr>');
+			document.write('</table>');
+			document.write('
+');
+			document.write('<!-- end Google AdSense writes -->');
+		}
+	}
+	// -->
+	</script>
+
+	<script language="JavaScript">
+
+	<!--
+	         google_ad_client = 'ca-techtarget_js';
+	         google_ad_channel = 'other';
+	         google_ad_output = 'js';
+	         google_max_num_ads = 5;
+
+			if(cl_exclusive != 'Y') document.write('<script language="JavaScript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
+
+	// -->
+	</script><script style="display: none;" language="JavaScript" src="show_ads.js"></script>
+
+	<!-- end Google AdSense -->
+
+
+
+
+	
+
+	
+	    	
+	 
+	  
+			        
+				  
+				  
+					   
+			        
+				   
+			        
+				    
+	
+	
+	
+		
+		
+			
+			
+				
+					<!-- BEGIN: Related Content-->
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td valign="top"><img src="icon_mottinfo.gif" width="14" height="14"></td>
+				<td><img src="spacer_003.gif" width="6" height="100%"></td>
+				<td class="colorback"><img src="spacer_003.gif" alt="" width="2" height="100%">
+		
+				</td><td><img src="spacer_003.gif" width="5" height="100%"></td>
+				<td><span class="textHighlite"><b>RELATED CONTENT</b></span><br>
+				
+				
+				 
+				 
+					
+					
+					
+						
+							
+							        
+						
+							  <!-- BEGIN: Taxonomy  - VPN Troubleshooting -->
+								<table border="0" cellpadding="0" cellspacing="0">
+	
+										  
+										<tbody><tr>
+											<td><img src="bullet_square_999999.gif"></td>
+											<td><a href="http://searchnetworking.techtarget.com/topics/0,295493,sid7_tax299293,00.html" class="hoverLink"><span class="a3"><b>VPN Troubleshooting</b></span></a></td>
+										</tr>
+										 <!-- Begin List of Content  -->
+									
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1265787,00.html" class="hoverLink"><span class="a2">Can I set up a VPN on my wireless router?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1265791,00.html" class="hoverLink"><span class="a2">How can I get our VPN to work on Windows Vista?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1265792,00.html" class="hoverLink"><span class="a2">To set up a VPN server, do you need two NIC cards?</span></a>
+														</td>
+													</tr>
+												  
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1265316,00.html" class="hoverLink"><span class="a2">How do I connect to our VPN with authentication ID?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1252310,00.html" class="hoverLink"><span class="a2">What causes my overseas VPN connection to slow during the day?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1252028,00.html" class="hoverLink"><span class="a2">Why has the terminal server ended my connection?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1247136,00.html" class="hoverLink"><span class="a2">How can I access each device from my network while keeping the companies' networks secure?</span></a>
+														</td>
+													</tr>
+												  
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/tip/0,289483,sid7_gci1245584,00.html" class="hoverLink"><span class="a2">VPN operating system interoperability -- Configure VPNs with Windows, Checkpoint</span></a>
+														</td>
+													</tr>
+												  
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/tip/0,289483,sid7_gci1233283,00.html" class="hoverLink"><span class="a2">VPN operating system interoperability -- configure VPNs with Unix</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1231467,00.html" class="hoverLink"><span class="a2">How does the VPN concentrator work?</span></a>
+														</td>
+													</tr>
+												    <!-- End List of Content  -->				
+								 </tbody></table>
+								 <!-- END: Taxonomy  - VPN Troubleshooting -->
+								   
+					
+						
+							
+							        
+						
+							 <p> <!-- BEGIN: Taxonomy  - VPNs with Lisa Phifer -->
+								<table border="0" cellpadding="0" cellspacing="0">
+	
+										  
+										<tbody><tr>
+											<td><img src="bullet_square_999999.gif"></td>
+											<td><a href="http://searchnetworking.techtarget.com/topics/0,295493,sid7_tax296082,00.html" class="hoverLink"><span class="a3"><b>VPNs with Lisa Phifer</b></span></a></td>
+										</tr>
+										 <!-- Begin List of Content  -->
+									
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1086289,00.html" class="hoverLink"><span class="a2">Would you consider a Microsoft VPN tunnel through a WEP encrypted access point to be secure?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1079054,00.html" class="hoverLink"><span class="a2">I've heard rumors that some service providers can see unencrypted VPN traffic of their customers. Is this true?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1079057,00.html" class="hoverLink"><span class="a2">I need to select a Cisco ADSL router which is capable of acting as a VPN server for Microsoft VPN clients that come through the Internet.</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1070333,00.html" class="hoverLink"><span class="a2">I am having issues with the IKE communication between the two Cisco VPN concentrators.</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1070339,00.html" class="hoverLink"><span class="a2">What about using SSL VPN with e-mail clients?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1064430,00.html" class="hoverLink"><span class="a2">Can you have two VPN connections to the same machine simultaneously?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1059658,00.html" class="hoverLink"><span class="a2">Why can't I access my folders on the server through the VPN?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1059659,00.html" class="hoverLink"><span class="a2">I need a very basic VPN solution to connect two offices to allow two servers to talk to one another.</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1059662,00.html" class="hoverLink"><span class="a2">Can one use VPN over a peer-to-peer network within a home?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1059660,00.html" class="hoverLink"><span class="a2">After setting up my wireless router, I can no longer get on the VPN.</span></a>
+														</td>
+													</tr>
+												    <!-- End List of Content  -->				
+								 </tbody></table>
+								 <!-- END: Taxonomy  - VPNs with Lisa Phifer -->
+								   
+					
+						
+							
+							        
+						
+							 </p><p> <!-- BEGIN: Taxonomy  - Remote Access VPNs -->
+								<table border="0" cellpadding="0" cellspacing="0">
+	
+										  
+										<tbody><tr>
+											<td><img src="bullet_square_999999.gif"></td>
+											<td><a href="http://searchnetworking.techtarget.com/topics/0,295493,sid7_tax299291,00.html" class="hoverLink"><span class="a3"><b>Remote Access VPNs</b></span></a></td>
+										</tr>
+										 <!-- Begin List of Content  -->
+									
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/generic/0,295582,sid7_gci1308131,00.html" class="hoverLink"><span class="a2">Creating Remote Access and Site-to-Site VPNs with ISA Firewalls: from 'The Best Damn Firewall Book Period, Second Edition'</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1265787,00.html" class="hoverLink"><span class="a2">Can I set up a VPN on my wireless router?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/tip/0,289483,sid7_gci1263104,00.html" class="hoverLink"><span class="a2">VPN security: Hiding in plain sight, using network encryption</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/news/article/0,289142,sid7_gci1261518,00.html" class="hoverLink"><span class="a2">SonicWall acquisition could hurt Aventail users</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1252828,00.html" class="hoverLink"><span class="a2">Does IPv6 support encryption in the IP stack?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1252319,00.html" class="hoverLink"><span class="a2">What equipment do I use to connect two LANs in different cities? What are the steps?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/expert/KnowledgebaseAnswer/0,289625,sid7_gci1252323,00.html" class="hoverLink"><span class="a2">Are there any architectures of IPsec VPN apart from lookaside and flow-through?</span></a>
+														</td>
+													</tr>
+												  
+									
+										       
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/tip/0,289483,sid7_gci1245936,00.html" class="hoverLink"><span class="a2">NAC -- Strengthening your SSL VPN</span></a>
+														</td>
+													</tr>
+												  
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/news/article/0,289142,sid7_gci1246179,00.html" class="hoverLink"><span class="a2">WAN optimization and acceleration appliances tackle SSL traffic</span></a>
+														</td>
+													</tr>
+												  
+									
+										     	
+											   
+											 
+													<tr>
+														<td><img src="spacer_003.gif" width="1" height="1"></td>
+														<td><a href="http://searchnetworking.techtarget.com/news/article/0,289142,sid7_gci1239713,00.html" class="hoverLink"><span class="a2">Remote access keeps physicians connected</span></a>
+														</td>
+													</tr>
+												   
+										<tr>
+											<td><img src="spacer_003.gif" width="1" height="1"></td>
+											<td><a href="http://searchnetworking.bitpipe.com/data/rlist?t=soft_10_100_66_4" class="hoverLink"><span class="a2">Remote Access VPNs Research</span></a></td>
+										</tr>
+									 <!-- End List of Content  -->				
+								 </tbody></table>
+								 <!-- END: Taxonomy  - Remote Access VPNs -->
+								    </p></td>
+			</tr>
+		</tbody></table>
+		<!-- END: Related Content Splash -->   
+			
+			
+				
+					
+
+<p><!-- BEGIN: Related Glossary -->
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td valign="top"><img src="icon_mottinfo.gif" width="14" height="14"></td>
+				<td><img src="spacer_003.gif" width="6" height="100%"></td>
+
+				<td class="colorback"><img src="spacer_003.gif" alt="" width="2" height="100%">
+		
+				</td><td><img src="spacer_003.gif" width="5" height="100%"></td>
+				<td><span class="textHighlite"><b>RELATED GLOSSARY TERMS</b></span><br>
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tbody><tr><td colspan="2" class="a2">Terms from Whatis.com &minus; the <a href="http://whatis.techtarget.com/" class="hoverLink"><span class="a2">technology online dictionary</span></a></td></tr>
+					
+					<!-- BEGIN: Glossary Terms -->	
+					
+					
+					
+					    	
+						  
+					 
+					 
+						      <tr>
+							<td valign="top"><img src="bullet_square_999999.gif"></td>
+							<td align="left"><a href="http://searchnetworking.techtarget.com/sDefinition/0,290660,sid7_gci1232784,00.html" class="hoverLink"><span class="a2">virtual systems management</span></a>
+								
+									&nbsp;<span class="a1"><span class="text6">(SearchNetworking.com)</span></span>
+								  </td>
+						</tr>
+					
+					
+					     
+					 
+					 
+						      <tr>
+							<td valign="top"><img src="bullet_square_999999.gif"></td>
+							<td align="left"><a href="http://searchnetworking.techtarget.com/sDefinition/0,290660,sid7_gci1192573,00.html" class="hoverLink"><span class="a2">VPN appliance</span></a>
+								
+									&nbsp;<span class="a1"><span class="text6">(SearchNetworking.com)</span></span>
+								  </td>
+						</tr>
+					 </tbody></table>
+					<!-- END: Glossary Terms -->
+									 
+				</td>
+			</tr>
+		</tbody></table>
+		<!-- END: Related Glossary Splash -->
+    
+		
+		
+		
+			</p><p> <!-- BEGIN: Bitpipe Splash -->
+
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td valign="top"><img src="icon_mottinfo.gif" width="14" height="14"></td>
+				<td><img src="spacer_003.gif" width="6" height="100%"></td>
+				<td class="colorback"><img src="spacer_003.gif" alt="" width="2" height="100%">
+		
+				</td><td><img src="spacer_003.gif" width="5" height="100%"></td>
+				<td><span class="textHighlite"><b>RELATED RESOURCES</b></span><br>
+<table border="0" cellpadding="0" cellspacing="0">
+						<tbody><tr><td valign="top"><img src="bullet_square_999999.gif" alt=""></td>
+						<td class="a2">2020software.com, trial software downloads for <a href="http://www.2020software.com/" class="hoverLink">
+						<span class="a2">accounting software</span></a>, <a href="http://www.2020software.com/" class="hoverLink"><span class="a2">ERP software, CRM software and business software</span></a> systems
+						</td></tr>
+					
+						<tr><td valign="top"><img src="bullet_square_999999.gif" alt=""></td><td class="a2">Search Bitpipe.com for 
+						the latest <a href="http://searchnetworking.bitpipe.com/" class="hoverLink"><span class="a2">white papers</span></a> and 
+						<a href="http://searchnetworking.bitpipe.com/webcasts" class="hoverLink"><span class="a2">business webcasts</span></a></td></tr>
+
+						<tr><td valign="top"><img src="bullet_square_999999.gif" alt=""></td><td class="a2">
+
+						Whatis.com, the online <a href="http://whatis.techtarget.com/" class="hoverLink"><span class="a2">computer dictionary</span></a></td></tr>
+					</tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+ 
+		<!-- END: Bitpipe Splash -->   <br><img src="spacer.gif" alt="" width="1" height="5"><br>
+					</p></td>
+				</tr>
+			</tbody></table>
+		</td>
+		<!-- Spacer Column Begin -->
+		<td><img src="spacer.gif" alt="" width="10" height="1"></td>
+		<!-- Spacer Column End -->
+		<!-- Right Column Begin -->
+		<td valign="top" align="left" bgcolor="white">
+			<img src="spacer.gif" width="1" height="12"><br>
+			<!-- BEGIN: iframe -->
+
+
+<!-- 310x950 ad start -->
+
+<script language="JavaScript">
+
+<!--
+	if (typeof adDcopt == "undefined") var adDcopt = "ist";
+	if (typeof adPageID == "undefined") var adPageID = Math.round(Math.random() * 100000000);
+	if (typeof adString == "undefined") var adString = new String();
+	 adString = JSwriteAD2("snet", "ate", "310", "950", "ctHugeAd_4", "", adDcopt, adPageID);
+	document.writeln(adString);
+	adDcopt = "";
+// -->
+</script><iframe style="display: none;" src="0,289625,sid7_gci997245,00_3.html" border="0" marginheight="0" marginwidth="0" onload="resizeCLT(this)" scrolling="no" width="310" frameborder="0" height="950">
+
+&lt;a href='http://ad.doubleclick.net/jump/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;sz=310x950;dcopt=;ptile=4;iid=;iin=;rci=;nl=;ses=;track=;ord=55696179?'&gt;
+&lt;img src='http://ad.doubleclick.net/ad/snet/ate;pos=0;pth=expert.KnowledgebaseAnswer;kw=;gci=997245;tax=299293;clu=63;adg=;sz=310x950;dcopt=;ptile=4;iid=;iin=;rci=;nl=;ses=;track=;ord=55696179?' width='310' height='950' border='0'&gt;&lt;/a&gt;
+</iframe>
+
+
+<!-- 310x950 ad end --><!-- END: iframe -->
+			<script language="javascript">
+
+				ttWriteMboxDiv('searchNetworking_ATE_Content_Right');
+				ttWriteMboxContent('searchNetworking_ATE_Content_Right');
+			</script><div style="visibility: visible; display: block;" class="mboxDefault"></div><div id="mboxMarker-searchNetworking_ATE_Content_Right-0" style="visibility: hidden; display: none;"></div><script src="standard_004.dat" language="JavaScript"></script>
+			<p>
+			<!-- BEGIN: search advice -->
+			</p><center>							
+				<table class="bordercolorC" width="310" border="0" cellpadding="0" cellspacing="2">
+					<tbody><tr>
+						<td><img src="spacer.gif" width="10" height="10"></td>
+					</tr>
+					<tr>
+					<td><img src="spacer.gif" width="10" height="1"></td>
+						<td>
+							<b>Search and Browse the Expert Answer Center</b><br>
+							<span class="a2">Search and browse more than 25,000 question and 
+							answer pairs from more than 250 TechTarget industry experts.</span>
+						</td>
+						<td><img src="spacer.gif" width="10" height="1"></td>
+					</tr>
+					<tr>
+						<td colspan="3"><img src="spacer.gif" alt="" width="1" height="5"></td>
+					</tr>
+					<tr>
+						<td><img src="spacer.gif" alt="" width="10" height="1"></td>
+						<td>
+							<form name="search" action="http://expertanswercenter.techtarget.com/eac/knowledgebaseSearchResults/1,295198,sid7_gci1192573,00.html" method="get" style="margin-bottom: 0px;">
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tbody><tr>
+									<td><input name="query" value="" class="i3width200" type="text"></td>
+									<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+									<td><input src="button_search.gif" type="image"></td>
+								</tr>
+							</tbody></table>
+							</form>
+						</td>
+						<td><img src="spacer.gif" alt="" width="10" height="1"></td>
+					</tr>
+					<tr>
+						<td colspan="3"><img src="spacer.gif" alt="" width="1" height="5"></td>
+					</tr>
+									
+					<tr>
+						<td><img src="spacer.gif" alt="" width="10" height="1"></td>
+						<td>
+							<table>
+								<tbody><tr>
+									<td colspan="3">								
+										<b>Browse our Expert Advice</b>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top">
+										<!-- begin category listing -->
+										<ul class="list_bullet">
+		 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296725,00.html"><span class="a2">Operating Systems</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296726,00.html"><span class="a2">IT Management</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296727,00.html"><span class="a2">Networking</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296728,00.html"><span class="a2">Database</span></a>
+											</li>
+			
+										</ul>
+									</td>
+									<td valign="top">
+										<ul class="list_bullet">
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296729,00.html"><span class="a2">Security</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296730,00.html"><span class="a2">Servers and Storage</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296731,00.html"><span class="a2">Applications and Development</span></a>
+											</li>
+			 
+			  <li class="list_bullet_item"> <a href="http://expertanswercenter.techtarget.com/eac/knowledgebaseCategory/0,295197,sid63_gci1192573_tax296732,00.html"><span class="a2">Career Center</span></a>
+											</li>
+			   </ul>
+										<!-- end category listing -->
+									 </td>
+								</tr>
+	 </tbody></table>
+						</td>
+					</tr>
+					<tr>				 
+					<td><img src="spacer.gif" width="10" height="1"></td>
+					</tr>
+				</tbody></table>
+				<br>
+				</center>
+				<!-- END: search advice-->
+				<!-- Expert Answer Center Ad End -->
+			</td>
+			<!-- Right Column Begin -->
+	   		<!-- Spacer Column Begin -->
+			<td><img src="spacer.gif" width="5" height="1"></td>
+			<!-- Spacer Column End -->
+		</tr>
+	</tbody></table>
+	 <script language="Javascript">
+
+<!--
+	PAGE_FOOTER_TOP();
+// -->
+</script>
+
+	     <!-- Vignette V/5 Sat Jun 28 11:36:12 2008 -->
+
+
+
+ 
+
+
+<!-- searchNetworking.techtarget.com, searchNetworking, generated on June 28, 2008, by scorpio-->
+ 
+
+<!-- Footer AD COMPONENT Built by SS at Sat Jun 28 11:36:13 2008 -->
+<script language="Javascript">
+
+<!--
+
+	var JSfooterAdSense = "off";
+// -->
+</script>
+
+	   
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr class="color0">
+		<td><img src="spacer.gif" alt="" width="1" height="3"></td>
+	</tr>
+</tbody></table>
+
+
+	
+<!-- BEGIN: FOOTER NAV -->
+<div class="colorNav">
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr class="colorNav">
+		<td><img src="spacer.gif" alt="" width="8" height="1"></td>
+	<td><a href="http://searchnetworking.techtarget.com/home/0,289692,sid7,00.html"><img src="homenav_home.gif" alt="Home" width="30" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/news/0,289141,sid7,00.html"><img src="homenav_news.gif" alt="News" width="30" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/topicsMain/0,295490,sid7,00.html"><img src="homenav_topics.gif" alt="Topics" width="37" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/ITKnowledgeExchange/0,294907,sid7,00.html"><img src="homenav_itke.gif" alt="ITKnowledge Exchange" width="135" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/tips/0,289484,sid7,00.html"><img src="homenav_tips.gif" alt="Tips" width="23" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/expert/Knowledgebase/0,289622,sid7,00.html"><img src="homenav_ate.gif" alt="Ask the Experts" width="94" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.techtarget.com/webcasts/0,295024,sid7,00.html?asrc=SS_NAV_WC"><img src="homenav_webcasts.gif" alt="Webcasts" width="57" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.bitpipe.com/?asrc=SS_NAV_WP"><img src="homenav_whitepapers.gif" alt="White Papers" width="76" border="0" height="22"></a></td><td width="5%" align="center"><img src="homenav_separator.gif" alt="" width="2" height="22"></td><td><a href="http://searchnetworking.bitpipe.com/itdownloads?asrc=SS_NAV_DL"><img src="homenav_npt.gif" alt="Networking Product Trials" border="0" height="22"></a></td> <td><img src="spacer.gif" alt="" width="8" height="1"></td>
+	</tr>
+</tbody></table>
+</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr class="color0">
+		<td><img src="spacer.gif" alt="" width="1" height="3"></td>
+	</tr>
+</tbody></table>
+
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tbody><tr class="color1">
+			<td><img src="spacer.gif" width="5" height="1"></td>
+						
+				<td class="textOnColor1" width="100%" height="29">
+				<a href="http://searchnetworking.techtarget.com/aboutUs/0,289153,sid7,00.html" class="textOnColor1">About Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/contactUs/0,289157,sid7,00.html" class="textOnColor1">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/buyersGuideForVendors/0,289879,sid7,00.html" class="textOnColor1">For Advertisers</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/forBusinessPartners/0,289198,sid7,00.html" class="textOnColor1">For Business Partners</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/siteIndex/0,294352,sid7,00.html" class="textOnColor1">Site Index</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/rssLanding/0,295701,sid7,00.html" class="textOnColor1">RSS</a> </td>
+			  
+				<td class="color1">
+				<table class="color0" border="0" cellpadding="0" cellspacing="0">
+				<form name="search" action="http://searchnetworking.techtarget.com/search/1,293876,sid7,00.html" method="get"></form>
+					<tbody><tr>
+						<td class="color1"><img src="footer_searchwidget_corner_black.gif" alt="" width="29" height="29"></td>
+						<td class="textF"><span class="a2"><b>SEARCH</b>&nbsp;</span></td>
+						<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+						<td><input name="query" size="8" class="i3width125" type="text"></td>
+						<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+						<td><input src="button_search_cccccc.gif" type="image"></td>
+						<td><img src="spacer.gif" alt="" width="5" height="1"></td>
+					</tr>
+				
+				</tbody></table>
+			 </td></tr>
+		<tr class="color1">
+			<td colspan="3"><img src="spacer.gif" width="1" height="5"></td>
+		</tr>
+	</tbody></table>
+
+	
+	
+<table width="100%" bgcolor="#cecece" border="0" cellpadding="10" cellspacing="0">
+	<tbody><tr>
+		<td>
+		
+			
+			<table width="100%" bgcolor="#e0e0df" border="0" cellpadding="8" cellspacing="0">
+				<tbody><tr>
+					<td style="font-family: arial; font-style: normal; font-variant: normal; font-weight: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;">TechTarget provides enterprise IT professionals with the information they need to perform their jobs - from developing strategy, to making cost-effective IT purchase decisions and managing their organizations' IT projects - with its network of <a href="http://searchnetworking.techtarget.com/portfolioSites/0,296825,sid7,00.html" class="footerLink">technology-specific Web sites, events and magazines</a>.</td>
+				</tr>
+			</tbody></table>	
+		 <table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tbody><tr>
+					<td colspan="3"><br></td>
+				</tr>
+				<tr>
+					<td style="font-family: arial; font-style: normal; font-variant: normal; font-weight: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;" valign="top" nowrap="nowrap">
+						<a href="http://www.techtarget.com/" class="footerLink">TechTarget Corporate Web Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.techtarget.com/mediakit/" class="footerLink">Media Kits</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/reprints/0,296569,sid7,00.html" class="footerLink">Reprints</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://searchnetworking.techtarget.com/sitemap/0,296817,sid7,00.html" class="footerLink">Site Map</a> <br><br><br><br><br>All Rights Reserved, <a href="http://searchnetworking.techtarget.com/copyright/0,289135,sid7,00.html" class="footerLink">Copyright 2000 - 2008</a>, TechTarget&nbsp;|&nbsp;<a href="http://www.techtarget.com/html/privacy_policy.html" class="footerLink">Read our Privacy Policy</a>
+						 </td>
+					<td width="100%">&nbsp;</td>
+					<td valign="top">
+						<a href="http://www.techtarget.com/">
+						
+						
+							<img src="tt_footer_logo.gif" alt="TechTarget - The IT Media ROI Experts" width="97" border="0" height="92">						
+						 </a>
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+
+
+
+
+
+<script language="Javascript">
+
+<!--
+	document.write(LIFTSTUDY_QUEUE());
+	if (ISFIXEDWIDTH) document.write(CLOSE_FIXED_WIDTH_TABLE());
+	if (typeof f360I_TRACKING == "function") document.write(f360I_TRACKING());
+// -->
+</script></td><td class="color3" width="2"><img src="spacer.gif" alt="" width="2" height="1"></td><td valign="top"><script language="javascript">if(JSmboxGutterName != "") {ttWriteMboxDiv(JSmboxGutterName);ttWriteMboxContent(JSmboxGutterName);}</script><div style="visibility: visible; display: block;" class="mboxDefault"></div><div id="mboxMarker-searchNetworking_ATE_Content_Gutter-0" style="visibility: hidden; display: none;"></div><script src="standard_005.dat" language="JavaScript"></script></td></tr></tbody></table>
+
+
+<!-- Page Times
+Engine: 0.47 seconds
+Page: 1.629 seconds
+--> </body>
+</html>

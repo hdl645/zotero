@@ -1,0 +1,50 @@
+
+/* ::::: http://static.die.net/style/white.css ::::: */
+
+body, table { padding: 0pt; font-family: verdana,helvetica,arial,sans-serif; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); }
+body { margin: 0pt; font-size: 75%; background-image: url('bg.gif'); background-repeat: repeat-y; background-position: left top; }
+table { font-size: 1em; }
+#bg { margin: 10px 10px 10px 136px; max-width: 1024px; }
+#content { margin: 0pt; padding: 0pt; }
+#menu { border-style: none none dashed; border-color: -moz-use-text-color -moz-use-text-color rgb(0, 0, 0); border-width: 0pt 0pt 1px; margin: 0pt; padding: 4px 0pt 4px 4px; font-size: 12px; text-align: left; color: rgb(153, 153, 153); background-color: rgb(102, 0, 0); position: absolute; top: 0pt; left: 0pt; width: 116px; }
+b, strong { font-weight: bold; }
+i { font-style: italic; }
+a { text-decoration: none; color: rgb(102, 0, 0); }
+a:hover { text-decoration: underline; color: rgb(0, 0, 0); }
+hr { border: 0pt none ; height: 1px; color: rgb(102, 0, 0); background-color: rgb(102, 0, 0); }
+h1 { border-bottom: 2px solid rgb(102, 0, 0); text-align: left; font-size: 1.75em; margin-top: 0pt; line-height: 125%; }
+h2 { font-size: 1.25em; }
+img { border-width: 0pt; }
+input { border-color: rgb(153, 153, 153); }
+pre, tt { font-family: monospace; font-size: 12px; }
+#menu a { color: rgb(255, 255, 255); display: block; padding-left: 8px; text-indent: -8px; }
+#menu a:hover { background-color: rgb(153, 51, 51); text-decoration: none; }
+#menu dl { margin: 8px 0pt 8px 4px; padding-left: 0pt; text-align: left; }
+#menu dd { margin: 0pt 0pt 0pt 8px; padding-left: 0pt; }
+#menu dt { font-size: 1.25em; }
+#menu input { border-color: rgb(255, 204, 204); background-color: rgb(255, 204, 204); width: 92px; }
+#menu label { font-size: 0.75em; margin-top: 1.5em; display: block; }
+#news { margin: 1em 0pt; padding: 0.5em; background-color: rgb(238, 238, 238); }
+#news ul { margin: 0pt; padding: 0pt; }
+#news li { margin: 0pt; padding: 0pt 0pt 0pt 4em; list-style-type: none; text-indent: -4em; }
+.center { text-align: center; }
+.source { font-size: 0.75em; font-style: italic; }
+.even { background-color: rgb(255, 238, 238); }
+.odd { background-color: rgb(238, 238, 238); }
+.code { padding: 0pt 2em 0pt 0pt; }
+.sidebar { border: 1px solid rgb(102, 0, 0); padding: 0.5em 1em; background-color: rgb(255, 238, 238); }
+.highlight { background-color: rgb(255, 221, 221); }
+#menu { voice-family: inherit; width: 120px; }
+#menu iframe { margin: 1em 0pt 1em -3px; padding: 2px 1px; width: 120px; }
+#admenu iframe { background-color: rgb(255, 255, 255); height: 600px; }
+#adlink iframe { background-color: rgb(102, 0, 0); height: 100px; }
+#admiddle iframe { border-top: 1px solid rgb(102, 0, 0); border-bottom: 1px solid rgb(102, 0, 0); margin: 0.5em 5em; padding: 1em 0pt; }
+#adbottom iframe { border-top: 1px solid rgb(102, 0, 0); margin: 1em 0pt; padding-top: 0.4em; }
+#adright { border-left: 1px solid rgb(102, 0, 0); margin: 0pt 0pt 0.5em 0.5em; padding-left: 0.8em; float: right; }
+body > #Menu { width: 116px; }
+@media print {
+  body, #bg { margin: 0px; color: rgb(0, 0, 0); background-image: none; font-size: 12pt; }
+  pre, tt { font-size: 12pt; }
+  a { text-decoration: underline; }
+  form, #menu, #admiddle, #adbottom, #adright { display: none; }
+}

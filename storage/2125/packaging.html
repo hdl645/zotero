@@ -1,0 +1,719 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.golden-gryphon.com/software/misc/packaging.html">
+<meta name="wpd_url" content="http://www.golden-gryphon.com/software/misc/packaging.html">
+<meta name="wpd_date" content="2008-07-08T16:38Z">
+
+
+
+<title>Packaging software using Git</title>
+
+<meta name="generator" content="Org-mode">
+<meta name="generated" content="&lt;2008-04-01 Tue&gt;">
+<meta name="author" content="Manoj Srivastava">
+
+
+
+
+
+<script language="JavaScript" src="org-info.js"></script>
+<script type="text/javascript" language="JavaScript">
+
+/* <![CDATA[ */
+org_html_manager.set("LOCAL_TOC", 0);
+org_html_manager.set("VIEW_BUTTONS", 1);
+org_html_manager.set("VIEW", "info");
+org_html_manager.set("TOC", 1);
+org_html_manager.set("MOUSE_HINT", "underline"); // could be a background-color like #eeeeee
+org_html_manager.setup ();
+/* ]]> */
+</script>
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="packaging.css" media="all">
+</head>
+<body><div style="position: fixed; top: -40px; left: 0px; width: 100%;"><form action="http://www.golden-gryphon.com/software/misc/packaging.html" onsubmit="return false;"><input id="org-console-input" onkeydown="org_html_manager.getKey(this);" maxlength="150" style="border: 1px inset rgb(221, 221, 221); margin: 0px; width: 100%;" value="" type="text"></form></div><div style="position: fixed; top: -40px; left: 0px; width: 100%;"><form action="http://www.golden-gryphon.com/software/misc/packaging.html" onsubmit="return false;"><input id="org-console-input" onkeydown="org_html_manager.getKey(this);" maxlength="150" style="border: 1px inset rgb(221, 221, 221); margin: 0px; width: 100%;" value="" type="text"></form></div><div style="position: fixed; top: -40px; left: 0px; width: 100%;"><form action="http://www.golden-gryphon.com/software/misc/packaging.html" onsubmit="return false;"><input id="org-console-input" onkeydown="org_html_manager.getKey(this);" maxlength="150" style="border: 1px inset rgb(221, 221, 221); margin: 0px; width: 100%;" value="" type="text"></form></div>
+<h1 style="display: none; visibility: hidden;" class="title">Packaging software using Git</h1>
+A analysis of schemes people use for packaging
+
+
+<div style="display: block; visibility: visible;"><table style="border-bottom: 1px solid black;" width="100%" border="0"><tbody><tr><td colspan="3" style="border-style: none; text-align: left; vertical-align: bottom;"><div style="float: left; display: inline; text-align: left;">Top: <a accesskey="i" href="javascript:org_html_manager.showSection(0);">Packaging software using Git</a></div><div style="float: right; display: inline; text-align: right; font-size: 70%;"><a accesskey="t" href="javascript:org_html_manager.toggleView(6);">toggle view</a></div></td></tr><tr><td style="border-style: none; text-align: left; vertical-align: bottom; width: 22%;"><a accesskey="p" href="javascript:org_html_manager.showSection(5)" title="Go to: 5 Work-flow details">Previous</a> | <a accesskey="n" href="javascript:org_html_manager.showSection(7)" title="Go to: 5.2 Rebasing the topic branches">Next</a></td><td style="border-style: none; text-align: center; vertical-align: bottom; width: 56%;"><a href="javascript:org_html_manager.showSection(5)" title="Go to: 5 Work-flow details"><span style="font-variant: small-caps; font-style: italic;">5 Work-flow details</span></a></td><td style="border-style: none; text-align: right; vertical-align: bottom; width: 22%;">7</td></tr></tbody></table>
+<div style="display: none; visibility: hidden;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(6);">toggle view</a></div></div><h3 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(6);" id="sec-5.1">5.1 Merging the topic branches</h3>
+<div style="display: block; visibility: visible;" id="text-5.1">
+
+
+<p>
+<img src="merge.png">
+</p>
+
+<p>
+
+This case is pretty straight forward. All the branches are available
+to eveyone, and work may be based off any of them. However, the branch
+history, for any topic branch, is full of merge nodes where code from
+upstream was merged, which some people see as clutter.
+</p>
+<p>
+<b>What do maintainers do?</b>
+</p>
+
+
+  <pre>  git checkout upstream
+  git pull origin
+  git checkout topic/a
+  git merge upstream
+  git checkout topic/b
+  git merge upstream
+  git checkout master
+  git merge topic/a  topic/b
+  # do the release thing
+  git commit
+  </pre>
+
+</div>
+
+</div><div style="display: none; visibility: hidden;" id="table-of-contents"><h1 class="title">Packaging software using Git</h1>
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(0);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(0);">Table of Contents</h2>
+<div style="display: block; visibility: visible;" id="text-table-of-contents">
+<ul>
+<li><a href="javascript:org_html_manager.showSection(1)">1 Introduction</a></li>
+<li><a href="javascript:org_html_manager.showSection(2)">2 Interested constituencies</a></li>
+<li><a href="javascript:org_html_manager.showSection(3)">3 Patch flow characteristics on the topic branches</a></li>
+<li><a href="javascript:org_html_manager.showSection(4)">4 Other factors</a></li>
+<li><a href="javascript:org_html_manager.showSection(5)">5 Work-flow details</a>
+<ul>
+<li><a href="javascript:org_html_manager.showSection(6)">5.1 Merging the topic branches</a></li>
+<li><a href="javascript:org_html_manager.showSection(7)">5.2 Rebasing the topic branches</a></li>
+<li><a href="javascript:org_html_manager.showSection(8)">5.3 Rebase & merge</a></li>
+<li><a href="javascript:org_html_manager.showSection(9)">5.4 Merge & rebase</a></li>
+</ul>
+</li>
+<li><a href="javascript:org_html_manager.showSection(10)">6 Conclusion</a></li>
+<li><a href="javascript:org_html_manager.showSection(11)">7 Acknowledgements</a></li>
+</ul>
+</div>
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-1" class="outline-2">
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(1);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(1);" id="sec-1">1 Introduction</h2>
+<div style="display: block; visibility: visible;" id="text-1">
+
+
+<p>
+
+"Are you rebasing or merging?" seems to be the 64 thousand dollar
+question over in <a href="http://vcs-pkg.org/">vcs-pkg</a> discussions. Various people have offered
+their preferences, and indeed, several case studies of work flows have
+been presented, what is lacking is an <u>analysis</u> of the work-flow; an
+exploration of which methodology has advantages, and whether there are
+scenarios in which the <u>other</u> work flow would have been better.
+</p>
+<p>
+
+Oh, what are all these work flows about, you ask?  Most of the issues
+with packaging software for distributions have a few things in common:
+there is a mainline or upstream source of development. There are zero
+or more independent lines of development or ongoing bug fixes that are
+to be managed. And then there is the tree from which the distribution
+package is to be built. All this talk about packaging software work
+flows is how to best manage asynchronous development upstream and in
+the independent lines of development, and how to create a coherent,
+debuggable, integrated tree from which to build the distributions
+package.
+</p>
+<p>
+
+The rebasing question goes to the heart of how to handle the
+independent lines of development using git; since these lines of
+development are based off the main line of development, and must be
+periodically synchronized.  What follows here is a first look at a
+couple of important factors that will have bearing on that question,
+and packaging software for a distribution using Git in general. This
+is heavily geared towards git (nothing else does rebases so easily, I
+think), but some of the concepts should be generic. I am not
+considering the stacked set of quilt patches source controlled with
+Git in this article (I don't understand that model well enough to do
+an analysis)
+</p>
+<p>
+
+As a teaser, there is a third answer: neither. You can just add an
+independent line of development, and just let it sit: don't rebase,
+and don't merge; and in some circumstances that is a winning
+strategy. 
+</p>
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-2" class="outline-2">
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(2);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(2);" id="sec-2">2 Interested constituencies</h2>
+<div style="display: block; visibility: visible;" id="text-2">
+
+
+<p>
+
+Take the rebasing issue.  First, rebasing is for private branches --
+not for anything you publish. Whether or not you should have a private
+branch that you rebase or not depends on a number of factors --
+firstly, there is the question of which of the stake holder
+constituencies are most important to you. There are at least three
+constituencies involved here:
+</p>
+<ol>
+<li>
+
+Upstream developers. These are the people who are the consumers of
+the independent lines of development. Usually people go out of
+their way to feed patches and code in the preferred form acceptable
+to upstream; and it is in our interests to do so: the more code
+pushed upstream, the less work there is to do ourselves. People
+upstream want the patch submissions to be clean, not have
+extraneous crud that has to be removed, and would like a nice,
+clean, uncomplicated history. They care about descriptions of each
+patch in a series, but are not interested history, really (they do
+not care that it took 15 typographical and logic fixes to arrive at
+this juncture.) Upstreams want topic branches to be rebased to
+their latest version, so that the patches apply cleanly and are
+minimal.
+</li>
+<li>
+
+Downstream topic developers. These are people who are basing their
+work on your topic branches, and they develop code, and feed their
+changes back to you. If you rewrite history and rebase your topic
+branches, downstream developers will find it very hard to merge
+from you back into their development tree. Indeed, if you publish
+your topic branches for downstream developers to base their changes
+on, rebasing is not an option.
+
+<p>
+
+If you publish a branch (whether or not you mean downstream
+developers to base their work on it or not), your published
+repository will be set up by default to deny any non-fast-forward
+pushes. This is done for the reason we have been talking about --
+it would make it impossible for others to track the code and merge
+it into their local clones. So, if you plan on publishing rebased
+branches (with warnings to downstream developers to only cherry
+pick from it), you still will have to force the push.
+</p></li>
+<li>
+
+The distribution and its users. This is a very important
+constituency; and most of us packaging software for distributions
+are doing all this work precisely for this constituency. Through
+the integration branch, this is a downstream branch &ndash; though one
+interesting case study uses a single rebased patch branch and throw
+away integration branches, using a patch series in the integration
+branch.  Since you control the integration branch, this is not
+strictly downstream,
+
+</li>
+</ol>
+
+<p>Now, depending on where you are on the totem pole, some of these
+constituencies are more important than others. At the very top, you
+don't have an upstream. For example, Git development. They just use a
+mainline, and a rebased pending updates branch. All their downstream
+is cautioned never to base work on the pending updates series. So,
+rebased lines of development work for them, since they are upstream,
+and that is the most important constituency in their work-flow.
+</p>
+<p>
+
+If you are too low on the totem pole to have any downstream
+developers, and you can live with throw away integration branches,
+rebased lines of development work as well. But as soon as you have
+downstream developers <b>or</b> you are working with other people (yourself
+on your laptop is another person as well), rebasing stops being an
+option. A major advantage of a distributed SCM is for accessing the
+repository from different locations; if you do, rebase messes with
+that. 
+</p>
+
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-3" class="outline-2">
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(3);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(3);" id="sec-3">3 Patch flow characteristics on the topic branches</h2>
+<div style="display: block; visibility: visible;" id="text-3">
+
+
+<p>
+
+Are the stake holders the only factor in you decision? Not by a long
+shot. Take, for instance, the issue of how active your independent
+lines of development are, and how big the patch series is, and whether
+you want to do a functional test for each topic branch.
+</p>
+
+<ul>
+<li>
+
+Small, inactive topic branch
+
+<p>
+
+If you have a single, small patch ( a simple bug fix, for example), you
+can just create a branch, apply the bug fix to the integration branch,
+and just let the branch be.
+</p>
+<p>
+
+As upstream development happens, it gets merged into the integration
+branch where you have already merged your bug fix branch 
+</p><ul>
+<li>
+
+if there is no conflict on the integration branch, don't do
+anything.
+</li>
+<li>
+
+If there is a conflict, then you have a couple of options:
+<ul>
+<li>
+
+resolve the conflict on the integration branch, and merge the
+mainline into the topic branch (aka bug fix branch), resolve the
+conflict the same way you did in the integration branch, and let
+it be. This is delayed integration into topic branches.
+
+<p>
+
+The problem is that with this method you can never merge back
+into the integration branch without any conflicts: since now you
+have two different commits on the topic branch and the
+integration branch making the same changes. This is only
+feasible if you only cherry pick real changes from your topic
+branches into your integration branch, and it makes easier to
+miss fixes (since you are making the same change twice).
+</p></li>
+<li>
+
+Back out the merge on the integration branch. Merge the upstream
+into the topic branch, resolve the conflict, and then merge that
+fix into the integration branch.
+
+</li>
+</ul></li>
+</ul>
+<p>It might be better just to merge upstream into your topic branches
+first, resolving conflicts as you go, and then merge all topic
+branches into you integration branch, bringing in all the fixes. You
+might have to do some additional conflict resolution in the
+integration branch, depending on the overlap in your topics. This is
+the only viable option for larger or more active topic branches, so
+special casing for small topic branches is probably not worth the
+effort.
+</p>
+</li>
+<li>
+
+Larger patch-sets
+
+<p>
+
+For a large patch on a topic branch, the chances are that you'll
+have to merge almost every upstream version, since the chances are
+higher of some changes overlapping; might as well get into a pattern
+of merging the upstream branch into all the topic branches, and,
+indirectly, the integration branch.  Also, if there are downstream
+developers (more likely with large features like this), you need to
+keep the topic branch(es) up to date.
+</p>
+</li>
+<li>
+
+Active development
+
+<p>
+
+If your topic branch is being actively developed, you need to
+constantly merge it into your integration branch. Whenever upstream
+updates happen, you need to merge the upstream branch into the topic
+branch, and then merge the topic branch into the integration
+branches. Again, delayed integration of the upstream branch into the
+topic branches is unlikely to work well, and works not at all if you
+have downstream developers basing their work on your topic branches.
+</p>
+</li>
+</ul></div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-4" class="outline-2">
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(4);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(4);" id="sec-4">4 Other factors</h2>
+<div style="display: block; visibility: visible;" id="text-4">
+
+
+<ul>
+<li>
+
+Testing each topic branch independently
+
+<p>
+
+If you or a downstream developer need to compile and test each topic
+branch independently (instead of all together, in the integration
+branch), you must merge each upstream change into a feature
+branch. Rebasing or not depends on whether or not the branch has been
+published.
+</p>
+</li>
+<li>
+
+Public or private topic branches
+
+<p>
+
+If your topic branches are public, then rebasing is out &ndash; unless
+you have strong warnings in place about people not basing their work
+on this branch. Rewriting history (which is what a rebase is) out
+from under people basing their work on yours is rude, and may cause
+a lot of work to stitch things back together.
+</p>
+</li>
+<li>
+
+Team or collaborative development
+
+<p>
+
+If you are packaging software as a part of a team, team members need
+to have access to each other's branches (to pick up if you are busy,
+to see pending changes, to avoid duplication of work). This means
+public topic branches, and thus no rebasing.
+</p>
+</li>
+</ul></div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-5" class="outline-2">
+<div style="display: block; visibility: visible;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(5);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(5);" id="sec-5">5 Work-flow details</h2>
+<div style="display: block; visibility: visible;" id="text-5">
+
+
+<p>
+
+This section is the result of discussion with Bart Trojanowski, and
+incorporates material from his private communication (with
+permission). 
+</p>
+<p>
+
+In the figures that follow:
+</p><ul>
+<li>
+
+b#: bug fixes or orginial development
+</li>
+<li>
+
+d#: Debian releases
+</li>
+<li>
+
+m#: Just a merge node
+
+</li>
+</ul>
+<p>Each one of these examples has upstream making four releases, labelled
+A, B, C and D. There are two topic or feature branches, labeled
+"topic/a" and "topic/b", one of which has two commits, and the other
+one has one commit.  In all the examples, there are four Debian
+releases that happen during the interval tracked.  I have created
+these examples with an explicit upstream tracking branch; you can get
+away with fetch and origin/naster if you do not want a local tracking
+branch.  The dotted lines represent a topic branch earlier in the
+history of the workflow which got rebased away (to get the final
+state, pretend that the nodes linked by the dotted lines do not
+exist.)
+</p>
+
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-5.1" class="outline-3">
+<div style="display: none; visibility: hidden;"><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(6);">toggle view</a></div></div><h3 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(6);" id="sec-5.1">5.1 Merging the topic branches</h3>
+<div style="display: block; visibility: visible;" id="text-5.1">
+
+
+<p>
+<img src="merge.png">
+</p>
+
+<p>
+
+This case is pretty straight forward. All the branches are available
+to eveyone, and work may be based off any of them. However, the branch
+history, for any topic branch, is full of merge nodes where code from
+upstream was merged, which some people see as clutter.
+</p>
+<p>
+<b>What do maintainers do?</b>
+</p>
+
+
+  <pre>  git checkout upstream
+  git pull origin
+  git checkout topic/a
+  git merge upstream
+  git checkout topic/b
+  git merge upstream
+  git checkout master
+  git merge topic/a  topic/b
+  # do the release thing
+  git commit
+  </pre>
+
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-5.2" class="outline-3">
+<div><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(7);">toggle view</a></div></div><h3 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(7);" id="sec-5.2">5.2 Rebasing the topic branches</h3>
+<div style="display: block; visibility: visible;" id="text-5.2">
+
+
+<p>
+<img src="rebase.png">
+</p>
+<p>
+
+As mentioned earlier, The dotted lines represent a topic branch
+earlier in the history of the workflow. I want to stress that his
+work-flow has limited utility; and only when you do not have people
+basing their work off your banches. Since you never know who might
+want to base their work off you in the future &hellip;
+</p>
+<p>
+
+In this case, the release is made off a throw away release branch,
+which essentially becomes unusable as soon as a new upstream release
+comes and there is a rebase operation. However, at any given time, the
+rebased topic branch is nice, clean, and rebased against the latest
+upstream, making it really easy to feed patchs into the upstream code.
+</p>
+<p>
+
+However, downstream developers are seriously incovenienced, since all
+the branches are either thro away or rebased.
+</p>
+<p>
+<b>What do maintainers do?</b>
+</p>
+
+
+  <pre>  git checkout upstream
+  git pull origin
+  git checkout topic/a
+  git rebase upstream
+  git checkout topic/b
+  git rebase upstream
+  # create throw away branch
+  git checkout -b release-A upstream
+  git merge topic/a  topic/b
+  # do the release thing
+  git commit
+  </pre>
+
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-5.3" class="outline-3">
+<div><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(8);">toggle view</a></div></div><h3 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(8);" id="sec-5.3">5.3 Rebase & merge</h3>
+<div style="display: block; visibility: visible;" id="text-5.3">
+
+
+<p>
+<img src="rebase_merge.png">
+</p>
+<p>
+
+The scenario is identical to the rebase case, witht he difference that
+we carry an additional set of branches around for the downstream
+folks, but we still release from throw away branches.  This is almost
+strictly worse than the next case, since derivative distributors for
+not have a stable branch from which the packages are built &ndash; since we
+are building packages from a throw away branch.
+</p>
+<p>
+
+In the figure, the two "for downstream" branches are never rebased,
+always merge with upstream, and cherry pick changes from the current
+topic branches. If there is overlap, integration work will have to be
+done separately in the "for downstream" branches (but will often be
+the same disambiguation logic as was needed when rebasing the topic
+branch). The "for downstream" branches are just like the branches in
+the pure merge case above; with the difference that merges into the
+master branch are not happening (since we do not have a long lasting
+integration branch in this scenario).
+</p>
+<p>
+<b>What do maintainers do?</b>
+</p>
+<p>
+<b>Note:</b>: I do not yet understand what the <i>reset</i> and <i>merge -s</i> are doing.
+</p>
+
+
+  <pre>  git checkout upstream
+  git pull origin
+  git checkout topic/a
+  git rebase upstream
+  git checkout topic/b
+  git rebase upstream
+
+  git checkout downstream/a
+  git branch tmp/a
+  git reset --hard downstream/a
+  git merge -s ours tmp/a
+  git branch -d tmp/a
+
+  git checkout downstream/b
+  git branch tmp/b
+  git reset --hard downstream/b
+  git merge -s ours tmp/b
+  git branch -d tmp/b
+
+  # create throw away branch
+  git checkout -b release-A upstream
+  git merge topic/a  topic/b
+  # do the release thing
+  git commit
+  </pre>
+
+
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-5.4" class="outline-3">
+<div><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(9);">toggle view</a></div></div><h3 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(9);" id="sec-5.4">5.4 Merge & rebase</h3>
+<div style="display: block; visibility: visible;" id="text-5.4">
+
+
+<p>
+<img src="merge_rebase.png">
+</p>
+<p>
+
+This is my preferred mechnism. I only create the submit branches on
+demand; and the submit branches are cherry picked and rebased from the
+topic branches when I am ready to submit patches upstream &ndash; so in
+reality, my work-flow is really like the plain merged branches above,
+with the proviso that I can create the submit branches easily if I
+needed. 
+</p>
+<p>
+
+The submit branches, when they exist, look very much like the topic
+branches in the pure rebase case, except that we never gather them to
+make a release (since the release is done off the topic branches, not
+the submit branch set).
+</p>
+<p>
+<b>What do maintainers do?</b>
+</p>
+
+
+  <pre>  git checkout upstream
+  git pull origin
+
+  # the submit branch creation is optional
+  git checkout submit/a
+  git rebase upstream
+  git checkout submit/b
+  git rebase upstream
+
+  git checkout topic/a
+  git merge upstream
+  git checkout topic/b
+  git merge upstream
+  git checkout master
+  git merge topic/a  topic/b
+  # do the release thing
+  git commit
+  </pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-6" class="outline-2">
+<div><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(10);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(10);" id="sec-6">6 Conclusion</h2>
+<div id="text-6">
+
+
+<p>
+
+Based on which stake-holders you have, and which ones are most
+important to you, how big your topic branch differences are, and how
+active the topic development is, you can decide whether or not you
+rebase or merge, and whether you do delayed integration into topic
+branches or not.
+</p>
+<p>
+
+Now for my personal preferences: I am low down on the totem pole,
+mostly, but I like to publish my topic branches. So I will not rebase
+my public topic branches. I will have persistent integration branches,
+since derived distribution folks are likely to need that. I will also
+always merge new upstream into my topic branches, just in case someone
+is basing their work off my public topic branch.
+</p>
+<p>
+
+But since I have to cater to upstream as well, I plan on having a
+private, rebasable submission branch for each topic; and cherry pick
+original commits from the topic branch on to that. The submission
+branches will be rebased before submitting to the latest upstream
+version before submission, or more often if I feel like doing so.
+</p>
+<p>
+
+The topic branches will be named "topic/foo". submission branches will
+be named "submission/foo", and there will be a "tmp/bar" name space
+for ephemeral branches. This will make it easier to script things like
+new upstream versions.
+</p>
+</div>
+
+</div>
+
+<div style="display: none; visibility: hidden;" id="outline-container-7" class="outline-2">
+<div><div style="display: inline; float: right; text-align: right; font-size: 70%; font-weight: normal;"><a accesskey="t" href="javascript:org_html_manager.toggleView(11);">toggle view</a></div></div><h2 onmouseout="org_html_manager.unhighlight_headline(this);" onmouseover="org_html_manager.highlight_headline(this);" style="cursor: pointer;" onclick="org_html_manager.fold(11);" id="sec-7">7 Acknowledgements</h2>
+<div id="text-7">
+
+
+<p>
+
+Thanks to <a href="http://madduck.net/">Martin F. Krafft</a> and James Vega for reviewing this article,
+and providing feedback and corrections, and many people involved in
+the <a href="http://vcs-pkg.org/">vcs-pkg</a> project for the material this analysis is based on.  A
+special mention should be made about Bart Trojanowski, who provided
+ideas about concrete solutions for handling topic branches.
+</p></div>
+</div>
+<div id="postamble"><p class="author"> Author: Manoj Srivastava
+<a href="mailto:srivasta@debian.org">&lt;srivasta@debian.org&gt;</a>
+</p>
+<p class="date"> Date: &lt;2008-04-01 Tue&gt;</p>
+</div></body>
+</html>

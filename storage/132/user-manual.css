@@ -1,0 +1,60 @@
+
+/* ::::: http://www.kernel.org/pub/software/scm/git/docs/docbook-xsl.css ::::: */
+
+span.strong { font-weight: bold; }
+body blockquote { margin-top: 0.75em; line-height: 1.5; margin-bottom: 0.75em; }
+html body { margin: 1em 5%; line-height: 1.2; }
+body div { margin: 0pt; }
+h1, h2, h3, h4, h5, h6, div.toc p b, div.list-of-figures p b, div.list-of-tables p b, div.abstract p.title { color: rgb(82, 123, 189); font-family: tahoma,verdana,sans-serif; }
+div.toc p:first-child, div.list-of-figures p:first-child, div.list-of-tables p:first-child, div.example p.title { margin-bottom: 0.2em; }
+body h1 { border-bottom: 2px solid silver; margin: 0em 0pt 0pt -4%; line-height: 1.3; }
+body h2 { border-bottom: 2px solid silver; margin: 0.5em 0pt 0pt -4%; line-height: 1.3; }
+body h3 { margin: 0.8em 0pt 0pt -3%; line-height: 1.3; }
+body h4 { margin: 0.8em 0pt 0pt -3%; line-height: 1.3; }
+body h5 { margin: 0.8em 0pt 0pt -2%; line-height: 1.3; }
+body h6 { margin: 0.8em 0pt 0pt -1%; line-height: 1.3; }
+body hr { border: medium none ; }
+div.footnotes hr { border: 1px solid silver; }
+div.navheader th, div.navheader td, div.navfooter td { font-family: sans-serif; font-size: 0.9em; font-weight: bold; color: rgb(82, 123, 189); }
+div.navheader img, div.navfooter img { border-style: none; }
+div.navheader a, div.navfooter a { font-weight: normal; }
+div.navfooter hr { border: 1px solid silver; }
+body td { line-height: 1.2; }
+body th { line-height: 1.2; }
+ol { line-height: 1.2; }
+ul, body dir, body menu { line-height: 1.2; }
+html { margin: 0pt; padding: 0pt; }
+body h1, body h2, body h3, body h4, body h5, body h6 { margin-left: 0pt; }
+body pre { margin: 0.5em 10% 0.5em 1em; line-height: 1; color: navy; }
+tt.literal, code.literal { color: navy; }
+div.literallayout p { margin: 0em; padding: 0em; }
+div.literallayout { border: 1px solid silver; margin: 0em; padding: 0.5em; background: rgb(244, 244, 244) none repeat scroll 0% 0%; font-family: monospace; color: navy; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.programlisting, .screen { border: 1px solid silver; margin: 0.5em 10% 0.5em 0pt; padding: 0.5em 1em; background: rgb(244, 244, 244) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.sidebar { border: 1px solid silver; margin: 1em 10% 0.5em 0pt; padding: 0.5em 1em; background: rgb(255, 255, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.sidebar * { padding: 0pt; }
+div.sidebar div { margin: 0pt; }
+div.sidebar p.title { font-family: sans-serif; margin-top: 0.5em; margin-bottom: 0.2em; }
+div.bibliomixed { margin: 0.5em 5% 0.5em 1em; }
+div.glossary dt { font-weight: bold; }
+div.glossary dd p { margin-top: 0.2em; }
+dl { margin: 0.8em 0pt; line-height: 1.2; }
+dt { margin-top: 0.5em; }
+dt span.term { font-style: italic; }
+div.variablelist dd p { margin-top: 0pt; }
+div.itemizedlist li, div.orderedlist li { margin-left: -0.8em; margin-top: 0.5em; }
+ul, ol { list-style-position: outside; }
+div.sidebar ul, div.sidebar ol { margin-left: 2.8em; }
+div.itemizedlist p.title, div.orderedlist p.title, div.variablelist p.title { margin-bottom: -0.8em; }
+div.revhistory table { border: medium none ; border-collapse: collapse; }
+div.revhistory th { border: medium none ; color: rgb(82, 123, 189); font-family: tahoma,verdana,sans-serif; }
+div.revhistory td { border: 1px solid silver; }
+div.toc dl, div.toc dt, div.list-of-figures dl, div.list-of-figures dt, div.list-of-tables dl, div.list-of-tables dt, div.indexdiv dl, div.indexdiv dt { line-height: normal; margin-top: 0pt; margin-bottom: 0pt; }
+div.table table, div.informaltable table { margin-left: 0pt; margin-right: 5%; margin-bottom: 0.8em; }
+div.informaltable table { margin-top: 0.4em; }
+div.table thead, div.table tfoot, div.table tbody, div.informaltable thead, div.informaltable tfoot, div.informaltable tbody { border-top: 2px solid rgb(82, 123, 189); border-bottom: 2px solid rgb(82, 123, 189); }
+div.table thead, div.table tfoot, div.informaltable thead, div.informaltable tfoot { font-weight: bold; }
+div.mediaobject img { border: 1px solid silver; margin-bottom: 0.8em; }
+div.figure p.title, div.table p.title { margin-top: 1em; margin-bottom: 0.4em; }
+@media print {
+  div.navheader, div.navfooter { display: none; }
+}

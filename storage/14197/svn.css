@@ -1,0 +1,63 @@
+
+/* ::::: http://git.or.cz/stylesheets/screen.css ::::: */
+
+body { font-family: Arial,Helvetica,sans-serif; }
+a:visited, a { text-decoration: underline; }
+a:hover { text-decoration: none; }
+dt { font-weight: bold; margin-top: 1em; }
+h1 { margin: 1.4em; font-size: 2em; text-align: center; font-weight: normal; }
+h2 { font-size: 1.2em; margin-top: 2em; }
+h3 { font-size: 1em; }
+h4 { font-size: 1em; text-decoration: underline; }
+h5 { font-size: 1em; font-style: italic; }
+h2, h3, h4, h5 { margin-left: 1em; margin-right: 1em; font-weight: bold; }
+hr { display: none; }
+img { border: 0pt none ; }
+pre { margin: 0.5em 4em; padding: 1em; text-align: left; }
+var { font-family: monospace; font-style: normal; }
+ul li { margin-top: 0.5em; margin-bottom: 0.5em; }
+ul.toc li { margin-top: 0em; margin-bottom: 0em; }
+ul li, dl, p, div.news { margin-left: 2em; margin-right: 2em; }
+ul li, dl, p { text-align: justify; }
+.header, .footer { margin: 0em; padding: 0.4em 1em; }
+.header { font-size: 1em; font-weight: bold; }
+.footer { font-size: 0.7em; }
+.footer { margin-top: 4em; }
+.header span.menu, .footer span.menu { text-align: right; display: block; }
+.header #top, .footer span.left { margin: 0em; float: left; }
+.header #top { display: inline; }
+.footer a, .header a, .footer a:visited, .header a:visited { text-decoration: none; font-weight: bold; }
+.footer a:hover, .header a:hover { text-decoration: underline; }
+.header td { border: medium none ; }
+div.title { font-weight: bold; }
+table.releases th, table.releases td, table.bugmail th, table.bugmail td { border: medium none ; padding-left: 0.2em; padding-right: 0.2em; }
+table.ccmd td { border: 1px none ; padding-left: 2em; padding-right: 2em; }
+.releases th { text-align: center; font-weight: bold; }
+.bugmail th { text-align: center; }
+table { border: medium none ; margin-left: 1em; margin-right: 1em; }
+table.ccmd { width: 80%; }
+table.ccmd, code.g { font-family: monospace; }
+table.ccmd td.g { width: 40%; }
+table.ccmd td.g, code.g { font-weight: bold; }
+table[frame="hsides"] { border: 1px solid rgb(0, 0, 0); }
+thead { border-bottom: 1px solid rgb(0, 0, 0); }
+.validate { margin: 0.4em 0em; font-size: 0.7em; text-align: right; }
+.hide { display: none; }
+.tcenter { text-align: center; }
+.tright { text-align: right; }
+.tleft { text-align: left; }
+.fright { float: right; }
+.fleft { float: left; }
+
+/* ::::: http://git.or.cz/stylesheets/screen-default.css ::::: */
+
+body { background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+a { background: transparent none repeat scroll 0% 0%; color: rgb(17, 34, 68); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+h2, h3 { border-bottom: 1px solid rgb(17, 34, 68); }
+dt { font-weight: bold; }
+pre { border: 1px solid rgb(17, 34, 68); background: rgb(204, 221, 238) none repeat scroll 0% 0%; color: rgb(17, 34, 68); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; }
+.header, div.footer { border-top: 2px solid rgb(17, 34, 68); border-bottom: 2px solid rgb(17, 34, 68); background: rgb(170, 221, 238) none repeat scroll 0% 0%; color: rgb(17, 34, 68); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.footer a:visited, .header a:visited { background: transparent none repeat scroll 0% 0%; color: rgb(17, 34, 68); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+table.releases, table.ccmd, table.bugmail { border: 2px solid rgb(17, 34, 68); }
+table.bugmail th, table.releases th, tr.odd td { background: rgb(221, 238, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(17, 34, 68); }
+table.ccmd td.g { background: rgb(153, 204, 221) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(17, 34, 68); }

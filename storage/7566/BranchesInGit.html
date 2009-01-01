@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/BranchesInGit">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/BranchesInGit">
+<meta name="wpd_date" content="2008-07-08T16:32Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>BranchesInGit - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/BranchesInGit?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/BranchesInGit?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/BranchesInGit?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="BranchesInGit.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/BranchesInGit">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/BranchesInGit?action=fullsearch&value=linkto%3A%22BranchesInGit%22&context=180">BranchesInGit</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/BranchesInGit">BranchesInGit</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/BranchesInGit?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/BranchesInGit">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-2"></span><strong>Table of contents:</strong> <span class="anchor" id="line-3"></span><span class="anchor" id="line-4"></span></p><p class="line867"></p><div class="table-of-contents"><p class="table-of-contents-heading">Contents</p><ol><li><a href="#head-e32339ba99f0cfd149b3b7e0f64835114f27e459">Definition</a><ol><li><a href="#head-c5060b520e89451a7b57be2e1632acac2b574d92">Glossary entries</a></li><li><a href="#head-7c72cb69c1e91d911df8638641129270da712b49">Other definitions</a></li></ol></li><li><a href="#head-fe62c25d404f89df325a289f8d28effed5c8aebe">Branches in Git</a></li><li><a href="#head-7196a75954f9137d052c6ec475807a5dd7f60fe2">Different points of view of branches</a></li><li><a href="#head-b875ef5cce6c51f816441ab762d1563bd6a7533f">See also</a></li></ol></div> <span class="anchor" id="line-5"></span><hr><p class="line874"> <span class="anchor" id="line-6"></span><span class="anchor" id="line-7"></span></p><p class="line867">
+</p><h1 id="head-e32339ba99f0cfd149b3b7e0f64835114f27e459">Definition</h1>
+<span class="anchor" id="line-8"></span><p class="line867">
+</p><h2 id="head-c5060b520e89451a7b57be2e1632acac2b574d92">Glossary entries</h2>
+<span class="anchor" id="line-9"></span><p class="line862">See <a href="http://git.or.cz/gitwiki/GitGlossary">GitGlossary</a>. <span class="anchor" id="line-10"></span><span class="anchor" id="line-11"></span></p><dl><dt>branch</dt><dd><span class="anchor" id="line-12"></span><ul><li style="list-style-type: none;">A non-cyclical graph of revisions, i.e. the complete history of <span class="anchor" id="line-13"></span>a particular revision, which is called the branch head. The <span class="anchor" id="line-14"></span><p class="line862">branch heads are stored in <tt class="backtick">$GIT_DIR/refs/heads/</tt>. <span class="anchor" id="line-15"></span><span class="anchor" id="line-16"></span></p></li></ul></dd><dt>topic branch</dt><dd><span class="anchor" id="line-17"></span><ul><li style="list-style-type: none;">A regular git branch that is used by a developer to <span class="anchor" id="line-18"></span>identify a conceptual line of development.  Since branches <span class="anchor" id="line-19"></span>are very easy and inexpensive, it is often desirable to <span class="anchor" id="line-20"></span>have several small branches that each contain very well <span class="anchor" id="line-21"></span>defined concepts or small incremental yet related changes. <span class="anchor" id="line-22"></span><span class="anchor" id="line-23"></span></li></ul></dd><dt>tracking branch</dt><dd><span class="anchor" id="line-24"></span><ul><li style="list-style-type: none;">A regular git branch that is used to follow changes from <span class="anchor" id="line-25"></span>another (remote) repository.  A tracking branch should not contain <span class="anchor" id="line-26"></span>direct modifications or have local commits made to it. <span class="anchor" id="line-27"></span>A tracking branch can usually be identified as the <span class="anchor" id="line-28"></span><p class="line862">right-hand-side ref in a <tt>Pull:</tt> refspec. <span class="anchor" id="line-29"></span><span class="anchor" id="line-30"></span></p></li></ul></dd></dl><p class="line867">
+</p><h2 id="head-7c72cb69c1e91d911df8638641129270da712b49">Other definitions</h2>
+<span class="anchor" id="line-31"></span><span class="anchor" id="line-32"></span><ul><li>In software engineering, 'branch' is a separate line of development, which  <span class="anchor" id="line-33"></span>among others allows development on a project to diverge in two directions,  <span class="anchor" id="line-34"></span><p class="line862">such as a stable and a development version. (<a class="interwiki" href="http://en.wikipedia.org/wiki/Branch" title="WikiPedia">WikiPedia:Branch</a>) <span class="anchor" id="line-35"></span><span class="anchor" id="line-36"></span></p></li><li class="gap">In the CVS team development environment, a separate line of development  <span class="anchor" id="line-37"></span>where changes can be isolated. When a programmer changes files on  <span class="anchor" id="line-38"></span>a branch, those changes do not appear on the main trunk  <span class="anchor" id="line-39"></span>or other branches. (cvs.info) <span class="anchor" id="line-40"></span><span class="anchor" id="line-41"></span><span class="anchor" id="line-42"></span></li></ul><p class="line867">
+</p><h1 id="head-fe62c25d404f89df325a289f8d28effed5c8aebe">Branches in Git</h1>
+<span class="anchor" id="line-43"></span><span class="anchor" id="line-44"></span><p class="line874">A project history is born by recording a particular <span class="anchor" id="line-45"></span>state ("revision") as a root commit, and built up by <span class="anchor" id="line-46"></span>recording subsequent states ("revisions") on top of the <span class="anchor" id="line-47"></span>previous commits.  Thus, a group of commits connected by <span class="anchor" id="line-48"></span>their parent fields form a directed acyclic graph <span class="anchor" id="line-49"></span>("DAG").  Often this linkage between commits by their <span class="anchor" id="line-50"></span>parent fields is called "ancestry chain", and a commit <span class="anchor" id="line-51"></span>that has another commit in its "parent" field is called <span class="anchor" id="line-52"></span>a "child commit" of the latter. <span class="anchor" id="line-53"></span><span class="anchor" id="line-54"></span></p><p class="line874">There can be multiple root commits in the history of a <span class="anchor" id="line-55"></span>project.  In other words, projects born independently <span class="anchor" id="line-56"></span>can later be glued together to become a single project. <span class="anchor" id="line-57"></span><span class="anchor" id="line-58"></span></p><p class="line874">The history is grown by building on top of previous <span class="anchor" id="line-59"></span>commits, and by the nature of distributed development, <span class="anchor" id="line-60"></span>many lineages of histories are grown simultaneously. <span class="anchor" id="line-61"></span>Each lineage is called a "branch". <span class="anchor" id="line-62"></span><span class="anchor" id="line-63"></span></p><p class="line874">A commit that can be reached by following the ancestry <span class="anchor" id="line-64"></span>chain from a commit that is "on the branch" is also "on <span class="anchor" id="line-65"></span>the branch", and a commit that cannot be reached by <span class="anchor" id="line-66"></span>following the ancestry chain from any commit that is "on <span class="anchor" id="line-67"></span>the branch" is not "on the branch".  The commit that <span class="anchor" id="line-68"></span>bootstraps this recursive definition of "on the branch" <span class="anchor" id="line-69"></span>is called its "branch head", the "tip of the branch", or <span class="anchor" id="line-70"></span>the "top commit".  In other words, it is topologically <span class="anchor" id="line-71"></span>the latest commit on the branch. <span class="anchor" id="line-72"></span><span class="anchor" id="line-73"></span></p><p class="line874">The above does not mean the top commit of a branch does <span class="anchor" id="line-74"></span>not have any child commit in the global project <span class="anchor" id="line-75"></span>histories.  It just means that these children are not on <span class="anchor" id="line-76"></span>the branch; they may be on some other branches, forked <span class="anchor" id="line-77"></span>from it.  To create a branch whose "on the branch" <span class="anchor" id="line-78"></span>commits are strict superset of "on the branch" commits <span class="anchor" id="line-79"></span>of another branch is called "forking" the branch. <span class="anchor" id="line-80"></span><span class="anchor" id="line-81"></span><span class="anchor" id="line-82"></span></p><ul><li><p class="line891"><strong>Reference:</strong> <a class="http" href="http://permalink.gmane.org/gmane.comp.version-control.git/20217">Re: |RFD| Git glossary: 'branch' and 'head' description</a> email by <a class="nonexistent" href="http://git.or.cz/gitwiki/Junio_C._Hamano">Junio C. Hamano</a> at <a href="http://git.or.cz/gitwiki/GitCommunity">GitMailingList</a> and the rest of mentioned thread. <span class="anchor" id="line-83"></span><span class="anchor" id="line-84"></span><span class="anchor" id="line-85"></span></p></li></ul><p class="line867">
+</p><h1 id="head-7196a75954f9137d052c6ec475807a5dd7f60fe2">Different points of view of branches</h1>
+<span class="anchor" id="line-86"></span><ul><li><p class="line862">From the <strong>history</strong> point of view, "branch" is lineage of branch head (branch tip),  <span class="anchor" id="line-87"></span>i.e. parent-connected graph (DAG) of all the ancestors of the head. <span class="anchor" id="line-88"></span></p></li><li><p class="line862">From the <strong>commit</strong> point of view, branch heads are automatically moving pointers to the <span class="anchor" id="line-89"></span>tip of branch, the place where we commit changes. <span class="anchor" id="line-90"></span></p></li><li><p class="line862">From the <strong>reflog</strong> point of view (this is also Monotone definition of branches) branch <span class="anchor" id="line-91"></span>is set of previous branch heads, starting from root or fork/branching point. <span class="anchor" id="line-92"></span><span class="anchor" id="line-93"></span></p></li></ul><p class="line867">
+</p><h1 id="head-b875ef5cce6c51f816441ab762d1563bd6a7533f">See also</h1>
+<span class="anchor" id="line-94"></span><ul><li><p class="line891"><a class="http" href="http://lwn.net/Articles/210045/">(DRAFT) Branching and merging in git</a> post on <a class="http" href="http://lwn.net/">LWN</a> - Linux Weekly News. <span class="anchor" id="line-95"></span><span class="anchor" id="line-96"></span></p></li></ul><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-97"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a>  <span class="anchor" id="line-98"></span><a href="http://git.or.cz/gitwiki/CategoryGlossary">CategoryGlossary</a> <span class="anchor" id="line-99"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">BranchesInGit  (上次是 <span title="JakubNarebski @ abxc93.neoplus.adsl.tpnet.pl[83.8.252.93]"><a href="http://git.or.cz/gitwiki/JakubNarebski" title="JakubNarebski @ abxc93.neoplus.adsl.tpnet.pl[83.8.252.93]">JakubNarebski</a></span> 在 2007-12-19 11:00:29 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/BranchesInGit?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/BranchesInGit?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/BranchesInGit">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

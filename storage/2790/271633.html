@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://bbbush.livejournal.com/271633.html">
+<meta name="wpd_url" content="http://bbbush.livejournal.com/271633.html">
+<meta name="wpd_date" content="2008-07-10T02:21Z">
+
+
+
+   
+<script src="core.js" type="text/javascript"></script>
+<script src="dom.js" type="text/javascript"></script>
+<script src="httpreq.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function controlstrip_init() {
+        if (! $('lj_controlstrip') ){
+            HTTPReq.getJSON({
+              url: "/bbbush/__rpc_controlstrip?user=bbbush",
+              onData: function (data) {
+                  var body = document.getElementsByTagName("body")[0];
+                  var div = document.createElement("div");
+                  div.innerHTML = data;
+                      body.appendChild(div);
+              },
+              onError: function (msg) { }
+            });
+        }
+    }
+    DOM.addEventListener(window, "load", controlstrip_init);
+</script>
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://bbbush.livejournal.com/data/foaf">
+
+<script>
+
+// don't crawl this.  read http://www.livejournal.com/developer/exporting.bml
+var LJ_cmtinfo = {"form_auth": "c0:1218333600:1035:86400:G02pkvXH6U-0-X1RSdrh2Aojcags:45cf43e8e7ba041fc4f67ef3cc131871",
+"remote": "",
+"canAdmin": 0,
+"journal": "bbbush"}
+</script>
+        <script language="JavaScript" type="text/javascript">
+
+            var Site;
+            if (!Site)
+                Site = {};
+
+            var site_p = {"media_embed_enabled": 1,
+"inbox_update_poll": 0,
+"has_remote": 0,
+"statprefix": "http://p-stat.livejournal.com",
+"ctx_popup": 1,
+"imgprefix": "http://p-stat.livejournal.com/img",
+"esn_async": 1,
+"currentJournal": "bbbush",
+"siteroot": "http://www.livejournal.com",
+"currentJournalBase": "http://bbbush.livejournal.com"};
+            var site_k = ["media_embed_enabled", "inbox_update_poll", "has_remote", "statprefix", "ctx_popup", "imgprefix", "esn_async", "currentJournal", "siteroot", "currentJournalBase"];
+            for (var i = 0; i < site_k.length; i++) {
+                Site[site_k[i]] = site_p[site_k[i]];
+            }
+       </script>
+    <script type="text/javascript" src="untitled"></script>
+
+
+
+
+
+
+
+
+
+
+<title>GNU~~我的老山羊 - Notes about using msysgit in cygwin</title>
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="271633.css" media="all">
+</head>
+<body class="layout-two-column-left lj-view-entry"><table id="lj_controlstrip" cellpadding="0" cellspacing="0"><tbody><tr valign="top">                <td id="lj_controlstrip_userpic"><a href="http://www.livejournal.com/"><img src="ljlogo-transparent.gif" alt="Home" title="Home" border="0"></a></td>
+                <td id="lj_controlstrip_login" style="background-image: none;" nowrap="nowrap"><form id="login" class="lj_login_form" action="http://www.livejournal.com/login.bml?ret=1" method="post"><div>
+                <input name="mode" value="login" type="hidden">
+                <input name="chal" id="login_chal" class="lj_login_chal" value="c0:1218333600:1035:300:wv53BR3YXwiCMkufAvD1:dc246ecd74e9b1840e58fc3c75cd1b88" type="hidden">
+                <input name="response" id="login_response" class="lj_login_response" value="" type="hidden">
+                <table style="margin-right: 1em;" cellpadding="0" cellspacing="0"><tbody><tr><td>
+                <label for="xc_user">Username:</label> <input name="user" size="7" maxlength="17" tabindex="1" id="xc_user" value="" type="text">
+                </td><td>
+                <label style="margin-left: 3px;" for="xc_password">Password:</label> <input name="password" size="7" tabindex="2" id="xc_password" class="lj_login_password" type="password">
+<input value="Log in" tabindex="4" type="submit"></td></tr><tr><td valign="top"><a href="http://www.livejournal.com/lostinfo.bml">Forgot your password?</a></td><td style="font-family: Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;" colspan="2" valign="top" align="right"><input id="xc_remember" name="remember_me" style="height: 10px; width: 10px;" tabindex="3" type="checkbox"><label for="xc_remember">Remember Me</label></td></tr></tbody></table></div></form></td><td id="lj_controlstrip_actionlinks" nowrap="nowrap"><span id="lj_controlstrip_statustext">You are viewing <span class="ljuser" lj:user="bbbush" style="white-space: nowrap;"><a href="http://bbbush.livejournal.com/profile"><img class="ContextualPopup" src="userinfo.gif" alt="[info]" style="border: 0pt none ; vertical-align: bottom; padding-right: 1px;" width="17" height="17"></a><a href="http://bbbush.livejournal.com/"><b>bbbush</b></a></span>'s journal</span><br><a href="http://www.livejournal.com/create.bml">Create a LiveJournal Account</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/tour/">Learn more</a></td><td id="lj_controlstrip_search" nowrap="nowrap"><a href="http://www.livejournal.com/explore/">Explore LJ</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/culture/">Culture</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/entertainment/">Entertainment</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/life/">Life</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/music/">Music</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/news-and-politics/">News & Politics</a>&nbsp;&nbsp; <a href="http://www.livejournal.com/technology/">Technology</a>&nbsp;&nbsp; <br><form action="http://www.livejournal.com/multisearch.bml" method="get"><input onfocus="if (this.value == 'Search...') { this.value = ''; this.style.color = ''; }" value="Search..." style="color: rgb(153, 153, 153);" name="q" id="lj_controlstrip_search_input_text" onblur="if (this.value == '') { this.value = 'Search...'; this.style.color = '#999'; }" size="25" type="text"> 
+        <select name="type" style="width: auto;">
+              <option value="int">Interest</option>
+              <option value="region">Region</option>
+              <option value="nav_and_user">Site & User</option>
+              <option value="faq">FAQ</option>
+              <option value="email">Email</option>
+              <option value="im">IM Info</option>
+        </select>
+     <input id="lj_controlstrip_search_submit" value="Go" style="width: auto;" type="submit"></form></td></tr></tbody></table><div id="container"><div id="container-inner" class="pkg">
+<div id="banner"><div id="banner-inner" class="pkg">
+<h1 id="banner-header">GNU~~我的老山羊</h1><h2 id="banner-description">要努力</h2></div></div>
+<div id="pagebody"><div id="pagebody-inner" class="pkg">
+<div id="alpha"><div id="alpha-inner" class="pkg">
+<div class="module-photo module"><div class="module-content">
+<img class="ContextualPopup" src="5218016" title="" alt="fedora 蓝色小药丸" width="100" height="100">
+</div>
+</div>
+<div class="module-viewlinks module"><div class="module-content">
+<ul class="module-list">
+<li class="module-list-item"><a href="http://bbbush.livejournal.com/">近期文章</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/calendar">历史文章</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/friends">好友</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/profile">用户信息</a></li></ul>
+</div>
+</div>
+<div class="module-calendar module"><h2 class="module-header">August 2008</h2>
+<div class="module-content">
+<table summary="Monthly calendar with links to each day's posts">
+<tbody><tr>
+<th>S</th>
+<th>M</th>
+<th>T</th>
+<th>W</th>
+<th>T</th>
+<th>F</th>
+<th>S</th>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><a href="http://bbbush.livejournal.com/2008/08/01/">1</a></td><td>2</td></tr>
+<tr>
+<td>3</td><td><a href="http://bbbush.livejournal.com/2008/08/04/">4</a></td><td><a href="http://bbbush.livejournal.com/2008/08/05/">5</a></td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+<tr>
+<td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+<tr>
+<td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+<tr>
+<td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr>
+<tr>
+<td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</tbody></table>
+</div>
+</div>
+<div class="module-typelist module"><h2 class="module-header">Links</h2>
+<div class="module-content">
+<ul class="module-list">
+<li class="module-list-item"><a href="http://bbs.nju.edu.cn/blogdoc?userid=bbbush">百合的家</a></li><li class="module-list-item"><a href="http://bbs.nju.edu.cn/blogdoc?userid=swt">百合的家(swt)</a></li><li class="module-list-item"><a href="http://lilybbs.us/blogdoc?userid=bbbush">百合海外站的家</a></li><li class="module-list-item"><a href="http://bbbush.cublog.cn/">CU 的家</a></li><li class="module-list-item"><a href="http://spaces.msn.com/members/bluejudy">喵~~ sisco Ge</a></li><li class="module-list-item"><a href="http://www.livejournal.com/login.bml">登录 LiveJournal</a></li><li class="module-list-item"><a href="http://www.livejournal.com/inbox/">察看留言</a></li><li class="module-list-item"><a href="http://www.livejournal.com/manage/">控制面板</a></li><li class="module-list-item"><a href="http://www.livejournal.com/update.bml">发表新文章</a></li><li class="module-list-item"><a href="http://pics.livejournal.com/manage/upload">上传图片</a></li><li class="module-list-item"><a href="http://pics.livejournal.com/manage/gals?show=tags">管理相册</a></li><li class="module-list-item"><a href="http://pics.livejournal.com/bbbush/">我的相册</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/data/rss?tag=fedora&auth=digest">订阅本博客</a></li><li class="module-list-item"><a href="http://www.livejournal.com/editpics.bml">添加 Userpic</a></li><li class="module-list-item"><a href="http://www.livejournal.com/manage/emailpost.bml?mode=help&type=headers">邮件发表设置速查</a></li></ul>
+</div>
+</div>
+<div class="module-categories module"><h2 class="module-header">Tags</h2>
+<div class="module-content">
+<ul class="module-list">
+<li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/fedora">fedora</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/firefox">firefox</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/foss">foss</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/gnu">gnu</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/linux">linux</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/livejournal">livejournal</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/lj">lj</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/lug">lug</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/perl">perl</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/politics">politics</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/python">python</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/reading">reading</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/training">training</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/win32">win32</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E4%BB%96">他</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%95%86%E4%B8%9A">商业</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%99%A9%E6%A2%A6">噩梦</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%9B%9E%E5%BF%86">回忆</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%A5%B9">她</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%AE%B6">家</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%B0%8F%E4%B8%9C%E8%A5%BF">小东西</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E5%B7%A5%E4%BD%9C">工作</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%88%91">我</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%91%84%E5%BD%B1">摄影</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%94%BF%E6%B2%BB">政治</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%A2%A6">梦</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%AD%8C%E8%AF%8D">歌词</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%AD%BB">死</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%B5%81%E6%B0%B4%E5%B8%90">流水帐</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%B5%81%E6%B0%B4%E8%B4%A6">流水账</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%B5%8B%E8%AF%95">测试</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E6%B7%B1%E5%9C%B3">深圳</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%94%B5%E5%BD%B1">电影</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%97%85">病</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%99%BE%E5%90%88">百合</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%9C%8B%E7%94%B5%E5%BD%B1">看电影</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%BB%8F%E6%B5%8E">经济</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E7%BF%BB%E8%AF%91">翻译</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3">胡思乱想</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E8%87%AA%E7%94%B1">自由</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E8%AF%BB%E4%B9%A6">读书</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E8%BD%AC%E8%BD%BD">转载</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B">软件工程</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E9%87%91%E8%9E%8D">金融</a></li><li class="module-list-item"><a href="http://bbbush.livejournal.com/tag/%E9%A1%B9%E7%9B%AE">项目</a></li></ul>
+</div>
+</div>
+<div class="module-powered module"><div class="module-content">
+
+Powered by <a href="http://www.livejournal.com/">LiveJournal.com</a></div>
+</div>
+</div></div>
+<div id="beta"><div id="beta-inner" class="pkg">
+<div class="entry">
+<div class="entry-userpic"><img class="ContextualPopup" src="5218016" title="" alt="fedora 蓝色小药丸" width="100" height="100"></div><h3 class="entry-header">Notes about using msysgit in cygwin</h3>
+<div class="entry-content">
+<div class="entry-body">
+
+今天折腾的结果。我们这组都在用 cygwin git，完全是"个人应用"，因为比 vss/SAW 好太多了。<br><br>今天的 notes，放宽了 .gitignore (git add -f) 的限制，放宽了 trailing blank (git<br>commit -n) 的限制。<br><br><a name="cutid1"></a><br><br>Msysgit is a work in progress version of git which is not so official<br>than "cygwin git" but faster.<br><br>Do not follow this email if you are still going to use the "cygwin git".<br><br><br>1. Download from <a href="http://code.google.com/p/msysgit/">http://code.google.com/p/msysgit/</a> , Install msysgit<br>to D:/cygwin/opt/Git/ folder, do not create shortcuts, create context<br>menu of "GitGUI" (handy).<br><br>2. Add to .bashrc:<br><br>alias git='PATH="/opt/Git/bin:$PATH" git.exe'<br><br>3. exit bash and start cygwin again, also restart screen<br><br>4. to verify installation is correct, run<br><br>git --version<br>(should say something like git version 1.5.6.1.1071.g76fb)<br><br>git.exe --version<br>(should say git version 1.5.6)<br><br>(To use original git, run git.exe)<br><br>5. add to .gitconfig and *every* .git/config<br><br>[core]<br>	autocrlf = true<br><br><br>6. use these .gitignore files to replace original '*' one, and avoid<br>using "git add -f" in future<br>(With ".gitignore" files defined properly, now you can use "git add ."<br>for new files, or use "git commit -a" for deleted files, etc.)<br><br><pre>*.SCC
+*.dll
+*.exe
+*.idl
+*.ilk
+*.manifest
+*.ncb
+*.obj
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.suo
+*.tlb
+*.tlh
+*.tli
+*.tmp
+*.user
+*.vspscc
+dlldata.c
+*_p.c
+*_i.c
+_*.h
+
+Bin/
+Lib/
+TypLib/
+wwwroot/temp/
+WWWRoot/temp/
+
+Debug/
+Debug Server/
+DebugATL/
+DebugMFC/
+DirectRelease/
+excel_debug/
+excel_release/
+Release/
+Release MinDependency/
+Release MinSize/
+Release Server/
+ReleaseATL/
+ReleaseMFC/
+Unicode Debug/
+Unicode Release MinDependency/
+Unicode Release MinSize/
+
+</pre><br><br>Use "git ls-files --others -X .gitignore &gt;&gt; .gitignore" to add more items.<br><br><br>7. commit once for all projects. Line ending and file mode will change<br>in this commit.<br><br>8. To compare speed:<br>time git status &gt; /dev/null<br>time git.exe status &gt; /dev/null<br><br>9. To list untracked files:<br>git ls-files --others -X .gitignore<br><br>10. note: do not mix use "git" and "git.exe", also remember (again) do<br>not use "git add -f".<br><br>11. Do not use my scripts (~/git-add.sh, git-add-project,<br>trim-text-files, etc.) any more. If there is error message about<br>"trailing blanks", just ignore them by using "git commit -n".<br><br><br>12. "less" pipe do not work, so you have to specify a pager manually.<br>Such as "git log | less".<br><br>13. "vi" will be the plain vi in msys, it is not compatible with<br>cygwin, so just remove it. Only affect "git commit -c".<br><br>14. "gitk" should have a similar alias.<br><br><br>Thanks!<br><br><br><br><br>对 less, vi, gitk 的处理还是很糟糕。trailing blanks 据说可以有 pre-commit hook 处理?<br><br><br><br>update:<br><br>15. 对于 vi，可以考虑使用 bash 行编辑 "^X^E" 命令，调用外部编辑器。这样可以实现多行注释。然而，真正的问题在于 "git commit -c"<br><br>16. clone 和 push 操作，必须用 git.exe 完成，因为路径的关系。如果可以在 msysgit shell 中执行 mount，修改挂载点，可能解决 15 和这个问题，然而 msysgit 没有 mount 命令。<br><br>17. trap 命令对 msysgit shell 无效... 如果在 cygwin 中执行 msysgit shell，总是能用 ^C 退出。so annoying.<div class="ljtags">Tags: <a rel="tag" href="http://bbbush.livejournal.com/tag/fedora">fedora</a></div></div>
+<p class="entry-footer">Posted on Jul. 11th, 2008 at 06:13 pm <span class="separator">|</span> <a class="permalink" href="http://bbbush.livejournal.com/271633.html">Link</a> <span class="separator">|</span> <a onclick='return quickreply("topcomment", 0, "")' href="http://bbbush.livejournal.com/271633.html?mode=reply">发表评论</a> <span class="separator">|</span> <a href="http://www.livejournal.com/tools/memadd.bml?journal=bbbush&itemid=271633">Add to Memories</a> <span class="separator">|</span> <a href="http://www.livejournal.com/tools/tellafriend.bml?journal=bbbush&itemid=271633">Tell a Friend</a></p></div>
+<div id="ljqrttopcomment" style="display: none;"></div></div>
+
+    <a id="comments"></a>
+    <div class="comments">
+        <h3 class="comments-header">Comments</h3>
+        <div class="comments-content">
+            <!-- comment list -->
+
+        </div>
+    </div>
+</div></div>
+</div></div>
+</div></div>
+</body>
+</html>

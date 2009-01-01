@@ -1,0 +1,113 @@
+
+/* ::::: http://www.cublog.cn/css/index.css ::::: */
+
+body { margin: 0pt; padding: 0pt; }
+.p1 { margin: 7px 10px; text-align: left; text-indent: 26px; line-height: 150%; }
+.p2 { margin: 7px 26px; text-align: right; text-indent: 26px; line-height: 150%; }
+.p3 { margin: 1px 10px; text-align: left; line-height: 150%; }
+body { font-size: 10pt; color: rgb(0, 0, 0); font-family: Verdana,Arial,Helvetica,sans-serif; }
+td, tr, p, form, br { font-size: 10pt; font-family: Verdana,Arial,Helvetica,sans-serif; }
+input, select { font-size: 9pt; }
+.mytd { font-size: 10pt; line-height: 160%; font-family: Verdana,Arial,Helvetica,sans-serif; }
+.tableheader { border-color: rgb(128, 197, 233); border-width: 1px; border-left: 1px solid rgb(128, 197, 233); border-right: 1px solid rgb(128, 197, 233); color: rgb(0, 0, 0); height: 24px; background-image: url('tablehd.gif'); background-repeat: repeat-x; }
+.tableborder { border: 1px solid rgb(128, 197, 233); border-collapse: collapse; }
+.tablebody { color: rgb(51, 51, 102); text-decoration: none; background-color: rgb(240, 240, 240); }
+.tablebody2 { color: rgb(51, 51, 102); background-color: rgb(249, 249, 249); }
+.windows { border-style: solid; border-color: rgb(212, 236, 249) rgb(0, 103, 157) rgb(0, 103, 157) rgb(212, 236, 249); background-color: rgb(25, 156, 225); }
+a:link { text-decoration: none; color: rgb(0, 68, 182); }
+a:visited { text-decoration: none; color: rgb(0, 68, 182); }
+a:active { text-decoration: underline; color: rgb(0, 68, 182); }
+a:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.mya:link { text-decoration: underline; color: rgb(0, 68, 182); }
+.mya:visited { text-decoration: underline; color: rgb(0, 68, 182); }
+.mya:active { text-decoration: underline; color: rgb(0, 68, 182); }
+.mya:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list1:link { text-decoration: none; color: rgb(0, 0, 0); }
+.list1:visited { text-decoration: none; color: rgb(0, 0, 0); }
+.list1:active { text-decoration: none; color: rgb(255, 0, 0); }
+.list1:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list2:link { text-decoration: none; color: rgb(255, 255, 255); }
+.list2:visited { text-decoration: none; color: rgb(255, 255, 255); }
+.list2:active { text-decoration: none; color: rgb(255, 0, 0); }
+.list2:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list3:link { text-decoration: none; color: rgb(21, 66, 139); }
+.list3:visited { text-decoration: none; color: rgb(21, 66, 139); }
+.list3:active { text-decoration: none; color: rgb(255, 0, 0); }
+.list3:hover { text-decoration: none; color: rgb(255, 0, 0); }
+.listtree:link { text-decoration: none; color: rgb(104, 149, 194); }
+.listtree:visited { text-decoration: none; color: rgb(104, 149, 194); }
+.listtree:active { text-decoration: none; color: rgb(104, 149, 194); }
+.listtree:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+a.title1:link { font-size: 17.9px; font-family: arial; font-weight: bold; text-decoration: none; color: rgb(255, 255, 255); }
+a.title1:visited { font-size: 17.9px; font-family: arial; font-weight: bold; text-decoration: none; color: rgb(255, 255, 255); }
+a.title1:active { font-size: 17.9px; font-family: arial; font-weight: bold; text-decoration: none; color: rgb(255, 255, 255); }
+a.title1:hover { font-size: 17.9px; font-family: arial; font-weight: bold; text-decoration: none; color: rgb(255, 255, 255); }
+a.title2:link { text-decoration: none; color: rgb(0, 0, 0); font-size: 12px; }
+a.title2:visited { text-decoration: none; color: rgb(0, 0, 0); font-size: 12px; }
+a.title2:active { text-decoration: none; color: rgb(255, 0, 0); font-size: 12px; }
+a.title2:hover { text-decoration: none; color: rgb(255, 0, 0); font-size: 12px; }
+.text1 { border: 1px solid rgb(128, 197, 233); padding: 1px; }
+.text2 { border: 1px solid rgb(102, 102, 102); padding: 1px; }
+.button1 { border: 1px solid rgb(128, 197, 233); padding: 1px; color: rgb(0, 102, 204); background-color: rgb(197, 232, 250); height: 18px; }
+.button2 { border: 1px solid rgb(249, 168, 89); padding: 1px; color: rgb(0, 102, 204); background-color: rgb(248, 223, 185); height: 18px; }
+.F13 { font-weight: bold; color: rgb(40, 81, 71); text-indent: 10px; line-height: normal; font-size: 13px; }
+.F13 a:link { color: rgb(40, 81, 71); text-decoration: none; }
+.F13 a:visited { color: rgb(40, 81, 71); text-decoration: none; }
+.F13 a:hover { color: rgb(40, 81, 71); text-decoration: underline; }
+.F13 a:active { color: rgb(40, 81, 71); text-decoration: none; }
+.Fred { font-size: 14px; font-weight: bold; color: rgb(153, 0, 0); }
+.BLKallgrey { border: 1px solid rgb(204, 204, 204); padding: 7px 0px 5px 7px; }
+.gray { border: 1px solid rgb(204, 204, 204); padding: 1px; height: 72px; width: 83px; }
+.orange { font-weight: bold; color: rgb(255, 102, 0); }
+
+/* ::::: http://www.cublog.cn/css/base.css ::::: */
+
+body { margin: 0pt; padding: 0pt; }
+body, td, th, input, select { font-size: 12px; }
+form { margin: 0pt; padding: 0pt; }
+fieldset { border: 1px solid rgb(200, 217, 228); }
+legend { font-weight: bold; color: rgb(0, 0, 0); }
+input { padding-top: 2px; }
+.sec_nav { color: rgb(67, 139, 71); }
+.sec_nav a { text-decoration: none; color: rgb(67, 139, 71); }
+.sec_nav a:hover { text-decoration: underline; }
+.section_nav { background: rgb(103, 149, 186) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; height: 30px; color: rgb(255, 255, 255); }
+.section_nav a { text-decoration: none; color: rgb(255, 255, 255); }
+.section_nav a:hover { text-decoration: underline; }
+.list_tbl { background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.list_tbl th { background: rgb(197, 215, 226) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; padding-left: 5px; }
+.list_tbl td { background: rgb(235, 241, 245) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; padding-left: 10px; }
+.blue_sline { background: transparent url('blue_sline.gif') repeat-x scroll center top; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; height: 1px; }
+.form_border { border-left: 1px solid rgb(103, 149, 180); border-right: 1px solid rgb(103, 149, 180); background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.form_in { line-height: 120%; }
+.form_in th { background: rgb(197, 215, 226) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.desc_tip { border-top: 1px solid rgb(202, 220, 232); border-left: 1px solid rgb(103, 149, 180); border-right: 1px solid rgb(103, 149, 180); padding: 20px; background: rgb(235, 241, 245) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 150%; color: rgb(102, 102, 102); }
+.input_title { border: 1px solid rgb(127, 157, 185); width: 200px; height: 20px; }
+.input_title2 { border: 1px solid rgb(127, 157, 185); width: 105px; height: 16px; color: rgb(21, 66, 139); font-size: 9pt; }
+.input_title3 { border: 1px solid rgb(127, 157, 185); width: 100px; height: 20px; }
+.input_title4 { border: 1px solid rgb(127, 157, 185); width: 70px; height: 20px; }
+.input_title_g { border: 1px solid rgb(170, 170, 170); width: 150px; height: 20px; }
+.srch_title { border: 1px solid rgb(127, 157, 185); width: 200px; height: 20px; }
+.page_bar { color: rgb(132, 132, 132); text-align: center; }
+.tmpl_btn { border: 0pt none ; background: transparent url('tmpl_btn_bg.gif') repeat scroll 0% 0%; width: 114px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; color: rgb(21, 66, 139); }
+.smb_btn { border: 0pt none ; background: transparent url('smb_btn_bg.gif') repeat scroll 0% 0%; width: 62px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; color: rgb(21, 66, 139); }
+.smb_btn3 { border: 0pt none ; background: transparent url('smb_btn_bg3.gif') repeat scroll 0% 0%; width: 62px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; color: rgb(21, 66, 139); }
+.smb_btn2 { border: 0pt none ; background: transparent url('smb_btn_bg2.gif') repeat scroll 0% 0%; width: 45px; height: 16px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 10px; color: rgb(21, 66, 139); font-size: 12px; }
+.update_btn1 { border: 0px none ; background: transparent url('update_btn1.gif') repeat scroll 0% 0%; width: 98px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; }
+.update_btn2 { border: 0px none ; background: transparent url('update_btn2.gif') repeat scroll 0% 0%; width: 124px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 22px; }
+.srch_btn { border: 0pt none ; background: transparent url('srch_btn.gif') repeat scroll 0% 0%; width: 37px; height: 22px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; line-height: 18px; }
+.vsplit_line { background: transparent url('box_vsplit.gif') repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.desc_tip a { text-decoration: none; color: rgb(1, 78, 130); }
+.desc_tip a { text-decoration: underline; }
+.describe_txt { color: rgb(126, 126, 126); line-height: 150%; }
+.tab_under_line { border-bottom: 1px solid rgb(105, 150, 183); line-height: 24px; }
+.tab_front_tab { border-style: solid; border-color: rgb(105, 150, 183); border-width: 1px 1px 0pt; color: rgb(0, 78, 129); text-align: center; font-weight: bold; }
+.tab_front_tab a { text-decoration: none; color: rgb(103, 150, 178); }
+.tab_front_tab a:hover { text-decoration: underline; }
+.tab_back_tab { border: 1px solid rgb(105, 150, 183); background: rgb(237, 242, 246) none repeat scroll 0% 0%; text-align: center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; }
+.tab_back_tab a { text-decoration: none; color: rgb(103, 150, 178); }
+.tab_back_tab a:hover { text-decoration: underline; }
+.help_topic_desc { padding: 12px; line-height: 120%; }
+.help_topic_desc a { color: rgb(0, 0, 0); text-decoration: underline; }
+.help_topic_desc_hidden { overflow: hidden; cursor: pointer; color: rgb(153, 153, 153); }
+.help_topic_title { cursor: pointer; }

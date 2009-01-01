@@ -1,0 +1,32 @@
+
+/* ::::: null ::::: */
+
+p.MsoNormal, li.MsoNormal, div.MsoNormal { margin: 0cm 0cm 0.0001pt; font-size: 12pt; font-family: "Times New Roman"; }
+h1 { margin: 12pt 0cm 3pt; page-break-after: avoid; font-size: 16pt; font-family: Arial; }
+h2 { margin: 12pt 0cm 3pt; page-break-after: avoid; font-size: 14pt; font-family: Arial; font-style: italic; }
+h3 { margin: 0cm 0cm 0.0001pt; page-break-after: avoid; font-size: 11pt; font-family: "Courier New"; }
+p.MsoIndex1, li.MsoIndex1, div.MsoIndex1 { margin: 0cm 0cm 0.0001pt 12pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex2, li.MsoIndex2, div.MsoIndex2 { margin: 0cm 0cm 0.0001pt 24pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex3, li.MsoIndex3, div.MsoIndex3 { margin: 0cm 0cm 0.0001pt 36pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex4, li.MsoIndex4, div.MsoIndex4 { margin: 0cm 0cm 0.0001pt 48pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex5, li.MsoIndex5, div.MsoIndex5 { margin: 0cm 0cm 0.0001pt 60pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex6, li.MsoIndex6, div.MsoIndex6 { margin: 0cm 0cm 0.0001pt 72pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex7, li.MsoIndex7, div.MsoIndex7 { margin: 0cm 0cm 0.0001pt 84pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex8, li.MsoIndex8, div.MsoIndex8 { margin: 0cm 0cm 0.0001pt 96pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndex9, li.MsoIndex9, div.MsoIndex9 { margin: 0cm 0cm 0.0001pt 108pt; text-indent: -12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc1, li.MsoToc1, div.MsoToc1 { margin: 0cm 0cm 0.0001pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc2, li.MsoToc2, div.MsoToc2 { margin: 0cm 0cm 0.0001pt 12pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc3, li.MsoToc3, div.MsoToc3 { margin: 0cm 0cm 0.0001pt 24pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc4, li.MsoToc4, div.MsoToc4 { margin: 0cm 0cm 0.0001pt 36pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc5, li.MsoToc5, div.MsoToc5 { margin: 0cm 0cm 0.0001pt 48pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc6, li.MsoToc6, div.MsoToc6 { margin: 0cm 0cm 0.0001pt 60pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc7, li.MsoToc7, div.MsoToc7 { margin: 0cm 0cm 0.0001pt 72pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc8, li.MsoToc8, div.MsoToc8 { margin: 0cm 0cm 0.0001pt 84pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoToc9, li.MsoToc9, div.MsoToc9 { margin: 0cm 0cm 0.0001pt 96pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoIndexHeading, li.MsoIndexHeading, div.MsoIndexHeading { margin: 0cm 0cm 0.0001pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText { margin: 0cm 0cm 0.0001pt; font-size: 11pt; font-family: "Courier New"; font-weight: bold; font-style: italic; }
+a:link, span.MsoHyperlink { color: blue; text-decoration: underline; }
+a:visited, span.MsoHyperlinkFollowed { color: purple; text-decoration: underline; }
+div.Section1 { page: Section1; }
+ol { margin-bottom: 0cm; }
+ul { margin-bottom: 0cm; }

@@ -1,0 +1,28 @@
+
+/* ::::: http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.css ::::: */
+
+.MATH { font-family: "Century Schoolbook",serif; }
+.MATH i { font-family: "Century Schoolbook",serif; font-style: italic; }
+.BOLDMATH { font-family: "Century Schoolbook",serif; font-weight: bold; }
+small.XTINY { font-size: xx-small; }
+small.TINY { font-size: x-small; }
+small.SCRIPTSIZE { font-size: smaller; }
+small.FOOTNOTESIZE { font-size: small; }
+small.SMALL {  }
+big.LARGE {  }
+big.XLARGE { font-size: large; }
+big.XXLARGE { font-size: x-large; }
+big.HUGE { font-size: larger; }
+big.XHUGE { font-size: xx-large; }
+h1 {  }
+h2 {  }
+h3 {  }
+h4 {  }
+h5 {  }
+div.displaymath {  }
+td.eqno {  }
+div.navigation {  }
+span.sf {  }
+pre.preform {  }
+span.textit { font-style: italic; }
+span.arabic {  }

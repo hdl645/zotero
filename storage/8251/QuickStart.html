@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/QuickStart">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/QuickStart">
+<meta name="wpd_date" content="2008-07-08T16:32Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>QuickStart - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/QuickStart?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/QuickStart?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/QuickStart?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="QuickStart.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/QuickStart">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/QuickStart?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/QuickStart?action=fullsearch&value=linkto%3A%22QuickStart%22&context=180">QuickStart</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/QuickStart">QuickStart</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/QuickStart?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/QuickStart">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line867">
+</p><h2 id="head-d0be500757e8366de4558b52868146a2ed922a72">Setting up a Git project</h2>
+<span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span><p class="line874">If you want to work with an existing project, clone it: <span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span></p><p class="line867"><span class="anchor" id="line-6"></span></p><pre>$ git clone &lt;url&gt;
+<span class="anchor" id="line-7"></span></pre><span class="anchor" id="line-8"></span><span class="anchor" id="line-9"></span><p class="line874">If you do not have an existing git project, create one: <span class="anchor" id="line-10"></span><span class="anchor" id="line-11"></span></p><p class="line867"><span class="anchor" id="line-12"></span></p><pre>$ cd project/
+<span class="anchor" id="line-13"></span>$ git init          # initializes the repository
+<span class="anchor" id="line-14"></span>$ git add .         # add those 'unknown' files
+<span class="anchor" id="line-15"></span>$ git commit        # commit all changes, edit changelog entry
+<span class="anchor" id="line-16"></span></pre><span class="anchor" id="line-17"></span><span class="anchor" id="line-18"></span><p class="line862">Git will look for a file named <a href="http://git.or.cz/gitwiki/.gitignore">.gitignore</a> in the root of your <span class="anchor" id="line-19"></span>repository which contains a set of shell patterns to ignore in <span class="anchor" id="line-20"></span>file paths. <span class="anchor" id="line-21"></span><span class="anchor" id="line-22"></span></p><p class="line867">
+</p><h2 id="head-73d4d25b069c1101c928af8a27753b49c956f989">Branching and merging</h2>
+<span class="anchor" id="line-23"></span><span class="anchor" id="line-24"></span><p class="line867"><span class="anchor" id="line-25"></span></p><pre>$ git checkout -b linux-work        # create a new branch named "linux-work"
+<span class="anchor" id="line-26"></span>$ &lt;make changes&gt;
+<span class="anchor" id="line-27"></span>$ git commit -a
+<span class="anchor" id="line-28"></span>$ git checkout master               # go back to master branch
+<span class="anchor" id="line-29"></span>$ git merge linux-work              # merge changesets from linux-work (Git &gt;= 1.5)
+<span class="anchor" id="line-30"></span>$ git pull . linux-work             # merge changesets from linux-work (all Git versions)
+<span class="anchor" id="line-31"></span></pre><span class="anchor" id="line-32"></span><span class="anchor" id="line-33"></span><p class="line867">
+</p><h2 id="head-5b5af7d9ab031db083e368ba75be8652bf8dc4ac">Importing patches</h2>
+<span class="anchor" id="line-34"></span><span class="anchor" id="line-35"></span><p class="line867"><span class="anchor" id="line-36"></span></p><pre>$ git apply &lt; ../p/foo.patch
+<span class="anchor" id="line-37"></span>$ git commit -a
+<span class="anchor" id="line-38"></span></pre><span class="anchor" id="line-39"></span><span class="anchor" id="line-40"></span><p class="line867">
+</p><h2 id="head-aaf107eb4a9289e4adea69581f9b50acc2fe2933">Exporting a patch</h2>
+<span class="anchor" id="line-41"></span><span class="anchor" id="line-42"></span><p class="line867"><span class="anchor" id="line-43"></span></p><pre>$ &lt;make changes&gt;
+<span class="anchor" id="line-44"></span>$ git commit -a -m "commit message"
+<span class="anchor" id="line-45"></span>$ git format-patch HEAD^  # creates 0001-commit-message.txt
+<span class="anchor" id="line-46"></span>                          # (HEAD^ means every patch since one revision before the
+<span class="anchor" id="line-47"></span>                          # tip of the branch, also known as HEAD)
+<span class="anchor" id="line-48"></span></pre><span class="anchor" id="line-49"></span><span class="anchor" id="line-50"></span><p class="line867">
+</p><h2 id="head-0fae2e6c6023f94ac505cdb874e20059e37d08dd">Network support</h2>
+<span class="anchor" id="line-51"></span><span class="anchor" id="line-52"></span><p class="line867"><span class="anchor" id="line-53"></span></p><pre># clone from the primary Git repo
+<span class="anchor" id="line-54"></span>foo$ git clone git://git.kernel.org/pub/scm/git/git.git
+<span class="anchor" id="line-55"></span>foo$ cd git
+<span class="anchor" id="line-56"></span>
+<span class="anchor" id="line-57"></span># pushing changes to a remote repo with SSH
+<span class="anchor" id="line-58"></span>foo$ git push user@example.com:my-repository.git/
+<span class="anchor" id="line-59"></span>
+<span class="anchor" id="line-60"></span># fetch changes to a remote branch into a local branch
+<span class="anchor" id="line-61"></span>foo$ git fetch user@example.com:my-repository.git/ remote-branch:local-branch
+<span class="anchor" id="line-62"></span>
+<span class="anchor" id="line-63"></span># merge changes from a remote machine
+<span class="anchor" id="line-64"></span>bar$ git pull git://foo/repo.git/ branch
+<span class="anchor" id="line-65"></span>
+<span class="anchor" id="line-66"></span># Serve repository via git protocol
+<span class="anchor" id="line-67"></span>foo$ cd /my/repository/
+<span class="anchor" id="line-68"></span>foo$ touch .git/git-daemon-export-ok
+<span class="anchor" id="line-69"></span>foo$ git daemon  # now others can fetch from git://your.machine/my/repository/.git/
+<span class="anchor" id="line-70"></span>
+<span class="anchor" id="line-71"></span># Set up a bare (= without working directory) repository (e.g. on a webserver)
+<span class="anchor" id="line-72"></span>foo$ mkdir my-repo.git
+<span class="anchor" id="line-73"></span>foo$ cd my-repo.git
+<span class="anchor" id="line-74"></span>foo$ git --bare init
+<span class="anchor" id="line-75"></span>foo$ chmod a+x hooks/post-update # this is needed for HTTP transport
+<span class="anchor" id="line-76"></span>                                      # you need to populate this repository via push
+<span class="anchor" id="line-77"></span></pre><span class="anchor" id="line-78"></span><span class="anchor" id="line-79"></span><p class="line867">
+</p><h2 id="head-1cf769156a5297da83e3a6b526621db09452d73c">Inspecting revisions</h2>
+<span class="anchor" id="line-80"></span><span class="anchor" id="line-81"></span><p class="line867"><span class="anchor" id="line-82"></span></p><pre># inspect history visually
+<span class="anchor" id="line-83"></span>foo$ gitk       # this opens a Tk window, and shows you how the revisions are connected
+<span class="anchor" id="line-84"></span>
+<span class="anchor" id="line-85"></span># inspect history
+<span class="anchor" id="line-86"></span>foo$ git log    # this pipes a log of the current branch into your PAGER
+<span class="anchor" id="line-87"></span>foo$ git log -p # ditto, but append a patch after each commit message
+<span class="anchor" id="line-88"></span>
+<span class="anchor" id="line-89"></span># inspect a specific commit
+<span class="anchor" id="line-90"></span>foo$ git show HEAD    # show commit info, diffstat and patch
+<span class="anchor" id="line-91"></span>                      # of the tip of the current branch
+<span class="anchor" id="line-92"></span></pre><span class="anchor" id="line-93"></span><span class="anchor" id="line-94"></span><p class="line867">
+</p><h2 id="head-c0400629795c5bda7303edfdd72f41347ffc8c49">Referring to revisions</h2>
+<span class="anchor" id="line-95"></span><span class="anchor" id="line-96"></span><p class="line867"><span class="anchor" id="line-97"></span></p><pre># by name
+<span class="anchor" id="line-98"></span>foo$ git log v1.0.0   # show history leading up to tag "v1.0.0"
+<span class="anchor" id="line-99"></span>foo$ git log master   # show history of branch "master"
+<span class="anchor" id="line-100"></span>
+<span class="anchor" id="line-101"></span># relative to a name
+<span class="anchor" id="line-102"></span>foo$ git show master^   # show parent to last revision of master
+<span class="anchor" id="line-103"></span>foo$ git show master~2  # show grand parent to tip of master
+<span class="anchor" id="line-104"></span>foo$ git show master~3  # show great grand parent to tip of master (you get the idea)
+<span class="anchor" id="line-105"></span>
+<span class="anchor" id="line-106"></span># by output of "git describe"
+<span class="anchor" id="line-107"></span>foo$ git show v1.4.4-g730996f  # you get this string by calling "git describe"
+<span class="anchor" id="line-108"></span>
+<span class="anchor" id="line-109"></span># by hash (internally, all objects are identified by a hash)
+<span class="anchor" id="line-110"></span>foo$ git show f665776185ad074b236c00751d666da7d1977dbe
+<span class="anchor" id="line-111"></span>foo$ git show f665776   # a unique prefix is sufficient
+<span class="anchor" id="line-112"></span>
+<span class="anchor" id="line-113"></span># tag a revision
+<span class="anchor" id="line-114"></span>foo$ git tag v1.0.0                      # make current HEAD known as "v1.0.0"
+<span class="anchor" id="line-115"></span>foo$ git tag interesting v1.4.4-g730996f # tag a specific revision (not HEAD)
+<span class="anchor" id="line-116"></span></pre><span class="anchor" id="line-117"></span><span class="anchor" id="line-118"></span><p class="line867">
+</p><h2 id="head-accd7f0813950139dc2d4a62f90a467e4fb8c2a8">Comparing revisions</h2>
+<span class="anchor" id="line-119"></span><span class="anchor" id="line-120"></span><p class="line867"><span class="anchor" id="line-121"></span></p><pre># diff between two branches
+<span class="anchor" id="line-122"></span>foo$ git diff origin..master            # pipes a diff into PAGER
+<span class="anchor" id="line-123"></span>foo$ git diff origin..master &gt; my.patch # pipes a diff into my.patch
+<span class="anchor" id="line-124"></span>
+<span class="anchor" id="line-125"></span># get diffstat of uncommitted work
+<span class="anchor" id="line-126"></span>foo$ git diff --stat HEAD
+<span class="anchor" id="line-127"></span></pre><span class="anchor" id="line-128"></span><span class="anchor" id="line-129"></span><p class="line867">
+</p><h2 id="head-6a56885e3963407852d87e280935cca43431a187">Cherry picking patches</h2>
+<span class="anchor" id="line-130"></span><span class="anchor" id="line-131"></span><p class="line867"><span class="anchor" id="line-132"></span></p><pre>foo$ git cherry-pick other-branch~3     # apply 4th last patch of other-branch to current branch
+<span class="anchor" id="line-133"></span></pre><span class="anchor" id="line-134"></span><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-135"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a> <span class="anchor" id="line-136"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">QuickStart  (上次是 <span title="Dscho @ 138.251.11.74[138.251.11.74]"><a class="nonexistent" href="http://git.or.cz/gitwiki/Dscho" title="Dscho @ 138.251.11.74[138.251.11.74]">Dscho</a></span> 在 2007-07-30 09:56:53 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/QuickStart?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/QuickStart?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/QuickStart">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

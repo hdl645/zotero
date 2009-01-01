@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://hardware.mcse.ms/message13735.html">
+<meta name="wpd_url" content="http://hardware.mcse.ms/message13735.html">
+<meta name="wpd_date" content="2008-06-03T02:04Z">
+
+
+
+<title>what exactly is a router doing, when you enable l2tp pass-through?</title>
+<meta name="description" content="Computer hardware tech support forum">
+<meta name="keywords" content="Computers, Motherboards, DSL support, modems, networking, Upgrades, CPU, Overclocking, Microsoft hardware, Windows XP, Windows 2003">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="global">
+<meta name="ROBOTS" content="INDEX,FOLLOW">
+
+
+
+<link rel="stylesheet" type="text/css" href="message13735.css" media="all">
+</head>
+<body text="#000000" vlink="#333366" alink="#333366" bgcolor="#445669" link="#333366">
+<div id="main" align="center">
+<center>
+<table id="mt" width="97%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr valign="top"><td align="center">
+<!-- Hardware forum title -->
+<div id="g8">
+<h1><b>C</b>omputer <b>H</b>ardware <b>F</b>orum<br></h1>
+<h2>Computer Hardware reviews, PC support forum and enhanced web based access to PC hardware support newsgroups.</h2><br>
+Check our new <img src="cellphone.gif" width="22" align="absmiddle" border="0" height="32"> <a href="http://www.cellphonetopics.com/">Cell Phones reviews</a>
+</div>
+<form action="http://search.mcse.ms/cgi-bin/mcsesearch.cgi" method="get">
+<div id="cp">
+<a href="http://hardware.mcse.ms/fastlog.php?s=46191ee964b9055003582e1ee6f6363d">
+<img src="top_register.gif" alt="Registration is free!" border="0"></a>
+<a href="http://hardware.mcse.ms/usercp.php?s=46191ee964b9055003582e1ee6f6363d">
+<img src="top_profile.gif" alt="Edit your profile" border="0"></a>
+<a href="http://hardware.mcse.ms/calendar.php?s=46191ee964b9055003582e1ee6f6363d">
+<img src="top_calendar.gif" alt="Calendar" border="0"></a>
+<a href="http://hardware.mcse.ms/memberlist.php?s=46191ee964b9055003582e1ee6f6363d">
+<img src="top_members.gif" alt="Find other members" border="0"></a>
+<a href="http://hardware.mcse.ms/misc.php?s=46191ee964b9055003582e1ee6f6363d&action=faq">
+<img src="top_faq.gif" alt="Frequently Asked Computer Hardware Support Forum Questions" class="faq" border="0"></a>
+<!-- Search forum -->
+Search this Forum: <input class="bginput" name="q" size="15" type="text">
+<input src="b_find.gif" class="cpsb" type="image" border="0">
+<input name="fl" value="hardware" type="hidden">
+</div>
+</form>
+<div id="tops" style="padding: 5px; position: relative; width: 95%; background-color: lightyellow; font-family: verdana,arial; font-size: 12px; text-align: left;" align="center"><img src="new.gif" border="0"> This is interesting: <a href="http://www.mcse.ms/rlink.php?link=15"><b>Free Computer Magazines</b></a> | <a href="http://www.droptable.com/">Databases help forum</a></div>
+<div id="nav1"><a href="http://hardware.mcse.ms/">HOME</a>&nbsp;&gt;&nbsp;<a href="http://hardware.mcse.ms/Computer_Networking_Reviews/">Computer Networking Reviews</a> &gt; <a href="http://hardware.mcse.ms/Wireless_Networking/">Wireless Networking</a> &gt; <b>what exactly is a router doing, when you enable l2tp pass-through?</b>
+<br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 728;
+google_ad_height = 15;
+google_ad_format = "728x15_0ads_al_s";
+google_ad_channel ="9315981861";
+google_color_border = "2B4271";
+google_color_bg = "F7F7F7";
+google_color_link = "0066CC";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</div><br>
+<!-- <div id="gg">
+<a href='http://hits.vpaffiliates.com/cgi-bin/redir?pd_link=i1-a8675-o1534-c1370'><img src='http://ban.vpaffiliates.com/cgi-bin/imp?pd_link=i1-a8675-o1534-c1370' width='725' height='28' border=0></a>
+</div> -->
+<br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_channel ="9315981861";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "0000FF";
+google_color_text = "800000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+<div align="center">
+  <center>
+  <table width="95%" border="0" cellpadding="3" cellspacing="0">
+    <tbody><tr>
+      <td width="100%" align="center"><p><a href="http://www.examnotes.net/q/190" target="_top" style="font-weight: bold;">ExamVouchers.com</a>
+- CompTIA discount exam vouchers - save money</p>
+<p align="center">Sponsor: <a href="http://www.cert21.com/" target="_top"><b>Cert21.com</b></a><br>
+Free Online practice tests</p></td>
+    </tr>
+  </tbody></table>
+  </center>
+</div>
+
+
+<br>
+<!-- Hardware review forum area -->   
+<a name="posttop"></a>
+
+<br>
+<!-- first unread and next/prev -->
+<table width="95%" align="center" border="0" cellpadding="2" cellspacing="0">
+<tbody><tr><td><font size="1" face="verdana,arial,helvetica"> &nbsp;</font></td>
+<td align="right"><font size="1" face="verdana,arial,helvetica">
+<img src="prev.gif" alt="" border="0">
+<a href="http://hardware.mcse.ms/showthread.php?s=46191ee964b9055003582e1ee6f6363d&threadid=13735&goto=nextoldest">Last Thread</a>&nbsp;
+<a href="http://hardware.mcse.ms/showthread.php?s=46191ee964b9055003582e1ee6f6363d&threadid=13735&goto=nextnewest">Next Thread</a>
+<img src="next.gif" alt="" border="0"></font></td>
+</tr></tbody></table>
+<!-- first unread and next/prev -->
+<br>
+<div id="sthread"><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1"><tbody><tr bgcolor="#445669">
+<td valign="middle" width="175" nowrap="nowrap"> <font class="thtcolor" size="1" color="#ffffff" face="verdana,arial,helvetica"><b>Author</b></font></td>
+<td valign="middle" width="100%">
+<!-- Thread nav and post images -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+<td valign="middle" width="100%" bgcolor="#445669">
+</td>
+<td valign="middle"><a href="http://hardware.mcse.ms/newthread.php?s=46191ee964b9055003582e1ee6f6363d&action=newthread&forumid=80"><img src="newthread.gif" alt="Post New Thread" border="0"></a></td>
+<td valign="middle">&nbsp;&nbsp;&nbsp;</td>
+<td valign="middle">
+</td>
+</tr></tbody></table>
+<!-- /Thread nav and post images -->
+</td></tr></tbody></table>
+<!-- End content area table -->
+<div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ededed">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post47421"></a>
+
+Jan<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>if a router like the linksys wrt54g has the option to "enable l2tp
+pass-through" - does it mean it just forwards l2tp through to the
+client? In other words: if I disable l2tp pass-through but establish
+portforwarding for UDP 500 and UDP 1701 would it be the same?
+
+Thanks,
+Jan
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=47421">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47421"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47421" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ededed"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-27-04 04:18 AM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=47421">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=47421">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div><div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post47428"></a>
+
+Duane Arnold<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>Re: what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>jan@geisbauer.de (Jan) wrote in news:6103291d.0405261300.68557356
+@posting.google.com:
+<font color="seagreen">
+
+&gt; if a router like the linksys wrt54g has the option to "enable l2tp
+&gt; pass-through" - does it mean it just forwards l2tp through to the
+&gt; client? In other words: if I disable l2tp pass-through but establish
+&gt; portforwarding for UDP 500 and UDP 1701 would it be the same?
+&gt;</font>
+
+L2TP is a VPN protocol like TCP/IP is a carrier protocol to carry data
+from one machine to another machine on a network LAN or WAN. The L2TP VPN
+protocol encrypts and encapsulates the data within the L2TP protocol and
+the L2TP rides on the TCP/IP the carrier protocol.
+
+For a secure VPN connection, there must be two valid VPN end-points. If
+you disable L2TP on the router, the VPN connection is no longer a valid
+secure VPN connection.  VPN can be established on a machine behind the
+router and it would still be a valid VPN connection, without the router
+using its VPN protocol.
+
+Port forwarding is port forwarding of ports to an IP/machine opening the
+ports on the router to the public Internet and has nothing to do with a
+secure end-point to end-point VPN connection.
+
+Duane :)
+
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=47428">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47428"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47428" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ffffff"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-27-04 04:18 AM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=47428">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=47428">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div><div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ededed">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post47944"></a>
+
+Jan<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>Re: what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>Duane Arnold &lt;notme@notme.com&gt; wrote in message news:&lt;Xns94F5B4A3C31A2notmenotmecoml@216.148
+.227.77&gt;..<font color="seagreen">
+
+&gt; jan@geisbauer.de (Jan) wrote in news:6103291d.0405261300.68557356
+&gt; @posting.google.com:
+&gt; 
+&gt;
+&gt; L2TP is a VPN protocol like TCP/IP is a carrier protocol to carry data
+&gt; from one machine to another machine on a network LAN or WAN. The L2TP VPN
+&gt; protocol encrypts and encapsulates the data within the L2TP protocol and
+&gt; the L2TP rides on the TCP/IP the carrier protocol.
+&gt;
+&gt; For a secure VPN connection, there must be two valid VPN end-points. If
+&gt; you disable L2TP on the router, the VPN connection is no longer a valid
+&gt; secure VPN connection.  VPN can be established on a machine behind the
+&gt; router and it would still be a valid VPN connection, without the router
+&gt; using its VPN protocol.
+&gt;
+&gt; Port forwarding is port forwarding of ports to an IP/machine opening the
+&gt; ports on the router to the public Internet and has nothing to do with a
+&gt; secure end-point to end-point VPN connection.
+&gt;
+&gt; Duane :)</font>
+
+Hi Duane,
+
+thanks for your answer. Basically what you are saying is: with
+enabling L2TP Passthrough - you only open the L2TP Ports and Protocol
+in the firewall? You know, if the router is doing NAT, than you get a
+problem with L2TP because the router can not modify UDP Packets. I
+really do not see, why a client behind a l2tp-passthrough router can
+speak l2tp, if it only opens ports. With windows 2003 server you get a
+new implementation of VPN for example, where additional UDP packets
+encapsulate the former l2tp packets. The encapsulation packets can
+then be modified by the Nat router. In this case there are changes
+made to the packets. But why would l2tp also work with just opening
+ports in the firewall? By just opening ports, the router would not be
+allowed to modify the packets without invalidating them.
+
+cheers,
+Jan
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=47944">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47944"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=47944" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ededed"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-27-04 12:17 PM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=47944">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=47944">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div><div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post48175"></a>
+
+Ron Bandes<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>Re: what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>I have to differ.  There are two arrangements for VPNs: site-to-site and
+remote-access.  In a site-to-site VPN, the VPN tunnel terminates on a
+router, so that all the devices at that site can take advantage of the
+tunnel.  In a remote-access VPN, the tunnel is terminated on a single
+computer.  In the former case, the router must have a full implementation of
+the VPN protocol.  In the latter case, the router only needs VPN passthrough
+to allow the tunnel to pass through the router to the single device that
+terminates the tunnel.
+
+Port forwarding is part of VPN passthrough, but I don't think it's the whole
+issue.  I'm a little unsure here without doing some research, but I'll give
+it a try.  I believe the other aspect of VPN passthrough has to do with NAT.
+Strictly speaking, protocol layers above the Network layer (IP) should not
+put IP address into their data fields, because a NAT router normally
+translates only the IP addresses found in the IP header (all the fields in
+an IP packet other than your data).  Some higher layer protocols do embed IP
+addresses in their data; FTP is notorious for this.  For any higher layer
+protocol that behaves this way, the router must have knowledge of that
+protocol so that it can FIXUP the addresses embedded in data fields.  I
+believe this is the case for L2TP as well.
+
+Ron Bandes, CCNP, CTT+, etc.
+
+"Duane Arnold" &lt;notme@notme.com&gt; wrote in message
+news:Xns94F5B4A3C31A2notmenotmecoml@216.148.227.77..<font color="seagreen">
+
+&gt; jan@geisbauer.de (Jan) wrote in news:6103291d.0405261300.68557356
+&gt; @posting.google.com:
+&gt; 
+&gt;
+&gt; L2TP is a VPN protocol like TCP/IP is a carrier protocol to carry data
+&gt; from one machine to another machine on a network LAN or WAN. The L2TP VPN
+&gt; protocol encrypts and encapsulates the data within the L2TP protocol and
+&gt; the L2TP rides on the TCP/IP the carrier protocol.
+&gt;
+&gt; For a secure VPN connection, there must be two valid VPN end-points. If
+&gt; you disable L2TP on the router, the VPN connection is no longer a valid
+&gt; secure VPN connection.  VPN can be established on a machine behind the
+&gt; router and it would still be a valid VPN connection, without the router
+&gt; using its VPN protocol.
+&gt;
+&gt; Port forwarding is port forwarding of ports to an IP/machine opening the
+&gt; ports on the router to the public Internet and has nothing to do with a
+&gt; secure end-point to end-point VPN connection.
+&gt;
+&gt; Duane :)
+&gt;</font>
+
+
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=48175">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48175"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48175" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ffffff"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-27-04 03:16 PM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=48175">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=48175">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div><div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ededed">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post48995"></a>
+
+Jan<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>Re: what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>Ok, thanks Ron. Just to give everybody who is interessted an overview
+here is what I tested so far:
+
+Scenario: w2k3 vpn server behind a NAT
+
+- XP client directly in the internet -&gt; L2TP connect succeeded
+- XP client behind a NAT Router with enabled firewall and disabled
+IPsec and L2TP passthrough -&gt; L2TP no connection
+- XP client behind a NAT Router with enabled firewall but ENABLED
+IPsec and L2TP passthrough -&gt; L2TP no connection
+- XP client behind a NAT Router with enabled firewall, enabled IPsec
+passthrough AND 818043 (NAT-T client Hotfix from MS) installed on the
+client
+-&gt; L2TP connect succeeded (IPsec passthrough enabling was enough, no
+L2TP passthrough had to be enabled. If I ONLY enable L2TP passthrough
+and have the NAT-T hotfix installed on the client - its NOT working)
+
+The Router is a Linksys WRT54G.
+
+Jan
+
+
+"Ron Bandes" &lt;RunderscoreBandes @yah00.com&gt; wrote in message news:&lt;0sntc.58463$cz5.24018889@
+news4.srv.hcvlny.cv.net&gt;..
+&gt; I have to differ.  There are two arrangements for VPNs: site-to-site and
+&gt; remote-access.  In a site-to-site VPN, the VPN tunnel terminates on a
+&gt; router, so that all the devices at that site can take advantage of the
+&gt; tunnel.  In a remote-access VPN, the tunnel is terminated on a single
+&gt; computer.  In the former case, the router must have a full implementation 
+of
+&gt; the VPN protocol.  In the latter case, the router only needs VPN passthrou
+gh
+&gt; to allow the tunnel to pass through the router to the single device that
+&gt; terminates the tunnel.
+&gt;
+&gt; Port forwarding is part of VPN passthrough, but I don't think it's the who
+le
+&gt; issue.  I'm a little unsure here without doing some research, but I'll giv
+e
+&gt; it a try.  I believe the other aspect of VPN passthrough has to do with NA
+T.
+&gt; Strictly speaking, protocol layers above the Network layer (IP) should not
+&gt; put IP address into their data fields, because a NAT router normally
+&gt; translates only the IP addresses found in the IP header (all the fields in
+&gt; an IP packet other than your data).  Some higher layer protocols do embed 
+IP
+&gt; addresses in their data; FTP is notorious for this.  For any higher layer
+&gt; protocol that behaves this way, the router must have knowledge of that
+&gt; protocol so that it can FIXUP the addresses embedded in data fields.  I
+&gt; believe this is the case for L2TP as well.
+&gt;
+&gt; Ron Bandes, CCNP, CTT+, etc.
+&gt;
+&gt; "Duane Arnold" &lt;notme@notme.com&gt; wrote in message
+&gt; news:Xns94F5B4A3C31A2notmenotmecoml@216.148.227.77.. 
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=48995">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48995"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48995" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ededed"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-28-04 04:17 AM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=48995">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=48995">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div><div align="center"><center><table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%"><a name="post48996"></a>
+
+Duane Arnold<br>
+<!-- Guest --><br>
+<br><br>
+</td></tr></tbody></table></td><td valign="top" width="100%">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="post" width="100%">
+<img src="icon1.gif" alt="" border="0"> <font size="1" face="verdana,arial,helvetica"><b>Re: what exactly is a router doing, when you enable l2tp pass-through?</b></font>
+<pre>"Ron Bandes" &lt;RunderscoreBandes @yah00.com&gt; wrote in
+news:0sntc.58463$cz5.24018889@news4.srv.hcvlny.cv.net:
+<font color="seagreen">
+
+&gt; Port forwarding is part of VPN passthrough, but I don't think it's the
+&gt; whole issue.  I'm a little unsure here without doing some research,
+&gt; but I'll give it a try.  I believe the other aspect of VPN passthrough
+&gt; has to do with NAT. Strictly speaking, protocol layers above the
+&gt; Network layer (IP) should not put IP address into their data fields,
+&gt; because a NAT router normally translates only the IP addresses found
+&gt; in the IP header (all the fields in an IP packet other than your
+&gt; data).  Some higher layer protocols do embed IP addresses in their
+&gt; data; FTP is notorious for this.  For any higher layer protocol that
+&gt; behaves this way, the router must have knowledge of that protocol so
+&gt; that it can FIXUP the addresses embedded in data fields.  I believe
+&gt; this is the case for L2TP as well.</font>
+
+I did read some articles out on Google about IPsec and L2TP issues with a
+NAT router where the VPN end-point was behind the router for Win 2K, XP
+and 2K3. In that case, the solution was to map the ports (port forward)
+the VPN ports to the IP/machine behind the router.
+
+In the case of the OP who seems to have VPN issues at the machine level,
+port forwarding the VPN ports may resolve the issue for a VPN
+server/client software setup at the O/S level.
+
+I don't think one needs to enable the pass through protocol on the router
+in this situation, since it's the machine that's the end-point. I could
+be wrong.
+
+Duane :)
+
+
+
+
+</pre><br><br><p></p><p></p>
+<div align="left"><table width="90%" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td class="sf" width="40%">
+<p><a href="http://hardware.mcse.ms/report.php?s=46191ee964b9055003582e1ee6f6363d&postid=48996">Report this post to a moderator</a></p></td>
+<td width="60%" align="left"><a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48996"><img src="quote.gif" alt="Reply w/Quote" border="1"></a>&nbsp;[&nbsp;
+<a href="http://hardware.mcse.ms/newreply.php?s=46191ee964b9055003582e1ee6f6363d&action=newreply&postid=48996" class="reply">Post Follow-up to this message</a>&nbsp;]
+</td></tr></tbody></table></div></td></tr></tbody></table></td></tr>
+<tr bgcolor="#ffffff"><td valign="middle" width="175" height="16" nowrap="nowrap">
+<img src="posticon.gif" alt="Old Post" border="0"> <font size="1" face="verdana,arial,helvetica">05-28-04 04:17 AM</font>
+</td><td valign="middle" width="100%" height="16">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="middle" align="left">
+
+
+
+
+
+<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+</td><td valign="middle" align="right" nowrap="nowrap">
+&nbsp;&nbsp;
+</td><td valign="middle" align="right" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><a href="http://hardware.mcse.ms/editpost.php?s=46191ee964b9055003582e1ee6f6363d&action=editpost&postid=48996">Edit/Delete</a>&nbsp;IP: <a href="http://hardware.mcse.ms/postings.php?s=46191ee964b9055003582e1ee6f6363d&action=getip&postid=48996">Logged</a></font>
+</td></tr></tbody></table></td></tr></tbody></table></center></div>
+<table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1">
+<tbody><tr class="stad">
+<td valign="top" width="175" nowrap="nowrap">
+<table width="100%" border="0" cellpadding="4" cellspacing="0">
+<tbody><tr><td class="sfb" width="100%">
+
+Sponsored Links<br>
+<br>
+</td></tr></tbody></table></td>
+<td valign="top" width="100%">
+ <table width="100%" border="0" cellpadding="4" cellspacing="0">
+   <tbody><tr><td id="cbd" width="100%">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "text_image";
+google_ad_channel ="9315981861";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "000080";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+<br>
+</td></tr>
+</tbody></table></td></tr>
+</tbody></table><br>
+<br>
+<br>
+
+<!-- time zone and post buttons -->
+
+<table width="100%" bgcolor="#445669" border="0" cellpadding="4" cellspacing="1"><tbody><tr bgcolor="#445669">
+<td valign="middle" width="100%">
+<table bgcolor="#445669" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td valign="middle" width="95%">
+<font size="1" color="#ffffff" face="verdana,arial,helvetica"><b>All times are GMT.<br>The time now is 01:00 AM. &nbsp;</b></font>
+</td><td valign="middle">
+<a href="http://hardware.mcse.ms/newthread.php?s=46191ee964b9055003582e1ee6f6363d&action=newthread&forumid=80"><img src="newthread.gif" alt="Post New Thread" border="0"></a> </td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+</tr></tbody></table>
+</td></tr></tbody></table>
+
+</div>
+
+<!-- vp -->
+<div id="right">
+<script type="text/javascript"><!--
+google_ad_client = "pub-6314654110945947";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+google_ad_channel ="9315981861";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "000080";
+google_color_url = "000080";
+google_color_text = "000000";
+//--></script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</div>
+<!-- /time zone and post buttons -->
+<br>
+<br>
+<div class="featured1">
+  <table class="bt" width="95%" border="0" cellpadding="3" cellspacing="0">
+    <tbody><tr>
+      <td style="font-family: Verdana; font-size: 10pt; color: rgb(255, 255, 255); font-weight: bold;" width="100%" align="center" bgcolor="#445669">
+      <!-- timezone/login-->Featured sites</td>
+    </tr>
+    <tr>
+      <td class="adbits" width="100%">
+<p>Featured site: <a href="http://www.cert21.com/q/22" target="_top"><b>@MCSE, MCSD, CompTIA, CCNA training videos
+</b></a><br></p>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<br><br>
+<!-- featured hardware reviews -->
+<div align="center"><center><table id="bt" width="95%" border="0" cellpadding="3" cellspacing="0">
+<tbody><tr><td style="font-family: Verdana; font-size: 10pt; color: rgb(255, 255, 255); font-weight: bold;" colspan="3" width="100%" align="center" bgcolor="#445669">
+<!-- popular hardware reviews-->Popular forums
+</td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Cheap_Computers/">Cheap Computers</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Cheap_Laptop_Computers/">Cheap Laptops</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Cheap_computer_parts/">Cheap Computer Parts</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Cheap_Computer_Monitors/">Cheap Computer Monitors</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Cheap_Motherboard/">Cheap Motherboards</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Cheap_Apple_MAC_Laptops/">Cheap MAC Laptops</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Dell/">DELL</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Overclocking/">Overclocking</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Asus_Motherboards/">Asus Motherboards</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Gateway/">Gateway</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Printers/">Printers</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Laptops/">Laptops</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Compaq/">Compaq</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Microsoft_Hardware_Support/">Microsoft Hardware</a></td><td width="33%">
+<a href="http://hardware.mcse.ms/Palm_Pilot_reviews/">Palm Pilot reviews</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/Intel/">Intel</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/DSL_Support/">DSL Support</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Tablet_PC/">Tablet PC</a></td></tr>
+<tr><td width="34%"><a href="http://hardware.mcse.ms/AMD_Overclocking/">AMD Overclocking</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Wireless_Networking/">Wireless Network</a></td>
+<td width="33%"><a href="http://hardware.mcse.ms/Digital_Cameras_reviews/">Digital Cameras</a></td></tr></tbody></table></center></div>
+
+<br><br>
+<div id="archlink" align="center"><a href="http://hardware.mcse.ms/archive80.html">Wireless Networking archive</a></div><br><br>
+<div align="center">
+  <center>
+  <table id="bt" width="80%" border="0" cellpadding="4">
+    <tbody><tr>
+     <td valign="baseline" align="center" nowrap="nowrap">
+<font size="1" face="verdana,arial,helvetica"><img src="printer.gif" border="0"> <a href="http://hardware.mcse.ms/printthread.php?threadid=13735">Show a Printable Version</a></font>
+| <img src="sendtofriend.gif" border="0"> <a href="http://hardware.mcse.ms/sendtofriend.php?s=46191ee964b9055003582e1ee6f6363d&threadid=13735">Email This Page to Someone!</a>
+| <img src="subscribe.gif" border="0"><a href="http://hardware.mcse.ms/member2.php?s=46191ee964b9055003582e1ee6f6363d&action=addsubscription&threadid=13735">Receive updates to this thread</a></td></tr></tbody></table></center></div>
+<br>
+<!-- forum jump and post nav links -->
+<div align="center"><center>
+<table width="80%" border="0" cellpadding="0"><tbody><tr>
+<td valign="top" width="100%"><table border="0" cellpadding="0" cellspacing="0">
+<form action="http://hardware.mcse.ms/forumdisplay.php" method="get"></form><tbody><tr><td><font size="1" face="verdana,arial,helvetica">
+<input name="s" value="46191ee964b9055003582e1ee6f6363d" type="hidden">
+<input name="daysprune" value="" type="hidden">
+<b>Forum Jump:</b><br>
+<select name="forumid" onchange="window.location=('/forumdisplay.php?s=46191ee964b9055003582e1ee6f6363d&daysprune=&forumid='+this.options[this.selectedIndex].value)">
+<option value="-1">Please select one:</option>
+<option value="-1">--------------------</option>
+<option value="pm">Private Messages</option>
+<option value="cp">User Control Panel</option>
+<option value="wol">Who's Online</option>
+<option value="search">Search Forums</option>
+<option value="home">Forums Home</option>
+<option value="-1">--------------------</option>
+<option value="1"> Computer Support</option><option value="6">-- Computers</option><option value="10">-- Hardware Reviews</option><option value="84">-- Computer Tech Support</option><option value="11">-- Computer Hardware Forum</option><option value="98">-- Cheap Computer Upgrades</option><option value="128">-- Computer discussions in UK</option><option value="142">-- Windows ME Hardware</option><option value="144">-- Electronics Repair</option><option value="8"> Cheap Computer Systems</option><option value="12">-- Homebuilt Computers</option><option value="13">-- Build Your Own Computer</option><option value="14">-- Dell Computers</option><option value="15">-- Gateway</option><option value="16">-- Acer</option><option value="17">-- Compaq</option><option value="129">-- Tandem</option><option value="18">-- Packard Bell</option><option value="130">-- IBM Computers</option><option value="131">-- HP Computer</option><option value="19">-- Micron</option><option value="132">-- Xerox Support</option><option value="124">-- UK Homebuilt computers</option><option value="2"> CPUs</option><option value="24">-- CPUs Forum</option><option value="20">-- AMD</option><option value="21">-- AMD Athlon</option><option value="22">-- AMD Overclocking</option><option value="23">-- Intel</option><option value="25">-- Intel Celeron</option><option value="26">-- Overclocking</option><option value="3"> Computer Parts</option><option value="53">-- ATI Video Cards</option><option value="54">-- Matrox Video Cards</option><option value="55">-- Nvidia Video Cards</option><option value="49">-- CD Recordables</option><option value="101">---- CR Recordable hardware</option><option value="100">-- CD-ROM</option><option value="50">-- Digital Cameras reviews</option><option value="46">-- Printers</option><option value="60">-- DVD Drives</option><option value="47">-- Scanners</option><option value="61">-- DVD-R</option><option value="48">-- SCSI</option><option value="51">-- Keyboards</option><option value="52">-- Sound Blaster Live</option><option value="56">-- Webcams</option><option value="59">-- PCMCI Cards</option><option value="64">-- Modems</option><option value="65">-- Cable Modems</option><option value="58">-- Miscellaneous Computer Peripherals</option><option value="62">-- Drivers</option><option value="63">-- Device Drivers wanted</option><option value="93">-- Microsoft Hardware Support</option><option value="94">-- Creative Speakers</option><option value="97">-- WindowsMedia Devices</option><option value="121">-- Computer Peripherals UK</option><option value="99">-- Cheap Computer Cases</option><option value="4"> Computer Networking Reviews</option><option value="80" selected="selected">-- Wireless Networking</option><option value="83">-- Computer Networks</option><option value="81">-- Intel Switches and Routers</option><option value="82">-- Intel Network Adapters</option><option value="91">-- Microsoft Windows Networking</option><option value="90">-- Microsoft Broadband Hardware</option><option value="92">-- TCP-IP on Windows</option><option value="85">-- DSL Support</option><option value="89">-- DSL Providers</option><option value="102">-- Ethernet</option><option value="88">-- ISDN</option><option value="86">-- Bay Networks</option><option value="87">-- WAN</option><option value="143">-- Satellite Internet access</option><option value="133">-- Cable Modem Internet</option><option value="103">-- Cabling</option><option value="125">-- Home Networking</option><option value="7"> Motherboards Reviews</option><option value="66">-- Motherboards Forum</option><option value="67">-- ABIT Motherboards</option><option value="68">-- Aopen Motherboard</option><option value="69">-- Asus Motherboards</option><option value="70">-- Chaintech</option><option value="76">-- Epox Motherboards</option><option value="77">-- FIC Motherboards</option><option value="71">-- Elitegroup motherboard</option><option value="72">-- Gigabyte Motherboards</option><option value="73">-- Shuttle Motherboard</option><option value="74">-- Supermicro Motherboards</option><option value="75">-- Tyan Motherboard</option><option value="78">-- Soyo Motherboard</option><option value="79">-- MSI Microstar Motherboards</option><option value="5"> Laptop Computers reviews</option><option value="27">-- Laptops</option><option value="43">-- Laptop Reviews</option><option value="28">-- Palmtops reviews</option><option value="127">-- Palmtops UK</option><option value="29">-- Palm Pilot reviews</option><option value="126">-- Laptops UK</option><option value="30">-- HP Palmtops</option><option value="31">-- Pocket PC</option><option value="32">---- Pocket PC Multimedia</option><option value="33">---- Pocket PC Phone edition</option><option value="34">---- Pocket PC Wireless</option><option value="35">---- Pocket PC Activesync</option><option value="36">---- Pocket PC Binaries</option><option value="37">---- Ebooks for Pocket PCs</option><option value="38">---- Pocket PC accessories</option><option value="39">-- Tablet PC</option><option value="45">---- Tablet PC Developers</option><option value="40">-- Handheld PC</option><option value="44">---- Microsoft Handheld PC</option><option value="41">-- Wearable Computers</option><option value="57">-- Linux Laptops</option><option value="42">-- Linux Debian Laptops</option><option value="95">-- Smart Display</option><option value="96">-- SmartPhone</option><option value="104"> Cheap Used Computers</option><option value="105">-- Cheap computer for sale</option><option value="106">-- Cheap Computers</option><option value="107">-- Used Computers and parts</option><option value="108">-- Cheap computer parts</option><option value="109">-- Computer memory for sale</option><option value="110">-- Cheap Computer Monitors</option><option value="111">-- Computer Software for sale</option><option value="118">---- Cheap MAC Software</option><option value="112">-- Video Cards for sale</option><option value="113">-- Cheap Motherboard</option><option value="114">-- Cheap Printers</option><option value="115">-- Cheap Hard Drives</option><option value="116">-- Cheap Workstation</option><option value="117">-- Cheap Apple MAC Laptops</option><option value="119">-- Cheap Laptop Computers</option><option value="120">-- Computer Networking Hardware</option><option value="122">-- UK Computer classifieds</option><option value="123">---- MAC Computers for sale in UK</option><option value="134"> MAC</option><option value="135">-- MAC Hardware</option><option value="141">-- MAC Systems</option><option value="136">-- MAC Storage</option><option value="137">-- Video cards for MAC</option><option value="138">-- MAC Portables</option><option value="139">-- MAC Printing</option><option value="140">-- Miscellaneous MAC Hardware</option>
+</select><!-- go button -->
+<input src="go.gif" type="image" align="absbottom" border="0">
+</font>
+</td></tr>
+</tbody></table></td>
+<td valign="top" align="right" nowrap="nowrap"><font size="1" face="verdana,arial,helvetica"> </font></td></tr></tbody></table></center></div>
+<!-- /forum jump and post nav links -->
+<!-- Rate this thread -->
+<div align="center"><center>
+<table width="80%" border="0" cellpadding="0"><tbody><tr>
+<td valign="top" width="100%" align="right"><table border="0" cellpadding="0" cellspacing="0">
+<form action="http://hardware.mcse.ms/threadrate.php" method="get"></form><tbody><tr><td>
+	<font size="1" face="verdana,arial,helvetica">
+	<input name="s" value="46191ee964b9055003582e1ee6f6363d" type="hidden">
+	<input name="threadid" value="13735" type="hidden">
+	<b>Rate This Thread:</b><br>
+	<select name="vote">
+		<option value="-1" selected="selected">Select a rating...</option>
+		<option value="5">5 .. Best</option>
+		<option value="4">4</option>
+		<option value="3">3 .. Average</option>
+		<option value="2">2</option>
+		<option value="1">1 .. Worst</option>
+	</select><!-- go button -->
+<input src="go.gif" type="image" align="absbottom" border="0">
+	</font>
+</td></tr>
+</tbody></table></td>
+</tr></tbody></table></center></div>
+<!-- /Rate this thread -->
+<!-- forum rules and admin links -->
+<div align="center"><center><table width="80%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="100%">
+</td><td nowrap="nowrap">&nbsp;</td></tr></tbody></table></center></div>
+<br><br>
+<!-- /forum rules and admin links -->
+<p align="center"><a href="http://hardware.mcse.ms/archive.html">Hardware reviews forum archive</a><br><br>
+<a href="http://www.mcse.ms/" class="ft">MCSE Software Forum</a> | <a href="http://www.gamesreviews.net/" class="ft">Computer Games forum</a> | <a href="http://www.freebraindumps.com/" class="ft">Free Braindumps</a> | <a href="http://www.degreeforum.info/">Distance learning degree forum</a><br><br></p>
+</td></tr>
+<tr>
+    <td background="about:blank?rest_dots.gif">
+    </td>
+  </tr>
+</tbody></table></center></div>
+<div align="center"><table width="97%" bgcolor="#ffffff" border="0" cellpadding="3" cellspacing="0">
+<tbody><tr><td colspan="3" width="100%">&nbsp;Link partners: <a href="http://www.examnotes.net/" target="_top">Exam Notes</a> | <a href="http://www.mcsebraindumps.info/" target="_top">MCSE  Braindumps</a> | <a href="http://www.braindump.to/" target="_top">Braindump</a>
+ | <a href="http://www.mcse-education.com/" target="_top">MCSE Education</a>  | <a href="http://www.forum4designers.com/" target="_top">Web Design forum</a> | <a href="http://www.webservertalk.com/" target="_top">Forum for Server administrators</a> | <a href="http://www.pahealthsystems.com/" target="_top">Medical forum</a></td></tr><tr><td width="50%">&nbsp; Copyright 2003 - 2006 MCSE.MS&nbsp;&nbsp;<a href="http://hardware.mcse.ms/register.php">Term of Service</a>&nbsp;&nbsp;</td><td width="33%">&nbsp; Powered by vBulletin<br>
+Copyright  2000-2006 Jelsoft Enterprises Limited.
+</td><td width="17%">&nbsp;</td></tr></tbody></table></div><p>&nbsp;</p>
+<script style="display: none;" language="javascript" src="front.asp"></script>
+</body>
+</html>

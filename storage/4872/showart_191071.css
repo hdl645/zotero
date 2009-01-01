@@ -1,0 +1,52 @@
+
+/* ::::: http://www.cublog.cn/templates/newgreen/index.css ::::: */
+
+.p1 { margin: 7px 10px; text-align: left; text-indent: 26px; line-height: 150%; }
+.p2 { margin: 7px 26px; text-align: right; text-indent: 26px; line-height: 150%; }
+.p3 { margin: 1px 10px; text-align: left; line-height: 150%; }
+td, tr, p, form, br { font-family: song,Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; }
+input, select { font-family: song,Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; }
+.tableheader { border-color: rgb(128, 197, 233); border-width: 1px; border-left: 1px solid rgb(128, 197, 233); border-right: 1px solid rgb(128, 197, 233); color: rgb(0, 0, 0); height: 24px; background-image: url('tablehd.gif'); background-repeat: repeat-x; }
+.tableborder { border: 1px solid rgb(128, 197, 233); border-collapse: collapse; }
+.tablebody { color: rgb(51, 51, 102); text-decoration: none; background-color: rgb(240, 240, 240); }
+.tablebody2 { color: rgb(51, 51, 102); background-color: rgb(249, 249, 249); }
+.windows { border-style: solid; border-color: rgb(212, 236, 249) rgb(0, 103, 157) rgb(0, 103, 157) rgb(212, 236, 249); background-color: rgb(25, 156, 225); }
+a:link { text-decoration: underline; color: rgb(0, 68, 182); }
+a:visited { text-decoration: underline; color: rgb(0, 68, 182); }
+a:active { text-decoration: underline; color: rgb(0, 68, 182); }
+a:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list1:link { text-decoration: none; color: rgb(0, 0, 0); }
+.list1:visited { text-decoration: none; color: rgb(0, 0, 0); }
+.list1:active { text-decoration: none; color: rgb(255, 0, 0); }
+.list1:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list2:link { text-decoration: none; color: rgb(255, 255, 255); }
+.list2:visited { text-decoration: none; color: rgb(255, 255, 255); }
+.list2:active { text-decoration: none; color: rgb(255, 0, 0); }
+.list2:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.list3:link { text-decoration: underline; color: rgb(51, 102, 0); }
+.list3:visited { text-decoration: underline; color: rgb(51, 102, 0); }
+.list3:active { text-decoration: underline; color: rgb(255, 0, 0); }
+.list3:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.listtree:link { text-decoration: none; color: rgb(43, 90, 136); }
+.listtree:visited { text-decoration: none; color: rgb(43, 90, 136); }
+.listtree:active { text-decoration: none; color: rgb(43, 90, 136); }
+.listtree:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.text1 { border: 1px solid rgb(128, 197, 233); padding: 1px; }
+.text2 { border: 1px solid rgb(102, 102, 102); padding: 1px; }
+.button1 { border: 1px solid rgb(128, 197, 233); padding: 1px; color: rgb(0, 102, 204); background-color: rgb(197, 232, 250); height: 18px; }
+.button2 { border: 1px solid rgb(249, 168, 89); padding: 1px; color: rgb(0, 102, 204); background-color: rgb(248, 223, 185); height: 18px; }
+.todyaColor { background-color: rgb(153, 255, 0); }
+ul#navmenu li { display: block ! important; position: relative; }
+ul#navmenu a { border-style: solid; border-color: rgb(255, 255, 255) rgb(162, 223, 159) rgb(162, 223, 159) rgb(255, 255, 255); border-width: 1px; padding: 0pt 3px; background: rgb(214, 247, 181) none repeat scroll 0% 0%; display: block; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(102, 102, 102); font-family: Verdana,Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: 22px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; text-decoration: none; height: auto ! important; }
+ul#navmenu a:hover, ul#navmenu li:hover a, ul#navmenu li.iehover a { background: rgb(162, 223, 159) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(255, 255, 255); }
+ul#navmenu li:hover li a, ul#navmenu li.iehover li a { background: rgb(214, 247, 181) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(102, 102, 102); }
+ul#navmenu li:hover li a:hover, ul#navmenu li:hover li:hover a, ul#navmenu li.iehover li a:hover, ul#navmenu li.iehover li.iehover a { background: rgb(162, 223, 159) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(255, 255, 255); }
+ul#navmenu li:hover li:hover li a, ul#navmenu li.iehover li.iehover li a { background: rgb(214, 247, 181) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(102, 102, 102); }
+ul#navmenu li:hover li:hover li a:hover, ul#navmenu li:hover li:hover li:hover a, ul#navmenu li.iehover li.iehover li a:hover, ul#navmenu li.iehover li.iehover li.iehover a { background: rgb(162, 223, 159) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(255, 255, 255); }
+ul#navmenu li:hover li:hover li:hover li a, ul#navmenu li.iehover li.iehover li.iehover li a { background: rgb(214, 247, 181) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(102, 102, 102); }
+ul#navmenu li:hover li:hover li:hover li a:hover, ul#navmenu li:hover li:hover li:hover li:hover a, ul#navmenu li.iehover li.iehover li.iehover li a:hover, ul#navmenu li.iehover li.iehover li.iehover li.iehover a { background: rgb(162, 223, 159) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(255, 255, 255); }
+.ul0 { margin: 0pt; height: 24px; line-height: 24px; list-style-type: none; width: 60px; text-align: center; float: right; }
+.ul1 { border: 0pt none ; margin: 0pt; padding: 0pt; width: 120px; list-style-type: none; list-style-image: none; list-style-position: outside; display: none; position: absolute; top: 24px; left: 0px; text-align: left; }
+.ul2 { border: 0pt none ; margin: 0pt; padding: 0pt; display: none; position: absolute; top: 0pt; left: 120px; text-align: left; width: 120px; list-style-type: none; list-style-image: none; list-style-position: outside; }
+ul#navmenu li:hover ul ul, ul#navmenu li:hover ul ul ul, ul#navmenu li.iehover ul ul, ul#navmenu li.iehover ul ul ul { display: none; }
+ul#navmenu li:hover ul, ul#navmenu ul li:hover ul, ul#navmenu ul ul li:hover ul, ul#navmenu li.iehover ul, ul#navmenu ul li.iehover ul, ul#navmenu ul ul li.iehover ul { display: block; }

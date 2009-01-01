@@ -1,0 +1,670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.isaserver.org/articles/ipsec_passthrough.html">
+<meta name="wpd_url" content="http://www.isaserver.org/articles/ipsec_passthrough.html">
+<meta name="wpd_date" content="2008-06-03T02:10Z">
+
+
+
+  <title>How to pass IPSec traffic through ISA Server</title>
+  <meta name="keywords" content="IPSec L2TP L2TP/IPSec NAT Traversal NAT-T NAPT passthrough">
+  <meta name="description" content="A much asked question on the message boards is how to pass an IPSec VPN client through the ISA Server. It can be done if and only if the IPSec implementation supports a feature called NAT Traversal. If you want to know why, how it works and how you can pass it through ISA Server, read on.">
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="IsaServer RSS Feed" href="http://rss.isaserver.org/allnews.xml">
+  
+  <script type="text/javascript" src="utils.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="ipsec_passthrough.css" media="all">
+</head>
+<body><div style="z-index: 1000000;"><div id="addthis_dropdown" onmouseover="addthis_clearclosewin()" onmouseout="addthis_onmouseout()" style="z-index: 1000000; position: absolute; display: none;"><table style="background-color: rgb(238, 238, 238); height: 20px;" width="100%" cellpadding="2" cellspacing="0"><tbody><tr><td style="font-size: 12px; color: rgb(102, 102, 102);">Bookmark & Share</td><td width="60" align="right"><a href="http://www.addthis.com/" style="font-size: 9px; text-decoration: none; color: rgb(102, 102, 102);" target="_top" class="snap_noshots">&copy; Add This</a></td></tr></tbody></table><table id="addthis_services" style="font-family: Verdana,Arial; font-size: 11px;" width="100%" cellpadding="0"><tbody><tr><td width="50%"><a href="http://www.isaserver.org/" onclick="return addthis_to('favorites')"><img id="addthis_favorites" alt="" width="16" height="16">&nbsp; Favorites</a></td><td width="50%"><a href="http://www.isaserver.org/" onclick="return addthis_to('delicious')"><img id="addthis_delicious" alt="" width="16" height="16">&nbsp; Del.icio.us</a></td></tr><tr><td><a href="http://www.isaserver.org/" onclick="return addthis_to('digg');"><img id="addthis_digg" alt="" width="16" height="16">&nbsp; Digg</a></td><td><a href="http://www.isaserver.org/" onclick="return addthis_to('google')"><img id="addthis_google" alt="" width="16" height="16">&nbsp; Google</a></td></tr><tr><td><a href="http://www.isaserver.org/" onclick="return addthis_to('myspace');"><img id="addthis_myspace" alt="" width="16" height="16">&nbsp; MySpace</a></td><td><a href="http://www.isaserver.org/" onclick="return addthis_to('facebook');"><img id="addthis_facebook" alt="" width="16" height="16">&nbsp; Facebook</a></td></tr><tr><td><a href="http://www.isaserver.org/" onclick="return addthis_to('reddit');"><img id="addthis_reddit" alt="" width="16" height="16">&nbsp; Reddit</a></td><td><a href="http://www.isaserver.org/" onclick="return addthis_to('live');"><img id="addthis_live" alt="" width="16" height="16">&nbsp; Live</a></td></tr><tr><td><a href="http://www.isaserver.org/" onclick="return addthis_to('furl');"><img id="addthis_furl" alt="" width="16" height="16">&nbsp; Furl</a></td><td><a href="http://www.isaserver.org/" onclick="return addthis_to('myweb');"><img id="addthis_myweb" alt="" width="16" height="16">&nbsp; Yahoo MyWeb</a></td></tr><tr><td><a href="http://www.isaserver.org/" onclick="return addthis_to('su');"><img id="addthis_su" alt="" width="16" height="16">&nbsp; StumbleUpon</a></td><td><a href="http://www.isaserver.org/" onclick="return addthis_to();"><img id="addthis_more" alt="" width="16" height="16">&nbsp; More...</a></td></tr></tbody></table><table style="background-color: rgb(238, 238, 238); height: 6px; font-size: 8px; color: rgb(119, 119, 119);" width="100%" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2"></td></tr></tbody></table></div></div>
+ <div id="ww-wrapper">
+
+  <div id="main-banner">
+    		<script type="text/javascript" src="a.aspx"></script><!-- BEGIN NetShelter Ad Tag for ISAserver 728x90 -->
+<script language="JavaScript" type="text/javascript">
+
+if (!window.netshel_ord) { netshel_ord=Math.random()*10000000000000000;
+}
+if (!window.netshel_tile) { netshel_tile=1; }
+document.write('<script language="JavaScript" src="http://ad.doubleclick.net/adj/ns.isaserver/general;sz=728x90;dcopt='+netshel_tile+';ord=' + netshel_ord + '?" type="text/javascript"></scr' + 'ipt>');
+netshel_tile++;
+</script><script style="display: none;" language="JavaScript" src="general" type="text/javascript"></script>
+<!-- END AD TAG --><noscript>
+
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=10&SiteID=1&PageID=5998&Task=Click&Random=1215050416379&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=10&SiteID=1&PageID=5998&Random=1215050416379&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+</noscript>
+
+  </div>
+
+  <div id="ww-header">
+   <ul>
+    <li><a href="http://www.isaserver.org/articles_tutorials/">Articles</a></li>
+    <li><a href="http://www.isaserver.org/authors/">Authors</a></li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="http://www.isaserver.org/pages/books.asp">Books</a></li>
+    <!-- li><a href="/pages/certification.asp">Certification</a></li -->
+    <li><a href="http://www.isaserver.org/pages/events.asp">Events</a></li>
+    <li><a href="http://www.isaserver.org/faq/">FAQs</a></li>
+    <!-- li><a href="/articles/Gaming.html">Gaming</a></li -->
+    <li><a href="http://www.isaserver.org/hardware/">Hardware</a></li>
+    <li><a href="http://www.isaserver.org/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org/">Message Boards</a></li>
+    <li><a href="http://www.isaserver.org/pages/newsletter.asp">Newsletter</a></li>
+    <li><a class="ww-rsslink" href="http://rss.techgenix.com/">RSS</a></li>
+    <!-- li><a href="/Thomas_Shinder/">Shinder Section</a></li -->
+    <li class="ww-last"><a href="http://www.isaserver.org/software/">Software</a></li>
+   </ul>
+
+   <p id="ww-logo">
+    <a href="http://www.isaserver.org/"><img src="logo-isa.gif" alt="IsaServer logo" width="260" height="60"></a>
+   </p>
+
+   <form id="ww-search" action="http://www.isaserver.org/search.asp">
+    <p>
+      <label for="ww-search-input"><span>Site Search</span><input id="ww-search-input" name="s" class="i-text" value="Search Site" onfocus='if (this.value == "Search Site") this.value = "";'></label>
+      <input value="" class="i-submit" type="submit">
+    </p>
+    <p class="sf-advs"><a href="http://www.isaserver.org/search-adv.asp">Advanced Search</a></p>
+   </form>
+  </div>
+
+  
+
+  <div id="ww-container">
+   <div id="ww-cont-one">
+    <div id="ww-cont-two">
+
+     <div id="ww-content">
+
+
+<h1 class="ww-important"><span>How to pass IPSec traffic through ISA Server</span></h1>
+
+<!-- <<<
+
+seTitle		= "How to pass IPSec traffic through ISA Server"
+seDescr		= "A much asked question on the message boards is how to pass an IPSec VPN client through the ISA Server. It can be done if and only if the IPSec implementation supports a feature called NAT Traversal. If you want to know why, how it works and how you can pass it through ISA Server, read on."
+seKeys		= "IPSec L2TP L2TP/IPSec NAT Traversal NAT-T NAPT passthrough"
+seTags		= ""
+seAuthorName	= "Stefaan Pouseele"
+seAuthorUrl	= "http://www.ISAserver.org/Stefaan_Pouseele/"
+seAuthorRss	= ""
+seSectionName	= "Articles"
+seSectionUrl	= "http://www.ISAserver.org/articles/"
+seSectionRss	= ""
+sePubDate	= "04/11/2003"
+
+>>> -->
+
+<div id="art-meta">
+ <!-- h3>Sponsored by: <a href="http://www.techgenix.com">Techgenix Ltd.</a></h3 -->
+ 
+ <ul>
+  <li><span>Published:</span> 	<strong>Apr 11, 2003        </strong></li>
+  <li><span>Updated:</span> 	<strong>Mar 26, 2005        </strong></li>
+  <li><span>Section:</span>
+    
+      <strong><a href="http://www.isaserver.org/articles/">Articles</a></strong>
+    
+  </li>
+  <li><span>Author:</span>
+    
+      <strong><a href="http://www.isaserver.org/Stefaan_Pouseele/">Stefaan Pouseele</a></strong>
+    
+  </li>
+ 
+  <li id="am-printversion"><strong><a rel="nofollow" href="http://www.isaserver.org/articles/ipsec_passthrough.html?printversion">Printable&nbsp;Version</a></strong></li>
+  <li id="am-adjust-font">
+   <span>Adjust font size:</span>
+   <a class="af-plus" href="#" onclick='var cnt = document.getElementById("ww-content"); cnt.style.fontSize = (cnt.style.fontSize == "")?"1.2em":(parseFloat(cnt.style.fontSize, 1) + 0.1) + "em";'><img src="icon.plus.gif" alt="+"></a>
+   <a class="af-minus" href="#" onclick='var cnt = document.getElementById("ww-content"); cnt.style.fontSize = (cnt.style.fontSize == "")?"1.0em":(parseFloat(cnt.style.fontSize, 1) - 0.1) + "em";'><img src="icon.minus.gif" alt="-"></a>
+  </li>
+
+  
+  <li><span>Rating:</span> 		<strong>4.6/5 - 155 Votes</strong></li>
+ 
+ 
+
+ </ul>
+
+ 
+ <form class="vote-form" action="http://www.isaserver.org/pages/vote.asp?id=1072" target="vote-win" method="post">
+  <input name="act" value="vote" type="hidden">
+  <ul>
+   <li id="vf-1"><label>1<input class="i-radio" name="rate" value="1" type="radio"></label></li>
+   <li id="vf-2"><label>2<input class="i-radio" name="rate" value="2" type="radio"></label></li>
+   <li id="vf-3"><label>3<input class="i-radio" name="rate" value="3" type="radio"></label></li>
+   <li id="vf-4"><label>4<input class="i-radio" name="rate" value="4" type="radio"></label></li>
+   <li id="vf-5"><label>5<input class="i-radio" name="rate" value="5" type="radio"></label></li>
+  </ul>
+  <input class="i-image" src="but-rate.gif" value="Rate this article" onclick='window.open("about:blank", "vote-win", "channelmode=no,directories=no,height=100,width=200,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no");' type="image">
+ </form>
+
+ <div class="am-widget">
+ <!-- AddThis Bookmark Button BEGIN -->
+  <script type="text/javascript">
+
+  addthis_url = location.href;
+  addthis_title = document.title;
+  addthis_pub = 'TechGenix';
+  </script>
+  <script type="text/javascript" src="addthis_widget.php"></script><a href="http://www.addthis.com/bookmark.php?v=12&winname=addthis&pub=TechGenix&s=&url=http%3A%2F%2Fwww.isaserver.org%2Farticles%2Fipsec_passthrough.html&title=How%20to%20pass%20IPSec%20traffic%20through%20ISA%20Server" onmouseover="return addthis_onmouseover(this, event, 'http%3A%2F%2Fwww.isaserver.org%2Farticles%2Fipsec_passthrough.html', 'How%20to%20pass%20IPSec%20traffic%20through%20ISA%20Server', 'TechGenix')" onmouseout="addthis_onmouseout()" onclick="return addthis_to()" class="snap_noshots"><img src="button1-bm.gif" style="border: medium none ; padding: 0px;" alt="" width="125" border="0" height="16"></a>
+ <!-- AddThis Bookmark Button END -->
+ </div>
+
+
+</div>
+
+<div id="art-descr">
+
+ A much asked question on the message boards is how to pass an IPSec VPN client through the ISA Server. It can be done if and only if the IPSec implementation supports a feature called NAT Traversal. If you want to know why, how it works and how you can pass it through ISA Server, read on.
+</div>
+
+<div id="art-header">
+ 
+</div>
+
+<div id="art-content" class="text-block">
+ <!-- >>> -->
+ <h2 align="center">How to pass IPSec traffic through ISA Server</h2>
+<p align="center"><strong>By Stefaan Pouseele<br>April&nbsp;2003<br></strong>Last Update: 26/03/2005</p>
+<h2 align="left">1. Summary</h2>
+<p align="left">A topic that frequently comes up on the message boards is how to configure ISA Server for IPSec passthrough. Although ISA Server supports PPTP passthrough out of the box, there is no built-in support for IPSec passthrough. The reason for this is that the IPSec protocols are not NAPT (Network Address & Port Translation) compatible. The IPSec protocols are designed to authenticate and/or encrypt information in the packet. When a NAPT device (i.e. an ISA server) tries to change the information in the packet, it will either cause the packet to be considered invalid by an IPSec protocol, or it will be unable to perform the translation because information the NAPT device needs to access is encrypted. </p>
+<p>Lucky for us, the IETF (Internet Engineering Task Force) has fixed the problem at last. The <a href="http://www.ietf.org/html.charters/ipsec-charter.html" target="_top"><u><font color="#800080">IPSec Working Group</font></u></a> has worked out a solution called <i>NAT Traversal</i> or in short <i>NAT-T</i>. As from january 2005 the solution is fully standarized in the RFC's 3947 and 3948. The only problem left is that not all vendors have implemented the latest version of the RFC's yet, but rather some early version of the drafts, mostly version 2 and 3. Therefore, you can expect some small variations in the different implementations. This might result in some interoperability problems if you want to mix and match implementations from different vendors.</p>
+<h2>2. IPSec NAT Traversal</h2>
+<p>It is a well-known fact that the IPSec protocol was not designed with NAPT (Network Address & Port Translation) in mind. The use of the IPSec protocol is usual not a problem in a gateway-to-gateway VPN scenario, because the VPN gateways are placed on the border of the networks to be connected. However, one very popular use of VPNs is to provide telecommuter access to the corporate Intranet. Today NAPTs are widely deployed in home gateways, as well as in other locations likely to be used by telecommuters. The result is that the IPSec-NAPT incompatibilities have become a major barrier to deploy the IPSec protocol in a client-to-gateway VPN scenario.</p>
+<p>It is not within the scope of this article to describe the exact technical details of the known incompatibilities between NAPT and the IPSec protocol. If you are interested in that level of detail, you should read the IETF Informational RFC 3715 <a href="http://www.ietf.org/rfc/rfc3715.txt" target="_top"><u><font color="#800080">IPsec-NAT Compatibility Requirements</font></u></a> written by Bernard Aboba and William Dixon of Microsoft. </p>
+<p>It is a pity that the two excellent Microsoft Technet Webcasts "IPsec and NAT-T : Finally in Harmony? (Level 400)" and "Demystifying IPsec (Level 400)" given by Steve Riley are no longer available on the Microsoft Webcast site. However, on <a href="http://www.steveriley.ms/default.aspx" target="_top"><u><font color="#800080">Steve Riley's website</font></u></a> you should be able to find the excellent powerpoint presentation <span class="Download_Title" id="_ctl0__ctl5__ctl0_lblDownloadTitle"><a href="http://www.steveriley.ms/Presentations/247.aspx" target="_top"><u><font color="#800080">IPsec and NAT: Finally in harmony</font></u></a></span><span id="_ctl0__ctl5__ctl0_lblDownloadTitle">.</span></p>
+<p>To enable the deployment of the IPSec protocol in a client-to-gateway VPN scenario, the IETF has finally worked out a solution called NAT Traversal. Since one of the primary uses of IPSec is remote access to corporate Intranets, a NAT-T solution <i>must</i> support the traversal of a NAPT device via either IPSec tunnel mode or L2TP over IPSec transport mode. This includes support for traversal of more than one NAPT device between the remote client and the VPN gateway. The key elements of the NAT Traversal solution are:</p>
+<ul>
+<li>The use of the IPSec AH protocol is not supported. 
+</li><li>The negotiation of the NAT Traversal in the IKE. 
+</li><li>The UDP Encapsulation of IPSec Packets. </li></ul>
+<h4><b>2.1. The use of the IPSec AH protocol is not supported</b></h4>
+<p>The purpose of AH is to protect immutable fields within the IP header (including IP addresses). However, a NAPT device translates IP addresses, invalidating the AH integrity check. As a result, NAPT and AH are <i>fundamentally</i> incompatible and there is <i>no</i> requirement that an IPsec-NAT compatibility solution has to support AH transport or tunnel mode.</p>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_napt_ah1050086915216.gif"></p>
+<p><i><u>Note:</u> the mutable fields within the IP header are Type of Service (TOS), Fragment Offset, Flags, Time to Live (TTL), IP header checksum.</i></p></blockquote>
+<h4><b>2.2. The negotiation of the NAT Traversal in the IKE</b></h4>
+<p>The IETF RFC 3947 <a href="http://www.ietf.org/rfc/rfc3947.txt" target="_top"><u><font color="#800080">Negotiation of NAT-Traversal in the IKE</font></u></a> describes how to detect the support for NAT Traversal in the IPSec hosts, how to detect one or more NAPT devices along the path, and how to negotiate the use of UDP encapsulation of the IPSec packets through the NAPT boxes. This is done by defining some changes and extensions to the Internet Key Exchange (IKE) protocol. To better understand what is happening behind the scene, let us walk through the negotitiation process from a communication point of view.</p>
+<p>The VPN client (the initiating IPSec peer) starts the IKE negotiation as usual with a destination the IP address of the VPN gateway (the responding IPSec peer) and the well-known port UDP 500. Because a NAPT device along the path may change the IKE UDP source port, the recipient must be able to process IKE packets whose source port is different than UDP 500, the default source port. This implies also that the responder must send all replies back to the same source IP address and UDP port number of the received IKE packet.</p>
+<p>It is important that the presence of a NAPT device along the path is detected in the very beginning of the IKE negotiation process. This is done in two steps:</p>
+<ul dir="ltr" style="margin-right: 0px;">
+<li>The first step is to detect that the IPSec peers are capable of performing NAT-T. Each IPSec NAT-T capable peer must add a new <i>Vendor-ID </i>(VID) payload to the first IKE message (Security Association), containing a well-known hash value. Only if both the initiator and the responder have sent and received that specific VID payload, the NAT Traversal probe will continue. In all other cases, normal IPSec negotiations and IPSec protection is performed.<br>&nbsp; 
+</li><li>The second step is to add one or more new <i>NAT-Discovery</i> (NAT-D) payloads to the second IKE message (Key Exchange). Each NAT-D payload contains a hash value of an IP address and UDP port number. During Main Mode negotiation each IPSec peer sends two NAT-Discovery payloads, one for the destination IP address and UDP port number (default 500), and one for the source IP address and port number (default 500). By comparing the hash of the real source IP address and UDP port number of the received IKE message with those sent within the NAT-D payload, each recipient can determine if there is a NAPT device along the path and which peer is located behind a NAPT device. If at least one NAPT is detected, then the IPSec peers automatically use IPSec NAT-T to send IPSec-protected traffic across a NAPT device. In all other cases, normal IPSec negotiations and IPSec protection is performed. </li></ul>
+<p>As soon as the use of IPSec NAT Traversal is negotiated, the IKE traffic will move to a new UDP port number, the IKE Header will change to a Floated IKE Header format and the peer behind a NAPT device will start sending NAT-keepalive packets. Because these are three very important changes, let us examine them in more detail.</p>
+<p>The primary goal of the IPSec NAT Traversal is to have a <i>generic</i> NAPT transparent solution. It is common knowledge that there exist on the market some IPSec-aware NAPT devices. They use some vendor specific hacks to enable IPSec traffic through their own devices. However, by doing that they are interfering with the regular IKE traffic on UDP port 500. Because a generic solution can not discover the capabilities of any NAPT device, the designers of the IPSec NAT Traversal protocol have chosen to simply move the IKE traffic off UDP port 500 to avoid any problems with the IPSec-aware NAPT devices. Therefore, as soon as the use of IPSec NAT-T is negotiated, the new UDP port 4500 must be used. Take note that any implementation that supports NAT Traversal, must also support IKE negotiations that starts on UDP port 4500 instead of the default UDP port 500. Of course, if a negotiation begins immediately on UDP port 4500, then no port change is needed anymore.</p>
+<p>In addition to the UDP port change, the IKE data must be prepended with a <i>Non-ESP Marker</i> that allows a recipient to distinguish between an IKE message and a UDP encapsulated ESP packet. The Non-ESP Marker is nothing more than 4 octets of zero (x'00'). This aligns nicely with the SPI field of a UDP encapsulated ESP packet. This new format is called <i>Floated IKE Header</i> format and is illustrated in the figure below.</p>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_napt_format1050087143795.gif"></p></blockquote>
+<p>The sole purpose of sending NAT-keepalive packets is to keep the UDP mappings in a NAPT device alive for the duration of a connection between the IPSec peers. The NAT-keepalive packet is a standard UDP message that uses the same UDP port 4500 as the IKE traffic, and contains a single octet (0xFF) as payload. The default NAT-keepalive interval is set to 20 seconds of inactivity on a given connection. Take note that no NAT-keepalive packets are sent on UDP port 500.</p>
+<h4><b>2.3. The UDP Encapsulation of IPSec Packets</b></h4>
+<p>The IETF RFC 3948 <a href="http://www.ietf.org/rfc/rfc3948.txt" target="_top"><u><font color="#800080">UDP Encapsulation of IPsec Packets</font></u></a> defines methods to encapsulate and decapsulate IP Encapsulating Security Payload (ESP) packets inside a UDP packet for the purpose of traversing NAPT. The UDP encapsulation is used whenever negotiated using the Internet Key Exchange (IKE) protocol.</p>
+<p>The most important point here is the insertion of a standard UDP header between the IP and the ESP header as indicated in the above figure. The UDP port numbers must be the same as those for the IKE packets after the IPSec NAT Traversal is negotiated (UDP port 4500). That means that the IKE and the UDP encapsulated ESP packets use the same UDP port numbers. As already mentioned, to distinguish between an IKE packet and a UDP encapsulated ESP packet, the recipient must check the first 4 octets immediately following the UDP header to demultiplex the traffic. If they are all zero it is an IKE packet (Non-ESP Marker), otherwise it is a UDP encapsulated ESP packet. Therefore, the value of the SPI (Security Parameters Index) field in the ESP header <i>must</i> always be different from zero.</p>
+<p>It is worth mentioning that the UDP checksum in the UDP-encapsulated ESP header, the Floated IKE header and the NAT-keepalive Header <i>should</i> be transmitted as a zero value. However, the receiver <i>must not</i> depend upon the UDP checksum being a zero value. That seems to indicate that the receiving IPSec peer should not check the UDP checksum value for those packets.</p>
+<p>Since one of the primary uses of IPSec is a client-to-gateway VPN scenario, the NAT Traversal solution supports explicitely the L2TP over IPSec in transport mode and the IPSec tunnel mode implementations. Let us now briefly look at the complete packet structure for those two cases:</p>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_napt_esp_transport1050087373495.gif"></p>
+<p><i><u>Note:</u> a typical example of the above implementation is the Microsoft L2TP/IPSec VPN client. For more information about the Microsoft VPN solutions, check out the <a href="http://www.microsoft.com/vpn" target="_top"><u><font color="#800080">Microsoft VPN site</font></u></a>.</i></p>
+<p><em><img src="ipsec_napt_esp_tunnel1050087415746.gif"></em></p>
+<p><i><u>Note:</u> it is not within the scope of this article to discuss the pros and cons of both implementations. However, keep in mind that although the IPSec tunnel mode packet structure looks simple, it is not necessary a better solution for a client-to-gateway VPN scenario.</i></p></blockquote>
+<h2>3. Configuring ISA Server</h2>
+<p>Now that we understand how the IPSec NAT Traversal works, at least from a communication point of view, it shouldn't be that difficult to translate that knowledge into the necessary protocol definitions, protocol rule and site&content rule for the ISA Server.</p>
+<p>The configuration steps on the ISA server are:</p>
+<ul>
+<li><b>Create the protocol definition for the IPSec IKE protocol:</b></li></ul>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_ike1050087656823.gif"></p></blockquote>
+<ul dir="ltr">
+<li><strong>Create the protocol definition for the IPSec NAT-T protocol:&nbsp;</strong> </li></ul>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_nat-t1050087719533.gif"></p></blockquote>
+<ul dir="ltr">
+<li><b>Create the protocol rule allowing the protocols IPSec IKE and IPSec NAT-T:</b> </li></ul>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ipsec_pass_through1050087906922.gif"></p></blockquote>
+<p>Of course, there must be a site&content rule in place allowing access to the destination VPN gateway. Moreover, it might be necessary to disable IP Fragment Filtering on the ISA server (IP Packet Filter Properties), especially if certificates are used in the VPN authentication process.</p>
+<h2>4. Configuring ISA Clients</h2>
+<p>To understand how the client host should be configured, you must first understand on which layer in the TCP/IP protocol stack the different ISA client types and the IPSec client works. For more info about the different ISA clients types, check out Jim Harrison's excellent articles over at <a href="http://www.isaserver.org/Jim_Harrison/" target="_top"><u><font color="#800080">http://www.isaserver.org/Jim_Harrison/</font></u></a>.</p>
+<p>The following figure shows you a logical view of the TCP/IP protocol stack:</p>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="client_implementation1050088002900.gif"></p>
+<p><i><u>Note:</u> keep in mind that a single host can be configured as a SecureNAT, Firewall and Web Proxy client without any adverse interaction between the client configuration settings.</i></p></blockquote>
+<h4><b>4.1. Web Proxy client</b> </h4>
+<p>Unlike the Firewall client, the Web Proxy client is not a piece of software you have to install. It refers to client Web applications that are configured to use the ISA server as Web Proxy server. In most cases it will be a CERN-compatible Web browser.</p>
+<p>When a Web application is configured to use the Web Proxy service on ISA server, all HTTP/HTTPS requests for destinations not set for direct access are sent to the Web Proxy service on ISA server. That means that those requests are redirected by the Web application itself to the outbound Web Proxy listener on ISA server. In other words, the Web application will ask the transport layer to create a connection to the Internal IP address of the ISA server (a LAT destination) and TCP port 8080, assuming the default configuration of the outbound Web Proxy listener.</p>
+<p>Because the redirection is done by the Web application itself, we can say that the Web Proxy client is working at the application layer.</p>
+<h4><b>4.2. Firewall client</b> </h4>
+<p>The Firewall client is a very interesting piece of software and it works hand in hand with the Firewall service on the ISA server. In platforms that support Winsock 2.0, the client is implemented as a layered service provider (LSP). On other platforms, the client setup application renames the original Winsock DLL (wsock32.dll) and installs its own implementation of wsock32.dll. The Firewall client communicates with the Firewall service by using a dedicated connection called the <a href="http://www.isaserver.org/articles/Understanding_the_Firewall_Client_Control_Channel.html" target="_top"><u><font color="#800080">Firewall client control channel</font></u></a>. The control channel connection is established the first time it is needed.</p>
+<p>When a client application calls a Winsock function, the client DLL intercepts the call and decides, based on the specified request and the firewall service configuration files, whether the call is local or remote. Local calls are passed to the original Winsock implementation. Remote calls are redirected to the firewall service. In general, all TCP/UDP requests for non-LAT destinations are redirected by the Firewall client software to the Firewall service on ISA server. This is done by rewriting the original Winsock call and replacing some parameters, such as the destination IP address and destination port number, with those negotiated along the Firewall client control channel. Take note that the new destination IP address will be the Internal IP address of the ISA server.</p>
+<p>Because the redirection is done by the Firewall client software at the Winsock level, the Firewall client is definitely working at the transport layer.</p>
+<h4><b>4.3. SecureNAT client</b></h4>
+<p>Any computer that understands TCP/IP networking and has a default gateway capable of routing Internet bound traffic through the internal interface of the ISA server, is called a SecureNAT client. In a simple non-routed internal network, the default gateway on the clients should be configured with the IP address of the ISA internal interface. If you run a more complex routed internal network, check out Jim Harrison's article <a href="http://www.isaserver.org/tutorials/Designing_An_ISA_Server_Solution_on_a_Complex_Network.html" target="_top"><u><font color="#0000ff">Designing An ISA Server Solution on a Complex Network</font></u></a>.</p>
+<p>Unlike the Web Proxy and Firewall client, no redirection or special processing whatever is done at the client site. That means that SecureNAT requests follows the normal packet processing of the TCP/IP stack and that all processing must be done at the firewall service on ISA server. In other words, the destination IP address will be the IP address of the requested destination and the protocol and port number (if applicable) will be the requested ones.</p>
+<p>Because it depends on the gateway configuration and network routing infrastructure, the SecureNAT client belongs to the network layer.</p>
+<h4><b>4.4. IPSec</b> <b>client</b> </h4>
+<p>The IPSec client implementations can be classified into two categories:</p>
+<ul>
+<li><b>OS Integrated: </b>as IPSec is a network layer protocol, it may be implemented as part of the network layer. The IPSec layer needs the services of the IP layer to construct the IP header. This model is identical to the implementation of other network layer protocols such as ICMP. An example of such an implementation is the <a href="http://www.microsoft.com/windows2000/techinfo/reskit/en-us/default.asp?url=/windows2000/techinfo/reskit/en-us/intwork/inbe_vpn_njvv.asp" target="_top"><u><font color="#800080">L2TP/IPSec VPN client in Windows 2000 and above</font></u></a>. 
+</li><li><b>Bump in the Stack:</b> for companies providing solutions for VPNs, OS integrated solution has one serious drawback. On the end hosts, they have to work with the features provided by the OS vendors. This may limit their capabilities to provide advanced solutions. To overcome this limitation, IPSec is implemented as a <i>shim</i>, and inserted between the network and the data link layer. This is commonly referred to as Bump in the Stack (BITS) implementation. I believe that most third-party IPSec client implementations follow this design, including the <a href="http://www.microsoft.com/windows2000/server/evaluation/news/bulletins/l2tpclient.asp" target="_top"><u><font color="#800080">L2TP/IPSec VPN client for Windows 98, Windows Me and Windows NT 4.0</font></u></a>, developed for Microsoft by SafeNet, Inc. of Baltimore, MD. </li></ul>
+<p>From a logical point of view, the IPSec client can be considered as a redirector. In general, it is the destination IP address of the original IP packet that will be used to decide if an IP packet must be redirected for further IPSec processing. That means that the IPSec client must have some sort of configuration table, either locally or centrally controlled, telling the IPSec engine for which destination IP addresses and/or network ID's the packets must be redirected to a particular remote VPN gateway. In other words, after applying the necessary IPSec transform, the destination of the IP packets will be the external IP address of the remote VPN gateway, not the destination IP address of the original IP packet.</p>
+<p>Because the redirection and IPSec processing is done at the IP level, we can say that the IPSec client is working at the network layer.</p>
+<h4><b>4.5. Configuration issues</b></h4>
+<p>With the above knowledge, it should be obvious that you should carefully configure the different ISA client types in order to be able to pass IPSec traffic through the ISA server in a client-to-gateway VPN scenario. The first problem you may encounter is that the destination network ID you want to reach through te VPN tunnel is already in use on your internal network. This is a general VPN design problem and the only solution to that problem is to renumber your internal network so there is no longer an IP address conflict.</p>
+<p>If the client host is configured as a Web Proxy client, you must make sure that the destinations reachable through the VPN tunnel are <i>not</i> redirected to the Web Proxy service on ISA server. Therefore, you should configure those destinations for direct access. How to do that is very well explained in the article <a href="http://www.isaserver.org/tutorials/Configuring_Web_Proxy_Clients_for_Direct_Access.html" target="_top"><u><font color="#0000ff">Configuring Web Proxy Clients for Direct Access</font></u></a> by Tom Shinder.</p>
+<p>If the client host is configured as a Firewall client, you must make sure that the destinations reachable through the VPN tunnel are <i>not</i> redirected to the Firewall service on ISA server. The simplest solution for that problem is to disable the Firewall client for the duration of the VPN session. If that isn't a workable solution in your environment, you will have to fine tune the Firewall client configuration. More precisely, you should put the network ID's reachable through the VPN tunnel in the LAT. Because only a very small number of internal hosts should be involved, I would make the Firewall client configuration changes only on the client host and not globally on the ISA server. Otherwise, you should not allow a client-to-gateway VPN scenario through ISA server, but go for a gateway-to-gateway VPN scenario with ISA server as the VPN endpoint.</p>
+<p>To make the Firewall client configuration changes on the client host, use a text editor to create a custom client LAT file named <i>Locallat.txt</i> and place it into the Microsoft Firewall Client folder on the client computer. You can add there additional IP address ranges that the client recognizes as part of the internal network. The Firewall client uses both the Msplat.txt and Locallat.txt files to determine which IP addresses should <i>not</i> be redirected to the Firewall service on ISA server. For more info, check out the section <i>Firewall Client components</i> in the ISA help file.</p>
+<p>Now, it should become clear that the internal host on which the VPN client is installed <i>must</i> be configured as a SecureNAT client, at least for a so called Bump in the Stack IPSec client implementation. Remember that the destination of the IP packets for the VPN tunnel will be the external IP address of the remote VPN gateway and that is definitely a non-LAT destination. As a consequence, the ISA server will see the VPN tunnel as a SecureNAT request and therefore you can only apply outbound access control on the basis of a client address set.</p>
+<h2>5. Specific Implementations</h2>
+<p>As said before, not all vendors have implemented already the latest version of the RFC's. However, according to the discussions on the message boards, most recent implementations seems to support some form of UDP encapsulation but still lack the autodetection of a NAPT device along the path and therefore the negotiation of the use of UDP encapsulation of the IPSec packets through the NAPT boxes. So, it is very likely that the use of UDP encapsulation must be explicitely configured on the VPN client and the gateway, including the UDP port to be used for the encapsulation of the ESP packets.</p>
+<p>To support those unstandard IPSec NAT Traversal implementations, you need to know first how to enable that feature on the VPN client and the gateway, and the exact UDP ports used for the UDP encapsulation. Any VPN administrator who knows his job should be able to give you that important information. Otherwise, you will have to do some research and visit the VPN vendors Web Site or call their technical support.</p>
+<p>Here is some information collected from the different posts on the message boards for some well-known VPN clients.</p>
+<h4><b>5.1. Checkpoint</b></h4>
+<p>If you have CheckPoint 4.1 SP6 or NG1 FP1 or higher, then it would work with the following protocol definitions:</p>
+<ul>
+<li>UDP 500 (send-receive) - for authentication 
+</li><li>UDP 2746 (send-receive) - for encrypted traffic 
+</li><li>TCP 264 (Outbound) *optional* - for topology update. </li></ul>
+<p>For more information, check out the topic <a href="http://forums.isaserver.org/ultimatebb.cgi?ubb=get_topic;f=13;t=001107" target="_top"><u><font color="#800080">CP SecuRemote Client can't get out</font></u></a>.</p>
+<h4><b>5.2. Cisco</b></h4>
+<p>The Cisco VPN client version 3.6 and later, the Cisco VPN Concentrator 3000 serie and the Cisco PIX version 6.3 or later support the IPSec NAT Traversal. This is also explained in <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;812076" target="_top"><u><font color="#800080">HOW TO: Enable a Cisco IPSec VPN Client to Connect to a Cisco VPN Concentrator Through ISA Server 2000</font></u></a>. For older versions of the Cisco VPN client and the Cisco VPN Concentrator 3000 serie, the NAT-T protocol or UDP encapsulated ESP was done by default on UDP port 10000 instead of UDP port 4500.</p>
+<p>As far as I know, the NAT-T is enabled by default on the Cisco VPN Concentrator 3000 serie. However, for the Cisco PIX you have to enable the NAT-T support explicitely with the command "isakmp nat-traversal [natkeepalive]". The default keep-alive is 20 seconds and ranges from 10 to 3600 seconds.&nbsp;Also,&nbsp;make sure that the feature <i>Transparent Tunneling</i> is enabled on the Cisco VPN Concentrator.</p>
+<p>Some people have tried to use the Cisco proprietary option to encapsulate the IPSec traffic over a single TCP connection through the ISA server. This feature was introduced in version 3.5 of the VPN client. However, the Cisco documentation warns you that it is <i>not</i> supported through any proxy server. Because ISA server strips off the original headers and create new ones, therefore acting as a proxy server, the TCP encapsulation will <i>not</i> work through the ISA server. This is <i>not</i> an ISA server problem but due to the fact that the Cisco VPN Concentrator does not handle the MSS negotiation conforming the RFC specifications.</p>
+<p>For more information, check out the topic <a href="http://forums.isaserver.org/ultimatebb.cgi?ubb=get_topic;f=13;t=001993" target="_top"><u><font color="#800080">Cisco VPN client -&gt;ISA 2000-&gt; Cisco VPN Concentrator</font></u></a>.</p>
+<h4><strong>5.3. Microsoft</strong></h4>
+<p>Both the <a href="http://www.microsoft.com/windows2000/server/evaluation/news/bulletins/l2tpclient.asp" target="_top"><u><font color="#0000ff">L2TP/IPSec VPN client for Windows 98, Windows Me and Windows NT 4.0</font></u></a> and the <a href="http://support.microsoft.com/default.aspx?SCID=KB;EN-US;818043" target="_top"><u><font color="#0000ff">Updated L2TP/IPSec VPN client for Windows 2000 and XP</font></u></a> have support for the IPSec NAT Traversal. However, keep in mind that you need a Windows 2003 server as VPN gateway for the NAT-T support. The good news is that passing both L2TP/IPSec VPN clients through the ISA server to a Windows 2003 VPN gateway has been succesfully tested by Tom Shinder.</p>
+<p>As far as I know, the L2TP/IPSec VPN client for Windows 98, Windows Me and Windows NT 4.0 is a so called Bump in the Stack implementation. That means that all IPSec processing is done below the transport layer. Therefore, the internal host on which the VPN client is installed must be configured as a SecureNAT client and you can only apply outbound access control on the basis of a client address set for the traffic to the remote VPN gateway.</p>
+<p>However, the L2TP/IPSec VPN client for Windows 2000 and XP is a so called OS Integrated implementation. The following figure, taken from the Microsoft web site, shows the implementation details of the VPN client in Windows 2000 and XP:</p>
+<blockquote dir="ltr" style="margin-right: 0px;">
+<p><img src="ms-l2tp-ipsec1050088223918.gif"></p></blockquote>
+<p>According to this figure the packets seems to pass twice through the Winsock interface and all the IPSec processing seems to be done at the transport level. This suggest that, after the IPSec processing and the NAT-T encapsulation, the IPSec traffic can possibly be redirected by the Firewall client to the Firewall service on ISA server. However, this scenario has been tested by Tom Shinder and it did <i>not</i> work. Therefore, even for the OS Integrated implementation, the internal host on which the VPN client is installed must be configured as a&nbsp;SecureNAT client and you can only apply outbound access control on the basis of a client address set for the traffic to the remote VPN gateway.</p>
+<p>Take note that by default, Windows XP SP2 no longer supports IPsec NAT-T security associations to servers that are located behind a network address translator. To understand why Microsoft has changed the default behavior and how to change it to pre-SP2 behavior, check out the following Microsoft Knowledge Base Articles: </p>
+<ul>
+<li><a href="http://support.microsoft.com/?id=818043" target="_top"><u><font color="#800080">L2TP/IPsec NAT-T update for Windows XP and Windows 2000</font></u></a>. 
+</li><li><a href="http://support.microsoft.com/?id=885348" target="_top"><u><font color="#800080">IPSec NAT-T is not recommended for Windows Server 2003 computers that are behind network address translators</font></u></a>. </li></ul>
+<h4><b>5.4. Netscreen</b></h4>
+<p>As far as I know, Netscreen implemented NAT Traversal since ScreenOS 3.0.0 or later and Netscreen Remote version 6.0 or later, although it seems to be the first version of the drafts they support. The NetScreen Remote client automatically detects if the VPN Peer (the NetScreen box) is using NAT Traversal, and the UDP encapsulated ESP packets are sent on the original IKE UDP port 500 instead of the new UDP port 4500.</p>
+<p>In order to enable NAT-T for the client, simply enable the NAT-T option on the gateway screen when configuring the User on the NetScreen box. Also, make sure that when setting up the Phase 1 Proposal for NAT-T, the UDP checksum option is disabled.</p>
+<h4><b>5.5. Nortel Contivity</b></h4>
+<p>You can pass the Nortel Extranet Access Client software through ISA server if the Nortel Contivity switch is running with one of the newest firmware version 04_05.024 or later and you use the newest client software version 4.65 or later. This is what you need to do at the Contivity Switch:</p>
+<ul>
+<li>On the configuration page's left side, click on "Services", then "IPSEC". Toward the middle of page is the setting "NAT Traversal". Check to have it enabled and set it on UDP port 4500 (strongly recommended). 
+</li><li>Once the above step is done, go to "Profiles", then "Groups". Under a designated group where you want NAT Traversal enabled, click on "Edit." Under the section "IPSEC", click on "Configure." At the very bottom of the page, make sure "Auto-Detect NAT" is selected and keep the "NAT Keepalive" setting at 18 seconds. </li></ul>
+<p>If the VPN administrator have set the NAT Traversal port on something else than UDP port 4500 (i.e. UDP port 10001), you need to adopt the IPSec NAT-T protocol definition accordingly or create a new one and add it to the IPSec Passthrough protocol rule.</p>
+<h4><b>5.6. Sonicwall</b></h4>
+<p>The SonicWALL firmware 6.3, the VPN client version 8.0 and the Global VPN client version 1.0 supports the IPSec NAT Traversal. Because this seems to be recent releases, I assume they already use UDP port 4500 for the UDP encapsulation of the ESP packets and that the implementation supports the autodetection of a NAPT device along the path.&nbsp;</p>
+<p>I haven't found many posts on the message boards about the SonicWALL VPN solution. However, one post mentioned that the VPN client must be configured for aggressive mode,&nbsp; otherwise the IKE negotiation would not start on the standard UDP port 500 but on a high numbered UDP port.&nbsp;</p>
+<h2>6. Conclusion</h2>
+<p>In this article we went over how you can pass an IPSec VPN client through the ISA Server. Keep in mind it can only be done if the IPSec implementation supports a feature called NAT Traversal. How this feature works and how to configure the ISA server and clients to support it, is thoroughly explained. Furthermore, some useful information collected from the many posts on the message boards is given.</p>
+<p><i>I hope you enjoyed this article and found something in it that you can apply to your own network. If you have any questions on anything I discussed in this article, head on over to <a href="http://forums.isaserver.org/ultimatebb.cgi?ubb=get_topic;f=13;t=001467" target="_top"><u><font color="#800080">http://forums.isaserver.org/ultimatebb.cgi?ubb=get_topic;f=13;t=001467</font></u></a> <url>and post a message. I&rsquo;ll be informed of your post and will answer your questions ASAP. Thanks!&nbsp; &ndash; Stefaan.</url></i></p>
+<p><em></em>&nbsp;</p>
+ <!-- <<< -->
+
+  
+</div>
+
+
+ 
+<div id="art-about-author">
+ <h1>About Stefaan Pouseele</h1>
+ <p>
+
+  Stefaan Pouseele is a network engineer, working for Cevi NV in Belgium. On October 1, 2002 he received for the first time the prestigious Microsoft Most Valuable Professional (MVP) Award 2003 for his contribution to the ISA Server online community. To this very day, his award period was extended to 2008.
+ </p>
+ 
+ <p><strong><a href="http://www.isaserver.org/Stefaan_Pouseele/">Click here</a></strong> for Stefaan Pouseele's section.</p>
+ 
+</div>
+
+
+
+
+<div id="art-newsletter-share">
+ <h1>Share this article</h1>
+ <p>
+ <!-- AddThis Bookmark Button BEGIN -->
+  <script type="text/javascript">
+
+  addthis_url = location.href;
+  addthis_title = document.title;
+  addthis_pub = 'TechGenix';
+  </script>
+  <script type="text/javascript" src="addthis_widget.php"></script><a href="http://www.addthis.com/bookmark.php?v=12&winname=addthis&pub=TechGenix&s=&url=http%3A%2F%2Fwww.isaserver.org%2Farticles%2Fipsec_passthrough.html&title=How%20to%20pass%20IPSec%20traffic%20through%20ISA%20Server" onmouseover="return addthis_onmouseover(this, event, 'http%3A%2F%2Fwww.isaserver.org%2Farticles%2Fipsec_passthrough.html', 'How%20to%20pass%20IPSec%20traffic%20through%20ISA%20Server', 'TechGenix')" onmouseout="addthis_onmouseout()" onclick="return addthis_to()" class="snap_noshots"><img src="button1-bm.gif" style="border: medium none ; padding: 0px;" alt="" width="125" border="0" height="16"></a>
+ <!-- AddThis Bookmark Button END -->
+ </p>
+</div>
+
+
+
+<div id="art-newsletter-subsr">
+ <h1>Receive all the latest articles by email!</h1>
+ <p>Get all articles delivered directly to your mailbox as and when they are released on ISAserver.org! Choose between receiving instant updates with the Real-Time Article Update, or a monthly summary with the Monthly Article Update. Sign up to the ISAserver.org Monthly Newsletter, written by <a href="http://www.isaserver.org/Thomas_Shinder/">ISA expert Dr. Tom Shinder</a>, containing news, the hottest tips, ISA links of the month and much more. Subscribe today and don't miss a thing!</p>
+ <form action="http://www.techgenix.com/newsletter/subscribe.aspx?Task=Join" method="post">
+  <input value="Check" name="JoinType" type="hidden"> 
+  <input value="3,5,6" name="IDList" type="hidden"> 
+  <input value="{D67B20E7-F97D-4537-AFD6-90940C9D0FED}" name="SID" type="hidden"> 
+  <input value="HTML" name="DeliveryFormat" type="hidden">
+  <ul>
+   <li><label><input name="NewsletterListID_6" value="ON" checked="checked" type="checkbox"> Real-Time Article Update</label><label> (<a target="_top" href="http://www.isaserver.org/ISAserver.org-Real-Time-Article-Update-Newsletter-Sample.htm">click for sample</a>)</label></li>
+   <li><label><input name="NewsletterListID_5" value="ON" checked="checked" type="checkbox"> Monthly Article Update</label><label> (<a target="_top" href="http://www.isaserver.org/ISAserver.org-Monthly-Article-Update-Newsletter-Sample.htm">click for sample</a>)</label></li>
+   <li><label><input name="NewsletterListID_3" value="ON" checked="checked" type="checkbox"> Monthly Newsletter</label><label> (<a target="_top" href="http://www.isaserver.org/ISAserver.org-Monthly-Website-Newsletter-Sample.htm">click for sample</a>)</label></li>
+  </ul>
+
+  <p>
+   <input class="i-text" name="Email" value="Enter email address">
+   <input class="i-image" src="but-subscribe2.gif" value="Subscribe" type="image">
+  </p>
+ </form>
+</div>
+
+
+<br class="ww-dev">
+
+
+<div id="art-recent">
+ <h1>Latest articles by Stefaan Pouseele</h1>
+ <ul>
+   
+  <li><a href="http://www.isaserver.org/tutorials/enable-ESP-Null-Encryption-ISA-2004-site-to-site-VPN-scenario.html">How to enable ESP Null Encryption on ISA 2004 in a site-to-site VPN scenario</a></li>
+   
+  <li><a href="http://www.isaserver.org/IsaNews/February2006-Update-Understanding-Web-Proxy-Firewall-Client-Automatic-Configuration.html">Update to Understanding the Web Proxy and Firewall Client Automatic Configuration article</a></li>
+   
+  <li><a href="http://www.isaserver.org/tutorials/work-around-VPN-clients-split-DNS.html">How to work around an issue with VPN clients and split DNS</a></li>
+   
+  <li><a href="http://www.isaserver.org/IsaNews/January-2006-Update-Understanding-Web-Proxy-Firewall-Client-Automatic-Configuration.html">Update to Understanding the Web Proxy and Firewall Client Automatic Configuration article</a></li>
+   
+  <li><a href="http://www.isaserver.org/IsaNews/ISA2000_MS05-034.html">Security Update MS05-034 might break outbound Web access on ISA Server 2000</a></li>
+   
+ </ul>
+</div>
+   <div id="art-related"><h1>Related links</h1><ul>
+<li><a href="http://www.isaserver.org/tutorials/natt2003.html">Configuring Windows Server 2003-based ISA Server Firewall/VPN Server to Accept inbound NAT-T L2TP/IPSec Calls</a></li>
+<li><a href="http://www.isaserver.org/tutorials/pptpeaptlspart1.html">Configuring the VPN Client and Server to Support Certificate-Based PPTP EAP-TLS Authentication - Part 1</a></li>
+<li><a href="http://www.isaserver.org/articles/isa2000vpndeploymentkit.html">Announcing the ISA Server 2000 VPN Deployment Kit</a></li>
+<li><a href="http://www.isaserver.org/articles/2004pubvpn.html">Configuring Remote Access VPN Servers in a Back to Back ISA Firewall Configuration</a></li>
+<li><a href="http://www.isaserver.org/news/vpnkitbeta2.html">Announcing Beta 2 of ISA Server 2000 VPN Deployment Kit Documents</a></li>
+</ul></div>
+
+
+
+<div id="art-footer">
+ 
+</div>
+ 
+<!-- End content -->
+      <div id="ww-featured-links">
+       <h1>Featured Links*</h1>
+       <div style="display: none;" id="featured-links">
+        		<script type="text/javascript" src="sponsorshipnorotate.aspx"></script><table mm_noconvert="TRUE" width="100%" border="0" bordercolor="#ffffff" cellpadding="1" cellspacing="1"><tbody><tr><td><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=564&AdvertiserID=79&BannerID=742&SiteID=1&RandomNumber=371308130" target="_top"><b>ClearTunnel - Upgrade ISA Server to Inspect and Cache SSL Proxy Traffic</b></a><br>ISA secures HTTP traffic but leaves your LAN vulnerable to the HTTPS channel.  With ClearTunnel your ISA filters can secure HTTPS traffic, the newest emerging attack vector.<br></td></tr><tr><td><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=747&AdvertiserID=66&BannerID=590&SiteID=1&RandomNumber=371308130" target="_Blank"><b>It's New - SpamTitan Virtual Email Appliance, runs on VMware - Includes Kaspersky AV!</b></a><br>99% spam protection, anti phishing, in/out bound scanning, disclaimers, end user quarantine, reporting suite, simple installation, all from $500-100 users - 30 day free trial!<br></td></tr><tr><td><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=74&AdvertiserID=8&BannerID=823&SiteID=1&RandomNumber=2083781911" target="_blank&quot;"><b>Web monitoring and multi-layered anti-virus protection for ISA Server</b></a><br>Control your Internet users' browsing habits, monitor downloads in real-time and protect your network from viruses, spyware, malware & phishing attacks.<br></td></tr></tbody></table><noscript>
+
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Task=Click&Random=1215050416379&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Random=1215050416379&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Task=Click&Random=1215050416380&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Random=1215050416380&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Task=Click&Random=1215050416381&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Random=1215050416381&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Task=Click&Random=1215050416382&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Random=1215050416382&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Task=Click&Random=1215050416383&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=9&SiteID=1&PageID=5998&Random=1215050416383&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+</noscript>
+
+       </div>
+       <script type="text/javascript"><!--
+        FeaturedLinksParser();
+       // --></script><ul><li><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=564&AdvertiserID=79&BannerID=742&SiteID=1&RandomNumber=371308130" target="_top"><b>ClearTunnel - Upgrade ISA Server to Inspect and Cache SSL Proxy Traffic</b></a><br>ISA secures HTTP traffic but leaves your LAN vulnerable to the HTTPS channel.  With ClearTunnel your ISA filters can secure HTTPS traffic, the newest emerging attack vector.<br></li><li><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=747&AdvertiserID=66&BannerID=590&SiteID=1&RandomNumber=371308130" target="_Blank"><b>It's New - SpamTitan Virtual Email Appliance, runs on VMware - Includes Kaspersky AV!</b></a><br>99% spam protection, anti phishing, in/out bound scanning, disclaimers, end user quarantine, reporting suite, simple installation, all from $500-100 users - 30 day free trial!<br></li><li><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=9&CampaignID=74&AdvertiserID=8&BannerID=823&SiteID=1&RandomNumber=2083781911" target="_blank&quot;"><b>Web monitoring and multi-layered anti-virus protection for ISA Server</b></a><br>Control your Internet users' browsing habits, monitor downloads in real-time and protect your network from viruses, spyware, malware & phishing attacks.<br></li></ul>
+      </div>
+
+
+      <br style="clear: both;">
+
+      <div id="extfoot-newsletter-subsr"> <h1>Receive all the latest articles by email!</h1> <p>Receive Real-Time & Monthly ISAserver.org article updates in your mailbox. Enter your email below!<br>Click for <a target="_top" href="http://www.isaserver.org/ISAserver.org-Real-Time-Article-Update-Newsletter-Sample.htm">Real-Time sample</a> & <a target="_top" href="http://www.isaserver.org/ISAserver.org-Monthly-Article-Update-Newsletter-Sample.htm">Monthly sample</a></p> <form action="http://www.techgenix.com/newsletter/subscribe.aspx?Task=Join" method="post">  <p>   <input value="Check" name="JoinType" type="hidden">    <input name="IDList" value="5,6" type="hidden">   <input name="NewsletterListID_5" value="ON" type="hidden">   <input name="NewsletterListID_6" value="ON" type="hidden">   <input value="{D67B20E7-F97D-4537-AFD6-90940C9D0FED}" name="SID" type="hidden">    <input value="HTML" name="DeliveryFormat" type="hidden">   <input class="i-text" name="Email" value="Enter Email" onfocus='if (this.value == "Enter Email") this.value = "";'>   <input class="i-image" src="but-subscribe2.gif" value="Subscribe" type="image">  </p> </form></div><div id="extfoot-forum"> <h1>Become an ISAserver.org member!</h1> <p>Discuss your ISA Server issues with thousands of other ISA Server experts. <a href="http://forums.isaserver.org/register.aspx">Click here</a> to join!</p></div>
+
+     </div>
+
+    </div>
+   </div>
+
+<!-- begin right sidebars -->
+
+   <div class="ww-sidebar" id="sb-community-area">
+    <h3><a href="http://forums.isaserver.org/">Community Area</a></h3>
+    <p id="sb-in">
+      <a href="http://forums.isaserver.org/loginflat.aspx">Log in</a>
+      <span class="ww-div">|</span>
+      <a href="http://forums.isaserver.org/register.aspx">Register</a>
+    </p>
+
+    <p id="sb-out">
+      <a href="http://forums.isaserver.org/editprofile.aspx">My Account</a>
+      <span class="ww-div">|</span>
+      <a href="http://forums.isaserver.org/redirect.aspx">Log out</a>
+    </p>
+    <script type="text/javascript" src="ism-script.aspx"></script>
+   </div>
+
+
+
+   <div class="ww-sidebar" id="ads-block-top">
+     		<script type="text/javascript" src="a_002.aspx"></script> <noscript>
+
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=35&SiteID=1&PageID=5998&Task=Click&Random=1215050416379&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=35&SiteID=1&PageID=5998&Random=1215050416379&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div class="ww-sidebar" id="ads-block">
+     		<script type="text/javascript" src="a_003.aspx"></script><!-- BEGIN NetShelter Ad Tag for ISAserver 120x600,160x600 -->
+<script language="JavaScript" type="text/javascript">
+
+if (!window.netshel_ord) { netshel_ord=Math.random()*10000000000000000;
+}
+if (!window.netshel_tile) { netshel_tile=1; }
+document.write('<script language="JavaScript" src="http://ad.doubleclick.net/adj/ns.isaserver/general;sz=120x600,160x600;tile='+netshel_tile+';ord=' + netshel_ord + '?" type="text/javascript"></scr' + 'ipt>');
+netshel_tile++;
+</script><script style="display: none;" language="JavaScript" src="general_002.dat" type="text/javascript"></script>
+<!-- END AD TAG --><noscript>
+
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=11&SiteID=1&PageID=5998&Task=Click&Random=1215050416379&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=11&SiteID=1&PageID=5998&Random=1215050416379&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div class="ww-sidebar" id="ads-block-bottom">
+     <h3>Solution Center</h3>
+     <div style="display: none;" class="ww-sidebar" id="ads-block-bottom-script">
+      		<script type="text/javascript" src="sponsorshipnorotate_002.aspx"></script><table mm_noconvert="TRUE" width="100%" border="0" bordercolor="#ffffff" cellpadding="1" cellspacing="1"><tbody><tr><td><span class="bnr-important">
+<a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=34&CampaignID=353&AdvertiserID=9&BannerID=518&SiteID=1&RandomNumber=244023411"><strong>Learn about SQL Injection and other web attacks</strong></a><br>
+Sponsored by Acunetix</span><br></td></tr></tbody></table>
+     </div>
+     <script type="text/javascript"><!--
+        SolutionCenterParser();
+     // --></script><ul class="bnr-list"><li><span class="bnr-important">
+<a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=34&CampaignID=353&AdvertiserID=9&BannerID=518&SiteID=1&RandomNumber=244023411"><strong>Learn about SQL Injection and other web attacks</strong></a><br>
+Sponsored by Acunetix</span><br></li></ul>
+   </div>
+
+<!-- end right sidebars -->
+
+  </div>
+
+<!-- begin left sidebars -->
+
+   <ul class="ww-sidebar" id="ww-menu" onclick="treeClick(event);">
+    <li class="ww-collapse"><a href="#">Articles & Tutorials</a>
+     <ul>
+      	<li><a href="http://www.isaserver.org/articles_tutorials/certification/">Certification</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/configuration_alternative_products/">Configuration - Alt. Products & Platforms</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/configuration_general/">Configuration - General</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/configuration_security/">Configuration - Security</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/general/">General</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/general_guides_and_articles/">General Guides and Articles</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/installation_and_planning/">Installation & Planning</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/miscellaneous/">Miscellaneous</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/non_ISA_tutorials/">Non-ISAserver.org Tutorials</a></li>
+	<li><a href="http://www.isaserver.org/articles_tutorials/Product_Reviews/">Product Reviews</a></li>
+	<li class="ww-last"><a href="http://www.isaserver.org/articles_tutorials/publishing/">Publishing</a></li>
+
+     </ul>
+    </li>
+    <li class="ww-collapse"><a href="#">Authors</a>
+     <ul>
+      	<li><a href="http://www.isaserver.org/Thomas_Shinder/">Thomas Shinder</a></li>
+	<li><a href="http://www.isaserver.org/Marc_Grote/">Marc Grote</a></li>
+	<li><a href="http://www.isaserver.org/Ricky_M_Magalhaes/">Ricky M. Magalhaes</a></li>
+	<li class="ww-last"><a href="http://www.isaserver.org/Stefaan_Pouseele/">Stefaan Pouseele</a></li>
+
+     </ul>
+    </li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="http://www.isaserver.org/pages/books.asp">Books</a></li>
+    <li class="ww-collapse"><a href="#">Hardware</a>
+     <ul>
+      	<li><a href="http://www.isaserver.org/hardware/ISA-Appliances/">ISA Appliances</a></li>
+	<li class="ww-last"><a href="http://www.isaserver.org/hardware/SSL-Acceleration/">SSL Acceleration</a></li>
+
+     </ul>
+    </li>
+    <li><a href="http://www.isaserver.org/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org/">Message Boards</a></li>
+    <li><a href="http://www.isaserver.org/pages/newsletter.asp">Newsletter Signup</a></li>
+    <li><a href="http://rss.isaserver.org/">RSS Feed</a></li>
+    <li class="ww-collapse"><a href="#">Software</a>
+     <ul>
+      	<li><a href="http://www.isaserver.org/software/ISA/Access-Control/">Access Control</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Anti-Virus/">Anti Virus</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Authentication/">Authentication</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Bandwidth-Control/">Bandwidth Control</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Caching/">Caching</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Content-Security/">Content Security</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Free-Tools/">Free Tools</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Intrusion-Detection/">Intrusion Detection</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Misc.-ISA-server-software/">Misc. ISA server software</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Monitoring-&-Admin/">Monitoring & Admin</a></li>
+	<li><a href="http://www.isaserver.org/software/ISA/Reporting/">Reporting</a></li>
+	<li class="ww-last"><a href="http://www.isaserver.org/software/ISA/Security-Services/">Security Services</a></li>
+
+     </ul>
+    </li>
+   </ul>
+
+   <script type="text/javascript">treeParse();</script>
+
+
+   <div class="ww-sidebar" id="sb-featured-product">
+    <h3>Featured Products</h3>
+    		<script type="text/javascript" src="sponsorshipnorotate_003.aspx"></script><table mm_noconvert="TRUE" width="100%" border="0" bordercolor="#ffffff" cellpadding="1" cellspacing="1"><tbody><tr><td><center><a href="http://banman.isoftmarketing.com/a.aspx?Task=Click&ZoneID=12&CampaignID=616&AdvertiserID=79&BannerID=741&SiteID=1&RandomNumber=971910099" target="_Blank"><img style="display: none;" src="flexform125.jpg" border="0"><br>Automate Single Sign-on
+<br>Download FlexForm</a><br></center></td></tr></tbody></table><noscript>
+
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&SiteID=1&PageID=5998&Task=Click&Random=1215050416395&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&SiteID=1&PageID=5998&Random=1215050416395&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+	<p><a href="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&SiteID=1&PageID=5998&Task=Click&Random=1215050416396&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" target="_blank">  <img src="http://banman.isoftmarketing.com/a.aspx?ZoneID=12&SiteID=1&PageID=5998&Random=1215050416396&Task=Get&Mode=HTML&Keywords=HowtopassIPSectrafficthroughISAServer" border="0"  alt=""></a></p>
+</noscript>
+
+   </div>
+
+   <div class="ww-sidebar" id="sb-featured-book">
+    <h3>Featured Book</h3>
+    <p>
+     <a href="http://www.amazon.com/exec/obidos/ASIN/1597491993/isaserver1-20/">
+      <img src="isa@2020061192113992767.gif" alt="" width="73" height="94">
+     </a>
+     <br>
+     Order today <a href="http://www.amazon.com/exec/obidos/ASIN/1597491993/isaserver1-20/">Amazon.com</a>
+    </p>
+   </div>
+
+   <div class="ww-sidebar" id="sb-poll">
+	<h3>Readers' Choice</h3>
+	<form method="post" action="http://www.isaserver.org/poll/vote.asp">
+	<p id="pl-question"><input name="QID" value="123" type="hidden"><strong>Which is your preferred ISA Server reporting solution?</strong></p>
+		<ul>
+		<li><label for="pl-item-1562"><input id="pl-item-1562" name="AID" value="1562" type="radio"><span>bt-LogAnalyzer</span></label></li>
+		<li><label for="pl-item-1563"><input id="pl-item-1563" name="AID" value="1563" type="radio"><span>Cyfin Reporter</span></label></li>
+		<li><label for="pl-item-1564"><input id="pl-item-1564" name="AID" value="1564" type="radio"><span>LK Log Scan</span></label></li>
+		<li><label for="pl-item-1565"><input id="pl-item-1565" name="AID" value="1565" type="radio"><span>ProxyInspector</span></label></li>
+		<li><label for="pl-item-1566"><input id="pl-item-1566" name="AID" value="1566" type="radio"><span>Quest InTrust</span></label></li>
+		<li><label for="pl-item-1567"><input id="pl-item-1567" name="AID" value="1567" type="radio"><span>SmartFilter SmartReporter</span></label></li>
+		<li><label for="pl-item-1568"><input id="pl-item-1568" name="AID" value="1568" type="radio"><span>WebSpy Insight</span></label></li>
+		<li id="pl-question-other">
+			<label for="pl-item-0"><input id="pl-item-0" name="AID" value="1569" type="radio"><span>Other</span></label>
+			<input id="pl-other" name="other" value="please specify" onfocus="if (this.defaultValue==this.value) { this.value = ''; }" type="text">
+		</li>
+		</ul>
+	<p id="pl-submit"><input value="Vote!" type="submit"></p>
+	</form>
+</div>
+
+
+   <div class="ww-sidebar" id="sb-recommended-sites">
+    <h3>TechGenix Sites</h3>
+    <dl class="techgenix-sites">
+     <!-- dt><a href="http://www.isaserver.org">ISAserver.org</a></dt>
+     <dd><a href="http://www.isaserver.org">The No.1 ISA Server 2006 / 2004 / 2000 resource site.</a></dd -->
+     <dt><a href="http://www.msexchange.org/">MSExchange.org</a></dt>
+     <dd><a href="http://www.msexchange.org/">The leading Microsoft Exchange Server 2007 / 2003 / 2000 resource site.</a></dd>
+     <dt><a href="http://www.windowsecurity.com/">WindowSecurity.com</a></dt>
+     <dd><a href="http://www.windowsecurity.com/">Network Security & Information Security resource for IT administrators.</a></dd>
+     <dt><a href="http://www.windowsnetworking.com/">WindowsNetworking.com</a></dt>
+     <dd><a href="http://www.windowsnetworking.com/">Windows Server 2008 / 2003 & Windows Vista networking resource site.</a></dd>
+     <dt><a href="http://www.virtualizationadmin.com/">VirtualizationAdmin.com</a></dt>
+     <dd><a href="http://www.virtualizationadmin.com/">The essential Virtualization resource site for administrators.</a></dd>
+    </dl>
+   </div>
+<!-- end left sidebars -->
+
+
+
+  <div id="ww-footer">
+   <ul>
+    <li><a href="http://www.isaserver.org/articles_tutorials/">Articles</a></li>
+    <li><a href="http://www.isaserver.org/authors/">Authors</a></li>
+    <li><a href="http://blogs.isaserver.org/">Blogs</a></li>
+    <li><a href="http://www.isaserver.org/pages/books.asp">Books</a></li>
+    <!-- li><a href="/pages/certification.asp">Certification</a></li -->
+    <li><a href="http://www.isaserver.org/pages/events.asp">Events</a></li>
+    <li><a href="http://www.isaserver.org/faq/">FAQs</a></li>
+    <!-- li><a href="/articles/Gaming.html">Gaming</a></li -->
+    <li><a href="http://www.isaserver.org/hardware/">Hardware</a></li>
+    <li><a href="http://www.isaserver.org/pages/links.asp">Links</a></li>
+    <li><a href="http://forums.isaserver.org/">Message Boards</a></li>
+    <li><a href="http://www.isaserver.org/pages/newsletter.asp">Newsletter</a></li>
+    <li><a class="ww-rsslink" href="http://rss.techgenix.com/">RSS</a></li>
+    <!-- li><a href="/Thomas_Shinder/">Shinder Section</a></li -->
+    <li class="ww-last"><a href="http://www.isaserver.org/software/">Software</a></li>
+   </ul>
+
+   <p class="notice">
+    <a href="http://www.techgenix.com/aboutus.htm">About Us</a> :
+    <script type="text/javascript">ShowEmail('info/isaserver|org','Email us');</script><a href="mailto:info@isaserver.org">Email us</a> :
+    <a href="http://www.isaserver.org/software/submissionform.asp">Product Submission Form</a> :
+    <a href="http://www.techgenix.com/advert/index.htm">Advertising Information</a>
+    <br>
+    ISAserver.org is in no way affiliated with Microsoft Corp. *Links are sponsored by advertisers.
+   </p>
+
+   <address id="ww-copyright">Copyright &copy; 2008 <a href="http://www.techgenix.com/">TechGenix Ltd.</a> All rights reserved.
+    Please read our <a href="http://www.isaserver.org/pages/privacy.asp">Privacy Policy</a> and <a href="http://www.isaserver.org/pages/terms.asp">Terms & Conditions</a>.
+   </address>
+
+  </div>
+
+
+ </div>
+
+<!--  -->
+
+<script src="ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var pageTracker = _gat._getTracker("UA-313036-1");
+pageTracker._initData();
+pageTracker._setDomainName("isaserver.org"); 
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

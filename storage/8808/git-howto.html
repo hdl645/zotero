@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://linux.yyz.us/git-howto.html">
+<meta name="wpd_url" content="http://linux.yyz.us/git-howto.html">
+<meta name="wpd_date" content="2008-07-08T15:24Z">
+
+
+
+
+<meta name="author" content="Dunvegan Media">
+
+
+
+<title>Kernel Hackers' Guide to git</title>
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="git-howto.css" media="all">
+</head>
+<body>
+<div id="wrap">
+
+<div id="header">
+<h1>Kernel Hackers' Guide to git</h1>
+</div>
+
+<img id="frontphoto" src="penguins.jpg" alt="" width="760" height="111">
+
+<div id="leftside">
+<h2 class="hide">Menu:</h2>
+
+<ul class="avmenu">
+<li><a href="http://linux-ata.org/">Serial ATA</a></li>
+<li><a href="http://linux.yyz.us/ipv6/">IPv6</a></li>
+<li><a href="http://linux.yyz.us/dns/">DNS</a></li>
+<li><a href="http://linux.yyz.us/projects.html">Current projects</a></li>
+</ul>
+
+</div>
+
+<div id="contentwide">
+
+<p>This tutorial is a cookbook of recipes getting up and running with
+Linus's source code management (SCM) software, "git." 
+Its targetted mainly at Linux kernel hackers, though others may find it
+useful.</p>
+
+<h2>Table of Contents</h2>
+
+<table align="right"><tbody><tr><td>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3593799263359511";
+/* 120x600, created 6/25/08 */
+google_ad_slot = "8917464262";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</td></tr></tbody></table>
+
+<ul>
+<li><a href="#getting_started">Getting Started</a>
+	<ul>
+	<li><a href="#installing_git">Installing git</a></li>
+	<li><a href="#download_first_time">First kernel tree download</a></li>
+	</ul>
+</li>
+
+<li><a href="#basic_tasks">Basic tasks</a>
+	<ul>
+	<li><a href="#update_tree">Download remote tree updates</a></li>
+	<li><a href="#undo">Undo all working dir modifications</a></li>
+	<li><a href="#undo_commits">Undo recent commits</a></li>
+	<li><a href="#check_in">Check in changes</a></li>
+	<li><a href="#changes_diff">Generate diff of working dir changes</a></li>
+	<li><a href="#changes_summary">Generate summary of working dir changes</a></li>
+	<li><a href="#list_csets">List all changeset descriptions</a></li>
+	<li><a href="#list_file_csets">List all changeset descriptions
+	belonging to a specific file</a></li>
+	</ul>
+</li>
+
+<li><a href="#branches">Branches</a>
+	<ul>
+	<li><a href="#list_branches">List all branches</a></li>
+	<li><a href="#switch_branch">Switch working dir to new branch</a></li>
+	<li><a href="#new_branch">Create new branch</a></li>
+	<li><a href="#cur_branch">List current branch</a></li>
+	<li><a href="#diff_branch">Diff against master branch</a></li>
+	<li><a href="#log_branch">List changes present only on local branch</a></li>
+	<li><a href="#pull_branch">Merge changes from one branch into another</a></li>
+	</ul>
+</li>
+
+<li><a href="#misc">Misc. debris</a>
+	<ul>
+	<li><a href="#old_kernel">Check out an older kernel version</a></li>
+	<li><a href="#mbox">Apply mailbox full of patches</a></li>
+	<li><a href="#download_tags">Download tags periodically</a></li>
+	<li><a href="#create_tags">Create a tag</a></li>
+	</ul>
+</li>
+<li><a href="#further">Further reading</a></li></ul>
+
+<hr>
+
+<h2><a name="getting_started">Getting Started</a></h2>
+
+<h3><a name="installing_git">Installing git</a></h3>
+
+<p>git requires bootstrapping, since you must have git installed in order
+to check out <tt>git.git</tt> (git repository), and <tt>linux-2.6.git</tt> (kernel
+repository).  You may find that your distribution already provides a usable version
+of git.  If so, try that first.
+</p><ul>
+<li>Fedora 7 and later:  The git-core package is available through the
+standard package repositories.  Fedora Core 3 through 6: git-core package is in <a href="http://fedoraproject.org/wiki/Extras">Fedora Extras</a>.
+<p><tt>yum install git-core</tt></p>
+</li></ul>
+
+
+
+<p>If your distro does not package git, you may download the latest stable
+release from:<br>
+<a href="http://www.kernel.org/pub/software/scm/git/">http://www.kernel.org/pub/software/scm/git/</a>
+</p>
+
+<p>tarball build-deps:  <a href="http://www.zlib.net/">zlib</a>,
+<a href="http://curl.haxx.se/">libcurl</a>,
+libcrypto (<a href="http://www.openssl.org/">openssl</a>)
+</p>
+
+<p>install tarball:  </p><pre>unpack && make prefix=/usr/local && sudo make prefix=/usr/local install</pre>
+
+
+<p>After reading the rest of this document, come back and update your copy
+of git to the latest:
+<tt>git://git.kernel.org/pub/scm/git/git.git</tt>
+</p>
+
+
+<h3><a name="download_first_time">Download a linux kernel tree for the
+very first time</a></h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git linux-2.6
+</pre>
+</div></div>
+
+<p>NOTE:  The kernel tree is very large.  This constitutes downloading
+just over 300 megabytes of compressed data (as of Jun 2008).</p>
+
+<hr>
+
+<h2><a name="basic_tasks">Basic Tasks</a></h2>
+
+<h3><a name="update_tree">Update</a> local kernel tree to latest 2.6.x upstream ("fast-forward
+merge")</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd linux-2.6
+$ git pull git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+</pre>
+</div></div>
+
+<p>or more simply, to pull from the location from which you cloned:</p>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd linux-2.6
+$ git pull
+</pre>
+</div></div>
+
+to pull from the origin repository from which you originally cloned the
+tree.
+
+<h3><a name="undo">Undo</a> all local modifications:</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git checkout -f
+</pre>
+</div></div>
+
+<h3><a name="check_in">Check in</a> your own modifications (e.g. do some hacking, or apply
+a patch)</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre># go to repository
+$ cd linux-2.6
+
+# make some modifications
+$ vi drivers/net/sk98lin/skdim.c
+
+# NOTE: Run git-add and git-rm if adding or removing files.
+
+# check in all modifications
+$ git commit -a
+</pre>
+</div></div>
+
+
+<h3><a name="undo_commits">Undo</a> recent commits:</h3>
+
+<p>Sometimes you have made a few commits, or just pulled a change, and
+simply want those commits to go away.</p>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd my-kernel-tree-2.6
+$ git reset HEAD~2	# make last 2 commits disappear
+</pre>
+</div></div>
+
+<p>will "disappear" the top two commits.  <b>DO NOT do this, if anyone
+has downloaded a tree containing the commits you just eliminated.</b></p>
+
+<p>Note that this is quite different from <b>git revert</b>, which
+applies a reversed patch as an additional commit.</p>
+
+<h3><a name="changes_diff">List all changes in working dir, in diff
+format.</a></h3>
+
+<p>Display changes since last git-add or git-rm:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ git diff
+</pre>
+</div></div>
+
+<p>Display changes since last commit:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ git diff HEAD
+</pre>
+</div></div>
+
+
+<h3><a name="changes_summary">Obtain summary of all changes in working
+dir</a></h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git status
+</pre>
+</div></div>
+
+<h3><a name="list_csets">List all changeset descriptions</a></h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git log
+</pre>
+</div></div>
+
+The git-log option "-p" shows diffs in addition to changeset text.  The
+option "--stat" shows the diffstat in addition to the changeset text.
+
+<h3><a name="list_file_csets">List all changesets</a> belonging to a specific
+file</h3>
+
+(in this case, net/ieee80211/ieee80211_module.c)
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git log net/ieee80211/ieee80211_module.c
+</pre>
+</div></div>
+
+<hr>
+
+<h2><a name="branches">Branches</a></h2>
+
+<h3><a name="list_branches">List all branches</a></h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git branch
+</pre>
+</div></div>
+
+
+<h3><a name="switch_branch">Make desired branch current</a> in working directory</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git checkout $branch
+</pre>
+</div></div>
+
+
+<h3><a name="new_branch">Create a new branch</a>, and make it current</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git checkout -b my-new-branch-name master
+</pre>
+</div></div>
+
+
+<h3><a name="cur_branch">Examine which branch is current</a></h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git status
+</pre>
+</div></div>
+
+<p>(git-branch also shows you the current branch, using a "*" to
+indicate this)</p>
+
+<h3><a name="diff_branch">Obtain a diff between current branch</a>, and master branch</h3>
+
+<p>In most trees <b>with branches</b>, <tt>.git/refs/heads/master</tt> contains the current
+'vanilla' upstream tree, for easy diffing and merging.  (in trees
+without branches, 'master' simply contains your latest changes)
+</p>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git diff master..HEAD
+</pre>
+</div></div>
+
+<p>(this is equivalent to <b>git diff HEAD</b>, when used with HEAD
+branch)</p>
+
+<h3><a name="log_branch">Obtain a list of changes between current branch</a>, and master branch</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git log master..HEAD
+</pre>
+</div></div>
+
+<p>(this is equivalent to <b>git log</b>, when used with HEAD)</p>
+
+or rather than full changeset descriptions, obtain a one-line summary of
+each changes:
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git shortlog master..HEAD
+</pre>
+</div></div>
+
+<h3><a name="pull_branch">Merge changes from one branch into another</a></h3>
+
+Let us suppose that you do work on branch <i>A</i> and branch <i>B</i>, and after work
+on those two branches is complete, you merge the work into mainline
+branch <i>M</i>.
+
+<div class="listingblock">
+<div class="content">
+<pre>$ git checkout M	# switch to branch M
+$ git merge A		# merge A into M
+$ git merge B		# merge B into M
+</pre>
+</div></div>
+
+<hr>
+
+<h2><a name="misc">Misc. Debris</a></h2>
+
+<h3><a name="gc">Optimize</a> your repository</h3>
+
+<p>git is heavily optimized for fast storage and retrieval on a
+per-command basis.  However, over a long period of time, it can be
+useful to perform further optimizations, including packing all git
+objects into single "packfile" for fast retrieval and less wasted disk
+space.
+
+</p><div class="listingblock">
+<div class="content">
+<pre>$ cd my-kernel-tree-2.6
+$ git gc
+</pre>
+</div></div>
+
+<p>will optimize your repository.  You don't need to run this frequently
+&mdash; git is quite fast even without it.  See the git-gc man page for
+more details.</p>
+
+<h3><a name="old_kernel">Check out</a> an older kernel version</h3>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd my-kernel-tree-2.6
+$ git checkout -b tmp v2.6.22
+</pre>
+</div></div>
+
+<p>This creates a temporary branch 'tmp', with the contents of kernel
+version 2.6.22.</p>
+
+<h3><a name="mbox">Apply</a> all patches in a Berkeley mbox-format file</h3>
+
+<p>First, make sure that the <tt>tools</tt> subdirectory of the git-core
+repository is in your PATH.</p>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd my-kernel-tree-2.6
+$ git-am --utf8 --signoff /path/to/mbox
+</pre>
+</div></div>
+
+<p>The file <tt>/path/to/mbox</tt> is a Berkeley mbox file, containing one
+or more patches to be committed to the git repository.  The
+<i>--signoff</i> option indicates that git-am should append the
+</p><p><tt>Signed-off-by: Your Name &lt;your@email.com&gt;</tt></p>
+<p>line that is common to almost all kernel submissions.  The name and
+email address are taken from the GIT_COMMITTER_NAME and
+GIT_COMMITTER_EMAIL environment variables (I recommend setting these in
+your .bash_profile or similar file).</p>
+
+
+<h3><a name="download_tags">Don't forget to download tags</a> from time to time.</h3>
+
+<p><tt>git pull</tt> only downloads sha1-indexed object data, and the
+requested remote head.  This misses updates to the
+<tt>.git/refs/tags/</tt> and
+<tt>.git/refs/heads/</tt> directories.  For tags, run <b>git fetch
+--tags $URL</b>.</p>
+
+<h3><a name="create_tags">Tag</a> a particular commit.</h3>
+
+<p>For your own repositories, you may wish to give interesting or
+significant commits a name, known as a tag.  The Linux kernel uses tags
+to for each kernel version:  "v2.6.21", "v2.6.22", etc.</p>
+
+<div class="listingblock">
+<div class="content">
+<pre>$ cd my-kernel-tree-2.6
+$ git tag my-tag</pre>
+</div></div>
+
+<p>creates a new tag named "my-tag", based on the current commit.  You
+can do a <i>lot</i> more with tagging, including GPG-signing, so read
+the man page for more details.</p>
+
+<hr>
+
+<h2><a name="further">Further reading</a></h2>
+
+<p>Another good introduction is the official <a href="http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">git
+tutorial</a>, followed by the more in-depth git <a href="http://www.kernel.org/pub/software/scm/git/docs/">man page
+documentation</a>.</p>
+
+<hr>
+
+</div>
+
+<div id="footer">
+<p>Copyright &copy; 2008 Jeff Garzik</p>
+<p>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3593799263359511";
+/* linux chan, 468x60, created 6/25/08 */
+google_ad_slot = "7958017131";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</p>
+</div>
+
+</div>
+</body>
+</html>

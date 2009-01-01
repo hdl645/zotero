@@ -1,0 +1,489 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/">
+<meta name="wpd_url" content="http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/">
+<meta name="wpd_date" content="2008-07-08T16:35Z">
+ 
+
+        <title>Red Hat Magazine | Shipping quality code with git</title>
+<link rel="SHORTCUT ICON" href="about:blank?favicon.ico">
+
+
+<meta name="" http-equiv="pragma" content="no-cache">
+<meta name="" http-equiv="cache-control" content="no-cache">
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.redhat.com/magazine/rss20.xml">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.redhatmagazine.com/xmlrpc.php?rsd">
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="shipping-quality-code-with-git.css" media="all">
+</head>
+<body>
+
+<!-- SiteCatalyst code version: H.1.
+ Copyright 1997-2005 Omniture, Inc. More info available at
+ http://www.omniture.com sec -->
+<div id="oTags">
+<script type="text/javascript">
+
+<!--
+var s_account = "redhatcom";
+-->
+</script>
+<script language="JavaScript" src="s_code.js"></script><img src="s78324978299945" name="s_i_redhatcom" alt="" width="1" border="0" height="1">
+<script language="JavaScript" src="rh_omni_footer.js"></script>
+<script language="JavaScript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><img
+src="https://smtrcs.redhat.com/b/ss/redhatcom/1/H.2--NS/0"
+height="1" width="1" border="0" alt="" /></noscript><!--/DO NOT REMOVE/-->
+</div><!-- oTags -->
+<!-- End SiteCatalyst code version: H.1. -->
+
+
+<!-- HEADER -->
+<div id="header">
+<a href="http://www.redhat.com/"><img src="rhm_masthead_shadowman_25x22.png" id="mastheadWWW" width="25" height="22"></a>
+<!-- img src="/wp-content/themes/rhm2.0/images/grey_909090.png" width="1" height="25" class="mastheadGreyBar" />
+<a href="http://www.redhatmagazine.com"><img src="/wp-content/themes/rhm2.0/images/rhm_masthead_rhm_36x13.png" width="36" height="13" id="mastheadRHM" /></a -->
+<br>
+<div id="mastheadLeft">
+<a href="http://www.redhatmagazine.com/"><img src="rhm_logo_bw_167x58.png" id="mastheadLogo" width="167" height="58"></a>
+<img src="grey_909090.png" class="mastheadGreyBar" width="1" height="65">
+</div><!-- mastheadLeft -->
+
+<div id="mastheadRight">
+<form method="get" id="searchform" action="http://www.redhatmagazine.com/">
+<input name="b" value="www" type="hidden"><div><input value="" name="s" id="s" style="width: 120px;" type="text">
+<input id="searchsubmit" style="border: 1px solid black; background: rgb(204, 204, 204) none repeat ; 0%; font-size: 10pt; font-weight: bold; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-top: 0.3em;" value="Go" type="submit">
+</div>
+</form>
+<a href="http://www.redhatmagazine.com/rss-feeds/"><img src="rhm_feeds_rss_28x19.png" class="mastheadRSS" border="0"></a>&nbsp;&nbsp;<a href="http://feeds.feedburner.com/RedHatMagazineOggPodcast"><img src="rhm_feeds_ogg_28x19.png" class="mastheadRSS" border="0"></a>&nbsp;&nbsp;<a href="http://feeds.feedburner.com/RedHatMagazinePodcasts"><img src="rhm_feeds_mp3_28x19.png" class="mastheadRSS" border="0"></a>
+</div><!-- mastheadRight -->
+
+<div id="mastheadInfo">
+<a href="http://www.redhatmagazine.com/about/">About</a><br>
+<a href="http://www.redhatmagazine.com/staff/">Editorial team</a><br>
+<a href="http://www.redhat.com/magazine/feedback/to_the_editor.html">Letter to the editors</a><br>
+<a href="http://www.redhat.com/magazine/feedback/call_for_writers.html">Call for writers</a>
+</div><!-- mastheadInfo -->
+
+<!-- img src="/wp-content/themes/rhm2.0/images/rhm_home_header.png" width="800" height="120" / -->
+</div><!-- end header -->
+
+<!-- /end header.php include -->
+
+
+
+<div id="wrapper" class="clearWrap">
+<div id="twoColOne">
+
+<!-- post-by-post navigation, should be useful 				
+  	
+		<div class="navigation">
+			<div class="alignleft">&laquo; <a href="http://www.redhatmagazine.com/2008/05/01/video-mark-proctor-part-2-origins-and-uses-of-jboss-drools/">Video: Mark Proctor, part 2: Origins and uses of JBoss Drools</a></div>
+			<div class="alignright"><a href="http://www.redhatmagazine.com/2008/05/05/tips-and-tricks-how-do-i-set-default-password-expiration-for-new-accounts/">Tips and tricks:  How do I set default password expiration for new accounts?</a> &raquo;</div>
+		</div>
+ /end of post-by-post navigation, I think -->
+
+<!-- article functions -->
+<div class="artFunct">
+<span class="artItem"><img src="star.gif"> <!-- div style="font-size:x-small;margin:0 0 0 4px;">Current rating:</div -->
+
+<script language="JavaScript">
+
+<!--
+function openwindow()
+{
+	var new_win = window.open("http://www.redhat.com/apps/ratepage/giverating_article.html?url=http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/","mywindow","menubar=1,resizable=1,width=350,height=350");	
+}
+-->
+</script>
+
+
+<a href="javascript:%20openwindow()">Rate this page</a>
+</span>
+
+<span class="artItem"><a href="http://del.icio.us/post" onclick="window.open('http://del.icio.us/post?v=4&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=700,height=400'); return false;"><img src="delicious.gif" border="0"></a> <a href="http://del.icio.us/post" onclick="window.open('http://del.icio.us/post?v=4&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=700,height=400'); return false;">del.icio.us</a></span>
+
+<span class="artItem"><a href="http://digg.com/submit" onclick="window.open('http://digg.com/submit?phase=2&partner=fb&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)); return false;"><img src="digg.gif" width="10" height="10"></a>&nbsp;<a href="http://digg.com/submit" onclick="window.open('http://digg.com/submit?phase=2&partner=fb&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)); return false;">Digg</a></span>
+
+<span class="artItem"><a href="javascript:location.href='http://slashdot.org/bookmark.pl?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)"><img src="slashdot.gif"></a> <a href="javascript:location.href='http://slashdot.org/bookmark.pl?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)">slashdot</a></span>
+
+<span class="artItem"><a href="javascript:location.href='http://www.stumbleupon.com/submit?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)"><img src="stumble.png"></a> <a href="javascript:location.href='http://www.stumbleupon.com/submit?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)">StumbleUpon</a></span>
+</div><!-- artFunct -->
+		<div class="post" id="post-872">
+			<h1 id="content"><a href="http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/" rel="bookmark" title="Permanent Link: Shipping quality code with git" class="headline">Shipping quality code with git</a></h1>
+			<h4 id="byline">by <a href="http://www.redhatmagazine.com/author/bleanhar/" title="Posts by Brenton Leanhardt">Brenton Leanhardt</a></h4>	
+			<div class="entrytext">
+				<p>Git is a program for Source Code Management (SCM) whose complexity has been blown out of proportion.  This may be due to the fact that early on it was primarily used by Linux kernel hackers who, needless to say, do not represent most users of SCM tools.  Regardless of its past, today the UI is quite simple and there are only a handful of techniques a user needs to manage their code base with git&ndash;in ways that are nearly impossible to do with the mainstream alternatives.  These techniques, which are mentioned in the order of their suggested usage, focus on improving the overall quality of the code base throughout the life of a project.<a id="more-872"></a></p>
+<h2>Good patches</h2>
+<p>While developers have been managing changes to code for decades, this task is not quite as simple as it sounds.  These changes, or patches, range from simple one-line fixes to features measured in hundreds of lines.  However, there is one goal that all good patches share, no matter their content.  The objective is to introduce positive cohesive change to the code base.  In practice, this means that unrelated changes should be contained in their own patches. As projects grow there is a need to group patches into cohesive sets for both organization and maintenance.  </p>
+<p>This article is as much about using git effectively as it is about creating quality patches.  Before we go any further, let&rsquo;s explain the need for this coupling.</p>
+<h2>M&eacute;tro, Boulot, Codo</h2>
+<p>As much as project managers (or maintainers) like to believe their releases are well-planned and will go out on-schedule, the reality is that priorities, businesses, and staffing changes often disrupt the best intentions.  A disciplined approach to submitting changes goes a long way to allowing projects to react with agility to these types of challenges.</p>
+<p>While it may not be apparent to developers in the trenches, a bit of discipline gives those in charge of integrating and releasing code the confidence to add or remove features&ndash;even if they do not have an extremely low-level understanding of the implementation. Most people tasked with releasing projects are not nearly as concerned about particular files; they are more worried about entire trees and changes over time.  They want to ship feature X and yank feature Y with accuracy.</p>
+<p>Sadly, many of the mainstream tools for managing source code are poorly set up for these kinds of tasks, and thus, they are simply ignored in the field.  This can be seen in any project where a large majority of the commit messages provide vague information like &ldquo;checking in my stuff&rdquo;.</p>
+<p>Let&rsquo;s observe the life cycle of a typical nice-to-have patch: </p>
+<ol>
+<li>Developer has an itch for a new feature so she downloads the project&rsquo;s source</li>
+<li>Several changes are made&ndash;some good, some bad</li>
+<li>The feature is then tested</li>
+<li>A patch is submitted to the project&rsquo;s mailing list </li>
+<li>People review the patch and eventually it is accepted upstream</li>
+</ol>
+<p>On large projects, there often exists an arbitrarily long period of time in which the patch is simply left in limbo. This typically happens between steps 4 and 5. This can be due to many factors&ndash;often limited resources and/or time. </p>
+<p>The main problem that patches face is that the longer they stay in limbo, the less likely they are to apply cleanly. And when patches carry the weight of several (often minor) unrelated changes, the effort needed to resolve a merge conflict can dramatically increase. </p>
+<p>But never fear&ndash;when upstream has moved on and left a patch behind, there is still hope.  Git can help a developer maintain a patchset until it is accepted upstream, and here&rsquo;s how:</p>
+<h3>1. Rebasing</h3>
+<p>Rebasing is a powerful feature that greatly simplifies out-of-tree patch maintenance. The goal is to avoid the &lsquo;weaving commits&rsquo; problem that linear SCMs suffer from. Consider the simple case of weaving between two developers working on unrelated features of the same project:</p>
+<p>Instead of:</p>
+<pre>A1---B1---A2---A3---B2---A4---A5
+</pre>
+<p>It&rsquo;s more readable to have this:</p>
+<pre>A1---A2---A3---A4---B1---B2
+</pre>
+<p>To make this work, typically there is some notion of &ldquo;upstream.&rdquo; In this example, A is upstream and B is a single developer.</p>
+<pre>   B1*---B2
+  /
+A1---A2---A3*---A4
+</pre>
+<p>Instead of leaving B&rsquo;s patches in limbo, <code>git-rebase</code> can be used to stack the changes back on top of A&rsquo;s.  </p>
+<pre>                  B1*---B2
+                 /
+A1---A2---A3*---A4
+
+* Represents a committed mistake that has no value
+</pre>
+<p>Should any conflicts arise, <code>git-rebase</code> will let you resolve them as you go and will even guide you through the process.  Whenever it&rsquo;s decided that B&rsquo;s changes should ship, they will be ready to apply cleanly against the latest revision of A&ndash;without having to make sense of dozens of woven commits.</p>
+<h3>2. Squashing</h3>
+<p>An observant reader will notice we&rsquo;re still weaving&ndash;just on a higher level. Commit-weaving is only a bad thing when it leads to an improper signal-to-noise ratio in the commit log.  If these commits were all related, we would really have a situation more like:</p>
+<pre>A1`---B1`
+</pre>
+<p>This can be achieved when developers use a healthy dose of squashing.  Git provides several tools for making this easy. After performing a rebase, all commits that do not exist upstream will be stacked on top.  If they represent a cohesive change (and were authored by a single person), the simplest way to combine them is with <code>git-merge</code>, like so:  </p>
+<pre># Switch to the branch to merge into
+git checkout master
+git merge --squash &lt;previously rebased branch&gt;
+</pre>
+<p>Quite frequently the commits are arranged in more interesting ways.  Another useful tool is <code>git-cherry-pick</code>:  </p>
+<pre>git checkout master
+# Using the &ldquo;--no-commit&rdquo; flag allows for combining the changes
+git cherry-pick &lt;hash of commit1&gt; --no-commit
+git cherry-pick &lt;hash of commit2&gt; --no-commit
+git commit
+</pre>
+<p>Git also has great support for doing &ldquo;reverse&rdquo; squashes where a single commit is split into multiple patches. Below is an example of how to split a commit that has multiple unrelated changes in the same file. This should be familiar to anyone who has struggled merging changes from team members who use conflicting indentation.  This is precisely the type of noise no one concerned with releasing code should have to deal with.</p>
+<pre># It's a good idea to do this cleanup on another branch
+git checkout -b cleanup &lt;ref of commit to be split&gt;
+
+# Reverse the git history one commit but leave the working tree intact
+git reset --mixed HEAD^
+
+# Interactively add commit &ldquo;chunks&rdquo; in foo.py to the commit staging area (aka index)
+git add --patch foo.py
+
+# Commit change one
+git commit -m &ldquo;Fixing the gnarly production issue&rdquo;
+</pre>
+<p>At this point, the changes to <code>foo.py</code> have been committed, and the comment notes this. Now, pretend all the remaining chunks to be committed are related, and commit them together:</p>
+<pre>git commit -a -m &ldquo;minor whitespace fixes&rdquo;
+</pre>
+<p>The above approach is useful when changes are committed poorly and we want to clean up after-the-fact.  To avoid the problem in the first place, <code>git-stash</code> offers a great alternative.  See the documentation for more information.</p>
+<h3>3. Reordering</h3>
+<p>We have already hinted at the benefits of reordering. Rebasing is just one approach.  When submitting multiple patches, having a logical order can make them easier to understand. There is a big difference between scanning 100 well-ordered (and cohesive) commits and 100 stream-of-consciousness commits.  More importantly, the person reviewing the commits gets no value from commit messages like &ldquo;oops&rdquo; or &ldquo;trying again.&rdquo;  If there is value in expressing a failed attempt, it should be explained in the commit log. For this next example we&rsquo;re going to use <code>git-rebase</code>&rsquo;s powerful interactive mode.</p>
+<pre># Start the rebase from the commit before things got messy
+git rebase --interactive &lt;last good commit&gt;
+</pre>
+<p>From here the user will be presented with a text file.  Editing the file tells git how to perform the rebase.  To reorder the commits, simply reorder the lines in the text file.  Removing a line will result in that commit being deleted from the history.  The rest of this powerful feature is documented at the bottom of the text file.  As soon as the editor is closed the rebase will begin. The beauty of it all is that whenever git cannot figure out how to merge a change, it will stop and guide the user through resolving the issue.  Just remember to continue the rebase after you commit with <code>git rebase --continue</code>.</p>
+<p>Once patches are in a logical order, it&rsquo;s often convenient to post them somewhere for review.  With git this could be a branch on a public repository<br>
+or even a few patches posted to a mailing list.  Those reviewing the code will appreciate the work put into the patch order and it could result in suggestions for a different or better ordering.</p>
+<h3>4. Documenting</h3>
+<p>With all this squashing and reordering, there exists another tool  that can help developers produce quality code.  This is the commit log. Many developers simply do not understand the utility of the commit log.  It&rsquo;s the one place that can holistically document code in a particular state. What makes git different than mainstream tools is that developers are not forced to worry about documentation at the time the code is first committed.  Documenting code takes serious effort. In practice, undocumented code often gets pushed to the repository for fear of the work being lost. With git, this process can be iterative and will result in high-quality documentation over time.  It should be no surprise that <code>git-rebase</code> is the key.  If you tried the interactive rebase from the last example, simply mark the commits whose messages you would like to modify with the &ldquo;edit&rdquo; flag. </p>
+<p>When commits are grouped into cohesive sets of changes and are placed in a logical order, developers can better understand the code base.  For example, in any average project consisting of over 100,000 lines of code there will inevitably exist a chunk of code that no one understands and everyone is afraid to touch.  When production problems arise with this particular block, it&rsquo;s extremely useful to be able to jump through the last 40 or 50 of its permutations (that may span several years and more than a few different developers).  This is precisely why changes not applied in a logical order will be too much to comprehend as time goes on. And you never know&ndash;by looking at the changes to a fearsome block of code over time, it may become apparent that the code in question was merely a vestige of a feature that never shipped.</p>
+<h2>En Fin</h2>
+<p>As in all areas of software development, there are no silver bullets and teams should feel free to adapt these practices as they see fit.  A typical project can reap the benefits of actively maintaining and improving commits within a few weeks.  With a little practice, git can make these techniques feel less like a chore and more like adding a new coat of paint to your restored &lsquo;57 Chevy&ndash;tough work but you know it&rsquo;s worth it.
+</p>
+	
+					
+				<p class="postmetadata">
+
+						This entry was posted by <a href="http://www.redhatmagazine.com/author/bleanhar/" title="Posts by Brenton Leanhardt">Brenton Leanhardt</a> 
+						 
+						on Friday, May 2nd, 2008 at 3:20 pm						and is filed under <a href="http://www.redhatmagazine.com/category/fedora/" title="View all posts in Fedora" rel="category tag">Fedora</a>,  <a href="http://www.redhatmagazine.com/category/technical/" title="View all posts in technical" rel="category tag">technical</a>.
+						You can follow any responses to this entry through the <a href="http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/feed/">RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://www.redhatmagazine.com/2008/05/02/shipping-quality-code-with-git/trackback/" rel="trackback">trackback</a> from your own site.
+						
+										</p>
+	
+			</div><!-- entrytext -->
+		</div><!-- post -->
+		
+	<div class="marginFive">
+
+
+<!-- You can start editing here. -->
+
+	<h3 id="comments">7 responses to &ldquo;Shipping quality code with git&rdquo;</h3> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-74462">
+			<cite><a href="http://michaeldehaan.net/" rel="external nofollow">Michael DeHaan</a></cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-74462" title="">May 2nd, 2008 at 5:10 pm</a> </small>
+
+			<p>Yay, git!  There are clearly a lot of commands (a gazillion of them), though in practice I find myself not even using many of the ones you mention.</p>
+<p>A few other nice ones &mdash; &ldquo;git-format-patch&rdquo; and &ldquo;git-send-email&rdquo; are clearly outstanding tools for people who want to submit code to projects and are worth a mention.  Ultimately though, you can get a long long long way with just the basics.  For those that want to learn more, see the tutorial here:</p>
+<p><a href="http://www.kernel.org/pub/software/scm/git/docs/tutorial.html" rel="nofollow">http://www.kernel.org/pub/software/scm/git/docs/tutorial.html</a></p>
+<p>Mercurial is also another similar distributed system, but having had it clobber my remote repositories on more than one occasion, I much prefer git.</p>
+<p>I often liken it to an Italian sports car &mdash; it&rsquo;s a high performance SCM and much better than your Ford Taurus (SVN), but it does take some time to learn how to drive it properly.  And it is probably easier for a newb to get wrapped around a tree.  But wouldn&rsquo;t you rather have the sports car?
+</p>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-76375">
+			<cite><a href="http://zhesto.wordpress.com/2008/05/05/links-for-2008-05-05/" rel="external nofollow">links for 2008-05-05 &laquo; Bloggitation</a></cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-76375" title="">May 4th, 2008 at 6:20 pm</a> </small>
+
+			<p>[&hellip;] Shipping quality code with git (tags: git scm programming) [&hellip;]
+</p>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-81012">
+			<cite>David Woodhouse</cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-81012" title="">May 8th, 2008 at 8:57 am</a> </small>
+
+			<p>It should be mentioned that these tricks (rebasing, squashing, etc.) should be played behind closed doors only. When your tree is public and other people are basing their work on it, it&rsquo;s very bad to rebase or change things around.</p>
+<p>&ldquo;Just say *no* to rebasing&rdquo; &mdash; Linus Torvalds.</p>
+<p>&ldquo;In particular, people who rebase other peoples trees should just be shot.&rdquo; &mdash; Linus Torvalds.
+</p>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-81021">
+			<cite>David Woodhouse</cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-81021" title="">May 8th, 2008 at 9:10 am</a> </small>
+
+			<p>Not to mention that the example shown in section 1 is particularly gratuitous &mdash; it sounds like you&rsquo;ve missed the fundamental point that git doesn&rsquo;t have a linear progression of commits; it&rsquo;s designed to have a _graph_ of commits. You could, and _should_, have just merged the tree with &lsquo;B&rsquo;s changes, as git was designed to do.</p>
+<p>  B1*&mdash;B2&mdash;&mdash;&mdash;\<br>
+  /                 \<br>
+A1&mdash;A2&mdash;A3*&mdash;A4&mdash;A5</p>
+<p>This preserves the ordering of commits and merges, and reflects the fact that changes B1 and B2 were designed, committed and tested on top of commit A1. And means that &lsquo;git-bisect&rsquo; works as designed if we later need to track down bugs introduced in these commits.</p>
+<p>If developer B wants to use the &rsquo;squashing&rsquo; trick to combine his patches into one commit, before he&rsquo;s ever made them public, that might make sense. But if &lsquo;A&rsquo; is upstream, or even an intermediate &rsquo;subsystem&rsquo; tree, and suddenly decides that he&rsquo;s going to break his tree and collapse commits &lsquo;A1&prime; and &lsquo;A2&prime; together so that it goes&hellip;</p>
+<p> A0&mdash;A2&prime;&mdash;A3&prime;&mdash;</p>
+<p>&hellip; when other developers were _using_ that tree as a base for further development, then that is really nasty.</p>
+<p>&ldquo;Rebasing is fine for maintaining *your* own patch set, i.e. it is an alternative to using quilt. But it is absolutely not acceptable for *anything* else.&rdquo; &mdash; Linus Torvalds.
+</p>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-81023">
+			<cite>Brenton</cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-81023" title="">May 8th, 2008 at 9:15 am</a> </small>
+
+			<p>I probably should have mentioned this is how we maintain a large internal codebase.  I completely understand (and agree) with your statements about the dangers of rewriting history.  The truth is on our projects we indeed have a point in which the code is far enough downstream that no rewriting is allowed to occur.</p>
+<p>It all comes down to your first point of code that is &ldquo;behind closed doors&rdquo;.  That&rsquo;s the key for rewriting.
+</p>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-81037">
+			<cite>Brenton</cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-81037" title="">May 8th, 2008 at 9:35 am</a> </small>
+
+			<p>Basically this article focused on shipping code.  For an internal project &ldquo;shipping&rdquo; might me mean handing off the codebase to release engineering.  For an open source project shipping can simply mean publishing a repo.  Indeed, once the code has shipped it must be managed differently.</p>
+<p>I actually had in the original draft a warning about how to apply these practices in the context of the project you are working on.  In hindsight it might have been good to leave that in.  I think these comments sum it up though.</p>
+<p>On a side note your point on the correct use of merging is well taken.  I didn&rsquo;t want to go into all the detail of fastforward vs. recursive merges in the article.  Our problem with merging on &ldquo;non-shipped&rdquo; code is that on our team non-fastforward merges were happening far too often.  The history was cluttered with merge commits to the point where it was extremely annoying and needless noise IMO (for a tree that hasn&rsquo;t shipped yet).
+</p>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-83297">
+			<cite><a href="http://faelcavalcanti.wordpress.com/2008/05/11/prepare-se-para-comer-poeira-do-git/" rel="external nofollow">Prepare-se para comer poeira do git &laquo; rafa.rocha</a></cite> says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-83297" title="">May 10th, 2008 at 11:56 pm</a> </small>
+
+			<p>[&hellip;] Atualmente, nem tenho id&eacute;ia, como est&atilde;o se comportando os mantenedores do cvs/svn/ss/starTeam, entre outros quanto a estas mudan&ccedil;as. Benchmarks[1][] j&aacute; est&atilde;o sendo demonstrados, comparativos mostram-se publicamente justificados[1][2][3][4][5] o ganho que o git vem oferecendo. Basta apenas estarmos acompanhando estas evolu&ccedil;&otilde;es e/ou colaborando nas principais listas existentes [1], bem como de boas ferramentas em processo de desenvolvimento em massa. J&aacute; t&aacute; rolando screenshots do plugin para o git(bem interessante o history views a partir do resource decorator na perspectiva logo abaixo na view da IDE do eclipse. isso vai virar febre logo, logo). [&hellip;]
+</p>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h3 id="respond">Leave a reply</h3>
+
+
+<form action="http://www.redhatmagazine.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input name="author" id="author" value="" size="22" tabindex="1" type="text">
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input name="email" id="email" value="" size="22" tabindex="2" type="text">
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;code&gt; &lt;em&gt; &lt;i&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="60" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" id="submit" tabindex="5" value="Submit comment" type="submit">
+<input name="comment_post_ID" value="872" type="hidden">
+</p>
+<input name="b" value="www" type="hidden"><input name="token" value="cdb43434e863eac3c61114d8fb9fd54db727021e" type="hidden">
+</form>
+
+
+</div><!-- marginFive -->
+	
+	
+</div><!-- twoColOne -->
+
+<!-- ISSUE INCLUDE / TOC for HOME, col THREE -->
+
+<div id="threeColThree">
+<div class="marginFive">
+
+<ul class="bold">
+<li><a href="http://truthhappens.redhatmagazine.com/">Truth Happens</a></li>
+<li><a href="http://developer.redhatmagazine.com/">Developer Fu</a></li>
+<li><a href="http://blogs.hosted.redhat.com/red_hat_blogs/RED_HAT_BLOGS.html">Red Hat People</a></li>
+<li><a href="http://press.redhat.com/">Red Hat Press</a></li>
+<li><a href="http://www.redhat.com/">redhat.com</a></li>
+<li><a href="http://jboss.com/">JBoss.com</a></li>
+<li><a href="http://jboss.org/">jboss.org</a></li>
+
+</ul>
+
+<hr>
+
+<h2>Links</h2>
+<ul class="ital">
+<li><a href="http://www.creativecommons.org/">Creative Commons</a></li>
+<li><a href="http://www.laptop.org/">One Laptop Per Child</a></li>
+<li><a href="http://lyceum.ibiblio.org/">The Lyceum Project</a></li>
+</ul>
+
+<hr>
+
+<!-- ARTICLES BY CATEGORY -->
+<h2>Tags</h2>
+<ul class="tags">
+  	<li><a href="http://www.redhatmagazine.com/category/contests/" title="View all posts filed under contests">contests</a> (2)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/culture/" title="View all posts filed under culture">culture</a> (53)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/design/" title="View all posts filed under design">design</a> (16)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/documentation/" title="View all posts filed under documentation">documentation</a> (17)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/education/" title="View all posts filed under education">education</a> (14)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/events/" title="View all posts filed under events">events</a> (50)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/fedora/" title="View all posts filed under Fedora">Fedora</a> (68)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/from-the-editors/" title="View all posts filed under from the editors">from the editors</a> (50)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/jboss/" title="View all posts filed under JBoss">JBoss</a> (15)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/multimedia/" title="View all posts filed under multimedia">multimedia</a> (47)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/music/" title="View all posts filed under music">music</a> (9)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/one-laptop-per-child/" title="View all posts filed under One Laptop per Child">One Laptop per Child</a> (14)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/red-hat-enterprise-linux/" title="View all posts filed under Red Hat Enterprise Linux">Red Hat Enterprise Linux</a> (43)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/review/" title="View all posts filed under review">review</a> (23)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/shadowman/" title="View all posts filed under Shadowman">Shadowman</a> (3)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/technical/" title="View all posts filed under technical">technical</a> (84)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/tips-and-tricks/" title="View all posts filed under tips and tricks">tips and tricks</a> (127)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/truth/" title="View all posts filed under truth">truth</a> (19)
+</li>
+	<li><a href="http://www.redhatmagazine.com/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a> (6)
+</li>
+</ul>
+
+<hr>
+
+<!-- MONTHLY ARCHIVES -->
+<h2>Archives</h2>
+<ul>
+  	<li><a href="http://www.redhatmagazine.com/2008/08/" title="August 2008">August 2008</a></li>
+	<li><a href="http://www.redhatmagazine.com/2008/07/" title="July 2008">July 2008</a></li>
+	<li><a href="http://www.redhatmagazine.com/2008/06/" title="June 2008">June 2008</a></li>
+	<li><a href="http://www.redhatmagazine.com/2008/05/" title="May 2008">May 2008</a></li>
+	<li><a href="http://www.redhatmagazine.com/2008/04/" title="April 2008">April 2008</a></li>
+	<li><a href="http://www.redhatmagazine.com/2008/03/" title="March 2008">March 2008</a></li>
+</ul>
+
+</div>
+</div><!-- colThree -->
+
+<!-- /end ISSUE INCLUDE/ TOC -->
+	
+
+</div><!-- wrapper -->
+
+<!-- footer.php INCLUDE -->
+<br style="clear: both;">
+
+<div id="footer">
+<a href="feed://http//www.redhatmagazine.com/feed/">Entries (RSS)</a> and <a href="feed://http//www.redhatmagazine.com/comments/feed/">Comments (RSS)</a>.<br>
+www is powered by <a href="http://lyceum.ibiblio.org/">Lyceum</a> and <a href="http://wordpress.org/">WordPress</a><br>
+ISSN 1933-7973<br>
+Copyright &copy; 2007 Red Hat, Inc. All rights reserved.
+<!-- 84 queries. 6.988 seconds. -->
+</div><!-- END footer -->
+
+
+</body>
+</html>

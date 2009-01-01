@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01521.html">
+<meta name="wpd_url" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01521.html">
+<meta name="wpd_date" content="2008-06-03T02:32Z">
+<!-- MHonArc v2.5.14 -->
+<!--X-Subject: Re: Looking for info on ipsec passthrough (or passthru?) -->
+<!--X-From-R13: [nexhf Egraoret <zfgraoreNffu.pbz> -->
+<!--X-Date: Thu, 31 Aug 2000 06:16:17 &#45;0700 (PDT) -->
+<!--X-Message-Id: 87d7ipanfs.fsf@porsas.tokyo.jp.ssh.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 7DAA70BEB463D211AC3E00A0C96B7AB20344B9E8@orsmsx41.jf.intel.com -->
+<!--X-Head-End-->
+
+
+
+<title>Re: Looking for info on ipsec passthrough (or passthru?)</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01520.html">Date Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01522.html">Date Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">Thread Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01519.html">Thread Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01521">Date Index</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01521">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Looking for info on ipsec passthrough (or passthru?)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: "Strahm, Bill" &lt;<a href="mailto:bill.strahm@DOMAIN.HIDDEN">bill.strahm@xxxxxxxxx</a>&gt;</li>
+<li><em>Subject</em>: Re: Looking for info on ipsec passthrough (or passthru?)</li>
+<li><em>From</em>: Markus Stenberg &lt;<a href="mailto:mstenber@DOMAIN.HIDDEN">mstenber@xxxxxxx</a>&gt;</li>
+<li><em>Date</em>: 31 Aug 2000 16:40:07 +0900</li>
+<li><em>Cc</em>: "'John C. Day'" &lt;<a href="mailto:JCDay@DOMAIN.HIDDEN">JCDay@xxxxxxxxx</a>&gt;, <a href="mailto:ipsec@DOMAIN.HIDDEN">ipsec@xxxxxxxxxxxxxxxxx</a></li>
+<li><em>In-reply-to</em>: "Strahm, Bill"'s message of "Wed, 30 Aug 2000 08:45:21 -0700"</li>
+<li><em>References</em>: &lt;<a></a>&gt;</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@DOMAIN.HIDDEN">owner-ipsec@xxxxxxxxxxxxxxxxx</a></li>
+<li><em>User-agent</em>: Gnus/5.0807 (Gnus v5.8.7) XEmacs/21.1 (Channel Islands)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>"Strahm, Bill" &lt;bill.strahm@intel.com&gt; writes:
+ &gt; Ok, I looked it up and think I know what "passthru" is.
+ &gt; 
+ &gt; Getting IPsec through NAT is a VERY hard problem.  There isn't an easy way
+ &gt; of associating (on the wire) that a packet with an SPI of this value needs
+ &gt; to be demultiplexed to this destination because a packet with another SPI
+ &gt; went through the NAT gateway...
+
+In the most recent IETF Pittsburgh meeting, there was actually a lot of
+interest on this topic. To summarize:
+
+  - In general case, IPsec that will pass through NATs will require _at
+  least_ support from endpoints, and in many of the suggested solutions from
+  other network components as well (both approaches were given good overview
+  by Aboba/Dixon).
+
+  - There are apparently ways to just make NAT compensate for some of the
+  changes (as presented by Brustoloni). In this case, the
+  example NAT was Linux's ipmasq suite.
+
+  - Only presented approach for doing endpoint support was our draft
+  draft-stenberg-ipsec-nat-traversal-00.txt(*).
+
+ &gt; Passthru is one way of solving this, basically saying all IPsec traffic
+ &gt; flows through the NAT to this 1 destination.
+
+Passthru is very ugly hack that doesn't work in European NAT cases at all
+(when ISPs do NAT due to lack of sufficient address space, you can't just
+have 1 NAT user _total_ at same time..).
+
+ &gt; Passthru is a hack until something like RSIP becomes a reality.
+
+I _wish_ RSIP could become reality in short term. But realistically speaking:
+
+  RSIP is based on the assumption that all network hardware will change just
+  to accommodate it - which is the opposite of the assumption made with NAT
+  deployment in the first place (=quick hack without changing
+  infrastructure).
+
+I (more realistically?) _hope_ that the deployment efforts will be spent on
+IPv6 instead.
+
+ &gt; Bill
+
+-Markus
+
+(*)
+    I'd like to have some discussion on the topic in general on the
+    list. The draft's version -01 will have a lot of changes based on input
+    from various sources, but additional input is always welcome.
+
+ &gt; ______________________________________________
+ &gt; Bill Strahm        Programming today is a race between
+ &gt; bill.strahm@      software engineers striving to build
+ &gt; intel.com           bigger and better idiot-proof programs,
+ &gt; (503) 264-4632   and the Universe trying to produce
+ &gt;             bigger and better idiots.  So far, the
+ &gt;                         Universe is winning.--Rich Cook
+ &gt; I am not speaking for Intel.  And Intel rarely speaks for me
+
+-- 
+Markus Stenberg &lt;markus.stenberg@ssh.com&gt;
+SSH Communications Security Corp (<a href="http://www.ssh.com/">http://www.ssh.com</a>)
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01517" href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01517.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+<ul><li><em>From:</em> Strahm, Bill</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01520.html">RFC2401 Questions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01522.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01519.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01521"><strong>Date</strong></a></li>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01521"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

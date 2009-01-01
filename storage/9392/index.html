@@ -1,0 +1,1445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" dir="ltr">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw#VPN_Terms_and_Methods">
+<meta name="wpd_url" content="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw#VPN_Terms_and_Methods">
+<meta name="wpd_date" content="2008-06-03T02:02Z">
+
+
+
+               
+                		<meta name="keywords" content="Quick HOWTO : Ap01 : Miscellaneous Linux Topics,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/af,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/ar,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/az,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/bcc,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/bg,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/br,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/ca,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/cs,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/de,Quick HOWTO : Ap01 : Miscellaneous Linux Topics/el">
+		<link rel="shortcut icon" href="about:blank?favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.ubuntu.org.cn/opensearch_desc.php" title="Ubuntu中文 (中文)">
+<link rel="alternate" type="application/rss+xml" title="訂閱 Ubuntu中文 的 RSS 資料來源" href="http://wiki.ubuntu.org.cn/index.php?title=Special:Recentchanges&feed=rss">
+<link rel="alternate" type="application/atom+xml" title="訂閱 Ubuntu中文 的 Atom 資料來源" href="http://wiki.ubuntu.org.cn/index.php?title=Special:Recentchanges&feed=atom">
+                <title>Quick HOWTO : Ap01 : Miscellaneous Linux Topics - Ubuntu中文</title>
+                
+                
+                
+                <!--[if lt IE 5.5000]><style type="text/css">@import "/skins/ubuntuchina/IE50Fixes.css?116";</style><![endif]-->
+                <!--[if IE 5.5000]><style type="text/css">@import "/skins/ubuntuchina/IE55Fixes.css?116";</style><![endif]-->
+                <!--[if IE 6]><style type="text/css">@import "/skins/ubuntuchina/IE60Fixes.css?116";</style><![endif]-->
+                <!--[if IE 7]><style type="text/css">@import "/skins/ubuntuchina/IE70Fixes.css?116";</style><![endif]-->
+                <!--[if lt IE 7]><script type="text/javascript" src="/skins/common/IEFixes.js?116"></script>
+                <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+                <script type="text/javascript">/*<![CDATA[*/
+var skin = "ubuntuchina";
+var stylepath = "/skins";
+var wgArticlePath = "/$1";
+var wgScriptPath = "";
+var wgScript = "/index.php";
+var wgServer = "http://wiki.ubuntu.org.cn";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics";
+var wgTitle = "Quick HOWTO : Ap01 : Miscellaneous Linux Topics";
+var wgAction = "view";
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+var wgArticleId = "17256";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "zh-tw";
+var wgContentLanguage = "zh";
+var wgBreakFrames = false;
+var wgCurRevisionId = "75848";
+var wgVersion = "1.12.0";
+var wgEnableAPI = true;
+var wgEnableWriteAPI = false;
+/*]]>*/</script>
+                
+                <script type="text/javascript" src="wikibits.js"><!-- wikibits js --></script>
+                <script type="text/javascript" src="index.php"><!-- site js --></script>
+                
+                <!-- Head Scripts -->
+		<script type="text/javascript" src="ajax.js"></script>
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<div id="container">
+	<div id="mastWrapper">
+        <div id="masthead">
+            <div id="nav1">
+                <ul>
+                	<li><a href="http://linux.ubuntu.org.cn/">Linux</a></li>
+                	<li><a href="http://irc.ubuntu.org.cn/">ChatIRC</a></li>
+                	<li><a href="http://blog.ubuntu.org.cn/">Blog</a></li>
+                	<li><a href="http://paste.ubuntu.org.cn/">Paste</a></li>
+                    <li id="current"><a href="http://wiki.ubuntu.org.cn/">Wiki</a></li>
+                    <li><a href="http://forum.ubuntu.org.cn/">Forum</a></li>
+                    <li><a href="http://www.ubuntu.org.cn/">Ubuntu</a></li>
+                </ul>
+            </div>
+        		<form name="searchform" action="http://wiki.ubuntu.org.cn/index.php?title=Special:Search&amp;variant=zh-tw" id="search">
+    			<div style="text-align: right;">
+    			<label for="q">搜尋</label>
+    			<input id="q" name="search" accesskey="f" value="" type="text">
+    			<input name="go" class="searchButton" id="searchGoButton" value="進入" type="submit">&nbsp;<input name="fulltext" class="searchButton" value="搜尋" type="submit">
+    	       </div>
+    		</form>
+    	</div>
+    	<div id="bar">
+    		<ul>
+    		   	<li class="selected"><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw">頁面</a></li><li class="new"><a href="http://wiki.ubuntu.org.cn/index.php?title=Talk:Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&action=edit">討論</a></li><li><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&action=edit">原始碼</a></li><li><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&action=history">歷史</a></li><li><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-hans">简体</a></li><li><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-hant">繁體</a></li><li><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-cn">简体中文</a></li><li class="selected"><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw">繁体中文</a></li>    		</ul>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+	<div id="mBody">
+	
+		<div id="side">
+			<ul id="nav">
+								<li><span>導航</span>
+						<ul>
+										<li id="n-mainpage"><a href="http://wiki.ubuntu.org.cn/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-tw">首頁</a></li>
+										<li id="n-portal"><a href="http://wiki.ubuntu.org.cn/index.php?title=Ubuntu%E4%B8%AD%E6%96%87:%E7%A4%BE%E5%8C%BA&variant=zh-tw">社群入口</a></li>
+										<li id="n-currentevents"><a href="http://wiki.ubuntu.org.cn/index.php?title=Ubuntu%E4%B8%AD%E6%96%87:%E5%BD%93%E5%89%8D%E4%BA%8B%E4%BB%B6&variant=zh-tw">現時事件</a></li>
+										<li id="n-recentchanges"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Recentchanges&variant=zh-tw">近期變動</a></li>
+										<li id="n-randompage"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Random&variant=zh-tw">隨機頁面</a></li>
+										<li id="n-help"><a href="http://wiki.ubuntu.org.cn/index.php?title=Help:%E7%9B%AE%E5%BD%95&variant=zh-tw">使用說明</a></li>
+										<li id="n-sitesupport"><a href="http://wiki.ubuntu.org.cn/index.php?title=Ubuntu%E4%B8%AD%E6%96%87:%E8%B5%84%E5%8A%A9&variant=zh-tw">贊助</a></li>
+									</ul>
+					</li>
+								<li><span>工具箱</span>
+					<ul>
+					  					  <li id="t-whatlinkshere"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Whatlinkshere/Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw">鏈入頁面</a></li>
+					  					  <li id="t-recentchangeslinked"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Recentchangeslinked/Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw">相關頁面修訂記錄</a></li>
+					  				      				      				      				      				      				      				      <li id="t-upload"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Upload&variant=zh-tw">上傳檔案</a></li>				      				      <li id="t-specialpages"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Specialpages&variant=zh-tw">特殊頁面</a></li>				      					</ul>
+				</li>
+				<li><span>個人工具</span>
+					<ul>
+					<li id="pt-login"><a href="http://wiki.ubuntu.org.cn/index.php?title=Special:Userlogin&returnto=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics">登入／建立新帳號</a></li>					</ul>
+				</li>
+							</ul>
+		</div><!-- end of SIDE div -->
+		
+		<div id="mainContent">
+			
+			<h1>Quick HOWTO : Ap01 : Miscellaneous Linux Topics</h1>
+			<h3 id="siteSub">出自Ubuntu中文</h3>
+			<div id="contentSub"></div>
+									<!-- start content -->
+			<div class="LanguageLinks">
+<table style="border: 1px solid rgb(170, 170, 170); margin: 0pt 1px; padding: 1em; clear: both; border-collapse: collapse; font-size: 85%;" width="100%">
+<tbody><tr style="background: rgb(238, 243, 226) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="center">
+<td style="width: 25px; padding-left: 0.5em;"><a href="http://wiki.ubuntu.org.cn/index.php?title=Image:Geographylogo.png&variant=zh-tw" class="image" title="Geographylogo.png"><img alt="" src="25px-geographylogo.png" width="25" border="0" height="25"></a></td>
+<td style="border-right: 1px solid rgb(170, 170, 170); padding: 1px 1em 0pt; width: 80px; white-space: nowrap;"><b>文章出處:</b>&nbsp;</td><td style="padding: 1px 1em 0pt; background: rgb(246, 249, 237) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<p><a href="http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics" class="external free" title="http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics" rel="nofollow">http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics</a>
+</p>
+</td></tr></tbody></table></div>
+<div class="LanguageLinks">
+<table style="border: 1px solid rgb(170, 170, 170); margin: 0pt 1px; padding: 0.2em; clear: both; border-collapse: collapse; font-size: 85%;" width="100%">
+<tbody><tr style="background: rgb(238, 243, 226) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="center">
+<td style="width: 25px; padding-left: 0.5em;"><a href="http://wiki.ubuntu.org.cn/index.php?title=Image:Geographylogo.png&variant=zh-tw" class="image" title="Geographylogo.png"><img alt="" src="25px-geographylogo.png" width="25" border="0" height="25"></a></td>
+<td style="border-right: 1px solid rgb(170, 170, 170); padding: 1px 1em 0pt; width: 80px; white-space: nowrap;"><b><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics/zh&variant=zh-tw" title="Quick HOWTO : Ap01 : Miscellaneous Linux Topics/zh">點擊翻譯</a>:</b>&nbsp;</td><td style="padding: 1px 1em 0pt; background: rgb(246, 249, 237) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<p><strong class="selflink">English</strong>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+&nbsp;&bull;&nbsp;<span lang="zh"><a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics/zh&variant=zh-tw" title="Quick HOWTO : Ap01 : Miscellaneous Linux Topics/zh">中文</a></span>
+<span></span>
+<span></span>
+</p>
+</td><td style="padding: 1px 1em 0pt; background: rgb(246, 249, 237) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" align="right"><font color="red">
+</font><p><font color="red"></font>
+</p>
+</td>
+</tr></tbody></table></div>
+<p><br>
+</p>
+<table id="toc" class="toc" summary="目錄"><tbody><tr><td><div id="toctitle"><h2>目錄</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">隱藏</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#.E4.BB.8B.E7.BB.8D"><span class="tocnumber">1</span> <span class="toctext">介紹</span></a></li>
+<li class="toclevel-1"><a href="#Fedora_Core_3"><span class="tocnumber">2</span> <span class="toctext">Fedora Core 3</span></a></li>
+<li class="toclevel-1"><a href="#Linux_Security_With_TCP_Wrappers"><span class="tocnumber">3</span> <span class="toctext">Linux Security With TCP Wrappers</span></a>
+<ul>
+<li class="toclevel-2"><a href="#The_TCP_Wrappers_File_Format"><span class="tocnumber">3.1</span> <span class="toctext">The TCP Wrappers File Format</span></a></li>
+<li class="toclevel-2"><a href="#Determining_the_TCP_Daemon.27s_Name"><span class="tocnumber">3.2</span> <span class="toctext">Determining the TCP Daemon's Name</span></a></li>
+<li class="toclevel-2"><a href="#Additional_TCP_Wrappers_Help"><span class="tocnumber">3.3</span> <span class="toctext">Additional TCP Wrappers Help</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Adjusting_Kernel_Parameters"><span class="tocnumber">4</span> <span class="toctext">Adjusting Kernel Parameters</span></a></li>
+<li class="toclevel-1"><a href="#Running_Linux_Without_A_Monitor"><span class="tocnumber">5</span> <span class="toctext">Running Linux Without A Monitor</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Preparing_To_Go_.22Headless.22"><span class="tocnumber">5.1</span> <span class="toctext">Preparing To Go "Headless"</span></a></li>
+<li class="toclevel-2"><a href="#Configuration_Steps"><span class="tocnumber">5.2</span> <span class="toctext">Configuration Steps</span></a></li>
+<li class="toclevel-2"><a href="#Table_I.1_How_Physical_COM_Ports_Map_To_Linux_TTYS_Devices"><span class="tocnumber">5.3</span> <span class="toctext">Table I.1 How Physical COM Ports Map To Linux TTYS Devices</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Make_Your_Linux_Box_Emulate_A_VT100_Dumb_Terminal"><span class="tocnumber">6</span> <span class="toctext">Make Your Linux Box Emulate A VT100 Dumb Terminal</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Configuration_Steps_2"><span class="tocnumber">6.1</span> <span class="toctext">Configuration Steps</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#VPN_Terms_and_Methods"><span class="tocnumber">7</span> <span class="toctext">VPN Terms and Methods</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Figure_I.1_Transport_mode_AH_packet_format"><span class="tocnumber">7.1</span> <span class="toctext">Figure I.1 Transport mode AH packet format</span></a></li>
+<li class="toclevel-2"><a href="#Figure_I.2_Transport_mode_AH_.2F_ESP_packet_format"><span class="tocnumber">7.2</span> <span class="toctext">Figure I.2 Transport mode AH / ESP packet format</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Figure_I.3_Tunnel_mode_AH_packet_format"><span class="tocnumber">8</span> <span class="toctext">Figure I.3 Tunnel mode AH packet format</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Figure_I.4_Tunnel_mode_AH_.2F_ESP_packet_format"><span class="tocnumber">8.1</span> <span class="toctext">Figure I.4 Tunnel mode AH / ESP packet format</span></a></li>
+<li class="toclevel-2"><a href="#Authentication_and_Encryption_methods"><span class="tocnumber">8.2</span> <span class="toctext">Authentication and Encryption methods</span></a></li>
+<li class="toclevel-2"><a href="#Internet_Key_Exchange_.28IKE.29"><span class="tocnumber">8.3</span> <span class="toctext">Internet Key Exchange (IKE)</span></a>
+<ul>
+<li class="toclevel-3"><a href="#Public_Encrypted_Keys"><span class="tocnumber">8.3.1</span> <span class="toctext">Public Encrypted Keys</span></a></li>
+<li class="toclevel-3"><a href="#Private_Shared_keys"><span class="tocnumber">8.3.2</span> <span class="toctext">Private Shared keys</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2"><a href="#IKE.27s_role_in_creating_Security_Associations"><span class="tocnumber">8.4</span> <span class="toctext">IKE's role in creating Security Associations</span></a></li>
+<li class="toclevel-2"><a href="#VPN_Security_And_Firewalls"><span class="tocnumber">8.5</span> <span class="toctext">VPN Security And Firewalls</span></a></li>
+<li class="toclevel-2"><a href="#VPN_User_Authentication_Methods_For_Temporary_Connections"><span class="tocnumber">8.6</span> <span class="toctext">VPN User Authentication Methods For Temporary Connections</span></a></li>
+<li class="toclevel-2"><a href="#Table_I-2_Types_Of_Dial_Up_VPN_Authentication"><span class="tocnumber">8.7</span> <span class="toctext">Table I-2 Types Of Dial Up VPN Authentication</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#TCP.2FIP_Packet_Format"><span class="tocnumber">9</span> <span class="toctext">TCP/IP Packet Format</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Figure_I.5"><span class="tocnumber">9.1</span> <span class="toctext">Figure I.5</span></a></li>
+<li class="toclevel-2"><a href="#Table_I.3_Contents_Of_The_IP_Header"><span class="tocnumber">9.2</span> <span class="toctext">Table I.3 Contents Of The IP Header</span></a></li>
+<li class="toclevel-2"><a href="#Table_I.4_Contents_Of_The_TCP_Header"><span class="tocnumber">9.3</span> <span class="toctext">Table I.4 Contents Of The TCP Header</span></a></li>
+<li class="toclevel-2"><a href="#Table_I.5_Contents_Of_The_UDP_Header"><span class="tocnumber">9.4</span> <span class="toctext">Table I.5 Contents Of The UDP Header</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#ICMP_Codes"><span class="tocnumber">10</span> <span class="toctext">ICMP Codes</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Table_I-6_ICMP_Codes"><span class="tocnumber">10.1</span> <span class="toctext">Table I-6 ICMP Codes</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "顯示"; var tocHideText = "隱藏"; showTocToggle(); } </script>
+<a name=".E4.BB.8B.E7.BB.8D"></a><h2> <span class="mw-headline"> 介紹 </span></h2>
+<p>從升級到無頭的操作到模擬器－一些主題，不管有多重要，沒有辦法很容易的定義到某一章節。這個附錄作為一個一些必須知道項目的參考中心。
+</p>
+<a name="Fedora_Core_3"></a><h2> <span class="mw-headline"> Fedora Core 3 </span></h2>
+<p>Released as this book was going to press, Fedora Core 3 has three main enhancements:
+</p>
+<ul><li> Upgrades of the GCC C programming compiler, the GNOME and KDE desktops, the Evolution e-mail client, and the CUPS printer management software suite
+</li><li> Support for Indic languages in both character sets and font rendering
+</li><li> Mandatory application of the Security-Enhanced Linux (SE-Linux) feature
+</li></ul>
+<p>The first two items don't affect anything covered in the book, but SE Linux does. Applications that are registered with SE Linux have all their executable programs and data files listed in a database. The Linux operating system then authorizes access according to the rules defined in the registration database only. The intention is that a hacked SE Linux registered application would be able to affect only its own files and no one else's, even if file permissions in other areas would have normally allowed them access.
+</p><p>SE Linux shouldn't affect your server's operation if you locate your application data files in their default locations, and if it does, there will be ample warning messages in the /var/log/messages file. If you find SE Linux generally too complicated, you can deactivate it by editing your /etc/selinux/config file and setting the SELINUX variable to disabled before rebooting your system. Remember that once this is done, newly created files won't be added to the SE Linux registration database so reactivating SE Linux correctly would be very difficult.
+</p><p>In Fedora Core 3, SE Linux support is provided for dhcpd, httpd, named, ntpd, portmap, snmpd, squid, and syslogd.
+</p><p><br>
+</p>
+<a name="Linux_Security_With_TCP_Wrappers"></a><h2> <span class="mw-headline"> Linux Security With TCP Wrappers </span></h2>
+<p>The TCP Wrappers package is installed by default on Fedora Linux and provides host-based security separate from that provided by a firewall running on the server itself or elsewhere.
+</p><p>The application relies on two main files:
+</p>
+<ul><li> <b>/etc/hosts.allow</b>: Defines the hosts and networks allowed to connect to the server. The TCP Wrappers enabled application searches this file for a matching entry, and if it finds one, then the connection is allowed.
+</li></ul>
+<ul><li> <b>/etc/hosts.deny</b>: Defines the hosts and networks prohibited from connecting to the server. If a match is found in this file, the connection is denied. No match means the connection proceeds normally.
+</li></ul>
+<p>The /etc/hosts.allow file is always read first and both files are always read from top to bottom, therefore the ordering of the entries is important. 
+</p>
+<a name="The_TCP_Wrappers_File_Format"></a><h3> <span class="mw-headline">The TCP Wrappers File Format</span></h3>
+<p>The format of the file is as follows:
+</p>
+<pre>&lt;TCP-daemon-name&gt;  &lt;client-list&gt; &nbsp;: &lt;option&gt;
+</pre>
+<p>This example allows all traffic from the 192.168.1.0/24 and the 192.168.2.0/255.255.255.0 networks and SSH from only two hosts, 172.16.1.1 and 216.10.119.244. All HTTP Web traffic is allowed. All other TCP traffic to the host is denied. Notice how the subnet masks can use the slash nomenclature or the dotted decimal 255.255.255.0 format.
+</p>
+<pre>#
+# File: hosts.allow
+#
+ 
+ALL:    192.168.1.0/24 192.168.2.0/255.255.255.0
+sshd:   172.16.1.1 216.10.119.244
+httpd:  ALL
+ 
+#
+# File: hosts.deny
+#
+
+ALL:    ALL
+
+</pre>
+<a name="Determining_the_TCP_Daemon.27s_Name"></a><h3> <span class="mw-headline">Determining the TCP Daemon's Name</span></h3>
+<p>The easiest way of determining the name of a daemon is to use the ps command and then use grep to filter for the name of the service. Here, the example quickly determines the daemon name (/usr/sbin/sshd) for the SSH server process. Because TCP Wrappers only requires the program name and not the path, sshd therefore becomes the entry to place in the TCP-daemon-name column of the configuration file.
+</p><p><br>
+</p>
+<pre>[root@bigboy tmp]# ps -ef | grep -i ssh
+root     10053  �  1  0 Nov06&nbsp;?        00:00:00 /usr/sbin/sshd
+root     14145 10053  0 Nov13&nbsp;?        00:00:02 sshd: root@pts/1
+root     18100 14148  0 21:56 pts/1    00:00:00 grep ssh
+[root@bigboy tmp]#
+</pre>
+<p><br>
+</p>
+<a name="Additional_TCP_Wrappers_Help"></a><h3> <span class="mw-headline">Additional TCP Wrappers Help</span></h3>
+<p>For a full explanation of all the options available, refer to section 5 of the man pages for hosts_access.
+</p>
+<pre>[root@bigboy tmp]# man 5 hosts_access
+</pre>
+<p>TCP wrappers is simple to implement, but you have to set them on every host. Management is usually easier on a firewall that protects the entire network.
+</p>
+<a name="Adjusting_Kernel_Parameters"></a><h2> <span class="mw-headline">Adjusting Kernel Parameters</span></h2>
+<p>Unlike many Linux applications that need to be restarted before their configuration parameters are read, many of the Linux kernel's parameters can be instantaneously activated and deactivated.
+</p><p>The Linux kernel stores many of its dynamic parameters in the /proc filesystem, which resides on a virtual RAM disk in memory for maximum performance.
+</p><p>Parameters are generally categorized by function within subdirectories of the /proc; information on IDE hard drives are located in the /proc/ide directory, for example, and general system parameters are located in the /proc/sys directory.
+</p><p>System parameters are held within files with names that mimic their function. For example, a Linux system can become a rudimentary router if the IP forwarding networking parameter is set to 1, not 0. Networking parameters for IPv4 addressing schemes are located in the /proc/sys/net/ipv4/. The file that covers IP forwarding is named ip_forward and contains a single byte: 1 when it's active or 0 when it's not.
+</p><p>You can update these files by redirecting the output of the echo command to overwrite the file contents using the &gt; redirection character. This line activates IP forwarding by overwriting the contents of the ip_forward file with the value 1.
+</p>
+<pre>[root@bigboy tmp] echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</pre>
+<p>There are some disadvantages to doing this. It is not a permanent solution, and the system will revert back to its defaults after the next reboot. You can overcome this by adding the echo commands to the /etc/rc.local script that runs at the end of each reboot. This too has its disadvantages; it is the very last script to be run so if your parameters need to be set earlier, as most kernel parameters should be, it isn't a suitable solution.
+</p><p>Linux has a more elegant solution called the /etc/sysctl.conf file. It is a list of all the /proc filesystem files the systems administrator wants to customize and the values they should contain. The file has two columns, the first is the filename relative to the /proc/sys directory, and the second is the value the file should contain separated by an equals sign. You can also replace the slashes in the filename with periods. Continuing with the example, you can set the /proc/sys/net/ipv4/ip_forward file with a value of 1 using either of these configurations.
+</p>
+<pre>#
+# Sample /etc/sysctl.conf file
+#
+# Activate IP forwarding
+#
+net.ipv4.ip_forward = 1
+ 
+#
+# Activate IP forwarding too!
+#
+net/ipv4/ip_forward = 1
+</pre>
+<p>Editing the /etc/sysctl.conf file isn't enough, because the update isn't instantaneous. You have to force Linux to reread the file and reset the kernel parameters using the sysctl -p command. In the example, the /proc/sys/net/ipv4/ip_forward file had a value of 0 until the sysctl command ran, after which time, IP forwarding was activated.
+</p>
+<pre>[root@bigboy tmp]# cat /proc/sys/net/ipv4/ip_forward
+0
+[root@bigboy tmp]# sysctl -p
+net.ipv4.ip_forward = 1
+net.ipv4.conf.default.rp_filter = 1
+kernel.sysrq = 0
+kernel.core_uses_pid = 1
+[root@bigboy tmp]# cat /proc/sys/net/ipv4/ip_forward
+1
+[root@bigboy tmp]#
+</pre>
+<p>The use of the /etc/sysctl.conf is important in day to day administration.
+</p><p><br>
+</p>
+<a name="Running_Linux_Without_A_Monitor"></a><h2> <span class="mw-headline"> Running Linux Without A Monitor </span></h2>
+<p>You can reduce the cost of ownership of your Linux system by not using a VGA monitor. This creates what is also known as a headless system. Operating costs may not be important at home, but will be in a corporate environment with large numbers of Linux servers racked in data centers. In such cases, access to the Linux box can be more cheaply provided via the COM port.
+</p><p>I've included this section, largely because I have occasionally hosted the Web site www.linuxhomenetworking.com at friends' homes and felt badly about borrowing their monitors. Having access via the COM ports has also helped me in both the home and business situations. The most common occurrence is when the system is hung, locking out network access, and I need to get to it by using:
+</p>
+<ul><li> A notebook PC with a console cable connected to the COM port
+</li><li> A modem connected to the COM port
+</li><li> Telnet to log in to a terminal server that has one of its ports connected to the Linux box's COM port
+</li></ul>
+<a name="Preparing_To_Go_.22Headless.22"></a><h3> <span class="mw-headline">Preparing To Go "Headless" </span></h3>
+<p>One of the advantages of this method is that you don't need a keyboard either. Unfortunately, your BIOS may halt the system during the Power On Self Test (POST) if it doesn't detect a keyboard. Make sure you disable this feature in the BIOS setup of your PC before proceeding. You can usually find the POST feature on the very first screen under the Halt On option.
+</p><p>You also need to make sure that you have activated your COM ports in your BIOS settings.
+</p><p>For connectivity that doesn�t involve modems (PC to PC) connect a <b>null</b> modem cable to the COM port you want to test, connect the other end to the client PC running Hyperterm or whatever terminal emulation software you are using. One popular Linux equivalent to Hyperterm is minicom.
+</p><p>If you're using a modem for connectivity, then you'll need a <b>full</b> modem cable and you'll have to test via a dial up connection.
+</p>
+<a name="Configuration_Steps"></a><h3> <span class="mw-headline">Configuration Steps</span></h3>
+<p>In RedHat/Fedora Linux, the COM1 and COM2 ports are controlled by a program called agetty, but agetty usually isn't activated when you boot up unless its configuration file /etc/inittab is modified. In other versions of Linux, agetty may be called just plain getty. Table I.1 lists the physical ports to their equivalent Linux device names. 
+</p>
+<a name="Table_I.1_How_Physical_COM_Ports_Map_To_Linux_TTYS_Devices"></a><h3> <span class="mw-headline">Table I.1 How Physical COM Ports Map To Linux TTYS Devices </span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+ <tbody><tr>
+  <td style="border: 1pt inset rgb(17, 17, 17); padding: 7.5pt; background: green none repeat ; 0%; width: 1in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="120">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Port</span></b></p>
+  </td>
+  <td style="border-style: inset inset inset none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 7.5pt; background: green none repeat ; 0%; width: 1.5in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="180">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Linux "agetty"</span></b></p>
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Device Name</span></b></p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 1in;" valign="top" width="120">
+  <p class="MsoNormal" style="text-align: center;" align="center">COM1</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 1.5in;" valign="top" width="180">
+  <p class="MsoNormal" style="text-align: center;" align="center">ttyS0</p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 1in;" valign="top" width="120">
+  <p class="MsoNormal" style="text-align: center;" align="center">COM2</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 1.5in;" valign="top" width="180">
+  <p class="MsoNormal" style="text-align: center;" align="center">ttyS1</p>
+  </td>
+ </tr>
+
+</tbody></table>
+</div>
+<p><br>
+To configure your COM ports for terminal access, add these lines to /etc/inittab:
+</p>
+<pre># Run COM1 and COM2 gettys in standard runlevels
+S0:235:respawn:/sbin/agetty -L 9600 ttyS0 vt102
+S1:235:respawn:/sbin/agetty -L 9600 ttyS1 vt102
+</pre>
+<p>What do these lines mean? At boot time, when the system enters runlevels 2, 3, or 5, agetty must attach itself to devices ttyS0 and ttyS1 and emulate a VT102 terminal running at 9600 baud. The -L means ignore modem control signals, this option should be omitted if you are connecting the port to a modem. The respawn lines mean that agetty will restart automatically if, for whatever reason, it dies.
+</p><p>The next step is to restart the init process to re-read /etc/inittab: 
+</p>
+<pre>[root@bigboy tmp]# init q
+</pre>
+<p>Now you need to configure the terminal client (Hyperterm) to match the speed settings in /etc/inittab. Connect the console/modem cable between the client and your Linux box. Press Enter a couple times, and celebrate when you see something like this:
+</p>
+<pre>Red Hat Linux release 8.0 (Psyche)
+Kernel 2.4.18-14 on an i586
+bigboy login:
+</pre>
+<p><b>Note:</b> By default, user root will not be able to log in from a terminal. To do this, you'll have to edit the /etc/securetty file, which contains the device names of TTY lines on which root is allowed to login. Just add ttyS0 and ttyS1 to the list if you need this access.
+</p><p><br>
+</p>
+<a name="Make_Your_Linux_Box_Emulate_A_VT100_Dumb_Terminal"></a><h2> <span class="mw-headline"> Make Your Linux Box Emulate A VT100 Dumb Terminal </span></h2>
+<p>Dumb terminals are devices that allow you to log in to your system via the COM port. You can make your Linux box emulate a dumb terminal quite easily. Why would you want to? For example, you run Linux on a notebook and you need to use it to access a hung headless Linux server via the COM port, Or, perhaps you need to gain access to a modem connected to the COM port. This section will focus on the notebook scenario, not using Linux to dial a modem:
+</p>
+<a name="Configuration_Steps_2"></a><h3> <span class="mw-headline">Configuration Steps</span></h3>
+<p>The most commonly used Linux terminal emulation program is minicom. It is simple to use mainly because it uses a text-based GUI. You first need to go through all the relevant steps listed in the "Preparing to go Headless" section to ensure you have the right type of cable and correct BIOS settings.
+</p><p>Be warned, minicom will clash with your agetty configuration explained previously: A headless system cannot be used to access another headless system using the headless COM port. You, therefore, have to disable the agetty configuration for the port on which you wish to run minicom.
+</p><p>1.      It is important not to have an agetty entry for the COM port you are going to use. If an entry exists, disable agetty on COM1 by commenting out the ttyS0 agetty statements in the /etc/inittab file. COM1 now handles outbound minicom connections to other systems, and other systems using minicom can use COM2 to access this system. The next phase is to restart the init process to reload the new /etc/inittab settings.
+</p><p>2.      Edit /etc/inittab:
+</p>
+<pre># Run COM1 and COM2 gettys in standard runlevels
+#S0:235:respawn:/sbin/agetty -L 9600 ttyS0 vt102
+S1:235:respawn:/sbin/agetty -L 9600 ttyS1 vt102
+</pre>
+<p>3.      Restart init 
+</p>
+<pre>[root@bigboy tmp]# init q
+</pre>
+<p>4.      Run minicom in setup mode using the minicom -s command, which brings you to the setup menu:
+</p>
+<pre>[root@bigboy tmp]# minicom -s
+</pre>
+<p><br>
+</p>
+<pre>------[configuration]-------
+| Filenames and paths      |
+| File transfer protocols  |
+| Serial port setup        |
+| Modem and dialing        |
+| Screen and keyboard      |
+| Save setup as dfl        |
+| Save setup as..          |
+| Exit                     |
+| Exit from Minicom        |
+----------------------------
+</pre>
+<p><br>
+5.      Select the Serial Port Setup menu item. Make the speed match that of the remote headless system and make sure the correct serial COM device is chosen. Device /dev/ttyS0 is COM1 and /dev/ttyS1 is COM2. Also make sure that flow control is off.
+</p>
+<pre>-------------------------------------------
+| A -    Serial Device     &nbsp;: /dev/ttyS0  |
+| B - Lockfile Location    &nbsp;: /var/lock   |
+| C -   Callin Program     &nbsp;:             |
+| D -  Callout Program     &nbsp;:             |
+| E -    Bps/Par/Bits      &nbsp;: 9600 8N1    |
+| F - Hardware Flow Control&nbsp;: No          |
+| G - Software Flow Control&nbsp;: No          |
+|                                         |
+|    Change which setting?                |
+-------------------------------------------
+</pre>
+<p>6.      Select the Modem and Dialing option and make sure the Init String and Reset String settings are blank.
+</p><p>7.      Select the Save Setup as dfl to make this your saved default setting, and then choose Exit from Minicom.
+</p><p>8.      Make sure the other system is correctly configured for headless operation. Connect the cables between the systems.
+</p><p>9.      Re-enter minicom, this time without the -s.
+</p>
+<pre>[root@bigboy tmp]# minicom
+</pre>
+<p>10.   Press Enter, and you should get a login prompt
+</p>
+<pre>Welcome to minicom 2.00.0
+ 
+OPTIONS: History Buffer, F-key Macros, Search History Buffer, I18n
+Compiled on Jun 23 2002, 16:41:20.
+ 
+Press CTRL-A Z for help on special keys
+ 
+bigboy login:
+</pre>
+<p>11.   To exit minicom, type Ctrl-A, then Z, then X
+</p><p>12.   Users other than root will get a "permission denied" message if they use minicom, because the COM ports are not normally accessible to regular users. To get around this, user root can either give everyone read/write access using the chmod command or add selected trusted users to your sudo configuration.
+</p><p>Remember that minicom resets the privileges to the COM port each time you change the configuration with minicom -s so you may find yourself having to run chmod from time to time.
+</p>
+<pre>[root@bigboy tmp]# chmod o+rw /dev/ttyS0
+</pre>
+<p><b>Note:</b> This configuration is sufficient for connection to a Cisco router, switch or PIX firewall. Just remember to use the Cisco proprietary RJ45 type console cable to connect your COM port to the network device.
+</p><p><br>
+</p>
+<a name="VPN_Terms_and_Methods"></a><h2> <span class="mw-headline"> VPN Terms and Methods </span></h2>
+<p>A virtual private network (VPN) provides security for transmission of sensitive information over unprotected networks such as the Internet. VPN relationships are established between trusted sites on the Internet making the public network appear to be virtually the same as a private network to the VPN members. VPNs, however, have their own language. Once you know the terms, you'll be ready to get to work.
+</p>
+<ul><li> <b>Authentication:</b> The process of ensuring that the VPN data received is both unchanged and from the expected source.
+</li></ul>
+<ul><li> <b>Encryption:</b> The use of special mathematical equations to scramble the bits in a data stream, rendering the data stream unreadable to anyone who does not have access to the corresponding decryption equation. The process is usually made even harder through the use of an encryption key, which modifies the way the equations do the scrambling. Only persons with access to this key and the corresponding programs are able to recover the original data. Data encryption helps to prevent unauthorized persons from having access to the data.
+</li></ul>
+<ul><li> <b>IPSec:</b> The name given to a number of data communications protocols designed to authenticate and encrypt VPN data to protect it from unauthorized viewing or modification as it is transmitted across a network.
+</li></ul>
+<ul><li> <b>Authentication header (AH):</b> One of two IPSec security protocols. Provides authentication and antireplay services, without encryption, by adding its own security header to the original IP packet
+</li></ul>
+<p><b>Encapsulating security protocol (ESP):</b> The other IPSec security protocol. Provides authentication, encryption, and antireplay services. It encrypts the data within the packet and then adds its own security header to the original IP packet. Because ESP headers don't authenticate the outer IP header as AH headers do, AH and an ESP are often used in combination with each other. This is called transport adjacency.
+</p><p><b>Transport mode VPN:</b> A style of VPN in which the original source and destination address of the data sent over the VPN is unchanged. Figures I.1 and I.2 provide examples of transport mode VPN IP packets. (For more information on the IP protocol, please refer to Chapter 2, "<a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ch02_:_Introduction_to_Networking&variant=zh-tw" title="Quick HOWTO : Ch02 : Introduction to Networking">Introduction to Networking</a>", which introduces networking concepts.)
+</p>
+<a name="Figure_I.1_Transport_mode_AH_packet_format"></a><h3> <span class="mw-headline">Figure I.1 Transport mode AH packet format</span></h3>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellpadding="0" cellspacing="3">
+ <tbody><tr>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">IP Header</p>
+  </td>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">AH Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">TCP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">DATA</p>
+  </td>
+ </tr>
+</tbody></table>
+</div>
+<a name="Figure_I.2_Transport_mode_AH_.2F_ESP_packet_format"></a><h3> <span class="mw-headline">Figure I.2 Transport mode AH / ESP packet format</span></h3>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellpadding="0" cellspacing="3">
+ <tbody><tr>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">IP Header</p>
+  </td>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">AH Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">ESP Header</span></b></p>
+  </td>
+
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">TCP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">DATA</p>
+  </td>
+
+ </tr>
+</tbody></table>
+</div>
+<ul><li> <b>Tunnel mode VPN:</b> A style of VPN in which the original source and destination address of the data sent over the VPN is changed by encapsulating the original IP packet within another IP packet. The original packet is frequently encrypted, header and all, in an effort to provide an additional layer of security by not revealing the true identities of the servers communicating with each other. Figures I.3 and I.4 show examples of tunnel mode VPN IP packets.
+</li></ul>
+<a name="Figure_I.3_Tunnel_mode_AH_packet_format"></a><h2> <span class="mw-headline">Figure I.3 Tunnel mode AH packet format</span></h2>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellpadding="0" cellspacing="3">
+ <tbody><tr>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">New</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">IP Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">AH Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">IP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">TCP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">DATA</p>
+  </td>
+ </tr>
+
+</tbody></table>
+</div>
+<a name="Figure_I.4_Tunnel_mode_AH_.2F_ESP_packet_format"></a><h3> <span class="mw-headline">Figure I.4 Tunnel mode AH / ESP packet format</span></h3>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellpadding="0" cellspacing="3">
+ <tbody><tr>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">New</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">IP Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">AH Header</span></b></p>
+  </td>
+
+  <td style="padding: 0.75pt; background: green none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+  <p class="MsoNormal"><b><span style="color: white;">Inserted</span></b></p>
+  <p class="MsoNormal"><b><span style="color: white;">ESP Header</span></b></p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">IP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">Original</p>
+  <p class="MsoNormal">TCP Header</p>
+  </td>
+  <td style="padding: 0.75pt;">
+  <p class="MsoNormal">DATA</p>
+  </td>
+ </tr>
+</tbody></table>
+</div>
+<a name="Authentication_and_Encryption_methods"></a><h3> <span class="mw-headline">Authentication and Encryption methods</span></h3>
+<p>IPSec data integrity is usually provided by one of two hashed message authentication code (HMAC) methods:
+</p>
+<ul><li> Message Digest 5 (MD5)
+</li><li> Secure Hash Algorithm (SHA-1).
+</li></ul>
+<p>IPSec usually uses one of two methods to encrypt data:
+</p>
+<ul><li> Data Encryption Standard (DES) using a 56-bit encryption key
+</li><li> Triple DES using a 168-bit encryption key.
+</li></ul>
+<a name="Internet_Key_Exchange_.28IKE.29"></a><h3> <span class="mw-headline">Internet Key Exchange (IKE)</span></h3>
+<p>IKE provides authentication of the IPSec peers, negotiates IPSec security associations, and establishes IPSec keys. There are two main methods of establishing a trusted relationship between two devices that want to create a VPN between themselves.
+</p>
+<a name="Public_Encrypted_Keys"></a><h4> <span class="mw-headline">Public Encrypted Keys</span></h4>
+<p>The first method is public key cryptography using RSA encryption pioneered by RSA Data Security Inc. Each VPN device has its own public and private keys. Anything encrypted with one of the keys can only be decrypted with the other. This allows you to create a signature when the message is encrypted with a sender's private key. The receiver verifies the signature by decrypting the message with the sender's public key.
+</p><p>A successful exchange requires the receiver to have a copy of the sender's public key and to know with a high degree of certainty that it really does belong to the sender, and not to someone pretending to be the sender. This certainty is assured using certificates and Certification Authorities.
+</p><p>A digital certificate contains information that identifies a user or device, such as a name, serial number, company, department, or IP address. It also contains a copy of the entity's public key. Certificates are managed and issued by Certification Authorities (CAs). A CA can either be a trusted public third party, such as VeriSign, or an in-house private server that you establish within your organization. 
+</p><p>Prior to installing a certificate-based VPN, each VPN device must be preconfigured with the certificate generated for them by the CA. The VPN devices are also be preconfigured with the CA's certificate.
+</p><p>During the key exchange, the VPN peers authenticate by sending each other the certificate issued to them by the CA, but encrypted using their private key.
+</p><p>Each peer then uses the pre-installed CA certificate they have to authenticate with the CA and securely receive the other peer's certificate from the CA using public key cryptography.
+</p><p>Each peer then extracts the public key from the certificate they receive from the CA and uses it to decrypt the certificate they just received from the other peer.
+</p><p>Once the certificates received from the CA and the other peer match, authentication is complete.
+</p>
+<a name="Private_Shared_keys"></a><h4> <span class="mw-headline">Private Shared keys</span></h4>
+<p>The second method of establishing a trusted relationship is to have the devices at each end of the VPN use a shared key or password. The disadvantage is that each pair of VPN connections needs set of keys, making it difficult for large scale implementations. Unlike the RSA method, there is no CA to provide an impartial audit trail of VPN connection initiations. 
+</p>
+<a name="IKE.27s_role_in_creating_Security_Associations"></a><h3> <span class="mw-headline">IKE's role in creating Security Associations</span></h3>
+<p>Once authentication is complete, the VPN peers use IKE to negotiate the security associations (SAs) to be used at each end point. IKE, in turn, uses special ISAKMP IP packets using IP protocol 50 to establish a security association. SAs are comprised of transforms and shared keys. Transforms describe how the data will be transformed by the VPN and between which pre-defined networks at each end of the tunnel to provide the desired security, for example:
+</p>
+<ul><li> Packet encryption methods
+</li><li> Packet authentication methods
+</li><li> Transport versus tunnel mode
+</li><li> AH and or ESP usage
+</li><li> SA lifetime before it is renegotiated. (SAs are permanent for when manually established)
+</li></ul>
+<p>Shared keys are the actual keywords used by the encryption and authentication processes to protect the data.
+</p>
+<a name="VPN_Security_And_Firewalls"></a><h3> <span class="mw-headline">VPN Security And Firewalls</span></h3>
+<p>All security devices in the path of a VPN connection have to allow IP protocol 50 between the two VPN devices to ensure that IKE works properly.
+</p><p>VPNs also use a separate channel through which the encrypted data passes as UDP packets through port 500. Unusually, the source and destination port is 500.
+</p><p>For the VPN to function correctly these protocols must also be allowed to pass through unimpeded. In certificate based VPNs, you may have to open up these ports and protocols to the CA as well.
+</p>
+<dl><dd><b>Note:</b> VPN tunnels frequently don't operate correctly if they have to pass through a firewall that uses NAT. They will tend to work if the NAT firewall is the termination point of the VPN. 
+</dd></dl>
+<a name="VPN_User_Authentication_Methods_For_Temporary_Connections"></a><h3> <span class="mw-headline">VPN User Authentication Methods For Temporary Connections</span></h3>
+<p>The discussion so far has been slanted towards a permanent connection between purpose built VPN devices. Frequently, however, the device at the other end of the connection is a PC. Table I.2 shows some authentication methods used in such cases.
+</p>
+<a name="Table_I-2_Types_Of_Dial_Up_VPN_Authentication"></a><h3> <span class="mw-headline">Table I-2 Types Of Dial Up VPN Authentication</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse;" border="1" cellpadding="0" cellspacing="0">
+
+ <tbody><tr>
+  <td style="border: 1pt inset rgb(17, 17, 17); padding: 7.5pt; background: green none repeat ; 0%; width: 0.75in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="90">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Method</span></b></p>
+  </td>
+  <td style="border-style: inset inset inset none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 7.5pt; background: green none repeat ; 0%; width: 5in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="600">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Description</span></b></p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">IKE-XAUTH secured RADIUS</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 5in;" valign="top" width="600">
+  <p class="MsoNormal">Usernames and passwords entered into the VPN remote login
+  software are relayed by the VPN device at the remote end to a trusted RADIUS
+  server. If the username/password combination is valid for remote login, then
+  the RADIUS server authorizes the VPN device to continue with the IKE
+  interchange.</p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal"><span class="content">ACE/SecurID</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 5in;" valign="top" width="600">
+  <p class="MsoNormal">Software uses a username and password in conjunction with
+  a small key-ring token with a digital display, also known as a fob, whose
+  authentication serial number changes every few minutes for a login to occur.
+  To log in, the user not only has to enter the username and password, but also
+  the PIN tied to the fob plus the fob's dynamic serial number which is
+  synchronized with the authentication server at the other end of the VPN.</p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Windows Domain</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 5in;" valign="top" width="600">
+  <p class="MsoNormal">Remote home user authentication relies on the same
+  username/password combination of the Windows Domain Controller that the user
+  would normally use to log in when they are at work.</p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Local user database</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 5in;" valign="top" width="600">
+  <p class="MsoNormal">Valid usernames and passwords are configured into the VPN
+  device at the other end of the VPN</p>
+  </td>
+ </tr>
+
+</tbody></table>
+</div>
+<a name="TCP.2FIP_Packet_Format"></a><h2> <span class="mw-headline">TCP/IP Packet Format</span></h2>
+<p>The TCP/IP packet contains an IP header followed by a TCP or UDP header followed by the TCP/UDP data as seen in Figure I.5.
+</p>
+<a name="Figure_I.5"></a><h3> <span class="mw-headline">Figure I.5</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="width: 423.75pt;" width="706" border="1" cellpadding="0" cellspacing="1">
+ <tbody><tr>
+  <td style="padding: 0.75pt; width: 78pt;" width="130">
+  <p class="MsoNormal">IP</p>
+  <p class="MsoNormal">Header&nbsp;&nbsp;&nbsp;</p>
+  </td>
+  <td style="padding: 0.75pt; width: 91.5pt;" width="153">
+  <p class="MsoNormal">TCP/UDP </p>
+  <p class="MsoNormal">Header</p>
+  </td>
+  <td style="padding: 0.75pt; width: 240.75pt;" width="401">
+  <p class="MsoNormal">DATA</p>
+  </td>
+ </tr>
+
+</tbody></table>
+</div>
+<p>Tables I.3 through I.5 show the general format of the various TCP/IP header fields you may encounter.
+</p>
+<a name="Table_I.3_Contents_Of_The_IP_Header"></a><h3> <span class="mw-headline">Table I.3 Contents Of The IP Header</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+   <td style="border: 1pt inset rgb(17, 17, 17); padding: 7.5pt; background: green none repeat ; 0%; width: 66.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="110">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="font-size: 8pt; color: white;">Field</span></b></p>
+   </td>
+   <td style="border-style: inset inset inset none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 7.5pt; background: green none repeat ; 0%; width: 349.5pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="583">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="font-size: 8pt; color: white;">Description</span></b></p>
+   </td>
+  </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">IP Version</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0.05in; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">The version of IP being
+  used. Version 4 is the current version used by most devices on the Internet.
+  Version 6 is a newer format that allows for a more vast range of addresses.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">IHL</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Internet Header Length.
+  Total length of the IP header.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Total Length</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Total length of the IP
+  packet.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">DF Bit</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Indicator to tell whether
+  the data in the packet may be fragmented into smaller packets due to
+  limitations of the communications line.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">MF Bit</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Indicator to tell whether
+  this data in this packet is the last one of a stream of fragments.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Fragment Offset</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">If the packet is part of a
+  fragmented datagram, then this specifies where in the complete datagram the
+  data in the packet should be inserted.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">TTL</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Time to live. This value is
+  decremented by each router through which the packet passes. When the value
+  reaches zero, the packet is discarded by the router. The server sending the
+  data usually sets the TTL to a value high enough to reach its destination
+  without being discarded. The TTL decrement feature is used by routers as an
+  additional precaution to prevent the packet from mistakenly being routed
+  around the Internet in an infinite loop caused by a routing error.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Protocol</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Defines the type of protocol
+  header to expect at the end of this header. For example, 6 = TCP. 17 = UDP</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Header checksum</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Used to ensure that the
+  header contents are error free.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Source Address</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 8pt;">Indicates the IP address of
+  the server sending the data.</span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 66.05pt;" valign="top" width="110">
+  <p class="MsoNormal"><span style="font-size: 9pt;">Destination Address</span></p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 349.5pt;" valign="top" width="583">
+  <p class="MsoNormal"><span style="font-size: 9pt;">Indicates the IP address of
+  the server intended to receive the data.</span></p>
+  </td>
+
+ </tr>
+</tbody></table>
+</div>
+<a name="Table_I.4_Contents_Of_The_TCP_Header"></a><h3> <span class="mw-headline">Table I.4 Contents Of The TCP Header</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+   <td style="border: 1pt inset rgb(17, 17, 17); padding: 7.5pt; background: green none repeat ; 0%; width: 0.75in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="90">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Field</span></b></p>
+   </td>
+   <td style="border-style: inset inset inset none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 7.5pt; background: green none repeat ; 0%; width: 4.5in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="540">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Description</span></b></p>
+   </td>
+
+  </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Source and Destination Port</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Identifies points at which upper-layer source and
+  destination processes receive TCP services. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Sequence Number</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Usually specifies the number assigned to the first byte of
+  data in the current message. In the connection-establishment phase, this
+  field also can be used to identify an initial sequence number to be used in
+  an upcoming transmission. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Acknowledgment Number</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Contains the sequence number of the next byte of data the
+  sender of the packet expects to receive.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Data Offset</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Length of the TCP header. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Flags</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Carries a variety of control information, including the
+  SYN and ACK bits used for connection establishment, and the FIN bit used for
+  connection termination.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Window</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Specifies the size of the sender's receive window (that
+  is, the buffer space available for incoming data)</p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Checksum</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Used to ensure that the header contents are error free.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 0.75in;" valign="top" width="90">
+  <p class="MsoNormal">Data</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Contains upper-layer information</p>
+  </td>
+ </tr>
+</tbody></table>
+</div>
+<a name="Table_I.5_Contents_Of_The_UDP_Header"></a><h3> <span class="mw-headline">Table I.5 Contents Of The UDP Header</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+   <td style="border: 1pt inset rgb(17, 17, 17); padding: 7.5pt; background: green none repeat ; 0%; width: 88.45pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="147">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Field</span></b></p>
+   </td>
+   <td style="border-style: inset inset inset none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 7.5pt; background: green none repeat ; 0%; width: 4.5in; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="540">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Description</span></b></p>
+   </td>
+  </tr>
+
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 88.45pt;" valign="top" width="147">
+  <p class="MsoNormal">Source and Destination Port</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Identifies points at which upper-layer source and
+  destination processes receive TCP services. </p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 88.45pt;" valign="top" width="147">
+  <p class="MsoNormal">Length</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" valign="top" width="540">
+  <p class="MsoNormal">Specifies the length of the UDP header and data</p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border-style: none inset inset; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 7.5pt; width: 88.45pt;" width="147">
+  <p class="MsoNormal">Checksum</p>
+  </td>
+  <td style="border-style: none inset inset none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 7.5pt; width: 4.5in;" width="540">
+  <p class="MsoNormal">Used to ensure that the header contents are error free.</p>
+  </td>
+
+ </tr>
+</tbody></table>
+</div>
+<a name="ICMP_Codes"></a><h2> <span class="mw-headline">ICMP Codes</span></h2>
+<p>You'll also encounter ICMP codes in your troubleshooting exercises, especially when viewing your iptables log files. Table I.6 lists the most commonly used codes.
+</p>
+<a name="Table_I-6_ICMP_Codes"></a><h3> <span class="mw-headline">Table I-6 ICMP Codes</span></h3>
+<div align="center">
+<table class="MsoNormalTable" style="width: 468.4pt; border-collapse: collapse;" width="781" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr style="page-break-inside: avoid;">
+   <td style="border-style: solid solid none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt medium; padding: 0in; width: 42.4pt;" valign="top" width="71">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b>Type</b></p>
+   </td>
+   <td style="border-style: solid solid none none; border-color: black black -moz-use-text-color -moz-use-text-color; border-width: 1pt 1pt medium medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b>Name</b></p>
+   </td>
+   <td style="border-style: solid solid none none; border-color: black black -moz-use-text-color -moz-use-text-color; border-width: 1pt 1pt medium medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+   <p class="MsoNormal" style="text-align: center;" align="center"><b>Description</b></p>
+   </td>
+  </tr>
+
+ <tr style="page-break-inside: avoid;">
+  <td style="border: 1pt solid rgb(17, 17, 17); padding: 0in; background: green none repeat ; 0%; width: 42.4pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">3</span></b></p>
+  </td>
+  <td colspan="2" style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 426pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="710">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Destination Unreachable Codes&nbsp;</span></b></p>
+  </td>
+
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Net Unreachable</p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The sending device knows about the network but believes it is
+  not available at this time. Perhaps the network is too far away through the
+  known route. </p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Host Unreachable</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The sending devices knows about host but doesn't get ARP
+  reply, indicating the host is not available at this time</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Protocol Unreachable</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The protocol defined in IP header cannot be forwarded. </p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Port Unreachable</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The sending device does not support the port number you are
+  trying to reach</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Fragmentation Needed and Don't Fragment was Set</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The router needs to fragment the packet to forward it across
+  a link that supports a smaller maximum transmission unit (MTU ) size.
+  However, application set the Don't Fragment bit.</p>
+  </td>
+ </tr>
+
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Source Route Failed</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender can't use the strict or loose source routing path
+  specified in the original packet.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Destination Network Unknown</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender does not have a route entry for the destination
+  network, indicating this network may never have been an available.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid; height: 31.5pt;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt; height: 31.5pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt; height: 31.5pt;" valign="top" width="264">
+  <p class="H3Body">Destination Host Unknown</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt; height: 31.5pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender does not have a host entry, indicating the host
+  may never have been available on connected network. </p>
+  </td>
+
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Source Host Isolated</p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) has been configured to not forward
+  packets from source (the old electronic pink slip).</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Communication with Destination Network is Administratively
+  Prohibited</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) has been configured to block access to
+  the desired destination network.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Communication with Destination Host is Administratively
+  Prohibited</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) has been configured to block access to
+  the desired destination host.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Destination Network Unreachable for Type of Service</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The sender is using a Type of Service (TOS) that is not
+  available through this router for that specific network.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Destination Host Unreachable for Type of Service</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">The sender is using a Type of Service (TOS) that is not
+  available through this router for that specific host.</p>
+  </td>
+ </tr>
+
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Communication Administratively Prohibited</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender is not available for communications at this time.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Host Precedence Violation</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">Precedence value defined in sender's original IP header is
+  not allowed (for example, using Flash Override precedence).</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; background: green none repeat ; 0%; width: 42.4pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">5</span></b></p>
+  </td>
+  <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 426pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="710">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Redirect Codes&nbsp;</span></b></p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: solid solid none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt medium; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Redirect Datagram for the Network (or subnet)</p>
+  </td>
+  <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) is not the best way to get to the
+  desired network. Reply contains IP address of best router to destination.
+  Dynamically adds a network entry in original sender's routing tables.</p>
+  </td>
+
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Redirect Datagram for the Host</p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) is not the best way to get to the
+  desired host. Reply contains IP address of best router to destination.
+  Dynamically adds a host entry in original sender's route tables. </p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Redirect Datagram for Type of the Service and Network</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) does not offer a path to the destination
+  network using the TOS requested. Dynamically adds a network entry in original
+  sender's route tables.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+
+  <td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid none none; border-color: -moz-use-text-color black -moz-use-text-color -moz-use-text-color; border-width: medium 1pt medium medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Redirect Datagram for the Type of Service and Host</p>
+  </td>
+  <td style="border-style: none solid none none; border-color: -moz-use-text-color black -moz-use-text-color -moz-use-text-color; border-width: medium 1pt medium medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) does not offer a path to the destination
+  host using the TOS requested. Dynamically adds a host entry in original
+  sender's route tables. </p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; background: green none repeat ; 0%; width: 42.4pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">6</span></b></p>
+  </td>
+  <td colspan="2" style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 426pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="710">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Alternate Host Address Codes</span></b></p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid; height: 29.25pt;">
+  <td style="border: 1pt solid rgb(17, 17, 17); padding: 0in; width: 42.4pt; height: 29.25pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt; height: 29.25pt;" valign="top" width="264">
+  <p class="H3Body">Alternate Address for Host</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt; height: 29.25pt;" valign="top" width="446">
+  <p class="H3Body">Reply that indicates another host address should be used for
+  the desired service. Should redirect application to another host. </p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; background: green none repeat ; 0%; width: 42.4pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">11</span></b></p>
+  </td>
+  <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 426pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="710">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Time Exceeded Codes</span></b></p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid; height: 33.75pt;">
+  <td style="border-style: solid solid none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt medium; padding: 0in; width: 42.4pt; height: 33.75pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt; height: 33.75pt;" valign="top" width="264">
+  <p class="H3Body">Time to Live exceeded in Transit</p>
+  </td>
+  <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0in; width: 267.45pt; height: 33.75pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (router) indicates that originator's packet
+  arrived with a Time To Live (TTL) of 1. Routers cannot decrement the TTL
+  value to 0 and forward the packet.</p>
+  </td>
+ </tr>
+
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Fragment Reassembly Time Exceeded</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender (destination host) did not receive all fragment
+  parts before the expiration (in seconds of holding time) of the TTL value of
+  the first fragment received.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: solid solid none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 42.4pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">12</span></b></p>
+  </td>
+  <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; background: green none repeat ; 0%; width: 426pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="710">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="color: white;">Parameter Problem Codes</span></b></p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: solid solid none; border-color: rgb(17, 17, 17) rgb(17, 17, 17) -moz-use-text-color; border-width: 1pt 1pt medium; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Pointer indicates the error </p>
+  </td>
+  <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">Error is defined in greater detail within the ICMP packet.</p>
+  </td>
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid; border-color: -moz-use-text-color rgb(17, 17, 17); border-width: medium 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Missing a Required Option</p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">ICMP sender expected some additional information in the
+  Option field of the original packet.</p>
+  </td>
+
+ </tr>
+ <tr style="page-break-inside: avoid;">
+  <td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(17, 17, 17) rgb(17, 17, 17); border-width: medium 1pt 1pt; padding: 0in; width: 42.4pt;" valign="top" width="71">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b>&nbsp;</b></p>
+  </td>
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 158.55pt;" valign="top" width="264">
+  <p class="H3Body">Bad Length</p>
+  </td>
+
+  <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0in; width: 267.45pt;" valign="top" width="446">
+  <p class="H3Body">Original packet structure had an invalid length.</p>
+  </td>
+ </tr>
+</tbody></table>
+</div>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 1212/1000000
+Post-expand include size: 5545/2097152 bytes
+Template argument size: 6357/2097152 bytes
+-->
+
+<!-- Saved in parser cache with key help:pcache:idhash:17256-0!1!0!!zh-tw!2!zh-tw!edit=0 and timestamp 20080703020016 -->
+<div class="printfooter">
+
+取自"<a href="http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw">http://wiki.ubuntu.org.cn/index.php?title=Quick_HOWTO_:_Ap01_:_Miscellaneous_Linux_Topics&variant=zh-tw</a>"</div>
+						<!-- end content -->
+
+		</div><!-- end of MAINCONTENT div -->	
+	
+	</div><!-- end of MBODY div -->
+
+	<div id="footer"><table><tbody><tr><td width="1%" align="left" nowrap="nowrap">
+		</td><td align="center">
+		<span id="f-viewcount">本頁面已經被瀏覽1,182次。 </span>		<ul id="f-list">
+			<li id="f-credits">此頁由Ubuntu中文使用者<a href="http://wiki.ubuntu.org.cn/index.php?title=User:Bongdeee&action=edit" class="new" title="User:Bongdeee">Bongdeee</a>於2008年1月22日 (星期二) 17:50的最後更改。 在<a href="http://wiki.ubuntu.org.cn/index.php?title=User:Oneleaf&variant=zh-tw" title="User:Oneleaf">Oneleaf</a>的工作基礎上。</li>						<li id="f-about"><a href="http://wiki.ubuntu.org.cn/index.php?title=Ubuntu%E4%B8%AD%E6%96%87:%E5%85%B3%E4%BA%8E&variant=zh-tw" title="Ubuntu中文:关于">關於Ubuntu中文</a></li>			<li id="f-disclaimer"><a href="http://wiki.ubuntu.org.cn/index.php?title=Ubuntu%E4%B8%AD%E6%96%87:%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E&variant=zh-tw" title="Ubuntu中文:免责声明">免責聲明</a></li>		</ul></td><td width="1%" align="right" nowrap="nowrap"><div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div></td></tr></tbody></table>
+
+	</div><!-- end of the FOOTER div -->
+</div><!-- end of the CONTAINER div -->
+
+<!-- Served in 4.134 secs. -->
+</body>
+</html>

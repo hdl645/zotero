@@ -1,0 +1,1 @@
+mboxFactoryDefault.get('global',0).setOffer(new mboxOfferDefault()).loaded();

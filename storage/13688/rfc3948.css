@@ -1,0 +1,33 @@
+
+/* ::::: null ::::: */
+
+body { margin: 0px 8px; font-size: 1em; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { line-height: 0pt; display: inline; white-space: pre; font-family: monospace; font-size: 1em; font-weight: bold; }
+pre { font-size: 1em; }
+.pre { white-space: pre; font-family: monospace; }
+.header { font-weight: bold; }
+.invisible { text-decoration: none; color: white; }
+@media print {
+  body { font-size: 10.5pt; }
+  h1, h2, h3, h4, h5, h6 { font-size: 10.5pt; }
+  a:link, a:visited { color: inherit; text-decoration: none; }
+  .break { page-break-before: always; }
+  .noprint { display: none; }
+}
+@media screen {
+  .grey, .grey a:link, .grey a:visited { color: rgb(119, 119, 119); }
+  .docinfo { background-color: rgb(238, 238, 238); }
+  .top { border-top: 7px solid rgb(238, 238, 238); }
+  .bgwhite { background-color: white; }
+  .bgred { background-color: rgb(255, 68, 68); }
+  .bggrey { background-color: rgb(102, 102, 102); }
+  .bgbrown { background-color: rgb(136, 68, 0); }
+  .bgorange { background-color: rgb(255, 170, 0); }
+  .bgyellow { background-color: rgb(238, 238, 0); }
+  .bgmagenta { background-color: rgb(255, 68, 255); }
+  .bgblue { background-color: rgb(102, 102, 255); }
+  .bgcyan { background-color: rgb(68, 221, 221); }
+  .bggreen { background-color: rgb(68, 255, 68); }
+  .legend { font-size: 90%; }
+  .cplate { border: 1px solid grey; font-size: 70%; }
+}

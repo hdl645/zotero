@@ -1,0 +1,57 @@
+
+/* ::::: http://wiki.openswan.org/pub/skins/openswan_theme/jh.css ::::: */
+
+body { margin: 0px 0px 1em; font-family: georgia,times,serif; }
+a { text-decoration: none; }
+a:link { color: rgb(255, 153, 0); }
+a:visited { color: rgb(255, 153, 0); }
+a:hover { color: rgb(0, 204, 0); }
+#wikihead { margin: 0px; padding: 3px 20px; background-color: rgb(51, 51, 51); text-align: right; vertical-align: bottom; }
+.wikisearchbox { width: 110px; }
+#wikiOpenswan { background-color: rgb(130, 49, 48); }
+#wikititle { padding: 5px 25px; background-color: rgb(130, 49, 48); }
+.pagegroup { color: white; font-family: verdana,helvetica,sans-serif; font-size: small; }
+.pagetitle { color: white; font-family: georgia,times,serif; font-size: large; font-weight: normal; }
+#wikicmds { font-size: smaller; float: left; background-color: rgb(130, 49, 48); width: 100%; }
+#wikicmds ul { margin: 0pt; padding-left: 17px; list-style-type: none; list-style-image: none; list-style-position: outside; }
+#wikicmds li { margin: 0pt; padding: 0pt; float: left; }
+#lastmod { float: right; position: relative; top: -1.5em; right: 20px; color: rgb(255, 255, 255); font-size: x-small; font-family: verdana,helvetica,sans-serif; text-align: right; }
+#login { float: left; color: rgb(255, 255, 255); font-size: smaller; font-family: verdana,helvetica,sans-serif; text-align: right; }
+#wikitext { clear: both; padding-left: 25px; padding-right: 25px; padding-top: 1em; font-family: georgia,times,serif; }
+#poweredby { float: right; padding-right: 25px; font-size: x-small; font-family: verdana,helvetica,sans-serif; }
+#rssfeed { padding-left: 250px; }
+#wikifoot { padding-left: 20px; font-size: x-small; font-family: verdana,helvetica,sans-serif; }
+#wikifoot a { padding: 5px; }
+h1.wikiaction { margin: 0pt; font-size: x-large; }
+
+/* ::::: null ::::: */
+
+.dottedtop { background-image: url('dotted-top.gif'); }
+.dottedbot { margin-top: 1.33em; margin-bottom: 5px; background-image: url('dotted-bot.gif'); }
+#wikicmds a { padding: 3px 15px; background: transparent url('bl.gif') no-repeat scroll left top; float: left; display: block; font-family: verdana,helvetica,sans-serif; font-size: smaller; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(0, 0, 0); }
+#wikicmds li { margin: 0pt; padding: 0pt; background: transparent url('br-off.gif') no-repeat scroll right top; float: left; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#wikicmds #browse { background: transparent url('br-on.gif') no-repeat scroll right top; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#wikicmds a { float: none; }
+
+/* ::::: null ::::: */
+
+ul, ol, pre, dl, p { margin-top: 0px; margin-bottom: 0px; }
+code.escaped { white-space: nowrap; }
+.vspace { margin-top: 1.33em; }
+.indent { margin-left: 40px; }
+.outdent { margin-left: 40px; text-indent: -40px; }
+a.createlinktext { border-bottom: 1px dotted gray; text-decoration: none; }
+a.createlink { border-bottom: medium none; text-decoration: none; position: relative; top: -0.5em; font-weight: bold; font-size: smaller; }
+img { border: 0px none ; }
+.editconflict { color: green; font-style: italic; margin-top: 1.33em; margin-bottom: 1.33em; }
+table.markup { border: 2px dotted rgb(204, 204, 255); width: 90%; }
+td.markup1, td.markup2 { padding-left: 10px; padding-right: 10px; }
+table.vert td.markup1 { border-bottom: 1px solid rgb(204, 204, 255); }
+table.horiz td.markup1 { border-right: 1px solid rgb(204, 204, 255); width: 23em; }
+table.markup caption { text-align: left; }
+div.faq p, div.faq pre { margin-left: 2em; }
+div.faq p.question { margin: 1em 0pt 0.75em; font-weight: bold; }
+.frame { border: 1px solid rgb(204, 204, 204); padding: 4px; background-color: rgb(249, 249, 249); }
+.lfloat { float: left; margin-right: 0.5em; }
+.rfloat { float: right; margin-left: 0.5em; }
+a.varlink { text-decoration: none; }

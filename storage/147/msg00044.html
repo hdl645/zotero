@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00044.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00044.html">
+<meta name="wpd_date" content="2008-06-03T03:01Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: RE: IPSec Passthrough -->
+<!--X-From-R13: "Ehoengn Ubfjnzv" <ftbfjnzvNhzvpu.rqh> -->
+<!--X-Date: Sat, 3 May 2003 17:57:18 &#45;0400 (EDT) -->
+<!--X-Message-Id: 007501c31193$f9836b30$10c0140a@SGOSWAMIPCL -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: p05100308bad86b6da60e@[128.89.88.34] -->
+<!--X-Head-End-->
+
+
+
+<title>RE: IPSec Passthrough</title>
+<link rev="made" href="mailto:sgoswami@umich.edu">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.ox.org/ipsec/2003/05/msg00043.html">Date Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00045.html">Date Next</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00032.html">Thread Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00009.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00044">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00044">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &lt;<a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a>&gt;</li>
+<li><em>Subject</em>: RE: IPSec Passthrough</li>
+<li><em>From</em>: "Subrata Goswami" &lt;<a href="mailto:sgoswami@umich.edu">sgoswami@umich.edu</a>&gt;</li>
+<li><em>Date</em>: Sat, 3 May 2003 09:49:29 -0700</li>
+<li><em>Importance</em>: Normal</li>
+<li><em>In-Reply-To</em>: &lt;<a href="http://www.ox.org/ipsec/2003/05/msg00032.html">p05100308bad86b6da60e@[128.89.88.34]</a>&gt;</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Transport Mode and Tunnel Mode are also different in how fragmentation
+is handled. A Transport Mode ESP implementation needs to have its own
+fragmentation function as per RFC 2401.
+
+Subrata
+ 
+
+&gt; -----Original Message-----
+&gt; From: owner-ipsec@lists.tislabs.com 
+&gt; [<a href="mailto:owner-ipsec@lists.tislabs.com">mailto:owner-ipsec@lists.tislabs.com</a>] On Behalf Of Stephen Kent
+&gt; Sent: Friday, May 02, 2003 11:41 AM
+&gt; To: Joshua Graessley
+&gt; Cc: ipsec@lists.tislabs.com
+&gt; Subject: Re: IPSec Passthrough
+&gt; 
+&gt; 
+&gt; &gt;
+&gt; &gt;There are two "modes" that IPSec operates in, tunnel mode and
+&gt; &gt;transport mode. This is, in my opinion, a little bogus because 
+&gt; &gt;"tunnel mode" is really just transport mode where the next header is 
+&gt; &gt;an IP header instead of UDP, TCP, ICMP or some other protocol. 
+&gt; &gt;Anyhow, the NAT transparency only works with Tunnel mode (where the 
+&gt; &gt;next header after the ESP header is IP). In transport mode, the TCP 
+&gt; &gt;and UDP checksums will be screwed up. ESP encrypts and authenticates 
+&gt; &gt;the payload so the NAT can't molest it. The UDP and TCP checksums 
+&gt; &gt;take bits of the IP header in to account, most notably the source 
+&gt; &gt;and destination IP addresses. The NAT modifies the destination IP 
+&gt; &gt;address. Since it can't see or modify the TCP or UDP checksum to 
+&gt; &gt;compensate for the address change, TCP and UDP packets will be 
+&gt; &gt;dropped due to a bad checksum.
+&gt; 
+&gt; Josh,
+&gt; 
+&gt; Tunnel and transport mode differ in several ways that make them more 
+&gt; different that what you suggest above, for example:
+&gt; 
+&gt; 	- in tunnel mode we discard the outer IP header, whereas in 
+&gt; transport mode we don't discard anything from the inbound packet
+&gt; 
+&gt; 	- the modes differ in terms of which headers are checked for 
+&gt; inbound access control (the topic of a recent thread on this list)
+&gt; 
+&gt; Steve
+&gt; 
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00032" href="http://www.ox.org/ipsec/2003/05/msg00032.html">Re: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Stephen Kent &lt;kent@bbn.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00043.html">Re: Confirm decision on identity handling.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00045.html">Re: Peer liveliness</a></strong>
+</li>
+<li>Prev by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00032.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00009.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00044"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00044"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

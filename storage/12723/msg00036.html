@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00036.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00036.html">
+<meta name="wpd_date" content="2008-06-03T03:02Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: RE: IPSec Passthrough -->
+<!--X-From-R13: PEvatuN@bznqvk.pbz -->
+<!--X-Date: Fri, 2 May 2003 16:17:30 &#45;0400 (EDT) -->
+<!--X-Message-Id: 89680B404BA1DD419E6D93B28B41899B0105F29D@01MAIL -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+
+
+<title>RE: IPSec Passthrough</title>
+<link rev="made" href="mailto:BSingh@Nomadix.com">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Date Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00037.html">Date Next</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Thread Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00001.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00036">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00036">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <a href="mailto:srao@intotoinc.com">srao@intotoinc.com</a>, <a href="mailto:vinay-rc@naturesoft.net">vinay-rc@naturesoft.net</a>, <a href="mailto:BSingh@Nomadix.com">BSingh@Nomadix.com</a></li>
+<li><em>Subject</em>: RE: IPSec Passthrough</li>
+<li><em>From</em>: <a href="mailto:BSingh@Nomadix.com">BSingh@Nomadix.com</a></li>
+<li><em>Date</em>: Fri, 2 May 2003 12:20:19 -0700 </li>
+<li><em>Cc</em>: <a href="mailto:msiler@hcin.net">msiler@hcin.net</a>, <a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a></li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>For 3. I will add that what is listed is one way of doing things.. In the
+Nomadix USG we have the patent-pending iNAT functionality that does away
+with the requirement of sequencing multiple IPSec connections to the same
+server and adding reliability by reducing the confusion for the server.. And
+also it doesn't require keeping track of ESP SPIs as well.. 
+
+-----Original Message-----
+From: Srinivasa Rao Addepalli [<a href="mailto:srao@intotoinc.com">mailto:srao@intotoinc.com</a>] 
+Sent: Friday, May 02, 2003 12:31 PM
+To: Vinay K Nallamothu; BSingh@Nomadix.com
+Cc: msiler@hcin.net; ipsec@lists.tislabs.com
+Subject: Re: IPSec Passthrough
+
+Hi,
+   These are the ways to run IPSEC tunnel between two SGs with 
+   Firewall/NATs in between the security gateways.
+
+   1. L2TP over IPSEC (rfc3193): It works well and very useful
+       to provide remote access for VPN clients. As you may be aware,
+       WINXP/WIN2000 comes with built in client.
+       Microsoft also provides free client software for WIN98.
+       More and more vendors are supporting LNS with IPSEC.
+
+        Disadvantage: More bandwidth is used. 
+
+  2. IPSEC NAT Traversal:
+       There is very less penalty on bandwidth compared to L2TP over IPSEC
+       (use v2 onwards). Most of the vendors support this feature and is
+       interoperable.
+
+  3. NAT boxes having ESP/IKE intelligence:
+      In this case, there is no bandwidth penalty. But there are some
+disadvantages
+      with this:
+          A. Can't expect this intelligence to be there in all NAT boxes.
+          B. Though many clients can establish tunnels with the corp.
+gateway, until
+               tunnel is established in both ways, other clients can't
+connect to the
+              same peer.
+
+Srini
+Intoto Inc. 
+Enabling Security Infrastructure
+3160, De La Cruz Blvd #100
+Santa Clara, CA 95054
+www.intotoinc.com
+----- Original Message ----- 
+From: "Vinay K Nallamothu" &lt;vinay-rc@naturesoft.net&gt;
+To: &lt;BSingh@Nomadix.com&gt;
+Cc: &lt;msiler@hcin.net&gt;; &lt;ipsec@lists.tislabs.com&gt;
+Sent: Thursday, May 01, 2003 11:09 PM
+Subject: RE: IPSec Passthrough
+
+
+&gt; On Thu, 2003-05-01 at 23:44, BSingh@Nomadix.com wrote:
+&gt; &gt; server. It is dependent on the server implementation to distinguish 2
+&gt; &gt; different connections coming from the same IP address (of the NAT
+device)
+&gt; &gt; and is not a very reliable method of doing things..
+&gt; what tricks were used by the NAT-T unware IPsec gateways?
+&gt; 
+&gt; Few mechanisms i could imagine the IPsec gateways did:
+&gt; 1. Use L2TP over IPsec and tie (using firewall rules) the PPP/L2TP
+&gt; assigned IP address to the IPsec SA.
+&gt; 
+&gt; 2. Do some sort of (static?) NAT (again using firewall) on the packets
+&gt; coming out an SA so that the packets on the reverse path can be reliably
+&gt; channeled to the correct SA.
+&gt; 
+&gt; Any better ways of doing that?
+&gt; 
+&gt; vinay
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00037.html">Terminology question: "suites" vs "set of cryptographic algorithms"</a></strong>
+</li>
+<li>Prev by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00001.html">IPSec iterated tunneling</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00036"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00036"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

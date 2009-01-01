@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/GitWorkflows">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/GitWorkflows">
+<meta name="wpd_date" content="2008-07-08T16:33Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>GitWorkflows - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/GitWorkflows?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/GitWorkflows?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/GitWorkflows?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="GitWorkflows.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/GitWorkflows">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/GitWorkflows?action=fullsearch&value=linkto%3A%22GitWorkflows%22&context=180">GitWorkflows</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/GitWorkflows">GitWorkflows</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitWorkflows?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitWorkflows">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line874">This page attempts to decribe actual, useful, real-world things that people do with git, step by step. <span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span></p><p class="line867">
+</p><h2 id="head-bcb8555a3b96c81f12fc2319342b0bff94c9ceb5">How to revert your version of the kernel source back to the running version</h2>
+<span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span><p class="line874">If you actually run versions of the kernel on your machine that you've checked <span class="anchor" id="line-6"></span>out of a git repository, you will see a uname that starts with a 'g' followed by <span class="anchor" id="line-7"></span>a hex number: <span class="anchor" id="line-8"></span><span class="anchor" id="line-9"></span></p><p class="line867"></p><pre># uname -r 
+<span class="anchor" id="line-10"></span>2.6.18-g7e472020
+<span class="anchor" id="line-11"></span></pre><span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span><p class="line874">That number is the beginning of the commit which marks the revision that you <span class="anchor" id="line-14"></span>built your kernel.  The next step is to find the full commit name: <span class="anchor" id="line-15"></span><span class="anchor" id="line-16"></span></p><p class="line867"></p><pre>dave@machine:~/linux-2.6.git$ git rev-list  --all | grep ^7e472020 | head -1 
+<span class="anchor" id="line-17"></span>7e4720201ad44ace85a443f41d668a62a737e7d0
+<span class="anchor" id="line-18"></span></pre><span class="anchor" id="line-19"></span><span class="anchor" id="line-20"></span><p class="line874">It is possible, since the kernel version doesn't contain a full commit that <span class="anchor" id="line-21"></span>this isn't your revision, but it is highly unlikely. <span class="anchor" id="line-22"></span><span class="anchor" id="line-23"></span></p><p class="line874">Now that you've found the revision, you need to revert back to it: <span class="anchor" id="line-24"></span><span class="anchor" id="line-25"></span></p><p class="line867"></p><pre>git reset --hard 7e4720201ad44ace85a443f41d668a62a737e7d0 
+<span class="anchor" id="line-26"></span></pre><span class="anchor" id="line-27"></span><span class="anchor" id="line-28"></span><p class="line867">
+</p><h2 id="head-658c0f1c571bfd14846527be873ae9bbbde9bd4a">How to turn a git branch into a set of patches between revisions</h2>
+<span class="anchor" id="line-29"></span><span class="anchor" id="line-30"></span><p class="line874">First, get a git tree which was derived from another: <span class="anchor" id="line-31"></span><span class="anchor" id="line-32"></span></p><p class="line867"></p><pre>git-clone http://git.openvz.org/pub/linux-2.6.16-openvz linux-2.6.16-openvz 
+<span class="anchor" id="line-33"></span></pre><span class="anchor" id="line-34"></span><span class="anchor" id="line-35"></span><p class="line874">This could take a bit of time to download the whole thing.  But, if you are <span class="anchor" id="line-36"></span>wondering how to do this, you probably already have one of those. <span class="anchor" id="line-37"></span><span class="anchor" id="line-38"></span></p><p class="line874">Them you need to find a revision against which you would like to generate your <span class="anchor" id="line-39"></span>patches.  The easiest way to do this is to use an existing tag.  Look at your tags <span class="anchor" id="line-40"></span>directory: <span class="anchor" id="line-41"></span><span class="anchor" id="line-42"></span></p><p class="line867"></p><pre>linux-2.6.git$ ls .git/refs/tags/ 
+<span class="anchor" id="line-43"></span>2.6.16-git1   2.6.16-git2         v2.6.11       v2.6.13-rc3  v2.6.15      v2.6.16-rc3  v2.6.18
+<span class="anchor" id="line-44"></span>2.6.16-git10  2.6.16-git20        v2.6.11-tree  v2.6.13-rc4  v2.6.15-rc1  v2.6.16-rc4  v2.6.18-rc1
+<span class="anchor" id="line-45"></span>2.6.16-git11  2.6.16-git3         v2.6.12       v2.6.13-rc5  v2.6.15-rc2  v2.6.16-rc5  v2.6.18-rc2
+<span class="anchor" id="line-46"></span>...
+<span class="anchor" id="line-47"></span></pre><span class="anchor" id="line-48"></span><span class="anchor" id="line-49"></span><p class="line874">The other way is to go find a revision manually.  Run gitk, and then find the commit that <span class="anchor" id="line-50"></span>you are interested in.  In my case, this would be the one titled "Linux v2.6.18. Arrr!". <span class="anchor" id="line-51"></span>I see "eead19bffcf064856ab8513afc395eaf80896e0f" in gitk's "SHA1 ID" field.  This is the <span class="anchor" id="line-52"></span>value you will need. <span class="anchor" id="line-53"></span><span class="anchor" id="line-54"></span></p><p class="line874">So, using either the tag name, or the SHA1 ID, run git-format-patch: <span class="anchor" id="line-55"></span><span class="anchor" id="line-56"></span></p><p class="line867"></p><pre>$ git-format-patch -o ../openvz-patches/ v2.6.18.. 
+<span class="anchor" id="line-57"></span>$ git-format-patch -o ../openvz-patches/ eead19bffcf064856ab8513afc395eaf80896e0f..
+<span class="anchor" id="line-58"></span>../openvz-patches/0001-Namespaces-support-from-mm-tree.txt
+<span class="anchor" id="line-59"></span>../openvz-patches/0002-Namespaces-support-from-mm-tree.txt
+<span class="anchor" id="line-60"></span>../openvz-patches/0003-Namespaces-support-from-mm-tree.txt
+<span class="anchor" id="line-61"></span>../openvz-patches/0004-Namespaces-support-from-mm-tree.txt
+<span class="anchor" id="line-62"></span></pre><span class="anchor" id="line-63"></span><span class="anchor" id="line-64"></span><p class="line874">Note the ".." syntax after the revision you've specified.  That is there to say <span class="anchor" id="line-65"></span>"use that revision as a base, and go until the most recent revision".  You could <span class="anchor" id="line-66"></span>also put a revision after that, such as "v2.6.17..v2.6.18".  That would give you <span class="anchor" id="line-67"></span>all of the patches between 2.6.17 and 2.6.18.  The same method also works with <span class="anchor" id="line-68"></span>the raw SHA1 ID. <span class="anchor" id="line-69"></span><span class="anchor" id="line-70"></span></p><p class="line874">Voila!  You should have a nice, linear set of patches. <span class="anchor" id="line-71"></span><span class="anchor" id="line-72"></span></p><p class="line867">
+</p><h2 id="head-5169bc6131e46758a9631670d8008c72bd12cfc3">How make sure your git tree doesn't have old, redundant cruft in it</h2>
+<span class="anchor" id="line-73"></span><span class="anchor" id="line-74"></span><p class="line867"><span class="anchor" id="line-75"></span></p><pre>  $ git-pack-redundant --all | xargs --no-run-if-empty rm
+<span class="anchor" id="line-76"></span>  $ git-prune-packed 
+<span class="anchor" id="line-77"></span></pre><span class="anchor" id="line-78"></span><span class="anchor" id="line-79"></span><p class="line867">
+</p><h2 id="head-735d05972e48108a6568fdcb59ac05915927c4c0">How to edit a ChangeLog entry</h2>
+<span class="anchor" id="line-80"></span><span class="anchor" id="line-81"></span><p class="line874">My changelog for the top patch is wrong, what do I do? <span class="anchor" id="line-82"></span><span class="anchor" id="line-83"></span></p><p class="line867"></p><pre>       git commit --amend 
+<span class="anchor" id="line-84"></span></pre><span class="anchor" id="line-85"></span><p class="line874">If you just need to add your SOB line: <span class="anchor" id="line-86"></span><span class="anchor" id="line-87"></span></p><p class="line867"></p><pre>       git commit --amend -s 
+<span class="anchor" id="line-88"></span></pre><span class="anchor" id="line-89"></span><p class="line874">Note: don't ever do this on a publicly-available git tree. <span class="anchor" id="line-90"></span><span class="anchor" id="line-91"></span></p><p class="line867">
+</p><h2 id="head-d1a91cfd09b4ff408acdcb34f56fe1b3579e75da">How do I rearrange a set of commits</h2>
+<span class="anchor" id="line-92"></span><span class="anchor" id="line-93"></span><p class="line867"></p><pre>       git rebase -i &lt;commit-ish&gt; 
+<span class="anchor" id="line-94"></span></pre><span class="anchor" id="line-95"></span><p class="line862">You would usually use "master" there for the &lt;commit-ish&gt;. <span class="anchor" id="line-96"></span>You probably want to go find this with gitk. <span class="anchor" id="line-97"></span><span class="anchor" id="line-98"></span></p><p class="line874">You then get a nice file that looks like this:  <span class="anchor" id="line-99"></span><span class="anchor" id="line-100"></span></p><p class="line867"></p><pre>pick 9feaa34 reduce kvm stack usage in kvm_arch_vm_ioctl() 
+<span class="anchor" id="line-101"></span>pick a888f5b reduce stack usage in kvm_vcpu_ioctl()
+<span class="anchor" id="line-102"></span>pick e4a0c10 reduce stack usage in kvm_arch_vcpu_ioctl()
+<span class="anchor" id="line-103"></span>pick 8cd362a kvm: reduce stack usage in kvm_pv_mmu_op()</pre><span class="anchor" id="line-104"></span><span class="anchor" id="line-105"></span><p class="line874">Rearrange this file as you like.  If you want to edit a commit message <span class="anchor" id="line-106"></span>for one of these, change the 'pick' to 'edit', and use the above command, <span class="anchor" id="line-107"></span>with an additional -a: <span class="anchor" id="line-108"></span><span class="anchor" id="line-109"></span></p><p class="line867"></p><pre>       git commit -a --amend 
+<span class="anchor" id="line-110"></span></pre><span class="anchor" id="line-111"></span><span class="anchor" id="line-112"></span><p class="line874">Note: don't ever do this on a publicly-available git tree. <span class="anchor" id="line-113"></span><span class="anchor" id="line-114"></span></p><p class="line867">
+</p><h2 id="head-5cc05abea3afb3dd2c69dae6b6e1da85c8043689">How do I update a set of patches for a new tree from Linus (or anybody)</h2>
+<span class="anchor" id="line-115"></span><span class="anchor" id="line-116"></span><p class="line874">OK, so I've got a nice stack of patches on top of 'remotes/origin/master' <span class="anchor" id="line-117"></span>and now I need to pull another copy from Linus and update on what I'm <span class="anchor" id="line-118"></span>basing these patches. <span class="anchor" id="line-119"></span><span class="anchor" id="line-120"></span></p><ul><li style="list-style-type: none;">I get output like this: <span class="anchor" id="line-121"></span></li></ul><p class="line867"></p><pre>    $ git fetch 
+<span class="anchor" id="line-122"></span>        &lt;should churn here a bit...&gt;
+<span class="anchor" id="line-123"></span>        From /home/dave/lse/linux/2.5/linux-2.6.git/
+<span class="anchor" id="line-124"></span>                   c9272c4..f934fb1  master     -&gt; origin/master
+<span class="anchor" id="line-125"></span>                   c9272c4..f934fb1  origin     -&gt; origin/origin
+<span class="anchor" id="line-126"></span>        From /home/dave/lse/linux/2.5/linux-2.6.git/
+<span class="anchor" id="line-127"></span>         * [new tag]         v2.6.25    -&gt; v2.6.25
+<span class="anchor" id="line-128"></span>         * [new tag]         v2.6.25-rc1 -&gt; v2.6.25-rc1
+<span class="anchor" id="line-129"></span>         * [new tag]         v2.6.25-rc2 -&gt; v2.6.25-rc2
+<span class="anchor" id="line-130"></span>        ...
+<span class="anchor" id="line-131"></span>        $ git rebase FETCH_HEAD master
+<span class="anchor" id="line-132"></span>        First, rewinding head to replay your work on top of it...
+<span class="anchor" id="line-133"></span>        Applying reduce kvm stack usage in kvm_arch_vm_ioctl()
+<span class="anchor" id="line-134"></span>        Applying reduce stack usage in kvm_vcpu_ioctl()
+<span class="anchor" id="line-135"></span>        Applying reduce stack usage in kvm_arch_vcpu_ioctl()
+<span class="anchor" id="line-136"></span>        Applying kvm: reduce stack usage in kvm_pv_mmu_op()
+<span class="anchor" id="line-137"></span></pre><span class="anchor" id="line-138"></span><span class="anchor" id="line-139"></span><p class="line874">Here FETCH_HEAD is the new commit on which we <span class="anchor" id="line-140"></span>are going to rebase, and master is the name of <span class="anchor" id="line-141"></span>the branch which we are going to merge on top <span class="anchor" id="line-142"></span>of FETCH_HEAD. <span class="anchor" id="line-143"></span><span class="anchor" id="line-144"></span><span class="anchor" id="line-145"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-146"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a> <span class="anchor" id="line-147"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">GitWorkflows  (上次是 <span title="??? @ pool-71-117-247-149.ptldor.fios.verizon.net[71.117.247.149]">pool-71-117-247-149</span> 在 2008-07-28 19:28:03 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/GitWorkflows?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/GitWorkflows?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/GitWorkflows">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

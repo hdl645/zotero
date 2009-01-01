@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-2.html">
+<meta name="wpd_url" content="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-2.html">
+<meta name="wpd_date" content="2008-06-04T09:43Z">
+
+
+
+ <meta name="GENERATOR" content="SGML-Tools 1.0.9">
+ <title>Linux VPN Masquerade HOWTO: Background Knowledge</title>
+ <link href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-3.html" rel="next">
+ <link href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-1.html" rel="previous">
+ <link href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc2" rel="contents">
+</head>
+<body>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-3.html">Next</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-1.html">Previous</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc2">Contents</a>
+<hr>
+<h2><a name="s2">2. Background Knowledge</a></h2>
+
+<p>
+</p><p>
+</p><h2><a name="ss2.1">2.1 What is a <layer id="google-toolbar-hilite-10" style="background-color: Cyan; color: black;">VPN</layer>?</a>
+</h2>
+
+<p>A 
+<a href="http://foldoc.doc.ic.ac.uk/foldoc/foldoc.cgi?VPN">Virtual Private Network</a>, or "<layer id="google-toolbar-hilite-11" style="background-color: Cyan; color: black;">VPN</layer>", is a tunnel that carries
+private network traffic from one endpoint system to another over a public
+network (such as the Internet) without the traffic being aware that there
+are intermediate hops between the endpoints, or the intermediate hops being
+aware they are carrying the network packets that are traversing the tunnel.
+The tunnel may optionally compress and/or encrypt the data, providing
+enhanced performance and some measure of security.
+</p><p>The "Virtual" part stems from the fact that you are constructing
+a private link over a public network, rather than actually buying a direct
+hardwired link over leased lines. The <layer id="google-toolbar-hilite-12" style="background-color: Cyan; color: black;">VPN</layer> allows you to pretend you are
+using a leased line or direct telephone call to communicate between the endpoints.
+</p><p>You may find the <layer id="google-toolbar-hilite-13" style="background-color: Cyan; color: black;">VPN</layer> FAQ at
+<a href="http://kubarb.phsx.ukans.edu/%7Etbird/vpn/FAQ.html">http://kubarb.phsx.ukans.edu/~tbird/<layer id="google-toolbar-hilite-14" style="background-color: Cyan; color: black;">vpn</layer>/FAQ.html</a>
+informative.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.2">2.2 What is IPsec?</a>
+</h2>
+
+<p><b>
+<a href="http://foldoc.doc.ic.ac.uk/foldoc/foldoc.cgi?IPsec">IPsec</a></b>
+is a set of standard protocols for implementing secure communications
+and encryption key exchange between computers. It can be used to implement
+a <layer id="google-toolbar-hilite-15" style="background-color: Cyan; color: black;">VPN</layer>.
+</p><p>An IPsec <layer id="google-toolbar-hilite-16" style="background-color: Cyan; color: black;">VPN</layer> generally consists of two communications channels between the
+endpoint hosts: a key-exchange channel over which authentication and
+encryption key information is passed, and one or more data channels over
+which private network traffic is carried.
+</p><p>The key-exchange channel is a standard UDP connection to and from port 500. The
+data channels carrying the traffic between the client and server use IP
+protocol number 50 (ESP).
+</p><p>More information is available in F-Secure's IPsec FAQ at
+<a href="http://www.europe.f-secure.com/support/vpn+/faq/techfaq.html">http://www.Europe.F-Secure.com/support/<layer id="google-toolbar-hilite-17" style="background-color: Cyan; color: black;">vpn</layer>+/faq/techfaq.html</a>,
+and in
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc2402.html">RFC2402</a>
+(the AH protocol, IP protocol number 51),
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc2406.html">RFC2406</a>
+(the ESP protocol, IP protocol number 50),
+and
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc2408.html">RFC2408</a>
+(the ISAKMP key-exchange protocol).
+</p><p>IPsec is a peer-to-peer protocol. However, since most people will be
+exposed to it in the form of an originate-only Windows client being used to
+access a central network security gateway, "client" will be used to
+refer to the endpoint host that the user is sitting in front of and
+"server" will be used to refer to the central network security
+gateway.
+</p><p>Important note: If your <layer id="google-toolbar-hilite-18" style="background-color: Cyan; color: black;">VPN</layer> is based on the AH protocol (including AH+ESP), it
+cannot be masqueraded. The AH protocol specifies a cryptographic checksum
+across portions of the IP header, including the IP addresses. IP Masquerade is
+implemented by modifying the source IP address for outbound packets and the
+destination IP address for inbound packets. Since the masquerading gateway
+cannot participate in the encryption key exchange, it cannot generate the
+correct cryptographic checksums for the modified IP headers. Thus the
+modified IP packets will be discarded by the recipient as invalid, because
+they fail the cryptographic checksum test.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.3">2.3 What is PPTP?</a>
+</h2>
+
+<p><b>
+<a href="http://foldoc.doc.ic.ac.uk/foldoc/foldoc.cgi?PPTP">PPTP</a></b>
+stands for <em><b>P</b></em>oint-to-<em><b>P</b></em>oint
+<em><b>T</b></em>unnelling <em><b>P</b></em>rotocol. It is a
+Microsoft-proposed protocol for implementing a <layer id="google-toolbar-hilite-19" style="background-color: Cyan; color: black;">VPN</layer>.
+</p><p>The PPTP <layer id="google-toolbar-hilite-20" style="background-color: Cyan; color: black;">VPN</layer> protocol consists of two communications channels between the
+client and server: a control channel over which link-management information
+is passed, and a data channel over which (possibly encrypted) private network
+traffic is carried.
+</p><p>The control channel is a standard TCP connection to port 1723 on the
+server. The data channel carrying the private network traffic uses IP
+protocol number 47 (GRE), a generic encapsulation protocol described in
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc1701.html">RFC1701</a>. The transparent transmission of data over the data channel
+is achieved by negotiating a standard PPP connection over it, just as if it
+were a dialup connection directly from the client to the server. The
+options negotiated over the tunnel by PPP control whether the data is
+compressed and/or encrypted, thus PPTP itself has nothing to do with
+encryption.
+</p><p>The details of the PPTP protocol are documented in
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc2637.html">RFC2637</a>.
+</p><p>Microsoft's implementation of the PPTP protocol is not considered very
+secure. If you're interested in the details, here are three separate analyses:
+</p><p>
+<a href="http://www.counterpane.com/pptp.html">http://www.counterpane.com/pptp.html</a></p><p>
+<a href="http://www.geek-girl.com/bugtraq/1999_1/0664.html">http://www.geek-girl.com/bugtraq/1999_1/0664.html</a></p><p>
+<a href="http://oliver.efri.hr/%7Ecrv/security/bugs/NT/pptp2.html">http://oliver.efri.hr/~crv/security/bugs/NT/pptp2.html</a></p><p>
+</p><p>
+</p><h2><a name="ss2.4">2.4 What is FWZ?</a>
+</h2>
+
+<p><b>FWZ</b> is a proprietary encryption protocol developed by 
+<a href="http://www.checkpoint.com/">Check Point Software Technologies</a>.
+It is used in VPNs that are built around their Firewall-1 product.
+</p><p>A Checkpoint-based firewall can be configured in several modes. The
+"FWZ Encapsulation" mode <em>cannot</em> be masqueraded. The
+"IKE" mode, which uses standard IPsec protocols, can be
+masqueraded with minor configuration changes on the <layer id="google-toolbar-hilite-21" style="background-color: Cyan; color: black;">VPN</layer> gateway.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.5">2.5 Why masquerade a <layer id="google-toolbar-hilite-22" style="background-color: Cyan; color: black;">VPN</layer> client?</a>
+</h2>
+
+<p>Most current <layer id="google-toolbar-hilite-23" style="background-color: Cyan; color: black;">VPN</layer> clients assume you will be connecting the client computer
+directly to the internet. Doing this when you have only a single connection
+for internet access bypasses your <layer id="google-toolbar-hilite-0" style="background-color: Yellow; color: black;">Linux</layer> firewall and the security and
+access-sharing capabilities that it provides. Extending the <layer id="google-toolbar-hilite-1" style="background-color: Yellow; color: black;">Linux</layer> firewall
+to also masquerade <layer id="google-toolbar-hilite-24" style="background-color: Cyan; color: black;">VPN</layer> traffic allows you to retain the firewalling
+security provided by the <layer id="google-toolbar-hilite-2" style="background-color: Yellow; color: black;">Linux</layer> firewall as well as permitting the other
+systems on your local network to access the internet regardless of whether
+or not the <layer id="google-toolbar-hilite-25" style="background-color: Cyan; color: black;">VPN</layer> network connection is active.
+</p><p>If your firewall is being used in a corporate setting you may also wish to
+require your <layer id="google-toolbar-hilite-26" style="background-color: Cyan; color: black;">VPN</layer> client users to go through that firewall for security
+reasons, rather than providing them with modems so they can dial out on
+their own when they need to use <layer id="google-toolbar-hilite-27" style="background-color: Cyan; color: black;">VPN</layer>. <layer id="google-toolbar-hilite-28" style="background-color: Cyan; color: black;">VPN</layer> Masquerade allows you to do so
+even if the desktops do not have registered IP addresses.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.6">2.6 Can several clients on my local network use IPsec simultaneously?</a>
+</h2>
+
+<p>Yes, though there may occasionally be minor problems.
+</p><p>The IPsec protocols define a method for identifying the traffic streams
+called the <em>Security Parameters Index</em> ("SPI").
+Unfortunately the SPI used by outbound traffic is different from the SPI
+used by inbound traffic, and there is no other identifying information
+available that is not encrypted, so association of the inbound and outbound
+data streams is difficult and not perfectly reliable.
+</p><p>IPsec Masquerade attempts to associate inbound and outbound ESP traffic by
+serializing new connections. While this has worked well in testing, it
+cannot be guaranteed to be perfectly reliable, and the serialization of new
+traffic may result in some timeouts if the link is saturated or if many
+local IPsec hosts attempt to initiate communications or rekey with the same
+remote IPsec host simultaneously. 
+</p><p>It is also assumed that should this association scheme fail to associate
+the traffic streams correctly, the IPsec hosts themselves will discard the
+incorrectly routed traffic because it will have the wrong SPI values. This
+is required by the IPsec RFCs.
+</p><p>These problems could be eliminated if there was some way to sniff the new
+SPI values from the ISAKMP key exchange before any ESP traffic appears, but
+unfortunately that portion of the key exchange is encrypted.
+</p><p>To minimize the problems associated with this, it is recommended that you
+open a command window on your masqueraded IPsec host and run the
+"ping" program pinging a host on the remote network for as long
+as you have the tunnel up.
+</p><p>See the IPsec technical notes at the end of the document for more details.
+</p><p>
+</p><p>
+<a name="multiclientpptp"></a> </p><h2><a name="ss2.7">2.7 Can several clients on my local network use PPTP simultaneously?</a>
+</h2>
+
+<p>Yes.
+</p><p>You must enable PPTP Call ID masquerade when configuring your kernel in
+order to distinguish between multiple data streams from the same server.
+PPTP <layer id="google-toolbar-hilite-45" style="background-color: Fuchsia; color: black;">masq</layer> with Call ID <layer id="google-toolbar-hilite-46" style="background-color: Fuchsia; color: black;">masq</layer> enabled will support many concurrent masqueraded
+sessions with no restrictions on which server a client can call.
+</p><p>
+<a href="http://andrew2.andrew.cmu.edu/rfc/rfc2637.html">The PPTP RFC</a>
+specifies in section 3.1.3 that there may only be one control channel
+connection between two systems. This <em>should</em> mean that you can only
+masquerade one PPTP session at a time with a given remote server, but in
+practice the MS implementation of PPTP does not enforce this, at least not as
+of NT 4.0 Service Pack 4. If the PPTP server you're trying to connect to only
+permits one connection at a time, it's following the protocol rules properly.
+Note that this does not affect a masqueraded server, only multiple masqueraded
+clients attempting to contact the same remote server.
+</p><p>For another alternative, see the next question...
+</p><p>
+</p><p>
+</p><h2><a name="ss2.8">2.8 Can I access the remote network from my entire local network?</a>
+</h2>
+
+<p>Yes. However, your <layer id="google-toolbar-hilite-29" style="background-color: Cyan; color: black;">VPN</layer> client must be able to forward IP traffic.
+</p><p>This means that you'll either have to use a <layer id="google-toolbar-hilite-3" style="background-color: Yellow; color: black;">Linux</layer> <layer id="google-toolbar-hilite-30" style="background-color: Cyan; color: black;">VPN</layer> client or a MS NT <layer id="google-toolbar-hilite-31" style="background-color: Cyan; color: black;">VPN</layer>
+client. The IP stack in W'95 and W'98 does not support IP forwarding. NT
+Workstation will work for this, and is less expensive than NT Server if
+you're only using it to route encrypted traffic.
+</p><p>If you cannot install a <layer id="google-toolbar-hilite-4" style="background-color: Yellow; color: black;">Linux</layer> or NT-based <layer id="google-toolbar-hilite-32" style="background-color: Cyan; color: black;">VPN</layer> client, then you'll have to
+enable PPTP Call-ID masquerade if you are using PPTP, and install <layer id="google-toolbar-hilite-33" style="background-color: Cyan; color: black;">VPN</layer>
+client software on every system you want to provide access for. This is
+inefficient, aesthetically revolting, a security weakness, and may not work
+if the PPTP server correctly implements the protocol, but it's cheaper
+than licensing NT.
+</p><p>Network-to-network routing this way works very well. This is how I have my
+home network set up for telecommuting. It does require a little more
+networking knowhow than simply giving everybody their own <layer id="google-toolbar-hilite-34" style="background-color: Cyan; color: black;">VPN</layer> client.
+</p><p>In my experience, network-to-network routing in a pure-MS environment
+requires RRAS be installed at both ends of the tunnel.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.9">2.9 Why masquerade the <layer id="google-toolbar-hilite-35" style="background-color: Cyan; color: black;">VPN</layer> server?</a>
+</h2>
+
+<p>If your <layer id="google-toolbar-hilite-36" style="background-color: Cyan; color: black;">VPN</layer> server has a registered IP address you do not need to
+masquerade it, simply configure your firewall to route the <layer id="google-toolbar-hilite-37" style="background-color: Cyan; color: black;">VPN</layer> traffic
+properly as described below.
+</p><p>If your <layer id="google-toolbar-hilite-38" style="background-color: Cyan; color: black;">VPN</layer> server has a Private-Network IP address you will need to
+redirect the inbound traffic to it and masquerade the outbound traffic from
+it. Masquerading allows you to make a <layer id="google-toolbar-hilite-39" style="background-color: Cyan; color: black;">VPN</layer> server available to the internet
+even if you only have one assigned IP address. This should work even if
+your IP address is dynamically assigned: you would publicize the IP address
+for clients through the use of a third-party dynamic DNS service such as
+that provided by 
+<a href="http://www.ddns.org/">DDNS.ORG</a>
+or 
+<a href="http://www.cjb.net/">CJB.NET</a>
+and configure the clients to connect to a system named
+<code>our-company.ddns.org</code> or something similar. Note that this is a
+security risk, because it is possible for an incorrect IP address to be
+retrieved from the dynamic DNS server through timing problems, a failure to
+properly register the current dynamic IP address, or a third party
+registering a different IP address under the system name.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.10">2.10 Why patch the <layer id="google-toolbar-hilite-5" style="background-color: Yellow; color: black;">Linux</layer> kernel?</a>
+</h2>
+
+<p>The largest problem in masquerading <layer id="google-toolbar-hilite-40" style="background-color: Cyan; color: black;">VPN</layer> traffic is that the stock 
+<layer id="google-toolbar-hilite-6" style="background-color: Yellow; color: black;">Linux</layer> IP masquerade has no special awareness of IP protocols other than
+TCP, UDP and ICMP.
+</p><p>All IP traffic may be forwarded and filtered by IP address, but
+masquerading IP protocols other than TCP, UDP and ICMP requires modifying the
+kernel.
+</p><p>The PPTP control channel is plain TCP and requires no special setup beyond
+letting it through the firewall and masquerading it.
+</p><p>Masquerading the IPsec and PPTP data channels requires a modification that
+adds support for the ESP and GRE protocols to the masquerading code, and
+masquerading the ISAKMP key exchange protocol requires a modification that
+prevents masquerade from altering the UDP source port number and adds
+tracking of the ISAKMP cookie values instead of the port number.
+</p><p>
+</p><p>
+</p><h2><a name="ss2.11">2.11 Current Status</a>
+</h2>
+
+<p>The 2.0.x kernel patch works on kernel 2.0.36 and is incorporated into the
+standard 2.0.37 and higher kernel releases. It may work on earlier kernels but
+I have not tested it, and I recommend you upgrade to kernel 2.0.38 anyway
+for security reasons if you are running an older kernel.
+</p><p>The 2.2.x kernel patch works on kernels from 2.2.5 to 2.2.17 and may work
+on earlier kernels, but that has not been tested. It has been submitted for
+inclusion in the standard 2.2.18 release.
+</p><p>I don't have the resources to follow the development kernels, so at this
+time no work on <layer id="google-toolbar-hilite-41" style="background-color: Cyan; color: black;">VPN</layer> Masquerade for 2.3.x or 2.4.x has taken place. If you
+know someone who <em>is</em> working on this, please let me know.
+</p><p>The 2.0.x kernel patch has been tested and works on x86 and Sparc systems,
+and the 2.2.x kernel patch has been tested and works on x86 and PowerPC systems,
+but there should be no major problems in porting to other architectures. I
+believe the architecture dependencies would only be in endian-ness within the
+bitmaps in the GRE header definition used to format debugging log messages.
+If anyone ports this to a non-Intel architecture I'd appreciate hearing
+about it so I can merge any changes into the master copy.
+</p><p>A PPTP-only kernel patch for the 2.1.105+ and early 2.2.x kernels is
+available at 
+<a href="http://bmrc.berkeley.edu/people/chaffee/linux_pptp.html">http://bmrc.berkeley.edu/people/chaffee/<layer id="google-toolbar-hilite-7" style="background-color: Yellow; color: black;">linux</layer>_pptp.html</a>.
+</p><p>See the <layer id="google-toolbar-hilite-42" style="background-color: Cyan; color: black;">VPN</layer> Masquerade home page at
+<a href="http://www.impsec.org/linux/masquerade/ip_masq_vpn.html">http://www.impsec.org/<layer id="google-toolbar-hilite-8" style="background-color: Yellow; color: black;">linux</layer>/masquerade/ip_<layer id="google-toolbar-hilite-47" style="background-color: Fuchsia; color: black;">masq</layer>_<layer id="google-toolbar-hilite-43" style="background-color: Cyan; color: black;">vpn</layer>.html</a> for the status of
+the <layer id="google-toolbar-hilite-44" style="background-color: Cyan; color: black;">VPN</layer> <layer id="google-toolbar-hilite-48" style="background-color: Fuchsia; color: black;">Masq</layer> patches, and
+<a href="http://bmrc.berkeley.edu/people/chaffee/linux_pptp.html">http://bmrc.berkeley.edu/people/chaffee/<layer id="google-toolbar-hilite-9" style="background-color: Yellow; color: black;">linux</layer>_pptp.html</a> for the
+status of the 2.1.105+/2.2.x PPTP-only <layer id="google-toolbar-hilite-49" style="background-color: Fuchsia; color: black;">Masq</layer> patch.
+</p><p>
+</p><p>
+</p><p>
+</p><hr>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-3.html">Next</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO-1.html">Previous</a>
+<a href="http://tldp.org/HOWTO/VPN-Masquerade-HOWTO.html#toc2">Contents</a>
+</body>
+</html>

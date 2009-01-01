@@ -1,0 +1,607 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://en.wikipedia.org/wiki/Authentication_Header#Authentication_header_.28AH.29">
+<meta name="wpd_url" content="http://en.wikipedia.org/wiki/Authentication_Header#Authentication_header_.28AH.29">
+<meta name="wpd_date" content="2008-06-03T02:13Z">
+
+
+	
+		
+				<meta name="keywords" content="IPsec,VPN,IPstack,2005,2007,AIX operating system,ARCnet,Address Resolution Protocol,Advanced Encryption Standard,Application layer,Asynchronous Transfer Mode">
+		<link rel="alternate" type="application/x-wiki" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit">
+		<link rel="shortcut icon" href="about:blank?favicon.ico">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://en.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (en)">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/rss+xml" title="Wikipedia RSS Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=rss">
+<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=atom">
+		<title>IPsec - Wikipedia, the free encyclopedia</title>
+		
+		
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/skins-1.5/monobook/IE50Fixes.css?156";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/skins-1.5/monobook/IE55Fixes.css?156";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/skins-1.5/monobook/IE60Fixes.css?156";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/skins-1.5/monobook/IE70Fixes.css?156";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?156"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type="text/javascript">/*<![CDATA[*/
+var skin = "monobook";
+var stylepath = "/skins-1.5";
+var wgArticlePath = "/wiki/$1";
+var wgScriptPath = "/w";
+var wgScript = "/w/index.php";
+var wgVariantArticlePath = false;
+var wgActionPaths = [];
+var wgServer = "http://en.wikipedia.org";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "IPsec";
+var wgTitle = "IPsec";
+var wgAction = "view";
+var wgArticleId = "43342";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "en";
+var wgContentLanguage = "en";
+var wgBreakFrames = false;
+var wgCurRevisionId = "223039786";
+var wgVersion = "1.13alpha";
+var wgEnableAPI = true;
+var wgEnableWriteAPI = false;
+var wgMWSuggestTemplate = "http://en.wikipedia.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}";
+var wgDBname = "enwiki";
+var wgSearchNamespaces = [0];
+var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+/*]]>*/</script>
+                
+		<script type="text/javascript" src="wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="ajax.js"></script>
+		<script type="text/javascript" src="mwsuggest.js"></script>
+		<script type="text/javascript" src="index.php"><!-- site js --></script><script type="text/javascript" src="index_002.php"></script>
+		
+	
+<link rel="stylesheet" type="text/css" href="Authentication_Header.css" media="all">
+</head>
+<body class="mediawiki ns-0 ltr page-IPsec">
+	<div id="globalWrapper"><div style="position: absolute; z-index: 40; left: 155px; top: 1px; clear: both; float: left; font-size: 90%; font-style: italic; white-space: nowrap;" id="anon-banner">Help us provide free content to the world by <a href="http://wikimediafoundation.org/wiki/Fundraising?source=enwiki_05" class="extiw" title="foundation:Fundraising"><b>donating today</b></a>!</div>
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type="text/javascript" language="JavaScript">
+
+<!--
+document.writeln("\x3cp\x3e\x3c/p\x3e\n");
+-->
+</script><p></p>
+
+</div>		<h1 class="firstHeading">IPsec</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From Wikipedia, the free encyclopedia</h3>
+			<div id="contentSub">&nbsp;&nbsp;(Redirected from <a href="http://en.wikipedia.org/w/index.php?title=Authentication_Header&redirect=no" title="Authentication Header">Authentication Header</a>)</div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table class="navbox" style="margin: 0pt 0pt 1em 1em; float: right; width: 19em; font-size: 95%;">
+<tbody><tr>
+<th style="background: rgb(170, 221, 187) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">The five-layer <a href="http://en.wikipedia.org/wiki/TCP/IP_model" title="TCP/IP model">TCP/IP model</a></th>
+</tr>
+<tr>
+<th style="background: rgb(204, 255, 204) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">5. <a href="http://en.wikipedia.org/wiki/Application_layer" title="Application layer">Application layer</a></th>
+</tr>
+<tr>
+<td>
+<p><span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol" title="Dynamic Host Configuration Protocol">DHCP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Domain_Name_System" title="Domain Name System">DNS</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol">FTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Gopher_%28protocol%29" title="Gopher (protocol)">Gopher</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="Hypertext Transfer Protocol">HTTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Internet_Message_Access_Protocol" title="Internet Message Access Protocol">IMAP4</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat" title="Internet Relay Chat">IRC</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Network_News_Transfer_Protocol" title="Network News Transfer Protocol">NNTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Extensible_Messaging_and_Presence_Protocol" title="Extensible Messaging and Presence Protocol">XMPP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Post_Office_Protocol" title="Post Office Protocol">POP3</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time Transport Protocol">RTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Session_Initiation_Protocol" title="Session Initiation Protocol">SIP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol" title="Simple Mail Transfer Protocol">SMTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Simple_Network_Management_Protocol" title="Simple Network Management Protocol">SNMP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Secure_Shell" title="Secure Shell">SSH</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/TELNET" title="TELNET">TELNET</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Remote_procedure_call" title="Remote procedure call">RPC</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Real_time_control_protocol" title="Real time control protocol">RTCP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol" title="Real Time Streaming Protocol">RTSP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">TLS</a> (and <a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" class="mw-redirect" title="Secure Sockets Layer">SSL</a>)&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Session_Description_Protocol" title="Session Description Protocol">SDP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/SOAP" title="SOAP">SOAP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/GPRS_Tunnelling_Protocol" title="GPRS Tunnelling Protocol">GTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Simple_traversal_of_UDP_over_NATs" title="Simple traversal of UDP over NATs">STUN</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Network_Time_Protocol" title="Network Time Protocol">NTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Category:Application_layer_protocols" title="Category:Application layer protocols">(more)</a></span></p>
+</td>
+</tr>
+<tr>
+<th style="background: rgb(204, 255, 204) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">4. <a href="http://en.wikipedia.org/wiki/Transport_layer" title="Transport layer">Transport layer</a></th>
+</tr>
+<tr>
+<td><span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol" title="Transmission Control Protocol">TCP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol" title="User Datagram Protocol">UDP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Datagram_Congestion_Control_Protocol" title="Datagram Congestion Control Protocol">DCCP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Stream_Control_Transmission_Protocol" title="Stream Control Transmission Protocol">SCTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Resource_reservation_protocol" title="Resource reservation protocol">RSVP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Explicit_Congestion_Notification" title="Explicit Congestion Notification">ECN</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Category:Transport_layer_protocols" title="Category:Transport layer protocols">(more)</a></span></td>
+</tr>
+<tr>
+<th style="background: rgb(204, 255, 204) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">3. <a href="http://en.wikipedia.org/wiki/Network_layer" title="Network layer">Network/internet layer</a></th>
+</tr>
+<tr>
+<td><span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Internet_Protocol" title="Internet Protocol">IP</a> (<a href="http://en.wikipedia.org/wiki/IPv4" title="IPv4">IPv4</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/IPv6" title="IPv6">IPv6</a>)&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Open_Shortest_Path_First" title="Open Shortest Path First">OSPF</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/IS-IS" title="IS-IS">IS-IS</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><strong class="selflink">IPsec</strong>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Address_Resolution_Protocol" title="Address Resolution Protocol">ARP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Reverse_Address_Resolution_Protocol" title="Reverse Address Resolution Protocol">RARP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Routing_Information_Protocol" title="Routing Information Protocol">RIP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Internet_Control_Message_Protocol" title="Internet Control Message Protocol">ICMP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/ICMPv6" title="ICMPv6">ICMPv6</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Internet_Group_Management_Protocol" title="Internet Group Management Protocol">IGMP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Border_Gateway_Protocol" title="Border Gateway Protocol">BGP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Category:Network_layer_protocols" title="Category:Network layer protocols">(more)</a></span></td>
+</tr>
+<tr>
+<th style="background: rgb(204, 255, 204) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">2. <a href="http://en.wikipedia.org/wiki/Data_link_layer" title="Data link layer">Data link layer</a></th>
+</tr>
+<tr>
+<td><span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/IEEE_802.11" title="IEEE 802.11">802.11 (WLAN)</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/IEEE_802.16" title="IEEE 802.16">802.16</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Wi-Fi" title="Wi-Fi">Wi-Fi</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/WiMAX" title="WiMAX">WiMAX</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Asynchronous_Transfer_Mode" title="Asynchronous Transfer Mode">ATM</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Dynamic_synchronous_Transfer_Mode" title="Dynamic synchronous Transfer Mode">DTM</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Token_ring" title="Token ring">Token ring</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Ethernet" title="Ethernet">Ethernet</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Fiber_distributed_data_interface" title="Fiber distributed data interface">FDDI</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Frame_relay" title="Frame relay">Frame Relay</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/General_Packet_Radio_Service" title="General Packet Radio Service">GPRS</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Evolution-Data_Optimized" title="Evolution-Data Optimized">EVDO</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/High-Speed_Packet_Access" class="mw-redirect" title="High-Speed Packet Access">HSPA</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/High-Level_Data_Link_Control" title="High-Level Data Link Control">HDLC</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Point-to-Point_Protocol" title="Point-to-Point Protocol">PPP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Point-to-point_tunneling_protocol" title="Point-to-point tunneling protocol">PPTP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol" title="Layer 2 Tunneling Protocol">L2TP</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Integrated_Services_Digital_Network" title="Integrated Services Digital Network">ISDN</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/ARCnet" class="mw-redirect" title="ARCnet">ARCnet</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Link_Layer_Topology_Discovery" title="Link Layer Topology Discovery">LLTD</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Category:Link_protocols" title="Category:Link protocols">(more)</a></span></td>
+</tr>
+<tr>
+<th style="background: rgb(204, 255, 204) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">1. <a href="http://en.wikipedia.org/wiki/Physical_layer" title="Physical layer">Physical layer</a></th>
+</tr>
+<tr>
+<td><span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Ethernet_physical_layer" title="Ethernet physical layer">Ethernet physical layer</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/RS-232" title="RS-232">RS-232</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Synchronous_optical_networking" title="Synchronous optical networking">SONET/SDH</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/G.709" title="G.709">G.709</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Optical_fiber" title="Optical fiber">Optical fiber</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Coaxial_cable" title="Coaxial cable">Coaxial cable</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Twisted_pair" title="Twisted pair">Twisted pair</a>&nbsp;<b>&middot;</b></span> <span style="white-space: nowrap;"><a href="http://en.wikipedia.org/wiki/Category:Physical_layer_protocols" title="Category:Physical layer protocols">(more)</a></span></td>
+</tr>
+<tr>
+<td>
+<div class="noprint plainlinksneverexpand" style="padding: 0pt; background-color: transparent; white-space: nowrap; font-weight: normal; font-size: xx-small;">This box:&nbsp;<a href="http://en.wikipedia.org/wiki/Template:IPstack" title="Template:IPstack"><span title="View this template" style="">view</span></a>&nbsp;<span style="font-size: 80%;">&bull;</span>&nbsp;<a href="http://en.wikipedia.org/wiki/Template_talk:IPstack" title="Template talk:IPstack"><span style="color: rgb(0, 43, 184);" title="Discussion about this template">talk</span></a>&nbsp;<span style="font-size: 80%;">&bull;</span>&nbsp;<a href="http://en.wikipedia.org/w/index.php?title=Template:IPstack&action=edit" class="external text" title="http://en.wikipedia.org/w/index.php?title=Template:IPstack&action=edit" rel="nofollow"><span style="color: rgb(0, 43, 184);" title="You can edit this template. Please use the preview button before saving.">edit</span></a></div>
+</td>
+</tr>
+</tbody></table>
+<p><b>IPsec</b> (<b>IP security</b>) is a <a href="http://en.wikipedia.org/wiki/Protocol_suite" class="mw-redirect" title="Protocol suite">suite of protocols</a> for securing <a href="http://en.wikipedia.org/wiki/Internet_Protocol" title="Internet Protocol">Internet Protocol</a> (IP) communications by <a href="http://en.wikipedia.org/wiki/Authentication" title="Authentication">authenticating</a> and/or <a href="http://en.wikipedia.org/wiki/Encryption" title="Encryption">encrypting</a> each <a href="http://en.wikipedia.org/wiki/Packet_%28information_technology%29#Example:_IP_packets" title="Packet (information technology)">IP packet</a> in a <a href="http://en.wikipedia.org/wiki/Data_stream" title="Data stream">data stream</a>. IPsec also includes protocols for cryptographic <a href="http://en.wikipedia.org/wiki/IKE" class="mw-redirect" title="IKE">key establishment</a>.</p>
+<table id="toc" class="toc" summary="Contents">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>Contents</h2>
+ <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#Summary"><span class="tocnumber">1</span> <span class="toctext">Summary</span></a></li>
+<li class="toclevel-1"><a href="#Security_architecture"><span class="tocnumber">2</span> <span class="toctext">Security architecture</span></a></li>
+<li class="toclevel-1"><a href="#Current_status_as_a_standard"><span class="tocnumber">3</span> <span class="toctext">Current status as a standard</span></a></li>
+<li class="toclevel-1"><a href="#Design_intent"><span class="tocnumber">4</span> <span class="toctext">Design intent</span></a></li>
+<li class="toclevel-1"><a href="#Modes"><span class="tocnumber">5</span> <span class="toctext">Modes</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Transport_mode"><span class="tocnumber">5.1</span> <span class="toctext">Transport mode</span></a></li>
+<li class="toclevel-2"><a href="#Tunnel_mode"><span class="tocnumber">5.2</span> <span class="toctext">Tunnel mode</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Technical_details"><span class="tocnumber">6</span> <span class="toctext">Technical details</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Authentication_header_.28AH.29"><span class="tocnumber">6.1</span> <span class="toctext">Authentication header (AH)</span></a></li>
+<li class="toclevel-2"><a href="#Encapsulating_Security_Payload_.28ESP.29"><span class="tocnumber">6.2</span> <span class="toctext">Encapsulating Security Payload (ESP)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Implementations"><span class="tocnumber">7</span> <span class="toctext">Implementations</span></a></li>
+<li class="toclevel-1"><a href="#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1"><a href="#List_of_IPsec-related_RFCs"><span class="tocnumber">9</span> <span class="toctext">List of IPsec-related RFCs</span></a></li>
+<li class="toclevel-1"><a href="#References"><span class="tocnumber">10</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1"><a href="#External_links"><span class="tocnumber">11</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript">
+
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="Summary" id="Summary"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=1" title="Edit section: Summary">edit</a>]</span> <span class="mw-headline">Summary</span></h2>
+<p><b>IPsec</b> protocols operate at the <a href="http://en.wikipedia.org/wiki/Network_layer" title="Network layer">network layer</a>, layer 3 of the <a href="http://en.wikipedia.org/wiki/OSI_model" title="OSI model">OSI model</a>. Other Internet security protocols in widespread use, such as <a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" class="mw-redirect" title="Secure Sockets Layer">SSL</a>, <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">TLS</a> and <a href="http://en.wikipedia.org/wiki/Secure_Shell" title="Secure Shell">SSH</a>, operate from the <a href="http://en.wikipedia.org/wiki/Transport_layer" title="Transport layer">transport layer</a> up (OSI layers 4 - 7). This makes IPsec more flexible, as it can be used for protecting layer 4 protocols, including both <a href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol" title="Transmission Control Protocol">TCP</a> and <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol" title="User Datagram Protocol">UDP</a>, the most commonly used transport layer protocols. IPsec has an advantage over SSL and other methods that operate at higher layers: an application doesn't need to be designed to use IPsec, whereas the ability to use SSL or another higher-layer protocol must be incorporated into the design of an application.</p>
+<p><b>IPSec</b> is a framework of open standards that provides data confidentiality, data integrity, and data authentication between participating peers. IPSec provides these security services at the IP layer; it uses <b>IKE</b> to handle negotiation of protocols and algorithms based on local policy and to generate the encryption and authentication keys to be used by IPSec. IPSec can be used to protect one or more data flows between a pair of hosts, between a pair of security gateways, or between a security gateway and a host.</p>
+<p><a name="Security_architecture" id="Security_architecture"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=2" title="Edit section: Security architecture">edit</a>]</span> <span class="mw-headline">Security architecture</span></h2>
+<p><b>IPsec</b> is implemented by a set of <a href="http://en.wikipedia.org/wiki/Cryptographic_protocol" title="Cryptographic protocol">cryptographic protocols</a> for (1) securing packet flows, (2) <a href="http://en.wikipedia.org/wiki/Internet_key_exchange" title="Internet key exchange">mutual authentication</a> and (3) <a href="http://en.wikipedia.org/wiki/Internet_key_exchange" title="Internet key exchange">establishing cryptographic parameters</a>.</p>
+<p>The IP security architecture uses the concept of a <a href="http://en.wikipedia.org/wiki/Security_association" title="Security association">security association</a> as the basis for building security functions into IP. A security association is simply the bundle of algorithms and parameters (such as keys) that is being used to encrypt and authenticate a particular flow in one direction. Therefore, in normal bi-directional traffic, the flows are secured by a pair of security associations. The actual choice of encryption and authentication algorithms (from a defined list) is left to the IPsec administrator.</p>
+<p>In order to decide what protection is to be provided for an outgoing packet, IPsec uses the <a href="http://en.wikipedia.org/wiki/Security_Parameter_Index" title="Security Parameter Index">Security Parameter Index</a> (SPI), an index to the security association database (SADB), along with the destination address in a packet header, which together uniquely identify a security association for that packet. A similar procedure is performed for an incoming packet, where IPsec gathers decryption and verification keys from the security association database.</p>
+<p>For multicast, a security association is provided for the group, and is duplicated across all authorized receivers of the group. There may be more than one security association for a group, using different SPIs, thereby allowing multiple levels and sets of security within a group. Indeed, each sender can have multiple security associations, allowing authentication, since a receiver can only know that someone knowing the keys sent the data. Note that the relevant standard does not describe how the association is chosen and duplicated across the group; it is assumed that a responsible party will have made the choice.</p>
+<p><a name="Current_status_as_a_standard" id="Current_status_as_a_standard"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=3" title="Edit section: Current status as a standard">edit</a>]</span> <span class="mw-headline">Current status as a standard</span></h2>
+<p>IPsec implementation is a mandatory part of <a href="http://en.wikipedia.org/wiki/IPv6" title="IPv6">IPv6</a><sup id="cite_ref-0" class="reference"><a href="#cite_note-0" title="">[1]</a></sup>, but is not an integral part of <a href="http://en.wikipedia.org/wiki/IPv4" title="IPv4">IPv4</a>. However, because of the slow uptake of IPv6, IPsec is most commonly used to secure IPv4 traffic. IPsec protocols were originally defined in <a href="http://en.wikipedia.org/wiki/Request_for_Comments" title="Request for Comments">RFCs</a> by <a href="http://tools.ietf.org/html/rfc1825" class="external" title="http://tools.ietf.org/html/rfc1825">RFC 1825</a> & <a href="http://tools.ietf.org/html/rfc1829" class="external" title="http://tools.ietf.org/html/rfc1829">RFC 1829</a>, published in 1995. In 1998, these documents were obsoleted by <a href="http://tools.ietf.org/html/rfc2401" class="external" title="http://tools.ietf.org/html/rfc2401">RFC 2401</a> & <a href="http://tools.ietf.org/html/rfc2412" class="external" title="http://tools.ietf.org/html/rfc2412">RFC 2412</a> (which they were not compatible with) although they were conceptually identical. In December 2005, these RFCs were themselves obsoleted by <a href="http://tools.ietf.org/html/rfc4301" class="external" title="http://tools.ietf.org/html/rfc4301">RFC 4301</a> & <a href="http://tools.ietf.org/html/rfc4309" class="external" title="http://tools.ietf.org/html/rfc4309">RFC 4309</a>, which are largely a superset of the previous editions but provide a second Internet Key Exchange standard, <a href="http://en.wikipedia.org/wiki/IKEv2" title="IKEv2">IKEv2</a>. These third-generation documents standardized the abbreviation of IPsec to uppercase &ldquo;IP&rdquo; and lowercase &ldquo;sec&rdquo;. It is unusual to see any product that offers support for RFCs 1825 & 1829. &ldquo;ESP&rdquo; generally refers to <a href="http://tools.ietf.org/html/rfc2406" class="external" title="http://tools.ietf.org/html/rfc2406">RFC 2406</a>, while ESPbis refers to <a href="http://tools.ietf.org/html/rfc4303" class="external" title="http://tools.ietf.org/html/rfc4303">RFC 4303</a>.</p>
+<p><a name="Design_intent" id="Design_intent"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=4" title="Edit section: Design intent">edit</a>]</span> <span class="mw-headline">Design intent</span></h2>
+<p>IPsec was intended to provide either <b>transport mode</b> (end-to-end) security of packet traffic in which the end-point computers do the security processing, or <b>tunnel mode</b> (portal-to-portal) <a href="http://en.wikipedia.org/wiki/Communications_security" title="Communications security">communications security</a> in which security of packet traffic is provided to several machines (even to whole <a href="http://en.wikipedia.org/wiki/Local_area_network" title="Local area network">LANs</a>) by a single node.</p>
+<p>IPsec can be used to create <a href="http://en.wikipedia.org/wiki/Virtual_Private_Network" class="mw-redirect" title="Virtual Private Network">Virtual Private Networks</a> (VPNs) in either mode, and this is the dominant use. Note, however, that the security implications are quite different between the two operational modes.</p>
+<p>End-to-end communication security on an Internet-wide scale has been slower to develop than many had expected. Part of the reason is that no universal, or universally trusted, <a href="http://en.wikipedia.org/wiki/Public_Key_Infrastructure" class="mw-redirect" title="Public Key Infrastructure">Public Key Infrastructure</a> (PKI) has emerged (<a href="http://en.wikipedia.org/wiki/DNSSEC" title="DNSSEC">DNSSEC</a> was originally envisioned for this); another part is that many users understand neither their needs nor the available options well enough to promote inclusion in vendors' products.</p>
+<p>Since the <a href="http://en.wikipedia.org/wiki/Internet_Protocol" title="Internet Protocol">Internet Protocol</a> does not inherently provide any security capabilities, IPsec was introduced to provide security services such as the following:</p>
+<ol>
+<li>Encrypting traffic (so it cannot be read by parties other than those for whom it is intended)</li>
+<li>Integrity validation (ensuring traffic has not been modified along its path)</li>
+<li>Authenticating the peers (ensuring that traffic is from a trusted party)</li>
+<li>Anti-replay (protecting against replay of the secure session).</li>
+</ol>
+<p><a name="Modes" id="Modes"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=5" title="Edit section: Modes">edit</a>]</span> <span class="mw-headline">Modes</span></h2>
+<p>There are two modes of <b>IPsec</b> operation: <b>transport mode</b> and <b>tunnel mode</b>.</p>
+<p><a name="Transport_mode" id="Transport_mode"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=6" title="Edit section: Transport mode">edit</a>]</span> <span class="mw-headline">Transport mode</span></h3>
+<p>In <b>transport mode</b>, only the payload (the data you transfer) of the IP packet is <a href="http://en.wikipedia.org/wiki/Encrypted" class="mw-redirect" title="Encrypted">encrypted</a> and/or authenticated. The routing is intact, since the IP header is neither modified nor encrypted; however, when the <a href="#Authentication_header_.28AH.29" title="">authentication header</a> is used, the IP addresses cannot be <a href="http://en.wikipedia.org/wiki/Network_address_translation" title="Network address translation">translated</a>, as this will invalidate the <a href="http://en.wikipedia.org/wiki/Hash_value" class="mw-redirect" title="Hash value">hash value</a>. The <a href="http://en.wikipedia.org/wiki/Transport_layer" title="Transport layer">transport</a> and <a href="http://en.wikipedia.org/wiki/Application_layer" title="Application layer">application</a> layers are always secured by hash, so they cannot be modified in any way (for example by <a href="http://en.wikipedia.org/wiki/Port_address_translation" title="Port address translation">translating</a> the <a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port" title="TCP and UDP port">port</a> numbers). <b>Transport mode</b> is used for host-to-host communications.</p>
+<p>A means to encapsulate IPsec messages for <a href="http://en.wikipedia.org/wiki/NAT_traversal" title="NAT traversal">NAT traversal</a> has been defined by <a href="http://en.wikipedia.org/wiki/Request_for_Comments" title="Request for Comments">RFC</a> documents describing the <a href="http://en.wikipedia.org/wiki/NAT-T" title="NAT-T">NAT-T</a> mechanism.</p>
+<p><a name="Tunnel_mode" id="Tunnel_mode"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=7" title="Edit section: Tunnel mode">edit</a>]</span> <span class="mw-headline">Tunnel mode</span></h3>
+<p>In <b>tunnel mode</b>, the entire IP packet (data plus the message headers) is encrypted and/or authenticated. It must then be encapsulated into a new IP packet for routing to work. <b>Tunnel mode</b> is used for network-to-network communications (secure tunnels between routers, e.g. for <a href="http://en.wikipedia.org/wiki/Virtual_Private_Network" class="mw-redirect" title="Virtual Private Network">VPNs</a>) or host-to-network and host-to-host communications over the <a href="http://en.wikipedia.org/wiki/Internet" title="Internet">Internet</a>.</p>
+<p><a name="Technical_details" id="Technical_details"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=8" title="Edit section: Technical details">edit</a>]</span> <span class="mw-headline">Technical details</span></h2>
+<p>Two protocols have been developed to provide packet-level security for both <a href="http://en.wikipedia.org/wiki/IPv4" title="IPv4">IPv4</a> and <a href="http://en.wikipedia.org/wiki/IPv6" title="IPv6">IPv6</a>:</p>
+<ul>
+<li>The IP <b>Authentication Header</b> provides integrity, authentication, and non-repudiation if the appropriate choice of cryptographic algorithms is made.</li>
+<li>The IP <b>Encapsulating Security Payload</b> provides confidentiality, along with optional (but strongly recommended) authentication and integrity protection.</li>
+</ul>
+<p>Cryptographic algorithms defined for use with IPsec include <a href="http://en.wikipedia.org/wiki/HMAC" title="HMAC">HMAC</a>-<a href="http://en.wikipedia.org/wiki/SHA1" class="mw-redirect" title="SHA1">SHA1</a> for integrity protection, and <a href="http://en.wikipedia.org/wiki/TripleDES" class="mw-redirect" title="TripleDES">TripleDES</a>-<a href="http://en.wikipedia.org/wiki/Cipher_block_chaining" class="mw-redirect" title="Cipher block chaining">CBC</a> and <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" title="Advanced Encryption Standard">AES</a>-CBC for confidentiality. Refer to <a href="http://tools.ietf.org/html/rfc4305" class="external" title="http://tools.ietf.org/html/rfc4305">RFC 4305</a> for details.</p>
+<p><a name="Authentication_header_.28AH.29" id="Authentication_header_.28AH.29"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=9" title="Edit section: Authentication header (AH)">edit</a>]</span> <span class="mw-headline">Authentication header (AH)</span></h3>
+<p>The AH is intended to guarantee connectionless integrity and data origin authentication of IP datagrams. Further, it can optionally protect against <a href="http://en.wikipedia.org/wiki/Replay_attack" title="Replay attack">replay attacks</a> by using the <a href="http://en.wikipedia.org/wiki/Sliding_window" class="mw-redirect" title="Sliding window">sliding window</a> technique and discarding old packets. AH protects the IP payload and all header fields of an IP datagram except for mutable fields, i.e. those that might be altered in transit. In IPv4, mutable (and therefore unauthenticated) IP header fields include <a href="http://en.wikipedia.org/wiki/Type_of_Service" title="Type of Service">TOS</a>, Flags, <a href="http://en.wikipedia.org/wiki/IP_fragmentation" title="IP fragmentation">Fragment</a> <a href="http://en.wikipedia.org/wiki/Offset" title="Offset">Offset</a>, <a href="http://en.wikipedia.org/wiki/TTL" title="TTL">TTL</a> and Header <a href="http://en.wikipedia.org/wiki/Checksum" title="Checksum">Checksum</a>. AH operates directly on top of IP, using IP protocol number 51. An AH packet diagram:</p>
+<table class="wikitable" border="1" cellpadding="2" cellspacing="0">
+<tbody><tr>
+<th style="text-align: center; width: 10em;">0 - 7 bit</th>
+<th style="text-align: center; width: 10em;">8 - 15 bit</th>
+<th style="text-align: center; width: 10em;">16 - 23 bit</th>
+<th style="text-align: center; width: 10em;">24 - 31 bit</th>
+</tr>
+<tr>
+<td style="text-align: center;">Next header</td>
+<td style="text-align: center;">Payload length</td>
+<td colspan="2" style="text-align: center;">RESERVED</td>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">Security parameters index (SPI)</td>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">Sequence number</td>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">
+<p>Authentication data (variable)</p>
+</td>
+</tr>
+</tbody></table>
+<p>Field meanings:</p>
+<dl>
+<dt>Next header&nbsp;</dt>
+<dd>Identifies the protocol of the transferred data.</dd>
+<dt>Payload length&nbsp;</dt>
+<dd>Size of AH packet.</dd>
+<dt>RESERVED&nbsp;</dt>
+<dd>Reserved for future use (all zero until then).</dd>
+<dt>Security parameters index (SPI)&nbsp;</dt>
+<dd>Identifies the security parameters, which, in combination with the IP address, then identify the <a href="http://en.wikipedia.org/wiki/Security_association" title="Security association">security association</a> implemented with this packet.</dd>
+<dt>Sequence number&nbsp;</dt>
+<dd>A <a href="http://en.wikipedia.org/wiki/Monotonic" class="mw-redirect" title="Monotonic">monotonically</a> increasing number, used to prevent replay attacks.</dd>
+<dt>Authentication data&nbsp;</dt>
+<dd>Contains the integrity check value (ICV) necessary to authenticate the packet; it may contain padding.</dd>
+</dl>
+<p><a name="Encapsulating_Security_Payload_.28ESP.29" id="Encapsulating_Security_Payload_.28ESP.29"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=10" title="Edit section: Encapsulating Security Payload (ESP)">edit</a>]</span> <span class="mw-headline">Encapsulating Security Payload (ESP)</span></h3>
+<p>The ESP protocol provides origin authenticity, integrity, and confidentiality protection of a packet. ESP also supports encryption-only and authentication-only configurations, but using encryption without authentication is strongly discouraged because it is insecure.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1" title="">[2]</a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2" title="">[3]</a></sup><sup id="cite_ref-3" class="reference"><a href="#cite_note-3" title="">[4]</a></sup>. Unlike AH, the IP packet header is not protected by ESP. (Although in tunnel mode ESP, protection is afforded to the whole inner IP packet, including the inner header; the outer header remains unprotected.) ESP operates directly on top of IP, using IP protocol number 50.</p>
+<p>An ESP packet diagram:</p>
+<table class="wikitable" border="1" cellpadding="2" cellspacing="0">
+<tbody><tr>
+<th style="text-align: center; width: 10em;">0 - 7 bit</th>
+<th style="text-align: center; width: 10em;">8 - 15 bit</th>
+<th style="text-align: center; width: 10em;">16 - 23 bit</th>
+<th style="text-align: center; width: 10em;">24 - 31 bit</th>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">Security parameters index (SPI)</td>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">Sequence number</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: medium none; text-align: center;">
+<p><br>
+Payload data (variable)</p>
+<p><br></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; border-top-style: hidden;">&nbsp;</td>
+<td colspan="2" style="text-align: center;">Padding (0-255 bytes)</td>
+<td style="border-left-style: hidden;">&nbsp;</td>
+</tr>
+<tr>
+<td style="border-right-style: hidden;">&nbsp;</td>
+<td style="border-top-style: hidden;">&nbsp;</td>
+<td style="text-align: center;">Pad Length</td>
+<td style="text-align: center;">Next Header</td>
+</tr>
+<tr>
+<td colspan="4" style="text-align: center;">
+<p>Authentication Data (variable)</p>
+<p><br></p>
+</td>
+</tr>
+</tbody></table>
+<p>Field meanings:</p>
+<dl>
+<dt>Security parameters index (SPI)&nbsp;</dt>
+<dd>Identifies the security parameters in combination with IP address.</dd>
+<dt>Sequence number&nbsp;</dt>
+<dd>A monotonically increasing number, used to prevent replay attacks.</dd>
+<dt>Payload data&nbsp;</dt>
+<dd>The data to be transferred.</dd>
+<dt>Padding&nbsp;</dt>
+<dd>Used with some block ciphers to pad the data to the full length of a block.</dd>
+<dt>Pad length&nbsp;</dt>
+<dd>Size of padding in bytes.</dd>
+<dt>Next header&nbsp;</dt>
+<dd>Identifies the protocol of the transferred data.</dd>
+<dt>Authentication data&nbsp;</dt>
+<dd>Contains the data used to authenticate the packet.</dd>
+</dl>
+<p><a name="Implementations" id="Implementations"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=11" title="Edit section: Implementations">edit</a>]</span> <span class="mw-headline">Implementations</span></h2>
+<p>IPsec support is usually implemented in the <a href="http://en.wikipedia.org/wiki/Kernel_%28computer_science%29" title="Kernel (computer science)">kernel</a> with key management and <a href="http://en.wikipedia.org/wiki/ISAKMP" class="mw-redirect" title="ISAKMP">ISAKMP</a>/<a href="http://en.wikipedia.org/wiki/IKE" class="mw-redirect" title="IKE">IKE</a> negotiation carried out from user-space. Existing IPsec implementations tend to include both of these functionalities. However, as there is a standard interface for key management, it is possible to control one kernel IPsec stack using key management tools from a different implementation.</p>
+<p>Because of this, there is confusion as to the origins of the IPsec implementation that is in the <a href="http://en.wikipedia.org/wiki/Linux_kernel" title="Linux kernel">Linux kernel</a>. The <a href="http://en.wikipedia.org/wiki/FreeS/WAN" title="FreeS/WAN">FreeS/WAN</a> project made the first complete and <a href="http://en.wikipedia.org/wiki/Open_source" title="Open source">open source</a> implementation of IPsec for <a href="http://en.wikipedia.org/wiki/Linux" title="Linux">Linux</a>. It consists of a kernel IPsec stack (<a href="http://en.wikipedia.org/w/index.php?title=KLIPS&action=edit&redlink=1" class="new" title="KLIPS (page does not exist)">KLIPS</a>), as well as a key management <a href="http://en.wikipedia.org/wiki/Daemon_%28computer_software%29" title="Daemon (computer software)">daemon</a> (<a href="http://en.wikipedia.org/w/index.php?title=Pluto_%28openswan%29&action=edit&redlink=1" class="new" title="Pluto (openswan) (page does not exist)">pluto</a>) and many <a href="http://en.wikipedia.org/wiki/Shell_scripts" class="mw-redirect" title="Shell scripts">shell scripts</a>. The FreeS/WAN project was disbanded in <a href="http://en.wikipedia.org/wiki/March_2004" title="March 2004">March 2004</a>. <a href="http://en.wikipedia.org/wiki/Openswan" title="Openswan">Openswan</a> and <a href="http://en.wikipedia.org/wiki/StrongSwan" title="StrongSwan">strongSwan</a> are continuations of FreeS/WAN. The <a href="http://en.wikipedia.org/wiki/KAME_project" title="KAME project">KAME project</a> also implemented complete IPsec support for <a href="http://en.wikipedia.org/wiki/NetBSD" title="NetBSD">NetBSD</a>, <a href="http://en.wikipedia.org/wiki/FreeBSD" title="FreeBSD">FreeBSD</a>. Its key management daemon is called <a href="http://en.wikipedia.org/w/index.php?title=Racoon_%28kame%29&action=edit&redlink=1" class="new" title="Racoon (kame) (page does not exist)">racoon</a>. <a href="http://en.wikipedia.org/wiki/OpenBSD" title="OpenBSD">OpenBSD</a> made its own ISAKMP/IKE daemon, simply named isakmpd (which was also ported to other systems, including <a href="http://en.wikipedia.org/wiki/Linux" title="Linux">Linux</a>).</p>
+<p>However, none of these kernel IPsec stacks were integrated into the Linux kernel. <a href="http://en.wikipedia.org/w/index.php?title=Alexey_Kuznetsov&action=edit&redlink=1" class="new" title="Alexey Kuznetsov (page does not exist)">Alexey Kuznetsov</a> and <a href="http://en.wikipedia.org/wiki/David_S._Miller" title="David S. Miller">David S. Miller</a> wrote a kernel IPsec implementation from scratch for the Linux kernel around the end of 2002. This stack was subsequently released as part of Linux 2.6, and is referred to variously as "native" or "NETKEY".</p>
+<p>Therefore, contrary to popular belief, the Linux IPsec stack did not originate from the KAME project. As it supports the standard <a href="http://en.wikipedia.org/w/index.php?title=PF_KEY&action=edit&redlink=1" class="new" title="PF KEY (page does not exist)">PF_KEY</a> protocol (<a href="http://tools.ietf.org/html/rfc2367" class="external" title="http://tools.ietf.org/html/rfc2367">RFC 2367</a>) and the native <a href="http://en.wikipedia.org/w/index.php?title=XFRM&action=edit&redlink=1" class="new" title="XFRM (page does not exist)">XFRM</a> interface for key management, the Linux IPsec stack can be used in conjunction with either <i>pluto</i> from <a href="http://en.wikipedia.org/wiki/Openswan" title="Openswan">Openswan</a>/<a href="http://en.wikipedia.org/wiki/StrongSwan" title="StrongSwan">strongSwan</a>, <i>isakmpd</i> from <a href="http://en.wikipedia.org/wiki/OpenBSD" title="OpenBSD">OpenBSD</a> project, <i>racoon</i> from the <a href="http://en.wikipedia.org/wiki/KAME_project" title="KAME project">KAME project</a> or without any ISAKMP/IKE daemon (using manual keying).</p>
+<p>The new architectures of network processors, including multi-core processors with integrated encryption engines, change the way the IPsec stacks are designed. A dedicated Fast Path is used in order to offload the processing of the IPsec processing (SA, SP lookups, encryption, etc.). These Fast Path stacks must be co-integrated on dedicated cores with Linux or RTOS running on other cores. These OS are the control plane that runs ISAKMP/IKE of the Fast Path IPsec stack.</p>
+<p>There are a number of implementations of <b>IPsec</b> and ISAKMP/IKE protocols. These include:</p>
+<ul>
+<li><a href="http://www.6wind.com/6WINDGate-software.html" class="external text" title="http://www.6wind.com/6WINDGate-software.html" rel="nofollow">6WINDGate</a>, Network processor <a href="http://en.wikipedia.org/wiki/Multi-core" title="Multi-core">MPU</a> Fast Path IPsec stack</li>
+<li><a href="http://en.wikipedia.org/wiki/United_States_Naval_Research_Laboratory" title="United States Naval Research Laboratory">NRL</a> <a href="http://www.itd.nrl.navy.mil/" class="external autonumber" title="http://www.itd.nrl.navy.mil/" rel="nofollow">[1]</a> IPsec, one of the original sources of IPsec code <a href="http://ezine.daemonnews.org/199812/security.html" class="external autonumber" title="http://ezine.daemonnews.org/199812/security.html" rel="nofollow">[2]</a></li>
+<li><a href="http://en.wikipedia.org/wiki/OpenBSD" title="OpenBSD">OpenBSD</a>, with its own code derived from NRL IPsec</li>
+<li>the <a href="http://en.wikipedia.org/wiki/KAME_project" title="KAME project">KAME</a> stack, that is included in <a href="http://en.wikipedia.org/wiki/Mac_OS_X" title="Mac OS X">Mac OS X</a>, <a href="http://en.wikipedia.org/wiki/NetBSD" title="NetBSD">NetBSD</a> and <a href="http://en.wikipedia.org/wiki/FreeBSD" title="FreeBSD">FreeBSD</a></li>
+<li>"IPsec" in <a href="http://en.wikipedia.org/wiki/Cisco_IOS" title="Cisco IOS">Cisco IOS Software</a> <a href="http://www.cisco.com/en/US/tech/tk583/tk372/technologies_tech_note09186a0080094203.shtml" class="external autonumber" title="http://www.cisco.com/en/US/tech/tk583/tk372/technologies_tech_note09186a0080094203.shtml" rel="nofollow">[3]</a></li>
+<li>"IPsec" in <a href="http://en.wikipedia.org/wiki/Microsoft_Windows" title="Microsoft Windows">Microsoft Windows</a>, including Windows XP<a href="http://support.microsoft.com/?kbid=884909" class="external autonumber" title="http://support.microsoft.com/?kbid=884909" rel="nofollow">[4]</a> <a href="http://support.microsoft.com/kb/818043/en-us" class="external autonumber" title="http://support.microsoft.com/kb/818043/en-us" rel="nofollow">[5]</a>, Windows 2000<a href="http://www.microsoft.com/windows2000/technologies/communications/ipsec/default.mspx" class="external autonumber" title="http://www.microsoft.com/windows2000/technologies/communications/ipsec/default.mspx" rel="nofollow">[6]</a>, Windows 2003<a href="http://www.microsoft.com/windowsserver2003/technologies/networking/ipsec/default.mspx" class="external autonumber" title="http://www.microsoft.com/windowsserver2003/technologies/networking/ipsec/default.mspx" rel="nofollow">[7]</a>, and Windows Vista <a href="http://technet.microsoft.com/en-us/network/bb531150.aspx" class="external autonumber" title="http://technet.microsoft.com/en-us/network/bb531150.aspx" rel="nofollow">[8]</a></li>
+<li><a href="http://en.wikipedia.org/w/index.php?title=SafeNet&action=edit&redlink=1" class="new" title="SafeNet (page does not exist)">SafeNet</a> <a href="http://en.wikipedia.org/w/index.php?title=QuickSec&action=edit&redlink=1" class="new" title="QuickSec (page does not exist)">QuickSec</a> toolkits <a href="http://www.safenet-inc.com/products/swTK/index.asp" class="external autonumber" title="http://www.safenet-inc.com/products/swTK/index.asp" rel="nofollow">[9]</a></li>
+<li>IPsec in <a href="http://en.wikipedia.org/wiki/Solaris_%28operating_system%29" title="Solaris (operating system)">Solaris</a> <a href="http://docs.sun.com/app/docs/doc/817-2694?a=expand" class="external autonumber" title="http://docs.sun.com/app/docs/doc/817-2694?a=expand" rel="nofollow">[10]</a></li>
+<li><a href="http://en.wikipedia.org/wiki/IBM" title="IBM">IBM</a> <a href="http://en.wikipedia.org/wiki/AIX_operating_system" class="mw-redirect" title="AIX operating system">AIX operating system</a></li>
+<li><a href="http://en.wikipedia.org/wiki/IBM" title="IBM">IBM</a> <a href="http://en.wikipedia.org/wiki/Z/OS" title="Z/OS">z/OS</a></li>
+<li>IPsec and IKE in <a href="http://en.wikipedia.org/wiki/HP-UX" title="HP-UX">HP-UX</a> (HP-UX IPSec)</li>
+<li>"IPsec and IKE" in <a href="http://en.wikipedia.org/wiki/VxWorks" title="VxWorks">VxWorks</a> <a href="http://www.windriver.com/portal/server.pt?space=CommunityPage&cached=true&control=SetCommunity&CommunityID=766" class="external autonumber" title="http://www.windriver.com/portal/server.pt?space=CommunityPage&cached=true&control=SetCommunity&CommunityID=766" rel="nofollow">[11]</a></li>
+</ul>
+<p><a name="See_also" id="See_also"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=12" title="Edit section: See also">edit</a>]</span> <span class="mw-headline">See also</span></h2>
+<div class="tright portal" style="border: 1px solid rgb(170, 170, 170); margin: 0.5em 0pt 0.5em 0.5em;">
+<table style="background: rgb(249, 249, 249) none repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 85%; line-height: 110%;">
+<tbody><tr>
+<td><a href="http://en.wikipedia.org/wiki/Image:Crypto_key.svg" class="image" title="Crypto key.svg"><img alt="" src="32px-crypto_key.svg.png" width="32" border="0" height="16"></a></td>
+<td style="padding: 0pt 0.2em;"><i><b><a href="http://en.wikipedia.org/wiki/Portal:Cryptography" title="Portal:Cryptography">Cryptography Portal</a></b></i></td>
+</tr>
+</tbody></table>
+</div>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Information_security" title="Information security">Information security</a></li>
+<li>Year <a href="http://en.wikipedia.org/wiki/2005" title="2005">2005</a> saw the standardization of a <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol" title="User Datagram Protocol">UDP</a> <a href="http://en.wikipedia.org/wiki/Encapsulation_%28networking%29" title="Encapsulation (networking)">encapsulation</a> mechanism for <a href="http://en.wikipedia.org/wiki/NAT_traversal" title="NAT traversal">NAT traversal</a>: <a href="http://en.wikipedia.org/wiki/NAT-T" title="NAT-T">NAT-T</a></li>
+<li><a href="http://en.wikipedia.org/wiki/L2TP" class="mw-redirect" title="L2TP">Layer 2 Tunneling Protocol</a> (L2TP)</li>
+<li><a href="http://en.wikipedia.org/wiki/Security_association" title="Security association">Security association</a> (SA)</li>
+<li><a href="http://en.wikipedia.org/wiki/Opportunistic_encryption" title="Opportunistic encryption">Opportunistic encryption</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Virtual_private_network" title="Virtual private network">Virtual private network</a></li>
+</ul>
+<p><a name="List_of_IPsec-related_RFCs" id="List_of_IPsec-related_RFCs"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=13" title="Edit section: List of IPsec-related RFCs">edit</a>]</span> <span class="mw-headline">List of IPsec-related RFCs</span></h2>
+<dl>
+<dt><a href="http://tools.ietf.org/html/rfc2367" class="external" title="http://tools.ietf.org/html/rfc2367">RFC 2367</a></dt>
+<dd>PF_KEY Interface</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2401" class="external" title="http://tools.ietf.org/html/rfc2401">RFC 2401</a></dt>
+<dd>Security Architecture for the Internet Protocol (IPsec overview)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2403" class="external" title="http://tools.ietf.org/html/rfc2403">RFC 2403</a></dt>
+<dd>The Use of HMAC-MD5-96 within ESP and AH</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2404" class="external" title="http://tools.ietf.org/html/rfc2404">RFC 2404</a></dt>
+<dd>The Use of HMAC-SHA-1-96 within ESP and AH</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2405" class="external" title="http://tools.ietf.org/html/rfc2405">RFC 2405</a></dt>
+<dd>The ESP DES-CBC Cipher Algorithm With Explicit IV</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2410" class="external" title="http://tools.ietf.org/html/rfc2410">RFC 2410</a></dt>
+<dd>The NULL Encryption Algorithm and Its Use With IPsec</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2411" class="external" title="http://tools.ietf.org/html/rfc2411">RFC 2411</a></dt>
+<dd>IP Security Document Roadmap</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2412" class="external" title="http://tools.ietf.org/html/rfc2412">RFC 2412</a></dt>
+<dd>The OAKLEY Key Determination Protocol</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2451" class="external" title="http://tools.ietf.org/html/rfc2451">RFC 2451</a></dt>
+<dd>The ESP CBC-Mode Cipher Algorithms</dd>
+<dt><a href="http://tools.ietf.org/html/rfc2857" class="external" title="http://tools.ietf.org/html/rfc2857">RFC 2857</a></dt>
+<dd>The Use of HMAC-RIPEMD-160-96 within ESP and AH</dd>
+<dt><a href="http://tools.ietf.org/html/rfc3526" class="external" title="http://tools.ietf.org/html/rfc3526">RFC 3526</a></dt>
+<dd>More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key Exchange (IKE)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc3706" class="external" title="http://tools.ietf.org/html/rfc3706">RFC 3706</a></dt>
+<dd>A Traffic-Based Method of Detecting Dead Internet Key Exchange (IKE) Peers</dd>
+<dt><a href="http://tools.ietf.org/html/rfc3715" class="external" title="http://tools.ietf.org/html/rfc3715">RFC 3715</a></dt>
+<dd>IPsec-Network Address Translation (NAT) Compatibility Requirements</dd>
+<dt><a href="http://tools.ietf.org/html/rfc3947" class="external" title="http://tools.ietf.org/html/rfc3947">RFC 3947</a></dt>
+<dd>Negotiation of NAT-Traversal in the IKE</dd>
+<dt><a href="http://tools.ietf.org/html/rfc3948" class="external" title="http://tools.ietf.org/html/rfc3948">RFC 3948</a></dt>
+<dd>UDP Encapsulation of IPsec ESP Packets</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4106" class="external" title="http://tools.ietf.org/html/rfc4106">RFC 4106</a></dt>
+<dd>The Use of Galois/Counter Mode (GCM) in IPsec Encapsulating Security Payload (ESP)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4301" class="external" title="http://tools.ietf.org/html/rfc4301">RFC 4301</a></dt>
+<dd>Security Architecture for the Internet Protocol</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4302" class="external" title="http://tools.ietf.org/html/rfc4302">RFC 4302</a></dt>
+<dd>IP Authentication Header</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4303" class="external" title="http://tools.ietf.org/html/rfc4303">RFC 4303</a></dt>
+<dd>IP Encapsulating Security Payload</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4304" class="external" title="http://tools.ietf.org/html/rfc4304">RFC 4304</a></dt>
+<dd>Extended Sequence Number (ESN) Addendum to IPsec Domain of Interpretation (DOI) for Internet Security Association and Key Management Protocol (ISAKMP)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4307" class="external" title="http://tools.ietf.org/html/rfc4307">RFC 4307</a></dt>
+<dd>Cryptographic Algorithms for Use in the Internet Key Exchange Version 2 (<a href="http://en.wikipedia.org/wiki/IKEv2" title="IKEv2">IKEv2</a>)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4308" class="external" title="http://tools.ietf.org/html/rfc4308">RFC 4308</a></dt>
+<dd>Cryptographic Suites for IPsec</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4309" class="external" title="http://tools.ietf.org/html/rfc4309">RFC 4309</a></dt>
+<dd>Using Advanced Encryption Standard (AES) CCM Mode with IPsec Encapsulating Security Payload (ESP)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4478" class="external" title="http://tools.ietf.org/html/rfc4478">RFC 4478</a></dt>
+<dd>Repeated Authentication in Internet Key Exchange (IKEv2) Protocol</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4543" class="external" title="http://tools.ietf.org/html/rfc4543">RFC 4543</a></dt>
+<dd>The Use of Galois Message Authentication Code (GMAC) in IPsec ESP and AH</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4555" class="external" title="http://tools.ietf.org/html/rfc4555">RFC 4555</a></dt>
+<dd>IKEv2 Mobility and Multihoming Protocol (MOBIKE)</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4621" class="external" title="http://tools.ietf.org/html/rfc4621">RFC 4621</a></dt>
+<dd>Design of the IKEv2 Mobility and Multihoming (MOBIKE) Protocol</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4718" class="external" title="http://tools.ietf.org/html/rfc4718">RFC 4718</a></dt>
+<dd>IKEv2 Clarifications and Implementation Guidelines</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4806" class="external" title="http://tools.ietf.org/html/rfc4806">RFC 4806</a></dt>
+<dd>Online Certificate Status Protocol (OCSP) Extensions to IKEv2</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4809" class="external" title="http://tools.ietf.org/html/rfc4809">RFC 4809</a></dt>
+<dd>Requirements for an IPsec Certificate Management Profile</dd>
+<dt><a href="http://tools.ietf.org/html/rfc4945" class="external" title="http://tools.ietf.org/html/rfc4945">RFC 4945</a></dt>
+<dd>The Internet IP Security PKI Profile of IKEv1/ISAKMP, IKEv2, and PKIX</dd>
+</dl>
+<p><a name="References" id="References"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=14" title="Edit section: References">edit</a>]</span> <span class="mw-headline">References</span></h2>
+<ol class="references">
+<li id="cite_note-0"><b><a href="#cite_ref-0" title="">^</a></b> <a href="http://tools.ietf.org/html/rfc4294" class="external" title="http://tools.ietf.org/html/rfc4294">RFC 4294</a> section 8.1</li>
+<li id="cite_note-1"><b><a href="#cite_ref-1" title="">^</a></b> <cite style="font-style: normal;">Bellovin, Steven M. (1996). "<a href="http://www.cs.columbia.edu/%7Esmb/papers/badesp.ps" class="external text" title="http://www.cs.columbia.edu/~smb/papers/badesp.ps" rel="nofollow">Problem Areas for the IP Security Protocols</a>". <i>Proceedings of the Sixth Usenix Unix Security Symposium</i>: 1-16. <span class="reference-accessdate">Retrieved on <a href="http://en.wikipedia.org/wiki/2007" title="2007">2007</a>-<a href="http://en.wikipedia.org/wiki/July_9" title="July 9">07-09</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=proceeding&rft.btitle=Proceedings+of+the+Sixth+Usenix+Unix+Security+Symposium&rft.atitle=Problem+Areas+for+the+IP+Security+Protocols&rft.aulast=Bellovin&rft.aufirst=Steven+M.&rft.date=1996&rft.pages=1-16&rft_id=http%3A%2F%2Fwww.cs.columbia.edu%2F%7Esmb%2Fpapers%2Fbadesp.ps"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-2"><b><a href="#cite_ref-2" title="">^</a></b> <cite style="font-style: normal;">K.G. Paterson and A. Yau (2006). "<a href="http://eprint.iacr.org/2005/416" class="external text" title="http://eprint.iacr.org/2005/416" rel="nofollow">Cryptography in theory and practice: The case of encryption in IPsec</a>". <i>Eurocrypt 2006, Lecture Notes in Computer Science Vol. 4004</i>: 12-29. <span class="reference-accessdate">Retrieved on <a href="http://en.wikipedia.org/wiki/2007" title="2007">2007</a>-<a href="http://en.wikipedia.org/wiki/August_13" title="August 13">08-13</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=proceeding&rft.btitle=Eurocrypt+2006%2C+Lecture+Notes+in+Computer+Science+Vol.+4004&rft.atitle=Cryptography+in+theory+and+practice%3A+The+case+of+encryption+in+IPsec&rft.au=K.G.+Paterson+and+A.+Yau&rft.date=2006&rft.pages=12-29&rft_id=http%3A%2F%2Feprint.iacr.org%2F2005%2F416"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-3"><b><a href="#cite_ref-3" title="">^</a></b> <cite style="font-style: normal;">J.P. Degabriele and K.G. Paterson (2007). "<a href="http://eprint.iacr.org/2007/125" class="external text" title="http://eprint.iacr.org/2007/125" rel="nofollow">Attacking the IPsec Standards in Encryption-only Configurations</a>". <i>IEEE Symposium on Security and Privacy, IEEE Computer Society</i>: 335-349. <span class="reference-accessdate">Retrieved on <a href="http://en.wikipedia.org/wiki/2007" title="2007">2007</a>-<a href="http://en.wikipedia.org/wiki/August_13" title="August 13">08-13</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=proceeding&rft.btitle=IEEE+Symposium+on+Security+and+Privacy%2C+IEEE+Computer+Society&rft.atitle=Attacking+the+IPsec+Standards+in+Encryption-only+Configurations&rft.au=J.P.+Degabriele+and+K.G.+Paterson&rft.date=2007&rft.pages=335-349&rft_id=http%3A%2F%2Feprint.iacr.org%2F2007%2F125"><span style="display: none;">&nbsp;</span></span></li>
+</ol>
+<p><a name="External_links" id="External_links"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit&section=15" title="Edit section: External links">edit</a>]</span> <span class="mw-headline">External links</span></h2>
+<ul>
+<li><a href="http://www.ietf.org/html.charters/OLD/ipsec-charter.html" class="external text" title="http://www.ietf.org/html.charters/OLD/ipsec-charter.html" rel="nofollow">IETF IPsec WG has "concluded", archive of the page is here</a></li>
+<li><a href="https://datatracker.ietf.org/public/idindex.cgi?command=show_wg_id&id=1091" class="external text" title="https://datatracker.ietf.org/public/idindex.cgi?command=show_wg_id&id=1091" rel="nofollow">IPsec WG still has important active drafts</a></li>
+<li><a href="http://www.ietf.org/html.charters/wg-dir.html#Security%20Area" class="external text" title="http://www.ietf.org/html.charters/wg-dir.html#Security%20Area" rel="nofollow">All IETF active security WGs</a></li>
+<li><a href="http://www.ietf.org/html.charters/btns-charter.html" class="external text" title="http://www.ietf.org/html.charters/btns-charter.html" rel="nofollow">IETF BTNS WG (chartered to work on unauthenticated IPsec, IPsec APIs, connection latching)</a></li>
+<li><a href="http://www.windowsecurity.com/articles/Securing_Data_in_Transit_with_IPSec.html" class="external text" title="http://www.windowsecurity.com/articles/Securing_Data_in_Transit_with_IPSec.html" rel="nofollow">Securing Data in Transit with IPsec</a></li>
+<li><a href="http://search.dmoz.org/cgi-bin/search?search=ipsec" class="external text" title="http://search.dmoz.org/cgi-bin/search?search=ipsec" rel="nofollow">IPsec</a> at the <a href="http://en.wikipedia.org/wiki/Open_Directory_Project" title="Open Directory Project">Open Directory Project</a></li>
+<li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=1d4c292c-7998-42e4-8786-789c7b457881&displaylang=en" class="external text" title="http://www.microsoft.com/downloads/details.aspx?FamilyID=1d4c292c-7998-42e4-8786-789c7b457881&displaylang=en" rel="nofollow">Microsoft IPsec Diagnostic Tool</a></li>
+<li><a href="http://www.unixwiz.net/techtips/iguide-ipsec.html" class="external text" title="http://www.unixwiz.net/techtips/iguide-ipsec.html" rel="nofollow">An Illustrated Guide to IPsec</a></li>
+<li><a href="http://www.ict.tuwien.ac.at/skripten/datenkomm/infobase/L97-IPsec_v4-7.pdf" class="external text" title="http://www.ict.tuwien.ac.at/skripten/datenkomm/infobase/L97-IPsec_v4-7.pdf" rel="nofollow">Data Communication Lectures of Manfred Lindner - Part IPsec</a></li>
+</ul>
+<table class="navbox" style="" cellspacing="0">
+<tbody><tr>
+<td style="padding: 2px;">
+<table id="collapsibleTable0" class="nowraplinks collapsible autocollapse" style="background: transparent none repeat ; 0%; width: 100%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th style="" colspan="2" class="navbox-title"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">[<a href="javascript:collapseTable(0);" id="collapseButton0">hide</a>]</span>
+<div style="float: left; width: 6em; text-align: left;">
+<div class="noprint plainlinksneverexpand" style="border: medium none ; padding: 0pt; background-color: transparent; white-space: nowrap; font-weight: normal; font-size: xx-small;"><a href="http://en.wikipedia.org/wiki/Template:VPN" title="Template:VPN"><span title="View this template" style="border: medium none ;">v</span></a>&nbsp;<span style="font-size: 80%;">&bull;</span>&nbsp;<a href="http://en.wikipedia.org/w/index.php?title=Template_talk:VPN&action=edit&redlink=1" class="new" title="Template talk:VPN (page does not exist)"><span style="border: medium none ; color: rgb(0, 43, 184);" title="Discussion about this template">d</span></a>&nbsp;<span style="font-size: 80%;">&bull;</span>&nbsp;<a href="http://en.wikipedia.org/w/index.php?title=Template:VPN&action=edit" class="external text" title="http://en.wikipedia.org/w/index.php?title=Template:VPN&action=edit" rel="nofollow"><span style="border: medium none ; color: rgb(0, 43, 184);" title="You can edit this template. Please use the preview button before saving.">e</span></a></div>
+</div>
+<span style="font-size: 110%;"><a href="http://en.wikipedia.org/wiki/Virtual_private_network" title="Virtual private network">Virtual Private Networking</a></span></th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="padding: 0px; width: 100%;" class="navbox-list navbox-odd">
+<div style="padding: 0em 0.25em;">
+<div>
+<p><b>Software:</b> <a href="http://en.wikipedia.org/wiki/Hamachi" title="Hamachi">Hamachi</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Microsoft_Intelligent_Application_Gateway" title="Microsoft Intelligent Application Gateway">Microsoft Intelligent Application Gateway</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Openswan" title="Openswan">Openswan</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/OpenVPN" title="OpenVPN">OpenVPN</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Remobo" title="Remobo">Remobo</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Tinc_%28protocol%29" title="Tinc (protocol)">tinc (protocol)</a><br>
+<b>Mechanisms:</b> <strong class="selflink">IPsec</strong><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol" title="Layer 2 Tunneling Protocol">Layer 2 Tunneling Protocol</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/L2TPv3" title="L2TPv3">L2TPv3</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Point-to-point_tunneling_protocol" title="Point-to-point tunneling protocol">Point-to-point tunneling protocol</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Split_tunneling" title="Split tunneling">Split tunneling</a><br>
+<b>Vendor-driven:</b> <a href="http://en.wikipedia.org/wiki/L2F" class="mw-redirect" title="L2F">L2F</a><span style="font-weight: bold;">&nbsp;&middot;</span> <a href="http://en.wikipedia.org/wiki/Next_Hop_Tunnel_Binding" title="Next Hop Tunnel Binding">Next Hop Tunnel Binding</a><br></p>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 1276/1000000
+Post-expand include size: 26344/2048000 bytes
+Template argument size: 4744/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:43342-0!1!0!default!!en!2 and timestamp 20080702084832 -->
+<div class="printfooter">
+
+Retrieved from "<a href="http://en.wikipedia.org/wiki/IPsec">http://en.wikipedia.org/wiki/IPsec</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://en.wikipedia.org/wiki/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:VPN" title="Category:VPN">VPN</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Internet_protocols" title="Category:Internet protocols">Internet protocols</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Cryptographic_protocols" title="Category:Cryptographic protocols">Cryptographic protocols</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Tunneling_protocols" title="Category:Tunneling protocols">Tunneling protocols</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Network_layer_protocols" title="Category:Network layer protocols">Network layer protocols</a></span></div></div>			<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+					 <li id="ca-nstab-main" class="selected"><a href="http://en.wikipedia.org/wiki/IPsec" title="View the content page [alt-shift-c]" accesskey="c">Article</a></li>
+					 <li id="ca-talk"><a href="http://en.wikipedia.org/wiki/Talk:IPsec" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+					 <li id="ca-edit"><a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=edit" title="You can edit this page. Please use the preview button before saving. [alt-shift-e]" accesskey="e">Edit this page</a></li>
+					 <li id="ca-history"><a href="http://en.wikipedia.org/w/index.php?title=IPsec&action=history" title="Past versions of this page [alt-shift-h]" accesskey="h">History</a></li>
+				</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=IPsec" title="You are encouraged to log in; however, it is not mandatory. [alt-shift-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(wiki.png);" href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+		<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage"><a href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main Page</a></li>
+				<li id="n-Contents"><a href="http://en.wikipedia.org/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li>
+				<li id="n-featuredcontent"><a href="http://en.wikipedia.org/wiki/Portal:Featured_content">Featured content</a></li>
+				<li id="n-currentevents"><a href="http://en.wikipedia.org/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-randompage"><a href="http://en.wikipedia.org/wiki/Special:Random" title="Load a random article [alt-shift-x]" accesskey="x">Random article</a></li>
+			</ul>
+		</div>
+	</div>
+		<div class="generated-sidebar portlet" id="p-interaction">
+		<h5>Interaction</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-aboutsite"><a href="http://en.wikipedia.org/wiki/Wikipedia:About">About Wikipedia</a></li>
+				<li id="n-portal"><a href="http://en.wikipedia.org/wiki/Wikipedia:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-recentchanges"><a href="http://en.wikipedia.org/wiki/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-contact"><a href="http://en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact Wikipedia</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate" title="Support us">Donate to Wikipedia</a></li>
+				<li id="n-help"><a href="http://en.wikipedia.org/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li>
+			</ul>
+		</div>
+	</div>
+		<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="http://en.wikipedia.org/wiki/Special:Search" id="searchform"><div>
+				<input autocomplete="off" id="searchInput" name="search" title="Search Wikipedia [alt-shift-f]" accesskey="f" value="" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if one exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the wiki for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://en.wikipedia.org/wiki/Special:WhatLinksHere/IPsec" title="List of all English Wikipedia pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://en.wikipedia.org/wiki/Special:RecentChangesLinked/IPsec" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-upload"><a href="http://en.wikipedia.org/wiki/Wikipedia:Upload" title="Upload files [alt-shift-u]" accesskey="u">Upload file</a></li>
+<li id="t-specialpages"><a href="http://en.wikipedia.org/wiki/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://en.wikipedia.org/w/index.php?title=IPsec&printable=yes" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://en.wikipedia.org/w/index.php?title=IPsec&oldid=223039786" title="Permanent link to this version of the page">Permanent link</a></li><li id="t-cite"><a href="http://en.wikipedia.org/w/index.php?title=Special:Cite&page=IPsec&id=223039786">Cite this page</a></li>			</ul>
+		</div>
+	</div>
+	<div id="p-lang" class="portlet">
+		<h5>Languages</h5>
+		<div class="pBody">
+			<ul>
+				<li class="interwiki-af"><a href="http://af.wikipedia.org/wiki/IPSec">Afrikaans</a></li>
+				<li class="interwiki-cs"><a href="http://cs.wikipedia.org/wiki/IPsec">Česky</a></li>
+				<li class="interwiki-da"><a href="http://da.wikipedia.org/wiki/IPsec">Dansk</a></li>
+				<li class="interwiki-de"><a href="http://de.wikipedia.org/wiki/IPsec">Deutsch</a></li>
+				<li class="interwiki-es"><a href="http://es.wikipedia.org/wiki/IPsec">Espa&ntilde;ol</a></li>
+				<li class="interwiki-eu"><a href="http://eu.wikipedia.org/wiki/IPsec">Euskara</a></li>
+				<li class="interwiki-fr"><a href="http://fr.wikipedia.org/wiki/IPsec">Fran&ccedil;ais</a></li>
+				<li class="interwiki-id"><a href="http://id.wikipedia.org/wiki/IP_Security">Bahasa Indonesia</a></li>
+				<li class="interwiki-it"><a href="http://it.wikipedia.org/wiki/IPsec">Italiano</a></li>
+				<li class="interwiki-nl"><a href="http://nl.wikipedia.org/wiki/IPsec">Nederlands</a></li>
+				<li class="interwiki-ja"><a href="http://ja.wikipedia.org/wiki/IPsec">日本語</a></li>
+				<li class="interwiki-pl"><a href="http://pl.wikipedia.org/wiki/IPsec">Polski</a></li>
+				<li class="interwiki-pt"><a href="http://pt.wikipedia.org/wiki/IPsec">Portugu&ecirc;s</a></li>
+				<li class="interwiki-ru"><a href="http://ru.wikipedia.org/wiki/IPsec">Русский</a></li>
+				<li class="interwiki-fi"><a href="http://fi.wikipedia.org/wiki/IPsec">Suomi</a></li>
+				<li class="interwiki-sv"><a href="http://sv.wikipedia.org/wiki/IPSEC">Svenska</a></li>
+				<li class="interwiki-zh"><a href="http://zh.wikipedia.org/wiki/IPsec">中文</a></li>
+			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="wikimedia-button.png" alt="Wikimedia Foundation" border="0"></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> This page was last modified on 2 July 2008, at 08:46.</li>
+				<li id="copyright">All text is available under the terms of the <a class="internal" href="http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License" title="Wikipedia:Text of the GNU Free Documentation License">GNU Free Documentation License</a>. (See <b><a class="internal" href="http://en.wikipedia.org/wiki/Wikipedia:Copyrights" title="Wikipedia:Copyrights">Copyrights</a></b> for details.) <br> Wikipedia&reg; is a registered trademark of the <a href="http://www.wikimediafoundation.org/">Wikimedia Foundation, Inc</a>., a U.S. registered <a class="internal" href="http://en.wikipedia.org/wiki/501%28c%29#501.28c.29.283.29" title="501(c)(3)">501(c)(3)</a> <a href="http://wikimediafoundation.org/wiki/Deductibility_of_donations">tax-deductible</a> <a class="internal" href="http://en.wikipedia.org/wiki/Non-profit_organization" title="Non-profit organization">nonprofit</a> <a href="http://en.wikipedia.org/wiki/Charitable_organization" title="Charitable organization">charity</a>.<br></li>
+				<li id="privacy"><a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy policy</a></li>
+				<li id="about"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+				<li id="disclaimer"><a href="http://en.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv116 in 0.081 secs. --></body>
+</html>

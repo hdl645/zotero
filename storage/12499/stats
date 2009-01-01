@@ -1,0 +1,28 @@
+
+
+document.write("<a href='http://tong&#46;weamax&#46;com/?userid=10408' target='_blank'><img src='http://sa6.tong.weamax.com/images/js_icon/12X50.gif' border='0' title='创新提升网站价值 - WeaMAX 流量通\nNo.10408 '  align=absmiddle></a>");	var in_iframe = 0;
+
+   var wea_h       = escape(location.href);
+   var wea_r   = escape(document.referrer);
+
+	if(in_iframe==1 || top!=self){  
+	   wea_h       = escape(top.location.href);
+	   wea_r   = escape(top.document.referrer);
+	}
+
+   var wea_l   = navigator.systemLanguage ? navigator.systemLanguage : navigator.userLanguage;
+   var wea_c = screen.colorDepth;
+   var wea_s = screen.width+"*"+screen.height;
+   var weastats_date       = new Date();
+   var wea_t   = 0 - weastats_date.getTimezoneOffset()/60;
+   document.write(
+   "<script language='JavaScript' src='http://sa6.tong.weamax.com/stats_write?u=10408"
+   +"&wea_h="+wea_h
+   +"&wea_r="+wea_r
+   +"&wea_l="+wea_l
+   +"&wea_c="+wea_c
+   +"&wea_s="+wea_s
+   +"&wea_t="+wea_t
+   +"'></script>"
+   );
+

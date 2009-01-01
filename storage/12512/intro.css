@@ -1,0 +1,22 @@
+
+/* ::::: null ::::: */
+
+body { margin: 1em; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-family: FreeSerif,serif; }
+.tt { font-family: Bitstream Vera Sans,Andale Mono,monospace; }
+h1, h2, h3, h4, h5, h6 { font-family: FreeSans,Arial,sans-serif; }
+.title, .title a { margin: 0pt auto; font-weight: bold; font-size: 1.3em; color: rgb(119, 119, 119); }
+h1 { font-size: 1.3em; }
+h2 { border-bottom: 2px solid maroon; font-size: 1.2em; }
+h3 { font-size: 1.1em; }
+h4, h5, h6 { font-size: 1em; font-style: italic; }
+g dl { margin-left: 1em; }
+dl dd { padding-top: 0.2em; padding-bottom: 0.5em; }
+pre { border: 1px solid grey; margin: 1em 0.3em; padding: 0.75em 1.5em; background-color: rgb(238, 238, 238); }
+.figure { padding: 0.6em; float: right; width: 50%; text-align: center; }
+.bigfigure { padding: 0.6em; float: right; text-align: center; }
+.figure img { width: 90%; }
+.bigfigure img { width: auto; }
+.figure .caption, .bigfigure .caption { font-style: italic; }
+.address { margin-left: 8em; font-style: italic; }
+.fixme { background: rgb(255, 204, 204) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; }
+.fixme:before { content: "[FIXME] "; }

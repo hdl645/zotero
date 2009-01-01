@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lists.openswan.org/pipermail/users/2006-May/009487.html">
+<meta name="wpd_url" content="http://lists.openswan.org/pipermail/users/2006-May/009487.html">
+<meta name="wpd_date" content="2008-06-03T07:33Z">
+
+
+ 
+   <title> [Openswan Users] 
+	Statement on support of multiple clients using transport mode and
+	L2TP
+   </title>
+   <link rel="Index" href="http://lists.openswan.org/pipermail/users/2006-May/index.html">
+   <link rel="made" href="mailto:users%40openswan.org?Subject=%5BOpenswan%20Users%5D%20%0A%09Statement%20on%20support%20of%20multiple%20clients%20using%20transport%20mode%20and%0A%09L2TP&In-Reply-To=">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.openswan.org/pipermail/users/2006-May/009479.html">
+   <link rel="Next" href="http://lists.openswan.org/pipermail/users/2006-May/009488.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>[Openswan Users] 
+	Statement on support of multiple clients using transport mode and
+	L2TP</h1>
+    <b>Patrick Naubert</b> 
+    <a href="mailto:users%40openswan.org?Subject=%5BOpenswan%20Users%5D%20%0A%09Statement%20on%20support%20of%20multiple%20clients%20using%20transport%20mode%20and%0A%09L2TP&In-Reply-To=" title="[Openswan Users] 
+	Statement on support of multiple clients using transport mode and
+	L2TP">patrickn at xelerance.com
+       </a><br>
+    <i>Wed May 10 13:24:41 CEST 2006</i>
+    <p></p><ul>
+        <li>Previous message: <a href="http://lists.openswan.org/pipermail/users/2006-May/009479.html">[Openswan Users]
+</a></li>
+        <li>Next message: <a href="http://lists.openswan.org/pipermail/users/2006-May/009488.html">[Openswan Users] Host Certifcate
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/date.html#9487">[ date ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/thread.html#9487">[ thread ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/subject.html#9487">[ subject ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/author.html#9487">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>Statement on support of multiple clients using transport mode and L2TP
+
+Currently Openswan, both with KLIPS and NETKEY, will show unexpected  
+behavior with the use of NAPT/NAT (<layer id="google-toolbar-hilite-0" style="background-color: Fuchsia; color: black;">IP</layer> Masquerading) at either the  
+source end or destination end, combined with transport mode.
+
+Many users have reported problems on the Openswan mailing lists.   
+Xelerance has been aware of these issues even before the users  
+started experimenting with using Openswan in transport mode.  
+Transport mode is necessary with the use of L2TP to connect from a  
+Windows (or OSX) platform to an Openswan server, using Windows (or  
+OSX) native IPsec clients.
+
+A few issues with NAT support and MTU problems appeared at the time  
+of the 2.4.x series, which muddied the waters a bit. Work arounds for  
+OSX and Windows had to be added to the NAT-detection in pluto code,  
+and some problems in "vhost" code as well as some NAT related rekey  
+errors showed up during at this time.
+
+The NAT detection fixes were merged into the current 2.4 series.  The  
+"vhost" patches are being merged into the development public code.  
+They will be rolled into a numbered release in the future.
+
+Here is where the Openswan software stands at this time:
+
+NETKEY uses the external <layer id="google-toolbar-hilite-1" style="background-color: Fuchsia; color: black;">IP</layer> as an SA identifier.  Kernel magic is  
+used to support this.  This means that multiple clients connecting  
+from behind the same home firewall will not work. One will, but not  
+multiple. This also means that multiple home users will be able to  
+connect from behind their respective firewalls at the same time, as  
+long as they are alone at their origin. Also, workarounds needed to  
+be added to ensure one L2TP/IPsec and other non-encrypted clients  
+from behind the same NAT router would work. This is an important  
+issue in some of the larger deployed GPRS networks.
+
+KLIPS uses the internal <layer id="google-toolbar-hilite-2" style="background-color: Fuchsia; color: black;">IP</layer> as an SA identifier. This means that  
+multiple clients connecting from behind the same home firewall could  
+work, but a additional policy bug in the 2.4.x versions actually made  
+this functionality undependable, particularly when using templated X. 
+509 based connections.
+
+The current KLIPS logic also meant that multiple home users could not  
+connect to an Openswan server if each was using the same source <layer id="google-toolbar-hilite-3" style="background-color: Fuchsia; color: black;">IP</layer>;  
+this is very common as Linksys routers will issue DHCP address from  
+192.168.1.101 and up.
+
+Chances are that each of your 100+ home users connecting to your  
+Openswan server will have 192.168.1.101 as a source <layer id="google-toolbar-hilite-4" style="background-color: Fuchsia; color: black;">IP</layer> address from  
+behind the Linksys. Netgear and others have the same problem.
+
+The result is that the L2TP server residing on the Openswan server  
+has no way of uniquely identifying multiple users using the same  
+source <layer id="google-toolbar-hilite-5" style="background-color: Fuchsia; color: black;">IP</layer>, regardless of which IPsec stack is used.
+
+Our solution was to modify KLIPS, pluto, iptables and l2tpd.
+There is a new API interface between KLIPS and l2tpd, mediated by the  
+<layer id="google-toolbar-hilite-6" style="background-color: Fuchsia; color: black;">IP</layer> and UDP socket layers.
+
+We forked the l2tpd project, since the current l2tpd developers did  
+not respond to our emails nor process our patches. Our fork is named  
+xl2tpd. It is hosted at our site. The new option "ipsec saref"  
+enables the new API interface functionality. The iptables changes  
+have been submitted to upstream for inclusion. The pluto code was re- 
+factored to better handle NAT-T, and fixed some of the "vhost" bugs  
+related to the Virtual <layer id="google-toolbar-hilite-7" style="background-color: Fuchsia; color: black;">IP</layer> selection and rekeying.
+
+All told, Xelerance spent $70,000US of development time to create  
+this functionality.  We did this because a sponsor approached us to  
+create the functionality.  The unfortunate thing was that the sponsor  
+could only cover a fraction of the development cost.
+
+The functionality has been delivered to the sponsor, and is being  
+used at this time internal to the sponsor.
+
+The good news is that the resulting API into userland forms the basis  
+of some work that is relevant to the IETF BTNS workgroup's efforts  
+(<a href="http://www.ietf.org/internet-drafts/draft-ietf-btns-prob-and-">http://www.ietf.org/internet-drafts/draft-ietf-btns-prob-and-</a> 
+applic-02.txt).
+
+The bad news is that Xelerance will not release this Openswan  
+functionality into the general code base until such time as our  
+development costs have been covered by sponsors.
+
+We are looking for $55,000US from the community.
+
+As a company, if you are interested in sponsoring this functionality,  
+please contact us immediately.  As an individual, if you are  
+interested in sponsoring this functionality, you will most probably  
+have to approach other individual users and pool your resources.
+
+We hope to be able to start work on our next project soon, which is  
+the "merging" of the KLIPS and NETKEY to provide one unified stack  
+that is satisfactory to both the Linux kernel maintainers and the  
+IPsec endusers.
+
+You can reach us at <a href="http://lists.openswan.org/mailman/listinfo/users">sales at xelerance.com</a>
+
+Thank you
+
+Patrick Naubert
+Chief Executive Officer, Xelerance Corporation
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li>Previous message: <a href="http://lists.openswan.org/pipermail/users/2006-May/009479.html">[Openswan Users]
+</a></li>
+	<li>Next message: <a href="http://lists.openswan.org/pipermail/users/2006-May/009488.html">[Openswan Users] Host Certifcate
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/date.html#9487">[ date ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/thread.html#9487">[ thread ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/subject.html#9487">[ subject ]</a>
+              <a href="http://lists.openswan.org/pipermail/users/2006-May/author.html#9487">[ author ]</a>
+         </li>
+       </ul>
+
+<hr>
+<a href="http://lists.openswan.org/mailman/listinfo/users">More information about the Users
+mailing list</a><br>
+</body>
+</html>

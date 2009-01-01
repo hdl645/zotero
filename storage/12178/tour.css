@@ -1,0 +1,113 @@
+
+/* ::::: http://cworth.org/style.css ::::: */
+
+.header { margin: 0pt; font-weight: bold; line-height: 1em; display: block; }
+.author { margin: 0pt; font-weight: bold; display: block; }
+.actions ul { border-bottom: 1px solid rgb(0, 0, 0); margin: 0pt; padding: 6px; list-style-type: none; }
+.inlinepage .actions ul { border-bottom: 0pt none; }
+.actions li { padding: 0.2em 0.4em; display: inline; }
+.tags { clear: both; }
+#pageinfo { border-top: 1px solid rgb(0, 0, 0); margin: 1em 0pt; clear: both; }
+div.tags { margin-top: 1em; }
+#backlinks { margin-top: 1em; }
+#searchform { display: inline; float: right; }
+#editcontent { width: 100%; }
+img { border-style: none; }
+tr.changeheader { background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black ! important; }
+tr.changeinfo { background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black ! important; }
+th.changeheader { padding: 1px 0.3em; }
+td.changeinfo { padding: 1px 0.3em; }
+td.changetime { padding: 1px 0.3em; white-space: nowrap; }
+td.changelog { font-style: italic; }
+#blogform { border: 1px solid rgb(170, 170, 170); padding: 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black ! important; }
+.inlinepage { border: 1px solid rgb(170, 170, 170); padding: 10px; }
+.fb_invalid { background: white none repeat scroll 0% 0% ! important; color: red; -moz-background-clip: -moz-initial ! important; -moz-background-origin: -moz-initial ! important; -moz-background-inline-policy: -moz-initial ! important; }
+.fb_required { font-weight: bold; }
+.feedbutton { border-style: solid; border-color: rgb(204, 170, 153) rgb(153, 51, 0) rgb(51, 17, 0) rgb(204, 153, 102); border-width: 1px; padding: 0px 0.5em; background: rgb(255, 102, 0) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: white ! important; font-family: sans-serif; font-weight: bold; font-size: small; text-decoration: none; margin-top: 1em; }
+.feedbutton:hover { background: rgb(255, 153, 0) none repeat scroll 0% 0%; color: white ! important; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.pagecloud { border: 1px solid rgb(170, 170, 170); padding: 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; float: right; width: 30%; text-align: center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black ! important; }
+.smallestPC { font-size: 70%; }
+.smallPC { font-size: 85%; }
+.normalPC { font-size: 100%; }
+.bigPC { font-size: 115%; }
+.biggestPC { font-size: 130%; }
+#sidebar { padding: 2ex; line-height: 3ex; width: 20ex; float: right; margin-left: 40px; margin-bottom: 40px; }
+li.L1 { list-style-type: upper-roman; list-style-image: none; list-style-position: outside; }
+li.L2 { list-style-type: decimal; list-style-image: none; list-style-position: outside; }
+li.L3 { list-style-type: lower-alpha; list-style-image: none; list-style-position: outside; }
+li.L4 { list-style-type: disc; list-style-image: none; list-style-position: outside; }
+li.L5 { list-style-type: square; list-style-image: none; list-style-position: outside; }
+li.L6 { list-style-type: circle; list-style-image: none; list-style-position: outside; }
+li.L7 { list-style-type: lower-roman; list-style-image: none; list-style-position: outside; }
+li.L8 { list-style-type: upper-alpha; list-style-image: none; list-style-position: outside; }
+hr.poll { border: 2px solid black; background: rgb(238, 238, 238) none repeat scroll 0% 0%; height: 10pt; color: white ! important; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div.poll { border: 1px solid rgb(170, 170, 170); padding: 1ex; margin-top: 1ex; margin-bottom: 1ex; }
+input#openid_url { background: rgb(255, 255, 255) url('openidlogin-bg.gif') no-repeat scroll 0pt 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(0, 0, 0); padding-left: 18px; }
+@media print {
+  .actions { display: none; }
+  .tags { display: none; }
+  .feedbutton { display: none; }
+  #searchform { display: none; }
+  #blogform { display: none; }
+  #backlinks { display: none; }
+}
+.infobox { border: 1px solid rgb(170, 170, 170); padding: 1ex; float: right; margin-left: 2ex; margin-top: 1ex; margin-bottom: 1ex; }
+.notebox { border: 1px solid rgb(170, 170, 170); padding: 1ex; float: right; margin-left: 2ex; margin-top: 1ex; margin-bottom: 1ex; width: 25%; }
+.popup { border-bottom: 1px dotted rgb(51, 102, 102); color: rgb(51, 102, 102); }
+.popup .balloon, .popup .paren, .popup .expand { display: none; }
+.popup:hover .balloon, .popup:focus .balloon { border: 2px solid ; margin: 1em 0pt 0pt -2em; padding: 0.625em; position: absolute; display: inline; background-color: rgb(221, 238, 238); color: black; opacity: 0.95; }
+fieldset { border: 1px solid black; margin: 1ex 0pt; }
+legend { padding: 0pt 1ex; }
+.fb_submit { margin: 2px 0pt; float: left; }
+#signin_openid_url_label { float: left; margin-right: 1ex; }
+#signin_openid { border: 1px solid rgb(170, 170, 170); padding: 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black ! important; }
+
+/* ::::: http://cworth.org/local.css ::::: */
+
+body { margin-left: 4%; margin-right: 4%; }
+h1, .header, #footer { clear: both; }
+#content { margin-left: 2%; margin-right: 2%; }
+h1, h2, h3, h4, h5, h6, .header { font-family: sans-serif; clear: left; color: rgb(242, 153, 21); }
+h1 { font-size: 150%; }
+h2, h3, h4, h5, h6 { font-size: 125%; }
+p, ol, ul, dl { margin-left: 2%; margin-right: 2%; }
+li p { margin-left: 0%; }
+pre { border: 1px solid rgb(197, 197, 246); padding: 0.5em; font-family: mono; margin-left: 10%; margin-right: 10%; background-color: rgb(219, 219, 247); }
+a:link { color: rgb(76, 76, 230); }
+a:visited { color: rgb(143, 143, 230); }
+a:hover { color: rgb(242, 153, 21); }
+#logo { text-align: center; }
+#footer { font-size: 80%; }
+#legal { clear: both; text-align: center; margin-top: 2em; margin-left: 15%; margin-right: 15%; }
+.pagedate { float: right; text-align: right; width: 49%; clear: none; }
+#contact { float: left; width: 49%; font-style: italic; }
+.left { float: left; padding-right: 0.5em; }
+.right { float: right; padding-left: 0.5em; }
+.chart li { background-color: rgb(64, 64, 64); }
+.chart .libc { background-color: rgb(164, 0, 0); }
+.chart .libc-2_5 { background-color: rgb(164, 0, 0); }
+.chart .libexa { background-color: rgb(78, 154, 6); }
+.chart .pixman { background-color: rgb(32, 74, 135); }
+.chart .libpixman { background-color: rgb(32, 74, 135); }
+.chart .libxul { background-color: rgb(92, 53, 102); }
+.chart .oprofiled { background-color: rgb(92, 53, 102); }
+.chart .vmlinux { background-color: rgb(143, 89, 2); }
+.chart .intel_drv { background-color: rgb(206, 92, 0); }
+.chart .Xorg { background-color: rgb(99, 164, 164); }
+.chart .libfb { background-color: rgb(99, 164, 164); }
+.chart .other { background-color: gray; }
+.chart.barchart dt { clear: left; }
+.chart.barchart dd { clear: left; display: block; height: 1.8em; margin-left: 0pt; }
+.chart.barchart dd span { display: block; }
+.chart.barchart ul, li { margin: 0pt; padding: 0pt; }
+.chart.barchart li { margin-bottom: 0.5em; }
+.chart.barchart li { overflow: hidden; color: white; display: block; float: left; height: 2.5em; }
+.chart.barchart li a:link { color: white; }
+.chart.barchart li a:hover { color: rgb(242, 153, 21); }
+.chart.barchart li a:visited { color: white; }
+.chart.vertchart dt { clear: left; }
+.chart.vertchart dd { clear: left; margin-left: 0pt; }
+.chart.vertchart dd span { display: block; }
+.chart.vertchart ul, li { margin: 0pt; padding: 0pt; }
+.chart.vertchart ul { margin-bottom: 0.5em; }
+.chart.vertchart li { height: 2.5em; }

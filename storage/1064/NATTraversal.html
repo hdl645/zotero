@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html40/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html40/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://wiki.openswan.org/index.php/Openswan/NATTraversal">
+<meta name="wpd_url" content="http://wiki.openswan.org/index.php/Openswan/NATTraversal">
+<meta name="wpd_date" content="2008-06-04T08:55Z">
+
+
+  <title>Openswan Wiki | Openswan / NATTraversal browse</title>
+  
+  
+  
+  <!--HeaderText-->  <meta name="robots" content="index,follow">
+
+
+<link rel="stylesheet" type="text/css" href="NATTraversal.css" media="all">
+</head>
+<body>
+<!--PageHeaderFmt-->
+  <form id="wikihead" action="http://wiki.openswan.org/index.php/Main/SearchWiki">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+  <td align="right">
+    <table border="0" cellpadding="0" cellspacing="3"><tbody><tr>
+    <td><a href="http://wiki.openswan.org/index.php"><img src="home.gif" alt="Home" border="0"></a></td>
+    <td><a href="http://wiki.openswan.org/index.php/Site/AllRecentChanges"><img src="recentchanges.gif" alt="Recent Changes" border="0"></a></td>
+    <input name="action" value="search" type="hidden">	
+    <td><input class="wikisearchbox" name="q" type="text"></td>
+    <td><input src="search.gif" alt="Search" name="submit" type="image"></td>
+    <td><a href="http://wiki.openswan.org/index.php/Openswan/Help"><img src="help.gif" alt="WikiHelp" border="0"></a></td>
+    </tr></tbody></table>
+  </td></tr></tbody></table></form>
+  <div class="dottedtop"><img src="no.gif" alt="" width="1" height="3"></div>
+<!--PageTitleFmt-->
+  <div id="wikiOpenswan">
+    <div class="openswan">
+      <img src="osw_wiki_logo_gradient2.jpg">
+    </div>
+  </div>
+  <div id="wikititle">
+    <div class="pagegroup"><a href="http://wiki.openswan.org/index.php/Openswan"><layer id="google-toolbar-hilite-0" style="background-color: Yellow; color: black;">Openswan</layer></a> /</div>
+    <div class="pagetitle">NATTraversal</div></div>
+  <div id="wikicmds"><ul>
+    <li id="browse"><a class="cmdbutton" href="http://wiki.openswan.org/index.php/Openswan/NATTraversal">view</a></li>
+    <li id="edit"><a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=edit">edit</a></li>
+    <li id="upload"><a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=upload">upload</a></li>
+    <li id="print"><a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=print" target="_top">print</a></li>
+    <li id="diff"><a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=diff">history</a></li></ul></div>
+  <div id="login"><a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=login">Login</a></div>
+  <div id="lastmod">Last modified: August 11, 2006, at 01:42 PM</div>
+<!--PageText-->
+<div id="wikitext">
+<p><layer id="google-toolbar-hilite-14" style="background-color: Cyan; color: black;">NAT</layer> Traversal is a method for encapsulating <span class="wikiword">IPsec</span> <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/ESP">ESP</a> packets into <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/UDP">UDP</a> packets for passing through routers or <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/ConfFirewall">firewalls</a> employing Network Address Translation (<layer id="google-toolbar-hilite-15" style="background-color: Cyan; color: black;">NAT</layer>). See <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/NatTraversal"><layer id="google-toolbar-hilite-16" style="background-color: Cyan; color: black;">nat</layer>_traversal</a> for an example <layer id="google-toolbar-hilite-1" style="background-color: Yellow; color: black;">openswan</layer> configuration.
+</p>
+<p class="vspace">The <layer id="google-toolbar-hilite-17" style="background-color: Cyan; color: black;">NAT</layer>-T standard has been published by the <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/IETF">IETF</a> in a number of <span class="wikiword">RFCs</span>:
+</p>
+<div class="vspace"></div><ul><li><a class="urllink" href="http://www.ietf.org/rfc/rfc3947.txt" rel="nofollow">RFC 3947</a> : the official <layer id="google-toolbar-hilite-18" style="background-color: Cyan; color: black;">NAT</layer>-T standard
+</li><li><a class="urllink" href="http://www.ietf.org/rfc/rfc3715.txt" rel="nofollow">RFC 3715</a> : set the requirements for the <layer id="google-toolbar-hilite-19" style="background-color: Cyan; color: black;">NAT</layer>-T RFC
+</li><li><a class="urllink" href="http://www.ietf.org/rfc/rfc3948.txt" rel="nofollow">RFC 3948</a> : encapsulating <span class="wikiword">IPsec</span> ESP packets within UDP
+</li></ul><p class="vspace">Recent versions of <layer id="google-toolbar-hilite-2" style="background-color: Yellow; color: black;">Openswan</layer> support the <layer id="google-toolbar-hilite-20" style="background-color: Cyan; color: black;">NAT</layer>-T RFC and the draft versions of these <span class="wikiword">RFCs</span>. There were several drafts:
+</p>
+<div class="vspace"></div><ul><li>draft-ietf-ipsec-<layer id="google-toolbar-hilite-21" style="background-color: Cyan; color: black;">nat</layer>-t-ike-01.txt
+</li><li>draft-ietf-ipsec-udp-encaps-01.txt
+</li><li>draft-ietf-ipsec-<layer id="google-toolbar-hilite-22" style="background-color: Cyan; color: black;">nat</layer>-t-ike-02.txt
+</li><li>draft-ietf-ipsec-udp-encaps-02.txt
+</li><li>draft-ietf-ipsec-<layer id="google-toolbar-hilite-23" style="background-color: Cyan; color: black;">nat</layer>-t-ike-03.txt
+</li><li>draft-ietf-ipsec-udp-encaps-03.txt
+</li><li>draft-ietf-ipsec-<layer id="google-toolbar-hilite-24" style="background-color: Cyan; color: black;">nat</layer>-t-ike-04.txt
+</li><li>draft-ietf-ipsec-udp-encaps-04.txt
+</li><li>draft-ietf-ipsec-<layer id="google-toolbar-hilite-25" style="background-color: Cyan; color: black;">nat</layer>-t-ike-08
+</li></ul><p class="vspace">The <layer id="google-toolbar-hilite-26" style="background-color: Cyan; color: black;">NAT</layer>-T support for <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/KLIPS">KLIPS</a> was done by Mathieu Lafon, from <a class="urllink" href="http://open-source.arkoon.net/" rel="nofollow">Arkoon Network Security</a>. The <layer id="google-toolbar-hilite-27" style="background-color: Cyan; color: black;">NAT</layer>-T support for <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/26sec">26sec</a> was done by Herbert Xu(?).
+</p>
+<p class="vspace">To enable it, you need <layer id="google-toolbar-hilite-28" style="background-color: Cyan; color: black;">NAT</layer>-T (technically, <span class="wikiword">ESPinUDP</span>) support in your kernel.  Kernels 2.6.6 and higher include this.  For 2.4 kernels, you need to patch your kernel - see the README included in <layer id="google-toolbar-hilite-3" style="background-color: Yellow; color: black;">Openswan</layer> on how to do this.
+</p>
+<p class="vspace">Known good interops:
+</p><ul><li><layer id="google-toolbar-hilite-4" style="background-color: Yellow; color: black;">Openswan</layer> to <layer id="google-toolbar-hilite-5" style="background-color: Yellow; color: black;">Openswan</layer>
+</li><li><layer id="google-toolbar-hilite-6" style="background-color: Yellow; color: black;">Openswan</layer> to Cisco VPN 3000
+</li><li><layer id="google-toolbar-hilite-7" style="background-color: Yellow; color: black;">Openswan</layer> to <span class="wikiword">FreeS</span>/WAN with <layer id="google-toolbar-hilite-29" style="background-color: Cyan; color: black;">NAT</layer>-T from <a class="urllink" href="http://open-source.arkoon.net/" rel="nofollow">http://open-source.arkoon.net</a>
+</li><li><layer id="google-toolbar-hilite-8" style="background-color: Yellow; color: black;">Openswan</layer> to <a class="createlinktext" rel="nofollow" href="http://wiki.openswan.org/index.php/Openswan/StrongSwan?action=edit">StrongSwan</a><a rel="nofollow" class="createlink" href="http://wiki.openswan.org/index.php/Openswan/StrongSwan?action=edit">?</a> (provided you patch your kernel) from <a class="urllink" href="http://www.strongswan.org/" rel="nofollow">http://www.strongswan.org/</a>
+</li><li><layer id="google-toolbar-hilite-9" style="background-color: Yellow; color: black;">Openswan</layer> to <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/SSHSentinel">SSH Sentinel</a>
+</li><li><layer id="google-toolbar-hilite-10" style="background-color: Yellow; color: black;">Openswan</layer> to <a class="createlinktext" rel="nofollow" href="http://wiki.openswan.org/index.php/Openswan/SafeNet?action=edit">SafeNet</a><a rel="nofollow" class="createlink" href="http://wiki.openswan.org/index.php/Openswan/SafeNet?action=edit">?</a>
+</li><li><layer id="google-toolbar-hilite-11" style="background-color: Yellow; color: black;">Openswan</layer> to  <a class="wikilink" href="http://wiki.openswan.org/index.php/Openswan/Windows">Microsoft Windows 2000/XP</a>(updates required).
+</li></ul><p class="vspace">Unknown:
+</p><ul><li><layer id="google-toolbar-hilite-12" style="background-color: Yellow; color: black;">Openswan</layer> to Cisco IOS or PIX
+</li><li><layer id="google-toolbar-hilite-13" style="background-color: Yellow; color: black;">Openswan</layer> to Nortel
+</li></ul>
+</div>
+
+<!--PageFooterFmt-->
+  <div class="dottedbot"><img src="no.gif" alt="" width="1" height="1"></div>
+  <div id="poweredby">Powered by 
+    <a href="http://pmwiki.com/wiki/PmWiki/PmWiki">PmWiki</a></div>
+  <div id="wikifoot">
+      <a class="cmdbutton" href="http://wiki.openswan.org/index.php/Openswan/NATTraversal">view</a> 
+      <a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=edit">edit</a>
+      <a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=upload">upload</a>
+      <a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=print" target="_top">print</a>
+      <a href="http://wiki.openswan.org/index.php/Openswan/NATTraversal?action=diff">history</a>
+      <a href="http://wiki.openswan.org/index.php/Site/AllRecentChanges?action=rss"><img src="rss.png" border="0"></a></div>
+<!--/PageFooterFmt-->
+</body>
+</html>

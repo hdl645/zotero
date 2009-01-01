@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">
+<meta name="wpd_url" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039261.html">
+<meta name="wpd_date" content="2008-06-03T02:11Z">
+
+
+ 
+   <title> IPSec passthrough with iptables
+   </title>
+   <link rel="Index" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/index.html">
+   <link rel="made" href="mailto:david%40hyperbolic.net">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039244.html">
+   <link rel="Next" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039265.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>IPSec passthrough with iptables
+   </h1>
+    <b>David A Golden
+    </b> 
+    <a href="mailto:david%40hyperbolic.net" title="IPSec passthrough with iptables">david@hyperbolic.net
+       </a><br>
+    <i>Tue, 15 Oct 2002 23:45:18 -0400</i>
+    <p></p><ul>
+        <li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039244.html">IPSec passthrough with iptables
+</a></li>
+        <li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039265.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39261">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39261">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39261">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39261">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>Just to muddy the waters, through experimentation, I have found that using 
+Checkpoint SecuRemote (on windows) behind a Linux netfilter firewall, I can 
+achieve an IPSEC connection using just:
+
+iptables -A FORWARD -s $INTERNAL_NET -j ACCEPT
+iptables -A FORWARD -d $INTERNAL_NET -m state --state ESTABLISHED,RELATED \
+         -j ACCEPT
+
+I.e. explicit per-protocol forwarding seems unnecessary.  (Though you might 
+want to be explicit for security/control reasons.)  [Note, no UDP 
+encapsulation, either]
+
+I do experience weird time-outs occasionally, apparently connected to 
+incoming IKE packets (UDP port 500) that aren't recognized as connected, 
+but I can get around this by just accepting them to the firewall, which 
+does nothing as there is nothing running on that port.  (I'm trying 
+variations of reject/drop to see if there is a better way to reply.)
+
+Regards,
+David
+
+At 09:00 AM 10/15/2002, Antony Stone wrote:
+&gt;<i>On Tuesday 15 October 2002 12:09 pm, George Agnelli wrote:
+</i>&gt;<i>
+</i>&gt;<i> &gt; I'm having a similar problem and am not very experienced yet with iptables.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; &gt; Make sure you are forwarding (both ways :-) protocol 50 (ESP), protocol
+</i>&gt;<i> &gt; &gt; 51 (AH) and UDP sport 500 / dport 500 (IKE).
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Could you show me the best way to write this in iptables syntax?
+</i>&gt;<i>
+</i>&gt;<i>iptables -A FORWARD -p esp -j ACCEPT
+</i>&gt;<i>iptables -A FORWARD -p ah -j ACCEPT
+</i>&gt;<i>iptables -A FORWARD -p udp --sport 500 --dport 500 -j ACCEPT
+</i>&gt;<i>
+</i>&gt;<i>You may wish to add some -s and/or -d source & destination address
+</i>&gt;<i>restrictions on the above rules, eg:
+</i>&gt;<i>
+</i>&gt;<i>iptables -A FORWARD -p esp -s a.b.c.d -d w.x.y.z -j ACCEPT
+</i>&gt;<i>iptables -A FORWARD -p esp -s w.x.y.z -d a.b.c.d -j ACCEPT
+</i>&gt;<i>
+</i>&gt;<i>where a.b.c.d and w.x.y.z are the two IPsec gateways which need to
+</i>&gt;<i>communicate.
+</i>&gt;<i>
+</i>&gt;<i>Antony.
+</i>
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039244.html">IPSec passthrough with iptables
+</a></li>
+	<li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039265.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39261">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39261">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39261">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39261">[ author ]</a>
+         </li>
+       </ul>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://linux.die.net/man/5/ipsec.conf">
+<meta name="wpd_url" content="http://linux.die.net/man/5/ipsec.conf">
+<meta name="wpd_date" content="2008-06-03T02:43Z">
+
+
+
+
+<title>ipsec.conf(5): IPsec config/connections - Linux man page</title>
+
+<link rel="shortcut icon" href="about:blank?favicon.ico" type="image/x-icon">
+<meta name="description" content="The optional ipsec.conf file specifies most configuration and control information for the Openswan IPsec subsystem. (The major exception is secrets for ...">
+
+<link rel="stylesheet" type="text/css" href="ipsec.css" media="all">
+</head>
+<body text="#333333" vlink="#660000" alink="#000000" bgcolor="#ffffff" link="#660000">
+<div id="bg"><div id="content">
+
+<!-- google_ad_section_start -->
+<h1>ipsec.conf(5) - Linux man page</h1>
+
+<h2>Name</h2>
+
+<p>ipsec.conf - IPsec configuration and connections
+</p><h2>Description</h2>
+<div id="adright">
+<script type="text/javascript"><!--
+google_ad_client = "pub-5823754184406795";
+google_ad_slot = "5992934909";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</div>
+
+
+
+<p>The optional <i>ipsec.conf</i> file specifies most configuration and control information for the Openswan IPsec subsystem. (The major exception is secrets
+for authentication; see <b><a href="http://linux.die.net/man/5/ipsec.secrets">ipsec.secrets</a></b>(5).) Its contents are not security-sensitive <i>unless</i> manual keying is being done for more than just
+testing, in which case the encryption/authentication keys in the descriptions for the manually-keyed connections are very sensitive (and those connection
+descriptions are probably best kept in a separate file, via the include facility described below).
+</p><p>The file is a text file, consisting of one or more <i>sections</i>. White space followed by <b>#</b> followed by anything to the end of the line is a
+comment and is ignored, as are empty lines which are not within a section.
+</p><p>A line which contains <b>include</b> and a file name, separated by white space, is replaced by the contents of that file, preceded and followed by empty
+lines. If the file name is not a full pathname, it is considered to be relative to the directory containing the including file. Such inclusions can be nested.
+Only a single filename may be supplied, and it may not contain white space, but it may include shell wildcards (see <b><a href="http://linux.die.net/man/1/sh">sh</a></b>(1)); for example:
+
+</p><p><b>include ipsec.*.conf</b>
+</p><p>The intention of the include facility is mostly to permit keeping information on connections, or sets of connections, separate from the main configuration
+file. This permits such connection descriptions to be changed, copied to the other security gateways involved, etc., without having to constantly extract them
+from the configuration file and then insert them back into it. Note also the <b>also</b> and <b>alsoflip</b> parameters (described below) which permit
+splitting a single logical section (e.g. a connection description) into several actual sections.
+</p><p>The first significant line of the file must specify the version of this specification that it conforms to:
+</p><p><b>version 2</b>
+</p><p>A section begins with a line of the form:
+</p><p><i>type name</i>
+</p><p>where <i>type</i> indicates what type of section follows, and <i>name</i> is an arbitrary name which distinguishes the section from others of the same type.
+(Names must start with a letter and may contain only letters, digits, periods, underscores, and hyphens.) All subsequent non-empty lines which begin with
+white space are part of the section; comments within a section must begin with white space too. There may be only one section of a given type with a given
+name.
+</p><p>Lines within the section are generally of the form
+</p><p><i>parameter</i><b>=</b><i>value</i>
+</p><p>(note the mandatory preceding white space). There can be white space on either side of the <b>=</b>. Parameter names follow the same syntax as section
+names, and are specific to a section type. Unless otherwise explicitly specified, no parameter name may appear more than once in a section.
+</p><p>An empty <i>value</i> stands for the system default value (if any) of the parameter, i.e. it is roughly equivalent to omitting the parameter line entirely.
+A <i>value</i> may contain white space only if the entire <i>value</i> is enclosed in double quotes (<b>"</b>); a <i>value</i> cannot itself contain a double
+quote, nor may it be continued across more than one line.
+</p><p>Numeric values are specified to be either an "integer" (a sequence of digits) or a "decimal number" (sequence of digits optionally followed by '.' and
+another sequence of digits).
+</p><p>There is currently one parameter which is available in any type of section:
+</p><p><b>also</b>
+</p><dl compact="compact">
+<dt>the value is a section name; the parameters of that section are appended to this section, as if they had been written as part of it. The specified section
+must exist, must follow the current one, and must have the same section type. (Nesting is permitted, and there may be more than one <b>also</b> in a single
+section, although it is forbidden to append the same section more than once.) This allows, for example, keeping the encryption keys for a connection in a
+separate file from the rest of the description, by using both an <b>also</b> parameter and an <b>include</b> line. (Caution, see BUGS below for some
+restrictions.)
+</dt><dt><b>alsoflip</b>
+</dt><dt>can be used in a <b>conn</b> section. It acts like an <b>also</b> that flips the referenced section's entries left-for-right.
+</dt><dt>Parameter names beginning with <b>x-</b> (or <b>X-</b>, or <b>x_</b>, or <b>X_</b>) are reserved for user extensions and will never be assigned
+meanings by IPsec. Parameters with such names must still observe the syntax rules (limits on characters used in the name; no white space in a non-quoted
+value; no newlines or double quotes within the value). All other as-yet-unused parameter names are reserved for future IPsec improvements.
+
+<p>A section with name <b>%default</b> specifies defaults for sections of the same type. For each parameter in it, any section of that type which does not have
+a parameter of the same name gets a copy of the one from the <b>%default</b> section. There may be multiple <b>%default</b> sections of a given type, but only
+one default may be supplied for any specific parameter name, and all <b>%default</b> sections of a given type must precede all non-<b>%default</b>
+sections of that type. <b>%default</b> sections may not contain <b>also</b> or <b>alsoflip</b> parameters.
+</p><p>Currently there are two types of section: a <b>config</b> section specifies general configuration information for IPsec, while a <b>conn</b> section
+specifies an IPsec connection.
+</p></dt></dl>
+<h2>Conn Sections</h2>
+
+<p>A <b>conn</b> section contains a <i>connection specification</i>, defining a network connection to be made using IPsec. The name given is arbitrary, and is
+used to identify the connection to <b><a href="http://linux.die.net/man/8/ipsec_auto">ipsec_auto</a></b>(8) and <b><a href="http://linux.die.net/man/8/ipsec_manual">ipsec_manual</a></b>(8). Here's a simple example:
+</p><dl compact="compact">
+<dt>
+
+<pre class="code"><b>conn snt
+</b></pre>
+</dt><dd><b>left=10.11.11.1</b>
+
+<p><b>leftsubnet=10.0.1.0/24</b>
+
+</p><p><b>leftnexthop=172.16.55.66</b>
+
+</p><p><b>leftsourceip=10.0.1.1</b>
+
+</p><p><b>right=192.168.22.1</b>
+
+</p><p><b>rightsubnet=10.0.2.0/24</b>
+
+</p><p><b>rightnexthop=172.16.88.99</b>
+
+</p><p><b>rightsourceip=10.0.2.1</b>
+
+</p><p><b>keyingtries=%forever</b>
+</p></dd><dt>A note on terminology... In automatic keying, there are two kinds of communications going on: transmission of user IP packets, and
+gateway-to-gateway negotiations for keying, rekeying, and general control. The data path (a set of "IPsec SAs") used for user packets is herein
+referred to as the "connection"; the path used for negotiations (built with "ISAKMP SAs") is referred to as the "keying channel".
+<p>To avoid trivial editing of the configuration file to suit it to each system involved in a connection, connection specifications are written in terms of
+<i>left</i> and <i>right</i> participants, rather than in terms of local and remote. Which participant is considered <i>left</i> or <i>right</i> is arbitrary;
+IPsec figures out which one it is being run on based on internal information. This permits using identical connection specifications on both ends. There are
+cases where there is no symmetry; a good convention is to use <i>left</i> for the local side and <i>right</i> for the remote side (the first letters are a good
+mnemonic).
+</p><p>Many of the parameters relate to one participant or the other; only the ones for <i>left</i> are listed here, but every parameter whose name begins with
+<b>left</b> has a <b>right</b> counterpart, whose description is the same but with <b>left</b> and <b>right</b> reversed.
+</p><p>Parameters are optional unless marked "(required)"; a parameter required for manual keying need not be included for a connection which will use only
+automatic keying, and vice versa.
+</p></dt></dl>
+
+<p><b>CONN PARAMETERS: GENERAL</b>
+</p><dl compact="compact">
+<dt>The following parameters are relevant to both automatic and manual keying. Unless otherwise noted, for a connection to work, in general it is necessary for
+the two ends to agree exactly on the values of these parameters.
+<p><b>type</b>
+</p></dt><dt>the type of the connection; currently the accepted values are <b>tunnel</b> (the default) signifying a host-to-host, host-to-subnet,
+or subnet-to-subnet tunnel; <b>transport</b>, signifying host-to-host transport mode; <b>passthrough</b>, signifying that no IPsec
+processing should be done at all; <b>drop</b>, signifying that packets should be discarded; and <b>reject</b>, signifying that packets should be discarded and
+a diagnostic ICMP returned.
+</dt><dt><b>left</b>
+</dt><dt>(required) the IP address of the left participant's public-network interface, in any form accepted by <b>ipsec_ttoaddr</b>(3) or one of several magic
+values. If it is <b>%defaultroute</b>, and the <b>config setup</b> section's, <b>interfaces</b> specification contains <b>%defaultroute, left</b> will be
+filled in automatically with the local address of the default-route interface (as determined at IPsec startup time); this also overrides any value
+supplied for <b>leftnexthop</b>. (Either <b>left</b> or <b>right</b> may be <b>%defaultroute</b>, but not both.) The value <b>%any</b> signifies an address to
+be filled in (by automatic keying) during negotiation. The value <b>%opportunistic</b> signifies that both <b>left</b> and <b>leftnexthop</b> are to be filled
+in (by automatic keying) from DNS data for <b>left</b>'s client. The values <b>%group</b> and <b>%opportunisticgroup</b> makes this a policy group conn: one
+that will be instantiated into a regular or opportunistic conn for each CIDR block listed in the policy group file with the same name as the conn.
+</dt><dt><b>leftsubnet</b>
+</dt><dt>private subnet behind the left participant, expressed as <i>network</i><b>/</b><i>netmask</i> (actually, any form acceptable to <b>ipsec_ttosubnet</b>(3));
+if omitted, essentially assumed to be <i>left/32</i>, signifying that the left end of the connection goes to the left participant only
+</dt><dt><b>leftprotoport</b>
+</dt><dt>allowed protocols and ports over connection, also called Port Selectors. The argument is in the form <i>protocol</i>, which can be a number or a name that
+will be looked up in <i>/etc/protocols</i>, such as <i>leftprotoport=icmp</i>, or in the form of <i>protocol/port</i>, such as <i>tcp/smtp</i>. Ports can be
+defined as a number (eg. 25) or as a name (eg smtp) which will be looked up in <i>/etc/services</i>. A special keyword <i>%any</i> can be used to allow all
+ports of a certain protocol. The most common use of this option is for L2TP connections to only allow l2tp packets (UDP port 1701), eg:
+<i>leftprotoport=17/1701</i>. Some clients, notably older Windows XP and some Mac OSX clients, use a random high port as source port. In those cases
+<i>rightprotoport=17/%any</i> can be used to allow all UDP traffic on the connection. Note that this option is part of the proposal, so it cannot be
+arbitrarily left out if one end does not care about the traffic selection over this connection - both peers have to agree. The Port Selectors show up in
+the output of <i>ipsec eroute</i> and <i>ipsec auto --status</i> eg:<i>"l2tp": 193.110.157.131[@aivd.xelernace.com]:7/1701...%any:17/1701</i> This
+option only filters outbound traffic. Inbound traffic selection must still be based on firewall rules activated by an updown script. The variablees
+$PLUTO_MY_PROTOCOL, $PLUTO_PEER_PROTOCOL, $PLUTO_MY_PORT, and $PLUTO_PEER_PORT are available for use in <i>updown</i> scripts. Older workarounds for bugs
+involved a setting of <i>17/0</i> to denote all ports were allowed. This notation should no longer be used.
+</dt><dt><b>leftnexthop</b>
+</dt><dt>next-hop gateway IP address for the left participant's connection to the public network; defaults to <b>%direct</b> (meaning <i>right</i>). If the
+value is to be overridden by the <b>left=%defaultroute</b> method (see above), an explicit value must <i>not</i> be given. If that method is not being used,
+but <b>leftnexthop</b> is <b>%defaultroute</b>, and <b>interfaces=%defaultroute</b> is used in the <b>config setup</b> section, the next-hop gateway
+address of the default-route interface will be used. The magic value <b>%direct</b> signifies a value to be filled in (by automatic keying) with the
+peer's address. Relevant only locally, other end need not agree on it.
+</dt><dt><b>leftsourceip</b>
+</dt><dt>the IP address for this host to use when transmitting a packet to the other side of this link. Relevant only locally, the other end need not agree. This
+option is used to make the gateway itself use its internal IP, which is part of the leftsubnet, to communicate to the rightsubnet or right. Otherwise, it will
+use its <b>nearest</b> IP address, which is its public IP address. This option is mostly used when defining subnet-subnet connections, so that the
+gateways can talk to each other and the subnet at the other end, without the need to build additional host-subnet, subnet-host and host-host
+tunnels.
+</dt><dt><b>leftupdown</b>
+</dt><dt>what "updown" script to run to adjust routing and/or firewalling when the status of the connection changes (default <b>ipsec _updown</b>). May include
+positional parameters separated by white space (although this requires enclosing the whole string in quotes); including shell metacharacters is unwise. See
+<b><a href="http://linux.die.net/man/8/ipsec_pluto">ipsec_pluto</a></b>(8) for details. Relevant only locally, other end need not agree on it.
+</dt><dt><b>leftfirewall</b>
+</dt><dt>This option is obsolete and should not used anymore.
+</dt><dt>If one or both security gateways are doing forwarding firewalling (possibly including masquerading), and this is specified using the firewall parameters,
+tunnels established with IPsec are exempted from it so that packets can flow unchanged through the tunnels. (This means that all subnets connected in this
+manner must have distinct, non-overlapping subnet address blocks.) This is done by the default <i>updown</i> script (see <b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8)).
+
+<p>The implementation of this makes certain assumptions about firewall setup, and the availability of the <i>Linux Advanced Routing</i> tools. In situations
+calling for more control, it may be preferable for the user to supply his own <i>updown</i> script, which makes the appropriate adjustments for his
+system.
+</p></dt></dl>
+
+<p><b>CONN PARAMETERS: AUTOMATIC KEYING</b>
+</p><dl compact="compact">
+<dt>The following parameters are relevant only to automatic keying, and are ignored in manual keying. Unless otherwise noted, for a connection to work, in
+general it is necessary for the two ends to agree exactly on the values of these parameters.
+<p><b>auto</b>
+</p></dt><dt>what operation, if any, should be done automatically at IPsec startup; currently-accepted values are <b>add</b> (signifying an <b>ipsec auto
+--add</b>), <b>route</b> (signifying that plus an <b>ipsec auto --route</b>), <b>start</b> (signifying that plus an <b>ipsec auto
+--up</b>), <b>manual</b> (signifying an <b>ipsec manual --up</b>), and <b>ignore</b> (also the default) (signifying no automatic
+startup operation). See the <b>config setup</b> discussion below. Relevant only locally, other end need not agree on it (but in general, for an
+intended-to-be-permanent connection, both ends should use <b>auto=start</b> to ensure that any reboot causes immediate
+renegotiation).
+</dt><dt><b>authby</b>
+</dt><dt>how the two security gateways should authenticate each other; acceptable values are <b>secret</b> for shared secrets, <b>rsasig</b> for RSA digital
+signatures (the default), <b>secret|rsasig</b> for either, and <b>never</b> if negotiation is never to be attempted or accepted (useful for shunt-only
+conns). Digital signatures are superior in every way to shared secrets.
+</dt><dt><b>ike</b>
+</dt><dt>IKE encryption/authentication algorithm to be used for the connection (phase 1 aka ISAKMP SA). The format is <i>"cipher-hash;modpgroup,
+cipher-hash;modpgroup, ..."</i> Any left out option will be filled in with all allowed default options. Multiple proposals are seperated by a comma. If
+an <b>ike=</b> line is specified, no other received proposals will be accepted. Formerly there was a distinction (by using a <b>"!"</b> symbol) between "strict
+mode" or not. That mode has been obsoleted. If an <b>ike=</b> option is specified, the mode is always strict, meaning no other received proposals will be
+accepted. Some examples are <b>ike=3des-sha1,aes-sha1</b>, <b>ike=aes</b>, <b>ike=aes128-md5;modp2048</b>,
+<b>ike=3des-md5;modp1024,esp=aes-sha1;modp1536</b> or <b>ike=modp1536</b>. The options must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi">ipsec_spi</a></b>(8)'s
+<b>--ike</b> option. The default is to use IKE, and to allow all combinations of:
+</dt><dd>
+
+<pre class="code"><b>                cipher:                 3des or aes
+                hash:                   sha1 or md5
+                pfsgroup (DHgroup):     modp1024 or modp1536
+</b></pre>
+</dd><dt>If Openswan was compiled with extra INSECURE and BROKEN options, then the des (1des) and null cipher, as well as modp768 are available. This turns your VPN
+into a joke. Do not enable these options.
+</dt><dt><b>phase2</b>
+</dt><dt>Sets the type of SA that will be produced. Valid options are: <b>esp</b> for encryption (the default), and <b>ah</b> for authentication only.
+</dt><dt><b>phase2alg</b>
+</dt><dt>Specifies the algorithms that will be offered/accepted for a phase2 negotiation. If not specified, a secure set of defaults will be used.
+
+<p>The format for ESP is ENC-AUTH followed by an optional PFSgroup. For instance, "3des-md5" or "aes256-sha1-modp2048".
+
+</p><p>The format for AH is AUTH followed by an optional PFSgroup. For instance, "md5" or "sha1-modp1536".
+</p></dt><dt><b>esp</b>
+</dt><dt>This option is obsolete. Please use <b>phase2alg</b> instead. ESP encryption/authentication algorithm to be used for the connection (phase2 aka IPsec SA).
+The format is identical to the <b>ike</b> option listed above. The options must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi" rel="nofollow">ipsec_spi</a></b>(8)'s <b>--esp</b>
+option. The default is to use ESP. The default values are the same as for ike= Note also that not all ciphers available to the kernel (eg through CryptoAPI)
+are necessarilly supported here.
+</dt><dt><b>ah</b>
+</dt><dt>AH authentication algorithm to be used for the connection, e.g here. <b>hmac-md5</b> The options must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi" rel="nofollow">ipsec_spi</a></b>(8)'s
+<b>--ah</b> option. The default is not to use AH. If for some (invalid) reason you still think you need AH, please use esp with the null encryption
+cipher instead. Note also that not all ciphers available to the kernel (eg through CryptoAPI) are necessarilly supported here.
+</dt><dt><b>leftid</b>
+</dt><dt>how the left participant should be identified for authentication; defaults to <b>left</b>. Can be an IP address (in any <b>ipsec_ttoaddr</b>(3) syntax) or a
+fully-qualified domain name preceded by <b>@</b> (which is used as a literal string and not resolved). The magic value <b>%myid</b> stands for the
+current setting of <i>myid</i>. This is set in <b>config setup</b> or by <b>ipsec_whack</b>(8)), or, if not set, it is the IP address in <b>%defaultroute</b>
+(if that is supported by a TXT record in its reverse domain), or otherwise it is the system's hostname (if that is supported by a TXT record in its forward
+domain), or otherwise it is undefined.
+</dt><dt><b>leftrsasigkey</b>
+</dt><dt>the left participant's public key for RSA signature authentication, in RFC 2537 format using <b>ipsec_ttodata</b>(3) encoding. The magic value <b>%none</b>
+means the same as not specifying a value (useful to override a default). The value <b>%dnsondemand</b> (the default) means the key is to be fetched from DNS at
+the time it is needed. The value <b>%dnsonload</b> means the key is to be fetched from DNS at the time the connection description is read from
+<i>ipsec.conf</i>; currently this will be treated as <b>%none</b> if <b>right=%any</b> or <b>right=%opportunistic</b>. The value <b>%dns</b> is currently
+treated as <b>%dnsonload</b> but will change to <b>%dnsondemand</b> in the future. The identity used for the left participant must be a specific host, not
+<b>%any</b> or another magic value. The value <b>%cert</b> will load the information required from a certificate defined in <b>%leftcert</b> and automatically
+define leftid for you. <b>Caution:</b> if two connection descriptions specify different public keys for the same <b>leftid</b>, confusion and madness will
+ensue.
+</dt><dt><b>leftrsasigkey2</b>
+</dt><dt>if present, a second public key. Either key can authenticate the signature, allowing for key rollover.
+</dt><dt><b>leftcert</b>
+</dt><dt>If you are using <b>leftrsasigkey=%cert</b> this defines the certificate you would like to use. It should point to a X.509 encoded certificate file. If you
+do not specify a full pathname, by default it will look in /etc/ipsec.d/certs. If openswan has been compiled with <b>USE_SMARTCARD=true</b>, then this option
+can also be set to <b>leftcert=%smartcard</b>. If multiple smartcards or USB tokens are present, they can be specified using <b>leftcert=%smartcard&lt;reader
+nr&gt;:&lt;PKCS#15 key id&gt;</b>
+</dt><dt><b>leftca</b>
+</dt><dt>specifies the authorized Certificate Agency (CA) that signed the certificate of the peer. If undefined, it defaults to the CA that signed the certificate
+specified in <b>leftcert</b>. The special <b>rightca=%same</b> is implied when not specifying a <b>rightca</b> and means that only peers with certificates
+signed by the same CA as the leftca will be allowed. This option is only useful in complex multi CA certificate situations. When using a single CA, it can be
+safely omitted for both left and right.
+</dt><dt><b>leftsendcert</b>
+</dt><dt>This option configures when Openswan will send X.509 certificates to the remote host. Acceptable values are <b>yes|always</b> (signifying that we should
+always send a certificate), <b>ifasked</b> (signifying that we should send a certificate if the remote end asks for it), and <b>no|never</b> (signifying that
+we will never send a X.509 certificate). The default for this option is <b>ifasked</b> which may break compatibility with other vendor's IPSec implementations,
+such as Cisco and SafeNet. If you find that you are getting errors about no ID/Key found, you likely need to set this to <b>always</b>. This per-conn
+option replaces the obsolete global <b>nocrsend</b> option.
+</dt><dt><b>leftxauthserver</b>
+</dt><dt>Left is an XAUTH server. This can use PAM for authentication or md5 passwords in <i>/etc/ipsec.d/passwd</i>. These are additional credentials to verify the
+user identity, and should not be confused with the XAUTH <b>group secret</b>, which is just a regular PSK defined in <i>ipsec.secrets</i>. The other side of
+the connection should be configured as <b>rightxauthclient</b>. XAUTH connections cannot rekey, so <b>rekey=no</b> should be specified in this conn. For
+further details on how to compile and use XAUTH, see README.XAUTH. Acceptable values are <b>yes</b> or <b>no</b> (the default).
+</dt><dt><b>leftxauthclient</b>
+</dt><dt>Left is an XAUTH client. The xauth connection will have to be started interactively and cannot be configured using <b>auto=start</b>. Instead, it has to be
+started from the commandline using <i>ipsec auto --up connname</i>. You will then be prompted for the username and password. To setup an XAUTH
+connection non-interactively, which defeats the whole purpose of XAUTH, but is regularly requested by users, it is possible to use a whack command
+- <i>ipsec whack --name baduser --ipsecgroup-xauth --xauthname badusername --xauthpass password
+--initiate</i> The other side of the connection should be configured as <b>rightxauthserver</b>. Acceptable values are <b>yes</b> or <b>no</b> (the
+default).
+</dt><dt><b>leftmodecfgserver</b>
+</dt><dt>Left is a Mode Config server. It can push network configuration to the client. Acceptable values are <b>yes</b> or <b>no</b> (the default).
+</dt><dt><b>leftmodecfgclient</b>
+</dt><dt>Left is a Mode Config client. It can receive network configuration from the server. Acceptable values are <b>yes</b> or <b>no</b> (the default).
+</dt><dt><b>modecfgpull</b>
+</dt><dt>Pull the Mode Config network information from the server. Acceptable values are <b>yes</b> or <b>no</b> (the default).
+</dt><dt><b>forceencaps</b>
+</dt><dt>In some cases, for example when ESP packets are filtered or when a broken IPsec peer does not properly recognise NAT, it can be useful to force
+RFC-3948 encapsulation. <b>forceencaps=yes</b> forces the NAT detection code to lie and tell the remote peer that RFC-3948 encapsulation (ESP in
+UDP port 4500 packets) is required. For this option to have any effect, the setup section option <b>nat_traversal=yes</b> needs to be set. Acceptable values
+are <b>yes</b> or <b>no</b> (the default).
+</dt><dt><b>overlapip</b>
+</dt><dt>a boolean (yes/no) that determines, when *subnet=vhost: is used, if the virtual IP claimed by this states created from this connection can with states
+created from other connections.
+<p>Note that connection instances created by the Opportunistic Encryption or PKIX (x.509) instantiation system are distinct internally. They will inherit this
+policy bit.
+</p><p>The default is no.
+</p><p>This feature is only available with kernel drivers that support SAs to overlapping conns. At present only the (klips)mast protocol stack supports this
+feature.
+</p></dt><dt><b>dpddelay</b>
+</dt><dt>Set the delay (in seconds) between Dead Peer Dectection (RFC 3706) keepalives (R_U_THERE, R_U_THERE_ACK) that are sent for this connection (default 30
+seconds). If dpdtimeout is set, but not dpddelay, dpddelay will be set to the default.
+</dt><dt><b>dpdtimeout</b>
+</dt><dt>Set the length of time (in seconds) we will idle without hearing either an R_U_THERE poll from our peer, or an R_U_THERE_ACK reply. After this period has
+elapsed with no response and no traffic, we will declare the peer dead, and remove the SA (default 120 seconds). If dpddelay is set, but not dpdtimeout,
+dpdtimeout will be set to the default.
+</dt><dt><b>dpdaction</b>
+</dt><dt>When a DPD enabled peer is declared dead, what action should be taken. <b>hold (default) means the eroute will be put into %hold status, while clear means
+the eroute and SA with both be cleared. dpdaction=clear is</b> really only usefull on the server of a Road Warrior config.
+</dt><dt><b>pfs</b>
+</dt><dt>whether Perfect Forward Secrecy of keys is desired on the connection's keying channel (with PFS, penetration of the key-exchange protocol does not
+compromise keys negotiated earlier); Since there is no reason to ever refuse PFS, Openswan will allow a connection defined with <b>pfs=no</b> to use PFS
+anyway. Acceptable values are <b>yes</b> (the default) and <b>no</b>.
+</dt><dt><b>pfsgroup</b>
+</dt><dt>PFS group to be used if <b>pfs=yes</b>, e.g. pfsgroup=modp1536 Because PFS group is not negotiated it is single valued and must be previously coordinated
+with peer. Possible values are: modp1024, modp1536, modp2048, modp3072 and modp4096. If not specified, it will use same DH group of phase1. Default value is
+the same value as Phase1's DH group.
+</dt><dt><b>aggrmode</b>
+</dt><dt>Use Aggressive Mode instead of Main Mode. Aggressive Mode is less secure, and vulnerable to Denial Of Service attacks. It is also vulnerable to brute force
+attacks with software such as <b>ikecrack</b>. It should not be used, and it should especially not be used with XAUTH and group secrets (PSK). If the remote
+system administrator insists on staying irresponsible, enable this option.
+<p>Aggressive Mode is further limited to only one proposal - there is no room for negotation. Therefor it is mandatory for Aggressive Mode connections
+that both <b>ike=</b> and <b>esp=</b> options are specified with exactly one fully specified proposal. Acceptable values are <b>yes</b> or <b>no</b> (the
+default).
+</p></dt><dt><b>salifetime</b>
+</dt><dt>how long a particular instance of a connection (a set of encryption/authentication keys for user packets) should last, from successful negotiation to
+expiry; acceptable values are an integer optionally followed by <b>s</b> (a time in seconds) or a decimal number followed by <b>m</b>, <b>h</b>, or <b>d</b> (a
+time in minutes, hours, or days respectively) (default <b>8h</b>, maximum <b>24h</b>). Normally, the connection is renegotiated (via the keying channel) before
+it expires. The two ends need not exactly agree on <b>salifetime</b>, although if they do not, there will be some clutter of superseded connections on the end
+which thinks the lifetime is longer.
+<p>The keywords "keylife" and "lifetime" are aliases for "salifetime."
+</p></dt><dt><b>rekey</b>
+</dt><dt>whether a connection should be renegotiated when it is about to expire; acceptable values are <b>yes</b> (the default) and <b>no</b>. The two ends need not
+agree, but while a value of <b>no</b> prevents Pluto from requesting renegotiation, it does not prevent responding to renegotiation requested from the other
+end, so <b>no</b> will be largely ineffective unless both ends agree on it.
+</dt><dt><b>rekeymargin</b>
+</dt><dt>how long before connection expiry or keying-channel expiry should attempts to negotiate a replacement begin; acceptable values as for <b>keylife</b>
+(default <b>9m</b>). Relevant only locally, other end need not agree on it.
+</dt><dt><b>rekeyfuzz</b>
+</dt><dt>maximum percentage by which <b>rekeymargin</b> should be randomly increased to randomize rekeying intervals (important for hosts with many connections);
+acceptable values are an integer, which may exceed 100, followed by a '%' (default set by <b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8), currently <b>100%</b>). The value of
+<b>rekeymargin</b>, after this random increase, must not exceed <b>keylife</b>. The value <b>0%</b> will suppress time randomization. Relevant only locally,
+other end need not agree on it.
+</dt><dt><b>keyingtries</b>
+</dt><dt>how many attempts (a whole number or <b>%forever</b>) should be made to negotiate a connection, or a replacement for one, before giving up (default
+<b>%forever</b>). The value <b>%forever</b> means "never give up" (obsolete: this can be written 0). Relevant only locally, other end need not agree on
+it.
+</dt><dt><b>ikelifetime</b>
+</dt><dt>how long the keying channel of a connection (buzzphrase: "ISAKMP SA") should last before being renegotiated; acceptable values as for <b>keylife</b>
+(default set by <b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8), currently <b>1h</b>, maximum <b>24h</b>). The two-ends-disagree case is similar to that of
+<b>keylife</b>.
+</dt><dt><b>compress</b>
+</dt><dt>whether IPComp compression of content is proposed on the connection (link-level compression does not work on encrypted data, so to be effective,
+compression must be done <i>before</i> encryption); acceptable values are <b>yes</b> and <b>no</b> (the default). The two ends need not agree. A value of
+<b>yes</b> causes IPsec to propose both compressed and uncompressed, and prefer compressed. A value of <b>no</b> prevents IPsec from proposing compression; a
+proposal to compress will still be accepted.
+</dt><dt><b>disablearrivalcheck</b>
+</dt><dt>whether KLIPS's normal tunnel-exit check (that a packet emerging from a tunnel has plausible addresses in its header) should be disabled; acceptable
+values are <b>yes</b> and <b>no</b> (the default). Tunnel-exit checks improve security and do not break any normal configuration. Relevant only locally,
+other end need not agree on it.
+</dt><dt><b>failureshunt</b>
+</dt><dt>what to do with packets when negotiation fails. The default is <b>none</b>: no shunt; <b>passthrough</b>, <b>drop</b>, and <b>reject</b> have the obvious
+meanings.
+</dt></dl>
+
+<p><b>CONN PARAMETERS: MANUAL KEYING</b>
+</p><dl compact="compact">
+<dt>The following parameters are relevant only to manual keying, and are ignored in automatic keying. Unless otherwise noted, for a connection to work, in
+general it is necessary for the two ends to agree exactly on the values of these parameters. A manually-keyed connection must specify at least one of AH
+or ESP.
+<p><b>spi</b>
+</p></dt><dt>(this or <b>spibase</b> required for manual keying) the SPI number to be used for the connection (see <b><a href="http://linux.die.net/man/8/ipsec_manual" rel="nofollow">ipsec_manual</a></b>(8)); must be of the form
+<b>0x</b><i>hex</i>, where <i>hex</i> is one or more hexadecimal digits (note, it will generally be necessary to make <i>spi</i> at least <b>0x100</b> to be
+acceptable to KLIPS, and use of SPIs in the range <b>0x100</b>-<b>0xfff</b> is recommended)
+</dt><dt><b>spibase</b>
+</dt><dt>(this or <b>spi</b> required for manual keying) the base number for the SPIs to be used for the connection (see <b><a href="http://linux.die.net/man/8/ipsec_manual" rel="nofollow">ipsec_manual</a></b>(8)); must be of the form
+<b>0x</b><i>hex</i>0, where <i>hex</i> is one or more hexadecimal digits (note, it will generally be necessary to make <i>spibase</i> at least <b>0x100</b> for
+the resulting SPIs to be acceptable to KLIPS, and use of numbers in the range <b>0x100</b>-<b>0xff0</b> is recommended)
+</dt><dt><b>espenckey</b>
+</dt><dt>ESP encryption key (must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi" rel="nofollow">ipsec_spi</a></b>(8)'s <b>--enckey</b> option) (may be specified separately for each direction
+using <b>leftespenckey</b> (leftward SA) and <b>rightespenckey</b> parameters)
+</dt><dt><b>espauthkey</b>
+</dt><dt>ESP authentication key (must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi" rel="nofollow">ipsec_spi</a></b>(8)'s <b>--authkey</b> option) (may be specified separately for each
+direction using <b>leftespauthkey</b> (leftward SA) and <b>rightespauthkey</b> parameters)
+</dt><dt><b>espreplay_window</b>
+</dt><dt>ESP replay-window setting, an integer from 0 (the <i>ipsec_manual</i> default, which turns off replay protection) to 64; relevant only if ESP
+authentication is being used
+</dt><dt><b>leftespspi</b>
+</dt><dt>SPI to be used for the leftward ESP SA, overriding automatic assignment using <b>spi</b> or <b>spibase</b>; typically a hexadecimal number beginning with
+<b>0x</b>
+</dt><dt><b>ahkey</b>
+</dt><dt>(required if <b>ah</b> is present) AH authentication key (must be suitable as a value of <b><a href="http://linux.die.net/man/8/ipsec_spi" rel="nofollow">ipsec_spi</a></b>(8)'s <b>--authkey</b> option) (may be
+specified separately for each direction using <b>leftahkey</b> (leftward SA) and <b>rightahkey</b> parameters)
+</dt><dt><b>ahreplay_window</b>
+</dt><dt>AH replay-window setting, an integer from 0 (the <i>ipsec_manual</i> default, which turns off replay protection) to 64
+</dt><dt><b>leftahspi</b>
+</dt><dt>SPI to be used for the leftward AH SA, overriding automatic assignment using <b>spi</b> or <b>spibase</b>; typically a hexadecimal number beginning with
+<b>0x</b>
+</dt></dl>
+<h2>Config Sections</h2>
+
+<p>At present, the only <b>config</b> section known to the IPsec software is the one named <b>setup</b>, which contains information used when the software is
+being started (see <b><a href="http://linux.die.net/man/8/ipsec_setup">ipsec_setup</a></b>(8)). Here's an example:
+</p><dl compact="compact">
+<dt>
+
+<pre class="code"><b>config setup
+</b></pre>
+</dt><dd><b>interfaces="ipsec0=eth1 ipsec1=ppp0"</b>
+
+<p><b>klipsdebug=none</b>
+
+</p><p><b>plutodebug=control</b>
+
+</p><p><b>protostack=auto</b>
+
+</p><p><b>manualstart=</b>
+</p></dd><dt>Parameters are optional unless marked "(required)".
+<p>The currently-accepted <i>parameter</i> names in a <b>config setup</b> section are:
+</p><p><b>myid</b>
+</p></dt><dt>the identity to be used for <b>%myid</b>. <b>%myid</b> is used in the implicit policy group conns and can be used as an identity in explicit conns. If
+unspecified, <b>%myid</b> is set to the IP address in <b>%defaultroute</b> (if that is supported by a TXT record in its reverse domain), or otherwise the
+system's hostname (if that is supported by a TXT record in its forward domain), or otherwise it is undefined. An explicit value generally starts with
+''<b>@</b>''.
+</dt><dt><b>protostack</b>
+</dt><dt>decide which protocol stack is going to be used. Valid values are "auto", "klips", "netkey" and "mast". The "mast" stack is a variation for the klips
+stack.
+</dt><dt><b>interfaces</b>
+</dt><dt>virtual and physical interfaces for IPsec to use: a single <i>virtual</i><b>=</b><i>physical</i> pair, a (quoted!) list of pairs separated by white space,
+or <b>%none</b>. One of the pairs may be written as <b>%defaultroute</b>, which means: find the interface <i>d</i> that the default route points to, and then
+act as if the value was ''<b>ipsec0=</b><i>d</i>''. <b>%defaultroute</b> is the default; <b>%none</b> must be used to denote no interfaces. If
+<b>%defaultroute</b> is used (implicitly or explicitly) information about the default route and its interface is noted for use by <b><a href="http://linux.die.net/man/8/ipsec_manual" rel="nofollow">ipsec_manual</a></b>(8) and
+<b><a href="http://linux.die.net/man/8/ipsec_auto" rel="nofollow">ipsec_auto</a></b>(8).)
+</dt><dt><b>nat_traversal</b>
+</dt><dt>whether to accept/offer to support NAT (NAPT, also known as "IP Masqurade") workaround for IPsec. Acceptable values are: <b>yes</b> and <b>no</b> (the
+default). This parameter may eventually become per-connection.
+</dt><dt><b>virtual_private</b>
+</dt><dt>contains the networks that are allowed as subnet= for the remote client. In other words, the address ranges that may live behind a NAT router through which
+a client connects. This value is usually set to all the RFC-1918 address space, excluding the space used in the local subnet behind the NAT (An IP
+address cannot live at two places at once). IPv4 address ranges are denoted as <i>%v4:a.b.c.d/mm</i> and IPv6 is denoted as
+<i>%v6:aaaa::bbbb:cccc:dddd:eeee/mm</i>. One can exclude subnets by using the <b>!</b>. For example, if the VPN server is giving access to 192.168.1.0/24, this
+option should be set to: <i>virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%4:172.16.0.0/12,%v4:!192.168.1.0/24</i>. This parameter is only needed on the
+server side and not on the client side that resides behind the NAT router, as the client will just use its IP address for the inner IP setting. This parameter
+may eventually become per-connection.
+</dt><dt><b>nhelpers</b>
+</dt><dt>how many <i>pluto helpers</i> are started to help with cryptographic operations. Pluto will start <i>(n-1)</i> of them, where <i>n</i> is the number
+of CPU's you have (including hypherthreaded CPU's). A value of 0 forces pluto to do all operations in the main process. A value of -1 tells pluto to
+perform the above calculation. Any other value forces the number to that amount.
+</dt><dt><b>crlcheckinterval</b>
+</dt><dt>interval, specified in seconds, after which pluto will verify loaded X.509 CRL's for expiration. If any of the CRL's is expired, or if they previously
+failed to get updated, a new attempt at updating the CRL is made. The first attempt to update a CRL is started at two times the crlcheckinterval. If set to
+<b>0</b>, which is also the default value if this option is not specified, CRL updating is disabled.
+</dt><dt><b>strictcrlpolicy</b>
+</dt><dt>if not set, pluto is tolerant about missing or expired X.509 Certificate Revocation Lists (CRL's), and will allow peer certificates as long as they do not
+appear on an expired CRL. When this option is enabled, all connections with an expired or missing CRL will be denied. Active connections will be terminated at
+rekey time. This setup is more secure, but also dangerous. If the CRL is fetched through an IPsec tunnel with a CRL that expired, the entire VPN server will be
+dead in the water until a new CRL is manually transferred to the machine (if it allows non-IPsec connections). Acceptable values are <b>yes</b> or
+<b>no</b> (the default).
+</dt><dt><b>forwardcontrol</b>
+</dt><dt>whether <i>setup</i> should turn IP forwarding on (if it's not already on) as IPsec is started, and turn it off again (if it was off) as IPsec is stopped;
+acceptable values are <b>yes</b> and (the default) <b>no</b>. For this to have full effect, forwarding must be disabled before the hardware interfaces are
+brought up (e.g., <b>net.ipv4.ip_forward = 0</b> in <i>/etc/sysctl.conf</i>), because IPsec doesn't get control early enough to do that. If this option is not
+specified, and subnet-subnet tunnels are configured, then IP forwarding should be enabled by the system administrator.
+</dt><dt><b>rp_filter</b>
+</dt><dt>whether and how <i>setup</i> should adjust the reverse path filtering mechanism for the physical devices to be used. Values are <b>%unchanged</b> (to leave
+it alone) or 0, 1, 2 (values to set it to). <i>/proc/sys/net/ipv4/conf/PHYS/rp_filter</i> is badly documented; it must be 0 in many cases for ipsec to
+function. The default value for the parameter is 0, that is, to disablerp_filter for all interfaces used.
+</dt><dt><b>syslog</b>
+</dt><dt>the <b><a href="http://linux.die.net/man/2/syslog">syslog</a></b>(2) "facility" name and priority to use for startup/shutdown log messages, default <b>daemon.error</b>.
+</dt><dt><b>klipsdebug</b>
+</dt><dt>how much KLIPS debugging output should be logged. An empty value, or the magic value <b>none</b>, means no debugging output (the default). The magic value
+<b>all</b> means full output. Otherwise only the specified types of output (a quoted list, names separated by white space) are enabled; for details on
+available debugging types, see <b><a href="http://linux.die.net/man/8/ipsec_klipsdebug">ipsec_klipsdebug</a></b>(8). This KLIPS option has no effect on NETKEY, Windows or BSD stacks.
+</dt><dt><b>plutodebug</b>
+</dt><dt>how much Pluto debugging output should be logged. An empty value, or the magic value <b>none</b>, means no debugging output (the default). The magic value
+<b>all</b> means full output. Otherwise only the specified types of output (a quoted list, names without the <b>--debug-</b> prefix,
+separated by white space) are enabled; for details on available debugging types, see <b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8).
+</dt><dt><b>uniqueids</b>
+</dt><dt>whether a particular participant ID should be kept unique, with any new (automatically keyed) connection using an ID from a different IP address deemed to
+replace all old ones using that ID. Acceptable values are <b>yes</b> (the default) and <b>no</b>. Participant IDs normally <i>are</i> unique, so a new
+(automatically-keyed) connection using the same ID is almost invariably intended to replace an old one.
+</dt><dt><b>plutorestartoncrash</b>
+</dt><dt>prevent pluto from restarting after it crashed. This option should only be used when a post-mortem of a core file is desired. It prevents pluto from
+restarting and possibly overwriting an older core file.
+</dt><dt><b>plutoopts</b>
+</dt><dt>additional options to pass to pluto upon startup. See <b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8).
+</dt><dt><b>plutostderrlog</b>
+</dt><dt>do not use syslog, but rather log to stderr, and direct stderr to the argument file.
+</dt><dt><b>pluto</b>
+</dt><dt>whether to start Pluto or not; Values are <b>yes</b> (the default) or <b>no</b> (useful only in special circumstances).
+</dt><dt><b>plutowait</b>
+</dt><dt>should Pluto wait for each negotiation attempt that is part of startup to finish before proceeding with the next? Values are <b>yes</b> or <b>no</b> (the
+default).
+</dt><dt><b>prepluto</b>
+</dt><dt>shell command to run before starting Pluto (e.g., to decrypt an encrypted copy of the <i>ipsec.secrets</i> file). It's run in a very simple way;
+complexities like I/O redirection are best hidden within a script. Any output is redirected for logging, so running interactive commands is difficult unless
+they use <i>/dev/tty</i> or equivalent for their interaction. Default is none.
+</dt><dt><b>postpluto</b>
+</dt><dt>shell command to run after starting Pluto (e.g., to remove a decrypted copy of the <i>ipsec.secrets</i> file). It's run in a very simple way; complexities
+like I/O redirection are best hidden within a script. Any output is redirected for logging, so running interactive commands is difficult unless they use
+<i>/dev/tty</i> or equivalent for their interaction. Default is none.
+</dt><dt><b>dumpdir</b>
+</dt><dt>in what directory should things started by <i>setup</i> (notably the Pluto daemon) be allowed to dump core? The empty value (the default) means they are not
+allowed to.
+</dt><dt><b>fragicmp</b>
+</dt><dt>whether a tunnel's need to fragment a packet should be reported back with an ICMP message, in an attempt to make the sender lower his PMTU estimate;
+acceptable values are <b>yes</b> (the default) and <b>no</b>. This KLIPS option has no effect on NETKEY, Windows or BSD stacks.
+</dt><dt><b>hidetos</b>
+</dt><dt>whether a tunnel packet's TOS field should be set to 0 rather than copied from the user packet inside; acceptable values are <b>yes</b> (the default) and
+<b>no</b>. This KLIPS option has no effect on NETKEY, Windows or BSD stacks.
+</dt><dt><b>overridemtu</b>
+</dt><dt>value that the MTU of the ipsec<i>n</i> <b>interface</b>(s) should be set to, overriding IPsec's (large) default. This parameter is needed only in special
+situations. This KLIPS option has no effect on NETKEY, Windows or BSD stacks.
+</dt><dt><b>manualstart</b>
+</dt><dt>which manually-keyed connections to set up at startup (empty, a name, or a quoted list of names separated by white space); see <b><a href="http://linux.die.net/man/8/ipsec_manual" rel="nofollow">ipsec_manual</a></b>(8).
+Default is none.
+</dt></dl>
+<h2>Implicit Conns</h2>
+
+<p>The system automatically defines several conns to implement default policy groups. Each can be overridden by explicitly defining a new conn with the same
+name. If the new conn has <b>auto=ignore</b>, the definition is suppressed.
+</p><p>Here are the automatically supplied definitions.
+</p><dl compact="compact">
+<dt>
+
+<pre class="code"><b>conn clear
+</b></pre>
+</dt><dd><b>type=passthrough</b>
+
+<p><b>authby=never</b>
+
+</p><p><b>left=%defaultroute</b>
+
+</p><p><b>right=%group</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt><b>conn clear-or-private</b>
+</dt><dd><b>type=passthrough</b>
+
+<p><b>left=%defaultroute</b>
+
+</p><p><b>leftid=%myid</b>
+
+</p><p><b>right=%opportunisticgroup</b>
+
+</p><p><b>failureshunt=passthrough</b>
+
+</p><p><b>keyingtries=3</b>
+
+</p><p><b>ikelifetime=1h</b>
+
+</p><p><b>keylife=1h</b>
+
+</p><p><b>rekey=no</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt><b>conn private-or-clear</b>
+</dt><dd><b>type=tunnel</b>
+
+<p><b>left=%defaultroute</b>
+
+</p><p><b>leftid=%myid</b>
+
+</p><p><b>right=%opportunisticgroup</b>
+
+</p><p><b>failureshunt=passthrough</b>
+
+</p><p><b>keyingtries=3</b>
+
+</p><p><b>ikelifetime=1h</b>
+
+</p><p><b>keylife=1h</b>
+
+</p><p><b>rekey=no</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt><b>conn private</b>
+</dt><dd><b>type=tunnel</b>
+
+<p><b>left=%defaultroute</b>
+
+</p><p><b>leftid=%myid</b>
+
+</p><p><b>right=%opportunisticgroup</b>
+
+</p><p><b>failureshunt=drop</b>
+
+</p><p><b>keyingtries=3</b>
+
+</p><p><b>ikelifetime=1h</b>
+
+</p><p><b>keylife=1h</b>
+
+</p><p><b>rekey=no</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt><b>conn block</b>
+</dt><dd><b>type=reject</b>
+
+<p><b>authby=never</b>
+
+</p><p><b>left=%defaultroute</b>
+
+</p><p><b>right=%group</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt><b># default policy<br>
+conn packetdefault</b>
+</dt><dd><b>type=tunnel</b>
+
+<p><b>left=%defaultroute</b>
+
+</p><p><b>leftid=%myid</b>
+
+</p><p><b>left=0.0.0.0/0</b>
+
+</p><p><b>right=%opportunistic</b>
+
+</p><p><b>failureshunt=passthrough</b>
+
+</p><p><b>keyingtries=3</b>
+
+</p><p><b>ikelifetime=1h</b>
+
+</p><p><b>keylife=1h</b>
+
+</p><p><b>rekey=no</b>
+
+</p><p><b>auto=route</b>
+</p></dd><dt>These conns are <i>not</i> affected by anything in <b>conn %default</b>. They will only work if <b>%defaultroute</b> works. The <b>leftid</b> will be the
+interfaces IP address; this requires that reverse DNS records be set up properly.
+<p>The implicit conns are defined after all others. It is appropriate and reasonable to use <b>also=private-or-clear</b> (for example) in any other
+opportunistic conn.
+</p></dt></dl>
+<h2>Policy Group Files</h2>
+
+<p>The optional files under <i>/etc/ipsec.d/policy</i>, including
+</p><dl compact="compact">
+<dt>
+
+<pre class="code">/etc/ipsec.d/policies/clear
+/etc/ipsec.d/policies/clear-or-private
+/etc/ipsec.d/policies/private-or-clear
+/etc/ipsec.d/policies/private
+/etc/ipsec.d/policies/block</pre>
+</dt><dt>may contain policy group configuration information to supplement <i>ipsec.conf</i>. Their contents are not security-sensitive.
+<p>These files are text files. Each consists of a list of CIDR blocks, one per line. White space followed by # followed by anything to the end of the line is a
+comment and is ignored, as are empty lines.
+</p><p>A connection in <i>ipsec.conf</i> which has <b>right=%group</b> or <b>right=%opportunisticgroup</b> is a policy group connection. When a policy group file
+of the same name is loaded, with
+</p><p><b>ipsec auto --rereadgroups</b>
+</p><p>or at system start, the connection is instantiated such that each CIDR block serves as an instance's <b>right</b> value. The system treats the resulting
+instances as normal connections.
+</p><p>For example, given a suitable connection definition <b>private</b>, and the file <i>/etc/ipsec.d/policy/private</i> with an entry 192.0.2.3, the system
+creates a connection instance <b>private#192.0.2.3.</b> This connection inherits all details from <b>private</b>, except that its right client is
+192.0.2.3.
+</p></dt></dl>
+<h2>Default Policy Groups</h2>
+
+<p>The standard Openswan install includes several policy groups which provide a way of classifying possible peers into IPsec security classes: <b>private</b>
+(talk encrypted only), <b>private-or-clear</b> (prefer encryption), <b>clear-or-private</b> (respond to requests for encryption),
+<b>clear</b> and <b>block</b>. Implicit policy groups apply to the local host only, and are implemented by the <b>IMPLICIT CONNECTIONS</b> described
+above.
+</p><h2>CHOOSING A CONNECTION [THIS SECTION IS EXTREMELY OUT OF DATE</h2>
+
+<p>When choosing a connection to apply to an outbound packet caught with a <b>%trap,</b> the system prefers the one with the most specific eroute that includes
+the packet's source and destination IP addresses. Source subnets are examined before destination subnets. For initiating, only routed connections are
+considered. For responding, unrouted but added connections are considered.
+</p><p>When choosing a connection to use to respond to a negotiation which doesn't match an ordinary conn, an opportunistic connection may be instantiated.
+Eventually, its instance will be /32 -&gt; /32, but for earlier stages of the negotiation, there will not be enough information about the client subnets
+to complete the instantiation.
+</p><h2>Files</h2>
+
+<pre class="code">/etc/ipsec.conf
+/etc/ipsec.d/policies/clear
+/etc/ipsec.d/policies/clear-or-private
+/etc/ipsec.d/policies/private-or-clear
+/etc/ipsec.d/policies/private
+/etc/ipsec.d/policies/block</pre>
+<h2>See Also</h2>
+
+<p><b><a href="http://linux.die.net/man/8/ipsec">ipsec</a></b>(8), <b>ipsec_ttoaddr</b>(8), <b><a href="http://linux.die.net/man/8/ipsec_auto" rel="nofollow">ipsec_auto</a></b>(8), <b><a href="http://linux.die.net/man/8/ipsec_manual" rel="nofollow">ipsec_manual</a></b>(8), <b><a href="http://linux.die.net/man/8/ipsec_rsasigkey">ipsec_rsasigkey</a></b>(8)
+</p><h2>History</h2>
+
+<p>Designed for the FreeS/WAN project &lt;<a href="http://www.freeswan.org/">http://www.freeswan.org</a>&gt; by Henry Spencer.
+</p><h2>Bugs</h2>
+
+<p>Before reporting new bugs, please ensure you are using the latest version of Openswan, and if not using KLIPS, please ensure you are using the latest kernel
+code for your IPsec stack.
+</p><p>When <b>type</b> or <b>failureshunt</b> is set to <b>drop</b> or <b>reject,</b> Openswan blocks outbound packets using eroutes, but assumes inbound blocking
+is handled by the firewall. Openswan offers firewall hooks via an "updown" script. However, the default <b>ipsec _updown</b> provides no help in controlling a
+modern firewall.
+</p><p>Including attributes of the keying channel (authentication methods, <b>ikelifetime</b>, etc.) as an attribute of a connection, rather than of a participant
+pair, is dubious and incurs limitations.
+</p><p>The use of <b>%any</b> with the <i>protoport=</i> option is ambiguous. Should the SA permits any port through or should the SA negotiate any single port
+through? The first is a basic conn with a wildcard. The second is a template. The second is the current behaviour, and it's wrong for quite a number of uses
+involving TCP. The keyword <b>%one</b> may be introduced in the future to seperate these two cases.
+</p><p><i>ipsec_manual</i> is not nearly as generous about the syntax of subnets, addresses, etc. as the usual Openswan user interfaces. Four-component
+dotted-decimal must be used for all addresses. It <i>is</i> smart enough to translate bit-count netmasks to dotted-decimal form.
+
+</p><p>It would be good to have a line-continuation syntax, especially for the very long lines involved in RSA signature keys.
+</p><p><b>First packet caching</b> is only implemented for the KLIPS(NG) and MAST stacks. NETKEY returns POSIX-breaking responses, visiable as <i>connect:
+Resource temporarily unavailable</i> errors. This affects Opportunistic Encryption and DPD. Functionality on the BSD and Windows stacks is unknown.
+
+</p><p>Some state information is only available when using KLIPS, and will return errors on other IPsec stacks. These include <i>ipsec eroute</i>, <i>ipsec spi</i>
+and <i>ipsec look</i>.
+</p><p>Multiple L2TP clients behind the same NAT router, and multiple L2TP clients behind different NAT routers using the same Virtual IP is currently only working
+for the KLIPSNG stack.
+</p><p>The ability to specify different identities, <b>authby</b>, and public keys for different automatic-keyed connections between the same participants is
+misleading; this doesn't work dependably because the identity of the participants is not known early enough. This is especially awkward for the "Road Warrior"
+case, where the remote IP address is specified as 0.0.0.0, and that is considered to be the "participant" for such connections.
+</p><p>In principle it might be necessary to control MTU on an interface-by-interface basis, rather than with the single global override that
+<b>overridemtu</b> provides. This feature is planned for a future release.
+</p><p>A number of features which <i>could</i> be implemented in both manual and automatic keying actually are not yet implemented for manual keying. This is
+unlikely to be fixed any time soon.
+</p><p>If conns are to be added before DNS is available, <b>left=</b><i>FQDN</i>, <b>leftnextop=</b><i>FQDN</i>, and <b>leftrsasigkey=%dnsonload</b> will fail.
+<b><a href="http://linux.die.net/man/8/ipsec_pluto" rel="nofollow">ipsec_pluto</a></b>(8) does not actually use the public key for our side of a conn but it isn't generally known at a add-time which side is ours (Road
+Warrior and Opportunistic conns are currently exceptions).
+</p><p>The <b>myid</b> option does not affect explicit <b>ipsec auto --add</b> or <b>ipsec auto --replace</b> commands for implicit
+conns.
+
+<!-- google_ad_section_end -->
+</p><h2>Referenced By</h2>
+<b><a href="http://linux.die.net/man/8/ipsec_showhostkey" rel="nofollow">ipsec_showhostkey</a></b>(8)
+<div id="adbottom">
+<script type="text/javascript"><!--
+google_ad_client = "pub-5823754184406795";
+google_ad_slot = "8789940313";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script style="display: none;" type="text/javascript" src="show_ads.js">
+</script>
+</div>
+
+
+</div>
+<div id="menu">
+
+<a href="http://www.die.net/"><img src="logo.gif" alt="die.net" width="119" border="0" height="121"></a>
+
+
+<dl><dd>
+<form id="cse-search-box-menu" action="http://www.die.net/search/">
+<label><a rel="nofollow" href="http://www.die.net/search/">site search</a></label>
+<input name="q" size="10" type="text">
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 75%;">Google Custom Search</span>
+<input name="sa" value="Search" type="hidden">
+<input name="ie" value="ISO-8859-1" type="hidden">
+<input name="cx" value="partner-pub-5823754184406795:54htp1rtx5u" type="hidden">
+<input name="cof" value="FORID:9" type="hidden">
+</form>
+<script type="text/javascript">
+
+<!--
+document.forms["cse-search-box-menu"].action = "http://www.die.net/search/";
+// -->
+</script>
+</dd></dl>
+
+
+
+
+<dl>
+<dt>Library</dt>
+<dd><a rel="nofollow" href="http://dictionary.die.net/">online dictionary</a></dd>
+<dd><a rel="nofollow" href="http://linux.die.net/">linux docs</a></dd>
+<dd><a rel="nofollow" href="http://linux.die.net/man/">linux man pages</a></dd>
+<dd><a rel="nofollow" href="http://www.die.net/musings/page_load_time/">page load time</a></dd>
+</dl>
+<dl>
+<dt>Toys</dt>
+<dd><a rel="nofollow" href="http://www.die.net/earth/">world sunlight</a></dd>
+<dd><a rel="nofollow" href="http://www.die.net/moon/">moon phase</a></dd>
+<dd><a rel="nofollow" href="http://trace.die.net/">trace explorer</a></dd>
+</dl>
+
+
+<dl>
+<dt><a href="http://linux.die.net/man/5/"><img src="back.gif" alt="Back" width="20" border="0" height="22"></a></dt>
+</dl>
+
+</div></div>
+<script type="text/javascript">
+
+<!--
+if (top.location != self.location) top.location = self.location;
+if (document.referrer.match(/(search|google\.|yahoo\.|live\.|msn\.|ask\.).*[?&][pq]=[^&]+/)) document.write('<scr'+'ipt src="http://static.die.net/style/highlight.js"><\/scr'+'ipt>');
+// -->
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://git.or.cz/gitwiki/RevisionSpecification">
+<meta name="wpd_url" content="http://git.or.cz/gitwiki/RevisionSpecification">
+<meta name="wpd_date" content="2008-07-08T16:32Z">
+
+
+
+
+<meta name="robots" content="index,nofollow">
+
+<title>RevisionSpecification - GitWiki</title>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.className = '';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.className = 'disabled';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initialize action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<script type="text/javascript">
+
+var gui_editor_link_href = "/gitwiki/RevisionSpecification?action=edit&editor=gui";
+var gui_editor_link_text = "Edit (GUI)";
+</script>        
+
+
+
+
+
+
+
+<link rel="Start" href="http://git.or.cz/gitwiki/FrontPage">
+<link rel="Alternate" title="Wiki標記" href="http://git.or.cz/gitwiki/RevisionSpecification?action=raw">
+<link rel="Alternate" media="print" title="檢視列印" href="http://git.or.cz/gitwiki/RevisionSpecification?action=print">
+<link rel="Search" href="http://git.or.cz/gitwiki/FindPage">
+<link rel="Index" href="http://git.or.cz/gitwiki/TitleIndex">
+<link rel="Glossary" href="http://git.or.cz/gitwiki/WordIndex">
+<link rel="Help" href="http://git.or.cz/gitwiki/HelpOnFormatting">
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="RevisionSpecification.css" media="all">
+</head>
+<body dir="ltr" lang="zh-tw">
+
+<div id="header">
+<div id="logo"><a href="http://git.or.cz/gitwiki/FrontPage">GitWiki</a></div>
+
+<form id="searchform" method="get" action="http://git.or.cz/gitwiki/RevisionSpecification">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label style="display: none;" for="searchinput">尋找:</label>
+<input class="disabled" id="searchinput" name="value" value="Search" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input disabled="disabled" id="titlesearch" name="titlesearch" value="標題" alt="Search Titles" type="submit">
+<input disabled="disabled" id="fullsearch" name="fullsearch" value="內文" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=login" id="login">登入</a></li></ul>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="backlink" title="點一下: 對本頁標題做全文檢索" href="http://git.or.cz/gitwiki/RevisionSpecification?action=fullsearch&value=linkto%3A%22RevisionSpecification%22&context=180">RevisionSpecification</a></li>
+</ul>
+
+</div>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://git.or.cz/gitwiki/FrontPage">FrontPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/FindPage">FindPage</a></li><li class="wikilink"><a href="http://git.or.cz/gitwiki/HelpContents">HelpContents</a></li><li class="current"><a href="http://git.or.cz/gitwiki/RevisionSpecification">RevisionSpecification</a></li>
+</ul>
+
+<div id="pageline"><hr style="display: none;"></div>
+
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/RevisionSpecification?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/RevisionSpecification">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="en">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line874">This section describes various ways to specify what revisions you are <span class="anchor" id="line-2"></span>interested in. Aside from being used by  <span class="anchor" id="line-3"></span><a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">git-log(1)</a> and <span class="anchor" id="line-4"></span><a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/git-whatchanged.html">git-whatchanged(1)</a>, <span class="anchor" id="line-5"></span>they may also be used with graphical frontends such as <a class="nonexistent" href="http://git.or.cz/gitwiki/Gitk">gitk</a>. <span class="anchor" id="line-6"></span><span class="anchor" id="line-7"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-8"></span><strong>Table of contents:</strong> <span class="anchor" id="line-9"></span><span class="anchor" id="line-10"></span></p><p class="line867"></p><div class="table-of-contents"><p class="table-of-contents-heading">Contents</p><ol><li><a href="#head-798d8d6010a62dc534d5a8b86849bae32d7f0bb9">Limit by Path Name</a></li><li><a href="#head-de5b942a2d8a04d3f130031b7983fa1398042b41">Limit by Date or Number</a></li><li><a href="#head-c86e54796c1a5e50d5562b549d5efa957fd2953b">Limiting by Commit Ranges</a></li><li><a href="#head-f144e1ae06148af31b862b3b332f025d91bb5546">Limiting by Reachability</a></li><li><a href="#head-3ee0c703f5de11658017e9fad2ca0942fb82ed03">Combining Revision Specifications</a></li><li><a href="#head-cf52e196a00d583cb649b838e8e0178108406feb">Examining All Repository References</a></li><li><a href="#head-dfd83090c3e5962cc6e6abb8f5f63bc669c97f9a">References</a></li></ol></div> <span class="anchor" id="line-11"></span><hr><p class="line874"> <span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span><span class="anchor" id="line-14"></span></p><p class="line867">
+</p><h1 id="head-798d8d6010a62dc534d5a8b86849bae32d7f0bb9">Limit by Path Name</h1>
+<span class="anchor" id="line-15"></span><span class="anchor" id="line-16"></span><p class="line874">If you are interested only in those revisions that made changes <span class="anchor" id="line-17"></span>to a specific file (or even several files) list the files like this: <span class="anchor" id="line-18"></span></p><pre>$ git log Makefile README
+<span class="anchor" id="line-19"></span></pre><span class="anchor" id="line-20"></span><span class="anchor" id="line-21"></span><p class="line874">To avoid ambiguity between repository references, such as tag name, <span class="anchor" id="line-22"></span>and filenames, separate file names from other git options using <tt class="backtick">--</tt>. <span class="anchor" id="line-23"></span>So if you have a file named master it will clash with the reference <span class="anchor" id="line-24"></span>named master, and thus you will have to use: <span class="anchor" id="line-25"></span></p><pre>$ git log -- master
+<span class="anchor" id="line-26"></span></pre><span class="anchor" id="line-27"></span><span class="anchor" id="line-28"></span><span class="anchor" id="line-29"></span><p class="line867">
+</p><h1 id="head-de5b942a2d8a04d3f130031b7983fa1398042b41">Limit by Date or Number</h1>
+<span class="anchor" id="line-30"></span><span class="anchor" id="line-31"></span><p class="line874">You can limit the amount of history to show from a given revision. <span class="anchor" id="line-32"></span>Either limit by date using e.g. <tt class="backtick">--since=1.month</tt> or  <span class="anchor" id="line-33"></span><tt class="backtick">--since=2.weeks.ago</tt>, or limit by the number of commits using <tt class="backtick">-n400</tt> <span class="anchor" id="line-34"></span>(or deprecated <tt class="backtick">-15</tt>). <span class="anchor" id="line-35"></span><span class="anchor" id="line-36"></span></p><p class="line874">If you are only interested in changed that happened between two dates <span class="anchor" id="line-37"></span>you can use: <span class="anchor" id="line-38"></span></p><pre>$ git log --after="May 5th" --before="2006-05-16 15:44"
+<span class="anchor" id="line-39"></span></pre><span class="anchor" id="line-40"></span><span class="anchor" id="line-41"></span><p class="line867"><strong>Note:</strong> <span class="anchor" id="line-42"></span></p><ul><li style="list-style-type: none;">If you want to avoid having to quote dates containing spaces you can <span class="anchor" id="line-43"></span><p class="line862">use "." instead, e.g. <tt class="backtick">--after=May.5th</tt>. <span class="anchor" id="line-44"></span><span class="anchor" id="line-45"></span><span class="anchor" id="line-46"></span></p></li></ul><p class="line867">
+</p><h1 id="head-c86e54796c1a5e50d5562b549d5efa957fd2953b">Limiting by Commit Ranges</h1>
+<span class="anchor" id="line-47"></span><span class="anchor" id="line-48"></span><p class="line874">Often you are interested in what happened between two revisions, such as <span class="anchor" id="line-49"></span>between two releases. For this reason, commits can be limited to a specific <span class="anchor" id="line-50"></span>range, such as "all commits between tag-1.0 and tag-2.0". For example: <span class="anchor" id="line-51"></span></p><pre>$ git log tag-1.0..tag-2.0
+<span class="anchor" id="line-52"></span></pre><span class="anchor" id="line-53"></span><span class="anchor" id="line-54"></span><p class="line874">This way of commit limiting makes it trivial to only browse the commits <span class="anchor" id="line-55"></span>which haven't been pushed to a remote branch. Assuming origin is your <span class="anchor" id="line-56"></span>upstream remote branch, using: <span class="anchor" id="line-57"></span></p><pre>$ git log origin..HEAD
+<span class="anchor" id="line-58"></span></pre><span class="anchor" id="line-59"></span><p class="line874">will list what changes are pending to be pushed to the remote branch. <span class="anchor" id="line-60"></span>Optionally, the ending or beginning <tt class="backtick">HEAD</tt> can be left out since  <span class="anchor" id="line-61"></span>it is implied. <span class="anchor" id="line-62"></span><span class="anchor" id="line-63"></span><span class="anchor" id="line-64"></span></p><p class="line867">
+</p><h1 id="head-f144e1ae06148af31b862b3b332f025d91bb5546">Limiting by Reachability</h1>
+<span class="anchor" id="line-65"></span><span class="anchor" id="line-66"></span><p class="line862">Git interprets the range specifier "<tt>tag-1.0..tag-2.0</tt>" as "all commits <span class="anchor" id="line-67"></span>reachable from tag-2.0 but not from tag-1.0". Where reachability refers <span class="anchor" id="line-68"></span>to what commits are ancestors (or part of the history) of the branch or <span class="anchor" id="line-69"></span>tagged revision in question. If you prefer to specify which commits you <span class="anchor" id="line-70"></span>are interested in this way use the following: <span class="anchor" id="line-71"></span></p><pre>$ git log tag-2.0 ^tag-1.0
+<span class="anchor" id="line-72"></span></pre><span class="anchor" id="line-73"></span><span class="anchor" id="line-74"></span><p class="line862">You can think of <tt class="backtick">^</tt> as a negation operator. Using this alternate syntax, <span class="anchor" id="line-75"></span>it is possible to further prune commits by specifying multiple "cut offs". <span class="anchor" id="line-76"></span><span class="anchor" id="line-77"></span></p><p class="line862">For example you can say <tt>a&nbsp;^b&nbsp;^c&nbsp;^d</tt> or <tt>a&nbsp;--not&nbsp;b&nbsp;c&nbsp;d</tt> for the more  <span class="anchor" id="line-78"></span>complex case where you're interested in one (or more) commit, but not  <span class="anchor" id="line-79"></span>anything that flows from any of a number of other commits. <span class="anchor" id="line-80"></span><span class="anchor" id="line-81"></span><span class="anchor" id="line-82"></span></p><p class="line867">
+</p><h1 id="head-3ee0c703f5de11658017e9fad2ca0942fb82ed03">Combining Revision Specifications</h1>
+<span class="anchor" id="line-83"></span><span class="anchor" id="line-84"></span><p class="line874">Revisions options can to some degree be combined, which makes it possible <span class="anchor" id="line-85"></span>to say "show at most 20 commits from within the last month that changed <span class="anchor" id="line-86"></span>files under the Documentation/ directory." <span class="anchor" id="line-87"></span></p><pre>$ git log --since=1.month -n20 -- Documentation/
+<span class="anchor" id="line-88"></span></pre><span class="anchor" id="line-89"></span><span class="anchor" id="line-90"></span><span class="anchor" id="line-91"></span><p class="line867">
+</p><h1 id="head-cf52e196a00d583cb649b838e8e0178108406feb">Examining All Repository References</h1>
+<span class="anchor" id="line-92"></span><span class="anchor" id="line-93"></span><p class="line874">In some cases, it can be useful to query changes across all references <span class="anchor" id="line-94"></span>in a repository. This is especially useful if you are using a visualization <span class="anchor" id="line-95"></span>tool such at <a class="nonexistent" href="http://git.or.cz/gitwiki/Gitk">gitk</a>. An example is to query "did any line of development <span class="anchor" id="line-96"></span>in this repository change a particular file within the last week?" <span class="anchor" id="line-97"></span>This can be accomplished using: <span class="anchor" id="line-98"></span></p><pre>$ gitk --all --since=1.week -- Makefile
+<span class="anchor" id="line-99"></span></pre><span class="anchor" id="line-100"></span><span class="anchor" id="line-101"></span><p class="line862">Another example: <span class="anchor" id="line-102"></span></p><pre>$ gitk --all --since=1.month -15 -- t/
+<span class="anchor" id="line-103"></span></pre><span class="anchor" id="line-104"></span><p class="line862">will show at most fifteen commits from <em>any</em> branch that changed the  <span class="anchor" id="line-105"></span>test subdirectory in the last month. <span class="anchor" id="line-106"></span><span class="anchor" id="line-107"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-108"></span>
+</p><h1 id="head-dfd83090c3e5962cc6e6abb8f5f63bc669c97f9a">References</h1>
+<span class="anchor" id="line-109"></span><span class="anchor" id="line-110"></span><ul><li>More examples can be found in the Git <span class="anchor" id="line-111"></span><p class="line891"><a class="http" href="http://kernel.org/pub/software/scm/git/docs/tutorial.html">tutorial's</a> <span class="anchor" id="line-112"></span>section about "Exploring History". <span class="anchor" id="line-113"></span><span class="anchor" id="line-114"></span></p></li><li class="gap">Relevant man pages: <span class="anchor" id="line-115"></span><p class="line891"><a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">git-log(1)</a>, <span class="anchor" id="line-116"></span><a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/git-rev-list.html">git-rev-list(1)</a>, and <span class="anchor" id="line-117"></span>the section on "Specifying Revisions" in <span class="anchor" id="line-118"></span><a class="http" href="http://www.kernel.org/pub/software/scm/git/docs/git-rev-parse.html">git-rev-parse(1)</a>. <span class="anchor" id="line-119"></span><span class="anchor" id="line-120"></span></p></li></ul><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-121"></span><a href="http://git.or.cz/gitwiki/CategoryGitDocumentation">CategoryGitDocumentation</a> <span class="anchor" id="line-122"></span><span class="anchor" id="bottom"></span></p></div><p id="pageinfo" class="info" dir="ltr" lang="zh-tw">RevisionSpecification  (上次是 <span title="JakubNarebski @ 193.0.122.19[193.0.122.19]"><a href="http://git.or.cz/gitwiki/JakubNarebski" title="JakubNarebski @ 193.0.122.19[193.0.122.19]">JakubNarebski</a></span> 在 2006-06-03 19:13:42 編輯的)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a name="texteditlink" href="http://git.or.cz/gitwiki/RevisionSpecification?action=edit&editor=text">Edit (Text)</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=edit&editor=gui">Edit (GUI)</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=info">關於</a></li><li><a href="http://git.or.cz/gitwiki/RevisionSpecification?action=AttachFile">Attachments</a></li><li>
+<form class="actionsmenu" method="get" action="http://git.or.cz/gitwiki/RevisionSpecification">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">其他功能:</option><option value="raw">Raw Text</option>
+<option value="print">檢視列印</option>
+<option value="RenderAsDocbook">Render as Docbook</option>
+<option value="refresh">Delete Cache</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="SpellCheck">拼字檢查</option>
+<option value="LikePages">Like Pages</option>
+<option value="LocalSiteMap">Local Site Map</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">重新命名本頁</option>
+<option value="DeletePage" disabled="disabled" class="disabled">刪除本頁</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="MyPages">My Pages</option>
+<option value="SubscribeUser">Subscribe User</option>
+<option value="show" disabled="disabled" class="disabled">------------</option>
+<option value="Despam">Remove Spam</option>
+<option value="PackagePages">Package Pages</option>
+    </select>
+    
+</div>
+<script type="text/javascript">
+
+<!--// Init menu
+actionsMenuInit('其他功能:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li><li><a href="http://www.python.org/">Python Powered</a></li><li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>

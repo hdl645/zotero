@@ -1,0 +1,1262 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://utsl.gen.nz/talks/git-svn/intro.html">
+<meta name="wpd_url" content="http://utsl.gen.nz/talks/git-svn/intro.html">
+<meta name="wpd_date" content="2008-07-08T16:36Z">
+
+
+<meta name="" http-equiv="Content-Type" value="text/html; charset=utf-8">
+<title>An introduction to git-svn for Subversion/SVK users and deserters</title>
+
+<script language="javascript" type="text/javascript"><!--
+  window.imgtimeout = 500;
+  function set_big(imgtag, figure) {
+
+    if (imgtag.big) {
+      imgtag.floater.set_active();
+      return;
+    }
+
+    imgtag.set_active = function() {
+      imgtag.inactive_time = null;
+      figure.className = "bigfigure";
+      imgtag.big = 1;
+      imgtag.onmouseover=function() {
+        this.set_active();
+      }
+      imgtag.onmouseout=function() {
+        this.set_inactive();
+      }
+    }
+
+    imgtag.set_inactive = function() {
+      imgtag.inactive_time = (new Date()).getTime() - 50;
+
+      window.setTimeout(function() {
+        var now = (new Date()).getTime();
+        if ( imgtag.inactive_time &&
+	     (now-imgtimeout) >= imgtag.inactive_time
+	     && imgtag.big) {
+
+	  figure.className = "figure";
+	  imgtag.inactive_time = null;
+	  imgtag.big = 0;
+	  imgtag.onmouseover = null;
+	  imgtag.onmouseout = null;
+
+	}
+      }, imgtimeout);
+    }
+
+    imgtag.set_active();
+  }
+--></script>
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="intro.css" media="all">
+</head>
+<body>
+
+<h1 class="title">An introduction to <tt>git-svn</tt> for Subversion/SVK users and deserters</h1>
+
+<div class="content">
+
+<p>This article is aimed at people who want to contribute to projects
+  which are using Subversion as their <em>code-wiki</em>.  It is
+  particularly targetted at SVK users, who are already used to a
+  work-flow that involves disconnected operation, though this is a
+  tiny subset of the workflows supported by the <tt>git</tt> suite.
+  Subversion users can skip SVK and move straight onto
+  <tt>git-svn</tt> with this tutorial.
+
+</p><p>People who are responsible for Subversion servers and are
+  converting them to <tt>git</tt> in order to lay them down to die are
+  advised to consider the one-off <tt>git-svnimport</tt>, which is
+  useful for bespoke conversions where you don't necessarily want to
+  leave SVN/CVS/etc breadcrumbs behind.  I'll mention bespoke
+  conversions at the end of the tutorial, and the sort of thing that
+  you end up doing with them.
+
+</p><p>This is quite different from the <a href="http://git.or.cz/course/svn.html">Git - SVN Crash Course</a>
+  on the Git home page, which is intended for people who are familiar
+  with Subversion who want to work with Git mastered projects using Git.
+
+</p><p>A lot of this tutorial is dedicated to advocacy, sadly necessary.
+  Those who would rather just cut to the chase will probably want to
+  skip straight to <a href="#getting">Getting Git</a>.
+
+</p><p><b>NEW 20<sup>th</sup> June, 2007</b>: click on images to enlarge!
+
+</p><p>I hope you enjoy this tutorial.
+
+</p><p class="address">Sam Vilain
+
+</p><p>This tutorial, though long, probably still needs lots of work, and
+  I would appreciate any feedback people would like to give.
+  Especially if it comes as a patch against a <tt>git clone
+  http://utsl.gen.nz/talks/git-svn/.git</tt> ;-).  Even just FIXME
+  notes with feedback would be great.
+
+</p><p>Thanks to all that have contributed, especially
+  <a href="#contributors">those</a> who have just pointed me at their
+  repo and asked me to pull, or provided easily mergeable patches.
+  Spot on.
+
+</p><p>Contents:
+
+<!-- toc start -->
+</p><ul class="toc">
+  <li><a href="#wtf-why">What!?  Yet Another Version Control System? Why?</a></li>
+  <ul class="toc2">
+    <li><a href="#yay-simple">Model Simplicity</a></li>
+    <li><a href="#eye-of-the-git">Good Visualisation</a></li>
+    <li><a href="#yay-publish">Publishing your changes for others to pull</a></li>
+    <li><a href="#yay-nocentre">Breaking free from the "star" merge pattern</a></li>
+    <li><a href="#yay-merging">Sane Merging</a></li>
+    <li><a href="#feature-branches">Feature branches - the "stable" development model</a></li>
+    <li><a href="#yay-mirroring">The Ferrari features - speed, resilience, space</a></li>
+  </ul>
+  <li><a href="#skip-svk">Primer for non-SVK-savvy users</a></li>
+  <li><a href="#getting">Getting Git</a></li>
+  <li><a href="#howto">How to...</a></li>
+  <ul class="toc2">
+    <li><a href="#howto-fetch">...fetch an upstream subversion repository...</a></li>
+    <ul class="toc3">
+      <li><a href="#howto-fetch-cheat">...re-using someone else's git-svn conversion</a></li>
+      <li><a href="#howto-fetch-head">...by checking out just the trunk from SVN</a></li>
+      <li><a href="#howto-fetch-convert">...by importing your SVK mirrors</a></li>
+      <li><a href="#howto-fetch-slow">...by importing the whole repository from Subversion</a></li>
+    </ul>
+    <li><a href="#using-moving">...relocate a checkout</a></li>
+    <li><a href="#howto-branch">...make a local branch for development</a></li>
+    <li><a href="#local-commit">...make changes to your local branch</a></li>
+    <li><a href="#howto-amend">...correcting changes in your local branch</a></li>
+    <li><a href="#howto-track">...track updates on the upstream Subversion server...</a></li>
+    <ul class="toc3">
+      <li><a href="#howto-track-native">...by updating somebody else's <tt>git-svn</tt> tracking repository</a></li>
+      <li><a href="#howto-track-svn">...using <tt>git-svn</tt> against the Subversion repository</a></li>
+      <ul class="toc4">
+        <li><a href="#howto-track-dropmeta">Clearing <tt>git-svn</tt> metadata</a></li>
+        <li><a href="#howto-track-rebuildmeta">Rebuilding <tt>git-svn</tt> metadata</a></li>
+        <li><a href="#howto-track-fetch">Fetching more revisions</a></li>
+      </ul>
+    </ul>
+    <li><a href="#fetch-track-pull">...keep your local branch up to date with Subversion</a></li>
+    <li><a href="#howto-push">...commit back to Subversion</a></li>
+    <li><a href="#howto-sendpatches">...send patches to mailing lists or RT instances</a></li>
+    <li><a href="#howto-merge">...merge changes</a></li>
+  </ul>
+  <li><a href="#sux">Git's limitations</a></li>
+  <ul class="toc2">
+    <li><a href="#sux-mismatch">Development model impedence mismatches</a></li>
+    <li><a href="#darcs-rulz">What darcs has over git</a></li>
+    <li><a href="#bzr-rulz">What Bazaar-NG has over git</a></li>
+    <li><a href="#hg-rulz">What Mercurial has over git</a></li>
+    <li><a href="#svn-stillsux">What Subversion has over git</a></li>
+  </ul>
+  <li><a href="#summary">Summary</a></li>
+  <li><a href="#grafting">Epilogue on history rewriting</a></li>
+  <li><a href="#contributors">Contributors</a></li>
+</ul>
+<!-- toc end -->
+
+<a name="wtf-why"></a><h2>What!?  Yet Another Version Control System? Why?</h2>
+
+<p>This is an understandable retort, but somewhat off the mark: git
+  is <em>not</em> (just) a version control system.
+
+  Linus' <a href="http://lkml.org/lkml/2005/4/8/9">initial
+  announcement</a> describes it thus:
+
+</p><pre>                 ... It's not an SCM, it's a distribution and archival
+mechanism.  I bet you could make a reasonable SCM on top of it, though.
+Another way of looking at it is to say that it's really a content-
+addressable filesystem, used to track directory trees.</pre>
+
+<p>Well, time has gone on, and sure enough, a huge collection of
+  people have written some nice Source Control Management (SCM)
+  software that runs on top of <tt>git</tt>, and a lot of it is
+  bundled with it.  Yes, it's true that <tt>git</tt> is a re-invention
+  of <a href="http://monotone.ca/">Monotone</a> that Linus wrote while
+  waiting for it to finish importing the Linux kernel from BitKeeper -
+  but technically, it's a different class of software to the Version
+  Control System.  It's a filesystem.
+
+</p><p>We're at the point now where instead of a whole lot of people being
+  happy that we've got a simple and efficient filesystem which
+  competes with RevML but is XML free and therefore doesn't suck, you
+  get a whole load of people who seem miffed that you're implying
+  Subversion isn't the be-all and end-all of version control systems
+  and choose to <a href="http://en.wikipedia.org/w/index.php?title=Spleen&oldid=112637051#Etymology_and_cultural_views">vent
+  their spleen</a> at the mention instead.  This is why I'm spending
+  all this time I'd <em>much rather be using to hack</em> writing this
+  article.
+
+</p><p>Subversion added nothing to CVS' development model.
+  <em>Nothing</em>.  It just fixed bugs, and that was the plan all
+  along.  It's still the same broken, inflexible work-flow.  It broke
+  it further by flattening branches and even <em>tags</em> into the
+  same namespace as your project's filesystem.  It even tried to sell
+  this as a <em>benefit</em>.
+
+</p><p>A lot of people will point at the failings of <tt>git</tt> - such
+  as the lack of a decent Windows port.  "harden up and install
+  Cygwin" is always an handy answer to that one, but
+  the <a href="http://repo.or.cz/w/git/mingw.git">MinGW port</a> is
+  coming along and there are
+  even <a href="http://code.google.com/p/msysgit/downloads/list">installers</a>
+  now!
+
+  Other hand-waving arguments are made about their perception of such
+  intangibles as the "cleanliness" of the implementation.  Yes, it's a
+  bunch of small programs that do one thing and do it well, get over
+  it, they're being unified, in fact there's a <a href="http://code.google.com/soc/git/appinfo.html?csaid=BB370B5D857FA7A">GSoC
+  project</a> currently underway for that.  There's also a <a href="http://repo.or.cz/w/egit.git">pure Java implementation</a>,
+  and a <a href="http://code.google.com/soc/mono/appinfo.html?csaid=59AC96ED9267FFC3">GSoC
+  project to implement it in C#</a>!.
+
+</p><p>All these arguments are simply <em>blown away</em> by the benefits
+  and the amount of energy going into git development.  I've dedicated
+  an <a href="#sux">entire section</a> to these shortfallings, in
+  fact, and I'll say now, it's not comprehensive.
+
+</p><p>I don't have any irrational hatred for Subversion or SVK, and I
+  like the people behind them very much.  They've done well at what
+  they set out to do - but you can't make a silk purse from a pig's
+  ear<a href="http://www.bartleby.com/59/3/youcantmakea.html"><sup>*</sup></a>, or carve rotten wood<a href="http://www.ga.k12.pa.us/Academics/LS/5th/chinfolk/99folkc/folkmlw.htm"><sup>*</sup></a> for that matter.  I used to push strongly
+  for SVK, but got brow-beaten by people who were getting far more out
+  of their version control system than I knew possible until I saw
+  what they were talking about.
+
+</p><p>In a way, it's something of an irrelevant question - comparing
+  apples with oranges - because SVK could easily use <tt>git</tt> as a
+  backing filesystem and drop the dependency on Subversion altogether.
+  So could <tt>bzr</tt> or <tt>hg</tt>. I started down this path, but
+  decided again, I'd rather hack <em>using</em> a version control
+  system than <em>on</em> a version control system.
+
+<a name="yay-simple"></a></p><h3>Model Simplicity</h3>
+
+<div class="figure">
+<a name="figure-foo"></a><img onclick="set_big(this, this.parentNode)" src="git-model.png" alt="A UML representation of the Git Model">
+<p class="caption">Simplicity: a UML representation of the Git Model
+</p></div>
+
+<p>The core Git filesystem can be explained as four types of objects: Blobs (files), Trees (directories), Commits and Tags.  The repository model (see right) is also simple enough that there are complete <tt>git</tt> re-implementations you can draw upon, in a variety of languages.
+
+</p><p>As I mentioned earlier, <tt>git</tt> is first and foremost a toolkit for writing VCS systems.  As a result, one huge benefit is a flexibility and wide range of tools to choose from.  Writing a tool to do something that you want is often quite a simple matter of plugging together a few core commands.
+
+</p><p>It's simple enough that once a few basic concepts are there, you begin to feel comfortable knowing that the repository just can't wedge, changes can be discarded yet not lost unless you request them to be cleaned up, etc.
+
+<a name="eye-of-the-git"></a></p><h3>Good Visualisation</h3>
+
+<div class="figure">
+<img onclick="set_big(this, this.parentNode)" src="gitk1.png" alt="A screenshot of `gitk' on the example repository">
+<p class="caption">A screenshot of `gitk' on the example repository
+</p></div>
+
+<p>I really haven't seen a nicer tool than <tt>gitk</tt> for browsing a repository.  It's so good that <tt>bzr</tt> stole it.  You can crank open <tt>gitk</tt> on it and click on commits, see their patches and the state of the tree at that point in time.
+
+</p><pre>$ <b>gitk --all</b></pre>
+
+<p><tt>gitk</tt> does some really cool things but is most useful when looking at projects that have cottoned onto feature branches (see <a href="#feature-branches">feature branches</a>, below).  If you're looking at a project where everyone commits largely unrelated changes to one branch it just ends up a straight line, and not very interesting.
+
+<a name="yay-publish"></a></p><h3>Publishing your changes for others to pull</h3>
+
+<p>You can easily publish your changes for others who are switched on to <tt>git</tt> to pull.  At a stretch, you can just throw the <tt>.git</tt> directory on an HTTP server somewhere and publish the path.  You don't need any silly Web-DAV extensions built into the web server just to share revisions.  There's the <tt>git-daemon</tt> for more efficient serving of repositories (at least, in terms of network use), and <tt>gitweb.cgi</tt> to provide a visualisation of a <tt>git</tt> repository.
+
+</p><p>At <a href="http://www.catalyst.net.nz/">Catalyst</a>, NZ's largest Open Source Software Services company, most of the time even when we're committing changes back to an upstream project server, it goes to our <a href="http://git.catalyst.net.nz/gitweb">public <tt>git</tt> server</a><a> as well.  We just consider it good practice - all of the work we do we can share with everyone easily, and crucially <b><em>the politics about what goes in and out of a project simply goes away</em></b> - you can't stop me from publishing changes to your project in my own space.  Am I the master or you the master?  That's not for you to decide, it's for the users to decide who they track.  But hopefully we can work together.
+
+</a></p><p><a>There are sites out there like </a><a href="http://repo.or.cz/">repo.or.cz</a> which will let anyone start a new project (or publish their fork of an existing project, or pull an interesting fork they found into the service).  A network of these repositories is kind of like a decentralised, peer-to-peer source network - there's even a <a href="http://gittorrent.utsl.gen.nz/rfc.html">protocol</a> designed for this.
+
+<a name="yay-nocentre"></a></p><h3>Breaking free from the "star" merge pattern</h3>
+
+<p>With Subversion, everyone has to commit their changes back to the central wiki, I mean repository, to share them.  SVK claims on its home page to be <em>distributed</em>, but by everyone else's definition, it's not, because it's not decentralised - there's always an <em>upstream</em>.  No, SVK merely offers <em>disconnected operation</em>.  If I meet you in the middle of a cruise and we both have a mirror of a subversion repository, I <em>just can't</em> easily, natively share my local branch with you if we're both on SVK. 
+
+</p><p>With Git (actually this is completely true for other distributed systems), it's <em>trivial</em> to push and pull changes between each other.  If what you're pulling has common history then <tt>git</tt> will just pull the differences.
+
+</p><p>So I'd just copy my repository to a USB key, stick it into the target machine, then run:
+
+</p><pre>$ <b>git pull /media/usbdisk/project.git</b>
+...
+$ </pre>
+
+<p>Sure, a USB stick isn't as gimmicky as a peer to peer wireless protocol featuring autodiscovery.  But frankly I'll put up with that for sane branching support in the first place.
+
+</p><p>If the person publishes their repository as described above, using the <cite>git-daemon(1)</cite>, <tt>http</tt> or anything else that you can get your kernel to map to its VFS, then you can set it up as a "remote" and pull from it;
+
+</p><pre>$ <b>git remote add friend file:///net/friend/git/project</b>
+$ <b>git fetch friend</b>
+</pre>
+
+<p>Here we're configuring all of the <tt>heads</tt> (aka branches) of the repository which appears at <tt>/net/friend/git/project</tt> to appear as <tt>remotes/friend/XXX</tt> in our repository.
+
+<a name="yay-merging"></a></p><h3>Sane Merging</h3>
+
+<p>This is your cross-branch merging:
+
+</p><p><img src="merge.png" alt="`gitk' showing a nice git-style merge">
+
+</p><p>This is your cross-branch merging on drugs, I mean, with Subversion:
+
+</p><p><img src="merge-on-drugs.png" alt="`gitk' showing a horrible mess">
+
+</p><p>Look at the merge commit in the top diagram - it has two lines coming back from it.  It has <em>two parents</em>.  It's something equivalent to SVK's <em>merge tickets</em>, except that the information doesn't become worthless when pushed back to a server, because the upstream repository doesn't have the repository UUID and revision in the merge ticket.  By contrast, with the un-fiddled history you have to hope the merge has some key word in it like "merge" or "sync" or "merging" or something like that.  Can you spot the commit where the merge happens?
+
+</p><p>This merge model is so simple and powerful it bears volumes to be written on it - but I'm keeping it brief here.
+
+<a name="feature-branches"></a></p><h3>Feature branches - the "stable" development model</h3>
+
+<p>This is an interesting one.  Most people say "but I don't want branches".  But users of <tt>darcs</tt> report that they didn't know how much they really <em>did</em> want branches, but never knew until <tt>darcs</tt> made it so easy.  In essence <b>every change can behave as a branch</b>, and this <em>isn't</em> painful.
+
+</p><div class="figure">
+<a name="figure-foo"></a><img onclick="set_big(this, this.parentNode)" src="stable-development.png" alt="A screenshot from 'gitk' on a random commit inside git">
+<p class="caption">Feature branches: the main 'trunk' just becomes a space for merges to terminate.  Junio is acting as a continual integration server, merging features from other people when they meet his unwritten strictures.
+</p></div>
+
+<p>Because you can easily separate your repositories into stable branches, temporary branches, etc, then you can easily set up programs that only let commits through if they meet criteria of your choosing.  Because you can readily work on branches without affecting the stable branch, it is perfectly acceptable for a stable branch to be updated by a single maintainer only, even for busy projects.
+
+</p><p>Some repositories, for instance the Linux kernel, run a policy of <em>no commit may break the build</em>.  What this means is that if you have a problem, you can use <em>bisection</em> to work out which patch introduced the bug.  While this might be possible with Subversion, there's no guarantee that the intermediate versions will build, and no easy way - short of <tt>pre-commit</tt> hooks - to ensure that this is the case.
+
+</p><p>You might use a <em>continual integration server</em> that is responsible for <em>promoting</em> branches to trunk should they pass the strictures that you set.  You might make a rule that the branch must be marked as mergeable, merge cleanly against trunk, add tests, and all tests must still pass.
+
+</p><p>Your "trunk" becomes merely a point where branches considered stable are merged into.  Each of your feature branches can merge <em>from</em> the trunk easily, which means that an immediate merge back in the other direction will involve no actual changes (no extra commit will be made in such a case - the head pointer will just be moved).
+
+</p><p>With <tt>git</tt>, you really <em>can</em> <b>commit early, commit
+  often</b>.  There is an awful lot less to keep in your head, and you
+  don't have to do things like plan branching in advance.  You can
+  just hack it out, then straighten it out later.
+
+</p><p>Good feature branches mean you end up <em>prototyping
+  well-developed changes</em>; the emphasis shifts away from making
+  <em>atomic commits</em>.  If you forgot to add a file, or made some
+  other little mistake, it's easy to go back and change it.  If you
+  haven't even pushed your changes anywhere, that's not only fine, but
+  <em>appreciated</em> by everyone involved.  <b>Review and revise
+  before you push</b> is the counter-balance to frequent commits.
+  Self-review, as well as peer review, help make changes more
+  understandable, catching bugs sooner.
+
+<a name="yay-mirroring"></a></p><h3>The Ferrari features - speed, resilience, space</h3>
+
+<p><b>Resilience</b> - Your <tt>git</tt> server going down doesn't kill your
+  team's group development.  Each person can just throw their branch
+  in a web server, a <a href="http://repo.or.cz/">repo</a> fork, and
+  easily track each other's repositories.  They just stop pushing to
+  the nominal "central" branch and push to each other for a bit.
+
+</p><p><b>Speed</b> - <tt>git</tt> is very fast for the most common use
+  cases.  Yes, there are operations for which the model is less
+  efficient than, say, Mercurial in terms of antiquated measures such
+  as discrete disk IOs.  But in general <tt>git</tt> wins.
+
+</p><p>Not only is the implementation fast locally, it's very network
+  efficient, and the protocol for exchanging revisions is also very
+  good at figuring out what needs to be transferred quickly.  This is
+  a huge difference - one repository hosted on <a href="http://alioth.debian.org/">Debian's Alioth SVN server</a> took
+  <em>2 days</em> to synchronise because the protocol is so chatty.
+  Now it fits in 3 megs and would not take that long to synchronise
+  over a 150 baud modem.
+
+</p><p><b>Disk might be cheap</b>, but my <tt>/home</tt> is always full -
+  <tt>git</tt> has a separate step for compacting repositories, which
+  means that <em>delta compression</em> can be far more effective.  If
+  you're a compression buff, think of it as having an arbitrarily
+  sized window, because when delta compressing git is able to match
+  strings <em>anywhere else in the repository</em> - not just the file
+  which is the notional ancestor of the new revision.
+
+</p><p>This space efficiency affects everything - the virtual memory
+  footprint in your buffercache while mining information from the
+  repository, how much data needs to be transferred during "push" and
+  "pull" operations, and so on.  Compare that to Subversion, which
+  even when merging between branches is incapable of using the same
+  space for the changes hitting the target branch.  The results speak
+  for themselves - I have observed an <em>average</em> of 10 to 1
+  space savings going from Subversion FSFS to <tt>git</tt>.
+
+<a name="skip-svk"></a></p><h2>Primer for non-SVK-savvy users</h2>
+
+<p>I'm going to be referring to a lot of SVK commands through this, but for Subversion users, here's a quick introduction to SVK concepts.  SVK users can skip this section and go onto <a href="#getting">getting git</a>.
+
+</p><dl>
+  <dt><tt>svk sync</tt>
+  </dt><dd>Normally with Subversion, you check out a single version.  With SVK you can copy the remote repository to an SVK path so that you can work with it locally.  <tt>svk sync</tt> is the command that copies revisions.
+  </dd><dt><tt>svk depotmap</tt>
+  </dt><dd>SVK presents all of the repositories that you have on your system as a single unified namespace, starting with <tt>/</tt>.  The first part of this is called the <em>depot</em>.  The default is an empty depot, that is, <tt>//</tt>. The <em>depot map</em> maps from these names to the real filesystem location of the depot's Subversion repository.
+  </dd><dt><tt>svk mirror</tt>
+  </dt><dd>SVK's <tt>mirror</tt> command associates SVK paths with remote repository URLs.  You use it to tell SVK where your remote repositories are, before you <tt>svk sync</tt> them (and <tt>svk checkout</tt> bundles all of these together).
+  </dd><dt>Mirror path
+  </dt><dd>This is a path within the SVK filesystem which tracks a remote Subversion repository.  You never commit to these paths yourself; <tt>SVN::Mirror</tt> (loosely speaking, a part of SVK) does.
+  </dd><dt>Local branch
+  </dt><dd>If you are not connected to the internet, or want to commit your changes to a private space before sending to the central code-wiki, then you must first make a <em>local branch</em> where you stage your changes.  Later, you <em>merge</em> your changes back to the <em>mirror path</em>.  This is a strange concept at first, but inherently correct - for instance, when you <em>commit</em> you can think of it as <em>merging</em> your changes from your own copy to the copy on the server.
+  </dd><dt><tt>svk smerge</tt>
+  </dt><dd>This command is what you use to merge between paths in SVK.  It leaves little breadcrumbs it calls <em>merge tickets</em> which has information about the path and revision being merged - information that the Subversion manual somewhat preposterously suggests that you should <em>manually</em> record in your commit message.  However, exactly what information gets stored and how useful it is depends on where exactly you merge from and to.
+</dd></dl>
+
+<a name="getting"></a><h2>Getting Git</h2>
+
+<p>Get yourself a copy of some fresh sources - <tt>git</tt> is a rapidly progressing project, the versions from the <a href="http://git.or.cz/">home page</a> are probably going to be better than the ones you'll find in your distribution (depending on how old this tutorial is when you read it).  Version 1.5.0 or higher is recommended.  Note that in Debian you'll want <tt>git-core</tt>. 
+
+</p><p>If you are going to want to try importing your SVK mirrors to <tt>git</tt>, you should start with a version that includes the appropriate SVM-related features.  It probably won't take long for these to hit the regular git, but at the time of writing you'll need to get a <a href="http://repo.or.cz/w/git/git-svn.git?a=snapshot;h=master">snapshot from Eric's branch</a>.  <b>Update:</b> or git 1.5.1+ <tt>:-)</tt>
+
+</p><p>I'm not going to talk about how you build and install it, it's just like every other application out there.  It's only got one "nightmare" dependency (<tt>asciidoc</tt>), that's only used for building the documentation.  In lieu of doing that, you can just read the text files in the source distribution under <tt>Documentation/</tt>.  You should also install a recent Tk for the GUI that will change the way you look at version control forever (as an aside, did you know that <a href="http://wiki.tcl.tk/9530">Tk doesn't have to look butt ugly?</a>)
+
+</p><p>Well, that's core git.  <tt>git-svn</tt>, by nature, also depends on the same crazy stack of Apache innards and Subversion SWIG bindings that SVK does.  However, these can be any version.
+
+<a name="howto"></a></p><h2>How to...</h2>
+
+<a name="howto-fetch"></a><h3>...fetch an upstream subversion repository...</h3>
+
+<p>You are at a junction with many roads, all leading to the same destination.
+
+</p><p>The first is labeled "<a href="#howto-fetch-cheat">the fastest route</a>", with some graffitti that looks like it says "CHEAT!".  At the end of the road you see a well-preened parrot.  Follow this road to download an already-imported <tt>git-svn</tt> repository quicker than you can say "<tt>svk co https://svn.perl.org/parrot</tt>".
+
+</p><p>A second path labeled "<a href="#howto-fetch-head">check out SVN trunk head revision</a>" looks quite short, but there's only the head of the Parrot at the end of it, and it looks very muddy.
+
+</p><p>There's a sign leading into the forest saying "<a href="#howto-fetch-convert">import our existing SVK mirror paths</a>", with "1 hr return" (those times are always exaggerated anyway, you know it's only 30 minutes for someone as fit as yourself).  You'll need your SVM-enhanced <tt>git</tt> (1.5.1+) to proceed further.
+
+</p><p>The fourth sign points back to the quagmire you are leaving and says "<a href="#howto-fetch-slow">import the entire Subversion repository from the source</a>", with "2 days" written underneath.
+
+</p><p>Life's full of choices, which path is for you?
+
+<a name="howto-fetch-cheat"></a></p><h4>...re-using someone else's git-svn conversion</h4>
+
+<p>Perhaps somebody has already made a conversion of the project and put it somewhere like the <a href="http://repo.or.cz/">repo.or.cz</a> or <a href="http://repo.utsl.gen.nz/">repo.utsl.gen.nz</a>.
+
+</p><p>If so, once you've found it, you can check out the entire history of the project with:
+
+</p><pre>$ <b>git clone git://utsl.gen.nz/parrot</b>
+Initialized empty Git repository in /home/samv/tmp/parrot/.git/
+remote: Generating pack...
+remote: Done counting 152636 objects.
+remote: Deltifying 152636 objects.
+remote:  100% (152636/152636) done
+Indexing 152636 objects.
+remote: Total 152636, written 152636 (delta 102789), reused 152478 (delta 102789)
+ 100% (152636/152636) done
+Resolving 102789 deltas.
+ 100% (102789/102789) done
+Checking files out...
+ 100% (2990/2990) done
+$ </pre>
+
+<p>Great!  Didn't take long, and that was the same as the whole <tt>svk co</tt> sequence - add mirror, sync revisions, and checkout.  If you are close enough on the network to <tt>utsl.gen.nz</tt>, that may have taken less than a minute.  You can proceed to <a href="#using">using your git-svn <tt>git</tt> repository</a>, below, if you just want to play with it and not worry about the painful migration part.
+
+</p><p>Of course if the upstream Subversion repository is down and you don't have an SVK mirror then this is your only option.
+
+<a name="howto-fetch-head"></a></p><h4>...by checking out just the trunk from SVN</h4>
+
+<p>It is probably second fastest to just check out the SVN head using <tt>git-svn</tt>; this is a bit like setting up a mirror path with <tt>svk mirror</tt>, then syncing only to the head revision using <tt>svk sync -s NNN</tt> (where <tt>NNN</tt> is the head revision, found below using <tt>svn log</tt>):
+
+</p><pre>$ svn log https://svn.perl.org/parrot/trunk|head
+------------------------------------------------------------------------
+r17048 | bernhard | 2007-02-19 07:32:13 +1300 (Mon, 19 Feb 2007) | 3 lines
+
+Remove the PIR.pg and bc.pg examples as they are
+now covered by languages/abc and languages/PIR.
+
+------------------------------------------------------------------------
+r17047 | bernhard | 2007-02-19 07:09:00 +1300 (Mon, 19 Feb 2007) | 5 lines
+
+[languages/PIR]
+$ <b>mkdir parrot</b>
+$ <b>cd parrot</b>
+$ <b>git svn init https://svn.perl.org/parrot/trunk</b>
+Initialized empty Git repository in .git/
+git-svn Using higher level of URL: https://svn.perl.org/parrot/trunk =&gt; https://svn.perl.org/parrot
+$ <b>git-svn fetch -r17048</b>
+        A       DEPRECATED.pod
+        A       debian/libparrot-dev.install
+        A       debian/parrot-doc.install
+...
+        A       examples/streams/ParrotIO.pir
+        A       examples/streams/Include.pir
+        A       examples/streams/Filter.pir
+r17048 = a57c09abef48d73f3c74c6a307793301b5956bfd (git-svn)
+Checking files out...
+ 100% (2959/2959) done
+Checked out HEAD:
+  https://svn.perl.org/parrot/trunk r17048
+
+$</pre>
+
+<p>Well, that was almost as quick - under 2 minutes for a head checkout; it had to download about as much as a release tarball.  If you like, from here you can proceed to <a href="#using">using your git-svn <tt>git</tt> repository</a>.
+
+</p><p>But people who use <tt>git</tt> are used to treating their repositories as a <em>revision data warehouse</em> which they use to <em>mine useful information</em> when they are trying to understand a codebase. 
+
+</p><p>We clearly can't do that with this shallow copy, but once your <em>git-fu</em> is strong, you can see you can graft parts of history from place to place if you want to, using <em>history rewriting</em>.  I'll briefly mention <a href="#grafting">grafting</a> (and its drawbacks) later on.
+
+<a name="howto-fetch-convert"></a></p><h4>...by importing your SVK mirrors</h4>
+
+<p>So, it is better to have the complete project history converted, but you probably won't want to wait the day or two it can take to replay a moderately sized Subversion repository using SVK (can <em>anyone</em> mirror the 40GB KDE Subversion repository?).
+
+</p><p>Be sure to see the <a href="#getting">notes above</a> on getting an SVM-enhanced git.
+
+</p><p>First, <tt>svk mi -l</tt> will tell us where the mirror paths are.
+
+</p><pre>$ <b>svk mi -l | grep parrot</b>
+/parrot/master               https://svn.perl.org/parrot
+$ </pre>
+
+<p>That's everything we need to get started.  Now we just need to convert <tt>/parrot/master</tt> to an SVN url; the <em>depot</em> is everything up to the second "<tt>/</tt>", and most SVK users will just be using a single depot with an empty name, <tt>//</tt>.  This example uses the depot <tt>/parrot/</tt>.
+
+</p><pre>$ <b>svk depotmap -l | grep '/parrot/'</b>
+/parrot/                /home/samv/.svk/parrot
+$ </pre>
+
+<p>So, I take the depot path and add on the rest of the mirror path, I should be able to look at the path using plain <tt>svn</tt>;
+
+</p><pre>$ <b>svn pl file:///home/samv/.svk/parrot/master</b>
+Properties on 'file:///home/samv/.svk/parrot/master':
+  svm:source
+  svm:uuid
+  svk:merge
+$ <b>svn ls file:///home/samv/.svk/parrot/master</b>
+branches/
+tags/
+trunk/
+$ </pre>
+
+<p>Great!  The <tt>pl</tt> (<tt>proplist</tt>) command was important - the properties there, particularly <tt>svm:source</tt> and <tt>svm::uuid</tt>, must be there for <tt>git-svn</tt> to convert this repository correctly.  We use the <tt>--use-svm-props</tt> option to set up the repository rewriting:
+
+</p><p>Set up the fetch using <tt>git svn init</tt>:
+
+</p><pre>$ <b>git svn init -t tags -b branches -T trunk \
+          --use-svm-props file:///home/samv/.svk/parrot/master</b>
+Initialized empty Git repository in .git/
+Using higher level of URL: file:///home/samv/.svk/parrot/master =&gt; file:///home/samv/.svk/parrot
+$ </pre>
+
+<p><tt>git-svn</tt> is quite capable of tracking multiple Subversion repositories that hold mirrors of the same project, though of course probably most people actually doing that are SVK users, and the "other repository" is your local depot.  The above command set up a git-svn remote with the default name of "<tt>svn</tt>".  Take a look at what was configured by running <tt>cat .git/config</tt>.
+
+</p><pre>$ <b>cat .git/config</b>
+[core
+]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[svn-remote "svn"]
+        url = file:///home/samv/.svk/parrot
+        fetch = trunk:refs/remotes/trunk
+        branches = branches/*:refs/remotes/*
+        tags = tags/*:refs/remotes/tags/*
+$ </pre>
+
+<p>There are some important things to note here.  Git's a simple
+  system, and so take note of the <tt>refs/</tt> paths - they're what
+  <tt>git</tt> uses to refer to things in the repository.  "Branches"
+  are normally called <tt>refs/heads/foo</tt>, "tags"
+  <tt>refs/tags/foo</tt>.  In this case, we've got a special type of
+  thing in our repository - "remote" references, which live under
+  <tt>refs/remotes/foo</tt>.  Actually, they will all be available
+  locally, the tool is just keeping them tidy.  Putting them under
+  <tt>remotes</tt> gives us a different set of defaults for some
+  commands.
+
+</p><p>Next, we can use <tt>git svn fetch</tt> to import them.
+
+</p><pre>$ <b>git svn fetch --repack 1000 --useSvmProps</b>
+        A       README
+r2 = 5c2dbc76df3fc7569d0b779841427d5ddf406e9d (trunk)
+        M       README
+r3 = 9aa2f03a26ed9617cf7002bbe4acae5d3d24dadf (trunk)
+  ...
+
+$ </pre>
+
+<p>So once that's all complete what did we win so far?
+
+</p><pre>$ <b>du -sk //home/samv/.svk/parrot .git</b>
+353576  //home/samv/.svk/parrot
+155245  .git
+$ </pre>
+
+<p>Well, that's a bit of savings.  <tt>git</tt> saved half the space compared to Subversion fsfs.  But it turns out that a lot of it is just <tt>git-svn</tt> metadata.  And we can compress it more; I've got CPU to burn so I ran this command:
+
+</p><pre>$ <b>git repack -a -d -f --window 100</b>
+Generating pack...
+Done counting 131402 objects.
+Deltifying 131402 objects.
+ 100% (131402/131402) done
+Writing 131402 objects.
+ 100% (131402/131402) done
+Total 131402 (delta 99440), reused 31385 (delta 0)
+Pack pack-079a95f55810fc1eea600bc89c911a2bf85c1add created.
+$ <b>ls -l .git/objects/pack/</b>
+total 33745
+-r--r--r-- 1 samv samv  3154712 2007-02-20 16:00 pack-079a95f55810fc1eea600bc89c911a2bf85c1add.idx
+-r--r--r-- 1 samv samv 31360284 2007-02-20 16:00 pack-079a95f55810fc1eea600bc89c911a2bf85c1add.pack
+$ </pre>
+
+<p>You may be wondering, "353MB of Subversion repository squeezed into 31MB of <tt>git</tt> pack?  That's smaller than an SVN head checkout!  Have not all the revisions been copied?  Did something get missed?"
+
+</p><p>It turns out that <tt>git</tt> is just being incredibly space-efficient.  More incredible stories about shrunken repositories can be found all over the internet.  Talk to the GCC, Mozilla and KDE folk for the most impressive ones.
+
+</p><p>Now, in theory, we could keep using SVK to mirror revisions, and keep using <tt>git-svn fetch</tt> to copy them into the <tt>git</tt> repository.  But we want some more space on our laptop to hold more MP3s, so we'll eventually delete it.  Ideally we also want to convert our local branches - stay tuned for <tt>git-svn</tt> extensions aimed at making this smooth, or help out and submit a patch!
+
+<a name="howto-fetch-slow"></a></p><h4>...by importing the whole repository from Subversion</h4>
+
+<p>This procedure is the same as the SVK one above, but we can just use the published repository URL.
+
+</p><pre>$ mkdir parrot
+$ cd parrot
+$ git svn init -t tags -b branches -T trunk https://svn.perl.org/parrot
+Initialized empty Git repository in .git/
+$ git svn fetch
+  ... </pre>
+
+<p>I didn't test this one - I have already waited the many hours it took to sync the first time.  Doing this for FAI took <em>days</em>.  And the repository had the sheer indencency to end up <a href="http://git.catalyst.net.nz/fai.git/objects/pack/">tiny</a>.
+
+</p><p>If you like, you can skip early revisions using the <tt>-r</tt>
+option to <b>git-fetch</b>.
+
+<a name="using-moving"></a></p><h3>...relocate a checkout</h3>
+
+<p>Unlike SVK, with git you don't need to do anything special to
+relocate a checkout, and you don't need to "detach" checkouts you no
+longer care about.
+
+</p><p>This is because git normally stores its repository information under <tt>.git</tt> at the top level of your checkout.  But everything's compressed and the filenames don't resemble the files in your checkout so <tt>grep -r</tt> and <tt>find</tt> etc don't hate you.  You can set <tt>GIT_DIR</tt> to get all the tools to look somewhere else if you really care, but for most people this system works very well.  <tt>GIT_DIR</tt> doesn't work the same as <tt>SVKROOT</tt> in SVK, it's a per-checkout path, not pointing to a central place.
+
+</p><p>I don't know about you but I was always running into situations where my <tt>~/.svk/config</tt> didn't match reality, and there were no breadcrumbs left in the checkout to do anything with it.  I much prefer these floating repositories and there was some talk of adding them to SVK.
+
+<a name="howto-branch"></a></p><h3>...make a local branch for development</h3>
+
+<p>One of the nice things about <tt>git</tt> (and <a href="http://abridgegame.org/darcs/">darcs</a> and <a href="http://bazaar-vcs.org/">bzr</a> and ...) is that to make branches is not just "simple" it's <em>trivial</em>.
+
+</p><p>If you've got a version checked out that you want to work on - regardless of whether you've got local changes or not, you can use:
+
+</p><pre>$ <b>git checkout -b foo</b>
+Switched to a new branch "foo"
+$ </pre>
+
+<p>The name "foo" is completely private; it's just a local name you're assigning to the piece of work you're doing.  Eventually you will learn to group related commits onto branches, called "topic branches", as described in the <a href="#feature-branches">introduction</a>.
+
+</p><p>But what does a branch mean?  First we can explain it in terms of making complete clones of the repository, such is the only way of working with branches with some systems (such as Bazaar-NG and Mercurial, though Mercurial's overlays are somewhat similar).
+
+</p><p>Say you want to take a project, and work on it somewhere else in a different direction, you can just make a copy using <tt>cp</tt> or your favourite file manager.  Contrast this with Subversion, where you have to fiddle around with <tt>branches/</tt> paths, <tt>svn cp</tt>, <tt>svn switch</tt>, etc, if you're using SVK worry about whether you branch on the mirror path or the local path and what effect that would have for later merging, etc.  <em>And</em> put up with Subversion followers saying that was 'natural' and 'easy'.  Uh-huh.
+
+</p><pre>$ <b>cp -a parrot parrot.my-branch</b>
+$ </pre>
+
+<p>Each of those copies is fully independent, and can diverge freely.  You can easily <em>push</em> and <em>pull</em> changes between them without tearing your hair out.
+
+</p><p>So, here's the deal.  Each time you have a new idea, make a new branch and work in that.  If this sounds like a scary suggestion, it's because you're still thinking too much of things in terms of the way Subversion works.
+
+</p><p>But anyway, that copying was too slow and heavy.  We don't want to copy 70MB each time we want to work on a new idea.  We want to create new branches at the drop of a hat.  Maybe you don't want to copy the actual repository, just make another checkout.  We can use <tt>git-clone</tt> again;
+
+</p><pre>$ <b>git clone -l parrot parrot.my-branch</b>
+Initialized empty Git repository in /home/samv/.svk/parrot.clone/.git/
+0 blocks
+Checking files out...
+ 100% (2815/2815) done
+$ </pre>
+
+<p>The <tt>-l</tt> option to <tt>git-clone</tt> told <tt>git</tt> to hardlink the objects together, so not only are these two sharing the same repository but <em>they can still be moved around independently</em>.  Cool.  I now have two checkouts I can work with, build software in, etc.
+
+</p><p>But all that's a lot of work and most of the time I don't care to create lots of different directories for all my branches.  I can just make a new branch and switch to it immediately with <tt>git-checkout</tt>:
+
+</p><pre>$ <b>git checkout -b localbranch remotes/trunk</b>
+$ </pre>
+
+<p>But wait, you say, don't I have to enter a commit message for this new branch?
+
+</p><p>Well, a branch in <tt>git</tt> is just a pointer to a commit.  If you look at "<tt>gitk</tt>" now, you'll see a new green label on the same commit as "<tt>remotes/trunk</tt>" called "<tt>localbranch</tt>".  They're like little "post-it" notes - with a new enough <tt>gitk</tt> you can pepper your history with them wherever you like with a click and then typing the name in.  Hence terms like <em>heads</em>, <em>branch tips</em>, <em>head references</em>, <tt>refs/heads/</tt>, etc.
+
+</p><p>They generally don't form a part of the permanent history - it's the actual commits, the changes to the code, that are the history.  Git does also track the movement of branch tips, but this is generally considered uninteresting and not synchronised or even recorded by default.
+
+<a name="local-commit"></a></p><h3>...make changes to your local branch</h3>
+
+<p>Once you have some edits you want to commit, you can use <tt>git-commit</tt> to commit them.  Nothing (not even file changes) gets committed by default; you'll probably find yourself using <tt>git-commit -a</tt> to get similar semantics to <tt>svn commit</tt>.
+
+</p><p>This is because <tt>git</tt> has a powerful concept of a <em>staging area</em>, called the <tt>index</tt>, which is where you can prepare your changes before you actually save the commit.
+
+</p><pre>$ <b>vi CREDITS</b>
+$ <b>git commit -a</b>
+committed tree 6b513546099f01826c5cc7bc25042d00bc2560b0
+$ </pre>
+
+<div class="figure">
+<img onclick="set_big(this, this.parentNode)" src="git-gui.png" alt="A screenshot of `git-gui' on the example repository">
+<p class="caption">A screenshot of `git-gui' on the example repository
+</p></div>
+
+<p>There is also a GUI for preparing commits in early (but entirely functional) stages of development.  I'll mention it briefly, but personally I use the command line (or the <tt>vcs-git.el</tt> plug-in).
+
+</p><pre>$ <b>git gui</b></pre>
+
+<p>People used to <tt>darcs</tt> or SVK's interactive commit will like to try <tt>git add -i</tt> - and look out for <tt><a href="http://thread.gmane.org/gmane.comp.version-control.git/41033">git hunk-commit --darcs</a></tt> if you're the sort of person that realises that there were an awful lot of things that darcs got right.
+
+<a name="howto-amend"></a></p><h3>...correcting changes in your local branch</h3>
+
+<p>Did you mess up a change?  Commit something poorly?  Well, no worries, there are lots of ways to fix it.
+
+</p><p>Again, we're diverging from things that SVK supports well, but I think they're important to get a taste for how things are different. According to one source, lack of support in SVK for this is a "philosophical" stance.  I really don't understand this - I make mistakes all the time and it's better that I correct the ones I catch early so other people don't waste their time on them.
+
+</p><p>If it's the top commit, you can just add <tt>--amend</tt> to your regular <tt>git-commit</tt> command to, well, amend the last commit.  If you explored the <tt>git-gui</tt> interface, you might have noticed the "Amend Last Commit" switch as well.
+
+</p><p>You can also <em>uncommit</em>.  The command for this is <tt>git-reset</tt>
+
+</p><pre>$ <b>git reset HEAD~1</b>
+$ </pre>
+
+<p><tt>HEAD~1</tt> is a special syntax that means "one commit before the reference called <tt>HEAD</tt>".  <tt>HEAD^</tt> is a slightly shorter shorthand for the same thing.  I could have also put a complete revision number, a partial (non-ambiguous) revision number, or something like <tt>remotes/trunk</tt>.  See <cite>git-rev-parse(1)</cite> for the full list of ways in which you can specify revisions.
+
+</p><p>And just like that, your most recent commit was unlinked.  If it really was garbage, that was what you wanted.  Actually, it isn't completely gone;
+
+</p><pre>$ <b>git fsck</b>
+dangling commit 2ef718cf5434eeb8fdec74e69968f64fadd28761
+$ </pre>
+
+<div class="figure">
+<img onclick="set_big(this, this.parentNode)" src="naked-lunch.png" alt="A screenshot of `gitk' showing dangling commits after a night of parrot hacking">
+<p class="caption">A screenshot of `<tt>gitk --all `git-fsck ...</tt>' (see text) showing dangling commits after a night of parrot hacking
+</p></div>
+
+<p>If you wanted, you could see it with, eg, <tt>gitk 2ef718</tt>.  I sometimes write commands like `<tt>gitk --all `git-fsck | awk '/dangling commit/ {print $3}'`</tt>' to see all the commits in the repository, not just the ones with "post-it notes" (aka references) stuck to them.
+
+</p><p>But that aside, uncommitting really is a primitive mode of operation, and you'd probably end up getting confused by the fact that <tt>git-update-ref</tt> didn't change the index (staging area).  This is because <tt>git-update-ref</tt> is a <em>plumbing</em> command; it does one thing, and does it quickly and well.  Commands like <tt>git-commit</tt> are considered <em>porcelain</em> - that is, designed for user interface.  So, the technical name for the above dangling commit is <em>spillage</em>.  This analogy doesn't seem to extend far enough to make <tt>git-prune</tt> (which would delete that commit) called something like <tt>git-flush</tt> or <tt>git-pull-chain</tt>, however.
+
+</p><p>Initially, it was planned that Git itself would be just a toolkit for writing VCS systems, and that you would need to get your actual user interface from somewhere else.  This is somewhat true; there are many programs which manage git repositories which are not distributed with git, and use only git commmands designated on <cite>git(1)</cite> as "plumbing".  <tt>cogito</tt> was one famous early example of this.  Cogito added many useful features and got quite a few users, however instead of <em>augmenting</em> the git-core command set, it replaced it entirely - and hence could not keep pace with the development of new features in git-core.  From about git 1.5+, Cogito was considered deprecated, even by the original author.  With <tt>git filter-branch</tt> (deriving from Cogito's <tt>cg-admin-rewritehist</tt> command) hit git-core, perhaps the only remaining feature Cogito has is the ability to clone a single branch from a repository in one command.
+
+</p><p>So, anyway, there are other tools for revising commits, and to be the king of patch revisioning is <a href="http://www.procode.org/stgit/">Stacked Git</a>.
+
+</p><p>Say I discover a change that I actually wanted to apply three commits ago.  Assuming that I haven't sent the patches out yet, then I can just go ahead and change them; no-one need know.  I can anyway, it's just that the longer ago you change things the more antisocial the behaviour becomes, and some repositories won't let you push deletions to them.
+
+</p><p>In this scenario, we'll assume that what I'm currently working on isn't finished, either - and I don't want to have to finish it first.  It's not ready.  I'm just going to call it "WIP".
+
+</p><pre>$ <b>stg init</b>
+branch 'localbranch' initialised
+$ <b>stg new -m "WIP." new-commit</b>
+...
+$ <b>stg uncommit -n 3</b>
+...
+$ </pre>
+
+<div class="figure">
+<img onclick="set_big(this, this.parentNode)" src="published.png" alt="A screenshot of `gitk' showing what was published from the night of hacking">
+<p class="caption">A screenshot of `<tt>gitk --all</tt>' showing just the published changes from the above</p></div>
+
+<p>Now, <tt>stg uncommit</tt> didn't do the same thing as <tt>git-update-ref</tt>; specifically, it didn't change my working copy or the repository.  They've just been moved onto the <em>patch stack</em>, which I can jump around with using <tt>stg</tt> commands.  First I'll extract the current patch with <tt>stg diff</tt>, edit it, then apply it a few revisions up.
+
+</p><pre>$ <b>stg diff -r /bottom &gt; this_commit.patch</b>
+$ <b>vi this_commit.patch</b>
+$ <b>stg pop -n 2</b>
+now at patch 'do_something_interesting'
+$ <b>patch -p1 &lt; commit.patch</b>
+patching file foobar.c
+$ <b>stg refresh</b>
+$ <b>stg push -n 2</b>
+now at patch 'do_something_else_interesting'
+$ <b>stg commit</b>
+$ <b>stg push</b>
+now at patch 'new-commit'
+$ <b>vi foo.c</b>
+$ <b>stg refresh -e</b>
+$ <b>stg commit</b>
+$ <b>stg clean</b>
+No patches applied
+$ </pre>
+
+<p>But this isn't a tutorial on stacked git.  See the <a href="http://www.procode.org/stgit/">Stacked Git homepage</a> for that.
+
+</p><p>"Another" way to revise commits is to make a branch from the point a few commits ago, then make a new series of commits that is revised in the way that you want.  This is the same scenario as before.
+
+</p><pre>$ <b>git commit -a -m "WIP."</b>
+committed tree 5ef9339c5b5bc6572b69ff61cdb1dd4af4603f0b
+$ <b>git checkout -b tempbranch HEAD~4</b>
+$ <b>git cherry-pick --no-commit -r localbranch~3</b>
+...
+$ <b>vi foobar.c</b>
+$ <b>git commit -a</b>
+$ <b>git cherry-pick -r localbranch~2</b>
+...
+$ <b>git cherry-pick -r localbranch~1</b>
+...
+$ <b>git cherry-pick --no-commit -r localbranch</b>
+...
+$ </pre>
+
+<p>I've introduced a new command there - <tt>git-cherry-pick</tt>.  This takes a commit and tries to copy its changes to the branch you've currently got checked out.  This technique is called <em>rebasing</em> commits.  There is also a <tt>git-rebase</tt> command which probably would have been fewer commands than the above.  But that's my way.
+
+</p><p>There are many, many ways to skin this cat.  To tell the truth a lot of them don't play well together, hence commands like <tt>stg assimilate</tt> (to tell <tt>stg</tt> that you committed a change without telling it).  It's the old Cathedral vs. Bazaar thing.  Using Git opens the door to a bazaar of VCS tools rather than sacrificing your projects at the altar of one.
+
+</p><p>The design of <tt>git</tt> makes these situations easy enough to recover from in practice.  Just don't run <tt>git prune</tt> or <tt>git repack -a -d</tt> unless you're sure everything that <tt>git fsck</tt> or <tt>git fsck --full</tt> (respectively) reports as "dangling" really is something you want to throw away.
+
+<a name="howto-track"></a></p><h3>...track updates on the upstream Subversion server...</h3>
+
+<p>There are of course multiple ways to track upstream updates, mostly depending on which road you took at <a href="#howto-fetch">that junction</a> you found earlier.
+
+</p><p>If you chose <a href="#howto-fetch-cheat">the fastest route</a> (cloning an already converted repository) it is possible to <a href="#howto-track-native">build on the work of others</a> again. Or you can <a href="#howto-track-rebuildmeta">choose to return to the origins</a> in case the work of others is not available.
+
+</p><p>If you chose <a href="#howto-fetch-head">the short road</a> (checking out the Subversion trunk) it seems that you're stuck in the mud. It might be <a href="#grafting">possible to clear through the mud</a> a little bit further but it might be better to <a href="#howto-fetch">backtrack</a>.
+
+</p><p>If you chose <a href="#howto-fetch-convert">the forest</a> (importing existing SVK mirror paths), there is a choice to be made: either you drop some <a href="#howto-track-dropmeta">things you picked up along the way</a> that you do not need anymore, and then <a href="#howto-track-rebuildmeta">proceed</a>, or you rely on your old ways (SVK) to provide you with directions before you <a href="#howto-track-fetch">continue</a>.
+
+</p><p>Finally, while <a href="#howto-fetch-slow">taking the long way</a> (cloning using git svn) might not have won you the race, it did help at this junction -- <a href="#fetch-track-pull">your direction is pretty clear now</a>.
+
+<a name="howto-track-native"></a></p><h4>...by updating somebody else's <tt>git-svn</tt> tracking repository</h4>
+
+If you pulled from my source, you can update the latest Subversion revisions I've put there using the native <tt>git</tt> command <tt>git-fetch</tt>:
+
+<pre>$ <b>git fetch</b>
+remote: Generating pack...
+remote: Done counting 314 objects.
+remote: Result has 173 objects.
+remote: Deltifying 173 objects.
+remote:  100% (173/173) done
+Indexing 173 objects.
+remote: Total 173, written 173 (delta 146), reused 10 (delta 5)
+ 100% (173/173) done
+Resolving 146 deltas.
+ 100% (146/146) done
+124 objects were added to complete this thin pack.
+* refs/remotes/origin/svn/trunk: fast forward to branch 'svn/trunk' of git://utsl.gen.nz/parrot
+  old..new: e0a02c9..78ad11b
+$ </pre>
+
+<p>This command completes very quickly even when pulling thousands of new revisions, modulo bugs for obscure corner cases like repositories with a huge number of non-overlapping revisions.  You can configure what gets fetched with <tt>git-fetch</tt> by editing the repository config (have a peek into <tt>.git/config</tt>).
+
+<a name="howto-track-svn"></a></p><h4>...using <tt>git-svn</tt> against the Subversion repository</h4>
+
+<p>Now for the other methods of keeping up to date, which all boil down to using <tt>git-svn</tt> in the end. Preparations might vary depending on your needs though, so read on.
+
+<a name="howto-track-dropmeta"></a></p><h5>Clearing <tt>git-svn</tt> metadata</h5>
+
+<p>If you converted the repository from your SVK depot, and you don't want to continue using SVK, then the safest thing to do is first clean out the <tt>git-svn</tt> metadata; but look out for <tt>git-svn</tt> updates that do this in a smarter way.
+
+</p><pre>$ <b>rm -r .git/svn</b>
+$ <b>vi .git/config</b>
+$ </pre>
+
+<a name="howto-track-rebuildmeta"></a><h5>Rebuilding <tt>git-svn</tt> metadata</h5>
+
+<p>If you copied the repository from somewhere else (eg, from <tt>repo.utsl.gen.nz</tt>) via <tt>git-clone</tt>, or if you just blew it away, then you won't have any SVN metadata - just commits.  In that case, you need to rebuild your SVN metadata, for instance, for just keeping <tt>trunk</tt> up to date - <tt>git-svn</tt> will rebuild its metadata when you run <tt>git-svn fetch</tt>.
+
+</p><pre>$ <b>git update-ref refs/remotes/git-svn origin/svn/trunk</b>
+$ <b>git svn init https://svn.perl.org/parrot/trunk</b>
+Using higher level of URL: https://svn.perl.org/parrot/trunk =&gt; https://svn.perl.org/parrot
+$ <b>git svn fetch</b>
+Rebuilding .git/svn/git-svn/.rev_db.d31e2699-5ff4-0310-a27c-f18f2fbe73fe ...
+r17220 = 78ad11bf2f61b35e1cb32a978ab546d198be8a2e
+r17219 = 605264b06d84670ec402d7a7a21c0016cae3a928
+r17218 = a8ceba9c503d2be8e8e69a3df454017322906cf5
+...
+</pre>
+
+<p>The first command is kind of cheating - we're copying a reference that I happened to have made as a regular head, to the place that <tt>git-svn</tt> is going to track the repository.  If you used <tt>git-svn</tt> on the upstream server or converted your SVN repositories, you won't have that problem.  Basically what's happening is that <tt>git-svn</tt> is storing its references under <tt>refs/remotes/</tt>, which aren't set up to be fetched by <tt>git-clone</tt>.  Here's how you fix that up:
+
+</p><pre>$ <b>git config --add remote.origin.fetch '+refs/remotes/*:refs/remotes/*'</b>
+$ <b>git fetch origin</b>
+remote: Generating pack...
+remote: Done counting 8069 objects.
+remote: Result has 6663 objects.
+remote: Deltifying 6663 objects.
+remote:  100% (6663/6663) done
+Indexing 6663 objects.
+remote: Total 6663, written 6663 (delta 4044), reused 4505 (delta 3083)
+ 100% (6663/6663) done
+Resolving 4044 deltas.
+ 100% (4044/4044) done
+709 objects were added to complete this thin pack.
+* refs/remotes/andy-pmc2c: storing remote branch 'andy-pmc2c' of git://utsl.gen.nz/parrot
+  commit: a7f2e56
+* refs/remotes/buildtools: storing remote branch 'buildtools' of git://utsl.gen.nz/parrot
+  commit: 5fbdecd
+* refs/remotes/debian: storing remote branch 'debian' of git://utsl.gen.nz/parrot
+...
+$ <b>git svn init -t tags -T trunk -b branches    \
+     https://svn.perl.org/parrot</b>
+$ <b>git svn fetch</b>
+Rebuilding .git/svn/trunk/.rev_db.d31e2699-5ff4-0310-a27c-f18f2fbe73fe ...
+r17203 = b0f49972505e94c6c37a832ac1278eb4ef0ebdc1
+r17201 = cadca277833966dbe885a2f5a6a725a646d4df39
+r17200 = 9a2f3a6d03b6eb90131f03cd439cf8f71d8d01c5
+...
+$ </pre>
+
+<p>And of course <em>that</em> only works because I've set up my SVN tracking repository to push all of its branches to the same places on the <tt>utsl.gen.nz</tt> repository.
+
+</p><p class="fixme">This is all very important information for people
+setting up central tracking servers.  This needs expansion, probably
+its own section.  Talk about tracking server symlink tricks (eg
+<tt>refs/heads/svn -&gt; ../remotes</tt> and <tt>refs/ttags/svn -&gt;
+../remotes/tags</tt>)
+
+</p><p>The simpler case - and still thoroughly useful - is just updating a single branch.  All you need for that is a commit somewhere in your history which has a correct <tt>git-svn</tt> breadcrumb and then <tt>git-svn</tt> can resume.
+
+</p><p>Whew.  Git's not convoluted, honest!  We're just doing things <em>you just don't do</em> with Subversion.
+
+<a name="howto-track-fetch"></a></p><h5>Fetching more revisions</h5>
+
+<p>If you have valid <tt>git-svn</tt> metadata, for instance pulled from the Subversion Server - the slowest option above - or you are continuing to use SVK to do the real fetching (and have just run <tt>svk sync</tt>), you would use:
+
+</p><pre>$ <b>git svn fetch</b>
+...
+        A       examples/streams/Writer.pir
+        A       examples/streams/SubHello.pir
+        A       examples/streams/Combiner.pir
+        A       examples/streams/ParrotIO.pir
+        A       examples/streams/Include.pir
+        A       examples/streams/Filter.pir
+Successfully followed parent
+W: +empty_dir: tags/buildtools-17226/compilers/past/t
+W: +empty_dir: tags/buildtools-17226/compilers/post
+W: +empty_dir: tags/buildtools-17226/docs/2.0
+W: +empty_dir: tags/buildtools-17226/docs/ops
+W: +empty_dir: tags/buildtools-17226/include/parrot/oplib
+W: +empty_dir: tags/buildtools-17226/lib/Parrot/Config
+W: +empty_dir: tags/buildtools-17226/lib/Parrot/OpLib
+r17227 = f82d500d84c58664bb460df61277889f6003d4dd (tags/buildtools-17226)
+$ </pre>
+
+<a name="fetch-track-pull"></a><h3>...keep your local branch up to date with Subversion</h3>
+
+The recommended way to do this for people familiar with Subversion is to use <tt>git-svn rebase</tt>.  You actually don't need to use <tt>git-svn fetch</tt> separately; it will automatically fetch new revisions first.
+
+<pre>$ <b>git svn rebase</b>
+...
+$ </pre>
+
+<p><b>Note:</b> before you do this, you should have a "clean" working
+tree - no local uncommitted changes.  You can use <tt>git-stash</tt>
+(git 1.5.3+) to hide away local uncommitted changes for later.
+
+</p><p>This command is doing something similar to the above commands that used <tt>git-cherry-pick</tt>; it's copying the changes from one point on the revision tree to another, just like <tt>svk smerge -Il</tt> would.  There is no analogue to this operation in plain Subversion.
+
+</p><p>Of course, in Subversion it is actually encouraged to do this without saving your changes first!  In <tt>git</tt>, you commit first and ask questions later.  So, to preserve the <tt>svn update</tt> semantics of allowing you to work when your working copy is changed, you can use these commands:
+
+</p><pre>$ <b>git-commit -a -m "Temporary commit"</b>
+...
+$ <b>git svn rebase</b>
+...
+$ <b>git reset --mixed HEAD^</b>
+$ </pre>
+
+<p>Better still is to bunch up your in-progress working copy changes
+into a set of unfinished commits, using <tt>git add -i</tt> (or
+<tt>git-gui</tt> / <tt>git-citool</tt>).  Then try the rebase.  You'll
+end up this time with more commits on top of the SVN tree than just
+one, so using Stacked Git you can "<tt>stg uncommit -n 4</tt>" (if you
+broke your changes into 4 commits), then use "<tt>stg pop</tt>" /
+"<tt>stg push</tt>" to wind around the stack (as well as "<tt>stg
+refresh</tt>" when finished making changes) to finish them - see <a href="http://procode.org/stgit"><tt>procode.org/stgit</tt></a>.
+
+</p><p>In fact in my experience <tt>stg</tt> is the best tool for
+rebasing, especially if you use a merging script like <a href="http://utsl.gen.nz/scripts/smartmerge">smartmerge</a> (customise
+to taste if <tt>emacs</tt> isn't your thing).  Once you grok that,
+you'll only need to use <tt>stg</tt> and <tt>git-svn fetch</tt>.
+
+<a name="howto-push"></a></p><h3>...commit back to Subversion</h3>
+
+<p>Ok, so you've already gone and <a href="#local-commit">made the
+commits locally</a> that you wanted to publish back to the Subversion
+server.  Perhaps you've even made a collection of changes, revising
+each change to be clearly understandable, making a single small change
+well such that the entire series of changes can be easily reviewed by
+your fellow project contributors.  It is now time to publish your
+changes back to Subversion.
+
+</p><p>The command to use is <tt>git svn dcommit</tt>.  The <tt>d</tt> stands for delta (there used to be a <tt>git svn commit</tt> command that has since been renamed to <tt>git svn set-tree</tt> because its behaviour was considered a little 'surprising' for first-time users).
+
+</p><p><tt>git-svn</tt> won't let the server merge revisions on the fly; if there were updates since you fetched / rebased, you'll have to do that again.
+
+</p><p>People are not used to this, thinking somehow that if somebody commits something to file A, then somebody else commits something to file B, the server should make a merged version with both changes, despite neither of the people committing actually having a working tree with both changes.  This suffers from the same fundamental problem that darcs' patch calculus does - that just because patches apply 'cleanly' does not imply that they make sense - such a decision can only be automatically made with a dedicated continual integration (smoke) server.
+
+</p><pre>$ <b>git-svn dcommit</b>
+...
+$ </pre>
+
+<a name="howto-sendpatches"></a><h3>...send patches to mailing lists or RT instances</h3>
+
+<p>Again there are lots of ways to do this.  Let's say we've made some changes and want to make patch files for all of the ones since <tt>trunk</tt>:
+
+</p><pre>$ <b>git format-patch remotes/trunk</b>
+...
+$ </pre>
+
+<p>A command like <tt>git log remotes/trunk..HEAD</tt> would show you the commits that this involves.  You can then take those patch files and attach them to e-mails or whatever.  There's a command called <tt>git-send-email</tt> that takes patch files generated by the above and pushes them out to a mailing list.
+
+</p><p>A simpler way to pull out an individual patch is with <tt>git show COMMIT</tt>
+
+</p><p>If the project uses the kernel patch submission policy, which strangely enough is very similar to best practices for sending patches to usenet etc since 'patch' was invented, then you probably don't want to use <tt>--attach</tt>.
+
+</p><p>If the upstream applies your patch without changes, then if you later merge, the changes shouldn't need to re-merged.  <tt>git</tt> will notice that there has been a revision since the "merge base" that an identical change was applied and realise it has already been done.
+
+</p><p>Unlike <tt>svk push -P</tt>, it's possible to work with a <em>series</em> of patches that build on each other, rather than just a single patch at a time.  Fancy that.
+
+<a name="howto-merge"></a></p><h3>...merge changes</h3>
+
+<p>This is normally what I use in preference to rebase.
+
+</p><pre>$ <b>git merge trunk</b>
+...
+$ </pre>
+
+<p>This will merge all the commits that aren't in your ancestry, but are in the ancestry of the branch <tt>trunk</tt> (try setting rightmost drop-down in <tt>gitk</tt> to '<tt>ancestor</tt>' and clicking around to get a feel for what this means), and make a new commit which has two parents - your old <tt>HEAD</tt>, and whatever commit <tt>trunk</tt> is up to.
+
+</p><p>If git's history-sensitive merging doesn't automatically resolve things like patches applied in a different order, you end up with conflicts.  The local file gets conflict markers - which might sound apalling, but the "ancestor", "left" and "right" versions of the file are nearby, in the index (staging area).  I like to use <tt>ediff-merge-files-with-ancestor</tt> to merge, so my <a href="http://utsl.gen.nz/scripts/smartmerge">merge script</a> handles starting this for me to make merging easy.  <em>Far</em> more effective than the emacs merge method I was using with SVK was.  And I don't have to worry about breaking out of a merge aborting the whole thing and throwing away work.
+
+</p><p>No doubt some will say that SVK's UI is better because it lets you make per-file decisions as you make the merge.  I see that as an easy possible addition to the git-commit interface.  Submit a patch to the mailing list, and as long as it doesn't suck it will be included.  It's just I've been quite happy to resolve using the facilities of the index.
+
+<a name="sux"></a></p><h2>Git's limitations</h2>
+
+Of course if I didn't mention these then I'd have people ranting about how I was biased and partisan etc.  But there are many shortfallings in git.
+
+<a name="sux-mismatch"></a><h3>Development model impedence mismatches</h3>
+
+<p>While <tt>git</tt> is a flexible development system, there are some development styles for which it does not do well.
+
+</p><h4>The 'Smashing patches to pieces' development model</h4>
+
+<p>This is where instead of merging in patches completely, you merge bits of them in on a file-by-file basis, and expect the VCS to tell you later what you did.
+
+</p><p>Perforce tracks changes at this level, and Bazaar-NG can apparently
+  represent this at the model level, but the authors have not found it
+  necessary to provide the features to the users.
+
+</p><h4>The 'Ghetto' development model</h4>
+
+<p>This is where you send new features into the <em>ghetto</em> so
+  that they can 'battle it out'.  The last features standing get
+  re-integrated into another branch known as the <em>trailer park</em>
+  to try to find a new life for themselves.
+
+</p><p>Note that <em>ghetto</em> is frequently called <tt>trunk</tt>, and
+  the <em>trailer park</em> something like <tt>releng</tt>.  The 'hood
+  is frequently mis-spelled "head".
+
+</p><p>Sadly, this model is in use by virtually every Subversion hosted
+  project out there.  And <em>that</em> is going to be hard to undo.
+
+<a name="darcs-rulz"></a></p><h3>What darcs has over git</h3>
+
+<h4>Opportunistic topic branches</h4>
+
+<div class="figure">
+<img onclick="set_big(this, this.parentNode)" src="hydra-vs-regular.png" alt="A side-by-side comparison of what darcs is thinking and what subversion would think">
+<p class="caption">Left: what darcs thinks when you start committing without marking tag points.<br>
+Right: Subversion has a somewhat smaller brain...
+</p></div>
+
+<p><tt>darcs</tt> has a very special idea about ancestry.  To <tt>darcs</tt>, by default patches exist in time at the earliest point at which they apply cleanly.  The crazy thing is, it figures this out at the latest time possible.
+
+</p><p>It is possible to use <tt>git</tt> in this way (see the figure to the right) - but it's not trivial, and not default.  In fact <tt>git</tt> itself is developed in this way, using <em>feature branches</em>, aka <em>topic branches</em>.
+
+</p><h4>Interactive commit</h4>
+
+<p>Yeah, I know I already wrote above that somebody is writing <tt>git-hunk-commit --darcs</tt>, but it ain't standard yet, and <tt>git-add -i</tt> isn't anywhere near as good as <tt>darcs commit</tt> <em>yet</em>.
+
+</p><p>However, git <em>does</em> have a couple of GUI interfaces that can be used to stage commits - try <tt>git-gui</tt> and <tt>git-citool</tt>.
+
+</p><h4>Push changes and the working copy</h4>
+
+<p>With git, if you <tt>git-push</tt> into a repository that is not 'bare', ie, it has a checkout too, then something somewhat surprising happens; the repository is moved forward, but the checkout (and the index/staging area) isn't.  
+
+</p><p>In darcs (and probably bzr), what happens is that both the repository and the checkout is updated, making <tt>push</tt> and <tt>pull</tt> symmetric.
+
+</p><p>You could in theory get around this with update hooks, but it seems no-one has cared about this enough to make this work yet.  Everyone must just use pull, or they use <tt>git-remote</tt> correctly to push into <tt>remotes/</tt> style references, therefore never updating a branch that is currently checked out.
+<b>Update:</b> looks like I care enough, and so I wrote such a <a href="http://utsl.gen.nz/talks/git-svn/.git/hooks/post-update">git hook to update the working copy</a> for managing this article.
+
+<a name="bzr-rulz"></a></p><h3>What Bazaar-NG has over git</h3>
+
+<p><tt>bzr</tt> comes with some great utilities like the <a href="https://launchpad.net/pqm">Patch Queue Manager</a> which helps show you your feature branches.  With PQM, you just create a branch with a description of what you're trying to do, make it work against the version that you branched off, and then you're done.  The branch can be updated to reflect changes in trunk, and eventually merged and closed.
+
+</p><p>Let's see, what else.  Windows support is good.  Consistent implementation.  <em>Experience</em> with the distributed development model.  Friendly and approachable author and core team.  Mark Shuttleworth's bank balance.
+
+</p><p>Actually the models of <tt>git</tt> and <tt>bzr</tt> are similar enough that <tt>bzr</tt> could be fitted atop of the <tt>git</tt> repository model, with only a few subtle and unimportant impedence-mismatch related bugs creeping in.  At least, that was the initial assessment when I talked this over with the bzr devs at OSDC in Melbourne.  If that happened, then <tt>git</tt> really would be a common platform for sharing software revisions - kind of like <tt>RevML</tt>, but without the XML.  
+
+</p><p>At OSDC Martin & Andrew also showed off an interesting continual integration console, only letting branches be merged to <tt>trunk</tt> if they pass tests and have been reviewed internally - but I won't count that because <em>they haven't released the darned thing as open source yet</em>.  Well, I don't care.  At least they're using it to produce some fine open source software that I can track easily with git.
+
+<a name="hg-rulz"></a></p><h3>What Mercurial has over git</h3>
+
+<p>Mercurial is missing lightweight branches that makes git so
+powerful, and there is no content hashing, so it doesn't really do the
+whole "revision protocol" thing like git.  This is why people like Ted
+T'so say "git has more legs".
+
+</p><p>However as a version control system in its own right, it's
+certainly one of the best.  And if you consider that it is almost a
+twin brother of git, being written in response to Larry McVoy's Great
+Temper Tantrum&trade; and its first release only a couple of weeks later
+than git's first release, and given all that it has achieved, it's an
+outstanding accomplishment.
+
+</p><p>Here are some of the reasons why.
+
+</p><h4>Portability and Consistency</h4>
+
+<p>Mercurial, like Bazaar-NG, is written completely in Python (with some performance critical parts in C).  So, if
+you like Python you might find that good.  If you're on Windows it's
+probably a lot easier to get going.  Hey, maybe it will even one day
+run on IronPython on .NET.
+
+</p><h4>Optimisation for the Cold Cache case</h4>
+
+<p>In the "cold cache" case, git typically needs to load a lot of
+blocks to do some operations.  Mercurial, on the other hand, gets away
+with far fewer seeks for them.  This means it can be a lot faster -
+for instance, one use case that Mercurial is a lot faster is applying
+a ton of patches.
+
+</p><p>In the "hot cache" case, git typically blows Mercurial out of the
+water, except for operations where git is having to do searches to get
+the data, like annotate.
+
+</p><h4>Bundle efficiency</h4>
+
+<p>Mercurial's <tt>hg bundle</tt> does a really, really good job of
+making small packs.  With the <tt>e2fsprogs</tt> repository, it
+managed to make a pack that was 50% smaller than the default
+<tt>git</tt> pack, and its default bundle was <a href="http://changelog.complete.org/?url=posts/596-Some-more-git,-mercurial,-and-darcs.html#c43126">20%
+smaller</a> than an agressively (and expensively) packed <tt>git</tt>
+pack.
+
+</p><p class="fixme">ok, so this section needs a little work.  From #mercurial:
+
+</p><pre>23:27 &lt; mugwump&gt; http://utsl.gen.nz/talks/git-svn/intro.html#hg-rulz  
+                 # see, I *can* say nice things about other VCSes :)
+23:27 &lt; hgbot&gt; Title: An introduction to git-svn for Subversion/SVK users
+               and deserters (at utsl.gen.nz)
+23:35 &lt; keramida&gt; heh :)
+23:39 &lt; pachi&gt; mugwump: it would be good having greater interoperability
+               between git and hg
+23:43 &lt; manuzhai&gt; mugwump: shouldn't you detail mq as well in the hg-rulz
+                  section?
+23:44 &lt; pachi&gt; yep
+23:44 &lt; keramida&gt; mugwump: is there a version of the screenshots/images
+                  which is larger?
+23:44 &lt; keramida&gt; they are not exactly `readable' right now
+23:45 &lt; pachi&gt; and in git cons, there's also that it only can work on top
+               of some filesystems (i.e. doesn't work on fat32)
+23:45 &lt; pmezard&gt; pachi: what the pb with fat32 ? permissions ? symlinks ?
+23:46 &lt; pachi&gt; pmezard: not sure, probably links
+23:46 &lt; pachi&gt; pmezard: as you can pull but not do a checkout with the
+               mingw port
+23:47 &lt; pachi&gt; mugwump: also, mercurial is not completely written in
+               python, it has a small C core, but it's portable
+23:53 &lt; pachi&gt; mugwump: also, citing that you don't need to repack
+               regularly is something I'd find interesting to have good space
+               efficiency
+23:55 &lt; pachi&gt; mugwump: and isn't the forest extension like subprojects?
+00:04 &lt; ThomasAH&gt; mugwump: hg's named branches might be what git's
+                  lightweight branches are, or not?  And what do you mean with
+                  "there is no content hashing"?
+00:05 &lt; ThomasAH&gt; mugwump: and "its first release only a couple of weeks
+                  later than git's first release" is wrong (iirc), too
+00:09 &lt; ThomasAH&gt; mugwump: ah, ok ... first (unusable :)) git snapshot was
+                  released 11 days before Mercurial 0.1
+00:10 &lt; ThomasAH&gt; so "couple of weeks" is just somewhat misleading
+00:11 &lt; ThomasAH&gt; "Mercurial, like Bazaar-NG, is written completely in
+                  Python." ... no, there are some required parts in C (that's
+                  good and bad)
+00:16 &lt; pachi&gt; mugwump: this is also fanboying too much: "Yes, there are
+               operations for which the model is less efficient than, say,
+               Mercurial in terms of antiquated measures such as discrete disk
+               IOs. But in general git wins." :P
+00:17 &lt; pachi&gt; mugwump: anyhow... nice tutorial. You could do a great
+               mercurial docs contributor ;)</pre>
+
+<a name="svn-stillsux"></a><h3>What Subversion has over git</h3>
+
+<h4>Partial checkouts</h4>
+
+<p>Yeah.  This one's an open question.  There are so many answers and none of them are particularly good.  Well, a good thing that even the KDE repository fits on a single DVD when converted to <tt>git</tt>. (623,354 revisions <a href="http://utsl.gen.nz/gitweb/?p=kde.git;a=shortlog;pg=1">online here</a> - try the <a href="http://utsl.gen.nz/kde-git-svn.torrent">torrent</a> - 7,491,252,858 bytes, a Dual-Layer-DVD, a few hundred thousand commits from the finish line, but I have found repositories tend to shrink as each press goes on, as history is correlated and the delta compression starts finding even better deltas).  It's large, but definitely distributable.  It won't fit on the built-in hard-drive on my EeePC, but 8GB of space for it is only $3.50 out of the purchase price of my last three and a half inch.
+
+</p><p>It's currently a TODO item in <tt>git</tt>, but no-one really gives a damn because git's so darned efficient and networks are fast.
+
+</p><p>It's possible to fix this.  They solved an analogous problem with <em>shallow clones</em> (see <cite>git-clone(1)</cite>).  It's just not been a priority for many people.
+
+</p><h4>svn:externals</h4>
+
+<p>There is support for <em>submodules</em> since version 1.5.3, but it's still in early stages.  This would also provide another way to solve the above problem with partial checkouts - big projects could put pieces into sub-projects, which would be able to be cloned separately.
+
+<a name="summary"></a></p><h2>Summary</h2>
+
+<p>We have the tools we need to break away from centralisation!  Now, we just need to convert the 10,000 projects...
+
+</p><p>git's not the tool for every occasion.  I'd certainly recommend that people consider at least Bazaar-NG and Mercurial.  Or <tt>darcs</tt> if they're developing projects in a University in Haskell. There's certainly been a lot of feature cross-pollenation between these systems of late.  <tt>bzr</tt> stole <tt>gitk</tt> as <tt>bzr vis</tt>, and via <tt>bzr-svn</tt> you can even use it to visualise remote SVN urls.  Neat!
+
+</p><p>Apologies that this tutorial kind of slipped into becoming an advocacy article, I hope that there are enough pointers and commands along the way to get those interested in <tt>git-svn</tt> on the right track.
+
+<a name="grafting"></a></p><h2>Epilogue on history rewriting</h2>
+
+<p>Earlier in this article I referred to history rewriting in passing.  I include this as a pointer for the keen, but bear in mind that this falls into the class of "history munging", and for various reasons is best done in the privacy of an unpublished project.
+
+</p><p>Let's say that we have a branch (the current one) that contains all the patches that we want to move to a rebased history.
+
+</p><p>We manually find a common commit (possibly using <tt>gitk</tt>).  Let's say it was commit <tt>7cbf53525bc6387495edd574ecdb248e1e4f872a</tt>, which became <tt>aa3e7febb0477e15257c89126d037f6f81a7974c</tt>.  You'd re-write that using <tt>git-filter-branch</tt>:
+
+</p><pre>$ <b>git filter-branch -k 7cbf53 \
+    --tag-name-filter 'cat' \
+    --parent-filter "sed -e 's/7cbf53525bc6387495edd574ecdb248e1e4f872a/aa3e7febb0477e15257c89126d037f6f81a7974c/'" \
+    new-branch</b></pre>
+
+<p>That's a one-line history graft.  I'm not even going to start explaining it.
+
+</p><p>Of course you have to be careful with this kind of history munging, you might just end up with somebody wondering why their "git-pull" is taking so long to negotiate which commits it has and hasn't got, and watch out for the dreaded message "<tt>warning: no common commits</tt>" issued by <tt>git-fetch</tt>.
+
+</p><p>Other things that you end up doing when history munging are identifying and tagging instances of cherry picking between branches; spotting merge points and re-writing the parents to represent the merge correctly, removing dummy commits, and even retrospectively applying automatic coding standards.  Usually the overriding principles are:
+
+</p><ol>
+<li>It should be possible to get back <em>exactly</em> the old state,
+  but..
+</li><li>I don't want anything <em>distracting</em>, <em>irrelevant</em>
+  and <em>untidy</em> in the revisions I normally query for version history, and
+</li><li>I probably only care about being able to build revisions which are
+  relatively near recent history (so, retrospective whitespace cleanups
+using tidy'ing tools are ok)
+</li><li>Save the old revisions for safekeeping, in a sepatate repository
+(that could refer to the latest one for alternates) for large rewrites,
+and using non-standard refs (eg, instead of <tt>refs/tags/Foo</tt>, use
+<tt>refs/Attic/Foo</tt>) in the same repository for small rewrites.
+</li></ol>
+
+<p>As <tt>git</tt> repositories can store separate branches that do not share
+  tangible history, you end up with not only a sequence of commits,
+  but a series of histories, each successively more useful for mining
+  than the older one.
+
+</p><p>Coding standards, such as whitespace, indenting, line feeds, etc,
+  can really throw a spanner in the works when trying to identify
+  which change introduced a line of code (ie, to answer the question,
+  "why is this line of code here?").  Instead of finding the initial
+  revision, you stop on some change where somebody decided to reformat
+  the code or somebody accidentally pressed tab on a line somewhere.
+  The kind of thing that irritates people on projects with review
+  procedures, because there is a trivial, unnecessary change which
+  they have to skip over.  After this kind of munging, hopefully they
+  become transparent to historical querying - because the versions
+  before and after are indented (or whatever) in the same way.
+
+</p><p>Repairing the damage done to projects by crappy version control
+  systems can be a large, open-ended task, so be <a href="http://git.catalyst.net.nz/gitweb?p=perl.git;a=tag;h=restorical-v2">careful
+  which projects you take on</a>.  Just ask Shawn Pearce, who ended up
+  writing a new packfile format because <tt>git</tt> <a href="http://thread.gmane.org/gmane.comp.version-control.git/26218/focus=26219">didn't
+  save enough space with the Mozilla repository</a>.  Well, at least
+  it didn't <a href="http://article.gmane.org/gmane.comp.version-control.git/21828">balloon
+  it to 8.2GB</a> like Subversion did.
+
+<a name="contributors"></a></p><h2>Contributors</h2>
+
+<p>Thanks to all the people who have given me feedback and thanks for
+writing this document.  For the complete and accurate list of credits,
+please refer to the git log - pull from <a href="http://utsl.gen.nz/talks/git-svn/.git">here</a>.
+
+</p><p>These people get acclaim on this section for submitting me well
+written patches and/or pull sources that I could just merge:
+
+</p><ul>
+  <li>Jakub Narebski
+  </li><li>Stijn Hoop
+</li></ul>
+
+</div>
+
+</body>
+</html>

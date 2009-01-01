@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00014.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00014.html">
+<meta name="wpd_date" content="2008-06-03T02:07Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: RE: IPSec Passthrough -->
+<!--X-From-R13: PEvatuN@bznqvk.pbz -->
+<!--X-Date: Thu, 1 May 2003 15:30:11 &#45;0400 (EDT) -->
+<!--X-Message-Id: 89680B404BA1DD419E6D93B28B41899B0105F21A@01MAIL -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+
+
+<title>RE: IPSec Passthrough</title>
+<link rev="made" href="mailto:BSingh@Nomadix.com">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.ox.org/ipsec/2003/05/msg00013.html">Date Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00015.html">Date Next</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00009.html">Thread Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00023.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00014">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00014">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <a href="mailto:vinay-rc@naturesoft.net">vinay-rc@naturesoft.net</a>, <a href="mailto:msiler@hcin.net">msiler@hcin.net</a></li>
+<li><em>Subject</em>: RE: IPSec Passthrough</li>
+<li><em>From</em>: <a href="mailto:BSingh@Nomadix.com">BSingh@Nomadix.com</a></li>
+<li><em>Date</em>: Thu, 1 May 2003 11:14:55 -0700 </li>
+<li><em>Cc</em>: <a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a></li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Actually since the SPI values are different in the 2 directions, these
+devices first try to associate the incoming and outgoing SPIs by preventing
+further new connections to the same IPSec server from clients behind the NAT
+device till they see atleast one incoming packet containing the SPI from the
+server. Once that association is made, the connection information is
+considered complete and they allow other clients to connect to the same
+server. It is dependent on the server implementation to distinguish 2
+different connections coming from the same IP address (of the NAT device)
+and is not a very reliable method of doing things..
+
+Regards
+
+-Bik
+
+-----Original Message-----
+From: Vinay K Nallamothu [<a href="mailto:vinay-rc@naturesoft.net">mailto:vinay-rc@naturesoft.net</a>] 
+Sent: Wednesday, April 30, 2003 11:10 PM
+To: Mark Siler
+Cc: ipsec@lists.tislabs.com
+Subject: Re: IPSec Passthrough
+
+On Wed, 2003-04-30 at 20:37, Mark Siler wrote:
+&gt; I'm curious on how IPSec passthrough works.  I know AH prevents a
+&gt; traditional NAT from occurring, but how do the SOHO routers (Linksys,
+&gt; D-Link, Ascend, etc) accomplish the IPSec passthrough?
+
+These devices track the IPsec connections by looking at the SPI in
+IKE/ESP headers.
+
+When they first see the IKE packets from the client behind the NAT they
+note down the SPI value, client address and then masquarade the packet
+as usual with its own IP.
+
+When they see the packets from the remote IPsec peer, it looks into the
+table using SPI and replaces the destination with client's IP.
+
+This mechanism works only with ESP and not with AH which is fine as most
+of the road warriors connect to IPsec gateways.
+
+You can get more details about this in sections 9.0 to 9.3 of
+draft-ietf-ipsec-ikev2-tutorial-01.txt.
+
+&gt;  Do they
+&gt; encapsulate the entire IPSec packet from the client?
+No
+
+&gt;  I keep reading
+&gt; about a Transparent Mode and Tunnel Mode,
+For NAT-T unware IPsec peers, the above mentioned mechanism is not
+visible and hence called transparent. Further this works only when the
+client behind the NAT is a road warrior.
+
+
+vinay
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00023" href="http://www.ox.org/ipsec/2003/05/msg00023.html">RE: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Vinay K Nallamothu &lt;vinay-rc@naturesoft.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00013.html">Re: ISAKMP and SSL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00015.html">Protocol ID Field</a></strong>
+</li>
+<li>Prev by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00009.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00023.html">RE: IPSec Passthrough</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00014"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00014"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+/* ::::: http://www.golden-gryphon.com/styles/defaults.css ::::: */
+
+address { color: gray; margin-left: -2em; text-align: right; }
+tt, code, kbd, samp { font-family: monospace; }
+div.box { border: 0.1em solid ; padding: 0.5em; }
+dt { font-weight: bold; }
+dd { margin-bottom: 0.66em; }
+blockquote.cite { border-left: thick solid rgb(18, 153, 18); color: rgb(34, 34, 34); font-family: "Times New Roman","Century Schoolbook",serif; padding-left: 1em; }
+.del { background: rgb(153, 0, 0) none repeat scroll 0% 0%; text-decoration: line-through; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.ins { background: rgb(0, 102, 0) none repeat scroll 0% 0%; text-decoration: none; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.acronym { font-variant: small-caps; letter-spacing: 0.1em; }
+.headline { border-top: 1.5em solid rgb(0, 0, 0); border-bottom: 5px dotted rgb(0, 0, 0); margin: 1em auto; padding: 0.5em 0pt; text-align: center; width: 14.6em; font-family: Georgia,Times,'Times New Roman',serif; font-size: 1.2em; text-transform: uppercase; white-space: nowrap; }
+
+/* ::::: http://www.golden-gryphon.com/styles/hints.css ::::: */
+
+.hint, .alt-hint { border-right: thick solid rgb(204, 204, 204); border-bottom: thick solid rgb(204, 204, 204); padding: 1em; background: rgb(204, 255, 204) none repeat scroll 0% 0%; width: 14em; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-style: italic; margin-top: 0.5em; margin-bottom: 0.5em; }
+.hint { float: right; text-align: right; margin-left: 1em; margin-right: 0pt; }
+.alt-hint { float: left; text-align: left; margin-left: 0pt; margin-right: 1em; }
+.hint ul, .hint ol { margin-left: 0pt; padding-left: 0pt; list-style-position: inside; }
+.hint li { margin-left: 0pt; }
+.hint em, .alt-hint em { font-style: normal; }
+.hint em em, .alt-hint em em { font-style: italic; }
+.nohint { display: none; }
+p.hint p, p.alt-hint p { text-indent: 0pt; margin-top: 1em; }
+
+/* ::::: http://www.golden-gryphon.com/styles/paragraphs.css ::::: */
+
+p.initial:first-letter { font-size: 215%; }
+.dropcap { background: rgb(255, 255, 153) none repeat scroll 0% 0%; float: left; font-weight: bold; font-size: 1.4em; font-family: "Times New Roman",serif; color: rgb(51, 0, 102); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#bigchar { background-color: red; color: white; font-size: 28pt; font-family: Impact; }
+p p { margin-top: 0pt; text-indent: 2em; }
+p.stb { text-indent: 0pt; margin-top: 0.83em; }
+p.mtb { text-indent: 0pt; margin-top: 2.17em; }
+p.ltb { text-indent: 0pt; margin-top: 3.08em; }
+.stb { border-style: solid; border-top: 0pt solid; border-bottom: 0pt solid; margin-top: 2.17em; margin-bottom: 0.75em; padding-top: 2.17em; padding-bottom: 0pt; }
+.mtb { border-style: solid; border-top: 0.1em solid; border-bottom: 0pt solid; margin-top: 3.08em; margin-bottom: 0.75em; padding-top: 3.08em; padding-bottom: 0pt; }
+.ltb { border-style: solid; border-top: 0.25em solid; border-bottom: 0pt solid; margin-top: 4.34em; margin-bottom: 0.75em; padding-top: 4.34em; padding-bottom: 0pt; }
+p.caption { text-indent: 0pt; }
+p.remark { font-size: smaller; }
+.logo { float: left; }
+
+/* ::::: http://www.golden-gryphon.com/styles/sections.css ::::: */
+
+h1.negint { margin-left: -8%; }
+h2.negint, h3.negint, h4.negint, h5.negint, h6.negint { margin-left: -4%; }
+h2.section { text-transform: capitalize; text-decoration: underline; margin-left: 5%; }
+h2.subsection { margin-top: 8em; margin-bottom: 3em; }
+h3.subsection { margin-top: 4em; margin-bottom: 2em; }
+h1.section { font-family: sans-serif,helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-variant: small-caps; text-transform: capitalize; }
+h1.title { text-align: center; font-variant: small-caps; font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-weight: bold; text-transform: capitalize; text-shadow: 0.3em 0.3em 0.1em rgb(255, 0, 0); }
+h1.subtitle { border-bottom: 2px solid rgb(140, 172, 187); font-variant: small-caps; font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; text-transform: capitalize; }
+h2.subtitle { border-bottom: 1px solid rgb(140, 172, 187); font-variant: small-caps; font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; text-transform: capitalize; }
+.subhead { border-top: 0pt none; border-bottom: 0pt none; margin-top: 0.75em; margin-bottom: 0.75em; padding-top: 0pt; padding-bottom: 0pt; }
+h2.identifier { border-bottom: 1px solid rgb(140, 172, 187); text-align: center; font-weight: bold; font-style: italic; font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-size: 90%; }
+.titletext { color: black; font-size: 18pt; font-weight: bold; margin-bottom: -10px; }
+div.titlepage { border: thin solid blue; margin: 1em 0pt; padding: 1em; }
+div.abstract { font-style: italic; }
+h3.author { margin: 2%; font-weight: bold; text-align: center; font-style: italic; }
+span.attribution { font-weight: bold; }
+div.copyright, p.copyright { margin: 5%; font-weight: bold; }
+span.holder { font-family: Times New Roman,Helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-size-adjust: 0.53; }
+div.intro { font-style: italic; margin-left: 2em; margin-right: 2em; }
+div.intro em { font-style: normal; }
+div.intro h2 { border: medium none ; background: rgb(251, 251, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; }
+div.navigation { background: rgb(224, 224, 224) none repeat scroll 0% 0%; font-size: smaller; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+p.navigation { padding: 0.3em 0.3em 0.3em 3em; background: rgb(224, 224, 224) none repeat scroll 0% 0%; font-family: Times New Roman,helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-size: 80%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-left: -3em; }
+ul.toc { list-style-type: none; }
+div.toc, div.subtoc { border: thin solid ; margin: 1em 0pt; padding: 1em; background: rgb(221, 221, 221) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+p.caption { font-weight: bold; }
+div.endmatter { border-top: thin solid; margin-right: -6em; }
+div.endmatter hr { display: none; }
+.footer { border-top: thin solid black; margin-top: 2em; padding-top: 1em; }
+
+/* ::::: http://www.golden-gryphon.com/styles/simple_screen.css ::::: */
+
+body { font-family: Helvetica,Times New Roman,Minion Web,Utopia,serif; }
+div#links a { border-width: 0pt; margin: 0pt 0pt 2px; padding: 5px 10px; display: block; text-align: center; font-family: sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 1em; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; text-decoration: none; color: rgb(204, 204, 255); }
+div#links a:first-child { border-top: medium none; }
+div#links a:hover { background: rgb(204, 204, 255) none repeat scroll 0% 0%; color: rgb(102, 68, 68); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+div#links { position: fixed; top: 6.3em; left: 0pt; width: 20ex; height: 650px; font-family: Verdana,sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; }
+div#content { border: medium solid rgb(255, 204, 153); margin: 1em 2em; padding: 10px; color: black; background-color: white; }
+div#content h3 { margin-bottom: 0.25em; }
+table { border: 2pt outset rgb(140, 172, 187); margin: 1.5em auto 1em; border-collapse: collapse; clear: both; }
+table th { font-weight: normal; white-space: nowrap; }
+table td { text-align: left; }
+div h2, h3, h4 { color: rgb(255, 0, 0); text-align: center; font-weight: bold; }
+h1 { text-align: center; font-weight: bold; }
+dt { padding-top: 0.5em; font-weight: bold; }
+dd { padding-top: 0.5em; padding-bottom: 0.5em; }
+dl.metrics {  }
+dt.score { text-decoration: underline; display: inline; text-align: left; }
+dt.info { text-decoration: underline; }
+dt.metricDesc { text-decoration: underline; }
+dd.score { display: inline; text-align: right; }
+pre { border: 1px solid rgb(203, 203, 203); background-color: rgb(255, 248, 237); color: black; }
+
+/* ::::: http://www.golden-gryphon.com/styles/common.css ::::: */
+
+address { color: gray; margin-left: -2em; text-align: right; }
+tt, code, kbd, samp { font-family: monospace; }
+p.initial:first-letter { font-size: 215%; }
+#bigchar { background-color: red; color: white; font-size: 28pt; font-family: Impact; }
+p + p { text-indent: 1.5em; margin-top: 0pt; }
+p.stb { text-indent: 0pt; margin-top: 0.83em; }
+p.mtb { text-indent: 0pt; margin-top: 2.17em; }
+p.ltb { text-indent: 0pt; margin-top: 3.08em; }
+.center { text-align: center; }
+p.caption { text-indent: 0pt; }
+.letterspaced { letter-spacing: 10pt; }
+.wordspaced { word-spacing: 20px; }
+.sub { vertical-align: sub; }
+.super { vertical-align: super; }
+.right { text-align: right; }
+.left { text-align: left; }
+.justify { text-align: justify; }
+.center { text-align: center; }
+.underline { text-decoration: underline; }
+.overline { text-decoration: overline; }
+.blink { text-decoration: blink; }
+.line-through { text-decoration: line-through; }
+.normal { white-space: normal; }
+.pre { white-space: pre; }
+.nowrap { white-space: nowrap; }
+.obeylines-h { white-space: nowrap; }
+.obeylines-v { white-space: nowrap; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.try { border: 4px solid ; }
+.name { font-size: 4em; text-align: center; }
+.oops { font-family: Jester,"Comic Sans MS"; }
+.nocss { display: none; }
+.colophon { display: none; }
+.hide { display: none; color: white; }
+span.skip { display: none; }
+div.skip { display: none; }
+table.raised { border: 5pt outset ; border-collapse: collapse; border-spacing: 0pt; }
+table.raised td { border: 1px solid ; padding: 1em; }
+table.raised th { border: 2px solid ; padding: 1em; }
+dt { font-weight: bold; }
+dd { margin-bottom: 0.66em; }
+h1.title { color: black; text-align: center; font-variant: small-caps; font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; font-weight: bold; text-transform: capitalize; text-shadow: 0.3em 0.3em 0.1em rgb(255, 0, 0); }
+.titletext { color: black; font-size: 18pt; font-weight: bold; margin-bottom: -10px; }
+div.titlepage { border: thin solid blue; margin: 1em 0pt; padding: 1em; }
+h2.section { text-transform: capitalize; text-decoration: underline; margin-left: 5%; }
+ol ol { list-style-type: lower-roman; list-style-image: none; list-style-position: outside; }
+ul ol { list-style-type: decimal; list-style-image: none; list-style-position: outside; }
+ol ol ol { list-style-type: lower-alpha; list-style-image: none; list-style-position: outside; }
+ol.withroman { list-style-type: lower-roman; }
+ol.upperroman { list-style-type: upper-roman; }
+ol.upperalpha { list-style-type: upper-alpha; }
+ol.withalpha { list-style-type: lower-alpha; }
+li.serif { font-family: Georgia,serif,Helvetica; }
+li.sans-serif { font-family: Times New Roman,Helvetica,sans-serif; }
+li.fantasy { font-family: fantasy; }
+li.monospace { font-family: monospace; }
+li.cursive { font-family: cursive; }
+ul.padded { line-height: 120%; }
+li.overskrift { margin-top: 2ex; font-weight: bold; }
+small { font-size: 0.92em; }
+big { font-size: 1.17em; }
+.Failed { color: rgb(119, 136, 153); background-color: Beige; text-align: center; }
+.Successful { color: rgb(0, 100, 0); background-color: PaleGreen; text-align: center; }
+.Baseline { color: rgb(0, 0, 205); background-color: Cyan; text-align: center; }
+.Folder { font-size: smaller; font-style: italic; }
+.Ignored { color: rgb(136, 125, 107); background-color: Bisque; text-align: center; }
+del { background: rgb(153, 0, 0) none repeat scroll 0% 0%; text-decoration: line-through; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+ins { background: rgb(0, 102, 0) none repeat scroll 0% 0%; text-decoration: none; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+acronym { font-variant: small-caps; letter-spacing: 0.1em; }
+body { position: relative; color: rgb(0, 51, 0); background-color: rgb(222, 250, 255); font-family: Helvetica,Times New Roman,Georgia,Utopia,serif; }
+div.gfdl { background: rgb(255, 255, 221) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(0, 0, 68); font-family: helvetica,Verdana,Myriad Web,Syntax,sans-serif; }
+div.main { background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(34, 34, 34); font-family: "Times New Roman","Century Schoolbook",serif; }
+div.mine { background: rgb(102, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(102, 17, 17); font-family: Garamond,Georgia,Times,serif; }
+div.position { border-right: thick solid rgb(204, 204, 204); border-bottom: thick solid rgb(204, 204, 204); padding: 1.5ex; background: White none repeat scroll 0% 0%; color: Black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-family: Garamond,Georgia,Times,serif; margin-left: 6%; margin-right: 3%; }
+.bugfixes { padding: 0.5em; background: yellow none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-left: 70%; text-align: center; font-style: italic; font-weight: bold; }
+.cmr-7 { font-size: 70%; }
+.cmmi-10 { font-style: italic; }
+.cmmi-7 { font-size: 70%; font-style: italic; }
+.cmbx-10 { font-weight: bold; }
+.cmtt-10 { font-family: monospace; }
+.cmti-10 { font-style: italic; }
+.small-caps { font-variant: small-caps; }
+.hline hr, .cline hr { height: 1px; }
+.Canvas { position: relative; }
+img.mathdisplay { margin-top: 1em; margin-bottom: 1em; }
+span.tex { letter-spacing: -0.125em; }
+span.tex span.e { position: relative; top: 0.5ex; left: -0.0417em; }
+a span.tex span.e { text-decoration: none; }
+.math { font-family: "Century Schoolbook",serif; }
+.math i { font-family: "Century Schoolbook",serif; }
+.boldmath { font-family: "Century Schoolbook",serif; font-weight: bold; }
+small.xtiny { font-size: xx-small; }
+small.tiny { font-size: x-small; }
+small.scriptsize { font-size: smaller; }
+small.footnotesize { font-size: small; }
+small.small {  }
+big.large {  }
+big.xlarge { font-size: large; }
+big.xxlarge { font-size: x-large; }
+big.huge { font-size: larger; }
+big.xhuge { font-size: xx-large; }
+.default { text-decoration: underline; font-style: normal; }
+.required { font-weight: bold; }
+div.box { border: 0.1em solid ; padding: 0.5em; }
+div.note { color: green; margin-left: 1em; }
+p.note { color: green; margin-left: 1em; }
+p.pnote { border-top: thin solid red; border-bottom: thin solid red; padding: 10px; }
+pre.example { border: 0.1em solid ; padding: 0.5em; background: rgb(222, 231, 236) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: Black; font-weight: normal; text-align: left; margin-right: 8%; margin-left: 8%; }
+div.warning { margin-right: 8%; margin-left: 8%; font-weight: bold; }
+div.output { margin-left: 3%; }
+.default { text-decoration: underline; font-style: normal; }
+.required { font-weight: bold; }
+.warning { background: yellow none repeat scroll 0% 0%; text-transform: none; font-style: normal; font-weight: bolder; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; }
+.footer { border-top: thin solid black; margin-top: 2em; padding-top: 1em; }
+.warning strong { background: rgb(255, 215, 0) none repeat scroll 0% 0%; color: rgb(255, 69, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: none; }
+.warning a:link, .warning a:visited, .warning a:active { background: transparent none repeat scroll 0% 0%; color: rgb(255, 69, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: underline; }
+.warning strong a:link, .warning strong a:visited, .warning strong a:active { background: rgb(255, 215, 0) none repeat scroll 0% 0%; color: rgb(255, 69, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.important { background: white none repeat scroll 0% 0%; text-transform: none; font-style: normal; font-weight: bolder; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: red; }
+.error { background: transparent none repeat scroll 0% 0%; color: rgb(220, 20, 60); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: none; }
+.error strong { background: rgb(255, 215, 0) none repeat scroll 0% 0%; color: rgb(220, 20, 60); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: none; }
+.error a:link, .error a:visited, .error a:active { background: transparent none repeat scroll 0% 0%; color: rgb(220, 20, 60); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: underline; }
+.error strong a:link, .error strong a:visited, .error strong a:active { background: rgb(255, 215, 0) none repeat scroll 0% 0%; color: rgb(220, 20, 60); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.letterspaced { letter-spacing: 10pt; }
+.wordspaced { word-spacing: 20px; }
+.sub { vertical-align: sub; }
+.super { vertical-align: super; }
+.right { text-align: right; }
+.left { text-align: left; }
+.justify { text-align: justify; }
+.center { text-align: center; }
+p.indent { text-indent: 20px; line-height: 200%; }
+p.negindent { text-indent: -10px; background-color: yellow; }
+p.noindent { text-indent: 0em; }
+p.indent { text-indent: 1.5em; }
+#bigchar { background-color: red; color: white; font-size: 28pt; font-family: Impact; }
+p.carson { font-size: 12pt; font-family: Courier; letter-spacing: 4pt; line-height: 5pt; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.underline { text-decoration: underline; }
+.blink { text-decoration: blink; }
+.line-through { text-decoration: line-through; }
+.overline { text-decoration: overline; }
+.normal { white-space: normal; }
+.pre { white-space: pre; }
+.nowrap { white-space: nowrap; }
+.obeylines-h, .obeylines-v { white-space: nowrap; }
+div.justify { text-align: justify; }
+h1.center { text-align: center; }
+p.noindent { text-indent: 0em; }
+p.indent { text-indent: 1.5em; }
+
+/* ::::: null ::::: */
+
+.todo { color: red; }
+.done { color: green; }
+.timestamp { color: grey; }
+.timestamp-kwd { color: CadetBlue; }
+.tag { background-color: lightblue; font-weight: normal; }
+.target { background-color: lavender; }

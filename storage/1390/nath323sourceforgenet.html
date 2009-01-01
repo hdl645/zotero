@@ -1,0 +1,1222 @@
+<html xmlns="http://www.w3.org/TR/REC-html40" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://nath323.sourceforge.net/">
+<meta name="wpd_url" content="http://nath323.sourceforge.net/">
+<meta name="wpd_date" content="2008-06-03T02:14Z">
+
+
+
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 9">
+<meta name="Originator" content="Microsoft Word 9">
+<link rel="File-List" href="http://nath323.sourceforge.net/index_files/filelist.xml">
+<link rel="Edit-Time-Data" href="http://nath323.sourceforge.net/index_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>NATH323 is a Linux kernel module that enables a Linux firewall to
+support connection tracking and NAT of H.323 protocol</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Jing Min Zhao</o:Author>
+  <o:LastAuthor>Jingmin Zhao</o:LastAuthor>
+  <o:Revision>36</o:Revision>
+  <o:TotalTime>103</o:TotalTime>
+  <o:Created>2006-02-05T20:07:00Z</o:Created>
+  <o:LastSaved>2006-04-24T03:25:00Z</o:LastSaved>
+  <o:Pages>8</o:Pages>
+  <o:Words>2773</o:Words>
+  <o:Characters>15809</o:Characters>
+  <o:Lines>131</o:Lines>
+  <o:Paragraphs>31</o:Paragraphs>
+  <o:CharactersWithSpaces>19414</o:CharactersWithSpaces>
+  <o:Version>9.6926</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1034"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+
+<link rel="stylesheet" type="text/css" href="nath323sourceforgenet.css" media="all">
+</head>
+<body style="" vlink="purple" lang="EN-CA" link="blue">
+
+<div class="Section1">
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">NATH323 is a Linux
+kernel module that enables Linux firewall to support connection tracking and
+network address translation (NAT) of H.323 protocol. This module supports RAS, Fast
+Start, H.245 Tunnelling, Call Forwarding, RTP/RTCP and T.120 based data and
+applications including audio, video, fax, chat, whiteboard, file transfer, etc.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">NATH323 is now part
+of the official Linux kernel 2.6.17-rc1 and 2.6.17-rc2.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The current stable
+version is 1.0 for kernel 2.6.16.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoToc1" style=""><!--[if supportFields]><span
+style='font-family:"Courier New"'><span style='mso-element:field-begin'></span><span
+style="mso-spacerun: yes"> </span>TOC \o &quot;1-3&quot; \h \z <span
+style='mso-element:field-separator'></span></span><![endif]--><span class="MsoHyperlink"><a href="#_Toc133598048">1. Introduction<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598048 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">1</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000340038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598049">2. Features<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598049 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">2</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000340039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598050">2.1 Full Featured H.323 Decoding
+Library<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598050 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">2</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598051">2.2 Support RAS<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598051 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">2</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598052">2.3 Support Fast-Start<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598052 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">2</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598053">2.4 Support H.245 Tunnelling<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598053 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598054">2.5 Support Audio, Video, Fax,
+Chat, Whiteboard and File Transfer<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598054 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598055">2.6 Support Both Voice Gateways and
+Terminals<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598055 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598056">2.7 Support Embedded Architectures
+That Have No Support of Misaligned Memory Accesses<span style="color: windowtext; display: none; text-decoration: none;"><span style="">&nbsp; </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598056 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598057">3. Installation<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598057 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598058">3.1 Download<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598058 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598059">3.2 Apply Patch to Kernel Source<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598059 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000350039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598060">3.3 Configure Kernel<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598060 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">3</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598061">3.4 Compile Kernel<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598061 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">4</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598062">3.4 Install Kernel<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598062 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">4</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598063">3.5 Load H.323 Module<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598063 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">4</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598064">3.6 Configure iptables<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598064 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">5</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598065">4. Calling Models<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598065 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">5</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598066">4.1 Internal Endpoint Call External
+Endpoint<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598066 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">5</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598067">4.2 External Endpoint Call Internal
+Endpoint<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598067 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">5</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598068">4.3 Internal Endpoint Call External
+Endpoint Though Gatekeeper<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598068 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">6</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598069">4.4 External Endpoint Call Internal
+Endpoint Though Gatekeeper<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598069 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">6</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000360039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598070">4.5 Internal Endpoint Call Another
+Internal Endpoint Though Gatekeeper<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598070 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">6</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598071">5. Support of Call Forwarding<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598071 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">6</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598072">5.1 Scenario 1: A is internal, B
+and C are external<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598072 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">7</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598073">5.2 Scenario 2: A and C are
+internal, B is external<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF
+_Toc133598073 \h </span><span style='color:windowtext;display:none;mso-hide:
+screen;text-decoration:none;text-underline:none'><span style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">7</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598074">5.3 Scenario 3: A is external, B
+and C are internal<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598074 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">7</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598075">5.4 Scenario 4: A and C are
+external, B is internal.<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF
+_Toc133598075 \h </span><span style='color:windowtext;display:none;mso-hide:
+screen;text-decoration:none;text-underline:none'><span style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">8</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc2" style=""><span class="MsoHyperlink"><a href="#_Toc133598076">5.5 Parameter internal_net<span style="color: windowtext; display: none; text-decoration: none;"><span style=""> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598076 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">8</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598077">6. Compatibility<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598077 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">8</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoToc1" style=""><span class="MsoHyperlink"><a href="#_Toc133598078">7. Contact Me<span style="color: windowtext; display: none; text-decoration: none;"><span style="">. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc133598078 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span style="color: windowtext; display: none; text-decoration: none;">8</span><span style="color: windowtext; display: none; text-decoration: none;"><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330033003500390038003000370038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><o:p></o:p></p>
+
+<p class="MsoNormal"><!--[if supportFields]><span style='font-family:"Courier New"'><span
+style='mso-element:field-end'></span></span><![endif]--><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598048">1. Introduction</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">H.323 is a standard
+VoIP signalling protocol from ITU-T. As one of the most important VoIP
+protocols, it is widely used by voice gateways (like Cisco voice gateways),
+hardware terminals (like IP phones), and software terminals (like Netmeeting,
+Gnomemeeting and OpenPhone).<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">To make a call,
+H.323 calling party and called party (and maybe involving a gatekeeper) need to
+exchange a series of signals, and setup multiple TCP and UDP connections. The
+signals are encoded in ASN.1 PER and BER. All of these make it much more
+difficult for a firewall to track the connections and do network address
+translation than other protocols.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">There are some
+existing alternative solutions, like "Shared IP" and STUN. Devices
+with support of "Shared IP" let you configure an IP address (supposed
+to be the external address of your firewall) that will be used as the reply
+address in every outgoing signal, and these devices will try to connect H.245
+channel and send RTP/RTCP packet first to make firewall to recognise these
+connections. But there are some problems. First, you may not know your
+firewall's external IP address or the address changes all the time (like a
+dial-up network); second, if the external endpoint connect H.245 or send
+RTP/RTCP first, the call will fail; third, these devices can't predict the
+NATed TCP/UDP port, so the actual ports may be different from the specified
+ports in signals, this may cause security issues; fourth, the mismatch of port
+numbers also causes the devices can't register with a gatekeeper and receives
+calls from outside.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">STUN (Simple
+Traversal of UDP through NATs) is a protocol for assisting devices behind
+firewall to find out their external IP address. But it's not widely supported
+by H.323 devices, and it needs extra non-H.323-standard equipments (STUN
+servers).<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Enabling firewalls
+to understand H.323 is the final solution. For Linux, as far as I know, Jozsef
+Kadlecsik wrote a H.323 connection tracking and NAT module for Netfilter and
+Max Kellermann wrote another one based on it. Jozsef's module uses "brute
+force" to look for addresses in signals by caller and callee's addresses.
+This method is mainly for Netmeeting.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Max Kellermann's
+module uses a separate ASN.1 decoding library. This is a great progress. But
+it's still not enough. We need support for RAS, Fast Start and H.245 Tunnelling
+(these are almost mandatory requirements for modern H.323 devices).<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">It seems we need yet
+another kernel module, so I wrote this one.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598049">2. Features</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598050">2.1 Full Featured H.323 Decoding Library</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">This patch (or
+module, actually) comes with an H.323 decoding library that is based on H.225
+version 4, H.235 version 2 and H.245 version 7. It is extremely optimized for
+Linux kernel and decodes only the absolutely necessary objects in a signal. It
+has following features:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<ul style="margin-top: 0cm;" type="disc">
+ <li class="MsoNormal" style=""><span style="font-family: &quot;Courier New&quot;;">Small. The total size of code plus data
+     is less than 20 KB.<o:p></o:p></span></li>
+ <li class="MsoNormal" style=""><span style="font-family: &quot;Courier New&quot;;">Fast. Decoding Netmeeting's Setup signal
+     1,000,000 times on a PIII 866 takes only 3.9 seconds.<o:p></o:p></span></li>
+ <li class="MsoNormal" style=""><span style="font-family: &quot;Courier New&quot;;">No memory allocation. It uses a static
+     object. No need to initialize or cleanup.<o:p></o:p></span></li>
+ <li class="MsoNormal" style=""><span style="font-family: &quot;Courier New&quot;;">Thread safe.<o:p></o:p></span></li>
+ <li class="MsoNormal" style=""><span style="font-family: &quot;Courier New&quot;;">Support embedded architectures that have
+     no support of misaligned memory accesses.<o:p></o:p></span></li>
+</ul>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598051">2.2 Support RAS</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">With support of RAS,
+a NATed gateway or terminal can register with a H.323 gatekeeper and make calls
+to and receive calls from a H.323 zone. The benefit is you can register
+multiple endpoints from behind one firewall and all of them can receive calls
+from outside. You don't need to configure iptables with boring DNAT rules for
+each of them! <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The limitation is
+the gatekeeper must be outside of the Linux firewall.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Gnomemeeting
+registers 127.0.0.1 as one of its call signal addresses to gatekeeper. This
+only makes sense when the calling party, called party and gatekeeper are in the
+same host. But this oddity can easily confuse a gatekeeper. NATH323 has special
+code to fix this. If you are registering an external Gnomemeeting, you better
+shut down its &ldquo;lo&rdquo; interface.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598052">2.3 Support Fast-Start</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Fast-Start means
+embedding H.245 OpenLogicalChannel signals in Q.931 signals. This makes a call
+setup faster, but also makes the Q.931 signals bigger, especially Setup
+signals. If there are too many Fast-Start entries, a Setup signal may become
+too big and the TPKT will be fragmented, finally the decoding library will get
+a partial signal. So if you get errors like "decoding error" or
+"incomplete TPKT" in your kernel log, you are running into this
+situation. I still have no idea how to handle this in a Netfilter module.
+Anybody can help? Based on my experience, I suggest you not use more than 20
+Fast-Start entries, if you disable Early H.245, you may use up to 30 entries.
+20 Fast-Start entries means totally 10 audio, video and fax codecs, this
+practically is enough for most of hardware devices, but not enough for some
+software terminals. Gnomemeeting and OpenPhone support more than 20 audio
+codecs, you may have to disable some of them before use.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598053">2.4 Support H.245 Tunnelling</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">H.245 Tunnelling
+saves a TCP connection of H.245 and makes call setup faster.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598054">2.5 Support Audio, Video, Fax, Chat, Whiteboard and
+File Transfer</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Actually, it
+supports any RTP/RTCP and T.120 based data or applications. <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598055">2.6 Support Both Voice Gateways and Terminals</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The main difference
+between them is a gateway supports multiple calls and a terminal only supports
+one at a time.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598056">2.7 Support Embedded Architectures That Have No
+Support of Misaligned Memory Accesses</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">This is necessary if
+you are using embedded system like some ARM.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598057">3. Installation</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">This installation
+guide is just a simple guide. I assume you will start with a clean kernel
+source code tree. If you have a modified or patched source, you are on your
+own.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598058">3.1 Download</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">You can download
+NATH323 patch from <a href="http://sourceforge.net/project/showfiles.php?group_id=158936">here</a>.
+The Linux kernel home page is <a href="http://www.kernel.org/">here</a>.
+Remember to download the file of correct version. If the patch name is
+patch-2.6.16-nath323-1.0.bz2, you should download linux-2.6.16.tar.bz2. Let's
+assume you will save them to your home directory. <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598059">3.2 Apply Patch to Kernel Source</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">First, you will
+decompress the kernel source, like this:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">tar xjvf linux-2.6.16.tar.bz2<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">A new directory
+linux-2.6.16 will be created under your home directory. The clean kernel source
+code is in it.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Then, apply the
+patch:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">cd linux-2.6.16<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">bunzip2 -cd ../patch-2.6.16-nath323-1.0.bz2 | patch
+-p1<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598060">3.3 Configure Kernel</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Before you compile
+kernel, you have to configure it to enable the new H.323 module. There are
+several ways to do it. You can get a menu-driven interface by using command:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make menuconfig<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">or <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make xconfig<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">or<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make gconfig<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Remember the
+location of H.323 module in the menu:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp; </span>-&gt; Networking<span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>-&gt; Networking support<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>-&gt; Networking options<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>-&gt; Network packet filtering <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>-&gt; IP: Netfilter Configuration<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>-&gt; Connection tracking <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>-&gt; H.323 protocol support<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">If you want to use
+an existing .config file, you will use this command:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make oldconfig<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">You can get more
+detailed information from linux-2.6.16/README. I assume you will configure the
+H.323 module as module (not built-in).<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598061">3.4 Compile Kernel</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">This is the simplest
+step and it takes the longest time. Just one command:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598062">3.4 Install Kernel</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Install modules
+first.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make modules_install<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Then the kernel.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">make install<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Based on your
+configuration, you may need build an initrd image, refer your Linux
+distributor's manual for details. After that, you need to check the
+configuration of Lilo or Grub, make sure you can boot with the new kernel and
+the old kernel.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Now you can reboot
+with your new kernel.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598063">3.5 Load H.323 Module</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">I assume you compile
+it as module, not built-in, otherwise, skip this step.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Now you are under
+the new kernel. You will need load the new H.323 module before test it.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">modprobe ip_conntrack_h323 gkrouted_only=0<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">modprobe ip_nat_h323<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">If you want only
+connection tracking, you can load only ip_conntrack_h323.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The parameter
+&ldquo;gkrouted_only&rdquo; is for NAT of RAS. If you set it to 0, when an internal
+endpoint registers with an external gatekeeper, calls from any external
+endpoints to this endpoint will be forwarded by Linux firewall. If you don't
+think this is safe and your gatekeeper supports proxy function (like GNUGK),
+you can set gkrouted_only to 1 (This actually is the default value), then only
+calls from the gatekeeper will be forwarded to the registered endpoint.&nbsp;<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Another parameter
+for ip_conntrack_h323 is &ldquo;default_rrq_ttl&rdquo;. This is used to specify a default<br>
+timeToLive (in seconds) for registering an endpoint that doesn't send
+keep-alive RRQ and there is no timeToLive in RRQ and RCF. In this situation,
+normally the RAS connection and call signal expectation will expire quickly
+(UDP connection expire in 180 seconds by default). This may <br>
+not be what people want when they register endpoints for receiving calls. By
+setting this parameter to a longer time, such endpoints like Netmeeting can
+register once and stay alive for a longer time to receive calls from outside of
+firewall. The default value is 300 (seconds).<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598064">3.6 Configure iptables</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">iptables's NAT
+function should be enabled unless you just want to do connection tracking. <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">First, enable Linux
+to forward IP packets. If it's already enabled, skip this.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">echo "1" &gt;
+/proc/sys/net/ipv4/ip_forward<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Then configure
+masquerading. I assume eth0 is the external interface of your Linux firewall.
+The command will be:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><i><span style="font-size: 11pt; font-family: &quot;Courier New&quot;;">iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE<o:p></o:p></span></i></b></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">OK, that's it. Now
+you can run your whatever VoIP devices.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598065">4. Calling Models</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">These are the
+supported calling models.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598066">4.1 Internal Endpoint Call External Endpoint</a></h2>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;">Internal Endpoint ---&gt;
+Linux Firewall ---&gt; External Endpoint<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The internal
+endpoint and the external endpoint are not registered with a gatekeeper, the
+internal endpoint calls the external endpoint by calling its IP address
+directly.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598067">4.2 External Endpoint Call Internal Endpoint</a></h2>
+
+<p class="MsoToc1"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;">Internal Endpoint &lt;---
+Linux Firewall &lt;--- External Endpoint<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The internal
+endpoint and the external endpoint are not registered with a gatekeeper, the
+external endpoint calls the internal endpoint by calling the firewall's
+external IP address.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">In this model, you
+need an extra iptables DNAT rule to forward incoming Setup signals to the
+internal endpoint. I assume eth0 is the external interface of your Linux
+firewall and the internal endpoint's IP address is 192.168.0.2. Then the
+command will be:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText">iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1720
+-j DNAT --to-destination 192.168.0.2</p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598068">4.3 Internal Endpoint Call External Endpoint Though
+Gatekeeper</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>+---------&gt; Gatekeeper &lt;--------+<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;">Internal Endpoint ---&gt;
+Linux Firewall ---&gt; External Endpoint<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The internal
+endpoint and the external endpoint are registered with a gatekeeper outside of
+the firewall. The internal endpoint calls the external endpoint by calling its
+email address, user name or even a phone number.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598069">4.4 External Endpoint Call Internal Endpoint Though
+Gatekeeper</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>+--------&gt; Gatekeeper &lt;---------+<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;">Internal Endpoint &lt;---
+Linux Firewall &lt;--- External Endpoint<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The internal
+endpoint and the external endpoint are registered with a gatekeeper outside of
+the firewall. The external endpoint calls the internal endpoint by calling its
+email address, user name or even a phone number.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">You don't need to
+configure a DNAT rule for iptables. When the internal endpoint registers with
+the gatekeeper, the firewall will do it for you.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598070">4.5 Internal Endpoint Call Another Internal
+Endpoint Though Gatekeeper</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>+----------------------&gt; Gatekeeper
+&lt;-----------------------+<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;"><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|<o:p></o:p></span></p>
+
+<p class="MsoBodyText"><span style="font-style: normal;">Internal Endpoint A
+---&gt; Linux Firewall A ---&gt; Linux Firewall B ---&gt; Internal Endpoint B<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">The internal
+endpoint A and the internal endpoint B are registered with a gatekeeper outside
+of their firewalls. They call each other by calling the peer's email address,
+user name or even a phone number.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Again, no special
+DNAT rules needed.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598071"></a><a name="_5._Support_of"></a><span style="">5. Support of Call Forwarding</span></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Call Forwarding is
+used for call redirection. When endpoint A calls endpoint B, B tells A a
+preconfigured IP address or alias of endpoint C, then A disconnects with B and
+calls C.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:180.75pt;
+ height:137.25pt'>
+ <v:imagedata src="./index_files/image001.jpg" o:title="cf0"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image001.jpg" v:shapes="_x0000_i1025" width="241" border="0" height="183"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">Special support may
+be needed when there is a firewall between A and B. Firewall must understand
+the forwarding address and track the implicit second call. If the forwarding
+address is an alias, NATH323 doesn&rsquo;t need and can&rsquo;t do anything &ndash; there will be
+a complete call procedure and NATH323 is already able to handle that. Special
+support is only needed when B gives A an IP address.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">There are four
+scenarios when firewall is involved in call forwarding.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598072">5.1 Scenario 1: A is internal, B and C are external</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:220.5pt;height:137.25pt'>
+ <v:imagedata src="./index_files/image002.jpg" o:title="cf1"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image002.jpg" v:shapes="_x0000_i1026" width="294" border="0" height="183"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">In this scenario, all
+traffic needs to traverse firewall. NATH323 will handle everything; you just
+need the SNAT configuration.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598073">5.2 Scenario 2: A and C are internal, B is external</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:241.5pt;height:145.5pt'>
+ <v:imagedata src="./index_files/image003.jpg" o:title="cf2"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image003.jpg" v:shapes="_x0000_i1027" width="322" border="0" height="194"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">In this scenario,
+because NATH323 has no way to know A and C are in the same side and can talk
+directly, it setup a useless connection expect between A and C, although the
+expected traffic will never come to it. The expect will expire and be released
+in 240 seconds. So, basically there&rsquo;s no big deal, just a little bit of memory.
+But you can avoid this by configuring parameter &ldquo;<a href="#_5.5_Parameter_internal_net">internal_net</a>&rdquo;.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598074">5.3 Scenario 3: A is external, B and C are internal</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:264.75pt;height:131.25pt'>
+ <v:imagedata src="./index_files/image004.jpg" o:title="cf3"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image004.jpg" v:shapes="_x0000_i1028" width="353" border="0" height="175"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">In this scenario,
+all traffic needs to traverse firewall. NATH323 will handle everything; you
+just need the DNAT configuration. If B is registered with a gatekeeper, you
+just need the SNAT configuration. C may or may not be registered with
+gatekeeper.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598075">5.4 Scenario 4: A and C are external, B is
+internal.</a></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:230.25pt;height:148.5pt'>
+ <v:imagedata src="./index_files/image005.jpg" o:title="cf4"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image005.jpg" v:shapes="_x0000_i1029" width="307" border="0" height="198"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">In this scenario,
+because NATH323 has no way to know A and C are in the same side and can talk
+directly, it NATs C&rsquo;s IP address to its external IP address. Then all the
+traffic between A and C will be relayed by firewall. Firewall acts like a H.323
+proxy. This relaying causes extra delay, but may be useful for some usages. For
+example, you may want to hide C from A. Similarly you can avoid this by
+configuring parameter &ldquo;<a href="#_5.5_Parameter_internal_net">internal_net</a>&rdquo;.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:232.5pt;height:148.5pt'>
+ <v:imagedata src="./index_files/image006.jpg" o:title="cf5"/>
+</v:shape><![endif]--><!--[if !vml]--><img src="image006.jpg" v:shapes="_x0000_i1030" width="310" border="0" height="198"><!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h2><a name="_Toc133598076"></a><a name="_5.5_Parameter_internal_net"></a><span style="">5.5 Parameter internal_net</span></h2>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">To avoid unnecessary
+expect in scenario 2 and unnecessary relaying in scenario 4, you can help
+NATH323 to distinguish internal and external endpoints by specifying your
+internal network and mask. This parameter is string type. The format is
+network/mask. For example, if your internal network is 192.168.0.0/255.255.255.0,
+you can load ip_conntrack_h323 module like this:<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">modprobe
+ip_conntrack_h323 internal_net=192.168.0.0/255.255.255.0<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">If you don&rsquo;t
+configure this parameter, NATH323 still works fine; but you will get
+unnecessary expect in scenario 2 and unnecessary relaying in scenario 4.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;" lang="EN-US"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598077">6. Compatibility</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">So far, the tested
+software includes Netmeeting, OpenPhone, Gnomemeeting, OpenGK and GNUGk.
+Reports of compatibility testing for other products are greatly appreciated.<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<h1><a name="_Toc133598078">7. Contact Me</a></h1>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;">If you find a bug,
+put it <a href="http://sourceforge.net/tracker/?group_id=158936">here</a>. If
+you have any questions, go to the <a href="http://sourceforge.net/forum/?group_id=158936">forum</a>. Please feel
+free to send any opinions to me, zhaojingmin at users.sourceforge.net (replace
+the "at" with "@").<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="font-family: &quot;Courier New&quot;;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+</div>
+
+</body>
+</html>

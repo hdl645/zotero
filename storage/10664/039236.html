@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039236.html">
+<meta name="wpd_url" content="http://lists.netfilter.org/pipermail/netfilter/2002-October/039236.html">
+<meta name="wpd_date" content="2008-06-03T02:59Z">
+
+
+ 
+   <title> IPSec passthrough with iptables
+   </title>
+   <link rel="Index" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/index.html">
+   <link rel="made" href="mailto:Antony%40Soft-Solutions.co.uk">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039233.html">
+   <link rel="Next" href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>IPSec passthrough with iptables
+   </h1>
+    <b>Antony Stone
+    </b> 
+    <a href="mailto:Antony%40Soft-Solutions.co.uk" title="IPSec passthrough with iptables">Antony@Soft-Solutions.co.uk
+       </a><br>
+    <i>Tue, 15 Oct 2002 09:22:30 +0100</i>
+    <p></p><ul>
+        <li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039233.html">IPSec passthrough with iptables
+</a></li>
+        <li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39236">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39236">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39236">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39236">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>On Tuesday 15 October 2002 5:47 am, Thomas Smith wrote:
+
+&gt;<i> I need to be able to connect to clients IPSec VPN from
+</i>&gt;<i> behind and iptables firewall. I know the VPN is
+</i>&gt;<i> working and my firewall is masquing traffic but IPSec
+</i>&gt;<i> doesn't work from systems behind my firewall.
+</i>&gt;<i>
+</i>&gt;<i> I've got a pretty basic firewall. It's simply masquing
+</i>&gt;<i> internal traffic.
+</i>&gt;<i>
+</i>&gt;<i> Are there some iptables' rules or patches I'm missing?
+</i>
+No patches needed.   No special support in netfilter needed.
+
+Make sure you are forwarding (both ways :-) protocol 50 (ESP), protocol 51 
+(AH) and UDP sport 500 / dport 500 (IKE).
+
+Also make sure you are using IPsec in tunnel mode, not transport mode 
+(transport mode will not work through NAT).
+
+Hope this helps,
+
+Antony.
+
+-- 
+
+If the human brain were so simple that we could understand it,
+we'd be so simple that we couldn't.
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039233.html">IPSec passthrough with iptables
+</a></li>
+	<li> Next message: <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/039239.html">IPSec passthrough with iptables
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/date.html#39236">[ date ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/thread.html#39236">[ thread ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/subject.html#39236">[ subject ]</a>
+              <a href="http://lists.netfilter.org/pipermail/netfilter/2002-October/author.html#39236">[ author ]</a>
+         </li>
+       </ul>
+</body>
+</html>

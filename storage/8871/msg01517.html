@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01517.html">
+<meta name="wpd_url" content="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01517.html">
+<meta name="wpd_date" content="2008-06-03T02:09Z">
+<!-- MHonArc v2.5.14 -->
+<!--X-Subject: RE: Looking for info on ipsec passthrough (or passthru?) -->
+<!--X-From-R13: "Egenuz, Pvyy" <ovyy.fgenuzNvagry.pbz> -->
+<!--X-Date: Wed, 30 Aug 2000 09:55:17 &#45;0700 (PDT) -->
+<!--X-Message-Id: 7DAA70BEB463D211AC3E00A0C96B7AB20344B9E8@orsmsx41.jf.intel.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+
+
+<title>RE: Looking for info on ipsec passthrough (or passthru?)</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01516.html">Date Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">Date Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01515.html">Thread Prev</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">Thread Next</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01517">Date Index</a>][<a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01517">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: Looking for info on ipsec passthrough (or passthru?)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: "'John C. Day'" &lt;<a href="mailto:JCDay@DOMAIN.HIDDEN">JCDay@xxxxxxxxx</a>&gt;, <a href="mailto:ipsec@DOMAIN.HIDDEN">ipsec@xxxxxxxxxxxxxxxxx</a></li>
+<li><em>Subject</em>: RE: Looking for info on ipsec passthrough (or passthru?)</li>
+<li><em>From</em>: "Strahm, Bill" &lt;<a href="mailto:bill.strahm@DOMAIN.HIDDEN">bill.strahm@xxxxxxxxx</a>&gt;</li>
+<li><em>Date</em>: Wed, 30 Aug 2000 08:45:21 -0700</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@DOMAIN.HIDDEN">owner-ipsec@xxxxxxxxxxxxxxxxx</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Ok, I looked it up and think I know what "passthru" is.
+
+Getting IPsec through NAT is a VERY hard problem.  There isn't an easy way
+of associating (on the wire) that a packet with an SPI of this value needs
+to be demultiplexed to this destination because a packet with another SPI
+went through the NAT gateway...
+
+Passthru is one way of solving this, basically saying all IPsec traffic
+flows through the NAT to this 1 destination.
+
+Passthru is a hack until something like RSIP becomes a reality.
+
+Bill
+
+______________________________________________
+Bill Strahm        Programming today is a race between
+bill.strahm@      software engineers striving to build
+intel.com           bigger and better idiot-proof programs,
+(503) 264-4632   and the Universe trying to produce
+            bigger and better idiots.  So far, the
+                        Universe is winning.--Rich Cook
+I am not speaking for Intel.  And Intel rarely speaks for me
+
+
+&gt; -----Original Message-----
+&gt; From: John C. Day [<a href="mailto:JCDay@JCDay.com">mailto:JCDay@JCDay.com</a>]
+&gt; Sent: Tuesday, August 29, 2000 3:56 PM
+&gt; To: ipsec@lists.tislabs.com
+&gt; Subject: Looking for info on ipsec passthrough (or passthru?)
+&gt; 
+&gt; 
+&gt; Greetings.  I'm poking around looking for information on 
+&gt; "IPSec passthru", 
+&gt; which I saw mentioned on <a href="http://www.linksys.com/">http://www.linksys.com</a> ("Firmware 
+&gt; upgrade - IPSec 
+&gt; passthru now supported").
+&gt; 
+&gt; I searched the archive files of 
+&gt; <a href="ftp://ftp.tis.com/pub/lists/ipsec/ipsec.0001">ftp://ftp.tis.com/pub/lists/ipsec/ipsec.0001</a> through ipsec.0008 but I 
+&gt; couldn't locate the string "passthr" anywhere in those.   I 
+&gt; also checked 
+&gt; rfc2401 without success, but I'm guessing it's a feature/spec 
+&gt; that's been 
+&gt; introduced recently.
+&gt; 
+&gt; Using google I did find a couple of mentions of it in news 
+&gt; groups, but I 
+&gt; wasn't able to locate an rfc or other doc which describes 
+&gt; what it's for and 
+&gt; how it's to be implemented.
+&gt; 
+&gt; Any pointers?   Thanks.
+&gt; 
+&gt; John
+&gt; 
+&gt; --
+&gt; 
+&gt; John C. Day
+&gt; Gilroy, CA
+&gt; <a href="http://www.jcday.com/">http://www.JCDay.com</a>
+&gt; 
+&gt; 
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01521" href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01521.html">Re: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+<ul><li><em>From:</em> Markus Stenberg</li></ul></li>
+<li><strong><a name="01518" href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+<ul><li><em>From:</em> John C. Day</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01516.html">Ask for Help</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01515.html">Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/msg01518.html">RE: Looking for info on ipsec passthrough (or passthru?)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/mail2.html#01517"><strong>Date</strong></a></li>
+<li><a href="http://www.vpnc.org/ietf-ipsec/00.ipsec/thrd2.html#01517"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

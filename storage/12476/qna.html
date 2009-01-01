@@ -1,0 +1,881 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://poptop.sourceforge.net/dox/qna.html#17">
+<meta name="wpd_url" content="http://poptop.sourceforge.net/dox/qna.html#17">
+<meta name="wpd_date" content="2008-06-02T16:59Z">
+
+
+
+
+
+<title>Poptop Questions & Answers</title>
+
+<link rel="stylesheet" type="text/css" href="qna.css" media="all">
+</head>
+<body>
+<center>
+<table><tbody><tr><td width="600">
+<hr size="3" width="50%" align="left" noshade="noshade">
+<h1>Poptop Questions & Answers</h1>
+<hr size="3" width="50%" align="left" noshade="noshade">
+<p>
+
+Last Updated: 2005-11-16<br>
+Send changes to mailing list.<br>
+</p><br>
+
+<p>
+<strong>Q&A</strong> mostly compiled from the Poptop SourceForge Mailing List and
+the Howto/FAQ by Jeff Blaize &lt;<a href="mailto:jblaize@netops.mediaplex.com">jblaize@netops.mediaplex.com</a>&gt;.
+</p>
+
+<br><hr noshade="noshade">
+
+<b>Questions</b>
+<p>
+</p><ol>
+<li><a href="http://marc.theaimsgroup.com/?l=poptop-server&m=110237762920868&w=2">How to configure pptpd, pppd and syslog for debug logging</a>
+</li><li><a href="#1">I want to provide another netmask to the Windows PPTP client. I set the option "netmask <somenetmask>".......</somenetmask></a>
+</li><li><a href="#2">I can connect to the server and ping to it fine, but I can't ping any other hosts........</a>
+</li><li><a href="#3">Also, after running pptpd and monitoring its log file and seeing that it failed to open ttyp1.......</a>
+</li><li><a href="#4">Sometimes when I make a connection to my pptpd server I see a message like.......</a>
+</li><li><a href="#5">Having trouble getting pptpd & mschap-v2 to work.... Error 691.......</a>
+</li><li><a href="#6">How do I go about checking who is logged in via tunnel?</a>
+</li><li><a href="#7">My NT client won't connect!</a>
+</li><li><a href="#8">PPTP *client* stops working!</a>
+</li><li><a href="#9">How many clients does Poptop support?</a>
+</li><li><a href="#10">What authentication methods (PAP/CHAP) does Poptop work with?</a>
+</li><li><a href="#11">When running Poptop I get the following error.... MGR: No more free connection slots!</a>
+</li><li><a href="#12">Does Poptop suffer from the same security flaws as the Windows NT PPTP server?</a>
+</li><li><a href="#13">Does Poptop support data encryption?</a>
+</li><li><a href="#14">Poptop or IPsec? Which is better suited to my needs?</a>
+</li><li><a href="#15">I get a 'createHostSocket: Address already in use' error! what gives?</a>
+</li><li><a href="#16">Does Poptop work with Windows 2K or XP clients?</a>
+</li><li><a href="#17">I cannot connect from more than one computer at the same time.</a>
+</li><li><a href="#18">When I disconnect from Workstation One then I can't connect from Workstation Two.</a>
+</li><li><a href="#19">Why 2 sets of IP's in pptpd.conf (remoteip and localip)?</a>
+</li><li><a href="#20">How do I set up authentication against SAMBA?</a>
+</li><li><a href="#21">How do I set up authentication against LDAP?</a>
+</li><li><a href="#22">Windows XP clients do not work.</a>
+</li><li><a href="#23">GRE: read(fd=5,buffer=804d720,len=8196) from PTY failed: status = -1 error = Input/output error</a>
+</li><li><a href="#24">Can I now also access SMB shares from clients outside the network? And how do I do that?</a>
+</li><li><a href="#25">Why are there Out Of Order drops of fragmented packages?</a>
+</li><li><a href="#26">What are these version numbers on PPP packages?</a>
+</li></ol>
+<p></p>
+
+<br><hr noshade="noshade">
+
+<a name="1"></a>
+<p><i><font size="+2">Q.</font>
+I want to provide another netmask to the Windows PPTP client. I set the option 
+"netmask <somenetmask>" in the options file, but it does not work. How do I do it?
+</somenetmask></i></p><i></i>
+<i><font size="+2">A.</font></i>
+A Windows machine sets the netmask on a PPTP client setup to 255.255.255.255, which
+is a hostmask. This is quite correct, since PPTP is a Point-to-point connection.
+The Windows machine sets the broadcast according to RFC:<br>
+<ul>10.x.x.x (Class A) &nbsp; 10.255.255.255</ul>
+<ul>172.16.x.x (Class B) &nbsp; 172.16.255.255</ul>
+<ul>192.168.x.x (Class C) &nbsp; 192.168.x.255</ul>
+<br>
+You have to renumber, set the client IP configuration static, or have the person 
+on the clientmachine execute a batchfile which fixes things.
+<p></p>
+
+<br><hr noshade="noshade">
+
+<a name="2"></a>
+<p><i><font size="+2">Q.</font>
+I can connect to the server and ping to it fine, but I can't ping any other hosts on the
+office subnet.  I have ip-forwarding turned on and I have proxyarp set
+in the ppp/options file.  What can be wrong?</i>
+</p>
+<p>
+<i><font size="+2">A.</font></i>
+There seem to be a lot of questions floating around about routing and
+masq'ing associated with this issue.
+</p>
+<p>
+
+Well, my curiosity got the best of me, so I thought I would check this
+out.  Shown below is my test setup for investigating this problem.
+</p>
+<img src="q2.png" border="0">
+<p>
+
+For the sake of simplicity, we will ignore address translation issues
+associated with the firewall.  This assumes that the client at
+192.168.8.142 is going to use 192.168.56.11 as its target address for
+the pptp connection to pptp_srvr.  The firewall will block all access to
+the 192.168.56.0 subnet except for pptp connections associated with
+pptp_srvr.  This can be implemented with, for example, ipchains
+</p>
+<pre>ipchains -P input DENY
+ipchains -P forward DENY
+ipchains -A input 192.168.56.0/24 -j ACCEPT  /* allow connections from inside */
+ipchains -A input -p tcp -d 192.168.56.11 1723 -j ACCEPT
+ipchains -A input -p 47 -d 192.168.56.11 -j ACCEPT
+ipchains -A forward -p tcp -d 192.168.56.11 1723 -j ACCEPT
+ipchains -A forward -p tcp -s 192.168.56.11 1723 -j ACCEPT
+ipchains -A forward -p 47 -d 192.168.56.11 -j ACCEPT
+ipchains -A forward -p 47 -s 192.168.56.11 -j ACCEPT
+ipchains -A forward -i ppp+ -d 192.168.56.0/24 -j ACCEPT /* allow from clients to inside */
+ipchains -A forward -i ppp+ -s 192.168.56.0/24 -j ACCEPT /* allow from inside to clients */
+</pre>
+<p>
+
+When you connect from client to pptp_srvr, you will be able to complete
+the connection and ping to pptp_srvr.  However, if you attempt to ping
+host, at 192.168.56.12, this will fail.
+</p>
+<p>
+
+A clue to this problem can be found in the /var/tmp/messages file on
+pptp_srvr.  There, in the pppd messages, you will find
+</p>
+<p>
+<b>Cannot determine ethernet address for proxy ARP</b>
+</p>
+<p>
+
+This is due to an issue with the pppd program, which attempts to find a
+hardware interface on the subnet to which the pppd client has been
+assigned.  In this case its looking for a hardware interface on the
+192.168.5.0 subnet.  It will fail to find one, and will drop the
+proxyarp request.
+</p>
+<p>
+
+The simplest way around this problem, and the one that is suggested in
+the pppd documentation, is to set the pppd client IP assignment to be on
+the local subnet.  An example in this case might be 192.168.56.129.
+However, it may not be possible to do that.  In the case of a fully
+loaded subnet, there may not be any addresses to spare.  Or there may be
+some security issues with giving out local subnet addresses.  What to
+do?
+</p>
+<p>
+
+The place to look is in the arp table.  If you run tcpdump on host
+(192.168.56.12) during the time when client is pinging, you will see
+unanswered arp requests from host attempting to find the hardware
+address for 192.168.5.12.  You need to proxy the hardware address of the
+pptp_srvr for client in order for this request to be fulfilled.  This is
+the job of proxyarp.  However, proxyarp has let us down in this
+instance, and we need to find a workaround.
+</p>
+<p>
+
+This can be done manually using the arp command on pptp_srvr.  For
+example, if the hardware address of the ethernet card on pptp_srvr is
+00:60:08:98:14:14, you could force the arp to proxy the client pptp
+address by saying
+</p><pre>	arp --set 192.168.5.12 00:60:08:98:14:13 pub
+</pre><p>
+
+You should now be able to ping from client to host through the pptp
+connection.
+</p>
+<p>
+
+This can be a problem, however, in a dynamic environment when clients
+are logging into and out of the pptp server on a continuous basis.  One
+way around this problem is to write a script that will execute upon the
+initiation of each ppp connection.
+</p>
+<p>
+
+The place to do this is in /etc/ppp/ip-up.  This script is executed each
+time a new ppp connection is started.  It gets some variables passed
+into it, one of which is the assigned IP address of the client.  Note
+that RedHat systems use ip-up.local as the place for you to make the
+script.  Don't forget to chmod +x !
+</p><pre>#! /bin/bash
+
+REMOTE_IP_ADDRESS=$5
+
+date &gt; /var/run/ppp.up
+echo "REMOTE_IP_ADDRESS = " $REMOTE_IP_ADDRESS &gt;&gt; /var/run/ppp.up
+arp --set $REMOTE_IP_ADDRESS 00:60:08:98:14:14 pub &gt;&gt; /var/run/ppp.up
+
+exit 0
+</pre>
+<p>
+
+This should put you in business for accessing the remote subnet under
+this scenario.  I am a little bit concerned, however, because I also
+built a script ip-down.local, that should remove the arp proxy when
+client disconnected.  It doesn't seem to do anything, however, and if I
+try to delete the arp entry manually, it just spits out a cryptic error
+message.  The arp entries remain persistent, as far as I can tell.  If
+this is a problem or not, I don't know.  The next few clients that log
+in are treated well, so I guess its OK.
+</p>
+<br>
+<br><hr noshade="noshade">
+
+<a name="3"></a>
+<p><i><font size="+2">Q.</font>
+Also, after running pptpd and monitoring its log file and seeing that it
+failed to open ttyp1 - I chmod +rw /dev/ttyp[0-9] and it seemed to work
+somewhat.  But, after I rebooted, I had to do this again.  Is this normal?
+</i>
+</p>
+<p>
+<i><font size="+2">A.</font></i>
+pptpd should be running as root (unless you have a system with a setuid 
+openpty() helper, which isn't very common).  If it fails to open a pty/tty
+pair as root then that is probably because it is in use.
+</p>
+<p>
+
+Other programs which use pty/tty's will change their permissions back to
+the standard ones.
+</p>
+<br><hr noshade="noshade">
+
+<a name="4"></a>
+<p><i><font size="+2">Q.</font>
+Sometimes when I make a connection to my pptpd server I see a message like
+<pre>Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-21
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-26
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-24
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-21
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-26
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-24
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-26
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-24
+Jul  2 17:30:03 ape modprobe: can't locate module ppp-compress-21
+</pre>
+in /var/log/messages on the server.  Any idea what I can do about it?  
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Yeah, in your /lib/modules/`uname -r`/net/ directory, there should
+be files called bsd_comp.o and ppp_deflate.o.. insmod those files and
+you'll be good to go.
+</p>
+<br><hr noshade="noshade">
+
+<a name="5"></a>
+<p><i><font size="+2">Q.</font>
+Hi, I'm having trouble getting pptpd & mschap-v2 to work. I downloaded
+all of the patches and compiled everything but whenever i try to connect, it says:
+</i></p>
+<p><i><b>
+
+Error 691:  The computer you have dialed in to has denied access because
+the username and/or password is invalid on the domain.
+</b></i></p>
+<p>
+<i>What is this suppose to mean?
+</i></p><i></i>
+<i><font size="+2">A.</font></i>
+Error 691 is an authentication problem probably due to the fact that MS
+chap uses the domain name and username combo to authenticate.  If you
+look at the logs you will probably see a message saying that MS chap is
+trying to authenticate user "domain\\username".  I got it to work by
+putting the full domain and user string in the client portion of the
+chap-secrets file.
+<pre># Secrets for authentication using CHAP
+# client                server          secret          IP addresses
+workgroup\\user         server          password        *    
+</pre>
+<p>
+
+There is also a patch called chapms-strip-domain out there which strips off the domain.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="6"></a>
+<p><i><font size="+2">Q.</font>
+How do I go about checking who is logged in via tunnel?
+</i></p>
+<p>
+<i>I need some way of writing the pppd data to wtmp/utmp.
+(and not sessreg either)
+</i></p>
+<p>
+<i>does anyone know of any way of doing this via ppp?
+</i></p>
+<p><i><font size="+2">A.</font></i>
+You will find a pptpd-logwtmp plugin in pptpd version 1.2.1 and later,
+which if enabled will maintain the /var/log/wtmp file so that
+<i>who</i> and <i>last</i> will show you the logins.
+</p><p>
+
+
+Alternatively, 
+pppd syslogs everything to /var/log/messages (that's the default on my box
+anyways) and it will say something like :
+</p><pre>	pppd[15450]: CHAP peer authentication succeeded for <username>
+</username></pre>
+<p>
+
+you could do a tail /var/log/messages -n2000 | grep CHAP if you wanted to
+see who has been logging in.
+</p>
+<p>
+
+All the authentication is
+provided by pppd (if you don't have an auth or a require-chap or pap, etc.)
+option, it doesn't even ask for a username.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="7"></a>
+<p><i><font size="+2">Q.</font>
+My NT client won't connect!
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Try turning header and software compression off.
+<br></p><hr noshade="noshade">
+
+
+<a name="8"></a>
+<p><i><font size="+2">Q.</font>
+PPTP *client* stops working.
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+go to /var/run/pptp/ and look for a socket named x.x.x.x
+delete it and try it again.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="9"></a>
+<p><i><font size="+2">Q.</font>
+How many clients does Poptop support?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+The limits under Linux are:
+</p><p>
+</p><ol><ul>
+	<li>per-process filedescriptors
+	<ul><li>one per client (would limit clients to 256 by default,
+	or 1024 with kernel recompile, or more with major libc/kernel
+	hackery)</li></ul></li>
+       <ul><li>no relevant limit</li></ul>
+
+<li>ttys
+	<ul><li>currently, with a standard kernel, 256 clients</li></ul></li>
+        <ul><li>with Unix98 ptys and a small amount of coding, 2048</li></ul>
+
+<li>ppp devices
+	<ul><li>no limit in kernel source for ppp</li></ul></li>
+
+<li>processes
+        <ul><li>2 per client plus system processes</li></ul></li>
+<p>
+
+So it seems that 2048 will be the limit, if you fix a few things and
+with a minor kernel mod.  To go above 2048 the easiest approach would
+be to combine pptpctrl and pppd in one process, which would get you to
+4096.  Beyond there, you need to go for a select() based model, which would
+be significant coding effort and require large fd-set sizes and so on.
+So 4096 is the practical limit, and 2048 the easy limit.
+</p><p>-- Note: This was taken from Jeff Blaize's howto.
+</p></ul></ol>
+<br>
+<br><hr noshade="noshade">
+
+
+<a name="10"></a>
+<p><i><font size="+2">Q.</font>
+What authentication methods (PAP/CHAP) does Poptop work with?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Poptop uses whatever authentication methods your PPPd provides (usually
+PAP, CHAP, MSCHAP and MSCHAPv2).  To use MPPE, MSCHAPv2 is required.
+</p>
+
+<br><hr noshade="noshade">
+
+
+<a name="11"></a>
+<p><i><font size="+2">Q.</font>
+When running Poptop I get the following error:
+<pre>Jun 11 08:29:04 server pptpd[4875]: MGR: No more free connection slots!
+</pre> 
+What does this mean?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+I'd say at a guess you've only configured one IP address and you have 
+connected a client, and as such there are no more free connection slots should 
+any more clients wish to connect.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="12"></a>
+<p><i><font size="+2">Q.</font>
+Does Poptop suffer from the same security flaws
+(<a href="http://www.counterpane.com/pptp.html">http://www.counterpane.com/pptp.html</a>)
+as the Windows NT PPTP server?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+An initial look at the article suggests that what the authors hammered was
+not the PPTP protocol, but the authentication that the PPTP VPN servers on
+NT offered access to via open internet.  PPTP seems initially to be just
+the path to the weakness, not the weakness itself.  Part of their
+observance of weakness deals with use of poor passwords as well, a cheap
+component, simple enough to fix.
+</p>
+<p>
+
+&gt; While no flaws were found in PPTP itself, several serious flaws were<br>
+&gt; found in the Microsoft implementation of it.<br>
+&gt; (<a href="http://www.counterpane.com/pptp-pressrel.html">http://www.counterpane.com/pptp-pressrel.html</a>)<br>
+</p>
+<p>
+
+The authors do not specifically say "this is ONLY effective against NT",
+just that NT is affected.  This implies that they do not recognize Poptop,
+and it may be included.  The fact that Poptop has to interOp with MS DUN's
+VPN client means that it will have the same weaknesses.  It can only
+protect itself from DoS attacks, have immediate response to out-of-sequence
+packets or illogical packets, etc.
+</p>
+<p>
+
+The protocol is not considered weak in this analysis, but the weaknesses
+have to be replicated in apparent behavior by Poptop.  The only thing the
+developers can do with Poptop is make it a stronger server per se -- more
+able to handle the attacks when the come.
+</p>
+<p>
+
+In conclusion: Poptop suffers the same security vulnerabilities as the NT
+sever (this is because it operates with Windows clients).
+</p>
+<p>
+<strong>Update: MSCHAPv2 has been released and addresses some of the security
+issues. Poptop works with MSCHAPv2, which is implemented in pppd.</strong>
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="13"></a>
+<p><i><font size="+2">Q.</font>
+Does Poptop support data encryption?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Yes, in that it uses PPP for it.  PPP 2.4.2 or later contains support
+for MPPE, and you may need to use the ppp_mppe.o kernel module
+provided by the PPP project.  This module was merged with kernel
+sources from 2.6.15-rc1.  See the <a href="http://pptpclient.sourceforge.net/">PPTP Client Project</a> for
+generic and specific instructions on adding MPPE support to kernels
+below 2.6.15-rc1.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="14"></a>
+<p><i><font size="+2">Q.</font>
+Poptop or IPsec? Which is better suited to my needs?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Here are some reasons I can think of:</p>
+<ol>
+<li><p>The difference between Poptop and IPsec is that Poptop is ready NOW..
+and requires *no* third party software on the Windows client end
+(Windows comes with a free PPTP client that is trivial to set up).
+</p></li>
+<li>Poptop is a completely *free* solution.
+Update: Unfortunately not true for Mac *clients* before Mac OS X 10.2 (Jaguar) though. 
+The Mac client software is around $400 US a copy.
+</li>
+<li><p>
+
+Poptop can be integrated with the latest PPPD patches that take
+advantage of MSCHAPv2 and MPPE (Microsoft encryption using RC4 - 40/128
+bits).
+</p>
+<p>
+
+More details follow from Emir Toktar:
+</p>
+<p><font size="-1">
+
+(Refs: A Comprehensive Guide to Virtual Private Networks, IBM.
+Virtual Private Networking: An Overview White Paper - DRAFT, 3/18/98
+Microsoft.)
+</font></p>
+<p>
+<font size="-1">Neither network layer-based (L2TP, PPTP,...) nor application layer-based
+(IPSec,SSL,SSH) security techniques are the best choice for all
+situations. There will be trade-offs. Network layer security protects the
+information created by upper layer protocols, but it requires that IPSec
+be implemented in the communications stack.
+</font></p>
+<p>
+<font size="-1">With network layer security, there is no need to modify existing upper
+layer applications. On the other hand, if security features are already
+imbedded within a given application, then the data for that specific
+application will be protected while it is in transit, even in the absence
+of network layer security. Therefore security functions must be imbedded
+on a per-application basis.
+</font></p>
+<p>
+<font size="-1">There are still other considerations:
+Authentication is provided only for the identity of tunnel endpoints, but
+not for each individual packet that flows inside the tunnel. This can
+expose the tunnel to man-in-the-middle and spoofing attacks.
+</font></p>
+<p>
+<font size="-1">Network layer security gives blanket protection, but this may not be as
+fine-grained as would be desired for a given application. It protects
+all traffic and is transparent to users and applications.
+</font></p>
+<p>
+<font size="-1">Network layer security does not provide protection once the datagram has
+arrived at its destination host. That is, it is vulnerable to attack
+within the upper layers of the protocol stack at the destination machine.
+</font></p>
+<p>
+<font size="-1">Application layer security can protect the information that has been
+generated within the upper layers of the stack, but it offers no
+protection against several common network layer attacks while the
+datagram is in transit. For example, a datagram in transit would be
+vulnerable to spoofing attacks against its source or destination address.
+</font></p>
+<p>
+<font size="-1">Application layer security is more intelligent (as it knows the
+application) but also more complex and slower.
+</font></p>
+<p>
+<font size="-1">IPSec provides for tunnel authentication, while PPTP does not.
+</font></p>
+<p>
+<font size="-1"><b>User Authentication</b></font></p><p><font size="-1"> Layer 2 tunneling protocols inherit the user
+authentication schemes of PPP, including the EAP methods discussed below.
+Many Layer 3 tunneling schemes assume that the endpoints were well
+known (and authenticated) before the tunnel was established. An exception
+to this is IPSec ISAKMP negotiation, which provides mutual authentication
+of the tunnel endpoints. (Note that most IPSec implementations support
+machine-based certificates only, rather than user certificates. As a
+result, any user with access to one of the endpoint machines can use
+the tunnel. This potential security weakness can be eliminated when
+IPSec is paired with a Layer 2 protocol such as L2TP.
+</font></p>
+<p>
+<font size="-1"><b>Token card support</b></font></p><p><font size="-1"> Using the Extensible Authentication Protocol
+(EAP), Layer 2 tunneling protocols can support a wide variety of
+authentication methods, including one-time passwords, cryptographic
+calculators, and smart cards. Layer 3 tunneling protocols (IPSec) can
+use similar methods; for example, IPSec defines public key certificate
+authentication in its ISAKMP/Oakley negotiation.
+</font></p>
+<p>
+<font size="-1"><b>Dynamic address assignment</b></font></p><p><font size="-1"> Layer 2 tunneling supports dynamic
+assignment of client addresses based on the Network Control Protocol
+(NCP) negotiation mechanism.
+</font></p>
+<p>
+<font size="-1">Generally, Layer 3 tunneling schemes assume that an address has already
+been assigned prior to initiation of the tunnel. Schemes for assignment
+of addresses in IPSec tunnel mode are currently under development and
+are not yet available.
+</font></p>
+<p>
+<font size="-1"><b>Data Compression</b></font></p><p><font size="-1"> Layer 2 tunneling protocols support PPP-based
+compression schemes. For example, the Microsoft implementations of both
+PPTP and L2TP use Microsoft Point-to-Point Compression (MPPC). The IETF
+is investigating similar mechanisms (such as IP Compression) for the
+Layer 3 tunneling protocols.
+</font></p>
+<p>
+<font size="-1"><b>Data Encryption</b></font></p><p><font size="-1"> Layer 2 tunneling protocols support PPP-based data
+encryption mechanisms. Microsoft's implementation of PPTP supports
+optional use of Microsoft Point-to-Point Encryption (MPPE), based on
+the RSA/RC4 algorithm. Layer 3 tunneling protocols can use similar
+methods; for example, IPSec defines several optional data encryption
+methods which are negotiated during the ISAKMP/Oakley exchange.
+</font></p>
+<p>
+<font size="-1"><b>Key Management</b></font></p><p><font size="-1"> MPPE, a Layer 2 protocol, relies on the initial key
+generated during user authentication, and then refreshes it
+periodically. IPSec, explicitly negotiates a common key during the
+ISAKMP exchange, and also refreshes it periodically.
+</font></p>
+<p>
+<font size="-1"><b>Multi-protocol support</b></font></p><p><font size="-1"> Layer 2 tunneling supports multiple payload
+protocols, which makes it easy for tunneling clients to access their
+corporate networks using IP, IPX, NetBEUI, and so forth. In contrast,
+Layer 3 tunneling protocols, such as IPSec tunnel mode, typically
+support only target networks that use the IP protocol. IPSec is not
+multi-protocol.
+</font></p>
+<p>
+<font size="-1">IPSec will be suported by Windows 2000.
+</font></p>
+<p>
+<font size="-1">Many cases can occur, each of which needs to be examined on its own 
+merit. It may be desirable to employ a mix of both network layer
+security techniques and application layer techniques to achieve the
+desired overall level of protection. For example, you could use an upper
+layer mechanism such as Secure Sockets Layer (SSL) to encrypt upper
+layer data. SSL could then be supplemented with IPSec's AH protocol at
+the network layer to provide per-packet data origin authentication and
+protection against spoofing attacks.
+</font>
+</p></li></ol><p></p>
+<br><hr noshade="noshade">
+
+
+<a name="15"></a>
+<p><i><font size="+2">Q.</font>
+I get a 'createHostSocket: Address already in use' error! what gives?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Address already in use in createHostSocket means something is already using
+TCP port 1723 - maybe another pptp daemon is running?
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="16"></a>
+<p><i><font size="+2">Q.</font>
+Does Poptop work with Windows 2K or XP clients?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Poptop v0.9.5 and above should work with Windows 2K and XP clients.
+</p>
+<br><hr noshade="noshade">
+
+<a name="17"></a>
+<p><i><font size="+2">Q.</font>
+I cannot connect from more than one computer at the same time.
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+PPTP uses protocol GRE (47) for it's tunnel. When two clients behind a single NAT firewall 
+connect to the same PPTP server, their source IP address will be rewritten by their firewall. 
+In this case, the GRE sockets in two pptpctrl processes will be reading GRE packets from both 
+clients.  The only way to distinguish between those two clients is to filter them by destination 
+call ID number found in the GRE header. In order for the client NAT firewall to correctly rewrite 
+the PPTP server's replies, please check Philip Craig's netfilter pptp helper module available from the 
+Netfilter CVS server:<br>
+cvs -d :pserver:cvs@pserver.netfilter.org:/cvspublic login<br>
+When it asks you for a password type `cvs'<br>
+cvs -d :pserver:cvs@pserver.netfilter.org:/cvspublic co netfilter-extensions/helpers/pptp<br>
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="18"></a>
+<p><i><font size="+2">Q.</font>
+When I disconnect from Workstation One then I can't connect from Workstation Two.
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+See answer 17.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="19"></a>
+<p><i><font size="+2">Q.</font>
+Why 2 sets of IP's in pptpd.conf (remoteip and localip)?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+PPTP is a point-to-point connection.
+localip is the ip of the ppp adapter on the server-side.
+remoteip is the ip of the client.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="20"></a>
+<p><i><font size="+2">Q.</font>
+How do I set up authentication against SAMBA?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+You can go about this two ways:<br>
+</p><ol>
+<li>Use the Radius plugin in pppd (=&gt; v2.4.2) and set up a radiusserver
+</li><li>Patch pppd with the smb_auth.patch, compile and set chap-secrets to:<br>
+* pptpd &/etc/samba/smbpasswd *<br>
+</li></ol>
+<p></p>
+
+<p>
+
+Note: submissions welcome to explain this further; as per a mailing
+list thread, we don't appear to have any smb_auth.patch anywhere.</p>
+
+
+<p>Update: mailing list archives have a <a href="http://marc.theaimsgroup.com/?l=poptop-server&m=110501659912319&w=2">posting
+from Ramses Pinxteren</a> that mentions a couple of patches.  Thanks
+to Sven Schuster.</p>
+
+<br><hr noshade="noshade">
+
+
+<a name="21"></a>
+<p><i><font size="+2">Q.</font>
+How do I set up authentication against LDAP?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+You can go about this two ways:<br>
+</p><ol>
+<li>Use the Radius plugin in pppd (=&gt; v2.4.2) and set up a radiusserver
+</li><li>Patch pppd with a ldap patch, compile and set chap-secrets to:<br>
+* pptpd &uid?(morrisonvpnaccess=Y)(objectclass=posixAccount)?ou=People,o=Morrison\ Industries,c=US *<br>
+</li></ol>
+This uses the first "?" delimited value as the key to lookup the user's object. The second parameter is any additional filters you wish to apply. The third parameter is the search base. So if "fred" attempts to establish a VPN connection PPPD will attempt to get the "ntpassword" attribute from the first object matching "(&(uid=fred)(morrisonvpnaccess=Y)(objectclass=posixAccount))" beneath "ou=People,o=Morrison\ Industries,c=US". The only hardcoded value is the name of the ldap server, which is hardcoded to "ldap". 
+<br><br>
+For more details (and patched pppd) go to <a href="http://www.kalamazoolinux.org/projects/awilliam/ldap.html" target="_new">http://www.kalamazoolinux.org/projects/awilliam/ldap.html</a>. The user who reported this had to modify auth.c to fit to the LDAP server.
+<p></p>
+<br><hr noshade="noshade">
+
+
+<a name="22"></a>
+<p><i><font size="+2">Q.</font>
+Windows XP clients do not work.
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+There are two similar things that seem to affect winXP pro:
+<br><br>
+1) VPN disconnects after about 1 min : Happens on systems with internet connection sharing enabled on the active non-vpn (eg dialup) network connection.  Resolve by not sharing.<br><br>
+2) VPN disconnects after about 5 mins: Happens on some winXP pro systems.  Call MS to obtain a patch, because it's not been fully tested yet - will be addressed in SP2.<br>
+</p><hr width="50%" noshade="noshade">
+2-Apr-2003:<br>
+A 'vpn' patch will be present in XP SP2, but no details of exactly what the patch fixes. Could be that it will fix all these problems.
+8-Apr-2003:<br>
+User comment: I upgraded XP to SP1 level....and now it works!
+<p></p>
+<br><hr noshade="noshade">
+
+
+<a name="23"></a>
+<p><i><font size="+2">Q.</font>
+GRE: read(fd=5,buffer=804d720,len=8196) from PTY failed: status = -1 error = Input/output error
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+The log will display something like this:<br>
+<br>
+Jun 22 21:48:35 linuxbox pptpd[1900]: GRE: read(fd=5,buffer=804d720,len=8196) from PTY failed: status = -1 error = Input/output error<br>
+Jun 22 21:48:35 linuxbox pptpd[1900]: CTRL: PTY read or GRE write failed (pty,gre)=(5,6)<br>
+<br>
+pppd failed for some reason. pptpd failed to report why pppd failed. 
+This is a bug, but it is not yet fixed.<br>
+You should look at why pppd failed, which is most likely your fault, not
+a bug. pppd fails when it does not understand the options you entered.
+Running pppd manually against your options.pptpd file would find the bad
+options.
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="24"></a>
+<p><i><font size="+2">Q.</font>
+Can I now also access SMB shares from clients outside the network? And how do I do that?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+It helps PPTP performance quite a bit if you use a WINS server.<br>
+Since Microsoft developed PPTP, maybe you should ready their documentation..<br>
+<a href="http://www.microsoft.com/ntserver/ProductInfo/faqs/PPTPfaq.asp">http://www.microsoft.com/ntserver/ProductInfo/faqs/PPTPfaq.asp</a><br>
+</p>
+<br><hr noshade="noshade">
+
+
+<a name="25"></a>
+<p><i><font size="+2">Q.</font>
+Why are there Out Of Order drops of fragmented packages?
+</i></p>
+<p>
+<i><font size="+2">A.</font></i>
+Microsoft Point-to-Point Tunneling Protocol (PPTP) discards all packets that are received out of sequence. 
+This is likely to happen over networks, such as the Internet, where multiple packets may take different 
+routes to a common destination.<br>
+More info: <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;292788" target="_new">PPTP Drops Packet Fragments That Arrive Out Of Order</a>
+<br><br>
+This issue will break some UDP traffic, like Kerberos Authentication. For information on how to set Kerberos to use TCP, read this article: <a href="http://support.microsoft.com/default.aspx?scid=KB;en-us;q244474" target="_new">How to Force Kerberos to Use TCP Instead of UDP</a>
+</p>
+<br><hr noshade="noshade">
+
+<a name="26"></a>
+<p><i><font size="+2">Q.</font>
+What are these version numbers on PPP packages?
+</i></p>
+<p>
+
+On the project file list, there are a number of different versions of
+ppp-2.4.3, e.g. ppp-2.4.3-0.cvs_20040527.X.i386.rpm where X can have
+the value 1, 2, 4 and 6.  What is the difference between these
+versions?</p>
+<p>
+<i><font size="+2">A.</font></i>
+They are packaging versions.
+</p><p>
+
+Changes in these version numbers represent
+changes in packaging, which is the translation from .tar.gz to .rpm.
+They represent changes made by the packager, not changes made to the
+upstream version.
+</p><p>
+
+So in the string ppp-2.4.3-0.cvs_20040527.X.i386.rpm, this is version
+2.4.3 of PPP cut from PPP CVS as of 2004-05-27, and has been revised X
+times by the packager.
+</p><p>
+
+Usually packaging changes represent packaging issues; changes of how the
+package is built or installed into the filesystem.  Sometimes a patch
+may be included, to increase compatibility with the target distribution,
+or to fix an urgent problem without grabbing a whole new upstream
+version.
+</p><p>
+
+Why do we keep the old ones around?  Sometimes people ask for them.
+Some of the HOWTOs and instructions make reference to a specific
+version, and were tested with that version.  It's helpful to the end
+user to know which particular package version a HOWTO was written from.
+(Although that mainly affects the PPTP client side of things, the client
+project uses the PPP packages from the PPTP server project.)
+</p><p>
+
+So we would expect you to use just one RPM for a system.
+</p><p>
+
+You can find more information on software release practice in Eric
+Raymond's <a href="http://www.tldp.org/HOWTO/Software-Release-Practice-HOWTO/">Software
+Release Practice HOWTO</a>.
+</p><p>
+
+You can find more information on the release history of the PPP package in the <a href="http://pptpclient.sourceforge.net/howto-diagnosis.phtml#pppd_options">PPTP Client FAQ</a>.
+</p>
+<br><hr noshade="noshade">
+
+</td></tr></tbody></table>
+
+</center></body>
+</html>

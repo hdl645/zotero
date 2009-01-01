@@ -1,0 +1,74 @@
+
+/* ::::: http://hardware.mcse.ms/forum.css ::::: */
+
+body { margin-top: 0px; margin-bottom: 0px; padding-bottom: 15px; font-family: verdana,arial; font-size: 12px; }
+#sthread { position: relative; float: left; width: 75%; margin-left: 10px; margin-bottom: 5px; }
+.featured1 { position: relative; float: left; margin-left: 2%; clear: both; }
+#right { position: relative; float: left; width: 16%; margin-left: 10px; }
+a { text-decoration: underline; }
+a:hover { text-decoration: underline; }
+a.forumlinks { color: rgb(0, 102, 204); text-decoration: underline; }
+a.forumlinks:hover { text-decoration: underline; }
+a.more { text-decoration: underline; }
+#bt { border: 1px solid rgb(68, 86, 105); background-color: rgb(247, 247, 247); }
+#bt td { padding: 3px; }
+td { font-family: Verdana,Tahoma,Arial,Helvetica,Geneva,sans-serif; font-size: 11px; }
+.copyright { font-family: Verdana,Tahoma,Arial,Helvetica,Geneva,sans-serif; font-size: 10px; }
+#bds { background-image: url('gradientleft.gif'); background-color: rgb(237, 237, 237); }
+#rtd { background-image: url('gradient2.jpg'); background-color: rgb(237, 237, 237); }
+#sfb { font-family: Verdana,arial,helvetica; font-size: 8pt; font-weight: bold; }
+#sfl { font-family: Verdana,arial,helvetica; font-size: 8pt; background-color: rgb(255, 255, 255); text-align: left; }
+#sfd { font-family: Verdana,arial,helvetica; font-size: 8pt; background-image: url('gradient2.jpg'); background-color: rgb(237, 237, 237); }
+#sfd b { font-weight: 400; }
+td.post { font-family: Tahoma,arial,helvetica; font-size: 10pt; }
+#nfl { font-family: Verdana,arial,helvetica; font-size: 10pt; background-color: rgb(255, 255, 255); }
+#fd1 { font-family: Verdana,arial,helvetica; font-size: 10pt; background-color: rgb(255, 255, 255); }
+#fd1 a { color: rgb(0, 102, 204); text-decoration: underline; }
+#fd2 { font-family: Verdana,arial,helvetica; font-size: 10pt; background-color: rgb(237, 237, 237); }
+#fd2 a { color: rgb(0, 102, 204); text-decoration: underline; }
+#nfd { font-family: Verdana,arial,helvetica; font-size: 10pt; background-color: rgb(237, 237, 237); }
+a.reply { font-family: arial,helvetica; font-size: 12pt; font-weight: bold; text-decoration: underline; font-style: italic; }
+#g8 { position: relative; width: 97%; background-color: white; font-family: verdana,arial; font-size: 12px; text-align: center; padding-bottom: 8px; }
+#g8 h1 { font-family: verdana,arial; text-align: center; font-size: 22px; margin-bottom: 0px; margin-top: 0px; color: rgb(0, 0, 0); font-weight: 400; }
+#g8 h1 b { font-weight: bold; color: rgb(68, 86, 105); font-size: 22px; margin-bottom: 0px; margin-top: 0px; }
+#g8 h2 { font-size: 10pt; color: rgb(0, 0, 0); font-weight: 400; }
+#cp { border: 1px solid rgb(68, 86, 105); position: relative; width: 95%; font-family: verdana,arial; font-size: 11px; text-align: left; padding-bottom: 8px; padding-left: 10px; padding-top: 10px; margin-top: 12px; background-color: rgb(247, 247, 247); }
+#cp img { border: 0px none ; margin-right: 10px; }
+#cp img.faq { border: 0px none ; margin-right: 160px; }
+#cp input { margin-right: 10px; margin-top: -5px; }
+#cps { float: right; position: absolute; margin-top: 0px; }
+#nav1 { border: 1px solid rgb(68, 86, 105); padding: 10px; position: relative; width: 95%; font-family: verdana,arial; font-size: 12px; text-align: left; background-color: rgb(247, 247, 247); margin-top: 10px; margin-bottom: 10px; font-weight: bold; }
+#nav1 a { font-weight: bold; font-family: verdana; }
+#nav1 a.ase { margin: 12px; font-weight: 400; font-size: 10px; }
+#nav1 .cpsb { margin-bottom: -3px; }
+#res { margin: 12px; padding: 12px; position: relative; width: 60%; float: left; font-family: verdana,arial; font-size: 12px; }
+#res a { position: relative; font-size: 15px; color: rgb(0, 0, 204); }
+#res i { font-style: normal; color: green; }
+#res u { text-decoration: none; color: rgb(51, 51, 51); }
+#bnav { padding: 12px; position: relative; float: left; width: 100%; text-align: center; font-family: verdana,arial; font-size: 12px; margin-top: 12px; margin-bottom: 20px; }
+#bnav a { margin: 3px; }
+#gg { position: relative; width: 90%; text-align: center; }
+#fl { position: relative; float: left; width: 40%; }
+#fr { position: relative; float: right; width: 40%; }
+#nt { position: relative; float: right; width: 25%; font-size: 10px; }
+#nt a { padding-left: 10px; padding-bottom: 8px; }
+#fdh { position: relative; color: darkred; margin-left: 0px; margin-right: 0px; text-align: left; padding-right: 10px; padding-left: 10px; padding-top: 10px; float: left; width: 156px; }
+#fdh a { font-size: 12px; }
+#fh { border-bottom: 1px solid white; position: relative; float: right; width: 90%; background-color: rgb(237, 237, 237); }
+#fh hr { visibility: hidden; display: none; }
+#fh img { position: relative; padding-left: 4px; padding-right: 4px; padding-top: 10px; margin-top: 6px; margin-right: 10px; float: left; left: 4px; }
+#cat { background-color: rgb(204, 102, 0); color: rgb(255, 255, 255); }
+#cat a { font-weight: bold; font-size: 12pt; color: rgb(255, 255, 255); text-decoration: none; }
+#hardware { background-image: url('gradientleft.gif'); background-color: rgb(237, 237, 237); }
+#h { background-image: url('gradientleft.gif'); background-color: rgb(237, 237, 237); }
+a.ft { position: relative; font-family: Verdana,arial; font-size: 11pt; font-weight: bold; text-decoration: underline; margin-bottom: 10px; padding-bottom: 15px; text-align: center; }
+#print { border-width: 1px; padding: 10pt; position: relative; width: 60%; float: left; margin-left: 5pt; }
+#ptg { border-width: 1px; padding: 10pt; position: relative; width: 35%; float: left; margin-left: 5pt; }
+#single { border-top: 1px solid rgb(51, 51, 51); border-left: 1px solid rgb(51, 51, 51); border-right: 1px solid rgb(51, 51, 51); padding: 7pt; color: rgb(255, 51, 0); font-size: 11pt; font-weight: bold; }
+#single a { color: rgb(255, 51, 0); font-size: 11pt; font-weight: bold; }
+#starch { position: relative; float: left; width: 75%; }
+.stad { background-color: white; }
+.iTt { border: 1px solid red; padding: 2px; font-family: Verdana,Arial,Helvetica; font-size: 11px; font-style: normal; font-weight: normal; color: blue; background-color: lightyellow; }
+#cbd b { color: red; }
+#amain { width: 75%; float: left; }
+#arite { width: 20%; float: left; padding-left: 5pt; }

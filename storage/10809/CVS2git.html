@@ -1,0 +1,1054 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://jonas.iki.fi/git_guides/HTML/CVS2git/">
+<meta name="wpd_url" content="http://jonas.iki.fi/git_guides/HTML/CVS2git/">
+<meta name="wpd_date" content="2008-07-08T16:36Z">
+
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+
+
+<title>CVS to git Transition Guide</title>
+<meta name="description" content="CVS to git Transition Guide">
+<meta name="keywords" content="CVS2git">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+
+<meta name="generator" content="LaTeX2HTML v2002-2-1">
+<meta name="" http-equiv="Content-Style-Type" content="text/css">
+
+
+
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="CVS2git.css" media="all">
+</head>
+<body>
+
+<div class="navigation"><!--Navigation Panel-->
+<img alt="next_inactive" src="nx_grp_g.png" width="81" align="bottom" border="0" height="24"> 
+<img alt="up" src="up_g.png" width="26" align="bottom" border="0" height="24"> 
+<img alt="previous" src="prev_g.png" width="63" align="bottom" border="0" height="24">   
+<br>
+<br>
+<br></div>
+<!--End of Navigation Panel-->
+
+
+
+
+[R]
+
+<p>
+
+</p><p>
+
+for Cold Turkey Quitters
+
+2007
+
+</p><h3>Abstract:</h3>
+<div class="ABSTRACT">Rev 0.3:
+<br><tt>git clone http://git.jonas.iki.fi/git_guides.git</tt>
+<br>
+Corrections and improvements are most welcome via e-mail using the
+<tt>git format-patch</tt> facility.</div>
+<p>
+
+</p><p>
+</p><h1 align="center">CVS to git Transition Guide</h1>
+<div class="author_info">
+
+<p align="center"><strong><i class="sans">Jonas Jus&eacute;lius</i></strong></p>
+<p align="left"><small><tt>&lt;jonas.juselius@chem.uit.no&gt;</tt>
+<br><i class="sans">University of Troms&Atilde;&cedil;</i>
+<br><i class="sans">Department of Chemistry</i>
+<br><i class="sans">N-9037 University of Troms&Atilde;&cedil;, Norway</i>
+</small></p>
+</div>
+<br>
+
+<h2><a name="SECTION00010000000000000000">
+
+Contents</a>
+</h2>
+<!--Table of Contents-->
+
+<ul class="TofC">
+<li><a name="tex2html41" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00020000000000000000">Preliminaries</a>
+<ul>
+<li><a name="tex2html42" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00021000000000000000">Recommended reading</a>
+</li><li><a name="tex2html43" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00022000000000000000">About this document</a>
+</li><li><a name="tex2html44" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00023000000000000000">Conventions</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html45" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00030000000000000000">Before you start</a>
+</li><li><a name="tex2html46" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00040000000000000000">Converting your CVS modules to git</a>
+<ul>
+<li><a name="tex2html47" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00041000000000000000">Overview</a>
+</li><li><a name="tex2html48" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00042000000000000000">Staging for the switch</a>
+</li><li><a name="tex2html49" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00043000000000000000">Converting the repository</a>
+</li><li><a name="tex2html50" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00044000000000000000">Access control</a>
+</li><li><a name="tex2html51" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00045000000000000000">Administrative details</a>
+</li><li><a name="tex2html52" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00046000000000000000">The web interface</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html53" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00050000000000000000">Migrating your local CVS repository</a>
+<ul>
+<li><a name="tex2html54" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00051000000000000000">Before you start</a>
+</li><li><a name="tex2html55" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00052000000000000000">Updating your CVS repository</a>
+</li><li><a name="tex2html56" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00053000000000000000">Setting up the git repository</a>
+</li><li><a name="tex2html57" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00054000000000000000">Committing your changes</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html58" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00060000000000000000">Getting started with git</a>
+<ul>
+<li><a name="tex2html59" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00061000000000000000">Using git like CVS</a>
+</li><li><a name="tex2html60" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00062000000000000000">Git vs. CVS</a>
+</li><li><a name="tex2html61" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00063000000000000000">Working with remote servers</a>
+</li><li><a name="tex2html62" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00064000000000000000">Adding a remote repository</a>
+</li></ul>
+<br>
+</li><li><a name="tex2html63" href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#SECTION00070000000000000000">Useful git commands</a>
+</li></ul>
+<!--End of Table of Contents-->
+
+<p>
+
+</p><h1><a name="SECTION00020000000000000000">
+
+Preliminaries</a>
+</h1>
+This guide attempts to document one way of migrating both repositories and 
+users from  CVS to git. 
+I'm sure there are many other equally good, or better, ways of doing 
+this. I have called my scheme the Cold Turkey scheme, since it involves
+freezing CVS in one go, and moving to git without attempting any kind of soft
+transition period operating both CVS and git in parallel. 
+
+<p>
+
+This is not a git manual. There is a lot of decent
+documentation available on the web, and all git commands are very well
+documented, so there is no need to repeat them here. 
+This document explains step-by-step how to move your local changes
+in your CVS repositories to the newly created git repository. It assumes that
+you have a recent version of git installed on your system, and that you have
+familiarised your self with the basic git operations by reading the available
+git documentation at <tt><a name="tex2html1" href="http://git.or.cz/">http://git.or.cz</a></tt>. 
+
+</p><p>
+
+The first part of this guide is intended for repository administrators, and
+documents step-by-step how to freeze the CVS archive and convert it to a git
+archive. 
+
+</p><p>
+
+The second part is intended for the individual developer, documenting how to
+set up git for personal use, and how to safely migrate all uncommitted changes
+from CVS to git.
+
+</p><p>
+
+</p><h2><a name="SECTION00021000000000000000">
+
+Recommended reading</a>
+</h2>
+If you have not done so yet, I
+recommend you start by reading the following two short tutorials:
+<dl>
+<dt><strong>Git for CVS users</strong></dt>
+<dd>:
+<br><tt><a name="tex2html2" href="http://www.kernel.org/pub/software/scm/git/docs/cvs-migration.html">http://www.kernel.org/pub/software/scm/git/docs/cvs-migration.html</a></tt>
+</dd>
+<dt><strong>The git tutorial</strong></dt>
+<dd>:
+<br><tt><a name="tex2html3" href="http://www.kernel.org/pub/software/scm/git/docs/tutorial.html">http://www.kernel.org/pub/software/scm/git/docs/tutorial.html</a></tt>
+</dd>
+<dt><strong>Git in a Nutshell</strong></dt>
+<dd>:
+<br>  <tt><a name="tex2html4" href="http://git.jonas.iki.fi/gitweb.cgi?p=git_guides.git;a=tree">http://git.jonas.iki.fi/gitweb.cgi?p=git_guides.git;a=tree</a></tt>
+</dd>
+</dl>
+Furthermore, the following documents may be of use:
+<dl>
+<dt><strong>Everyday git with 20 commands or so</strong></dt>
+<dd>:
+<br><tt><a name="tex2html5" href="http://www.kernel.org/pub/software/scm/git/docs/everyday.html">http://www.kernel.org/pub/software/scm/git/docs/everyday.html</a></tt>
+</dd>
+<dt><strong>Git user's manual</strong></dt>
+<dd>:
+<br><tt><a name="tex2html6" href="http://www.kernel.org/pub/software/scm/git/docs/user-maunal.html">http://www.kernel.org/pub/software/scm/git/docs/user-maunal.html</a></tt>
+</dd>
+</dl>
+
+<p>
+
+</p><h2><a name="SECTION00022000000000000000">
+
+About this document</a>
+</h2>
+This guide was written as part of moving the ACES2 (<tt><a name="tex2html7" href="http://www.aces2.de/">http://www.aces2.de</a></tt>)
+program package from CVS to git. As such it reflects the 
+practical choices made for this particular environment. 
+
+<p>
+
+Finally, I'm sure there are errors and/or semi correct statements in this
+document since I'm not a true git expert (yet). All suggestions and
+corrections are welcome!
+
+</p><p>
+
+</p><h2><a name="SECTION00023000000000000000">
+
+Conventions</a>
+</h2>
+I have used the following conventions in this document: Commands are written 
+in <tt>typewriter</tt> and anything the user should replace with his/her own 
+options have been enclosed in brackets, e.g. <tt>&lt;mybranch&gt;</tt>.  
+
+<p>
+
+</p><h1><a name="SECTION00030000000000000000">
+
+Before you start</a>
+</h1>
+This section is intended for administrators and users alike, and is based on
+some of the experience of migrating a bunch of CVS users to git. It seems that
+one of the main problems is for CVS users to grasp the distributed nature of
+git, i.e. the difference between a commit and a push. Users can become very
+confused, and think that git is impossibly complicated to use and understand. 
+
+<p>
+
+The very nature of git makes it much more powerful than CVS. Git is allows for
+a lot more flexibility, leading to a different workflow than under CVS.
+Changing two both the source code revision software <span class="textit">and</span> the working
+paradigm at the same time is a recipe for trouble. It's not git itself that is
+causing the confusion, rather the new way how to use it really efficiently! To
+avoid having grumpy and confused users it's better to do one thing at a time.
+Start by changing from CVS to git, but keep the same working paradigm as
+before. When the users have become comfortable using git, you can implement
+more advanced things like restricted branches and multiple remotes. 
+
+</p><p>
+
+</p><h1><a name="SECTION00040000000000000000">
+
+Converting your CVS modules to git</a>
+</h1>
+The general scheme used here for setting up the new git repository is based
+in part on having a central master repository, CVS style, and in
+part on providing centralised git hosting for the developers. The idea is to
+provide the developers with as much comfort and fexibility as the like. 
+
+<p>
+
+The central master server is set up with a master branch, which is supposed to
+contain the latest, greatest, bleeding edge <em>working</em> development version
+of the code. This is the branch from which the developers should pull
+regularly, and only the repository maintainers have right to push to this
+branch. There will also be an experimental branch to which people
+can push code they want others to test. Furthermore there will be a testing
+branch which acts as a staging area for code to be included in the master
+branch. It's simple to have the code in the testing branch 
+pulled once per night and run through a test suite. If all tests pass,
+the repository maintainers can merge with the master branch. 
+
+</p><p>
+
+In addition to these standard branches, every user has the right to create and
+update their own branch on the master server. One ``official'' branch per
+developer is probably enough for most users. This simple setup allows users to
+regularly fetch all remote branches and communicate code sideways if they need
+to. If one branch is not enough, or if a developer has special requirements,
+each developer is allowed to have his/hers own repository on the server. This
+gives maximum flexibility to the users without losing too much transparency.
+The git web interface shows all repositories in a directory tree, so that
+everyone can follow the development cycle in all repositories.
+
+</p><p>
+
+</p><h2><a name="SECTION00041000000000000000">
+
+Overview</a>
+</h2>
+To implement the Cold Turkey (tm) change to git, the following steps must be
+taken
+
+<ol>
+<li>Decide where the new git repositories should reside
+</li>
+<li>Create a UNIX group for the developers, one per project if necessary
+</li>
+<li>Make the relevant CVS modules read-only 
+</li>
+<li>Convert the CVS repositories to git
+</li>
+<li>Set permissions	on files and directories
+</li>
+<li>Set up the 'update' hook to enforce access restrictions
+</li>
+<li>Lay back and enjoy a good days work	
+</li>
+</ol>
+
+<p>
+
+</p><h2><a name="SECTION00042000000000000000">
+
+Staging for the switch</a>
+</h2>
+Decide where you want the new repositories to reside, create the necessary
+UNIX groups and set the permissions. Now is also a good time to fix
+permissions on files. Source files should have <tt>chmod 644</tt>, directories
+and scripts should probably be <tt>chmod 755</tt>.
+<pre>$ mkdir /path/to/git
+$ chgrp gits /path/to/git
+$ chmod 775 /path/to/git
+$ chmod +s /path/to/git
+$ chmod +t /path/to/git
+</pre>
+
+<p>
+
+Then change to your CVSROOT and make the module(s) read-only. Make sure that
+the lock and history files remain in writable locations. These are configured
+in $CVSROOT/CVSROOT/config.
+</p><pre>$ cd $CVSROOT
+$ chmod -R ugo-w myproj
+</pre>
+Now CVS commits are disabled and the repository frozen.
+
+<p>
+
+</p><h2><a name="SECTION00043000000000000000">
+
+Converting the repository</a>
+</h2>
+Converting a CVS repository with all branches, tags and the whole history is
+very easy using <tt>git-cvsimport</tt>. 
+Make sure you have a very recent version of git and cvsps installed, to avoid
+unnecessary problems.  
+<pre>$ cd /path/to/git
+$ git-cvsimport -k -i -d /path/to/CVSROOT -C myproj myproj
+</pre>
+To create a bare, shared repository we need to rename the git directory, fix
+the permissions and edit the git config file
+<pre>$ mv myproj/.git myproj.git
+$ rmdir myproj
+$ chgrp -R gitusers myproj.git
+$ chmod -R ug+w myproj.git
+$ chmod +s myproj.git
+# the hooks/ and info/ dirs are special since the control repository access
+$ cd myproj.git; chgrp -R gitadmin hooks info config description
+$ find -type d -exec chmod +s {} \;
+</pre>
+Then edit the config file:
+<pre>[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	sharedrepository = 1
+[receive]
+	denyNonFastforwards = true
+</pre>
+Finally edit the description file, adding a one line comment comment
+describing your project for gitweb.
+
+<p>
+
+</p><h2><a name="SECTION00044000000000000000">
+
+Access control</a>
+</h2>
+To set up per user or group access restrictions, copy the
+<tt>update</tt><a name="tex2html8" href="#foot69"><sup><span class="arabic">1</span></sup></a>script to the hooks directory, fix the permissions and make sure it's
+executable. Then copy the <tt>allowed-users</tt> and <tt>allowed-groups</tt>
+files to the info directory. Fix the permissions and group ownership of these
+files and edit to your liking. By default they give every developer the right
+to have one personal branch and any number of personal tags at the master.
+
+<p>
+
+</p><h2><a name="SECTION00045000000000000000">
+
+Administrative details</a>
+</h2> 
+Git has two ways of storing objects in it's database, either as separate
+files or in a packed format storing only differences between files. The packed
+format is for many purposes more efficient than the default storage mode. It's
+therefore a good idea to set up a cron job to traverse all git repositories on
+the master server and run <tt>git gc</tt> once per night to pack and clean the
+repositories. Obviously the cron job must be set up for a user which has
+sufficient permissions in the repository tree. Edit and copy the git-optimize.sh
+script distributed with this document to your git repository root directory
+and make sure it's executable. Then set up the cron job to pack the
+repositories
+<pre>$ crontab -e
+
+1 1 * * * cd /path/to/git; find -name "*.git" -type d -exec \
+/path/to/git/git-optimize.sh {} \;
+1 3 1 * * cd /path/to/git; find -name "*.git" -type d -exec \
+/path/to/git/git-optimize.sh {} \;
+</pre>
+
+<p>
+
+As a last point, it's a good idea to make sure that all users have a
+<tt>umask</tt> of at least 027 to make sure that the files and directories are
+accessible by all other developers.
+
+</p><p>
+
+</p><h2><a name="SECTION00046000000000000000">
+
+The web interface</a>
+</h2>
+Git comes with a very nice and easy to set web interface. Visit 
+<tt><a name="tex2html9" href="http://repo.or.cz/w/git.git/">http://repo.or.cz/w/git.git/</a></tt> to see it action. I will not discuss how to
+set up your web server, since there is ample information available on the web.
+To install the web interface copy the gitweb.cgi script to a suitable
+location (e.g. /usr/lib/cgi-bin on some systems) and edit the config file to
+point to the right repository tree. The cgi-script will automatically pick up
+all git projects under this tree. Please note that enabling the gitweb
+interface also enables people to clone your repositories over http. This might
+or might not be what you want, so it might be a good idea to set up access
+restrictions on the web server so that only people you want can connect and
+browse and clone your code. Your call.
+
+<p>
+
+</p><h1><a name="SECTION00050000000000000000">
+
+Migrating your local CVS repository</a>
+</h1>
+
+<p>
+
+</p><h2><a name="SECTION00051000000000000000">
+
+Before you start</a>
+</h2>
+Before doing anything else, I suggest that you setup some default
+configuration variables for git. Git uses a number of config files, system
+wide, per user and per repository (see the git config man page for more info).
+As a minimum you should set the following options:
+<pre>$ git config --global user.name "Your Name"
+$ git config --global user.email "my@email.com"
+</pre>
+These options are written in&nbsp;/.gitconfig, and are used by git to ensure that
+your commit messages are sensible, since user names and mail addresses are not
+necessarily set properly on all machines. In addition you might want to enable
+the following options as well:
+<pre>$ git config --global color.branch auto
+$ git config --global color.status auto
+$ git config --global color.diff false
+</pre>
+If you want to use some external (graphical) merge tool to resolve conflicts:
+<pre>$ git config --global merge.tool meld
+</pre>
+Meld is a fantastic merge tool, and I strongly suggest you have a look at it.
+Other valid possibilities are kdiff3 and xxdiff (amongst others).
+
+<p>
+
+</p><h2><a name="SECTION00052000000000000000">
+
+Updating your CVS repository</a>
+</h2>
+Since the old CVS server is no longer accepting new modifications, you need to
+move all of your local modifications under git and then commit them. To do
+this you need to follow these directions carefully. Before you start I
+strongly suggest that you backup your working copy!
+<dl>
+<dt><strong>Update</strong></dt>
+<dd>The first thing you must do is to synchronise your working
+copy with the CVS server by running
+<pre>$ cvs update
+</pre>
+This makes sure that your files are in the right state. 
+Files with local modifications will not be overwritten nor
+updated. If you have modified files that meanwhile have been modified on the
+master you will probably have a number of conflicts. You need to resolve these
+conflicts before continuing. Edit the files with conflicts and pick the
+correct pieces of code between the markers.
+</dd>
+<dt><strong>Diff</strong></dt>
+<dd>The next step is to create a patch file to migrate all your
+changes from CVS to your new git repository. 
+Now that all files, except your locally modified files, are in the same state
+as on the master you can run
+<pre>$ cvs diff -u -N &gt;migration.diff
+</pre>
+This file contains all the differences between the master and your working
+copy.
+</dd>
+</dl>
+
+<p>
+
+</p><h2><a name="SECTION00053000000000000000">
+
+Setting up the git repository</a>
+</h2>
+<dl>
+<dt><strong>Clone</strong></dt>
+<dd>Now you are in a position to clone the new git master repository!
+Change your working directory to where you want to create your new repository
+and run
+<pre>$ git clone &lt;myserver&gt;:/path/to/repos/myrepo.git
+$ cd aces2
+</pre>
+Optionally you can also specify the name of the new repository.
+</dd>
+<dt><strong>Branch and checkout</strong></dt>
+<dd>Before you do anything else you need to create a new (local) branch which is
+in the same state as the old master CVS, and switch to the new branch. The new
+branch will be called migration (or whatever) and must be created from the tag
+CVS_migration_HEAD:
+<pre>$ git branch migration CVS_migration_HEAD
+$ git checkout migration
+</pre>
+</dd>
+<dt><strong>Patch</strong></dt>
+<dd>You are now ready to apply the patch you created and bring your
+own local modifications into your git repository
+<pre>$ patch -p0 &lt; /path/to/myproj/migration.diff
+</pre>
+The patch should apply without a hitch if you have done everything correctly.
+You can now run 
+<pre>$ git status
+</pre>
+to show the status of your repository (i.e. modified files, deleted files,
+files that needs to be added, etc.).
+</dd>
+</dl>
+
+<p>
+
+Congratulations! Your repository is now in the same state as before the 
+switch!
+
+</p><p>
+
+</p><h2><a name="SECTION00054000000000000000">
+
+Committing your changes</a>
+</h2>
+The following step in the migration process is to commit all
+your changes in your local repository. Don't worry, you will not mess up
+anything on the master, or even make your changes public yet. This is a
+personal commit so far. 
+
+<p>
+
+Before you add changes (and files) to
+commit you should probably think closely about how changes are logically
+related and how they could be grouped into sets, instead of committing
+everything as one big blob. It's better to have many, many small commits than
+a few big ones, since this helps picking out particular patch sets and
+applying them to other branches (this is known as cherry picking).
+There is a convenient tool to pick, group and commit 
+your changes
+</p><pre>$ git citool
+</pre>
+If you rather do everything by hand, repeatedly run
+<pre>$ git add file(s) 
+$ git commit
+</pre>
+to group changes into sets, until all changes have been committed. 
+This is also how you add untracked files to git.
+
+<p>
+
+Finally run 
+</p><pre>$ git status
+</pre>
+to check that you have not missed anything. 
+
+<p>
+
+You can also just run
+</p><pre>$ git commit -a
+</pre>
+to do what you probably should not, i.e. commit everything as one huge commit.
+
+<p>
+
+</p><h1><a name="SECTION00060000000000000000">
+
+Getting started with git</a>
+</h1>
+Ok, so now all your changes have been safely committed in your local
+repository. The big difference to CVS is that commits are not automatically
+communicated to the master server. How to communicate your changes to the
+master will depend on how the master has been set up. The two following
+sections will explain how to get started with git, and how to communicate with
+the master repository.
+
+<p>
+
+</p><h2><a name="SECTION00061000000000000000">
+
+Using git like CVS</a>
+</h2>
+Here I will outline how to use git in a CVS-like fashion, without having
+to bother with branches and other complications. For completeness I have
+included how to clone a repository.
+The corresponding cvs commands are included as an example. 
+
+<p>
+
+</p><ol>
+<li>To get a local copy of the source repository:
+<pre>[ cvs checkout -d :ext:mylogin@myserver:/path/to/CVSROOT myproj ]
+$ git clone mylogin@myserver:/path/to/repository/myproj.git
+</pre>
+
+<p>
+
+</p></li><li>Updating the source repository to get the latest changes from the
+master:
+<pre>[ cvs update ]
+$ git pull origin master
+</pre>
+
+<p>
+
+</p></li><li>Checking in your changes on the master:
+<pre>[ cvs update ]
+[ cvs checkin file1 file2 ...]
+
+$ git pull origin
+$ git commit file1 file2 ...
+$ git push origin master
+</pre>
+
+<p>
+
+This is where git differs from CVS substantially, committing a file
+commits it to your local repository, and pushing it transfers it to the
+master. Note that before you can push anything it has to be committed! 
+A more useful way of working is:
+</p><pre>... work
+$ git commit file1 file2 ...
+... work
+$ git commit fileN dir2 ... 
+... work
+$ git commit -a  # (commits everything)
+... ok, we are ready with a new feature
+$ git pull origin master
+$ git push origin master
+</pre>
+
+<p>
+
+If you get a conflict when you pull, please consult the Nutshell guide
+how to resolve it.
+
+</p><p>
+
+</p></li><li>Common tasks:
+
+<ol>
+<li>How to add a file:
+<pre>[ cvs add file1 ... ]
+$ git add file1 ...
+</pre>
+
+<p>
+
+</p></li><li>How to delete a file:
+<pre>[ cvs remove file1 ]
+$ git rm file1
+</pre>
+
+<p>
+
+</p></li><li>How to move or rename a file:
+<pre>[ CVS cannot do this ]
+$ git mv file1 file2
+</pre>
+
+<p>
+
+</p></li><li>How to restore a file which you have deleted:
+<pre>[ cvs update ]
+$ git checkout file1
+</pre>
+</li>
+</ol>
+</li>
+</ol>
+
+<p>
+
+</p><h2><a name="SECTION00062000000000000000">
+
+Git vs. CVS</a>
+</h2>
+Git is not very different from CVS for everyday use, although it may at first
+seem so! There are really only two things that differ dramatically from CVS;
+your working copy is a full repository, hence the separation of making a
+commit and communicating the commit(s). The other big difference is that git
+keeps track of the state of a whole repository, not single files.
+
+<p>
+
+It's important to understand that a commit under git is exactly the same thing
+as under CVS, even if it's local to you until you push.  When you push git
+will update the remote branch (master in this case) to be in the exact same
+state as your repository. This means that if you have 12 commits which are not
+on the remote server, then all those 12 commits will be communicated!  Under
+CVS you would have made 12 commits directly to the server, under git you can
+commit any number of times, and when you think it's appropriate you push them
+all in one batch to the server. 
+
+</p><p>
+
+In the old, comfy realm of CVS you would work, work, work
+and never commit until you had something you really needed or had to
+commit, like a bugfix in one file in some module. You can do exactly the same
+with git! Never commit anything until you have something you really
+need to commit. Then you do the following:
+
+</p><p>
+</p><pre># first make sure we are up-to-date
+$ git pull origin master 
+# commit CVS style
+$ git commit file1 file2 ... fileN
+$ git push origin master
+</pre>
+
+<p>
+
+This is identical behaviour compared to CVS, except for the fact that you
+explicitly need to communicate the changes to your 'origin'. 
+
+</p><p>
+
+Of course, now I will argue that working like in the old CVS world is
+not very good. For one thing, it's important to commit often, since
+this way you get a much better work log/history and it's makes tracking
+down bugs a lot easier. Furthermore, when you accidentally delete a
+file, you can always get a reasonably new version back (if you have no
+daily backups of your work area). 
+
+</p><p>
+
+Now the problem arises; you need to publish a small fix, but you have a
+lot of commits, and the code is not ready for the public yet. This is
+one place where branches are very convenient: 
+
+</p><ul>
+<li>If you have not fixed the
+problem yet, create a new temporary branch (call it fix or whatever),
+checkout the branch, fix the problem, commit, push to the master,
+checkout your working branch, pull the fix from the master, delete the
+fix branch. 
+</li>
+<li>On the other hand, if you already have fixed and committed
+the fix, the procedure is almost the same, but with one difference:
+Create and checkout the fix branch, use 'gitk' or 'git log' to find the
+SHA1-number of the commit which fixed the problem, then use 'git
+cherry-pick SHA1-number' to incorporate that commit and nothing else
+into the fix branch, push to the master, checkout the working branch and
+delete the fix branch.
+</li>
+</ul>
+
+<p>
+
+</p><h2><a name="SECTION00063000000000000000">
+
+Working with remote servers</a>
+</h2>
+In the setup outlined above, every developer has the
+possibility to cerate their own branch on the master (note that it's not
+created by default). You can only commit branches and tags which have names
+that start with your user id. 
+
+<p>
+
+</p><h3><a name="SECTION00063100000000000000">
+
+Creating a remote branch</a>
+</h3> 
+To create a new branch on a remote server, git
+requires a very explicit syntax. After you have created the branch, you can
+use the same syntax as when operating on local branches. To create a remote 
+branch and push your changes in the migration branch to it, do
+<pre>$ git push origin migration:refs/heads/&lt;muid&gt;
+</pre>
+where <tt>&lt;myuid&gt;</tt> is your login on the server.
+
+<p>
+
+</p><h3><a name="SECTION00063200000000000000">
+
+Fetching changes</a>
+</h3> 
+To follow what others are doing and incorporating
+their latest changes you need to regularly fetch their changes. git is very
+flexible in the ways you can do things, so consult the man pages for more
+info. To download all changes from the master run
+<pre>$ git fetch origin
+</pre>
+This downloads all remote branches and stores them in your remote tracking
+branches (use <tt>git branch -r</tt> to see them). <tt>git fetch</tt> does not merge any changes
+into your working branches. After the git fetch you can examine the changes to
+the remote branches using e.g. <tt>gitk -all</tt> or 
+<tt>git [log/diff] origin/master</tt>.
+To update your current branch with e.g. the remote master branch do
+<pre>$ git merge origin/master
+</pre>
+
+<p>
+
+</p><h3><a name="SECTION00063300000000000000">
+
+Pulling changes</a>
+</h3> 
+There is a much easier way of updating your branches
+from the master server:
+<pre>$ git pull origin master
+</pre>
+This command automatically fetches the master branch from the server and
+merges it with your current branch. This is more or less the git equivalent of
+<tt>cvs update</tt>. Note that this only fetches the specified branch from the
+server. If you want all changes on all branches use the fetch command above.
+
+<p>
+
+</p><h3><a name="SECTION00063400000000000000">
+
+Push</a>
+</h3> 
+To publish changes to a branch so that others can see them and
+alternatively merge them with their branches you must push them to the main
+server. This is in a sense the git equivalent of a <tt>cvs commit</tt>. 
+To upload a
+branch and merge it with your personal branch on the server, do
+<pre>$ git push origin somebranch:&lt;myuid&gt;
+</pre>
+For more details see the git push man page. Note that for a push to work, it
+must result in a so called fast-forward-merge. Fast-forward means that the
+files you want to merge on another branch, must have the files in the other
+branch as parents. Simply stated, the files on the other branch have not
+changed since the last pull.  If the push fails because it's not fast-forward,
+you must first do a <tt>git pull origin branch</tt> and resolve any conflicts 
+before
+(re)doing the push.
+
+<p>
+
+</p><h3><a name="SECTION00063500000000000000">
+
+Tagging</a>
+</h3> 
+To create a tag, simply run <tt>git tag &lt;tagname&gt;</tt>. To push
+your tags to the main server, do
+<pre>$ git push --tags origin
+</pre>
+This will push all your tags to the main server. Note that you are not allowed
+by the server to create tags unless they are prefixed with your user id, e.g. 
+<tt>&lt;myuid&gt;/mytag</tt>. If you don't want to push all tags, you can use the special
+syntax
+<pre>$ git push origin tag &lt;myuid&gt;/&lt;mytag&gt;
+</pre>
+To delete a tag on the master you need to explicitly push an empty tag
+<pre>$ git push origin :refs/tags/&lt;myuid&gt;/&lt;mytag&gt;
+</pre>
+
+<p>
+
+</p><h3><a name="SECTION00063600000000000000">
+
+Deleting a remote branch</a>
+</h3> 
+If you for some reason want to delete a branch
+on the remote server, just push an empty branch to the remote branch:
+<pre>$ git push origin :&lt;branch&gt;
+</pre>
+
+<p>
+
+Since branches come and go, both in <tt>origin</tt> and in your own remote(s)
+it's a good idea to clean up the remotes once in a while by doing a
+</p><pre>$ git remote prune origin
+</pre>
+
+<p>
+
+</p><h2><a name="SECTION00064000000000000000">
+
+Adding a remote repository</a>
+</h2>
+If you want to have more
+flexibility, more branches and tags (on the server) and more freedom
+generally, you can also set up your own personal repository on the master. git
+makes it quite easy to work with multiple remote repositories in one go. 
+
+<p>
+
+To set up your own sub-master repository follow these steps:
+</p><pre>$ ssh &lt;myserver&gt;
+$ cd /path/to/repos
+$ mkdir $USER
+$ git clone -s -l --bare proj.git $USER/proj.git
+$ cd $USER/proj.git 
+$ git branch -a 
+# remove any branches and tags you do not care about
+$ git branch -D &lt;branch branch...&gt;
+$ git tag -d &lt;tag tag...&gt;
+# edit description (for gitweb) to your liking 
+$ vi description
+</pre>
+The -s and -l options to <tt>git clone</tt> will cause git to set up the
+repository to use the master's object database as much as possible, so that it
+will take up very little space. 
+
+<p>
+
+Now on your local machine, cd to your development repository and register the 
+new remote:
+</p><pre>$ git remote add &lt;name&gt; &lt;myserver&gt;:/path/to/repos/&lt;myuid&gt;/proj.git
+</pre>
+Now when you fetch, pull and push use your new remote-tag <tt>&lt;name&gt;</tt> instead 
+of <tt>origin</tt> to the corresponding command. The new development cycle will
+typically be something like
+<pre>$ git pull origin master
+# do some work
+$ git push myremote mybranch:mybranch
+# or to push all branches automatically
+$ git push --all myremote
+</pre>
+
+<p>
+
+</p><h1><a name="SECTION00070000000000000000">
+
+Useful git commands</a>
+</h1>
+Here is a short list of useful git commands to familiarise yourself with when
+you feel that you have the basics under control. <tt>man git-&lt;command&gt;</tt> will
+give you all available information on a particular command.
+<dl>
+<dt></dt>
+<dd><tt>gitk</tt> Graphical interface for browsing repositories.
+</dd>
+<dt></dt>
+<dd><tt>qgit</tt> Graphical interface for browsing repositories. Better and more
+advance than gitk, but probably not installed on your system by default.
+</dd>
+<dt></dt>
+<dd><tt>git diff</tt> View differences between your working copy and a committed
+revision (and more).
+</dd>
+<dt></dt>
+<dd><tt>git gc</tt> By default git will store all objects in a very primitive
+and storage inefficient way. This command packs, compresses and prunes
+unreachable objects in the object database. <b>Should be used regularly</b>.
+</dd>
+<dt></dt>
+<dd><tt>git stash</tt> If you need to checkout a new branch, but don't want to
+commit your changes, stash allows you to temporarily save your changes. Only
+in git 1.5.3 and newer.
+</dd>
+<dt></dt>
+<dd><tt>git cherry-pick</tt> Instead of merging two complete branches, only pick the
+commits you really want from a branch.
+</dd>
+<dt></dt>
+<dd><tt>git bisect</tt> Find a commit which introduced some nasty bug. Very
+helpful.
+</dd>
+<dt></dt>
+<dd><tt>git log</tt> View the commit history on a branch
+</dd>
+<dt></dt>
+<dd><tt>git archive</tt> Create a tar or zip archive from a branch.
+</dd>
+<dt></dt>
+<dd><tt>git mv</tt> Rename files in the repository.
+</dd>
+<dt></dt>
+<dd><tt>git rm</tt> Delete files from the repository.
+</dd>
+<dt></dt>
+<dd><tt>git annotate</tt> Show who changed what and when in files.
+</dd>
+<dt></dt>
+<dd><tt>git format-patch</tt> Generate an patch file of a commit, suitable for
+sending by e-mail
+</dd>
+<dt></dt>
+<dd><tt>git am</tt> Apply a patch from a mailbox
+
+<p>
+
+</p></dd></dl>
+
+<p>
+
+</p><h1><a name="SECTION00080000000000000000">
+
+About this document ...</a>
+</h1>
+ <strong>CVS to git Transition Guide</strong><p>
+
+This document was generated using the
+<a href="http://www.latex2html.org/"><strong>LaTeX</strong>2<tt>HTML</tt></a> translator Version 2002-2-1 (1.71)
+</p><p>
+
+Copyright &copy; 1993, 1994, 1995, 1996,
+Nikos Drakos, 
+Computer Based Learning Unit, University of Leeds.
+<br>
+Copyright &copy; 1997, 1998, 1999,
+<a href="http://www.maths.mq.edu.au/%7Eross/">Ross Moore</a>, 
+Mathematics Department, Macquarie University, Sydney.
+</p><p>
+
+The command line arguments were: <br>
+ <strong>latex2html</strong> <tt>-local_icons -dir HTML/CVS2git -split 0 CVS2git.tex</tt>
+</p><p>
+
+The translation was initiated by Jonas Juselius on 2008-03-14
+<br></p><hr><h4>Footnotes</h4>
+<dl>
+<dt><a name="foot69">...update</a><a href="http://jonas.iki.fi/git_guides/HTML/CVS2git/CVS2git.html#tex2html8"><sup><span class="arabic">1</span></sup></a></dt>
+<dd>Distributed together with the source distribution of
+this document.
+
+</dd>
+</dl>
+<div class="navigation"><hr>
+<!--Navigation Panel-->
+<img alt="next_inactive" src="nx_grp_g.png" width="81" align="bottom" border="0" height="24"> 
+<img alt="up" src="up_g.png" width="26" align="bottom" border="0" height="24"> 
+<img alt="previous" src="prev_g.png" width="63" align="bottom" border="0" height="24">   
+<br></div>
+<!--End of Navigation Panel-->
+<address>
+
+Jonas Juselius
+2008-03-14
+</address>
+</body>
+</html>

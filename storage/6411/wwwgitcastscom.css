@@ -1,0 +1,129 @@
+
+/* ::::: http://www.gitcasts.com/stylesheets/all.css?1215836111 ::::: */
+
+* { margin: 0pt; padding: 0pt; }
+:active, :focus { outline-color: -moz-use-text-color; outline-style: none; outline-width: medium; }
+body { text-align: center; font-family: Lucida Grande,Arial,Tahoma,sans-serif; font-size: 16px; color: rgb(42, 42, 42); padding-bottom: 20px; }
+#main { min-width: 600px; }
+.left { float: left; }
+.right { float: right; }
+.flash { padding: 0.4em; width: 99%; color: white; cursor: pointer; }
+.flash.notice { background: rgb(0, 170, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.flash.error { background: rgb(255, 17, 0) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+h1, h2, h3, h4, h5, h6 { margin: 0.5em 0pt; }
+ul, ol { font-size: 12px; }
+p { margin: 1em 0pt; font-size: 14px; line-height: 1.7em; }
+a { padding: 0.1em 0.2em; color: rgb(0, 170, 255); text-decoration: none; }
+a:hover { background: black none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: white; }
+a.active { text-decoration: underline; }
+cite a:hover, .meta a:hover { text-shadow: 1px 1px 1px rgb(23, 23, 23); }
+cite a:active, .meta a:active { text-shadow: none; }
+label { margin: 1em 0pt; display: block; font-size: 12px; width: 400px; }
+label input { width: 100%; font-size: 20px; font-weight: bold; }
+label textarea { padding: 0.2em; width: 100%; font-size: 12px; font-family: Monaco,Courier,monospace; }
+#all { margin: 0pt auto; padding: 0pt 0pt 2em; text-align: left; width: 500px; }
+#sidebar { border-top: 2px solid rgb(68, 136, 68); border-left: 2px solid rgb(68, 136, 68); border-bottom: 2px solid rgb(68, 136, 68); padding: 8px; background: rgb(170, 221, 170) none repeat scroll 0% 0%; float: right; position: absolute; text-align: center; top: 100px; right: 0px; width: 150px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.ads p { margin: 1em 0pt; text-align: left; color: rgb(51, 136, 51); font-size: 0.8em; line-height: 1.5em; }
+.ads p a { border-bottom: 1px solid rgb(119, 153, 119); color: rgb(17, 85, 17); }
+#page { margin: 0pt 90px; padding: 0pt 0pt 2em; text-align: left; width: 600px; }
+#fullpage { margin: 0pt auto; padding: 0pt 0pt 2em; text-align: left; width: 80%; }
+#page ul li { margin-left: 30px; }
+#page ul li a { color: rgb(51, 51, 51) ! important; }
+#page h2 { color: rgb(0, 170, 255); }
+.postlink { padding: 10px 0pt; }
+.postlink small { color: rgb(51, 51, 51); font-size: 0.8em; }
+#credits { margin: 20px 0pt; color: rgb(192, 192, 192); float: left; text-align: center; display: block; }
+.err { outline-color: rgb(255, 0, 0); outline-style: solid; outline-width: 1px; }
+#header { margin: 0pt 0pt 1em; }
+#header h1 { font-size: 40px; font-family: Georgia,Times,serif; margin-bottom: 0pt; text-shadow: 1px 1px 1px rgb(204, 204, 204); }
+#header h1 a { padding: 0pt; color: rgb(0, 170, 255); }
+#header h1 a:hover { background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: underline; }
+#header h1 a:hover span { color: black; }
+#header h1 a span { color: rgb(32, 32, 32); }
+#header h2 { font-size: 18px; font-family: Georgia,Times,serif; font-weight: normal; }
+#footer { clear: both; }
+#posts > div { border-top: 1px solid rgb(223, 223, 223); clear: both; }
+.date { padding: 0.2em 0pt; background: rgb(239, 239, 239) none repeat scroll 0% 0%; float: left; width: 55px; color: rgb(55, 55, 55); margin-left: -76px; font-size: 20px; font-weight: bold; text-align: center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-shadow: 1px 1px 1px rgb(192, 192, 192); }
+.date .month { display: block; }
+#posts div h3.entry-title { margin-top: 0pt; font-size: 26px; text-shadow: 1px 1px 1px rgb(204, 204, 204); }
+#posts div h3.entry-title a { color: rgb(0, 170, 255); padding-left: 0pt; }
+#posts div h3.entry-title a:hover { background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-decoration: underline; }
+#posts div h3.entry-title a span { color: rgb(16, 16, 16); }
+.pagination { font-size: 12px; }
+.pagination > * { padding: 0.3em 0.5em; margin-right: 0.3em; }
+.pagination a:hover { background: rgb(32, 32, 32) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-shadow: 1px 1px 1px rgb(23, 23, 23); }
+.pagination a:active { text-shadow: none; }
+.pagination .current { background: rgb(32, 32, 32) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: white; text-shadow: 1px 1px 1px rgb(23, 23, 23); }
+.pagination .disabled { color: rgb(192, 192, 192); }
+.article { padding: 1em 0pt; }
+.article .meta { font-size: 12px; text-align: right; }
+.article .date { margin-top: 0.3em; }
+.article cite { display: block; text-align: right; font-style: normal; font-size: 12px; }
+.article .media { padding: 5px; font-size: 0.9em; }
+.article .extra { margin-top: 10px; margin-bottom: 5px; }
+.quote { padding: 1.6em 0pt; }
+.quote blockquote { padding: 0pt 1em 0pt 2.3em; background: transparent url('quote.png') no-repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 20px; font-style: oblique; font-weight: bold; font-family: Georgia,Times,serif; margin-bottom: 0.5em; min-height: 36px; }
+.quote cite { display: block; text-align: right; font-style: normal; font-size: 12px; }
+.quote blockquote a { padding: 0pt; color: rgb(55, 55, 55); }
+.quote blockquote a:hover { background: white none repeat scroll 0% 0%; text-decoration: underline; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.quote blockquote a span { color: rgb(0, 170, 255); }
+.quote .date { margin-top: 0pt; }
+.tweet { padding: 1.4em 0pt; }
+.tweet blockquote { padding: 0pt 1em 0pt 2.3em; background: transparent url('tweet.png') no-repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 20px; font-style: oblique; font-weight: bold; font-family: Georgia,Times,serif; margin-bottom: 0.5em; }
+.tweet cite { display: block; text-align: right; font-style: normal; font-size: 12px; }
+.tweet blockquote a { padding: 0pt; color: rgb(55, 55, 55); }
+.tweet blockquote a:hover { background: white none repeat scroll 0% 0%; text-decoration: underline; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.tweet blockquote a span { color: rgb(0, 170, 255); }
+.tweet .date { margin-top: 0pt; }
+.link { padding: 1.4em 0pt; }
+.link blockquote { padding: 0pt 1em 0pt 2.2em; background: transparent url('link.png') no-repeat scroll 0pt 0.25em; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 22px; font-style: oblique; font-weight: bold; font-family: Georgia,Times,serif; margin-bottom: 0.5em; min-height: 2em; }
+.link p { padding: 0pt 1em 0pt 0.2em; }
+.link cite { display: block; text-align: right; font-style: normal; font-size: 12px; }
+.link blockquote p { font-family: Lucida Grande,Tahoma,sans-serif; font-style: normal; font-weight: normal; }
+.link blockquote a { padding: 0pt; color: rgb(55, 55, 55); }
+.link blockquote a:hover { background: white none repeat scroll 0% 0%; text-decoration: underline; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.link blockquote a span { color: rgb(0, 170, 255); }
+.link .date { margin-top: 0.3em; }
+.picture { padding: 1.4em 0pt; }
+.picture img { margin: 6px 0pt 0.5em; }
+.picture cite { display: block; text-align: right; font-style: normal; font-size: 12px; }
+.picture small { display: block; }
+.picture .date { margin-top: 0.3em; }
+#comments .new_comment, #comments { margin-top: 3em; }
+#comments label, #comments label input[type="text"] { padding: 0.2em; width: 100%; font-weight: normal; }
+#comments label textarea { padding: 0.2em; height: 150px; font-size: 12px; }
+#comments .fieldWithErrors input[type="text"], #comments .fieldWithErrors textarea { width: 100%; outline-color: rgb(255, 153, 68); outline-style: solid; outline-width: 3px; }
+#comments .comment h5 { margin-top: 0pt; }
+#comments .comment h5 a { padding: 0pt; }
+#comments .comment { padding: 0.5em; background: rgb(238, 238, 238) none repeat scroll 0% 0%; margin-top: 0.5em; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+#quote textarea { height: 100px; }
+.article .entry { color: rgb(32, 32, 32); font-size: 14px; line-height: 1.5em; }
+.article .entry p { margin-bottom: 0.6em; }
+.article .entry h1 { font-size: 20px; }
+.article .entry h2 { font-size: 18px; }
+.article .entry h3 { font-size: 16px; }
+.article .entry h4 { font-size: 14px; }
+.article .entry h5 { font-size: 12px; }
+.article .entry h6 { font-size: 10px; }
+.article .entry a { padding: 0pt 0.1em; color: rgb(0, 170, 221); text-decoration: underline; }
+.article .entry a:hover { background: rgb(0, 170, 255) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: white; }
+.article .entry a:hover span { color: white; }
+.article .entry a span { color: black; }
+.article .entry pre, .article .entry pre code { padding: 1em 0pt; font-size: 12px; font-family: Monaco,Courier,monospace; line-height: 1.3em; }
+.article .entry blockquote, .article .entry blockquote p { font-size: 12px; }
+.article .entry blockquote { border-left: 1em solid rgb(239, 239, 239); padding: 0pt 1em; }
+#admin { border-bottom: 1px solid rgb(204, 204, 204); padding: 0.3em 0.6em 0.2em; background: black none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-bottom: -1em; font-size: 11px; color: white; text-align: left; }
+#admin strong { margin-left: 1em; }
+#admin a { padding: 0pt 0.2em; color: white; margin-left: 1em; margin-top: -0.1em; }
+#admin a:hover { background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; text-decoration: none; }
+#admin #logoutLinks { float: right; }
+#admin hr { margin: 0pt; padding: 0pt; clear: both; visibility: hidden; }
+#all.admin { width: 600px; }
+#all.admin label { width: 600px; }
+.editable { padding: 0pt; color: rgb(32, 32, 32); }
+.editable:hover { background: rgb(255, 255, 204) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(32, 32, 32); }
+.editor { margin-top: 0pt; text-align: right; }
+.editor textarea { width: 99%; }
+.editor a { padding: 4px; font-size: 12px; }
+.editor a:hover { background: transparent none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: rgb(32, 32, 32); }
+#post_allow_comments { width: 15px; height: 15px; }

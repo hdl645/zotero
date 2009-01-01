@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://osteele.com/archives/2008/05/my-git-workflow">
+<meta name="wpd_url" content="http://osteele.com/archives/2008/05/my-git-workflow">
+<meta name="wpd_date" content="2008-07-08T16:34Z">
+
+
+
+  <title>My Git Workflow | Oliver Steele</title>
+	
+<link rel="shortcut icon" href="about:blank?favicon.ico" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="Oliver Steele RSS" href="http://osteele.com/rss.xml">
+  
+
+
+
+
+
+
+    
+<script charset="utf-8" id="injection_graph_func" src="injection_graph_func.js"></script>
+<link rel="stylesheet" type="text/css" href="my-git-workflow.css" media="all">
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <h1><span><a href="http://osteele.com/" title="Oliver Steele">Oliver Steele</a></span></h1>
+        <h2>Languages of the real and artificial</h2>
+      </div>
+
+  <div id="page">
+    <div id="content" class="hfeed">
+      <div class="navigation"><div class="breadcrumb"><a href="http://osteele.com/">Home</a> &raquo; <a href="http://osteele.com/archives">Blogs</a> &raquo; <a href="http://osteele.com/blog/1">oliver's blog</a></div><div class="clear"></div></div>            <h1 class="entry-title title">My Git Workflow</h1>                                    <div class="hentry" id="article-169">
+    <div class="vcard">
+
+    Posted by <span class="fn">oliver</span>
+  </div>
+  <abbr class="published" title="Sat, 05/10/2008 - 01:01">Sat, 05/10/2008 - 01:01</abbr>
+  <br class="clear">
+  <div class="entry-content">
+    	<p><a href="http://git.or.cz/">Git</a>&lsquo;s great!  But it&rsquo;s difficult to learn (it was for me, anyway) &mdash; especially the index, which unlike the power-user features, comes up in day-to-day operation.</p>
+
+	<p>Here&rsquo;s my path to enlightment, and how I ended up using the index in my particular workflow.  There are other workflows, but this one is mine.</p>
+
+	<p>What this isn&rsquo;t: a Git tutorial.  It doesn&rsquo;t tell you how to set up git, or use it. I don&rsquo;t cover branches, or merging, or tags, or blobs.  There are dozens of really great articles about Git on the web; here are <a href="http://del.icio.us/osteele/git">some</a>.  What&rsquo;s here are just some pictures that <em>aren&rsquo;t</em> about branches or blobs, that I wished I&rsquo;d been able to look at six months ago when I was trying to figure this stuff out; I still haven&rsquo;t seen them elsewhere, so here they are now.</p>
+
+	<h3>My brief history with Git</h3>
+
+	<p>I started using Git about six months ago, in order to productively subcontract for a company that still uses Perforce.  Before that I had been a happy Mercurial user; before that, a Darcs devotee; before that, a mildly satisfied Subversion supplicant; and before that, a Perforce proponent.  (That last was before the other systems even <em>existed</em>.  I introduced Perforce into a couple of companies that had previously been using SourceSafe(!) &mdash; including the one I was now contracting for.)</p>
+
+	<p>Each of these systems has flaws. Perforce and Subversion require an always-on connection and make branching (and merging) expensive, and Perforce uses pessimistic locking too (you have to check a file out before you can edit it).  I got hit by the exponential merge bug in Darcs (since fixed?); a deeper problem was that I found I wanted to be able to go back in time more often than I needed to commute patches, whereas Darcs makes the latter easy at the expense of the former &mdash; so Darcs&rsquo; <a href="http://darcs.net/manual/node8.html#Patch">theory of patches</a>, although insightful and beautiful, just didn&rsquo;t match my workflow.</p>
+
+	<p>Git&rsquo;s problem is its complexity.  Half of that is because it&rsquo;s actually more powerful than the other systems: it&rsquo;s got features that make it look scary but that you can ignore.  Another half is that Git uses nonstandard names for about half its most common operations.  (The rest of the <span class="caps">VCS</span> world has more or less settled on a basic command set, with names such as &ldquo;checkout&rdquo; and &ldquo;revert&rdquo;.  Not Git!)  And the third half is the index.  The index is a mechanism for preventing what you commit from matching what you tested in your working directory.  Huh?</p>
+
+	<h3>Git without the index</h3>
+
+	<p>I got through my first four months of Git by <a href="http://git.or.cz/course/svn.html">pretending it was Subversion</a>. (A faster implementation of Subversion, that works offline, with non-awful branches and merging, that can run as a client to Perforce &mdash; but still basically Subversion.)  The executive summary of this mode of operation is that if you use &ldquo;<code>git commit -a</code>&ldquo; instead of &ldquo;<code>git commit</code>&ldquo;, you can ignore the index altogether.  You can alias <code>ci</code> to &ldquo;<code>commit -a</code>&ldquo; (and train yourself not to use the longer <code>commit</code>, which I hadn&rsquo;t been doing anyway), and then you don&rsquo;t have to remember the command-line argument either:</p>
+
+<div class="geshifilter"><pre class="geshifilter-text">$ cat ~/.gitconfig
+[alias]
+  ci = commit -a
+  co = checkout
+  st = status -a
+$ git ci -m &lsquo;some changes&rsquo;</pre></div>
+
+	<h3>Adding Back the Index</h3>
+
+	<p>Git keeps copies of your source tree in the locations in this diagram<sup class="footnote"><a href="#fn25607342848530cd65b6bd">1</a></sup>.  (I&rsquo;ll call these locations &ldquo;data stores&rdquo;.)</p>
+
+	<p><img src="git-transport.png" alt=""></p>
+
+	<p>The data store that&rsquo;s new, relative to every other <span class="caps">DVCS</span> that I know about, is the &ldquo;index&rdquo;.  The one that&rsquo;s new relative to centralized VCS&rsquo;s such as Subversion and Perforce is the &ldquo;local repository&rdquo;.</p>
+
+	<p>The illustration shows that &ldquo;<code>git add</code>&ldquo; is the only (everyday) operation that can cause the index to diverge from the local repository.  The only reason (in Subversion-emulation mode) to use &ldquo;<code>git add</code>&ldquo; is so that &ldquo;<code>git commit</code>&ldquo; will see your changes.  The <code>-a&lt;/a&gt; option to "&lt;code&gt;git commit</code>&rdquo; causes &ldquo;<code>git commit</code>&ldquo; to run &ldquo;<code>git add -u</code>&ldquo; first &mdash; in which case you never need to <code>run "git add -u</code>&rdquo; explicitly &mdash; in which case the index stays in sync with the repository head.  This is how the trick in &ldquo;git without the index&rdquo; works: if you always use commit via &ldquo;<code>git commit -a</code>&ldquo;, you can ignore the index<sup class="footnote"><a href="#fn155097716248530cd65e59e">2</a></sup>.</p>
+
+	<p>So what&rsquo;s the point of the index?  Is it because Linus likes complicated things?  Is to one-up all the other repositories?  Is it to increase the complexity of system, so that you have a chance to shoot yourself in the foot if you&rsquo;re not an alpha enough geek?</p>
+
+	<p>Well, probably.  But it&rsquo;s good for something else as well.  Several things, actually; I&rsquo;ll show you one (that I use), and point you to another.</p>
+
+	<p>But first, a piece of background that helps in understanding Git.  Git isn&rsquo;t at its core a <span class="caps">VCS</span>.  It&rsquo;s really a distributed versioning file system, down to its own <a href="http://www.kernel.org/pub/software/scm/git/docs/git-fsck.html">fsck</a> and <a href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">gc</a>.  It was developed as the bottom layer of a <span class="caps">VCS</span>, but the <span class="caps">VCS</span>  layer, which provides the conventional <span class="caps">VCS</span> commands (<code>commit</code>, <code>checkout</code>, <code>branch</code>), is more like an uneven veneer than like the &ldquo;porcelain&rdquo; it&rsquo;s sometimes called: bits of file system (git core) internals poke through.</p>
+
+	<p>The disadvantage of this (leaky) layering is that Git is complicated.  If you look up how to diff against yesterday&rsquo;s 1pm sources in <a href="http://www.kernel.org/pub/software/scm/git/docs/git-diff.html">git diff</a>, it will send you to <a href="http://www.kernel.org/pub/software/scm/git/docs/git-rev-parse.html">git rev-parse</a> from the core; if you look up <a href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git checkout</a>, you may end up at <a href="http://www.kernel.org/pub/software/scm/git/docs/git-check-ref-format.html">git-check-ref-format</a>.  Most of this you can ignore, but it takes some reading to figure out which.</p>
+
+	<p>The advantage of the layering is that you can use Git to build your own workflows.  Some of these workflows involve the index.  Like the other fancy Git features, bulding your own workflows is something that you can ignore initially, and add when you get to where you need it.  This is, historically, how I&rsquo;ve used the index: I ignored it until I was comfortable with more of Git, and now I use it for a more productive workflow than I had with other VCS&rsquo;s.  It&rsquo;s not my main reason for using Git, but it&rsquo;s turned to a strength from being a liability.</p>
+
+	<h3>My Git Workflow</h3>
+
+	<p><ins>Added: By way of illustration, here&rsquo;s how I use Git.  I&rsquo;m not recommending this particular workflow; instead, I&rsquo;m hoping that it can further illustrate the relation between the workspace, the index, and the repository; and also the more general idea of using Git to build a workflow.</ins></p>
+
+	<p>I use the index as a checkpoint.  When I&rsquo;m about to make a change that might go awry &mdash; when I want to explore some direction that I&rsquo;m not sure if I can follow through on or even whether it&rsquo;s a good idea, such as a conceptually demanding refactoring or changing a representation type &mdash; I checkpoint my work into the index.  If this is the first change I&rsquo;ve made since my last commit, then I can use the local repository as a checkpoint, but often I&rsquo;ve got one conceptual change that I&rsquo;m implementing as a set of little steps. I want to checkpoint after each step, but save the commit until I&rsquo;ve gotten back to working, tested code.  (More on this tomorrow.)</p>
+
+	<p><ins>Added: This way I can checkpoint every few minutes.  It&rsquo;s a very cheap operation, and I don&rsquo;t have to spend time cleaning up the checkpoints later.  &ldquo;<code>git diff</code>&ldquo; tells me what I&rsquo;ve changed since the last checkpoint; &ldquo;<code>git diff head</code>&ldquo; shows what&rsquo;s changed since the last commit.  &ldquo;<code>git checkout .</code>&ldquo; reverts to the last checkpoint; &ldquo;<code>git checkout head .</code>&ldquo; reverts to the last commit.  And &ldquo;<code>git stash</code>&ldquo; and &ldquo;<code>git checkout -m -b</code>&ldquo; operate on the changes since the last commit, which is what I want.</ins></p>
+
+	<p>I&rsquo;m most efficient when I can fearlessly try out risky changes.  Having a test suite is one way to be fearless: the fear of having to step through a set of manual steps to test each changed code path, or worse yet missing some, inhibits creativity.  Being able to roll back changes to the last checkpoint eliminates another source of fear.</p>
+
+	<p>I used to make copies of files before I edited them; my directory would end up littered with files like <code>code.java.1</code> and <code>code.java.2</code>, which I would periodically sweep away.  Having Git handle the checkpoint and diff with them makes all this go faster.  (Having painless branches does the same for longer-running experiments, but I don&rsquo;t want to create and then destroy a branch for every five-minute change.)</p>
+
+	<p>Here&rsquo;s another picture of the same Git commands, this time shown along a second axis, time, proceeding from top to bottom. [This is the behavior diagram to the last picture&rsquo;s dataflow diagram.  Kind of.]  A number of local edits adds up to something I checkpoint to the index via &ldquo;<code>git add -u</code>&ldquo;; after a while I&rsquo;ve collected something I&rsquo;m ready to commit; and every so many commits I push everything so far to a remote repository, for backup (although I&rsquo;ve got other backup systems), and for sharing.  </p>
+
+	<p><img src="git-workflow.png" alt=""></p>
+
+	<p>I&rsquo;ve even added another step, releasing a distribution, that goes outside of git.  This uses rsync (or scp, or some other build or deployment tool) to upload a tar file (or update a web site, or build a binary to place on a <span class="caps">DVD</span>).</p>
+
+	<h3>Some Alternatives</h3>
+
+	<p>Ryan Tomayko has written an <a href="http://tomayko.com/writings/the-thing-about-git">excellent essay</a> about a completely different way to use the repository.  I recommend it wholeheartedly.</p>
+
+	<p>Ryan&rsquo;s workflow is completely incompatible with mine.  Ryan uses the repository to tease apart the changes in his working directory into a sequence of separate commits.  I prefer to commit only code that I&rsquo;ve tested in my directory, so Ryan&rsquo;s method doesn&rsquo;t work for me.  I set pending work aside via <code>git stash</code> or <code>git checkout -m -b</code> when I know I might need to interrupt it with another change; this sounds like it might not work for Ryan.  Neither one of these workflows is wrong (and I could easily use Ryan&rsquo;s, I&rsquo;m just slightly more efficient with mine); Git supports them both.</p>
+
+	<p>There&rsquo;s another way to do this particular task &mdash; of checkpointing after every few edits, but only persisting some of these checkpoints into the repository.  This is to commit each checkpoint to the repository (and go back to ignoring the index &mdash; at least for checkpointing &mdash; so this might work with Ryan&rsquo;s), and <code>rebase</code> them later.  Git lets you squash a number of commits into a single commit before you push it to a public repository (and edit, reorder, and drop unpushed commits too) &mdash; that&rsquo;s the <code>rebase -i</code> block in the previous illustration, and you can read about it <a href="http://blog.moertel.com/articles/2007/12/10/how-i-stopped-missing-darcs-and-started-loving-git">here</a>.  This is a perfectly legitimate mode of operation; it&rsquo;s just one that I don&rsquo;t use.</p>
+
+	<p>Both of these alternatives harken back to Git as being a tool for designing <span class="caps">VCS</span> workflows, as much as being a <span class="caps">VCS</span> system itself.  The reasons I don&rsquo;t use them myself bring us to Commit Policies, which I&rsquo;ll write about <a href="http://osteele.com/archives/2008/05/commit-policies">tomorrow</a>.</p>
+
+<hr>
+
+	<p id="fn25607342848530cd65b6bd" class="footnote"><sup>1</sup> This picture shows just those commands that copy data between the local repository, the remote repository, the index, and your workspace.  There&rsquo;s lots more going on <em>inside</em> these repositories (branches, tags, and heads; or, blobs, trees, commits, and refs).  In fact, during a merge, there&rsquo;s more going on inside the <em>index</em>, too (&ldquo;mine&rdquo;, &ldquo;ours&rdquo;, and &ldquo;theirs&rdquo;).  To a first approximation, all that&rsquo;s orthogonal to how data gets <em>between</em> data stores; we&rsquo;ll ignore it.</p>
+
+	<p id="fn155097716248530cd65e59e" class="footnote"><sup>2</sup> This isn&rsquo;t quite true.  You still need to use &ldquo;<code>git add</code>&ldquo; a new file to tell git about it, and at that point it&rsquo;s in your index but not in your repository.  You still don&rsquo;t need to <em>think</em> about the repository in order to use it this way </p>
+
+
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://osteele.com/archives/2008/05/my-git-workflow" dc:identifier="http://osteele.com/archives/2008/05/my-git-workflow" dc:title="My Git Workflow" trackback:ping="http://osteele.com/trackback/169" />
+</rdf:RDF>
+-->
+<div id="trackback-url"><div class="box">
+
+  <h2>Trackback URL for this post:</h2>
+
+  <div class="content">http://osteele.com/trackback/169</div>
+</div>
+</div>      </div>
+
+  <ul class="meta">
+        <li>Tags:
+    <ul class="links inline"><li class="first taxonomy_term_26"><a href="http://osteele.com/archives/category/26" rel="tag" title="" class="taxonomy_term_26">Illustrations</a></li>
+<li class="last taxonomy_term_22"><a href="http://osteele.com/category/wordpress-category/software-development" rel="tag" title="" class="taxonomy_term_22">Software Development</a></li>
+</ul>    </li>
+      </ul>
+
+          <div class="links">
+        <ul class="links inline"><li class="first blog_usernames_blog"><a href="http://osteele.com/blog/1" title="Read oliver's latest blog entries." class="blog_usernames_blog">oliver's blog</a></li>
+<li class="last comment_add"><a href="http://osteele.com/comment/reply/169#comment-form" title="Share your thoughts and opinions related to this posting." class="comment_add">Add new comment</a></li>
+</ul>      </div>
+        
+</div>
+<div id="comments"><h3 class="comments">Comments</h3><a id="comment-560"></a>
+<div class="comment"><div class="author"><cite>sergio </cite> - <abbr title="Tue, 05/13/2008 - 20:58">Tue, 05/13/2008 - 20:58</abbr></div><div class="content"><p>Your del.icio.us link in the first paragraph is broken. It is working as a relative link.</p>
+<p>Great couple of post on Git. I'm learning and this material is gold. Thanks a lot!.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/560" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-558"></a>
+<div class="comment"><div class="author"><cite>RichB </cite> - <abbr title="Tue, 05/13/2008 - 14:20">Tue, 05/13/2008 - 14:20</abbr></div><div class="content"><p>So it's like a (local) TFS shelveset?</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/558" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-554"></a>
+<div class="comment"><div class="author"><cite><a href="http://shifteleven.com/">K. Adam Christensen</a> </cite> - <abbr title="Mon, 05/12/2008 - 15:13">Mon, 05/12/2008 - 15:13</abbr></div><div class="content"><p>Excellent article.</p>
+<p>You mentioned that you use git-p4 and I have been trying to use it; however, things aren't working nicely for me.  If you need article ideas, I would love to hear about how you set that up and any pitfalls you have run into.</p>
+<p>Cheers</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/554" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-545"></a>
+<div class="comment"><div class="author"><cite>stacktracer </cite> - <abbr title="Sun, 05/11/2008 - 02:16">Sun, 05/11/2008 - 02:16</abbr></div><div class="content"><p>Your diagrams are exactly what's been missing from all the git tutorials out there.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/545" class="comment_reply">reply</a></li>
+</ul></div></div><div class="indented"><a id="comment-568"></a>
+<div class="comment"><div class="author"><cite>Ben </cite> - <abbr title="Thu, 05/15/2008 - 21:20">Thu, 05/15/2008 - 21:20</abbr></div><div class="content"><p>Ditto. If the article had nothing else, that one picture is worth a thousand typed or spoken words.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/568" class="comment_reply">reply</a></li>
+</ul></div></div></div><a id="comment-543"></a>
+<div class="comment"><div class="author"><cite>Gene Hunt </cite> - <abbr title="Sat, 05/10/2008 - 13:30">Sat, 05/10/2008 - 13:30</abbr></div><div class="content"><p>I'm a happy Mercurial user (like simple things) but I'm interested in what Git has to offer to have a better workflow.</p>
+<p>That is, with Mercurial you could do a similar workflow using queues. They are just a series of patches which are stacked over the history of your local repository. They can be reordered, pushed, poped... and whatnot. </p>
+<p>So it would work like this.</p>
+<p>hg qinit #init queues<br>
+hg qnew mywork #new queue patch</p>
+<p>Now you do your work:</p>
+<p>hg add<br>
+hg del<br>
+...<br>
+hg qrefresh #commits work to the top patch of queue (mywork). This is the checkpointing command</p>
+<p>When you are happy with the patch and want to make it a "real" revision, just:</p>
+<p>hg qremove --rev mywork</p>
+<p>And that is, I don't know if I'm mising part of your workflow, please let me know what you think about this.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/543" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-541"></a>
+<div class="comment"><div class="author"><cite><a href="http://www.jukie.net/%7Ebart/">bartman</a> </cite> - <abbr title="Sat, 05/10/2008 - 11:24">Sat, 05/10/2008 - 11:24</abbr></div><div class="content"><p>I love the diagrams!</p>
+<p>One unmentioned commit management feature is `git commit --amend` which would allow you to update the last commit with new edits.  If you're familiar with `git rebase -i` squashing, then this is like squashing your index into the last commit.  You could also amend with the working files by using `git commit --amend -a` or providing specific files on the command line.</p>
+<p>I think both `git stash` and `git commit --amend` have their uses, and I use them both in my workflow.</p>
+<p>Finally, I would also like to mention that `git add -i` has a hidden feature of being able to stage individual lines of change, not complete files.  If there is some debug code in your file, you can commit everything else.  You can also use `git gui` to stage individual "hunks" (blocks of a diff) for commit.</p>
+<p>-Bart</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/541" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-540"></a>
+<div class="comment"><div class="author"><cite>Anonymous </cite> - <abbr title="Sat, 05/10/2008 - 07:04">Sat, 05/10/2008 - 07:04</abbr></div><div class="content"><p>It might not hurt to make your underlined edits look different than your underlined links.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/540" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-538"></a>
+<div class="comment"><div class="author"><cite>Gwern </cite> - <abbr title="Sat, 05/10/2008 - 04:54">Sat, 05/10/2008 - 04:54</abbr></div><div class="content"><p>"I got hit by the exponential merge bug in Darcs (since fixed?)..."</p>
+<p>Yes, in Darcs 2 (just recently released). It's a very solid release, but I can't speak to whether it would be more satisfactory as far as 'going back in time'.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/538" class="comment_reply">reply</a></li>
+</ul></div></div><a id="comment-536"></a>
+<div class="comment"><div class="author"><cite><a href="http://newartisans.com/">John Wiegley</a> </cite> - <abbr title="Sat, 05/10/2008 - 03:32">Sat, 05/10/2008 - 03:32</abbr></div><div class="content"><p>What you describe sounds no different from using a branch, except that by checkpointing into the index, you're losing all of your recent history.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/536" class="comment_reply">reply</a></li>
+</ul></div></div><div class="indented"><a id="comment-537"></a>
+<div class="comment"><div class="author"><cite>oliver</cite> - <abbr title="Sat, 05/10/2008 - 04:33">Sat, 05/10/2008 - 04:33</abbr></div><div class="content"><p>Something I maybe didn't make clear enough is that I actually don't want the fine-grained history in the repository. I might make a checkpoint every five minutes, and many of these checkpoints are pretty low quality; I don't want them persisted.</p>
+<p>It would be nice to have all the checkpoints persisted until the next persistable commit, and then blow them away at that point.  (I just made up "persistable commit" to mean one that I want to keep in the repository, as opposed to the ones that represent ephemeral checkpoints, if I implement checkpointing as commit.)  The alternative for doing that that I mention is to commit checkpoints, and then rebase them away.  One disadvantage of doing this is the extra step of the rebase, along with having to remember where to rebase from.  The other is that "git diff head" won't tell me what I want.  Maybe tagging every persistable commit solves both these problems.</p>
+<p>Or I could, as you suggest, make a branch, commit my checkpoints into it, "merge -squash" it into the target branch, and then delete the branch.  Then a persistable commit becomes "git checkout {original}; git merge --squash wip; git commit; git checkout -b wip", where {original} depends on which branch I started from.  And "git diff head" becomes "git diff {original}", where, again, {original} depends on where I started.  This is heavier weight than I want, but again, maybe some scripting and/or tags makes it easier.</p>
+<p>Right now I like the fact that "git checkout head .", "git stash", and "git checkout -m -b" operate on everything since the last persistable commit.  All those things would be harder, or I'd need to write more scripts/tagging to do them, if checkpoints were commits too.</p>
+<p>Anyway, I really started out trying to draw a picture of how the index fit in, not to try to promote my particular workflow.  I've added a disclaimer paragraph to try to make this clearer.</p>
+</div><div class="links"><ul class="links"><li class="first last comment_reply"><a href="http://osteele.com/comment/reply/169/537" class="comment_reply">reply</a></li>
+</ul></div></div></div></div>          </div>
+
+    <div id="sidebar">
+      <!-- search -->
+      
+      <!-- sidebar components -->
+            <div class="sidebar-node block-block" id="block-block-1">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="http://osteele.com/about">About</a></li><li><a href="http://osteele.com/projects">Projects</a></li><li><a href="http://osteele.com/sources">Sources</a></li><li><a href="http://osteele.com/tools">Tools</a></li>        </ul>
+      </div>
+                  <div class="sidebar-node block-block" id="block-block-3">
+    <h3>About</h3>
+
+Oliver Steele lives in Western Massachusetts and commutes to downtown LA, where he is bringing an operating system from handwaving to reality.  He was the architect of OpenLaszlo, the author of PyWordNet and <a href="http://osteele.com/sources">other open source projects</a>.  His interests include programming languages, knowledge representation, information visualization, and math education.  <a href="http://osteele.com/bio">[more]</a></div><div class="sidebar-node block-relatedlinks" id="block-relatedlinks-2">
+      <h3>Related</h3>
+    <div class="item-list"><ul><li><a href="http://osteele.com/archives/2008/05/commit-policies">Commit Policies</a></li><li><a href="http://osteele.com/archives/2008/05/latin-agreement-and-case">Latin Agreement and Case</a></li><li><a href="http://osteele.com/archives/2008/05/biofuel-economy">The Biofuel Economy</a></li><li><a href="http://osteele.com/archives/2008/05/ambimation">Ambimation</a></li><li><a href="http://osteele.com/archives/2008/02/fizzbuzz-station">FizzBuzz Station</a></li></ul></div></div><div class="sidebar-node block-block" id="block-block-1">
+      <h3>Categories</h3>
+    <div class="item-list"><ul><li><a href="http://osteele.com/category/amusements">Amusements</a> (10)</li><li><a href="http://osteele.com/category/essays">Essays</a> (20)</li><li><a href="http://osteele.com/category/family">Family</a> (8)</li><li><a href="http://osteele.com/category/general">General</a> (9)</li><li><a href="http://osteele.com/category/health">Health</a> (1)</li><li><a href="http://osteele.com/category/illustrations">Illustrations</a> (11)</li><li><a href="http://osteele.com/category/inventions">Inventions</a> (2)</li><li><a href="http://osteele.com/category/javascript">JavaScript</a> (24)</li><li><a href="http://osteele.com/category/libraries">Libraries</a> (21)</li><li><a href="http://osteele.com/category/math+education">Math Education</a> (9)</li><li><a href="http://osteele.com/category/openlaszlo">OpenLaszlo</a> (31)</li><li><a href="http://osteele.com/category/programming">Programming</a> (7)</li><li><a href="http://osteele.com/category/programming+languages">Programming Languages</a> (6)</li><li><a href="http://osteele.com/category/projects">Projects</a> (23)</li><li><a href="http://osteele.com/category/python">Python</a> (3)</li><li><a href="http://osteele.com/category/ruby">Ruby</a> (7)</li><li><a href="http://osteele.com/category/software">Software</a> (3)</li><li><a href="http://osteele.com/category/open+source">Open Source</a> (4)</li><li><a href="http://osteele.com/category/xml">XML</a> (6)</li><li><a href="http://osteele.com/category/software+development">Software Development</a> (8)</li><li><a href="http://osteele.com/category/systems+thinking">Systems Thinking</a> (6)</li><li><a href="http://osteele.com/category/technology">Technology</a> (7)</li><li><a href="http://osteele.com/category/tips">Tips</a> (5)</li><li><a href="http://osteele.com/category/visualizations">Visualizations</a> (13)</li><li><a href="http://osteele.com/category/words">Words</a> (9)</li></ul></div></div><div class="sidebar-node block-blog" id="block-blog-0">
+      <h3>Recent blog posts</h3>
+    <div class="item-list"><ul><li><a href="http://osteele.com/archives/2008/05/latin-agreement-and-case">Latin Agreement and Case</a></li><li><a href="http://osteele.com/archives/2008/05/smiley-socket">Smiley Socket</a></li><li><a href="http://osteele.com/archives/2008/05/commit-policies">Commit Policies</a></li><li><a href="http://osteele.com/archives/2008/05/my-git-workflow" class="active">My Git Workflow</a></li><li><a href="http://osteele.com/archives/2008/05/pneumococoa">Pneumococoa</a></li><li><a href="http://osteele.com/archives/2008/05/my-no-tv">My No TV</a></li><li><a href="http://osteele.com/archives/2008/05/biofuel-economy">The Biofuel Economy</a></li><li><a href="http://osteele.com/archives/2008/05/ambimation">Ambimation</a></li><li><a href="http://osteele.com/archives/2008/05/jquery-profile-plugin">jQuery Profile Plugin</a></li><li><a href="http://osteele.com/archives/2008/04/shadow-legacy">The Shadow of a Legacy</a></li></ul></div><div class="more-link"><a href="http://osteele.com/archives" title="Read the latest blog entries.">more</a></div></div><div class="sidebar-node block-menu" id="block-menu-86">
+      <h3>Popular</h3>
+    
+<ul class="menu">
+<li class="leaf"><a href="http://osteele.com/sources/javascript/functional/">Functional JavaScript</a></li>
+<li class="leaf"><a href="http://osteele.com/archives/2006/04/javascript-memoization">JavaScript Memoization</a></li>
+<li class="leaf"><a href="http://osteele.com/archives/2007/12/overloading-semicolon" title="Monads from 10,000 Feet">Overloading Semicolon</a></li>
+<li class="leaf"><a href="http://osteele.com/tools/reanimator" title="Visualize regular expressions">reAnimator</a></li>
+<li class="leaf"><a href="http://osteele.com/archives/2004/11/ides">The IDE Divide</a></li>
+<li class="leaf"><a href="http://osteele.com/archives/2004/12/visualizing-basic-algebra">Visualizing Basic Algebra</a></li>
+
+</ul>
+</div><div class="sidebar-node block-node" id="block-node-0">
+      <h3>Syndicate</h3>
+    <a href="http://osteele.com/rss.xml" class="feed-icon"><img src="feed.png" alt="Syndicate content" title="Syndicate content" width="16" height="16"></a></div>          </div>
+    <br style="clear: both;">
+  </div>
+
+  <div id="footer">
+    <hr>
+    <p><a href="http://osteele.com/" title="Oliver Steele">Oliver Steele</a></p>
+    <p>Copyright 1995-2008 by Oliver Steele.  All rights reserved.
+</p><div class="sidebar-node block-block" id="block-block-2">
+    <script src="urchin.js" type="text/javascript"></script>
+<script type="text/javascript">_uacct = "UA-202010-1";urchinTracker();</script>
+<script type="text/javascript" src="quant.js"></script>
+<script type="text/javascript">_qacct="p-52aYZlc3ACyMc";quantserve();</script>
+</div>    <ul>
+      <li>powered by <a href="http://www.drupal.org/">drupal</a> /
+          styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a> /
+          ported by <a href="http://www.voidberg.org/">alexandru badiu</a>
+          </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

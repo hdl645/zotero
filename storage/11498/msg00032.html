@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00032.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00032.html">
+<meta name="wpd_date" content="2008-06-03T03:01Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: Re: IPSec Passthrough -->
+<!--X-From-R13: Egrcura Yrag <xragNooa.pbz> -->
+<!--X-Date: Fri, 2 May 2003 15:30:40 &#45;0400 (EDT) -->
+<!--X-Message-Id: p05100308bad86b6da60e@[128.89.88.34] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1772A2E865ABD411B18900508BB1B88F05ED7D8C@SVARLEXC07 -->
+<!--X-Reference: 1051769403.1131.40.camel@lima.royalchallenge.com -->
+<!--X-Reference: 29664595&#45;7BF7&#45;11D7&#45;96C9&#45;000A959D832C@apple.com -->
+<!--X-Head-End-->
+
+
+
+<title>Re: IPSec Passthrough</title>
+<link rev="made" href="mailto:kent@bbn.com">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.ox.org/ipsec/2003/05/msg00031.html">Date Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00033.html">Date Next</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00010.html">Thread Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00044.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00032">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00032">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Joshua Graessley &lt;<a href="mailto:jgraessley@apple.com">jgraessley@apple.com</a>&gt;</li>
+<li><em>Subject</em>: Re: IPSec Passthrough</li>
+<li><em>From</em>: Stephen Kent &lt;<a href="mailto:kent@bbn.com">kent@bbn.com</a>&gt;</li>
+<li><em>Date</em>: Fri, 2 May 2003 14:40:40 -0400</li>
+<li><em>Cc</em>: <a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a></li>
+<li><em>In-Reply-To</em>: &lt;<a href="http://www.ox.org/ipsec/2003/05/msg00010.html">29664595-7BF7-11D7-96C9-000A959D832C@apple.com</a>&gt;</li>
+<li><em>References</em>: &lt;1772A2E865ABD411B18900508BB1B88F05ED7D8C@SVARLEXC07&gt;&lt;<a href="http://www.ox.org/ipsec/2003/05/msg00000.html">1051769403.1131.40.camel@lima.royalchallenge.com</a>&gt;&lt;<a href="http://www.ox.org/ipsec/2003/05/msg00010.html">29664595-7BF7-11D7-96C9-000A959D832C@apple.com</a>&gt;</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>&gt;
+&gt;There are two "modes" that IPSec operates in, tunnel mode and 
+&gt;transport mode. This is, in my opinion, a little bogus because 
+&gt;"tunnel mode" is really just transport mode where the next header is 
+&gt;an IP header instead of UDP, TCP, ICMP or some other protocol. 
+&gt;Anyhow, the NAT transparency only works with Tunnel mode (where the 
+&gt;next header after the ESP header is IP). In transport mode, the TCP 
+&gt;and UDP checksums will be screwed up. ESP encrypts and authenticates 
+&gt;the payload so the NAT can't molest it. The UDP and TCP checksums 
+&gt;take bits of the IP header in to account, most notably the source 
+&gt;and destination IP addresses. The NAT modifies the destination IP 
+&gt;address. Since it can't see or modify the TCP or UDP checksum to 
+&gt;compensate for the address change, TCP and UDP packets will be 
+&gt;dropped due to a bad checksum.
+
+Josh,
+
+Tunnel and transport mode differ in several ways that make them more 
+different that what you suggest above, for example:
+
+	- in tunnel mode we discard the outer IP header, whereas in 
+transport mode we don't discard anything from the inbound packet
+
+	- the modes differ in terms of which headers are checked for 
+inbound access control (the topic of a recent thread on this list)
+
+Steve
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00044" href="http://www.ox.org/ipsec/2003/05/msg00044.html">RE: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> "Subrata Goswami" &lt;sgoswami@umich.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00000" href="http://www.ox.org/ipsec/2003/05/msg00000.html">Re: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Vinay K Nallamothu &lt;vinay-rc@naturesoft.net&gt;</li></ul></li>
+<li><strong><a name="00010" href="http://www.ox.org/ipsec/2003/05/msg00010.html">Re: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Joshua Graessley &lt;jgraessley@apple.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00031.html">Re: Question on inbound IPSEC policy check</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00033.html">RE: IPSec Passthrough</a></strong>
+</li>
+<li>Prev by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00010.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00044.html">RE: IPSec Passthrough</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00032"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00032"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

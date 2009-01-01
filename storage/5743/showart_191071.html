@@ -1,0 +1,298 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=x-gbk">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.cublog.cn/u/16147/showart_191071.html">
+<meta name="wpd_url" content="http://www.cublog.cn/u/16147/showart_191071.html">
+<meta name="wpd_date" content="2008-06-03T02:05Z">
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" title="ChinaUnix Blog RSS Feed" href="http://blog.chinaunix.net/u/rss.php?id=16147">
+<meta name="keywords" content="用OpenSWAN做Linux下的IPSec VPN的详细配置指南 - 网络管理及安全 - 穆利堂信息化">
+<meta name="description" content="中国最大的IT技术博客-ChinaUnix博客：用OpenSWAN做Linux下的IPSec VPN的详细配置指南 - 网络管理及安全 - 穆利堂信息化">
+<title>用OpenSWAN做Linux下的IPSec VPN的详细配置指南 - 网络管理及安全 - 穆利堂信息化</title>
+
+<link rel="stylesheet" type="text/css" href="showart_191071.css" media="all">
+</head>
+<body leftmargin="0" topmargin="0" style="background: rgb(255, 255, 255) url() repeat ; 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" align="center" marginheight="0" marginwidth="0">
+
+<table style="border-collapse: collapse; height: 25px;" width="100%" align="center" background="about:blank?tophem1.gif" border="0" cellpadding="0" cellspacing="0" height="25">
+<tbody><tr> <td id="tool-bar" align="left" nowrap="nowrap">
+&nbsp;
+<a href="http://blog.chinaunix.net/" target="_top">博客首页</a>
+<a href="http://blog.chinaunix.net/register.php" target="_top">注册</a>
+<a href="http://bbs.chinaunix.net/forumdisplay.php?fid=51" target="_top">建议与交流</a> 
+<a href="http://blog.chinaunix.net/top/" target="_top">排行榜</a>
+<a href="http://www.cublog.cn/addlink.php?url=" target="_top">加入友情链接</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.babyoh.com.cn/" target="_top">宝宝相册的专门空间</a>
+</td><form id="loginForm" method="get" target="_blank" action="http://www.cublog.cn/search.php"></form>
+<td align="right" nowrap="nowrap">
+<img src="userstar.php" id="starimg" alt="" width="55" border="0" height="12">
+<a href="http://www.cublog.cn/u2/star.php?blogid=16147" id="star" onclick="NewWindows(this.href);return false;" title="给此博客推荐值">推荐</a>
+<a href="http://www.cublog.cn/u2/complaint.php?blogid=16147" id="complaint" onclick="NewWindows(this.href);return false;" title="投诉此博客">投诉</a>
+
+ 搜索：<input name="q" size="20" type="text"> <input value="搜索" class="button1" type="submit"> <a href="http://www.cublog.cn/help/">帮助</a></td>
+</tr>
+
+</tbody></table>
+<script language="javascript">
+
+<!--
+
+navHover = function() {
+var lis = document.getElementById("navmenu").getElementsByTagName("LI");
+for (var i=0; i<lis.length; i++) {
+lis[i].onmouseover=function() {
+this.className+=" iehover";
+}
+lis[i].onmouseout=function() {
+this.className=this.className.replace(new RegExp(" iehover\\b"), "");
+}
+}
+}
+
+function NewWindows(shref){
+var xx=(window.screen.width-450)/2;
+var yy=(window.screen.height-200)/2;
+pp=window.open(shref,"win","menubar=no,location=no,resizable=no,scrollbars=no,status=no,left="+xx+",top="+yy+",Width=450,Height=200");
+}
+function $(s){return document.getElementById(s);}
+//-->
+</script>
+<table style="border-collapse: collapse; background-image: url(bg_top.gif); background-repeat: no-repeat;" width="100%" align="center" bgcolor="#187218" border="0" cellpadding="0" cellspacing="0" height="143">
+<tbody><tr><td width="360"></td><td width="500" align="center">
+
+<p style="margin: 5px; line-height: 150%;">
+ <font style="font-size: 14pt;" color="#ffffff"><b>
+<p style="margin: 5px; line-height: 150%;">
+ <font style="font-size: 14px;" color="#ffffff">
+ 
+<b>
+
+ 
+ 
+ 
+ 穆利堂信息化 
+ 
+ 
+</b>
+ 
+ </font></p>
+ </b></font></p>
+
+</td><td width="360">
+
+让我们为房地产信息化付出自己的一点力量</td></tr>
+<tr><td colspan="3">
+<table style="border-collapse: collapse;" width="980" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0">
+<tbody><tr><td></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+<table style="border-collapse: collapse;" width="100%" align="center" background="about:blank?bg_menu.gif" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" height="27">
+<tbody><tr><td width="30" align="center"><img src="img_menu_left.gif" alt="" width="26" border="0" height="29"></td><td width="200">
+<a href="http://movno1.cublog.cn/" class="list1" target="_top">movno1.cublog.cn</a>
+ 
+</td><td style="color: rgb(42, 82, 0);" width="750" align="right">
+<ul id="navmenu"><li class="ul0"><a href="http://control.cublog.cn/" target="_top" class="list1">管理博客</a> </li>
+
+<li class="ul0"><a href="http://control.cublog.cn/article_new.php" target="_top" class="list1">发表文章</a></li>
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/guestbook.html" class="list1">留言</a></li>
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/links.html" class="list1">收藏夹</a>
+<ul class="ul1"><li><a href="http://www.cublog.cn/u/16147/links_5414.html"> &middot; 网络安全<!-- a5414 --></a><!-- 5414 --></li>
+<li><a href="http://www.cublog.cn/u/16147/links_5416.html"> &middot; 工作管理<!-- a5416 --></a><!-- 5416 --></li>
+<li><a href="http://www.cublog.cn/u/16147/links_5415.html"> &middot; 计算机系统<!-- a5415 --></a><!-- 5415 --></li>
+</ul>
+
+</li>
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/group.html" class="list1">博客圈</a></li>
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/music.html" class="list1">音乐</a>
+<!-- 0 -->
+</li>
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/photo.html" class="list1">相册</a>
+<ul class="ul1"><li><a href="http://www.cublog.cn/u/16147/photo_2053.html"> &middot; 学校的<!-- a2053 --></a><!-- 2053 --></li>
+<li><a href="http://www.cublog.cn/u/16147/photo_2051.html"> &middot; 朋友的<!-- a2051 --></a><!-- 2051 --></li>
+<li><a href="http://www.cublog.cn/u/16147/photo_2050.html"> &middot; 木木的<!-- a2050 --></a><!-- 2050 --></li>
+<li><a href="http://www.cublog.cn/u/16147/photo_2052.html"> &middot; 公司的<!-- a2052 --></a><!-- 2052 --></li>
+</ul>
+
+</li> 
+ 
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/article.html" class="list1">文章</a>
+<ul class="ul1"><li><a href="http://www.cublog.cn/u/16147/article_28029.html"> &middot; 数据库<!-- a28029 --></a><!-- 28029 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_68970.html"> &middot; 网络游戏<!-- a68970 --></a><!-- 68970 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_68971.html"> &middot; 游戏代码<!-- a68971 --></a><!-- 68971 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_68972.html"> &middot; 游戏工具<!-- a68972 --></a><!-- 68972 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_69043.html"> &middot; 魔兽世界<!-- a69043 --></a><!-- 69043 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_28143.html"> &middot; 木木的<!-- a28143 --></a><!-- 28143 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25797.html"> &middot; 操作系统&nbsp;&nbsp;&nbsp;<font face="Wingdings 3">}</font></a><ul class="ul2"><li><a href="http://www.cublog.cn/u/16147/article_25819.html"> &middot; windows安全<!-- a25819 --></a><!-- 25819 --></li>
+</ul>
+</li>
+<li><a href="http://www.cublog.cn/u/16147/article_25802.html"> &middot; 常用<!-- a25802 --></a><!-- 25802 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_69044.html"> &middot; 传奇传世<!-- a69044 --></a><!-- 69044 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_79439.html"> &middot; 房地产行情<!-- a79439 --></a><!-- 79439 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_79440.html"> &middot; 房地产信息化<!-- a79440 --></a><!-- 79440 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_75682.html"> &middot; 公司<!-- a75682 --></a><!-- 75682 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25825.html"> &middot; 服务器<!-- a25825 --></a><!-- 25825 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25881.html"> &middot; 网络管理及安全<!-- a25881 --></a><!-- 25881 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25799.html"> &middot; 命令<!-- a25799 --></a><!-- 25799 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25879.html"> &middot; 黑客<!-- a25879 --></a><!-- 25879 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25800.html"> &middot; unixbsd<!-- a25800 --></a><!-- 25800 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25828.html"> &middot; 路由交换<!-- a25828 --></a><!-- 25828 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25880.html"> &middot; 防火病毒<!-- a25880 --></a><!-- 25880 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25801.html"> &middot; 人生<!-- a25801 --></a><!-- 25801 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25798.html"> &middot; 软件及工具使用<!-- a25798 --></a><!-- 25798 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25824.html"> &middot; 社会现状<!-- a25824 --></a><!-- 25824 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_26261.html"> &middot; IT<!-- a26261 --></a><!-- 26261 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25820.html"> &middot; 生活常识<!-- a25820 --></a><!-- 25820 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_28144.html"> &middot; 硬件<!-- a28144 --></a><!-- 28144 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_25826.html"> &middot; 英语<!-- a25826 --></a><!-- 25826 --></li>
+<li><a href="http://www.cublog.cn/u/16147/article_26098.html"> &middot; 工作管理<!-- a26098 --></a><!-- 26098 --></li>
+</ul>
+
+</li> 
+<li class="ul0"><a href="http://www.cublog.cn/u/16147/index.html" class="list1">首页</a></li>
+</ul>
+</td>
+<td width="10"></td>
+</tr>
+<tr><td colspan="4">
+<table style="border-collapse: collapse;" width="980" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0">
+<tbody><tr><td></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<script language="javascript">
+
+function $(s){return document.getElementById(s);}
+function ShowHideDiv(divid,iImg){
+if($(divid).style.display == "none"){
+iImg.src="../../templates/newgreen/images/dot2.gif";
+$(divid).style.display = "block";
+iImg.title="收起";
+}else{
+iImg.src="../../templates/newgreen/images/dot4.gif";
+$(divid).style.display = "none";
+iImg.title="展开";
+}
+}
+navHover();
+</script>
+<table style="border-collapse: collapse;" width="100%" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0">
+<tbody><tr><td height="3"></td> </tr>
+</tbody></table>
+
+
+<br>
+<table style="border-collapse: collapse;" width="90%" align="center" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0">
+<tbody><tr><td width="18" height="28"><img src="bg_art_left_top.gif" alt="" border="0"></td><td background="about:blank?bg_art_top.gif"><p style="margin: 5px; line-height: 150%;"></p></td><td width="18" height="28"><img src="bg_art_right_top.gif" alt="" border="0"></td></tr>
+<tr><td width="18" background="about:blank?bg_art_left.gif"></td><td align="center" bgcolor="#f5fdee">
+<br>
+<font style="font-size: 14pt;" color="#295200"><b>用OpenSWAN做Linux下的IPSec VPN的详细配置指南</b></font>
+
+<table style="border-collapse: collapse;" width="100%" border="1" bordercolor="#a5bd6b" cellpadding="0" cellspacing="1">
+<tbody><tr><td align="center">
+
+<table style="border-collapse: collapse;" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td align="center">
+<table style="border-collapse: collapse;" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td>
+<div id="art" style="margin: 15px;">
+<h1>用OpenSWAN做Linux下的IPSec VPN的详细配置指南</h1><br>创建时间：2006-10-25 更文章属性：转&nbsp; 文章提交：<a href="https://www.xfocus.net/bbs/index.php?lang=cn&act=Profile&do=03&MID=65720"><font color="#0000ff">toorq</font></a> (toorq_at_163.com)<br><br>用Openswan组建Linux IPSec<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>by toorq<br><br><br>1.概述<br>2.安装Openswan<br>3.认证和配置<br>&nbsp;&nbsp;&nbsp;&nbsp;3.1 RSAsig认证方式的配置<br>&nbsp;&nbsp;&nbsp;&nbsp;3.2 x.509证书认证的配置<br>&nbsp;&nbsp;&nbsp;&nbsp;3.3 RoadWarrior模式的配置<br>5.Windows客户端的配置<br>*****<br>1.概述<br>&nbsp;&nbsp;&nbsp;&nbsp;LInux上的VPN支持主要有三种：<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;1)IPSec 's VPN 其主要代表有 FreeS/WAN、KAME<br><br>&nbsp;&nbsp;&nbsp;&nbsp;IPSec在Linux上支持主要有两个主要的分类，一为FreeS/WAN，现在已经停止开发，其分裂为两个项目，Openswan与 Strongswan。其可以用自身的IPsec内核堆栈（Kernel stack），称为KLIPS，也可以用2.6内核中的堆栈代码（下面我们称其为26sec），可以说是非常的灵活。还有就是来自BSD世界的KAME。 KAME只能用内核堆栈。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;IPSec差不多是最老的VPN标准了，她的依然很安全，当然是在配置好以后。言下之意，她的配置比较麻烦。本文下面将做说明。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;2)SSL-Based VPN 其主要代表有 OpenVPN<br><br>&nbsp;&nbsp;&nbsp;&nbsp;SSL只要跑在应用层，所以理所当然的配置简单，只要机子能跑TCP或UDP就行，也可以穿过大多的防火墙。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;3)PPTP-Based VPN 有(PoPTop)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;PoPTop可以说是PPTP在Linux下的实现。不过，IPSec上跑L2TP更安全。<br><br>2.安装Openswan<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;因为FreeS/WAN已经在2004年三月停止开发，所以我们使用她的后继项目Openswan来做我们的IPSec实验。其相比FreeS/WAN有个好处，如果使用 26sec 的时候，Openswan不用打补丁，就可以用nat。<br>&nbsp;&nbsp;&nbsp;&nbsp;因为IPSec工作在网络层，所以需要系统内核态的支持，上面说过，有两个选择，用自带(26sec)的或用Openswan(KLIPS)的，为了方便（如何打补丁和编译内核不是本文讨论的重点），本文使用2.6自带的实现代码。同时本文使用Debian Sarge作为实验系统，在Debian上安装。<br>&nbsp;&nbsp;&nbsp;&nbsp;#apt-get install openswan<br>&nbsp;&nbsp;&nbsp;&nbsp;如果你想从源码安装，到<a href="http://www.openswan.org/code" target="_top"><font color="#0000ff">http://www.openswan.org/code</font></a>下载软件包，然后按照包中的说明安装。由于我们使用26sec，所以只要make programs;make install就可以搞定。值得注意的是，现在的Openswan已经内建些个好用的补丁，比如x.509和NAT Traversal的支持，使用起来非常的方便。<br>&nbsp;&nbsp;&nbsp;&nbsp;你也可以用<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec verify来检验你的安装<br><br>3.认证和配置<br><br>3.1 RSA Signature（RSA数字签名）认证的配制<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Openswan支持许多不同的认证方式，包括RSA keys、pre-shared keys或x.509证书方式。RSA Signature比较简单，我先介绍下所要使用的命令<br><br>&nbsp;&nbsp;&nbsp;&nbsp;生成一个新的RSA密钥对<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec newhostkey&nbsp;&nbsp;--output /etc/ipsec.secert<br>&nbsp;&nbsp;&nbsp;&nbsp;按left或right格式生成RSA Sig<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec showhostkey --left（或--right）<br><br>&nbsp;&nbsp;&nbsp;&nbsp;知道了上面的命令，我们就可以配置一个net-to-net，就是网关对网关的通讯。所在的Linux主机为通讯的网关，作为其子网的出口，对于子网的用户来所是透明的，远程的子网在通讯后可以像自己的局域网一样的访问。<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;本文使用VMWare架设起一个四台虚拟Linux主机来进行试验。因为要在不同的机子上进行配置，所以请读者认清主机名。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.183.44（子网客户机，计算机名RA）<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.49.2（Left网关主机，计算机名melin，同时eth1配置为192.168.183.1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.49.3（Right网关主机，计算机名right，同时eth1配置为192.168.233.1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.233.44（子网客户机，计算机名RB）<br><br>&nbsp;&nbsp;&nbsp;&nbsp;两个网关主机当然要安装好Openswan。同时用iptabels配置好NAT伪装。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;然后我们运行下面的命令<br><br>&nbsp;&nbsp;&nbsp;&nbsp;//melin&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec newhostkey --output /etc/ipsec.secert<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec showhostkey --right &gt;&gt; /etc/ipsec.conf<br>&nbsp;&nbsp;&nbsp;&nbsp;#vi /etc/ipsec.conf //编辑ipsec.conf配置文件<br>&nbsp;&nbsp;&nbsp;&nbsp;#scp /etc/ipsec.conf root@right_GW_ipaddress:/etc/ipsec.conf //把ipsec.conf拷贝到right网关，目的是为了让right的到left的rsasig。<br>&nbsp;&nbsp;&nbsp;&nbsp;//right<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec newhostkey&nbsp;&nbsp;--output /etc/ipsec.secert<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec showhostkey&nbsp;&nbsp; --right &gt;&gt; /etc/ipsec.conf<br>&nbsp;&nbsp;&nbsp;&nbsp;#vi /etc/ipsec.conf<br>&nbsp;&nbsp;&nbsp;&nbsp;#scp /etc/ipsec.conf&nbsp;&nbsp;root@left_GW_ipadress:/etc/ipsec.conf<br>&nbsp;&nbsp;&nbsp;&nbsp;然后分别从前启动ipsec服务<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec setup restart //这个因为你的系统不同点不同<br><br>&nbsp;&nbsp;&nbsp;&nbsp;这里的编辑ipsec.conf应该为（配置文件中的#为注释，和shell中不同）<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>version&nbsp;&nbsp;&nbsp;&nbsp;2.0<br><br>config setup<br>&nbsp;&nbsp;&nbsp;&nbsp;interfaces=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;nat_traversal=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>conn %default<br>&nbsp;&nbsp;&nbsp;&nbsp;authby=rsasig<br>&nbsp;&nbsp;&nbsp;&nbsp;compress=yes<br><br>#关掉 Opportunistic Encryption<br>include /etc/ipsec.d/examples/no_oe.conf<br><br>conn&nbsp;&nbsp;&nbsp;&nbsp;net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftid=@melin<br>&nbsp;&nbsp;&nbsp;&nbsp;leftnexthop=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.3<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.233.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;rightid=@right<br>&nbsp;&nbsp;&nbsp;&nbsp;rightnexthop=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;# RSA 2192 bits&nbsp;&nbsp; melin&nbsp;&nbsp; Mon May 29 03:42:49 2006<br>&nbsp;&nbsp;&nbsp;&nbsp;leftrsasigkey=0sAQ...（leftrsasigkey值，省略）<br>&nbsp;&nbsp;&nbsp;&nbsp;# RSA 2192 bits&nbsp;&nbsp; right&nbsp;&nbsp; Wed May 31 22:11:59 2006<br>&nbsp;&nbsp;&nbsp;&nbsp;rightrsasigkey=0sAQ...<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>然后在任意一方网关主机运行<br>&nbsp;&nbsp;&nbsp;&nbsp;ipsec auto --up net-to-net，这个时候，两个客户机之间应该可以互相ping的通，就像在一个内网一样。<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;比如在RA上可以<br><br>&nbsp;&nbsp;&nbsp;&nbsp;$ping 192.168.233.44<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;在ping的过程中，在任意一个网关上用tcpdump嗅探<br><br>&nbsp;&nbsp;&nbsp;&nbsp;#tcpdump -i eth0<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;可以看到这样的包<br><br>&nbsp;&nbsp;&nbsp;&nbsp;IP 192.168.233.44 &gt; 192.168.183.44:icmp 64:echo request seq 10<br>&nbsp;&nbsp;&nbsp;&nbsp;IP 192.168.49.2 &gt; 192.168.49.3: ESP(spi=0xeb73b78b,sed=0xa)<br>&nbsp;&nbsp;&nbsp;&nbsp;IP 192.168.49.3 &gt; 192.168.49.2: ESP(spi=0x1601e0bd,sed=0xb)<br>&nbsp;&nbsp;&nbsp;&nbsp;可以看到两个网关已经用ESP在通讯，说明成功。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;值得注意的是，如果网关主机开了iptables来做IP伪装（MASQUERADE）或NAT，需要竞争两个子网地址的转发，比如在我们例子中的Left主机上原来有<br>&nbsp;&nbsp;&nbsp;&nbsp;#echo 1 &gt; /proc/sys/net/ipv4/ip_forward<br>&nbsp;&nbsp;&nbsp;&nbsp;#iptables -t nat -A POSTROUTING -o eth0 -s 192.168.183.0/24 -j MASQERADE<br>&nbsp;&nbsp;&nbsp;&nbsp;把改为<br>&nbsp;&nbsp;&nbsp;&nbsp;#iptables -t nat -A POSTROUTING -o eth0 -s 192.168.183.0/24 -d ! 192.168.233.0/24 -j MASQERADE<br>&nbsp;&nbsp;&nbsp;&nbsp;即不转发目标地址为Right主机下的子网。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;另外，这一行<br>&nbsp;&nbsp;&nbsp;&nbsp;include /etc/ipsec.d/examples/no_oe.conf意为关闭Opportunistic Encryption在你不知道她到底做了什么之前，还是关掉她为好，打开no_oe.conf文件，发现其内容如下，我们将在本文的第五部分讨论这个话题。<br><br>conn block<br>auto=ignore<br><br>conn private<br>auto=ignore<br><br>conn private-or-clear<br>auto=ignore<br><br>conn clear-or-private<br>auto=ignore<br><br>conn clear<br>auto=ignore<br><br>conn packetdefault<br>auto=ignore<br><br>3.2 x.509证书认证的配置<br><br>&nbsp;&nbsp;&nbsp;&nbsp;x.509证书方式当然更灵活，要是VPN的客户比较多，总不能，每个都记住长长的rsasig吧。使用x.509证书认证，我们首先需要装上openssl（现在的Linux基本自带，没有的<a href="http://www.openssl.org/" target="_top"><font color="#0000ff">www.openssl.org</font></a>下一个装上）。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;1)然后，找到openssl.cnf文件，这个文件保存着对openssl证书生成的默认值，她的位置一般为：<br>&nbsp;&nbsp;&nbsp;&nbsp;Debian: /etc/ssl/openssl.cnf<br>&nbsp;&nbsp;&nbsp;&nbsp;RedHat 7.x+: /usr/share/ssl/openssl.cnf<br>&nbsp;&nbsp;&nbsp;&nbsp;用编辑器打开，变量名目繁多，比较有用的有<br>&nbsp;&nbsp;&nbsp;&nbsp;"default_days"，证书失效的天数，默认一般为365天，改为3650，这样十年才过期:)。<br>&nbsp;&nbsp;&nbsp;&nbsp;"default_bits"，密钥长度，默认为1024，你可以改为2048，更安全，当然速度也更慢&hellip;&hellip;<br>&nbsp;&nbsp;&nbsp;&nbsp;"req_distinguished_name"，默认的信息设置，如果你和我一样闲每次去生成密钥的时候去填的麻烦，就改之。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;2)建一个目录来放你的CA，我们这里用/root/ca，记的把他的权限设置为700，你不希望其他用户可以看到你的私钥吧。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;3)找到"CA.sh"脚本的位置，在不同系统上稍有不同<br>&nbsp;&nbsp;&nbsp;&nbsp;Debian: /usr/lib/ssl/misc/CA.sh<br>&nbsp;&nbsp;&nbsp;&nbsp;RedHat 7.x+: /usr/share/ssl/misc/CA<br>&nbsp;&nbsp;&nbsp;&nbsp;编辑她，把DAYS="-days 365"的365改成你希望的数值，注意要比openssl.cnf中的"default_days"要大，当时也不要太大，一般为15年到20年就好了。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;4)生成证书<br>&nbsp;&nbsp;&nbsp;&nbsp;~/ca$/usr/lib/ssl/misc/CA.sh -newca ;生成一个待签名的根证书，用她来给其他证书进行签名认证。默认生成在demoCA目录下的cacert.pem文件（在openssl.cnf中的 CA_default子段设置）下。输入的密码为用来生成其他证书的密码。-sign的时候用。<br>&nbsp;&nbsp;&nbsp;&nbsp;~/ca$openssl ca -gencrl -out crl.pem 生成一个与根证书相对应的crl文件<br>&nbsp;&nbsp;&nbsp;&nbsp;然后开始生成给主机用的证书<br>&nbsp;&nbsp;&nbsp;&nbsp;~/ca$/usr/lib/ssl/misc/CA.sh -newreq 生成待签名认证的证书，默认名字为newreq.pem，输入的密码用在填些/etc/ipsec.secrets中。<br>&nbsp;&nbsp;&nbsp;&nbsp;~/ca$/usr/lib/ssl/misc/CA.sh -sign 对证书进行签名认证，默认名字为newcert.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;~/ca$/usr/lib/ssl/misc/CA.sh -verify 认证一下<br>&nbsp;&nbsp;&nbsp;&nbsp;然后重命名文件<br>&nbsp;&nbsp;&nbsp;&nbsp;~ca$mv newcert.pem melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;~ca$mv newreq.pem melin.key //别搞反了，小的那个文件是key:)，另外如果要生成的主机证书，填入的信息相同可能出错<br>&nbsp;&nbsp;&nbsp;&nbsp;用同样的方法生成right.pem和right.key文件。这样我们就有了同样的根证书生成的两个证书文件。<br>&nbsp;&nbsp;&nbsp;&nbsp;把文件拷贝到相应的位置：<br><br>&nbsp;&nbsp;&nbsp;&nbsp;在Left主机主机上<br>&nbsp;&nbsp;&nbsp;&nbsp;melin:~/ca#cp melin.key /etc/ipsec.d/private<br>&nbsp;&nbsp;&nbsp;&nbsp;melin:~/ca#cp melin.pem /etc/ipsec.d/certs<br>&nbsp;&nbsp;&nbsp;&nbsp;melin:~/ca#cp demoCA/cacert.pem /etc/ipsec.d/cacerts<br>&nbsp;&nbsp;&nbsp;&nbsp;melin:~/ca#cp crl.pem /etc/ipsec.d/crls/crl.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;用安全的渠道（scp或软盘，别用ftp）把一下文件拷贝到right上<br>&nbsp;&nbsp;&nbsp;&nbsp;melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right.key<br>&nbsp;&nbsp;&nbsp;&nbsp;right.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;demoCA/cacert.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;crl.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;也拷贝到正确的地方<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#cp right.key /etc/ipsec.d/private<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#cp right.pem /etc/ipsec.d/certs<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#cp melin.pem /etc/ipsec.d/certs<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#cp crl.pem /etc/ipsec.d/crls<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#cp cacert.pem /etc/ipsec.d/cacerts/cacert.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;5) 配置ipsec<br>&nbsp;&nbsp;&nbsp;&nbsp;首先是/etc/ipsec.secrets加上<br>&nbsp;&nbsp;&nbsp;&nbsp;: RSA /etc/ipsec.d/private/right.key "password"<br>&nbsp;&nbsp;&nbsp;&nbsp;password就是生成主机密钥的时候输入的密码<br><br>&nbsp;&nbsp;&nbsp;&nbsp;这里有几个密码要搞清楚，在生成根证书的时候输入密码是用来生成其他证书的，CA.sh -sign的时候要填入，ipsec.secrets填入的密码是CA.sh -newreq时候输入的密码。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;然后当然就是/etc/ipsec.conf在本例子中的ipsec.conf分别为<br><br>#Left(melin)<br>version 2.0<br><br>config setup<br>&nbsp;&nbsp;&nbsp;&nbsp;interfaces=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;nat_traversal=yes<br>conn %default<br>&nbsp;&nbsp;&nbsp;&nbsp;authby=rsasig<br>&nbsp;&nbsp;&nbsp;&nbsp;compress=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;leftrsasigkey=%cert<br>&nbsp;&nbsp;&nbsp;&nbsp;rightrsasigkey=%cert<br>&nbsp;&nbsp;&nbsp;&nbsp;keyingtries=1<br>&nbsp;&nbsp;&nbsp;&nbsp;disablearrivalcheck=no<br><br>include /etc/ipsec.d/examples/no_oe.conf<br><br>conn net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.233.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>#Right(right)<br>version 2.0<br><br>config setup<br>&nbsp;&nbsp;&nbsp;&nbsp;interfaces=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;nat_traversal=yes<br>conn %default<br>&nbsp;&nbsp;&nbsp;&nbsp;authby=rsasig<br>&nbsp;&nbsp;&nbsp;&nbsp;compress=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;leftrsasigkey=%cert<br>&nbsp;&nbsp;&nbsp;&nbsp;rightrsasigkey=%cert<br>&nbsp;&nbsp;&nbsp;&nbsp;keyingtries=1<br>&nbsp;&nbsp;&nbsp;&nbsp;disablearrivalcheck=no<br><br>include /etc/ipsec.d/examples/no_oe.conf<br><br>conn net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.233.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;rightcert=right.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>&nbsp;&nbsp;&nbsp;&nbsp;然后分别重新启动IPSec服务<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec setup restart<br>&nbsp;&nbsp;&nbsp;&nbsp;在right上启动连接<br>&nbsp;&nbsp;&nbsp;&nbsp;#ipsec auto --up net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;如果一切正确，两个子网之间就可以互相通讯了。<br><br>3)RoadWarrior模式的配置<br>&nbsp;&nbsp;&nbsp;&nbsp;上面我们做的是网关对网关的配置，我们在应用中还有一种情况，员工带着比较本出差或在家，需要用IPSec连接到公司的网络。这个就是RoadWarrior模式。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;我们回到1)中RSA Keys配置的例子，在两台主机上添加这样的配置字段<br><br>#RoadWarrior,Road的机子，比如到处带着跑的笔记本，我们这里用right<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.3 #如果是动态ip地址，可以填上%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;leftnexthop=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;leftid=@melin<br>&nbsp;&nbsp;&nbsp;&nbsp;leftrsasigkey=0sAQ... #本机的RSA Key<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;rightid=@right<br>&nbsp;&nbsp;&nbsp;&nbsp;rightrsasigkey=0sAQO... #远程机子的RSA Key<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>############################<br>#Host 主机，我们这里用melin<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftid=@melin<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftrsasigkey=0sAQ...<br>&nbsp;&nbsp;&nbsp;&nbsp;rightnexthop=%defaultroute<br>&nbsp;&nbsp;&nbsp;&nbsp;right=%any #不知道要传入的连接，所以用%any<br>&nbsp;&nbsp;&nbsp;&nbsp;rightid=@right<br>&nbsp;&nbsp;&nbsp;&nbsp;rightrsasigkey=0sAQ...<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>可以看出，RoadWarrior模式和Net-to-Net模式配置的区别，关键就是在于net-to-net模式Left和Right是相同的，通讯的主机处于固定的位置上，而RoadWarrior配置，Left就是自己（Local），Right就是远程主机（Remote）。所以看上去，两个的 Left和Right值是相反的。这个是配置的关键。<br><br>然后在RoadWarrior的主机上运行<br>&nbsp;&nbsp;&nbsp;&nbsp;ipsec auto --up road<br>更改配置文件后记的要#ipsec setup restart重启Openswan Pluto。<br><br>接着就可以在right主机上ping到melin下的内网了<br>&nbsp;&nbsp;&nbsp;&nbsp;right$ping 192.168.183.44<br>同样的可以在melin上<br>&nbsp;&nbsp;&nbsp;&nbsp;melin#tcpdump -i eth0<br>看到ESP包的交换<br><br>下面我们回到使用证书的net-to-net例子<br><br>细心的读者可以发现，在证书的例子配置中，melin主机的right字段是用的是%any，整个配置类似于RoadWarrior的配置，可是又不同，实际上，这个仍然是net-to-net的配置。也可以把配置写成这样。<br><br>#Left(melin)<br>conn net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.3<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.233.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>#Right(right)<br>conn net-to-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;letcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.3<br>&nbsp;&nbsp;&nbsp;&nbsp;rightcert=right.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>不过，如果是这样的net-to-net的配置，就需要把right.pem也拷贝到melin主机的/etc/ipsec.d/certs目录下。可以看出来，ipsec.conf的配置是非常灵活的。<br><br>下面我们给出使用RoadWarrior和使用证书的配置<br><br>#RoadWarrior(right)<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.3（如果为动态ip，用%defaultroute）<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=right.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;rightcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>#Host(melin)<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br>使用上面的配制后会发现一个问题，在right主机上<br>&nbsp;&nbsp;&nbsp;&nbsp;right#ping 192.168.183.44<br>&nbsp;&nbsp;&nbsp;&nbsp;right#ping 192.168.183.1<br>&nbsp;&nbsp;&nbsp;&nbsp;是加密通讯<br>&nbsp;&nbsp;&nbsp;&nbsp;可是<br>&nbsp;&nbsp;&nbsp;&nbsp;right#ping 192.168.49.2（如果是在Internet，这个为主机在Internet上的ip）<br>&nbsp;&nbsp;&nbsp;&nbsp;却是明文通讯，实际上，我们上面的RoadWarrior配置是让RoadWarrior主机和网关做在的局外通讯，如果要加密和网关的通讯，可以这么写<br><br>#RoadWarrior(right)<br>conn road-net<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;also=road<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.3（如果为动态ip，用%defaultroute）<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=right.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>#Host(melin)<br>conn road-net<br>&nbsp;&nbsp;&nbsp;&nbsp;leftsubnet=192.168.183.0/24<br>&nbsp;&nbsp;&nbsp;&nbsp;also=road<br>conn road<br>&nbsp;&nbsp;&nbsp;&nbsp;left=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;leftcert=melin.pem<br>&nbsp;&nbsp;&nbsp;&nbsp;right=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=add<br><br>在right上分别启动<br><br>right#ipsec auto --up road<br>right#ipsec auto --up road-net<br><br>另外可以用ipsec auto status查看连接的状态。如果想让连接在开机就启动，可以把auto字段改为start。<br><br>5.Windows客户端的配置<br><br>&nbsp;&nbsp;&nbsp;&nbsp;让windows客户端可以连接上Linux的IPSec网关是很有用的，毕竟桌面还是Windows比较的多。<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;1)当然是让Openswan的主机运行正常运行起来，我们这里使用，上文最接近的那个road和road-net配置。同时要注意Windows的IPSec服务已经运行。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;2)生成证书<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;生成新的主机密钥对win.pem和win.key，然后，我们需要把她转化成Windows可以识别的p12格式：<br><br>~/ca$ openssl pkcs12 -export -in win.pem -inkey win.key -certfile demoCA/cacert.pem -out win.p12<br><br>获得根证书的信息，记下来，下面要用到<br><br>subject= /C=CN/ST=Fujian/L=Xiamen/O=Jimei University/OU=Chengyi College/CN=jianqiu/emailAddress=jianqiu414@stu.jmu.edu.cn<br><br>&nbsp;&nbsp;&nbsp;&nbsp;3)所需工具<br><br><a href="http://vpn.ebootis.de/package.zip" target="_top"><font color="#0000ff">http://vpn.ebootis.de/package.zip</font></a>下载Marcus M&uuml;ller的ipsec.exe工具，解压到一个目录中，本例使用d:\ipsec<br><br>~/ca$ openssl x509 -in demoCA/cacert.pem -noout -subject<br>得到如下的信息<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;4)创建需要的控制台<br><br>&nbsp;&nbsp;&nbsp;&nbsp;运行mmc-&gt;添加删除管理单元-&gt;添加-&gt;IP安全策略管理-&gt;选择本地计算机-&gt;完成；<br>&nbsp;&nbsp;&nbsp;&nbsp;添加删除管理单元-&gt;添加-&gt;证书-&gt;计算机账户-&gt;本地计算机-&gt;完成。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;5)添加证书<br><br>&nbsp;&nbsp;&nbsp;&nbsp;在刚才我们新建的工作台的证书上，选择个人-&gt;所以任务-&gt;导入，然后把win.p12导入即可。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;6)安装IPSec工具<br><br>&nbsp;&nbsp;&nbsp;&nbsp;首先需要安装ipsecpol.exe(Windows 2000)或ipseccmd.exe(Windows XP，在Windows安装光盘的UPPORT\TOOLS目录下，setup选择完全安装)，在<a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;838079" target="_top"><font color="#0000ff">http://support.microsoft.com/default.aspx?scid=kb;en-us;838079</font></a>还有一片关于XP SP2的这些个附加工具的说明。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;随后编辑d:\ipsec\ipsec.conf文件，把我们上面得到的证书的信息填入rightca，也可以用mmc的证书页面查看，编辑好的ipsec.conf看起来是这个样子的。<br><br>conn roadwarrior<br>&nbsp;&nbsp;&nbsp;&nbsp;left=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightca="C=CN,S=Fujian,L=Xiamen,O=Jimei University,OU=Chengyi College,CN=jianqiu,E=jianqiu414@stu.jmu.edu.cn"<br>&nbsp;&nbsp;&nbsp;&nbsp;network=auto<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=start<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br><br>conn roadwarrior-net<br>&nbsp;&nbsp;&nbsp;&nbsp;left=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=192.168.183.0/44<br>&nbsp;&nbsp;&nbsp;&nbsp;rightca="C=CN,S=Fujian,L=Xiamen,O=Jimei University,OU=Chengyi College,CN=jianqiu,E=jianqiu414@stu.jmu.edu.cn"<br>&nbsp;&nbsp;&nbsp;&nbsp;network=auto<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=start<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br>如果，你想要加密所有和192.168.49.2的连接<br><br>conn roadwarrior-all<br>&nbsp;&nbsp;&nbsp;&nbsp;left=%any<br>&nbsp;&nbsp;&nbsp;&nbsp;right=192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;rightsubnet=*<br>&nbsp;&nbsp;&nbsp;&nbsp;rightca="C=CN,S=Fujian,L=Xiamen,O=Jimei University,OU=Chengyi College,CN=jianqiu,E=jianqiu414@stu.jmu.edu.cn"<br>&nbsp;&nbsp;&nbsp;&nbsp;network=auto<br>&nbsp;&nbsp;&nbsp;&nbsp;auto=start<br>&nbsp;&nbsp;&nbsp;&nbsp;pfs=yes<br><br>注意rightca不要写错，可以通过我们刚才的控制台，依次打开，&ldquo;IP安全策略，在本地计算机&rdquo;-&gt;FreeSwan-&gt; &ldquo;roadwarrior-Host filter list&rdquo;-&gt;&ldquo;身份验证方法&rdquo;-&gt;&ldquo;使用由此证书颁发机构（CA）颁发的证书&rdquo;里的字段。<br><br>然后到d:\tools目录下，运行ipsec<br><br>IPSec Version 2.2.0 (c) 2001-2003 Marcus Mueller<br>Getting running Config ...<br>Microsoft's Windows XP identified<br>Usage: Ipsec [-off] [-delete] [-debug] [-nosleep]<br><br><br>D:\Tools\ipsec&gt;ipsec<br>IPSec Version 2.2.0 (c) 2001-2003 Marcus Mueller<br>Getting running Config ...<br>Microsoft's Windows XP identified<br>Setting up IPSec ...<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deactivating old policy...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removing old policy...<br><br>Connection roadwarrior:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyTunnel&nbsp;&nbsp;&nbsp;&nbsp; : 192.168.49.1<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyNet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 192.168.49.1/255.255.255.255<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PartnerTunnel: 192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PartnerNet&nbsp;&nbsp; : 192.168.49.2/255.255.255.255<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CA (ID)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: C=CN,S=Fujian,L=Xiamen,O=Jimei University,OU=Cheng...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PFS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: y<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : start<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auth.Mode&nbsp;&nbsp;&nbsp;&nbsp;: MD5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rekeying&nbsp;&nbsp;&nbsp;&nbsp; : 3600S/50000K<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activating policy...<br><br>Connection roadwarrior-net:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyTunnel&nbsp;&nbsp;&nbsp;&nbsp; : 192.168.49.1<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyNet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 192.168.49.1/255.255.255.255<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PartnerTunnel: 192.168.49.2<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PartnerNet&nbsp;&nbsp; : 192.168.183.0/255.255.255.0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CA (ID)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: C=CN,S=Fujian,L=Xiamen,O=Jimei University,OU=Cheng...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PFS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: y<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : start<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auth.Mode&nbsp;&nbsp;&nbsp;&nbsp;: MD5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rekeying&nbsp;&nbsp;&nbsp;&nbsp; : 3600S/50000K<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activating policy...<br><br>d:\ipsec&gt;ping 192.168.49.2<br>看到<br>Negotiating IP Security.<br>后有回复，说明连接成功。<br><br>如果ipsec工具在你的系统上运行有问题，请确认你的rightca有没有填错。也可以尝试到sourceforge.net下载Linsys IPSec Tool项目的lsipsectool.exe。另外，如果系统是Windows XP SP2，还要注意NAT-T的问题。具体Windows运行IPsec客户端的注意事项可以查阅
+<div></div>
+</div>
+</td></tr>
+</tbody></table>
+
+<p style="margin: 5px; line-height: 150%;">
+ 
+ 
+</p>
+</td></tr>
+ 
+ 
+<tr><td align="center" height="25">
+<font color="#295200">发表于： 2006-10-26 ，修改于： 2006-10-26 17:51，已浏览1791次，有评论2条</font>
+<a href="http://www.cublog.cn/u2/star.php?blogid=16147&artid=191071" id="star" onclick="NewWindows(this.href);return false;" title="推荐这篇文章">推荐</a>
+<a href="http://www.cublog.cn/u2/complaint.php?blogid=16147&artid=191071" id="complaint" onclick="NewWindows(this.href);return false;" title="投诉这篇文章">投诉</a>
+
+</td></tr>
+
+
+</tbody></table>
+
+
+</td></tr>
+</tbody></table>
+
+
+</td><td width="18" background="about:blank?bg_art_right.gif"></td></tr>
+
+
+<tr><td width="18" height="28"><img src="bg_art_left_bottom.gif" alt="" border="0"></td><td background="about:blank?bg_art_bottom.gif"><p style="margin: 5px; line-height: 150%;"></p></td><td width="18" height="28"><img src="bg_art_right_bottom.gif" alt="" border="0"></td></tr>
+
+
+</tbody></table>
+<br>
+<table style="border-collapse: collapse;" width="90%" align="center" border="1" bordercolor="#a5bd6b" cellpadding="0" cellspacing="1">
+<tbody><tr><td style="color: rgb(41, 82, 0);" bgcolor="#eff7de" height="25"> <b>网友评论</b></td></tr>
+<tr><td bgcolor="#ffffff" height="1"></td></tr>
+<tr><td align="center" bgcolor="#f9f5e7">
+<table style="border-collapse: collapse; color: rgb(41, 82, 0);" width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="60"><b>内容：</b></td>
+<td valign="top" width="580">
+
+<pre style="margin: 0px; line-height: 150%;" wrap="break-word">我按照你的文章做成功了，不过我觉得这里的CA不安全，别人把client.conf和key文件复制过去就能建立连接了。CA证书要有pass&nbsp;phrase保护，使用pass&nbsp;phrase导入才能起作用，如果不知道pass&nbsp;phrase，得到CA证书文件也没用，这样才比较安全。最后我还是选择了openswan做ipsec/l2tp的vpn.<br>
+http://zhangshg.luanhe.com<br>
+zhangshoug<br>
+</pre>
+</td>
+</tr>
+<tr height="25">
+<td colspan="2" style="color: rgb(115, 115, 115); font-size: 8pt;">
+
+本站网友评论于：2006-12-28 20:57:51     （121.26.220.★）
+</td></tr>
+
+<tr><td colspan="3" height="15"></td></tr>
+<tr><td colspan="3"><img src="middle_line.gif" alt="" border="0"></td></tr>
+<tr><td valign="top" width="60"><b>内容：</b></td>
+<td valign="top" width="580">
+
+<pre style="margin: 0px; line-height: 150%;" wrap="break-word">发错了，我的vpn就是用的这里相同的方案。<br>
+zhangshoug</pre>
+</td>
+</tr>
+<tr height="25">
+<td colspan="2" style="color: rgb(115, 115, 115); font-size: 8pt;">
+
+本站网友评论于：2006-12-28 21:02:08     （121.26.220.★）
+</td></tr>
+
+<tr><td colspan="3" height="15"></td></tr>
+<tr><td colspan="3"><img src="middle_line.gif" alt="" border="0"></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<br>
+
+
+<table style="border-collapse: collapse;" width="90%" align="center" border="1" bordercolor="#a5bd6b" cellpadding="0" cellspacing="1">
+<tbody><tr><td style="color: rgb(41, 82, 0);" bgcolor="#eff7de" height="25"> <b>发表评论</b></td></tr>
+<tr><td bgcolor="#ffffff" height="1"></td></tr>
+<tr><td align="center" bgcolor="#f9f5e7">
+ 
+<iframe name="comment" src="showart_191071_1.html" width="100%" frameborder="0" height="160"></iframe>
+ 
+
+</td></tr>
+</tbody></table>
+</body>
+</html>

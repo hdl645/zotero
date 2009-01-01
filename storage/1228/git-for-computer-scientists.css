@@ -1,0 +1,108 @@
+
+/* ::::: http://eagain.net/style/main.css ::::: */
+
+.button { border-style: solid; border-color: rgb(255, 204, 153) rgb(102, 51, 0) rgb(51, 51, 0) rgb(255, 153, 102); border-width: 1px; margin: 0px; padding: 0px 3px; font-family: verdana,sans-serif; font-size: 10px; font-weight: bold; text-decoration: none; color: white; background-color: rgb(255, 102, 0); }
+html, body { margin: 0pt; padding: 0pt; background-color: rgb(255, 255, 255); font-family: Bitstream Vera Sans,Trebuchet MS,Trebuchet,Verdana,Arial,Sans-serif; font-size: 9pt; height: 100%; }
+.body { margin: 0pt; padding: 0pt; position: relative; height: 100%; }
+html > body .body { height: auto; min-height: 100%; }
+.content { margin: 0pt 200px 0pt 0pt; }
+.main { margin-left: 3em; }
+.main p { margin-right: 1em; }
+.main-heading { border-bottom: 1px solid rgb(195, 195, 195); margin: 0pt; padding: 0.02em 0.02em 0.02em 0.2em; background-color: rgb(239, 239, 239); width: 100%; }
+.main img { margin-left: 1em; margin-right: 1em; }
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6, p.topic-title { border-top: 1px solid rgb(195, 195, 195); border-left: 1px solid rgb(195, 195, 195); border-bottom: 1px solid rgb(195, 195, 195); padding: 3px 3px 3px 6px; background: rgb(239, 239, 239) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 0pt; font-size: medium; }
+.hentry { clear: both; }
+.hentry h2 a { text-decoration: none; color: black; }
+.hentry .entry-content { margin-bottom: 0.8em; }
+.hentry address.author.vcard { display: inline; }
+.tags { margin: 0.2em 0.2em 0.2em 1.2em; font-size: 80%; text-decoration: none; color: rgb(48, 48, 48); }
+.tags ul { display: inline; padding-left: 0pt; }
+.tags li { display: inline; }
+.timestamp { margin: 0.2em 0.2em 0.2em 1.2em; font-style: italic; font-size: 75%; text-decoration: none; color: rgb(128, 128, 128); }
+.timestamp a { text-decoration: none; color: rgb(128, 128, 128); }
+.footer { border-top: 1px solid rgb(207, 207, 207); padding: 0.5em; clear: both; margin-top: 2em; font-size: x-small; color: rgb(68, 68, 68); }
+.sidebar { border-left: 1px solid rgb(207, 207, 207); margin: 0pt; padding: 0pt; position: absolute; width: 200px; background-color: rgb(237, 237, 237); color: rgb(68, 68, 68); right: 0px; top: 0px; bottom: 0px; clear: both; }
+.sidebar-section { border-bottom: 1px solid rgb(207, 207, 207); padding: 5px 10px 10px; }
+.sidebar.tab-selection .active { background-color: rgb(247, 247, 247); color: rgb(68, 68, 68); }
+.sidebar .header { display: block; font-size: 2em; font-weight: bold; color: black; margin-top: 0.2em; }
+.sidebar a { display: block; }
+.tab-selection div { margin: 0pt; padding: 0pt; display: block; width: 200px; }
+.tab-selection a { margin: 0pt; padding: 0.2em 0.5em; color: rgb(80, 80, 80); height: 100%; text-decoration: none; }
+.tab-selection a:hover { background-color: rgb(51, 102, 102); color: rgb(255, 255, 255); }
+.tab-selection a:active { background-color: rgb(85, 136, 136); color: rgb(255, 255, 255); }
+.tab-selection a.active { background-color: rgb(32, 80, 80); color: rgb(255, 255, 255); }
+.py-listing, .literal-block { border: 1px solid rgb(215, 215, 215); margin: 1em 1.75em; padding: 0.25em; overflow: auto; background-color: rgb(247, 247, 247); }
+.literal-block { padding: 0.5em 0.75em; }
+.py-listing pre { margin: 0.5em 0.75em; padding: 0pt; }
+p.topic-title { font-weight: bold; }
+p.caption { font-style: italic; }
+.py-listing p.caption { margin: 0.5em 0.75em; }
+div.admonition, div.attention, div.caution, div.danger, div.error, div.hint, div.important, div.note, div.tip, div.warning { border: 2px solid rgb(195, 195, 195); margin: 2em 4em; padding: 1em; max-width: 70%; }
+div.attention p.admonition-title, div.caution p.admonition-title, div.danger p.admonition-title, div.error p.admonition-title, div.warning p.admonition-title { color: red; font-weight: bold; font-family: sans-serif; }
+blockquote address { font-style: inherit; margin-left: 2em; }
+blockquote address:before { content: "— "; }
+.abstract p { padding-left: 3em; max-width: 70%; font-style: italic; }
+.abstract p.topic-title { font-style: normal; max-width: none; }
+
+/* ::::: http://eagain.net/style/pygments.css ::::: */
+
+.py-listing { background: rgb(248, 248, 248) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.py-listing .c { color: rgb(64, 128, 128); font-style: italic; }
+.py-listing .err { border: 1px solid rgb(255, 0, 0); }
+.py-listing .k { color: rgb(0, 128, 0); font-weight: bold; }
+.py-listing .o { color: rgb(102, 102, 102); }
+.py-listing .cm { color: rgb(64, 128, 128); font-style: italic; }
+.py-listing .cp { color: rgb(188, 122, 0); }
+.py-listing .c1 { color: rgb(64, 128, 128); font-style: italic; }
+.py-listing .cs { color: rgb(64, 128, 128); font-style: italic; }
+.py-listing .gd { color: rgb(160, 0, 0); }
+.py-listing .ge { font-style: italic; }
+.py-listing .gr { color: rgb(255, 0, 0); }
+.py-listing .gh { color: rgb(0, 0, 128); font-weight: bold; }
+.py-listing .gi { color: rgb(0, 160, 0); }
+.py-listing .go { color: rgb(128, 128, 128); }
+.py-listing .gp { color: rgb(0, 0, 128); font-weight: bold; }
+.py-listing .gs { font-weight: bold; }
+.py-listing .gu { color: rgb(128, 0, 128); font-weight: bold; }
+.py-listing .gt { color: rgb(0, 64, 208); }
+.py-listing .kc { color: rgb(0, 128, 0); font-weight: bold; }
+.py-listing .kd { color: rgb(0, 128, 0); font-weight: bold; }
+.py-listing .kp { color: rgb(0, 128, 0); }
+.py-listing .kr { color: rgb(0, 128, 0); font-weight: bold; }
+.py-listing .kt { color: rgb(176, 0, 64); }
+.py-listing .m { color: rgb(102, 102, 102); }
+.py-listing .s { color: rgb(186, 33, 33); }
+.py-listing .na { color: rgb(125, 144, 41); }
+.py-listing .nb { color: rgb(0, 128, 0); }
+.py-listing .nc { color: rgb(0, 0, 255); font-weight: bold; }
+.py-listing .no { color: rgb(136, 0, 0); }
+.py-listing .nd { color: rgb(170, 34, 255); }
+.py-listing .ni { color: rgb(153, 153, 153); font-weight: bold; }
+.py-listing .ne { color: rgb(210, 65, 58); font-weight: bold; }
+.py-listing .nf { color: rgb(0, 0, 255); }
+.py-listing .nl { color: rgb(160, 160, 0); }
+.py-listing .nn { color: rgb(0, 0, 255); font-weight: bold; }
+.py-listing .nt { color: rgb(0, 128, 0); font-weight: bold; }
+.py-listing .nv { color: rgb(25, 23, 124); }
+.py-listing .ow { color: rgb(170, 34, 255); font-weight: bold; }
+.py-listing .w { color: rgb(187, 187, 187); }
+.py-listing .mf { color: rgb(102, 102, 102); }
+.py-listing .mh { color: rgb(102, 102, 102); }
+.py-listing .mi { color: rgb(102, 102, 102); }
+.py-listing .mo { color: rgb(102, 102, 102); }
+.py-listing .sb { color: rgb(186, 33, 33); }
+.py-listing .sc { color: rgb(186, 33, 33); }
+.py-listing .sd { color: rgb(186, 33, 33); font-style: italic; }
+.py-listing .s2 { color: rgb(186, 33, 33); }
+.py-listing .se { color: rgb(187, 102, 34); font-weight: bold; }
+.py-listing .sh { color: rgb(186, 33, 33); }
+.py-listing .si { color: rgb(187, 102, 136); font-weight: bold; }
+.py-listing .sx { color: rgb(0, 128, 0); }
+.py-listing .sr { color: rgb(187, 102, 136); }
+.py-listing .s1 { color: rgb(186, 33, 33); }
+.py-listing .ss { color: rgb(25, 23, 124); }
+.py-listing .bp { color: rgb(0, 128, 0); }
+.py-listing .vc { color: rgb(25, 23, 124); }
+.py-listing .vg { color: rgb(25, 23, 124); }
+.py-listing .vi { color: rgb(25, 23, 124); }
+.py-listing .il { color: rgb(102, 102, 102); }

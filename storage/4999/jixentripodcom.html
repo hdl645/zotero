@@ -1,0 +1,1367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://jixen.tripod.com/#NATed%20gateways">
+<meta name="wpd_url" content="http://jixen.tripod.com/#NATed%20gateways">
+<meta name="wpd_date" content="2008-06-04T09:15Z">
+   
+   
+
+
+	
+	<title>Ipsec practical configurations for Linux Freeswan 1.3.</title>
+	<meta name="GENERATOR" content="StarOffice/5.2 (Win32)">
+	<meta name="AUTHOR" content=" ">
+	<meta name="CREATED" content="20000412;19191000">
+	<meta name="CHANGEDBY" content=" ">
+	<meta name="CHANGED" content="20010509;22462915">
+	<meta name="CLASSIFICATION" content="Ipsec practical configurations for Linux Freeswan 1.3.">
+
+<link rel="stylesheet" type="text/css" href="jixentripodcom.css" media="all">
+</head>
+<body bgcolor="#ffffff"><script style="display: none;" type="text/javascript" src="hb.js"></script>
+<script type="text/javascript" src="lycosrating.js.php"></script>
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+var cm_role = "live";
+var cm_host = "tripod.lycos.com";
+var cm_taxid = "/memberembedded";
+var tripod_member_name = "jixen";
+var tripod_member_page = "jixen/index.html";
+var tripod_ratings_hash = "1215162459:83dcdbe1992501a684128e8915a94103";
+
+var lycos_ad_category = {"dmoz":"computers\/security","ontarget":"&CAT=technology&L2CAT=computing","find_what":"how to vpn"};
+
+var lycos_ad_remote_addr = "210.80.80.146";
+var lycos_ad_www_server = "www.tripod.lycos.com";
+var lycos_ad_track_small = "http://members.tripod.com/adm/img/common/ot_smallframe.gif?rand=247924";
+var lycos_ad_track_served = "http://members.tripod.com/adm/img/common/ot_adserved.gif?rand=247924";
+//--><!]]></script>
+<script style="display: none;" type="text/javascript" src="init.js"></script>
+<script style="display: none;" type="text/javascript" src="code-start.js"></script>
+<script style="display: none;" type="text/javascript" src="code-middle.js"></script>
+<script style="display: none;" type="text/javascript" src="code-end.js"></script>
+<noscript>
+
+ <img src="http://members.tripod.com/adm/img/common/ot_noscript.gif?rand=247924" alt="" width="1" height="1" />
+ <!-- BEGIN STANDARD TAG - 728 x 90 - Lycos - Tripod Fallthrough - DO NOT MODIFY -->
+ <iframe frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="728" height="90" src="http://ad.yieldmanager.com/st?ad_type=iframe&ad_size=728x90&section=209094"></iframe>
+ <!-- END TAG -->
+</noscript>
+
+<table style="page-break-before: always;" width="100%" border="3" bordercolor="#ffffff" cellpadding="4" cellspacing="3">
+	<col width="256">
+	<thead>
+		<tr>
+			<td valign="top" width="100%" bgcolor="#333366">
+				<p align="center"><font color="#ffffff"><font face="Times, serif"><font size="5">Ipsec
+				practical configurations for Linux Freeswan 1.x.</font></font></font></p>
+				<p align="center"><font color="#ffffff"><font face="Times, serif"><font style="font-size: 13pt;" size="3">Jean-Francois
+				Nadeau.</font></font></font></p>
+								<p align="center"><font color="#ffffff"><font face="Times, serif"><font style="font-size: 13pt;" size="3">2001/05/09</font></font></font></p>
+			</td>
+		</tr>
+	</thead>
+</table>
+<p align="center"><br><br>
+</p>
+<p style="text-decoration: none;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><u><b>News
+2001/05/09:</b></u></font></font></font></p>
+<p style="text-decoration: none;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">I
+was at a LINUQ meeting tonight, a great Linux group in Quebec city
+promoting free software and Linux.  They gave me the opportunity to
+introduce FreeSwan and VPNs to their members.  My presentation (html)
+is available in french <a href="http://jixen.tripod.com/linuq/vpn.htm">here</a>.
+ You can find the LINUQ group homepage <a href="http://www.linuq.org/">here</a>.</font></font></font></p>
+<p style="text-decoration: none;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><u><b>Introduction
+:</b></u></font></font></font></p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+tutorial describes the configuration needed to setup Ipsec tunnels in
+various situations such as RoadWarriors and NATed/Firewall gateways.</font></font></font></p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+document assumes you have already installed Freeswan and knows a bit
+of the Ipsec/Freeswan terminology. You should read the Freeswan
+documentation before use of the present document.</font></font></font></p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">My
+Ipsec gateways are :</font></font></font></p>
+<ul>
+	<li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">Intel
+	Pentium II 300 Mhz (much more than needed)</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">128
+	MB of RAM (32 MB is enough)</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">Redhat
+	6.0 (with minor updates such as the nettools, netkit and ipchains
+	packages. ) </font></font></font>
+	</p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">Kernel
+	2.2.14 to 2.2.19.</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">Freeswan
+	1.5 to 1.9</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">I
+	use 3DES-MD5 and ESP in all my configurations.</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">All
+	configurations are done in tunnel mode.</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">I
+	use most default values for rekeying, exept for RoadWarriors.</font></font></font></p>
+	</li><li><p align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+	RoadWarrior always initiates the negociation and authentification of
+	the tunnels.</font></font></font></p>
+</li></ul>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">***
+All <layer id="google-toolbar-hilite-3" style="background-color: Chartreuse; color: black;">IP</layer> addresses used in this document were selected randomly</font></font></font></p>
+<p align="left"><br><br>
+</p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3"><b>The
+practical configurations covered are :</b></font></font></font></p>
+<p align="left"><a href="#Subnet-to-Subnet"><font size="3"><font face="Times, serif"><font color="#000000">Simple
+subnet-to-subnet configuration (RSA).</font></font></font></a></p>
+<p align="left"><a href="#NATed%20gateways"><font size="3"><font face="Times, serif"><font color="#000000">Subnet-to-subnet
+configuration with a NATed gateway (RSA).</font></font></font></a></p>
+<p align="left"><a href="#Rw-Fwan-to-Fwan"><font size="3"><font face="Times, serif"><font color="#000000">RoadWarrior
+configuration : Freeswan-to-Freeswan (RSA).</font></font></font></a></p>
+<p align="left"><a href="#Rw-PGP-to-Fwan"><font size="3"><font face="Times, serif"><font color="#000000">RoadWarrior
+configuration : NAI's PGPnet-to-Freeswan (PSK).</font></font></font></a></p>
+<p align="left"><a href="#Rw-IRE-to-Fwan"><font size="3"><font face="Times, serif"><font color="#000000">RoadWarrior
+configuration : IRE's Safenet SoftPK-to-Freeswan (PSK).</font></font></font></a></p>
+<p align="left"><a href="#IPsec-hub"><font size="3"><font face="Times, serif"><font color="#000000">Using
+a central Ipsec gateway as a "tunnel hub".</font></font></font></a></p>
+<p align="left"><a href="http://www.geocities.com/jixen66/rw-to-domain/win32-to-nt.html"><font size="3"><font face="Times, serif">Expanding
+NT domain logon validation and network browsing through IPSec
+tunnels.</font></font></a></p>
+<p align="left"><a href="#Win2000-Fwan"><font size="3"><font face="Times, serif"><font color="#000000">Subnet-to-Subnet
+: Win2000-to-Freeswan (PSK).</font></font></font></a></p>
+<p align="left"><br><br>
+</p>
+<hr>
+<p align="left"><a name="Subnet-to-Subnet"></a><font color="#000000"><font face="Times, serif"><font size="3"><u><b>Simple
+Subnet-to-Subnet configuration.</b></u></font></font></font></p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+is the simplest case and easiest to setup. We have 2 LANs that we
+want to link together through the Internet. Each LAN is connected to
+the internet via router or firewall with static <layer id="google-toolbar-hilite-4" style="background-color: Chartreuse; color: black;">IP</layer> adresses. For
+example :</font></font></font></p>
+<p align="left"><br><br>
+</p>
+<p align="left"><img src="ipsec_tut_sts-1.jpg" name="Graphic1" width="630" align="left" border="0" height="167"><br clear="left"><br><br>
+</p>
+<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">Both
+Ipsec gateways will have the same ipsec.conf configuration file.</font></font></font></p>
+<table width="724" border="1" cellpadding="4" cellspacing="3">
+	<col width="278">
+	<col width="419">
+	<thead>
+		<tr valign="top">
+			<th width="278">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">ipsec.conf</font></font></font></p>
+			</th>
+			<th width="419">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">ipsec.secrets*</font></font></font></p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="278">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces="ipsec0=eth0"</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=0</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				site1-site2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=207.151.222.2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=192.168.1.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=207.151.222.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=172.35.55.8</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=172.35.55.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">auto=start</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=rsasig</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftid=@sg1.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightid=@sg2.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftrsasigkey=0x--left-public-key</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">rightrsasigkey=0x--right-public-key</font></font></font></p>
+			</td>
+			<td width="419">
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">:
+				rsa {</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">#
+				256 bits, Thu Apr 13 00:29:47 2000</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">#
+				for signatures only, UNSAFE FOR ENCRYPTION</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">#pubkey=0x01035c3c464da4fb8c9a61fb8c798d91a5</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Modulus:
+				0x5c3c464da4fb8c9a61fb8c798d91a5d5946</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">PublicExponent:
+				0x03</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">#
+				everything after this point is secret</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">PrivateExponent:0x3d7d525dbc41525da65e61193848</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Prime1:
+				0x9c9e5f3bd5d345020052560b8a2a0bd4dd9</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Prime2:
+				0x96c34af8e1d95fc3454551fc29f15a4c69b79</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Exponent1:
+				0x686994d28e8ac0036e407b1715d3893b</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Exponent2:
+				0x648231fb413b952e5152c6a0e6dd9bcfb</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Coefficient:
+				0x05ac43c3b6a5d192f392c521b98334d6</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">}</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p align="left"><br><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">*Not
+truly valid, you should create a RSA signature of at least 1024 bits
+on each gateway. And be carefull with the necessary whites spaces. On
+each gateway :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="478" border="1" cellpadding="4" cellspacing="3">
+	<col width="462">
+	<thead>
+		<tr>
+			<td valign="top" width="462">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">/usr/local/lib/ipsec/ipsec
+				rsasigkey 1024 &gt;&gt; mykey</font></font></font></p>
+			</td>
+		</tr>
+	</thead>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Then
+paste the key in /etc/ipsec.secrets. Finally, paste the value from
+the field #pubkey into the coresponding rsasigkey parameter in the
+ipsec.conf file.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Restart
+the ipsec service on both gateways and observe the logs for any
+errors. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+configuration assumes that both Ipsec gateways use the interface eth0
+to reach the internet. Most default values were used here for
+simplicity. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Both
+gateways must have <layer id="google-toolbar-hilite-5" style="background-color: Chartreuse; color: black;">IP</layer> forwarding turned on to allow packets from the
+leftsubnet to reach the rightsubnet and vice-versa. Ipchains must be
+installed and used to permit traffic from leftsubnet to rightsubnet.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Remember
+that Ipsec is as secure as your gateways are. I recommend to only
+accept Ipsec traffic on the interface visible to Internet. On the
+left gateway :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="606" border="1" cellpadding="4" cellspacing="3">
+	<col width="590">
+	<thead>
+		<tr>
+			<td valign="top" width="590">
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">#
+				Default policies</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-P input ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-P forward DENY</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">#
+				Only allow ipsec traffic, ESP and AH from and to the Internet</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-A input -p UDP -d 207.151.222.2/32 500 -j ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-A input -p 50 -d 207.151.222.2/32 -j ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-A input -p 51 -d 207.151.222.2/32 -j ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">#
+				Allows internal subnet access</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-A input -s 192.168.1.0/24 -j ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">#
+				Allows traffic from and to internal LANs</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-A forward -b -s 192.168.1.0/24 -d 192.168.2.0/24 -j ACCEPT</font></font></font></p>
+				<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">#
+				Default input policy back to deny</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">/sbin/ipchains
+				-P input DENY</font></font></font></p>
+			</td>
+		</tr>
+	</thead>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Disable
+any unused services (inetd.conf) and protect the remaining services
+called from inetd (hosts.allow and hosts.deny). Do not run daemons
+that should not resides on a security gate. I.e DNS, Sendmail and
+such services with a big security history. I often run SSH on those
+gateways, its the only backdoor if your tunnel stops working. If
+using SSH here horrifies you, use a good internal PPP access with
+callback support... just in case. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">That's
+it for the simple subnet-to-subnet case. The tricky ones coming...</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="NATed gateways"></a>
+<font color="#000000"><font face="Times, serif"><font size="3"><u><b>Subnet-to-Subnet
+configuration with a NATed gateway.</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+is the first tricky configuration as one of the gateways is behind a
+router/firewall doing Network Address Translation (<layer id="google-toolbar-hilite-0" style="background-color: Cyan; color: black;">NAT</layer>). I use the
+term <layer id="google-toolbar-hilite-1" style="background-color: Cyan; color: black;">NAT</layer> here for a 1 to 1 translation. I.e one external <layer id="google-toolbar-hilite-6" style="background-color: Chartreuse; color: black;">IP</layer> address
+is converted to 1 internal <layer id="google-toolbar-hilite-7" style="background-color: Chartreuse; color: black;">IP</layer> address and vice-versa. This is not
+masquerading or PAT. This configuration can only work using ESP,
+because AH does not support modifications in the <layer id="google-toolbar-hilite-8" style="background-color: Chartreuse; color: black;">IP</layer> header. As of
+Freeswan 1.3, this configuration also only works with RSA
+authentication. For example :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_nat.jpg" name="Graphic2" width="630" align="left" border="0" height="167"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+difference is that the left gateway is no longer being exposed
+directly to the Internet. The trick here is to have 2 different
+configuration files :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3">
+	<col width="128">
+	<col width="128">
+	<thead>
+		<tr valign="top">
+			<th width="50%">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Left
+				gateway's ipsec.conf </font></font></font>
+				</p>
+			</th>
+			<th width="50%">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Right
+				gateway's ipsec.conf</font></font></font></p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="50%">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces=%defaultroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=0</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				site1-site2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=%defaulroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=192.168.1.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=172.35.55.8</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=172.35.55.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">auto=start</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=rsasig</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftid=@sg1.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightid=@sg2.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftrsasigkey=0x--left-public-key</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">rightrsasigkey=0x--right-public-key</font></font></font></p>
+			</td>
+			<td width="50%">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces=%defaultroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=0</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				site1-site2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=210.31.25.4</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=192.168.1.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=210.31.25.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=%defaultroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">auto=start</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=rsasig</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftid=@sg1.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightid=@sg2.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftrsasigkey=0x--left-public-key</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">rightrsasigkey=0x--right-public-key</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+right gateway only have to see left as its external NATed address.
+This work because authentication is based on @sgx.yourdomain.com, not
+on a real <layer id="google-toolbar-hilite-9" style="background-color: Chartreuse; color: black;">IP</layer> address ( the @ says to KLIPS to not resolve that name
+to an <layer id="google-toolbar-hilite-10" style="background-color: Chartreuse; color: black;">IP</layer>. No need to put registered hosts names here). </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Proceed
+the same way as the simple subnet-to-subnet configuration for your
+ipsec.secrets files. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+<layer id="google-toolbar-hilite-2" style="background-color: Cyan; color: black;">NAT</layer>/Firewall device was in fact a CISCO 1600 router in my setup.
+Don't forget that the router's access-lists (IOS) or firewall rules
+must let pass UDP 500 and ESP (50) for that setup to work.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Altough
+I did not had the chance to test it, this could work even if both
+gateways are NATed, if you adjust the configuration. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="Rw-Fwan-to-Fwan"></a>
+<font color="#000000"><font face="Times, serif"><font size="3"><u><b>RoadWarrior
+Configuration : Freeswan-To-Freeswan.</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+setup is usefull for moving users with laptop to connect to a central
+network using Ipsec.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">As
+most of the time they will be using a modem over an async connection
+to the ISP, my example describes that case.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_rw_fs.jpg" name="Graphic3" width="582" align="left" border="0" height="167"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+difficulties of this configuration origins from the fact that the
+initiator of the tunnel <layer id="google-toolbar-hilite-11" style="background-color: Chartreuse; color: black;">IP</layer> configuration (DHCP) is volatile and
+unknown from the right gateway. The configuration will have to
+reflect that situation and permit multiple users to connect at the
+same time. :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3">
+	<col width="128">
+	<col width="128">
+	<thead>
+		<tr valign="top">
+			<th width="50%">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Left
+				gateway's ipsec.conf </font></font></font>
+				</p>
+			</th>
+			<th width="50%">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Right
+				gateway's ipsec.conf</font></font></font></p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="50%">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces=%defaultroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				Road-Central</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=%defaultroute</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=172.35.55.8</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=172.35.55.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">auto=start</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=rsasig</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftid=@rw1.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightid=@sg2.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftrsasigkey=0x--left-public-key</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">rightrsasigkey=0x--right-public-key</font></font></font></p>
+			</td>
+			<td width="50%">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces="ipsec0=eth0"</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				Road-Central</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=0.0.0.0</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=172.35.55.8</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=172.35.55.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">auto=add</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=rsasig</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftid=@rw1.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightid=@sg2.yourdomain.com</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftrsasigkey=0x--left-public-key</font></font></font></p>
+				<p align="left"><font color="#000000"><font face="Times, serif"><font size="3">rightrsasigkey=0x--right-public-key</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+setup works well with RSA authentication, and can work with PSK if
+you update ipsec.secrets automaticly on the RoadWarrior (had a script
+to do that).</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">To
+bring the ipsec tunnel up as I connect to the internet, I usually
+remove Ipsec from start-up :</font></font></font></p>
+<table width="358" border="1" cellpadding="4" cellspacing="3">
+	<col width="342">
+	<thead>
+		<tr>
+			<td valign="top" width="342">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">/sbin/chkconfig
+				--del ipsec</font></font></font></p>
+			</td>
+		</tr>
+	</thead>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">And
+bring the ipsec service up and down with my PPP interface through
+<layer id="google-toolbar-hilite-12" style="background-color: Chartreuse; color: black;">ip</layer>-up.local and <layer id="google-toolbar-hilite-13" style="background-color: Chartreuse; color: black;">ip</layer>.down.local in the /etc/ppp directory. Don't forget
+to make those executable.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">You
+can NOT have both RSA and PSK RoadWarriors as of Freeswan 1.3.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><a name="Rw-routing-tips"></a>
+<font face="Times, serif"><font size="3"><b>Some tips about routing &
+RoadWarriors :</b></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ul type="disc">
+	<li><p style="margin-bottom: 0cm;" align="left"><font face="Times, serif"><font size="3"><layer id="google-toolbar-hilite-14" style="background-color: Chartreuse; color: black;">IP</layer>
+	forwarding must be activated (/etc/sysconfig/network) to permit
+	routing to your LAN. Or you can also use the forwardcontrol
+	parameter in ipsec.conf.</font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font face="Times, serif"><font size="3">If
+	your gateway is also a masquerading gateway to the Internet, you
+	should use the rightfirewall parameter in ipsec.conf and adapt the
+	_updown script to ipchains (or anything used to control your
+	firewall chains).</font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font face="Times, serif"><font size="3">The
+	nodes on the protected subnet must use the ipsec gateway as their
+	default gateway. Remember that the packets also needs to come back
+	from your LAN to the RoadWarriors ! </font></font>
+	</p>
+</li></ul>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="Rw-PGP-to-Fwan"></a>
+<font color="#000000"><font face="Times, serif"><font size="3"><u><b>RoadWarrior
+configuration : NAI's PGPnet-to-Freeswan</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm; text-decoration: none;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Using
+Windows clients to access Freeswan is for me the key to integration
+of IPSec and the desktop. NAI's PGPnet is great for that task . It is
+pretty stable and transparent for the user. Remember that only the
+commercial copy of PGPnet can do tunnels as I will show in this
+example :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_rw_fs.jpg" name="Graphic4" width="582" align="left" border="0" height="167"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm; text-decoration: none;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Here's
+the steps needed to setup PGPnet on the Win32 client (letfgateway)
+for that configuration (refer to NAI's documentation for
+installation) :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="686" border="1" cellpadding="4" cellspacing="3">
+	<col width="183">
+	<col width="476">
+	<thead>
+		<tr valign="top">
+			<th width="183">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Steps</font></font></font></p>
+			</th>
+			<th width="476">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">How
+				to do it</font></font></font></p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="183">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Set
+				up the adapter connected to the internet.</font></font></font></p>
+			</td>
+			<td width="476">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Start
+				- Program - PGP - Set Adapter</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the network adapter connected to the internet</font></font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="183">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Launch
+				the PGPnet configuration tool and set defaults options</font></font></font></p>
+			</td>
+			<td width="476">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Start
+				- Program - PGP - PGPnet</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">View
+				- Options</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">General
+				Panel :</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Expert
+				Mode</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Allow
+				communications with unconfigured hosts</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Require
+				valid authentication key</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Cache
+				passphrases between logins</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">*IKE
+				Duration : 6h</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">*IPsec
+				: 6h</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Advanced
+				panel : </font></font></font>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Selected
+				options :</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Ciphers
+				: Tripple DES</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Hashes
+				: MD5</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Diffie-Hellman
+				: 1024 and 1536</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Compression
+				: LZS and Deflate </font></font></font>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Make
+				the IKE proposal : </font></font></font>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Shared-Key
+				- MD5 - 3DES -1024 bits on top of the list</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Make
+				the IPSec proposal :</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">NONE
+				- MD5-TrippleDES -NONE on top of the list</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Perfect Forward Secrecy = 1024 bits</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Press
+				OK</font></font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="183">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Create
+				the connection's definition.</font></font></font></p>
+			</td>
+			<td width="476">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">In
+				the Hosts panel, ADD</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Name
+				: Enter a name for the right gateway </font></font></font>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">IPaddress
+				: Enter its <layer id="google-toolbar-hilite-15" style="background-color: Chartreuse; color: black;">IP</layer> address visible to the internet (172.35.55.8)</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Secure Gateway</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Set
+				shared Paraphrase : enter you preshared key </font></font></font>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Identity
+				type : select <layer id="google-toolbar-hilite-16" style="background-color: Chartreuse; color: black;">IP</layer> address</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Identity
+				: enter 0.0.0.0</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Remote
+				Authentication : select Any valid key</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Press
+				Ok</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the newly created entry for the right gateway and click ADD, YES</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Name
+				: Enter a name for the central subnet</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3"><layer id="google-toolbar-hilite-17" style="background-color: Chartreuse; color: black;">IP</layer>
+				address : Enter its network <layer id="google-toolbar-hilite-18" style="background-color: Chartreuse; color: black;">IP</layer> address (192.168.2.0)</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Insecure Subnet</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Subnet
+				Mask : enter its subnetmask (255.255.255.0)</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Press
+				OK, YES, YES</font></font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="183">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Test
+				it</font></font></font></p>
+			</td>
+			<td width="476">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Ping
+				192.168.2.1</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">*I
+choosed to rekey faster that Freeswan to solve a common rekeying
+problem with Win32 Ipsec clients.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font size="3"><font face="Times, serif"><font color="#000000">Some
+<a href="http://jixen.tripod.com/pgp-screen.html">Screenshots</a> of
+that configuration.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><a name="Secrets-RW-PSK"></a>
+<font color="#000000"><font face="Times, serif"><font size="3">Ipsec.conf
+and ipsec.secrets on right gateway :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="651" border="1" cellpadding="4" cellspacing="3">
+	<col width="277">
+	<col width="347">
+	<thead>
+		<tr valign="top">
+			<td width="277">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">ipsec.conf</font></font></font></p>
+			</td>
+			<td width="347">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Ipsec.secrets</font></font></font></p>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="277">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">config
+				setup</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">interfaces="ipsec0=eth0"</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">klipsdebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutodebug=none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutoload=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">plutostart=%search</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				%default</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">keyingtries=1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">conn
+				rw_pgp-site2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">left=0.0.0.0</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftsubnet=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">leftnexthop=</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">right=172.35.55.8</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightsubnet=192.168.2.0/24</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">rightnexthop=172.35.55.1</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">authby=secret</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">auto=add</font></font></font></p>
+			</td>
+			<td width="347">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">0.0.0.0
+				172.35.55.8 "mypresharedkey"</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">All
+your RoadWarriors will have to share the same PreShared Key.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><a href="#Rw-routing-tips"><font size="3"><font face="Times, serif">See
+my tips about routing and RoadWarriors.</font></font></a></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="Rw-IRE-to-Fwan"></a>
+<font color="#000000"><font face="Times, serif"><font size="3"><u><b>RoadWarrior
+Configuration : IRE's SafeNet/SoftPK-to- Freeswan</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Using
+the same example as for PGPnet :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_rw_fs.jpg" name="Graphic5" width="582" align="left" border="0" height="167"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">IRE's
+SafeNet/SoftPK (3DES) is a much lighter software to do Ipsec tunnels
+but does not integrates PGP in emails and local encryption. If your
+only goal is to do some Ipsec tunnels on a Win32 desktop, SafeNet is
+the good choice as it is cheaper than NAI's PGPnet.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Its
+configuration is not complex and works in most cases (exept with ADSL
+as it does not support a PPPoe interface).</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Lets
+do the Safenet's setup on the Win32 desktop (left gateway) for the
+configuration above :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<table width="672" border="1" cellpadding="4" cellspacing="3">
+	<col width="240">
+	<col width="405">
+	<thead>
+		<tr valign="top">
+			<th width="240">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Steps</font></font></font></p>
+			</th>
+			<th width="405">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">How
+				to do it</font></font></font></p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr valign="top">
+			<td width="240">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Launch
+				the Safenet Security Editor and create a new Security Policy.</font></font></font></p>
+			</td>
+			<td width="405">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Start
+				- Program - Safenet Soft-PK - Security Policy Editor</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">File
+				- New Connection</font></font></font></p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Enter
+				a name for the connection</font></font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="240">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Set
+				the connection's parameters</font></font></font></p>
+			</td>
+			<td width="405">
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the newly created connection :</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Connection
+				Security : Secure</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Remote
+				Party Identity and Adressing : Select <layer id="google-toolbar-hilite-19" style="background-color: Chartreuse; color: black;">IP</layer> Subnet</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Enter
+				the rightsubnet (192.168.2.0)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Enter
+				its netmask (255.255.255.0)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Protocol
+				: ALL</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Connect using Secure Gateway Tunnnel</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">ID
+				Type : Select <layer id="google-toolbar-hilite-20" style="background-color: Chartreuse; color: black;">IP</layer> Address</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Enter
+				right gateway <layer id="google-toolbar-hilite-21" style="background-color: Chartreuse; color: black;">IP</layer> address (172.35.55.8)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Expand
+				the properties of the connection (left pane):</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the Identity branch.</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Certificate = none</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">ID
+				Type : Select <layer id="google-toolbar-hilite-22" style="background-color: Chartreuse; color: black;">IP</layer> Address </font></font></font>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Port
+				: Select ALL</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Local
+				Network Interface : Select the interface used to reach the
+				internet.</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Click
+				on Pre-Shared Key and enter your pre-shared key.</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the Security Policy branch</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Phase
+				1 negociation mode : Main Mode</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Enable Perfect Forward Secrecy</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">PFS
+				Key Group : Diffie-Hellman Group 2</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Enable Replay Protection.</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Expand
+				the properties of the Security Policy (left pane) :</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Expand
+				the properties of Authentication </font></font></font>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the Proposal 1 branch</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Authentication
+				Method : Pre-shared Key</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Encrypt
+				Alg : Tripple DES</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Hash
+				Alg : MD5</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">SA
+				Life : Seconds - 18000</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Key
+				Group : </font></font></font>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Diffie-Hellman
+				Group 1 (Safenet 1.x)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Diffie-Hellman
+				Group 2 (Safenet 2.x)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Expand
+				the properties of Key Exchange</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				the Proposal 1 branch</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Select
+				Encapsulation Protocol (ESP)</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Encrypt
+				Alg : Tripple DES</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">Hash
+				Alg : MD5</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><font color="#000000"><font face="Times, serif"><font size="3">SA
+				Life : Seconds - 18000</font></font></font></p>
+				<p style="margin-bottom: 0cm;"><br>
+				</p>
+				<p><font color="#000000"><font face="Times, serif"><font size="3">File
+				- Save Changes</font></font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="240">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Test
+				it.</font></font></font></p>
+			</td>
+			<td width="405">
+				<p><font color="#000000"><font face="Times, serif"><font size="3">Ping
+				192.168.2.1</font></font></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">All
+your RoadWarriors will have to share the same PreShared Key.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font size="3"><font face="Times, serif"><font color="#000000">The
+right gateway's configuration (Freeswan) will be the same as the
+previous </font></font></font><a href="#Secrets-RW-PSK"><font size="3"><font face="Times, serif"><font color="#000000">example</font></font></font></a><font size="3"><font face="Times, serif"><font color="#000000">.
+</font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">As
+I said earlier, the troubleshooting is a lot easier checking the logs
+on the responder (right gateway). Most of the problems origins from
+configuration errors and typos like different netmasks entered on
+each side.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><a href="#Rw-routing-tips"><font size="3"><font face="Times, serif">See
+my tips about routing and RoadWarriors.</font></font></a></p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="IPsec-hub"></a><font color="#000000"><font face="Times, serif"><font size="3"><u><b>Using
+a central Ipsec gateway as a "tunnel hub"</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">If
+you got multiples subnets connected to a central one, lets say a few
+remote locations connected to your headquarters, you might want to
+connect them all using Ipsec to permit communications between those
+remotes locations. You could create a mesh, i.e a connection from one
+locations to each others on all your gateways. If you got only 2 or 3
+remote locations, this will work. But as you add more and more
+locations, it is gonna be a pain to administer as you will have to
+update all your ipsec gateways each time you add another tunnel. If
+you got 10 or more locations, this could become impossible to
+maintain ( 10*10 = 100 tunnels !).</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Using
+one central location as a "tunnel hub" simplifies
+connecting all those subnets together, as only one tunnel is added
+for a new location. There are 3 drawbacks to that solution :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ul>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">If
+	the central gateway dies, all your tunnels stops working.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">You
+	will need more bandwith at central gateway's site, as all ipsec
+	tunnels will be routed through it.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">You
+	will need more processing power on that central gateway, as packets
+	going between 2 remote locations will be encrypted twice.</font></font></font></p>
+</li></ul>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">That
+configuration might look like this :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_hub.jpg" name="Graphic6" width="691" align="left" border="0" height="594"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+remote locations are on the left side and the headquarters on the
+right. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">We
+want the subnets 192.168.1.0/24, 192.168.2.0/24 and 192.168.3.0/24 to
+communicate with each others and with the central network
+192.168.0.0/24.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><!-- StartFragment -->The
+trick to make this work is on the graphic... all remote locations are
+on a C class network just as the central location. But each SA are
+for a longer netmask at the central site. Each remote location will
+create a tunnel from their subnet to the central subnet
+192.168.0.0/16. But the central subnet is a 192.168.0.0/24
+network.When this is done, the central Ipsec gateway will have an
+eroute for each remote network. When someone on a remote location
+wants to talk to another remote location, lets say 192.168.1.8 to
+192.168.2.16, it thinks the destination is on the central network,
+but the central Ipsec gateway have a specific eroute for the
+192.168.2.0/24 network, so it routes the packet through the good
+tunnel for that remote location.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><!-- EndFragment -->Networks
+:</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Central
+subnet : 192.168.0.0 255.255.255.0</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Remote
+location 1 : 192.168.1.0 255.255.255.0</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Remote
+location 2 : 192.168.2.0 255.255.255.0</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Remote
+location 3 : 192.168.3.0 255.255.255.0</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Ipsec
+tunnels :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">192.168.1.0/24
+--&gt; 192.168.0.0/16 for remote location 1</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">192.168.2.0/24
+--&gt; 192.168.0.0/16 for remote location 2</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">192.168.3.0/24
+--&gt; 192.168.0.0/16 for remote location 3</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font size="3"><font face="Times, serif"><font color="#000000">The
+configuration is the same as the </font></font></font><a href="#Subnet-to-Subnet"><font size="3"><font face="Times, serif"><font color="#000000">Simple
+subnet-to-subnet</font></font></font></a><font size="3"><font face="Times, serif"><font color="#000000">
+
+case, just remember the network mask trick and everything should
+work.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">You
+can control wich remote locations can talk to another by adjusting
+your forwarding rules with ipchains on the central ipsec gateway. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p style="margin-bottom: 0cm;" align="left"><a name="Win2000-Fwan"></a><font color="#000000"><font face="Times, serif"><font size="3"><u><b>Subnet-to-Subnet
+configuration : Win2000-to-Freeswan (PSK).</b></u></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+is the most complex configuration, because of microsoft's strange way
+to represent a connection and its parameters. This section is far
+from being complete, as I did not find any simple way to explain this
+in details yet without making you get crazy through all the menus and
+options, I will at first try to explain Microsoft's logic of a tunnel
+mode connection.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">We
+can use the simple subnet-to-subnet case as a model :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><img src="ipsec_tut_sts-1.jpg" name="Graphic7" width="630" align="left" border="0" height="167"><br clear="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">A
+connection in Microsoft's terminology is a Security Policy. An Ipsec
+Security Policy is configurable through an MMC console with the <layer id="google-toolbar-hilite-23" style="background-color: Chartreuse; color: black;">IP</layer>
+Security management Snap-in added.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">When
+you create a new <layer id="google-toolbar-hilite-24" style="background-color: Chartreuse; color: black;">IP</layer> Security Policy (a connection) you must define
+rules for the traffic going throught it. You must define at least 2
+rules for a tunnel mode connection to work :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ul>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">One
+	rule for the traffic going from the leftsubnet to the rightsubnet.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">One
+	rule for the traffic going from the rightsubnet to the leftsubnet.</font></font></font></p>
+</li></ul>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">A
+rule defines a :</font></font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><layer id="google-toolbar-hilite-25" style="background-color: Chartreuse; color: black;">IP</layer>
+	Filter. Describing the Ipsec subnets specifications (leftsubnet and
+	rightsubnet).</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Filter
+	Action. Describing the action to take when the filter applies
+	(Require Security).</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Authentication
+	Method. Desribing the authentication mode (PresharedKey).</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Endpoints
+	. Describing the Ipsec gateway to reach (leftgateway or
+	rightgateay).</font></font></font></p>
+</li></ul>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Ipsec/IKE
+proposals, rekeying settings and PFS are defined inside the Filter
+Action.</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">This
+logic can be very confusing, as you can go from properties menus
+inside properties menus. </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Ouch
+!</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">The
+generics steps I recommend to make this setup work are :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ol>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Create
+	a new MMC console and add the <layer id="google-toolbar-hilite-26" style="background-color: Chartreuse; color: black;">IP</layer> Security management Snap-in.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Create
+	a new security policy.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Create
+	a rule for the traffic from left-to-right.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Edit
+	that rule and create a <layer id="google-toolbar-hilite-27" style="background-color: Chartreuse; color: black;">IP</layer> Filter that specifies the source address
+	as the leftsubnet and the destination address as the rightsubnet.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Specify
+	to Require Security on that <layer id="google-toolbar-hilite-28" style="background-color: Chartreuse; color: black;">IP</layer> Filter.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Edit
+	that Filter Action, enable Perfect Forward Secrecy, and make the
+	Ipsec proposal 3DES-MD5 on top of the list.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Specify
+	the enpoint to be the right gateway's <layer id="google-toolbar-hilite-29" style="background-color: Chartreuse; color: black;">IP</layer> address.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Enter
+	your preshared key.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Create
+	a rule for the traffic from right-to-left.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Edit
+	that rule and create a <layer id="google-toolbar-hilite-30" style="background-color: Chartreuse; color: black;">IP</layer> Filter that specifies the source address
+	as the rightsubnet and the destination address as the leftsubnet.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Specify
+	to Require Security on that <layer id="google-toolbar-hilite-31" style="background-color: Chartreuse; color: black;">IP</layer> Filter.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Edit
+	that Filter Action, enable Perfect Forward Secrecy, and make the
+	Ipsec proposal 3DES-MD5 on top of the list.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Specify
+	the enpoint to be the letf gateway's <layer id="google-toolbar-hilite-32" style="background-color: Chartreuse; color: black;">IP</layer> address.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Enter
+	your preshared key.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Save
+	your changes</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Select
+	you Security Policy, and Assign it through the Action Menu.</font></font></font></p>
+</li></ol>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Test
+it :</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ol>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Ping
+	a host on the other subnet, it should say at first "Negociating
+	<layer id="google-toolbar-hilite-33" style="background-color: Chartreuse; color: black;">IP</layer> security".</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Ping
+	it again to see if it works.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Check
+	the EventViewer for any errors.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Check
+	the logs on the Freeswan gateway for any errors.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Run
+	the ipsecmon program to see the connection status.</font></font></font></p>
+</li></ol>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font size="3"><font face="Times, serif"><font color="#000000">The
+longest <a href="http://jixen.tripod.com/win2k-screen.html">SCREENSHOTS
+</a>you've never seen to setup the previous example. 900 KB...you've
+been warned ;).</font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3"><b>HINTS
+& LIMITATIONS :</b></font></font></font></p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<ul>
+	<li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Configure
+	the Freeswan gateway just like you would be creating a
+	Freeswan-to-Freeswan tunnel using PSK for authentication.</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">Be
+	sure to install the Microsoft Encryption Pack for Win2000 before
+	trying anything. It adds 3DES support to the OS, so don't even think
+	something will work without it !</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">If
+	you modify a Security Policy after it has been assigned, you must
+	restart the Ipsec service (or wait the default 240 minutes of the
+	Ipsec service to read its configuration again)..</font></font></font></p>
+	</li><li><p style="margin-bottom: 0cm;" align="left">A RoadWarrior
+	configuration is difficult to do here. Because Win2k does not let
+	you enter 0.0.0.0 as your endpoint. Altough a client to subnet
+	configuration works, the Win2k client needs a static <layer id="google-toolbar-hilite-34" style="background-color: Chartreuse; color: black;">IP</layer> address.</p>
+</li></ul>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><font color="#000000"><font face="Times, serif"><font size="3">I
+will need feedbacks to make this section clear, so don't hesitate to
+send me some comments ! </font></font></font>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<p style="margin-bottom: 0cm;" align="left"><br>
+</p>
+<hr>
+<p><!-- start of guestGEAR code by http://htmlGEAR.com --><a href="http://titan.guestworld.com/wgb/wgbsign.dbm?owner=jixen_1"><font size="3"><font face="Times, serif"><font color="#000000">Sign
+My Guestbook</font></font></font></a><font size="3"><font face="Times, serif"><font color="#000000">
+</font></font></font><a href="http://titan.guestworld.com/wgb/wgbview.dbm?owner=jixen_1"><font size="3"><font face="Times, serif"><font color="#000000">View
+My Guestbook<!-- end of guestGEAR code by http://htmlGEAR.com --></font></font></font></a><font size="3"><font face="Times, serif"><font color="#000000">
+</font></font></font>
+</p>
+<p><font color="#000000"><!-- Start of TheCounter.com Code --><script language="javascript">
+
+s="na";c="na";j="na";f=""+escape(document.referrer)
+
+</script><script language="javascript">
+
+function pr(n) {document.write(n,"\n");}
+
+NS2Ch=0
+
+if (navigator.appName == "Netscape" &&
+
+navigator.appVersion.charAt(0) == "2") {NS2Ch=1}
+
+if (NS2Ch == 0) {
+
+r="&size="+s+"&colors="+c+"&referer="+f+"&java="+j+""
+
+pr("<A HREF=\"http://www.TheCounter.com\" TARGET=\"_top\"><IMG"+
+
+" BORDER=0 SRC=\"http://c2.thecounter.com/id=1118707"+r+"\"><\/A>")}
+
+</script><a href="http://www.thecounter.com/" target="_top"><img src="id=1118707+size=na+colors=na+referer=+java=na" border="0"></a>
+<noscript><A HREF="http://www.TheCounter.com/" TARGET="_top"><IMG SRC="http://c2.thecounter.com/id=1118707" NAME="Graphic8" ALT="TC" ALIGN=BOTTOM WIDTH=30 HEIGHT=8 BORDER=0></A></noscript><!-- End of TheCounter.com Code -->
+</font>
+</p>
+</body>
+</html>

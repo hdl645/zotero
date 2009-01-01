@@ -1,0 +1,1 @@
+mboxFactoryDefault.get('searchNetworking_ATE_Content_Right',0).setOffer(new mboxOfferDefault()).loaded();

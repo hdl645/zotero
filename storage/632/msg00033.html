@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.ox.org/ipsec/2003/05/msg00033.html">
+<meta name="wpd_url" content="http://www.ox.org/ipsec/2003/05/msg00033.html">
+<meta name="wpd_date" content="2008-06-03T02:08Z">
+<!-- MHonArc v2.4.9 -->
+<!--X-Subject: RE: IPSec Passthrough -->
+<!--X-From-R13: Dnznan Kneyntnqqn <enznan.lneyntnqqnNnanybt.pbz> -->
+<!--X-Date: Fri, 2 May 2003 15:52:20 &#45;0400 (EDT) -->
+<!--X-Message-Id: 4.3.2.7.1.20030502121318.02480d10@golf.cpgdesign.analog.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 89680B404BA1DD419E6D93B28B41899B0105F21A@01MAIL -->
+<!--X-Reference: 1051855760.1160.14.camel@lima.royalchallenge.com -->
+<!--X-Head-End-->
+
+
+
+<title>RE: IPSec Passthrough</title>
+<link rev="made" href="mailto:ramana.yarlagadda@analog.com">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="http://www.ox.org/ipsec/2003/05/msg00032.html">Date Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00034.html">Date Next</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00023.html">Thread Prev</a>][<a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Thread Next</a>][<a href="http://www.ox.org/ipsec/2003/05/maillist.html#00033">Date Index</a>][<a href="http://www.ox.org/ipsec/2003/05/threads.html#00033">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: IPSec Passthrough</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Vinay K Nallamothu &lt;<a href="mailto:vinay-rc@naturesoft.net">vinay-rc@naturesoft.net</a>&gt;, <a href="mailto:BSingh@Nomadix.com">BSingh@Nomadix.com</a></li>
+<li><em>Subject</em>: RE: IPSec Passthrough</li>
+<li><em>From</em>: Ramana Yarlagadda &lt;<a href="mailto:ramana.yarlagadda@analog.com">ramana.yarlagadda@analog.com</a>&gt;</li>
+<li><em>Date</em>: Fri, 02 May 2003 12:18:43 -0700</li>
+<li><em>Cc</em>: <a href="mailto:msiler@hcin.net">msiler@hcin.net</a>, <a href="mailto:ipsec@lists.tislabs.com">ipsec@lists.tislabs.com</a></li>
+<li><em>In-Reply-To</em>: &lt;<a href="http://www.ox.org/ipsec/2003/05/msg00023.html">1051855760.1160.14.camel@lima.royalchallenge.com</a>&gt;</li>
+<li><em>References</em>: &lt;<a href="http://www.ox.org/ipsec/2003/05/msg00014.html">89680B404BA1DD419E6D93B28B41899B0105F21A@01MAIL</a>&gt;    &lt;<a href="http://www.ox.org/ipsec/2003/05/msg00014.html">89680B404BA1DD419E6D93B28B41899B0105F21A@01MAIL</a>&gt;</li>
+<li><em>Sender</em>: <a href="mailto:owner-ipsec@lists.tislabs.com">owner-ipsec@lists.tislabs.com</a></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Hi, Vinay
+
+
+&gt;Few mechanisms i could imagine the IPsec gateways did:
+&gt;1. Use L2TP over IPsec and tie (using firewall rules) the PPP/L2TP
+&gt;assigned IP address to the IPsec SA.
+&gt;
+&gt;2. Do some sort of (static?) NAT (again using firewall) on the packets
+&gt;coming out an SA so that the packets on the reverse path can be reliably
+&gt;channeled to the correct SA.
+
+The static NAT requires more no of IP addresses. But with out static NAT 
+this can be done, by serializing the IPSEC connections of hosts behind the 
+NAT device. Linux  implementation is available for this problem.
+
+
+&gt;Any better ways of doing that?
+
+
+
+
+ 
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00014" href="http://www.ox.org/ipsec/2003/05/msg00014.html">RE: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> BSingh@Nomadix.com</li></ul></li>
+<li><strong><a name="00023" href="http://www.ox.org/ipsec/2003/05/msg00023.html">RE: IPSec Passthrough</a></strong>
+<ul><li><em>From:</em> Vinay K Nallamothu &lt;vinay-rc@naturesoft.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00032.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00034.html">Re: Question on inbound IPSEC policy check</a></strong>
+</li>
+<li>Prev by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00023.html">RE: IPSec Passthrough</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="http://www.ox.org/ipsec/2003/05/msg00035.html">Re: IPSec Passthrough</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="http://www.ox.org/ipsec/2003/05/maillist.html#00033"><strong>Date</strong></a></li>
+<li><a href="http://www.ox.org/ipsec/2003/05/threads.html#00033"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

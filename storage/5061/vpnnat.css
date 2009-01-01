@@ -1,0 +1,54 @@
+
+/* ::::: http://nscsysop.hypermart.net/css/mainstyle.css ::::: */
+
+body.c31 {  }
+body.c32 { margin-left: 0.5in; margin-right: 0.25in; }
+p { margin-right: 0.25in; margin-left: 0.25in; font-size: 12pt; font-family: "Times New Roman"; }
+p.c1 { margin: 0in 0.5in 0.0001pt; }
+p.c2, li.c2, div.c2 { margin: 0.04in 0.04in 0.0001pt; font-size: 12pt; font-family: "Times New Roman"; }
+p.c3 { margin: 0in 0.5in 12pt; }
+p.c4 { margin-left: 0.5in; font-family: "Times New Roman"; }
+p.c41 { margin-left: 0.5in; margin-right: 0.95in; font-size: 10pt; }
+p.c5 { margin-bottom: 12pt; margin-left: 0.5in; }
+p.c6 { margin: 0in 0.5in 0.0001pt; font-weight: bold; }
+p.c7 { margin-right: 0.5in; margin-left: 0.5in; }
+p.c8 { margin-left: 0.25in; margin-right: 0.25in; font-family: "Times New Roman"; }
+p.c9 { font-weight: bold; font-style: italic; font-size: 14pt; text-align: center; }
+p.c10 { margin-right: 0.5in; margin-bottom: 12pt; margin-left: 0.5in; }
+p.c17 { font-weight: bold; }
+p.c22 { font-style: italic; }
+p.c25 { font-weight: bold; margin-left: 0.5in; margin-right: 0.5in; }
+p.c26 { margin: 0in 1in 0.0001pt; }
+p.c27 { text-align: center; }
+p.c29 { font-weight: bold; text-align: center; }
+p.c30 { margin-bottom: 12pt; }
+p.c34 { margin-left: 0.5in; margin-right: 0.25in; }
+p.c35 { margin-left: 1in; }
+p.c36 { font-style: italic; margin-left: 0.5in; }
+p.c37 { margin-left: 1in; margin-right: 1in; }
+p.c38 { margin-left: 1in; margin-right: 1in; font-style: italic; font-size: 14pt; }
+p.c39 { margin-left: 1.4in; }
+p.c42 { margin-left: 1in; margin-right: 0.25in; font-size: 14pt; font-family: "Times New Roman"; }
+span.c8 { color: red; }
+span.c9 { color: black; }
+span.c28 { font-size: 18pt; }
+h5 { text-align: center; margin-right: 0in; margin-left: 0in; font-size: 24pt; font-family: "Times New Roman"; font-weight: bold; }
+h1 { margin-right: 0in; margin-left: 0in; font-size: 24pt; font-family: "Times New Roman"; font-weight: bold; }
+h2 { margin-right: 0in; margin-left: 0in; font-size: 18pt; font-family: "Times New Roman"; font-weight: bold; }
+h3 { margin-right: 0in; margin-left: 0in; font-size: 13.5pt; font-family: "Times New Roman"; font-weight: bold; }
+h4 { margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: "Times New Roman"; font-weight: bold; }
+h2.c14 { margin-right: 0.5in; margin-left: 0.5in; }
+h3.c2 { margin-right: 0.5in; margin-left: 0.5in; }
+hr.c12 { text-align: center; }
+a:link, span.MsoHyperlink { color: blue; text-decoration: underline; }
+a:visited, span.MsoHyperlinkFollowed { color: blue; text-decoration: underline; }
+a.c21 { font-weight: bold; }
+table.c19 { width: 95%; margin-left: 0.25in; }
+td.c15 { padding: 1.5pt; }
+td.c20 { padding: 1.5pt; width: 25%; }
+div.Section1 { page: Section1; }
+div.c13 { text-align: center; }
+ul { font-size: 12pt; font-style: normal; margin-left: 0.25in; margin-right: 0.25in; }
+ul.c50 { font-size: 12pt; font-style: normal; margin-left: 0.5in; margin-right: 0.25in; }
+ol { font-size: 12pt; font-style: normal; margin-left: 0.25in; margin-right: 0.25in; }
+ol.c51 { font-size: 12pt; font-style: normal; margin-left: 0.5in; margin-right: 0.25in; }
