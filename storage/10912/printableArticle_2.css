@@ -1,0 +1,34 @@
+
+/* ::::: http://embedded.firstlightera.com/ERA/Custom/Embedded/Css/HtmlRelatedLinks.css ::::: */
+
+.zeroHtmlResultsLink {  }
+.zeroHtmlResultsLink img { border: medium none ; }
+.eraLinksContainer { border-left: 1px solid rgb(20, 94, 141); border-right: 1px solid rgb(20, 94, 141); margin: 0pt; padding: 0pt; background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; }
+div.eraRelatedMicrosites, div.eraMoreRelatedMicrosites { margin: 0pt; padding: 0pt; display: block; }
+.eraHeader, .eraeraHeader { display: none; }
+.eraRelatedMicrosites .eraeraHeader {  }
+.eraRelatedContent, .eraRelatedContent, .eraRelatedNews {  }
+.eraRelatedMicrosites .eraIndentedSiteName { padding: 0pt 5px 0pt 10px; font-weight: bold; }
+.eraRelatedMicrosites .eraIndentedLink { padding: 0pt; }
+.eraMoreRelatedMicrosites .eraIndentedLink { padding: 0pt; font-weight: bold; }
+.eraMoreRelatedMicrosites .eraIndentedSiteName { padding: 0pt 0pt 0pt 5px; font-weight: bold; }
+.eraMoreeraHeader { padding: 5px; font-weight: bold; font-size: 12px; font-family: arial; color: rgb(0, 102, 204); display: none; }
+body { margin: 0pt; padding: 0pt; font-size: 12px; font-family: arial; }
+a { padding: 0pt 5px 4px 0pt; display: block; color: rgb(20, 94, 141); text-decoration: none; font-size: 11px; width: auto; }
+a:hover { text-decoration: underline; }
+b { font-weight: normal; }
+#relatedLinksScroll .eraLinksContainer { overflow: hidden; }
+#relatedLinksHeaderWrapper { border-top: 1px solid rgb(20, 94, 141); border-left: 1px solid rgb(20, 94, 141); border-right: 1px solid rgb(20, 94, 141); margin: 0pt; background: rgb(255, 255, 255) url('header_img.gif') no-repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; height: 40px; }
+#relatedLinksFooterWrapper { border-left: 1px solid rgb(20, 94, 141); border-right: 1px solid rgb(20, 94, 141); border-bottom: 1px solid rgb(20, 94, 141); background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; }
+#relatedLinksScroll #eraLinksScrollUp, #relatedLinksScroll #eraLinksScrollDown {  }
+#relatedLinksDrop #eraLinksScrollUp, #relatedLinksDrop #eraLinksScrollDown {  }
+.eraRelatedMicrosites { padding: 0pt; }
+.eraRelatedMicrosites div, .eraMoreRelatedMicrosites div { border-top: 0pt none; margin: 0pt; padding: 0px 0pt; font-weight: bold; }
+.eraRelatedMicrosites div a, .eraMoreRelatedMicrosites div a { border-bottom: 1px solid rgb(187, 234, 254); padding: 3px 10px; color: rgb(20, 94, 141); text-decoration: none; font-family: verdana; font-size: 11px; font-weight: normal; }
+div.eraMoreRelatedLinks { margin: 0pt; padding: 5px 0pt 0pt 11px; background: rgb(16, 93, 140) none repeat scroll 0% 0%; line-height: 1em; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; }
+div.eraMoreRelatedLinks a { color: rgb(255, 255, 255); font-weight: bold; }
+.eraLinksContainer div a strong, .eraRelatedMicrosites div a strong { font-family: verdana; font-weight: bold; }
+.eraLinksContainer div a:hover strong, .eraRelatedMicrosites div a:hover strong { text-decoration: underline; color: rgb(191, 85, 29); }
+.eraRelatedMicrosites div a:hover, div.eraMoreRelatedMicrosites a:hover { text-decoration: underline; color: rgb(191, 85, 29); }
+div.eraMoreRelatedLinks a:hover { text-decoration: underline; }
+.eraRelatedMicrositeItem strong { color: rgb(20, 94, 141); }

@@ -1,0 +1,894 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/254445/">
+<meta name="wpd_url" content="http://lwn.net/Articles/254445/">
+<meta name="wpd_date" content="2010-00-09T06:11Z">
+
+        
+        <title>Memory part 4: NUMA support [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/254445/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="254445.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        
+</p><div class="TextAd">
+    <p class="TextAdHeader">Advertisement</p>
+    <p class="TextAdLink"><a href="http://lwn.net/AdServer/click/178/">TrustCommerce</a></p>
+    <p class="TextAdBody">E-Commerce & credit card processing - the Open Source way!
+</p>
+    <p class="TextAdFooter"><a href="http://lwn.net/AdServer/">Advertise here</a></p>
+</div>
+<p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Weekly Edition</p>
+Return to the <a href="http://lwn.net/Articles/253976/">Front page</a></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/254445/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 468x60, created 4/3/08 */
+google_ad_slot = "6739810867";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</center></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>Memory part 4: NUMA support</h1>
+</div>
+<div class="ArticleText">
+<div class="GAByline">
+           <p>October 17, 2007</p>
+           <p>This article was contributed by  Ulrich Drepper</p>
+           </div>
+           [<i>Editor's note: welcome to part 4 of Ulrich Drepper's "What every
+programmer should know about memory"; this section discusses the particular
+challenges associated with non-uniform memory access (NUMA) systems.  Those
+who have 
+not read <a href="http://lwn.net/Articles/250967/">part&nbsp;1</a>, <a href="http://lwn.net/Articles/252125/">part&nbsp;2</a>, and <a href="http://lwn.net/Articles/253361/">part&nbsp;3</a> 
+may wish to do so
+now.  As always, please send typo reports and the like to lwn@lwn.net
+rather than posting them as comments here.</i>]
+<p>
+
+</p><h2>5 NUMA Support</h2>
+
+<p>
+
+
+
+In Section 2 we saw that, on some machines,
+the cost of access to specific regions of physical memory
+differs depending on where the access originated.  This
+type of hardware requires special care from the OS and the
+applications.  We will start with a few details of NUMA hardware,
+then we will cover some of the support the Linux kernel provides for
+NUMA.
+</p><p>
+</p><p>
+</p><h3>5.1 NUMA Hardware</h3>
+<p>
+
+Non-uniform memory architectures are becoming more and more common.
+In the simplest form of NUMA, a processor can have local memory (see
+Figure 2.3) which is cheaper to access than memory local to
+other processors.  The difference in cost for this type of NUMA system is
+not high, i.e., the NUMA factor is low.
+</p><p>
+
+NUMA is also&mdash;and especially&mdash;used in big machines.  We have described
+the problems of having many processors access the same memory.  For
+commodity hardware all processors would share the same Northbridge
+(ignoring the AMD Opteron NUMA nodes for now, they have their own
+problems).  This makes the Northbridge a severe bottleneck since
+<i>all</i> memory traffic is routed through it.  Big machines can, of
+course, use custom hardware in place of the Northbridge but, unless the
+memory chips used have multiple ports&mdash;i.e. they can be used from multiple
+busses&mdash;there still is a bottleneck.  Multiport RAM is complicated and
+expensive to build and support and, therefore, it is hardly ever used.
+</p><p>
+
+The next step up in complexity is the model AMD uses where an
+interconnect mechanism (Hypertransport in AMD's case, technology
+they licensed from Digital) provides access for processors which are not
+directly connected to the RAM.  The size of the structures which can
+be formed this way is limited unless one wants to increase the
+diameter (i.e., the maximum distance between any two nodes)
+arbitrarily.
+</p><p>
+</p><p>
+</p><blockquote>
+<img src="cpumemory.20.png">
+<p><b>Figure 5.1: Hypercubes</b>
+
+</p></blockquote>
+<p>
+
+An efficient topology for the nodes is the hypercube, which limits the
+number of nodes to <span class="UliMath">2<sup>C</sup></span> where <span class="UliMath">C</span> is the number of interconnect 
+interfaces each node has.  Hypercubes have the smallest diameter for
+all systems with <span class="UliMath">2<sup>n</sup></span> CPUs.  Figure
+5.1 shows the first 
+three hypercubes.  Each hypercube has a diameter of <span class="UliMath">C</span> which is the 
+absolute minimum.  AMD's first-generation Opteron processors have three
+hypertransport links per processor.  At least one of the processors
+has to have a Southbridge attached to one link, meaning, currently, that a
+hypercube with <span class="UliMath">C=2</span> can be implemented directly and efficiently.  The
+next generation is announced to have four links, at which point <span class="UliMath">C=3</span>
+hypercubes will be possible.
+</p><p>
+
+This does not mean, though, that larger accumulations of processors
+cannot be supported.  There are companies which have developed crossbars
+allowing larger sets of processors to be used (e.g., Newisys's
+Horus).  But these crossbars increase the NUMA factor and they stop
+being effective at a certain number of processors.
+</p><p>
+
+The next step up means connecting groups of CPUs and implementing a
+shared memory for all of them.  All such systems need specialized
+hardware and are by no means commodity systems.  Such designs exist at several
+levels of complexity.  A system which is still quite close to a
+commodity machine is IBM x445 and similar machines.  They can be
+bought as ordinary 4U, 8-way machines with x86 and x86-64 processors.
+Two (at some point up to four) of these machines can then be connected
+to work as a single machine with shared memory.  The interconnect used
+introduces a significant NUMA factor which the OS, as well as
+applications, must take into account.
+</p><p>
+
+At the other end of the spectrum, machines like SGI's Altix are
+designed specifically to be interconnected.  SGI's NUMAlink
+interconnect fabric is very fast and has a low latency; both of these are
+requirements for high-performance computing (HPC), especially when
+Message Passing Interfaces (MPI) are used.  The drawback is, of course, that such
+sophistication and specialization is very expensive.  They make a
+reasonably low NUMA factor possible but with the number of CPUs these
+machines can have (several thousands) and the limited capacity of the
+interconnects, the NUMA factor is actually dynamic and can reach
+unacceptable levels depending on the workload.
+</p><p>
+
+More commonly used are solutions where clusters of commodity machines
+are connected using high-speed networking.  But these are not NUMA
+machines; they do not implement a shared address space and therefore
+do not fall into any category which is discussed here.
+</p><p>
+</p><p>
+</p><h3>5.2 OS Support for NUMA</h3>
+<p>
+
+To support NUMA machines, the OS has to take the distributed
+nature of the memory into account.  For instance, if a process is run
+on a given processor, the physical RAM assigned to the process's address
+space should come from local memory.  Otherwise each instruction has
+to access remote memory for code and data.  There are special cases to
+be taken into account which are only present in NUMA machines.  The
+text segment of DSOs is normally present exactly once in a machine's
+physical RAM.  But if the DSO is used by processes and threads on all
+CPUs (for instance, the basic runtime libraries like <tt>libc</tt>) this
+means that all but a few processors have to have remote accesses.  The OS
+ideally would &ldquo;mirror&rdquo; such DSOs into each processor's physical RAM
+and use local copies.  This is an optimization, not a requirement, and
+generally hard to implement.  It might not be supported or only in a
+limited fashion.
+</p><p>
+
+To avoid making the situation worse, the OS
+should not migrate a process or thread from one node to another.  The
+OS should already try to avoid migrating processes on normal
+multi-processor machines because
+migrating from one processor to another means the cache content is
+lost.  If load distribution requires migrating a process or thread off
+of a processor, the OS can usually pick an arbitrary new processor
+which has sufficient capacity left.  In NUMA environments the
+selection of the new processor is a bit more limited.  The newly
+selected processor should not have higher access costs to the memory
+the process is using than the old processor; this restricts the list
+of targets.  If there is no free processor matching that criteria
+available, the OS has no choice but to migrate to a processor
+where memory access is more expensive.
+</p><p>
+
+In this situation there are two possible ways forward.  First, one can
+hope the situation is temporary and the process can be migrated back
+to a better-suited processor.  Alternatively, the OS can also migrate the
+process's memory to physical pages which are closer to the newly-used processor.
+This is quite an expensive operation.  Possibly huge amounts of memory
+have to be copied, albeit not necessarily in one step.  While this is
+happening the process, at least briefly, has to be stopped so that
+modifications to the old pages are correctly migrated.  There are a
+whole list of other requirements for page migration to be efficient
+and fast.  In short, the OS should avoid it unless it is really
+necessary.
+</p><p>
+
+Generally, it cannot be assumed that all processes on a NUMA machine
+use the same amount of memory such that, with the distribution of processes across
+the processors, memory usage is also equally
+distributed.  In fact, unless the applications running on the machines
+are very specific (common in the HPC world, but not outside) the
+memory use will be very unequal.  Some applications will use vast amounts
+of memory, others hardly any.  This will, sooner or later, lead to
+problems if memory is always allocated local to the processor where
+the request is originated.  The system will eventually run out of memory local to
+nodes running large processes.
+</p><p>
+
+In response to these severe problems, memory is, by default, not allocated
+exclusively on the local node.  To utilize all the system's memory the
+default strategy is to stripe the memory.  This guarantees equal use
+of all the memory of the system.  As a side effect, it becomes
+possible to freely migrate processes between processors since, on
+average, the access cost to all the memory used does not change.  For
+small NUMA factors, striping is acceptable but still not optimal (see
+data in Section 5.4).
+</p><p>
+
+This is a pessimization which helps the system avoid severe problems and 
+makes it more predictable under normal operation.  But it does
+decrease overall system performance, in some situations significantly.
+This is why Linux allows the memory allocation rules to be selected by
+each process.  A process can select a different strategy for itself and
+its children.  We will introduce the interfaces which can be used for
+this in Section 6.
+</p><p>
+</p><p>
+</p><h3>5.3 Published Information</h3>
+
+<p>
+
+The kernel publishes, through the <tt>sys</tt> pseudo file system (sysfs),
+information about the processor caches below
+</p><p>
+</p><pre>    /sys/devices/system/cpu/cpu*/cache
+</pre>
+<p>
+
+In Section 6.2.1 we will see interfaces which can be used to query
+the size of the various caches.  What is important here is the topology of
+the caches.  The directories above contain subdirectories
+(named <tt>index*</tt>) which list information about the various caches the CPU
+possesses.  The files <tt>type</tt>, <tt>level</tt>, and <tt>shared_cpu_map</tt>
+are the important files in these directories as far as the topology is
+concerned.  For an Intel Core&nbsp;2 QX6700 the information looks as in
+Table 5.1.
+</p><p>
+
+
+</p><blockquote>
+<table cellspacing="3">
+<tbody><tr class="Odd"><th colspan="2"></th><th align="left">type</th><th>level</th><th>shared_cpu_map</th></tr>
+
+<tr class="Odd"><td rowspan="3"><tt>cpu0</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000001</td></tr>
+
+<tr class="Odd"><td>index1</td><td>Instruction</td><td align="right">1 </td><td align="right">00000001</td></tr>
+<tr class="Odd"><td>index2</td><td> Unified </td><td align="right">2 </td><td align="right">00000003</td></tr>
+
+<tr class="Even"><td rowspan="3"><tt>cpu1</tt></td>
+    <td>index0</td><td> Data </td><td align="right">1 </td><td align="right">00000002</td></tr>
+    <tr class="Even"><td>index1</td><td> Instruction </td><td align="right">1 </td><td align="right">00000002</td></tr>
+    <tr class="Even"><td>index2</td><td> Unified </td><td align="right">2 </td><td align="right">00000003</td></tr>
+<tr class="Odd"><td rowspan="3"><tt>cpu2</tt></td>
+    <td>index0</td><td> Data </td><td align="right">1 </td><td align="right">00000004</td></tr>
+    <tr class="Odd"><td>index1</td><td> Instruction </td><td align="right">1 </td><td align="right">00000004</td></tr>
+    <tr class="Odd"><td>index2</td><td> Unified </td><td align="right">2 </td><td align="right">0000000c</td></tr>
+<tr class="Even"><td rowspan="3"><tt>cpu3</tt></td>
+    <td>index0</td><td> Data </td><td align="right">1 </td><td align="right">00000008</td></tr>
+    <tr class="Even"><td>index1</td><td> Instruction </td><td align="right">1 </td><td align="right">00000008</td></tr>
+    <tr class="Even"><td>index2</td><td> Unified </td><td align="right">2 </td><td align="right">0000000c</td></tr>
+</tbody></table>
+<p><b>Table 5.1: <tt>sysfs</tt> Information for Core 2 CPU Caches</b>
+</p></blockquote>
+
+<p>
+
+What this data means is as follows:
+</p><p>
+</p><ul>
+<p>
+</p><li> Each core {<i>The knowledge that <tt>cpu0</tt> to <tt>cpu3</tt>
+  are cores comes from another place that will be explained shortly.</i>}
+  has three caches: L1i, L1d, L2.
+<p>
+</p></li><li> The L1d and L1i caches are not shared with anybody&mdash;each core
+  has its own set of caches.  This is indicated by the bitmap
+  in <tt>shared_cpu_map</tt> having only one set bit.
+<p>
+</p></li><li> The L2 cache on <tt>cpu0</tt> and <tt>cpu1</tt> is shared, as is the
+  L2 on <tt>cpu2</tt> and <tt>cpu3</tt>.
+<p>
+</p></li></ul>
+<p>
+
+If the CPU had more cache levels, there would be more <tt>index*</tt>
+directories.
+</p><p>
+
+For a four-socket, dual-core Opteron machine the cache information
+looks like Table 5.2:
+</p><p>
+</p><blockquote>
+<table cellspacing="3">
+
+<tbody><tr class="Odd"><th colspan="2"></th><th align="left">type</th><th>level</th><th>shared_cpu_map</th></tr>
+
+<tr class="Odd"><td rowspan="3"><tt>cpu0</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000001</td></tr>
+    <tr class="Odd"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000001</td></tr>
+    <tr class="Odd"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000001</td></tr>
+<tr class="Even"><td rowspan="3"><tt>cpu1</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000002</td></tr>
+    <tr class="Even"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000002</td></tr>
+    <tr class="Even"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000002</td></tr>
+
+<tr class="Odd"><td rowspan="3"><tt>cpu2</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000004</td></tr>
+    <tr class="Odd"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000004</td></tr>
+    <tr class="Odd"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000004</td></tr>
+
+<tr class="Even"><td rowspan="3"><tt>cpu3</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000008</td></tr>
+    <tr class="Even"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000008</td></tr>
+    <tr class="Even"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000008</td></tr>
+
+<tr class="Odd"><td rowspan="3"><tt>cpu4</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000010</td></tr>
+    <tr class="Odd"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000010</td></tr>
+    <tr class="Odd"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000010</td></tr>
+
+<tr class="Even"><td rowspan="3"><tt>cpu5</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000020</td></tr>
+    <tr class="Even"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000020</td></tr>
+    <tr class="Even"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000020</td></tr>
+
+<tr class="Odd"><td rowspan="3"><tt>cpu6</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000040</td></tr>
+    <tr class="Odd"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000040</td></tr>
+    <tr class="Odd"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000040</td></tr>
+
+<tr class="Even"><td rowspan="3"><tt>cpu7</tt></td>
+    <td>index0</td><td>Data</td><td align="right">1</td><td align="right">00000080</td></tr>
+    <tr class="Even"><td>index1</td><td>Instruction</td><td align="right">1</td><td align="right">00000080</td></tr>
+    <tr class="Even"><td>index2</td><td>Unified</td><td align="right">2</td><td align="right">00000080</td></tr>
+
+</tbody></table>
+<p><b>Table 5.2: <tt>sysfs</tt> Information for Opteron CPU Caches</b>
+</p></blockquote>
+
+<p>
+
+
+
+  As can be seen these processors
+also have three caches: L1i, L1d, L2.  None of the cores
+shares any level of cache.  The interesting part for this system is the
+processor topology.  Without this additional information one cannot
+make sense of the cache data.  The <tt>sys</tt> file system exposes this
+information in the files below
+</p><p>
+</p><pre>    /sys/devices/system/cpu/cpu*/topology
+</pre>
+<p>
+
+Table 5.3 shows the interesting files in this hierarchy
+for the SMP Opteron machine.
+</p><p>
+</p><blockquote>
+<table cellspacing="3">
+<tbody><tr><th></th>
+    <th><tt>physical_<br>package_id</tt></th>
+    <th><tt>core_id</tt></th>
+    <th><tt>core_<br>siblings</tt></th>
+    <th><tt>thread_<br>siblings</tt></th></tr>
+
+
+<tr class="Odd"><td><tt>cpu0</tt></td><td rowspan="2" align="center">0</td><td align="center">0</td><td>00000003</td><td>00000001</td></tr>
+
+<tr class="Odd"><td><tt>cpu1</tt></td>  <td align="center">1</td><td>00000003</td><td>00000002</td></tr>
+
+<tr class="Even"><td><tt>cpu2</tt></td><td rowspan="2" align="center">1</td><td align="center">0</td><td>0000000c</td><td>00000004</td></tr>
+
+<tr class="Even"><td><tt>cpu3</tt></td>   <td align="center">1</td><td>0000000c</td><td>00000008</td></tr>
+
+<tr class="Odd"><td><tt>cpu4</tt></td><td rowspan="2" align="center">2</td><td align="center">0</td><td>00000030</td><td>00000010</td></tr>
+
+<tr class="Odd"><td><tt>cpu5</tt></td>   <td align="center">1</td><td>00000030</td><td>00000020</td></tr>
+
+<tr class="Even"><td><tt>cpu6</tt></td><td rowspan="2" align="center">3</td><td align="center">0</td><td>000000c0</td><td>00000040</td></tr>
+
+<tr class="Even"><td><tt>cpu7</tt></td>   <td align="center">1</td><td>000000c0</td><td>00000080</td></tr>
+
+</tbody></table>
+<p><b>Table 5.3: <tt>sysfs</tt> Information for Opteron CPU Topology</b>
+</p></blockquote>
+
+<p>
+
+Taking Table 5.2 and Table 5.3 together we
+can see that no CPU has hyper-threads (the <tt>thread_siblings</tt>
+bitmaps have one bit set), that the system in fact has four processors
+(<tt>physical_package_id</tt> 0 to 3), that each processor has two cores,
+and that none of the cores share any cache.  This is exactly what
+corresponds  to earlier Opterons.
+
+</p><p>
+
+What is completely missing in the data provided so far is information
+about the nature of NUMA on this machine.  Any SMP Opteron machine is
+a NUMA machine.  For this data we have to look at yet another part of
+the <tt>sys</tt> file system which exists on NUMA machines, namely in the
+hierarchy below
+</p><p>
+</p><pre>    /sys/devices/system/node
+</pre>
+<p>
+
+This directory contains a subdirectory for every NUMA node on the
+system.  In the node-specific directories there are a number of files.  The
+important files and their content for the Opteron machine described in the
+previous two tables are shown in Table 5.4.
+</p><p>
+</p><blockquote>
+<table>
+
+<tbody><tr><th></th><th><tt>cpumap</tt></th><th><tt>distance</tt></th></tr>
+
+<tr class="Odd"><td><tt>node0</tt></td><td>00000003</td><td>10 20 20 20</td></tr>
+
+<tr class="Even"><td><tt>node1</tt></td><td>0000000c</td><td>20 10 20 20</td></tr>
+
+<tr class="Odd"><td><tt>node2</tt></td><td>00000030</td><td>20 20 10 20</td></tr>
+
+<tr class="Even"><td><tt>node3</tt></td><td>000000c0</td><td>20 20 20 10</td></tr>
+
+</tbody></table>
+<p><b>Table 5.4: <tt>sysfs</tt> Information for Opteron Nodes</b>
+</p></blockquote>
+<p>
+
+This information ties all the rest together; now we have a complete
+picture of the architecture of the machine.  We already know that the
+machine has four processors.  Each processor constitutes its own node
+as can be seen by the bits set in the value in <tt>cpumap</tt> file in the
+<tt>node*</tt> directories.  The <tt>distance</tt> files in those
+directories contains a set of values, one for each node, which
+represent a cost of memory accesses at the respective nodes.  In this
+example all local memory accesses have the cost 10, all remote access
+to any other node has the cost 20.  {<i>This is, by the way,
+incorrect.  The ACPI information is apparently wrong since, although
+the processors used have three coherent HyperTransport links, at least
+one processor must be connected to a Southbridge.  At least one pair of nodes
+must therefore have a larger distance.</i>}  This means that, even though the
+processors are organized as a two-dimensional hypercube (see
+Figure 5.1), accesses between processors which are not directly connected is
+not more expensive.  The relative values of the costs
+should be usable as an estimate of the actual difference of the access
+times.  The accuracy of all this information is another question.
+</p><p>
+</p><p>
+</p><h3>5.4 Remote Access Costs</h3>
+
+<p>
+
+The distance is relevant, though.  In [amdccnuma] AMD documents
+the NUMA cost of a four socket machine.  For write operations the
+numbers are shown in Figure 5.3.  
+</p><p>
+</p><blockquote>
+<img src="cpumemory.49.png">
+<p><b>Figure 5.3: Read/Write Performance with Multiple Nodes</b>
+
+</p></blockquote>
+<p>
+
+Writes are slower than
+reads, this is no surprise.  The interesting parts are the costs of
+the 1- and 2-hop cases.  The two 1-hop cases actually have slightly
+different costs.  See [amdccnuma] for the details.  The fact we
+need to remember from this chart is that 2-hop reads and writes are
+30% and 49% (respectively) slower than 0-hop reads.  2-hop writes
+are 32% slower than 0-hop writes, and 17% slower than 1-hop writes.
+The relative position of processor and memory nodes can make a big
+difference.  The next generation of processors from AMD will feature
+four coherent HyperTransport links per processor.  In that case a four
+socket machine would have diameter of one.  With eight sockets the
+same problem returns, with a vengeance, since the diameter of a
+hypercube with eight nodes is three.
+</p><p>
+</p><p>
+
+All this information is available but it is cumbersome to use.  In
+Section 6.5 we will see an interface which helps accessing and
+using this information easier.
+</p><p>
+
+The last piece of information the system provides is in the status of
+a process itself.  It is possible to determine how the memory-mapped
+files, Copy-On-Write (COW) pages and anonymous memory are distributed over
+the nodes in the 
+system.
+ {<i>Copy-On-Write is a method
+often used in OS implementations when a memory page has one user at
+first and then has to be copied to allow independent users.  In
+many situations the copying is unnecessary, at all or at first, in
+which case it makes sense to only copy when either user modifies the
+memory.  The operating system intercepts the write operation,
+duplicates the memory page, and then allows the write instruction to
+proceed.</i>}
+
+ Each process has a file <tt>/proc/<b>PID</b>/numa_maps</tt>,
+where <tt><b>PID</b></tt> is the ID of the process, as shown in
+Figure 5.2.  
+</p><p>
+</p><blockquote>
+<pre>00400000 default file=/bin/cat mapped=3 N3=3
+00504000 default file=/bin/cat anon=1 dirty=1 mapped=2 N3=2
+00506000 default heap anon=3 dirty=3 active=0 N3=3
+38a9000000 default file=/lib64/ld-2.4.so mapped=22 mapmax=47 N1=22
+38a9119000 default file=/lib64/ld-2.4.so anon=1 dirty=1 N3=1
+38a911a000 default file=/lib64/ld-2.4.so anon=1 dirty=1 N3=1
+38a9200000 default file=/lib64/libc-2.4.so mapped=53 mapmax=52 N1=51 N2=2
+38a933f000 default file=/lib64/libc-2.4.so
+38a943f000 default file=/lib64/libc-2.4.so anon=1 dirty=1 mapped=3 mapmax=32 N1=2 N3=1
+38a9443000 default file=/lib64/libc-2.4.so anon=1 dirty=1 N3=1
+38a9444000 default anon=4 dirty=4 active=0 N3=4
+2b2bbcdce000 default anon=1 dirty=1 N3=1
+2b2bbcde4000 default anon=2 dirty=2 N3=2
+2b2bbcde6000 default file=/usr/lib/locale/locale-archive mapped=11 mapmax=8 N0=11
+7fffedcc7000 default stack anon=2 dirty=2 N3=2
+</pre>
+<p><b>Figure 5.2: Content of <tt>/proc/<i>PID</i>/numa_maps</tt></b>
+</p></blockquote>
+<p>
+
+The important information in the file is the
+values for <tt>N0</tt> to <tt>N3</tt>, which indicate the number of pages
+allocated for the memory area on nodes&nbsp;0 to&nbsp;3.  It is a good
+guess that the program was executed on a core on node&nbsp;3.  The program
+itself and the dirtied pages are allocated on that node.  Read-only
+mappings, such as the first mapping for <tt>ld-2.4.so</tt> and
+<tt>libc-2.4.so</tt> as well as the shared file <tt>locale-archive</tt> are
+allocated on other nodes.
+</p><p>
+
+As we have seen in Figure 5.3 the read performance across
+nodes falls by 9% and 30% respectively for&nbsp;1- and 2-hop reads.
+For execution, such reads are needed and, if the L2 cache is missed,
+each cache line incurs these additional costs.  All the costs measured
+for large workloads beyond the size of the cache would have to be
+increased by 9%/30% if the memory is remote to the processor.
+</p><p>
+</p><p>
+<!-- 00400000 default file=/bin/cat mapped=3 N3=3 -->
+<!-- 00504000 default file=/bin/cat anon=1 dirty=1 mapped=2 N3=2 -->
+<!-- 00506000 default heap anon=3 dirty=3 active=0 N3=3 -->
+<!-- 38a9000000 default file=/lib64/ld-2.4.so mapped=22 mapmax=47 N1=22 -->
+<!-- 38a9119000 default file=/lib64/ld-2.4.so anon=1 dirty=1 N3=1 -->
+<!-- 38a911a000 default file=/lib64/ld-2.4.so anon=1 dirty=1 N3=1 -->
+<!-- 38a9200000 default file=/lib64/libc-2.4.so mapped=53 mapmax=52 N1=51 N2=2 -->
+<!-- 38a933f000 default file=/lib64/libc-2.4.so -->
+<!-- 38a943f000 default file=/lib64/libc-2.4.so anon=1 dirty=1 mapped=3 mapmax=32 N1=2 N3=1 -->
+<!-- 38a9443000 default file=/lib64/libc-2.4.so anon=1 dirty=1 N3=1 -->
+<!-- 38a9444000 default anon=4 dirty=4 active=0 N3=4 -->
+<!-- 2b2bbcdce000 default anon=1 dirty=1 N3=1 -->
+<!-- 2b2bbcde4000 default anon=2 dirty=2 N3=2 -->
+<!-- 2b2bbcde6000 default file=/usr/lib/locale/locale-archive mapped=11 mapmax=8 N0=11 -->
+<!-- 7fffedcc7000 default stack anon=2 dirty=2 N3=2 -->
+<!--  -->
+<!-- 00400000-00405000 r-xp 00000000 fd:00 11523187                           /bin/cat -->
+<!-- 00504000-00506000 rw-p 00004000 fd:00 11523187                           /bin/cat -->
+<!-- 00506000-00527000 rw-p 00506000 00:00 0                                  [heap] -->
+<!-- 38a9000000-38a901a000 r-xp 00000000 fd:00 3764642                        /lib64/ld-2.4.so -->
+<!-- 38a9119000-38a911a000 r&mdash;p 00019000 fd:00 3764642                        /lib64/ld-2.4.so -->
+<!-- 38a911a000-38a911b000 rw-p 0001a000 fd:00 3764642                        /lib64/ld-2.4.so -->
+<!-- 38a9200000-38a933f000 r-xp 00000000 fd:00 3764652                        /lib64/libc-2.4.so -->
+<!-- 38a933f000-38a943f000 &mdash;-p 0013f000 fd:00 3764652                        /lib64/libc-2.4.so -->
+<!-- 38a943f000-38a9443000 r&mdash;p 0013f000 fd:00 3764652                        /lib64/libc-2.4.so -->
+<!-- 38a9443000-38a9444000 rw-p 00143000 fd:00 3764652                        /lib64/libc-2.4.so -->
+<!-- 38a9444000-38a9449000 rw-p 38a9444000 00:00 0 -->
+<!-- 2b2bbcdce000-2b2bbcdcf000 rw-p 2b2bbcdce000 00:00 0 -->
+<!-- 2b2bbcde4000-2b2bbcde6000 rw-p 2b2bbcde4000 00:00 0 -->
+<!-- 2b2bbcde6000-2b2bc01b5000 r&mdash;p 00000000 fd:00 12311782                   /usr/lib/locale/locale-archive -->
+<!-- 7fffedcc7000-7fffedcdc000 rw-p 7fffedcc7000 00:00 0                      [stack] -->
+<!-- ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vdso] -->
+</p><p>
+</p><p>
+</p><blockquote>
+<img src="cpumemory.66.png">
+<p><b>Figure 5.4: Operating on Remote Memory</b>
+
+</p></blockquote>
+<p>
+
+To see the effects in the real world we can measure the bandwidth as
+in Section 3.5.1 but this time with the memory being on a
+remote node, one hop away.  The result of this test when compared
+with the data for using local memory can be seen in
+Figure 5.4.  The numbers have a few big spikes
+in both directions which are the result of a problem of measuring
+multi-threaded code and can be ignored.  The important information in
+this graph is that read operations are always 20% slower.  This is
+significantly slower than the 9% in Figure 5.3, which is,
+most likely, not a number for uninterrupted read/write operations and might
+refer to older processor revisions.  Only AMD knows.
+</p><p>
+
+For working set sizes which fit into the caches, the performance of
+write and copy operations is also 20% slower.  For working sets
+exceeding the size of the caches, the write performance is not
+measurably slower than the operation on the local node.  The speed of
+the interconnect is fast enough to keep up with the memory.  The
+dominating factor is the time spent waiting on the main memory.</p><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/254445/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+
+</p><div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 18, 2007 13:33 UTC (Thu) by <b>dany</b> (subscriber, #18902)
+       [<a href="http://lwn.net/Articles/254969/">Link</a>]
+    </p>
+    <pre class="FormattedComment">Thanks for another very informative article!
+I am wondering, in relevant opteron CPU measured, how much slower are read/write operations on
+remote memory 2-hops away (figure 5.4 is about 1 hop away remote memory)?
+</pre>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/254969/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 19, 2007 4:47 UTC (Fri) by <b>sweikart</b> (guest, #4276)
+       [<a href="http://lwn.net/Articles/255112/">Link</a>]
+    </p>
+    <pre class="FormattedComment">Intel is working on a point-to-point processor interconnect called QuickPath, which is a
+competitor to AMD's HyperTransport.
+
+AMD will support HyperTransport 3.0 with its next-generation sockets (AM2+ and F+).
+HyperTransport 3.0 lets you split the links in half, so you can have 8 links total (and HT3.0
+links can run twice as fast as HT2.0 links, so the half-width links should have good
+throughput).  I assume this will enable a fully-connected (diameter of 1) eight-socket server.
+
+</pre>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/255112/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 22, 2007 0:35 UTC (Mon) by <b>dlang</b> (subscriber, #313)
+       [<a href="http://lwn.net/Articles/255293/">Link</a>]
+    </p>
+    <pre class="FormattedComment">several comments
+
+a radius 1 arrangement can actually include 3 CPUs, think a triangle, every machine is at most
+one hop from the memory
+
+the Opteron already has versions that have four HT links, they are the 800/8000 series chips
+targeted at 8 cpu systems
+</pre>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/255293/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 25, 2007 12:47 UTC (Thu) by <b>joib</b> (guest, #8541)
+       [<a href="http://lwn.net/Articles/255863/">Link</a>]
+    </p>
+    <i>
+
+the Opteron already has versions that have four HT links, they are the 800/8000 series chips
+targeted at 8 cpu systems
+</i>
+<p>
+
+That is not correct. All current Opterons (including the 800(0) series) have 3 HT links. The difference is that in the 800(0) series all 3 HT links are cache coherent, whereas there is only one cache coherent link on the 200(0) series and none on the 100(0) series (and athlon64).
+</p><p>
+
+That being said, the recently released quad core Opterons do in principle support 4 HT links, but so far they are using the existing socket so they are limited to 3 links until the next generation socket is introduced.
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/255863/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 27, 2007 6:51 UTC (Sat) by <b>dlang</b> (subscriber, #313)
+       [<a href="http://lwn.net/Articles/256207/">Link</a>]
+    </p>
+    it's also possible to have a radius-3 arrangement with only 3 links
+<br><pre>1--2--
+|  | |
+3--4 |
+|  | |
+5--6 |
+|  | |
+7--8--
+</pre><br>
+this leaves CPU's 1 and 7 with an extra link available for connections to a southbridge.
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/256207/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 4: NUMA support</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Jan 10, 2008 14:27 UTC (Thu) by <b>rengolin</b> (guest, #48414)
+       [<a href="http://lwn.net/Articles/264585/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre><font class="QuotedText">&gt; a radius 1 arrangement can actually include 3 CPUs, think a triangle, every machine is at
+most one hop from the memory</font>
+
+Actually it's N+1 being N the number of dimensions you build your computer. 
+
+In the three-dimensional reality a tetrahedron (4CPUs) is radius 1, in the two-dimensional a
+triangle and so on, therefore we can increase the number of CPUs in radius 1 by building
+computers in higher dimensions! ;)
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/264585/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 160x600, created 9/9/09 */
+google_ad_slot = "5759392869";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2007, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>

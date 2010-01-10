@@ -1,0 +1,128 @@
+
+/* ::::: http://lwn.net/CSS/lwn ::::: */
+
+body { padding: 0px; color: black; background-color: rgb(255, 255, 255); }
+h1 { margin: 0px 0px 5px; padding: 0px; color: black; }
+h2 { margin: 20px 0px 5px; padding: 0px; }
+h3 { margin: 0px 0px 5px; padding: 0px; }
+td {  }
+a { text-decoration: none; }
+a:link { color: Blue; }
+a:visited { color: DarkBlue; }
+a:hover { color: Red; }
+a.name { color: black; }
+a.name:link { color: black; }
+a.name:hover { color: black; }
+table.Page { width: 100%; }
+td.LeftColumn { overflow: hidden; background-color: rgb(255, 204, 153); width: 156px; vertical-align: top; }
+td.MidColumn { border-style: none; padding: 3px; background-color: rgb(255, 255, 255); vertical-align: top; }
+td.MCTopBanner { border-style: none; padding: 0pt 0pt 0pt 4px; background-color: rgb(255, 255, 255); }
+.MCTopBanner center { text-align: left; }
+td.RightColumn { border: thin none rgb(238, 238, 238); vertical-align: top; text-align: left; padding-top: 6em; }
+div.MidColHeader { margin: 0px auto 0px 0px; padding: 0pt; max-width: 57em; }
+table.Page tr { vertical-align: top; }
+table.HeadlineView {  }
+table.HeadlineView td { vertical-align: top; }
+div.PageHeadline { text-align: center; max-width: 75em; margin-top: 1em; margin-bottom: 2em; }
+div.PageHeadline h1 { margin-bottom: 0.2em; }
+div.PageHeadline h2 { margin-top: 0.2em; }
+p.Cat1HL { background-color: rgb(255, 204, 153); text-align: center; font-size: 200%; font-weight: bold; padding-top: 3px; padding-bottom: 5px; margin-bottom: 0.2em; }
+p.Cat2HL { background-color: rgb(255, 204, 153); font-size: large; font-weight: bold; padding-left: 3px; margin-bottom: 0.3em; }
+p.Cat3HL { background-color: rgb(255, 204, 153); font-weight: bold; padding-left: 3px; margin-bottom: 0.3em; }
+p.SummaryHL { font-weight: bold; font-size: larger; text-decoration: underline; margin-top: 0.4em; margin-bottom: 0.4em; }
+table.Form th { text-align: left; }
+span { font-style: normal; font-weight: normal; color: darkred; background-color: white; }
+span.SpellingError { background-color: rgb(238, 238, 238); color: black; }
+font.SpellingError { background-color: rgb(238, 238, 238); }
+div.ErrorWords { border-style: groove; margin: 1px 5px 1px 0px; padding: 3px 3px 2px; background-color: rgb(238, 238, 221); }
+div.BigQuote { font-style: normal; font-weight: normal; color: darkred; background-color: white; margin-left: 1cm; margin-right: 1cm; }
+div.BigQuote p { margin-top: 1em; margin-bottom: 0px; }
+div.Headline { background-color: rgb(255, 204, 153); font-weight: bold; font-size: larger; padding-left: 3px; }
+div.SummaryHeadline { font-weight: bold; font-size: larger; text-decoration: underline; margin-top: 0.4em; margin-bottom: 0.4em; }
+div.Byline { font-size: smaller; text-align: center; }
+div.SideBox { margin: 1em 1px; }
+div.SideBox p { margin: 0px 0px 1px 1em; text-indent: -1em; }
+div.SideBox p.Header { font-weight: bold; text-indent: 0px; margin-left: 0px; }
+div.Comment { margin-left: 1em; }
+div.CommentBox { border-style: none none none solid; border-color: rgb(255, 204, 153); border-width: thin; max-width: 60em; margin-top: 1em; }
+div.CommentBox p.CommentTitle { margin: 0px; padding: 2px 2px 2px 4px; background-color: rgb(255, 204, 153); font-weight: bold; }
+div.CommentBody { padding: 0px 4px; }
+p.CommentPoster { margin-top: 0px; }
+div.CommentReplyButton { padding: 4px; display: none; text-align: right; }
+div.FormattedComment {  }
+pre.FormattedComment { font-family: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; font-size-adjust: inherit; font-stretch: inherit; -x-system-font: none; }
+div.FormattedComment pre { font-family: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; font-size-adjust: inherit; font-stretch: inherit; -x-system-font: none; }
+td.Headline { background-color: rgb(255, 204, 153); }
+table.Middle { border-style: none; padding: 3px; background-color: rgb(255, 255, 255); width: 100%; }
+td.Middle { background-color: rgb(255, 255, 255); vertical-align: top; }
+.Form { border-style: groove; padding: 3px; background-color: rgb(238, 238, 238); }
+div.SponsorLinks { border-style: groove; background-color: rgb(238, 238, 238); padding-top: 3px; width: 100%; max-width: 70em; }
+a.Current { background-color: darkred; color: white; }
+a.Other {  }
+p.NextLink { text-align: right; }
+font.SearchItem { font-weight: bold; color: red; }
+font.QuotedText { color: rgb(153, 0, 153); }
+font.Subscription { color: darkgreen; }
+tr.Even { background-color: rgb(238, 238, 238); }
+tr.Odd {  }
+p.Headlines { margin-bottom: 6px; text-indent: -1em; margin-left: 1em; margin-top: 0px; }
+p.Feature { text-indent: -1em; margin-left: 1em; margin-top: 0px; margin-bottom: 2px; }
+p.ErrorMessage { color: red; margin-left: 1cm; margin-right: 1cm; font-weight: bold; font-size: large; }
+font.NonActive { color: red; font-weight: bold; }
+a.NonActive { color: red; font-weight: bold; }
+table.TopNavigation { width: 100%; max-width: 55em; margin-bottom: 0pt; margin-top: 0px; }
+td.NavLink { background-color: rgb(238, 238, 238); text-align: center; max-width: 15em; }
+p.IndexPrimary { margin-top: 1em; margin-bottom: 0px; font-weight: bold; }
+p.IndexSecondary { margin-top: 0px; text-indent: 5mm; margin-bottom: 0px; }
+p.IndexEntry { text-indent: 1cm; margin-top: 0px; margin-bottom: 0px; }
+div.TextAd { border-style: solid; border-width: thin; margin: 0px auto 10px; width: 150px; background-color: white; color: black; }
+p.TextAdHeader { background-color: rgb(65, 157, 74); color: white; margin-top: 0px; margin-bottom: 3px; text-align: center; font-weight: bold; }
+p.TextAdLink { margin: 2px; }
+p.TextAdBody { margin: 10px 2px 2px; }
+p.TextAdFooter { margin: 2px 0px 0px; border-top-style: dotted; border-top-width: thin; text-align: center; background-color: rgb(255, 204, 153); }
+table.tlnav { padding: 2px; width: 100%; color: black; }
+table.tlrw { border-style: groove; margin: 5px; width: 45%; background-color: rgb(238, 238, 221); float: right; }
+table.tlr { border-style: groove; margin: 5px; width: 35%; background-color: rgb(238, 238, 221); float: right; }
+table.tllw { border-style: groove; margin: 5px; width: 45%; float: left; background-color: rgb(238, 238, 221); }
+table.tll { border-style: groove; margin: 5px; width: 35%; float: left; background-color: rgb(238, 238, 221); }
+p.QuoteAttr { text-align: right; }
+div.tlrw { border-style: groove; margin: 1px 0px 1px 5px; padding: 3px 3px 0px; width: 45%; float: right; background-color: rgb(238, 238, 221); }
+div.tlr { border-style: groove; margin: 1px 0px 1px 5px; padding: 3px 3px 0px; width: 35%; float: right; background-color: rgb(238, 238, 221); }
+div.tllw { border-style: groove; margin: 1px 5px 1px 0px; padding: 3px 3px 0px; width: 45%; float: left; background-color: rgb(238, 238, 221); }
+div.tll { border-style: groove; margin: 1px 5px 1px 0px; padding: 3px 3px 0px; width: 35%; float: left; background-color: rgb(238, 238, 221); }
+p.tlqa { text-align: right; }
+p.GuestAuthor { border-style: groove; margin: 6px 0px 2px 5px; padding: 3px; max-width: 15em; background-color: rgb(238, 238, 238); float: right; }
+div.GAByline { border-style: groove; margin: 6px 0px 2px 5px; padding: 3px; max-width: 15em; background-color: rgb(238, 238, 238); float: right; }
+div.GAByline p { margin: 0px; text-align: left; }
+div.GAByline p:first-child { font-weight: bold; text-align: center; margin-bottom: 3px; }
+div.FeatureByline { border-style: groove; margin: 2px 5px 2px 0px; max-width: 20em; float: left; background-color: rgb(238, 238, 238); padding-bottom: 5px; padding-right: 25px; padding-left: 5px; }
+div.FeatureByline hr { width: 40%; }
+div.survey { margin-left: 1cm; }
+div.sv_mc { margin-left: 10mm; margin-top: 0cm; }
+span.PullQuote { border-style: none none none solid; border-color: rgb(255, 204, 153); margin: 2px 0px 2px 5px; padding: 5px 2px 5px 0.5em; max-width: 30%; float: right; color: black; background-color: rgb(238, 238, 238); font-weight: normal; font-size: larger; }
+span.invisible { display: none; }
+table.CalM { width: 100%; border-spacing: 0pt; }
+tr.CalM { border-left-style: groove; }
+td.CalMDate { background-color: rgb(238, 238, 238); font-size: x-large; width: 13%; border-left-style: groove; border-top-style: groove; }
+td.CalMEvent { font-size: smaller; vertical-align: middle; border-left-style: groove; }
+td.CalMContinue { font-size: smaller; vertical-align: middle; border-left-style: groove; }
+td.CalBlank { border-left-style: none; }
+td.CalMBottom { border-left-style: groove; border-bottom-style: groove; }
+td.CalMTop { border-left-style: none; border-top-style: groove; }
+td.CalMCorner { border-left-style: groove; border-top-style: groove; }
+td.CalMHeader { font-size: larger; font-weight: bold; text-align: center; width: 13%; padding-top: 20px; padding-bottom: 10px; }
+td.CalMName { font-size: x-large; font-weight: bold; text-align: center; background-color: rgb(238, 238, 238); margin-bottom: 10px; border-top-style: groove; border-bottom-style: groove; }
+td.CalMArrow { border-style: groove; vertical-align: middle; }
+div.ArticleText { border: thin none rgb(221, 221, 221); margin: 0px; padding: 0px 2px 0px 0px; min-width: 40em; max-width: 75em; }
+div.Printable {  }
+div.Printable div.ArticleText { margin: 0px; padding: 0px; max-width: none; }
+div.BlurbText { margin: 0px; padding: 0px; }
+span.UliMath { color: black; font-weight: bold; }
+span.UliInvSig { color: black; font-weight: bold; text-decoration: overline; }
+div.AdMarker { text-align: center; font-size: smaller; color: black; font-weight: bold; }
+div.AdRight { border: 3px solid rgb(255, 255, 255); padding: 2px; float: right; background-color: rgb(255, 255, 255); margin-left: 2px; }
+div.promobox { border-style: groove; margin: 1px 5px 1px 0px; padding: 3px 3px 0px; float: left; background-color: rgb(238, 238, 221); }
+
+/* ::::: http://lwn.net/CSS/nosub ::::: */
+
+div.MakeALink { display: none; }

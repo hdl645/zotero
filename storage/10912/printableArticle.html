@@ -1,0 +1,1826 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.embedded.com/shared/printableArticle.jhtml?articleID=18312031">
+<meta name="wpd_url" content="http://www.embedded.com/shared/printableArticle.jhtml?articleID=18312031">
+<meta name="wpd_date" content="2010-00-10T14:39Z">
+
+
+
+<!-- title and meta tags -->
+<title>Embedded.com - Learn a new trick with the offsetof() macro</title>
+<meta name="description" content="Welcome to Embedded.com, the on-line resource for embedded systems developers. This is the place to come for tutorials, code, demos, and news, along with information about Embedded Systems Design Magazine and the Embedded Systems Conferences.">
+<meta name="keywords" content="embedded systems,conference,development,real-time,programming,emulators,multitasking,debugging,software,optimization,engineer,RTOS,chips,tools,microcontrollers,DSP,operating systems,kernel,microprocessors,object-oriented,single board,ada,C++,visual basic, forth,RISC,compilers,specialty libraries, configuration management,ICE,ROM emulators,logic analyzers,device programmers,oscilloscopes,8-bit,eprom,flash,OEM,boards,CMP Media LLC,vendor,magazine,custom publishing,esp,esc,directories,mwmedia,Windows CE, Win CE, CE, Windows, Microsoft, developer, software, operating system, hand held, wallet, PC, OS, mobile, wireless, portable, driver, ETK, OAL, OAK, Pentium, 486, MIPS, Smartcards, Cellular Phone, Small-Form-Factor, H/PC, Palm, CE, RFA, PDA, PIC">
+<meta name="revisit-after" content="2 days">
+<meta name="robots" content="index,follow">
+<meta name="headline" content="Learn a new trick with the offsetof() macro">
+<meta name="author" content="Nigel Jones">
+<meta name="created" content="20040311">
+<meta name="source" content="embeddedsystemsprogramming">
+<meta name="lineage" content="http://www.embedded.com">
+<!-- Begin Network Navigation -->
+<script type="text/javascript">
+
+<!--
+function MM_swapImgRestore() { //v3.0
+var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_findObj(n, d) { //v4.01
+var p,i,x; if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+function MM_swapImage() { //v3.0
+var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+<!-- Begin Network navigation -->
+<meta name="verify-v1" content="K8+4EoBW0V0owP7ONuM9s69436WkjKi+Ph8J25xCXFM="><script src="lang04.js"></script><script src="menu42.js"></script>
+<link rel="stylesheet" type="text/css" href="printableArticle.css" media="all">
+</head>
+<body rightmargin="0" leftmargin="0" topmargin="0" onload="MM_preloadImages('https://i.cmpnet.com/eetimes/network/tol/network_eet_on.gif','https://i.cmpnet.com/eetimes/network/eet/images/tol_on.gif','https://i.cmpnet.com/eetimes/network/eet/embeddded_on.gif','https://i.cmpnet.com/eetimes/network/embedded/eet_on.gif')" alink="#6699cc" bgcolor="white" link="#336699" marginheight="0" marginwidth="0" text="#000000" vlink="#999999">
+<!-- SiteCatalyst code version: H.20.3.
+Copyright 1997-2009 Omniture, Inc. More info available at
+http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript" src="s_code_remote_eetimes.js"></script>
+<script language="JavaScript">
+
+<!--
+s.pageName="";
+s.server="";
+s.channel="";
+s.pageType="";
+s.prop1="";
+s.prop2="";
+s.prop3="Embedded Systems Design | 18312031 | Learn a new trick with the offsetof() macro";
+s.prop4="";
+s.prop5="Columns | Software & Web Development | Embedded | Hardware/Integration | Technical Insights | Embedded Systems Design | 1) Design Library";
+s.prop6="";
+s.prop7="Nigel Jones";
+s.prop8="123.193.211.92 | Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-TW; rv:1.9.1.7) Gecko/20091221 Firefox/3.5.7";
+s.prop9="";
+s.prop10="";
+s.prop11="";
+s.prop12="";
+s.prop14="";
+s.prop15="";
+s.prop16="";
+s.prop19="False";
+s.prop21="";
+
+/* Conversion Variables */
+s.campaign="";
+s.state="";
+s.zip="";
+s.events="event5";
+s.products="";
+s.purchaseID="";
+s.eVar1="";
+s.eVar2="";
+s.eVar3="";
+s.eVar4="";
+s.eVar5="";
+s.eVar21="";
+s.eVar22="";
+s.eVar23="False";
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<script language="JavaScript" type="text/javascript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><a href="http://www.omniture.com" title="Web Analytics"><img
+src="http://om.eetimes.com/b/ss/cmpglobalvista/1/H.20.3--NS/0"
+height="1" width="1" border="0" alt="" /></a></noscript><!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.20.3. -->
+
+<table class="nav" marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" rightmargin="0" bgcolor="#424242" border="0" cellpadding="0" cellspacing="0" height="28" width="100%">
+<tbody><tr>
+<td>
+<img src="network_logo.gif" alt="network logo" border="0" height="28" width="141"><a href="http://www.eetimes.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image5','','https://i.cmpnet.com/eetimes/network/embedded/eet_on.gif',1)"><img src="eet.gif" alt="eet" name="Image5" id="Image5" border="0" height="28" width="100"></a><a href="http://www.techonline.com/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image4','','https://i.cmpnet.com/eetimes/network/eet/tol_on.gif',1)"><img src="tol.gif" alt="techonline" name="Image4" id="Image4" border="0" height="28" width="129"></a><img src="embedded.gif" alt="embedded" border="0" height="28" width="143"></td>
+</tr>
+</tbody></table>
+<!-- End Network navigation -->
+<!-- End Network Navigation -->
+<!-- for google verification -->
+
+
+
+
+
+
+
+
+<script language="JavaScript" type="text/javascript" src="searchbox.js"></script>
+<script type="text/javascript">
+
+/* rmedlin: 7/22/09 - I added this code to rotate the tabs and added a new Twitter widget
+*/
+document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+var rotateTab = 1;
+var tabClicked = false;
+function rotateTabs(){
+if(tabClicked == false){
+if (navigator.appVersion.indexOf("MSIE") == -1){
+if (rotateTab == 3) {
+document.getElementById("rotateTabbernav4").innerHTML="<span style='position:relative; top:3px;*top:0px;_top:0px;'><img style='display:inline;margin:0;padding:0;' border='0' src='http://i.cmpnet.com/embedded/twitter/twitter_tab.gif'/></span>";
+}else{
+document.getElementById("rotateTabbernav4").innerHTML="<span style='position:relative; top:3px;*top:0px;_top:0px;'><img style='display:inline;margin:0;padding:0;' border='0' src='http://i.cmpnet.com/embedded/twitter/twitter_tab_blue.gif'/></span>";
+}
+}
+document.getElementById('rotateTabber').tabber.tabShow(rotateTab);
+}
+if(rotateTab < 4){
+rotateTab++;
+}else{
+rotateTab = 0;
+}
+}
+var tabberOptions = {
+/* Optional: instead of letting tabber run during the onload event,
+we'll start it up manually. This can be useful because the onload
+even runs after all the images have finished loading, and we can
+run tabber at the bottom of our page to start it up faster. See the
+bottom of this page for more info. Note: this variable must be set
+BEFORE you include tabber.js.
+*/
+'manualStartup':false,
+/* Optional: code to run after each tabber object has initialized */
+'onLoad': function(argsObj) {
+/* Display an alert only after tab2 */
+setInterval("rotateTabs()","10000");
+if (navigator.appVersion.indexOf("MSIE") == -1){ 
+document.getElementById("rotateTabbernav4").innerHTML="<span style='position:relative; top:3px;*top:0px;_top:0px;'><img style='display:inline;margin:0;padding:0;' border='0' src='http://i.cmpnet.com/embedded/twitter/twitter_tab_blue.gif'/></span>";
+}
+//document.getElementById("rotateTabbernav4").style.background="url(http://i.cmpnet.com/embedded/twitter/twitter_tab.gif)";
+//document.getElementById("rotateTabbernav4").style.width="100px";
+},
+/* Optional: code to run when the user clicks a tab. If this
+function returns boolean false then the tab will not be changed
+(the click is canceled). If you do not return a value or return
+something that is not boolean false, */
+'onClick': function(argsObj) {
+var t = argsObj.tabber; /* Tabber object */
+var id = t.id; /* ID of the main tabber DIV */
+var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
+var e = argsObj.event; /* Event object */
+if (navigator.appVersion.indexOf("MSIE") == -1){
+if (i == 3) {
+document.getElementById("rotateTabbernav4").innerHTML="<span style='position:relative; top:3px;*top:0px;_top:0px;'><img style='display:inline;margin:0;padding:0;' border='0' src='http://i.cmpnet.com/embedded/twitter/twitter_tab.gif'/></span>";
+}else{
+document.getElementById("rotateTabbernav4").innerHTML="<span style='position:relative; top:3px;*top:0px;_top:0px;'><img style='display:inline;margin:0;padding:0;' border='0' src='http://i.cmpnet.com/embedded/twitter/twitter_tab_blue.gif'/></span>";
+}
+}
+tabClicked = true;
+setTimeout("tabClicked = false;","30000")
+},
+/* Optional: set an ID for each tab navigation link */
+'addLinkId': true
+};
+</script>
+<script language="JavaScript" type="text/javascript" src="tabber-new.js"></script>
+<script language="JavaScript" type="text/javascript" src="cc.js"></script>
+<script language="JavaScript" type="text/javascript" src="ff.js"></script>
+<script language="JavaScript" type="text/javascript" src="rating.js"></script>
+
+<!-- in shared template parts main maintemplate -->
+<img src="msft_embeddedhp" height="1" width="1">
+<!-- Welcome AD in maintemplate -->
+<!-- http://as.cmpnet.com/html.ng/pagepos=fullpage&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<script src="emb_ms_100104.js"></script><script src="emb_ms_100104_x.js"></script><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=248454+flightid=159058+targetid=8815+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,12449,15971+targets=2625,2878,8815+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3216,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=cdoplcp,bfurjrpblpyyr" border="0" height="1" width="1">
+<!-- end Welcome AD in maintemplate -->
+<div id="pageWrapper">
+<!-- main table -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="978">
+<tbody><tr>
+<td valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td colspan="4">
+<!-- top ads -->
+<table border="0" cellpadding="0" cellspacing="0" width="975">
+<tbody><tr>
+<td align="center" width="740">
+<!-- top ads in shared template parts main top ads -->
+<!-- http://as.cmpnet.com/html.ng/pagepos=top&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<script language="JavaScript1.1" src="b2747093.7">
+</script>
+<noscript>
+
+<A HREF="http://ad.doubleclick.net/jump/N3175.eetimes.com/B2747093.7;sz=728x90;ord=bjvnwei,bfurjRpbluvmw?">
+<IMG SRC="http://ad.doubleclick.net/ad/N3175.eetimes.com/B2747093.7;sz=728x90;ord=bjvnwei,bfurjRpbluvmw?" BORDER=0 WIDTH=728 HEIGHT=90 ALT="Click Here!"></A>
+</noscript><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=247274+flightid=158100+targetid=786+siteid=309+affiliateid=451+entitydefresetflag=0+segments=862,885,935,3108,3129,3448,13824,13830,14394+targets=683,786,2625,2878+values=34,46,51,63,77,87,90,102,140,203,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=bjvnwei,bfurjrpbluvmw" border="0" height="1" width="1">
+<br>
+<!-- http://as.cmpnet.com/html.ng/pagepos=buy&catid=top&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=75640&AdID=125688&TargetID=2878&Segments=3108,3448,14918&Targets=2625,2878,10928&Values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1476,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://www.ubmtechnology.com"><img src="iopsblank.gif" alt="" border="0" height="1" width="1"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=125688+flightid=75640+targetid=2878+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,14918+targets=2625,2878,10928+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1476,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035+rawvalues=+random=cnmotny,bfurjrprzgiy" border="0" height="1" width="1">
+</td>
+<td align="center" width="10">
+<img src="spacer.gif" border="0" height="1" hspace="0" vspace="0" width="10">
+</td>
+<td align="center" height="60" width="225">
+<!-- <a href="http://www.eetimes.com/brightcove_video/index.jhtml;jsessionid=1T1IXLMBKPPGOQSNDLPSKH0CJUNN2JVN"><img src="http://i.cmpnet.com/embedded/images/embedded_video_esc.gif" hspace="0" vspace="0" border="0"></a>-->
+<!-- <a href="http://www.embedded-on-demand.com"><img src="http://i.cmpnet.com/embedded/2007/on_demand_button.gif" hspace="0" vspace="0" border="0"></a>-->
+<!-- <a href="http://www.wilsonresearch.com/esdsurvey08.php?" target="_blank"><img src="http://i.cmpnet.com/embedded/marketstudy/embedded_market_study.jpg" hspace="0" vspace="0" border="0"></a> -->
+<!-- <a href="http://cmptv.net/TeardownTV/embedded_launcher.php" target="_blank"><img src="http://i.cmpnet.com/embedded/images/embedded_video.gif" hspace="0" vspace="0" border="0"></a>-->
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://www.cmp.com/"><img src="cmp.gif" alt="CMP" border="0" height="85" width="78"></a>
+</td>
+<td width="383">
+<a href="http://www.embedded.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN"><img src="embedded_002.gif" alt="EMBEDDED.COM" border="0" height="85" width="383"></a>
+</td>
+<td width="10">
+<img src="spacer.gif" border="0" height="1" hspace="0" vspace="0" width="10">
+</td>
+<td height="87" width="490">
+<!-- search box -->
+<table border="0" cellpadding="0" cellspacing="0" width="490">
+<tbody><tr>
+<td align="top">
+<img src="spacer.gif" border="0" height="3" hspace="0" vspace="0" width="1">
+<br>
+<div class="search">
+<form method="get" action="http://www.embedded.com/TechSearch/Search.jhtml;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" name="searchForm">
+<input name="sortSpec" value="score desc" type="hidden">
+<input name="site_id" value="Embedded.com" type="hidden">
+<input name="Site ID" value="Embedded.com" type="hidden">
+<input name="c1" id="c12" value="All" onclick="javascript:searchCheckCheckBoxes(this.id, this.checked);" type="checkbox"> All
+<input name="c2" id="c22" value="Articles" onclick="searchUncheckMain();" type="checkbox"> Articles
+<input name="c3" id="c32" value="Products" onclick="searchUncheckMain();" type="checkbox"> Products 
+<input name="c4" id="c42" value="Columns" onclick="searchUncheckMain();" type="checkbox"> Columns 
+<input name="c5" id="c52" value="Courses" onclick="searchUncheckMain();" type="checkbox"> Courses 
+<input name="c6" id="c62" value="VirtuaLabs" onclick="searchUncheckMain();" type="checkbox"> VirtuaLabs 
+<input name="c7" id="c72" value="Webinars" onclick="searchUncheckMain();" type="checkbox"> Webinars 
+<br>
+<img src="search.gif" alt="Search" border="0" height="20" width="65">
+<input name="queryText" value="" size="60" type="text">
+<input src="form_go_arrow.gif" name="Search" border="0" height="17" type="image" width="16"><br>
+</form>
+</div>
+</td>
+<td align="top">
+<img src="spacer.gif" border="0" height="1" hspace="0" vspace="0" width="5">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td colspan="4" valign="middle">
+<!-- login/register & embedded on demand -->
+<!-- logged out in shared temp parts main login_register -->
+<table border="0" cellpadding="0" cellspacing="0" width="975">
+<tbody><tr>
+<td background="about:blank?header_left.gif" valign="middle" width="32"><img src="key.gif" border="0" height="34" width="32"></td>
+<td background="about:blank?header_left.gif" valign="middle" width="394">
+<a href="http://www.embedded.com/profile;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" style="text-decoration: none;">
+<span class="teal_header">Login</span>
+</a>
+<font color="gray" face="verdana" size="2"><strong>|</strong></font>
+<a href="http://www.embedded.com/profile;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN?register=true" style="text-decoration: none;">
+<span class="teal_header">Register</span>
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="teal_header">Welcome Guest</span>
+</td>
+<td width="568"><a href="http://embedded.com/events"><img src="esc_promoband.gif" valign="bottom" border="0"></a></td> 
+<!-- commented out by Mara Cruz on 9/3/09 --> 
+<!-- <td width="403" background="http://i.cmpnet.com/embedded/2007/header_left.gif" align="right" valign="bottom"></td>
+<td align="right" valign="bottom" width="165" background="http://i.cmpnet.com/embedded/2007/header_left.gif">
+</td> -->
+<td background="about:blank?ips_logo_right_border.gif">&nbsp;</td>
+</tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td id="awmAnchor-top_nav_menu" colspan="4" height="21" width="100%">
+<script charset="UTF-8" src="header_nav.js" type="text/javascript"></script><div id="dropdownmenu" class="dropmenudiv" style="z-index: 100; visibility: hidden; width: 150px;" onmouseover="clearhidemenu()" onmouseout="dynamichide(event)"></div>
+
+<!-- Survey Gizmo Popup Survey -->
+<script type="text/javascript" src="surveycookie2.js"></script>
+<script type="text/javascript">
+
+<!--
+var surveyName = "Starbucks Coffee Card";
+var surveyStartDate = new Date("December 14, 2009");
+var surveyEndDate = new Date("December 21, 2009"); //End date is day the survey should stop
+var surveyURL = "https://www.surveymonkey.com/s/GK5SRH6";
+var surveyPrompt = "$5 for 5\n\r\n\rTake a 5-minute survey - Get a $5 Starbucks gift card\n\r\n\r(Limited to first 50 completed surveys)";
+var today = new Date();
+if ( surveyStartDate < today && surveyEndDate > today ){
+doSurvey(surveyName, surveyPrompt, surveyEndDate, surveyURL, 700, 650);
+}
+-->
+</script> 
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td width="59">
+<a href="http://www.embedded.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">
+<img src="topnav_home_white.gif" alt="HOME" name="image1" border="0" height="30" width="59">
+</a>
+</td>
+<td width="90">
+<a href="http://www.embedded.com/design;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu1, '120px')" onmouseout="delayhidemenu()">
+<img src="topnav_design_white.gif" alt="DESIGN" name="image2" border="0" height="30" width="98">
+</a>
+</td>
+<td width="61">
+<a href="http://www.embedded.com/products;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu2, '120px')" onmouseout="delayhidemenu()">
+<img src="topnav_products_white.gif" alt="PRODUCTS" name="image3" border="0" height="30" width="61">
+</a>
+</td>
+<td width="61">
+<a href="http://www.embedded.com/columns;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu3, '150px')" onmouseout="delayhidemenu()">
+<img src="topnav_columns_white.gif" alt="COLUMNS" name="image4" border="0" height="30" width="61">
+</a>
+</td>
+<td width="71">
+<a href="http://www.embedded.com/elearning;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu4, '120px')" onmouseout="delayhidemenu()">
+<img src="topnav_elearning_white.gif" alt="E-LEARNING" name="image5" border="0" height="30" width="71">
+</a>
+</td>
+<td width="81">
+<a href="http://www.embedded.com/events/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu5, '160px')" onmouseout="delayhidemenu()">
+<img src="topnav_conferences_white.gif" alt="CONFERENCES" name="image6" border="0" height="30" width="81">
+</a>
+</td>
+<td width="182">
+<a href="http://www.embedded.com/code.new;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">
+<img src="topnav_code_white.gif" alt="CODE" name="image7" border="0" height="30" width="182">
+</a>
+</td>
+<td width="89">
+<a href="#" onmouseover="dropdownmenu(this, event, menu6, '120px')" onmouseout="delayhidemenu()">
+<img src="topnav_forums_white.gif" alt="FORUMS/BLOGS" name="image8" border="0" height="30" width="89">
+</a>
+</td>
+<td width="77">
+<a href="http://www.embedded.com/profile/preferences.jhtml;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN?#newsletters">
+<img src="topnav_newsletters_white.gif" alt="NEWSLETTERS" name="image9" border="0" height="30" width="77">
+</a>
+</td>
+<td width="56">
+<a href="http://www.embedded.com/contact;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" onmouseover="dropdownmenu(this, event, menu7, '270px')" onmouseout="delayhidemenu()">
+<img src="topnav_contact_white.gif" alt="CONTACT" name="image10" border="0" height="30" width="56">
+</a>
+</td>
+<td width="83">
+<a href="#" onmouseover="dropdownmenu(this, event, menu8, '270px')" onmouseout="delayhidemenu()">
+<img src="topnav_sitefeat_white.gif" alt="FEATURES" name="image11" border="0" height="30" width="83">
+</a>
+</td>
+<td width="52">
+<a href="http://www.embedded.com/rss;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">
+<img src="topnav_rss.gif" alt="RSS" name="image12" border="0" height="30" width="52">
+</a>
+</td>
+<td width="6">
+<a href="#">
+<img src="nav_spacer.gif" alt="RSS" border="0" height="30" width="6">
+</a>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td colspan="4" align="left">
+<!-- taxonomy elements -->
+<!-- elearnings id's (from TOL) -->
+<!-- columns -->
+<!-- columns (archives only) -->
+<!-- sourcecode filtered file id -->
+<div class="sub_template">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td align="left" bgcolor="#ffffff" valign="top" width="600">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="600">
+<!-- breadcrumb -->
+<div class="breadcrumb">
+<a href="http://www.embedded.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Embedded.com</a>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top">
+<img src="gray_dot.gif" height="1" vspace="0" width="600"><br>
+</td>
+</tr>
+</tbody></table>
+<table border="0" cellpadding="10" cellspacing="0" width="600">
+<tbody><tr>
+<td valign="top" width="100%">
+<!-- BEGIN MAIN CONTENT -->
+<!-- reader opinion links -->
+<!-- <droplet src="opinion_links.jhtml"/> -->
+<!-- headline -->
+<div class="article_headline">Learn a new trick with the offsetof() macro</div>
+<!-- sub head -->
+<!-- /sub head -->
+<!-- icons -->
+<script language="javascript">
+
+<!--
+function launcher(art_id) {
+uri = "/shared/article/emailBox.jhtml?articleID=" + art_id;
+window.open(uri,"","toolbar=no,scrollbars=auto,location=no,status=no,width=750,height=600,resizable=1");
+}
+//-->
+</script>
+<div class="article_icons_wrapper">
+<div class="article_icons_main">
+<a href="http://www.embedded.com/shared/printableArticle.jhtml;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN?printable=true">
+<img src="print.gif" border="0"></a><br><a href="javascript:launcher('18312031')" title="Send As Email"><img src="email.gif" border="0"></a><br><a href="http://www.wrightsreprints.com/reprints/index.cfm?magid=2211"><img src="reprints.gif" border="0"></a><br><!-- ADDTHIS BUTTON BEGIN from addthis.com -->
+<script type="text/javascript">
+
+addthis_pub = 'techinsights';
+addthis_logo = 'http://www.techinsights.com/images/Img_TechInsightsLogo1.jpg';
+addthis_logo_background = 'EFEFFF';
+addthis_logo_color = '666699';
+addthis_brand = 'Techinsights';
+addthis_options = 'favorites, email, twitter, slashdot, digg, delicious, myspace, facebook, google, newsvine, linkedin, more';
+</script>
+<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="button1-share.gif" alt="" border="0" height="16" width="125"></a>
+<script type="text/javascript" src="addthis_widget.js"></script>
+<!-- ADDTHIS BUTTON END -->
+</div>
+</div>
+<!-- author/byline -->
+<div class="article_author">By Nigel Jones</div>
+<!-- site -->
+<div class="article_site">
+<!-- remove http:// substring (if present) from the url -->
+<a href="http://www.embedded.com/" target="_top">
+
+Embedded Systems Design
+</a>
+</div>
+<!-- date -->
+<div class="article_date">(03/11/04, 03:00:00 H EST)</div>
+<!-- article body -->
+<div class="article_body"><a href="#response"><b>Click here for reader response to this article</b></a>
+<p>
+<font face="Verdana" size="2"><font color="#003366" face="Verdana" size="2"><b>Almost never used, the <b>offsetof()</b> macro can actually be a helpful addition to your bag of tricks. Here are a couple of places in embedded systems where the macro is indispensable&mdash;packing data structures and describing how EEPROM data are stored.</b></font>
+</font></p><p>
+<font face="Verdana" size="2">If you browse through an ANSI C compiler's header files, you'll come across a very strange looking macro in <b>stddef.h</b>. The macro, <b>offsetof()</b>, has a horrid declaration. Furthermore, if you consult the compiler manuals, you'll find an unhelpful explanation that reads something like this:
+</font></p><p>
+<font face="Verdana" size="2">"<i>The</i> <b>offsetof()</b> <i>macro returns the offset of the element name within the struct or union composite. This provides a portable method to determine the offset.</i>"
+</font></p><p>
+<font face="Verdana" size="2">At this point, your eyes start to glaze over, and you move on to something that's more understandable and useful. Indeed, this was my position until about a year ago when the macro's usefulness finally dawned on me. I now kick myself for not realizing the benefits earlier&mdash;the macro could have saved me a lot of grief over the years. However, I console myself by realizing that I wasn't alone, since I'd never seen this macro used in any embedded code. Offline and online searches confirmed that <b>offsetof()</b> is essentially not used. I even found compilers that had not bothered to define it.
+How the macro works
+</font></p><p>
+<font face="Verdana" size="2">Before delving into the three areas where I've found the macro useful, it's necessary to discuss what the macro does, and how it does it.
+</font></p><p>
+<font face="Verdana" size="2">The <b>offsetof()</b> macro is an ANSI-required macro that should be found in <b>stddef.h</b>. Simply put, the <b>offsetof()</b> macro returns the number of bytes of offset before a particular element of a struct or union. 
+</font></p><p>
+<font face="Verdana" size="2">The declaration of the macro varies from vendor to vendor and depends upon the processor architecture. Browsing through the compilers on my computer, I found the example declarations shown in Listing 1. As you can see, the definition of the macro can get complicated. 
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 1: A representative set of offsetof() macro definitions
+</b></font></p><p>
+<font face="Verdana" size="2"><b>// Keil 8051 compiler<br>
+#define offsetof(s,m) (size_t)&(((s *)0)-&gt;m)
+</b></font></p><p>
+<font face="Verdana" size="2"><b>// Microsoft x86 compiler (version 7)<br>
+#define offsetof(s,m) (size_t)(unsigned long)&(((s *)0)-&gt;m)
+</b></font></p><p>
+<font face="Verdana" size="2"><b>// Diab Coldfire compiler<br>
+#define offsetof(s,memb) ((size_t)((char *)&((s *)0)-&gt;memb-(char *)0))
+</b>
+</font></p><p>
+<font face="Verdana" size="2">Regardless of the implementation, the <b>offsetof()</b> macro takes two parameters. The first parameter is the structure name; the second, the name of the structure element. (I apologize for using a term as vague as "structure name." I'll refine this shortly.) A straightforward use of the macro is shown in Listing 2.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 2: A straightforward use of offsetof()
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef struct<br>
+{<br>
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} SFOO;<br>
+</b></font></p><p>
+<font face="Verdana" size="2"><b>void main(void)<br>
+{<br>
+&nbsp;&nbsp;printf("Offset of 'f' is %u", offsetof(SFOO, f));<br>
+}</b>
+</font></p><p>
+<font face="Verdana" size="2">To better understand the magic of the <b>offsetof()</b> macro, consider the details of Keil's definition. The various operators within the macro are evaluated in an order such that the following steps are performed: 
+</font></p><p>
+</p><ol>
+<font face="Verdana" size="2"><li><b>((s *)0)</b> takes the integer zero and casts it as a pointer to <i>s</i>. 
+</li><li><b>((s *)0)-&gt;m</b> dereferences that pointer to point to structure member <i>m</i>.
+</li><li><b>&(((s *)0)-&gt;m)</b> computes the address of <i>m</i>. 
+</li><li><b>(size_t)&(((s *)0)-&gt;m)</b> casts the result to an appropriate data type.
+</li></font></ol>
+<p>
+<font face="Verdana" size="2">By definition, the structure itself resides at address 0. It follows that the address of the field pointed to (Step 3 above) must be the offset, in bytes, from the start of the structure. At this point, we can make several observations:
+</font></p><p>
+</p><ul>
+<font face="Verdana" size="2"><li>We can be a bit more specific about the term "structure name." In a nutshell, if the structure name you use, call it <i>s</i>, results in a valid C expression when written as <b>(s *)0-&gt;m</b>, you can use <i>s</i> in the <b>offsetof()</b> macro. The examples shown in Listings 3 and 4 will help clarify that point.
+</li><li>The member expression, <i>m</i>, can be of arbitrary complexity. Indeed, if you have nested structures, then the member field can be an expression that resolves to a parameter deeply nested within a structure.
+</li><li>It's easy enough to see why this macro also works with unions.
+</li><li>The macro won't work with bitfields. You simply can't take the address of a bitfield member of a structure or union.
+</li></font></ul>
+<p>
+<font face="Verdana" size="2">Listings 3 and 4 contain simple variations on the usage of this macro. These should help you get you comfortable with the <b>offsetof()</b> basics.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 3: Without a typedef
+</b></font></p><p>
+<font face="Verdana" size="2"><b>struct sfoo
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b> int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>};
+</b></font></p><p>
+<font face="Verdana" size="2"><b>void main(void)<br>
+{<br>
+&nbsp;&nbsp;printf("Offset of 'f' is %u", offsetof(struct sfoo, f));<br>
+}
+</b></font></p><p>
+<font face="Verdana" size="2"><b>Listing 4: Nested structs
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef struct<br>
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>long</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>l;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>short</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>s;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} SBAR;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef struct<br>
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>SBAR</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>b;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} SFOO;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>void main(void)<br>
+{<br>
+&nbsp;&nbsp;printf("Offset of 'l' is %u", 
+&nbsp;&nbsp;&nbsp;&nbsp;offsetof(SFOO, b.l));<br>
+}</b>
+</font></p><p>
+<font face="Verdana" size="2">Now that you understand the semantics of the macro, it's time to take a look at how to use it.
+</font></p><p>
+<font face="Verdana" size="2"><font color="#003366" face="Verdana" size="3"><b>Use 1: pad bytes</b></font><br>
+Most 16-bit and larger processors require that data structures in memory be aligned on a multibyte (for example, 16-bit or 32-bit) boundary. Sometimes the requirement is absolute, and sometimes it's merely recommended for optimal bus throughput. In the latter case, the flexibility is offered because the designers recognized that you may wish to trade off memory access time with other competing issues such as memory size and the ability to transfer (perhaps via a communications link or direct memory access) the memory contents directly to another processor that has a different alignment requirement.
+</font></p><p>
+<font face="Verdana" size="2">For cases such as these, it's often necessary to resort to compiler directives to achieve the required level of packing. As the C structure declarations can be quite complex, working out how to achieve this can be daunting. Furthermore, after poring over the compiler manuals, I'm always left with a slight sense of unease about whether I've really achieved what I set out to do.
+</font></p><p>
+<font face="Verdana" size="2">The most straightforward solution to this problem is to write a small piece of test code. For instance, consider the moderately complex declaration given in Listing 5.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 5: A union containing a struct
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef union<br>
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>struct 
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>g;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>double</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>h;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>&nbsp;&nbsp;} b;<br>
+} UFOO;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>void main(void)<br>
+{<br>
+&nbsp;&nbsp;printf("Offset of 'h' is %u", 
+&nbsp;&nbsp;&nbsp;&nbsp;offsetof(UFOO, b.h));
+}</b>
+</font></p><p>
+<font face="Verdana" size="2">If you need to know where b.h resides in the structure, then the simplest way to find out is to write some test code such as that shown in Listing 5. This is all well and good, but what about portability? Writing code that relies on offsets into structures can be risky&mdash;particularly if the code gets ported to a new target at a later date. Adding a comment is of course a good idea&mdash;but what one really needs is a means of forcing the compiler to tell you if the critical members of a structure are in the wrong place. Fortunately, one can do this using the <b>offsetof</b> macro and the technique in Listing 6, courtesy of Michael Barr.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 6: Anonymous union that checks structure offsets
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef union<br>
+{
+</b><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>struct</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>{</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>g;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;double</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>h;</b></font>
+</td>
+</tr>	
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>} b;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;</b></font>
+</td>
+</tr>
+</tbody></table><b><br>
+} UFOO;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>static union<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char wrong_offset_i[offsetof(UFOO,i) == 0];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char wrong_offset_f[offsetof(UFOO,f) == 0];
+</b></font></p><p>
+<font face="Verdana" size="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char wrong_offset_h[offsetof(UFOO, b.h) == 2]; //Error generated<br>
+};</b>
+</font></p><p>
+<font face="Verdana" size="2">The technique works by attempting to declare an array. If the test evaluates to FALSE, then the array will be of zero size, and a compiler error will result. In Listing 6, the compiler generates an error "Invalid dimension size [0]" for the parameter b.h.
+</font></p><p>
+<font face="Verdana" size="2">Thus the <b>offsetof()</b> macro allows you to both determine and check the packing of elements within structures.
+</font></p><p>
+<font face="Verdana" size="2"><font color="#003366" face="Verdana" size="3"><b>Use 2: nonvolatile memory</b></font><br>
+Many embedded systems contain some form of nonvolatile memory, which holds configuration parameters and other device-specific information. One of the most common types of nonvolatile memory is serial EEPROM. Normally, such memories are byte addressable. The result is often a serial EEPROM driver that provides an API that includes a read function that looks like this:
+</font></p><p>
+<font face="Verdana" size="2"><b>ee_rd(uint16_t offset, uint16_t nBytes, uint8_t * dest)</b>
+</font></p><p>
+<font face="Verdana" size="2">In other words, <b>read nBytes</b> from offset <b>offset</b> in the EEPROM and store them at <b>dest</b>. The problem is knowing what offset in EEPROM to read from and how many bytes to read (in other words, the underlying size of the variable being read). The most common solution to this problem is to declare a data structure that represents the EEPROM and then declare a pointer to that struct and assign it to address 0x0000000. This technique is shown in Listing 7.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 7: Accessing parameters in serial EEPROM via a pointer
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef struct<br>
+{</b>
+<table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+</tbody></table><br>
+<b>} EEPROM;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>EEPROM * const pEE = 0x0000000;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>ee_rd(&(pEE-&gt;f), sizeof(pEE-&gt;f), dest);
+</b>
+</font></p><p>
+<font face="Verdana" size="2">This technique has been in use for years. However, I dislike it precisely because it does create an actual pointer to a variable that supposedly resides at address 0. In my experience, this can create a number of problems including:
+</font></p><p>
+</p><ol>
+<font face="Verdana" size="2"><li>Someone maintaining the code can get confused into thinking that the EEPROM data structure really does exist.
+</li><li>You can write perfectly legal code (for example, <b>pEE-&gt;f = 3.2</b>) and get no compiler warnings that what you're doing is disastrous.
+</li><li>The code doesn't describe the underlying hardware well.
+</li></font></ol>
+<p>
+<font face="Verdana" size="2">A far better approach is to use the <b>offsetof()</b> macro. An example is shown in Listing 8
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 8: Using offsetof()to access parameters in serial EEPROM
+</b></font></p><p>
+<font face="Verdana" size="2"><b>typedef struct<br>
+{</b><br>
+<table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>int</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>i;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>f;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>c;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} EEPROM;
+</b></font></p><p>
+<font face="Verdana" size="2"><b>ee_rd(offsetof(EEPROM,f), 4, dest);</b>
+</font></p><p>
+<font face="Verdana" size="2">However, there's still a bit of a problem. The size of the parameter has been entered manually (in this case "4"). It would be a lot better if we could have the compiler work out the size of the parameter as well. No problem, you say, just use the <b>sizeof()</b> operator. However, the <b>sizeof()</b> operator doesn't work the way we would like it to. That is, we cannot write <b>sizeof(EEPROM.f)</b> because <b>EEPROM</b> is a data type and not a variable. 
+</font></p><p>
+<font face="Verdana" size="2">Now normally, one always has at least one instance of a data type so that this is not a problem. In our case, the data type <b>EEPROM</b> is nothing more than a template for describing how data are stored in the serial EEPROM. So, how can we use the <b>sizeof()</b> operator in this case? Well, we can simply use the same technique used to define the <b>offsetof()</b> macro. Consider the definition:
+</font></p><p>
+<font face="Verdana" size="2"><b>#define SIZEOF(s,m) ((size_t) sizeof(((s *)0)-&gt;m))</b>
+</font></p><p>
+<font face="Verdana" size="2">This looks a lot like the <b>offsetof()</b> definitions in Listing 1. We take the value 0 and cast it to "pointer to <i>s</i>." This gives us a variable to point to. We then point to the member we want and apply the regular <b>sizeof()</b> operator. The net result is that we can get the size of any member of a typedef without having to actually declare a variable of that data type.
+</font></p><p>
+<font face="Verdana" size="2">Thus, we can now refine our read from the serial EEPROM as follows:
+</font></p><p>
+<font face="Verdana" size="2"><b>ee_rd(offsetof(EEPROM, f), SIZEOF(EEPROM, f), &dest);</b>
+</font></p><p>
+<font face="Verdana" size="2">At this point, we're using two macros in the function call, with both macros taking the same two parameters. This leads to an obvious refinement that cuts down on typing and errors:
+</font></p><p>
+<font face="Verdana" size="2"><b>#define EE_RD(M,D)&nbsp;&nbsp;&nbsp;ee_rd(offsetof(EEPROM,M), SIZEOF(EEPROM,M), D)</b>
+</font></p><p>
+<font face="Verdana" size="2">Now our call to the EEPROM driver becomes much more intuitive:
+</font></p><p>
+<font face="Verdana" size="2"><b>EE_RD(f, &dest);</b>
+</font></p><p>
+<font face="Verdana" size="2">That is, read <b>f</b> from the EEPROM and store its contents at location <b>dest</b>. The location and size of the parameter is handled automatically by the compiler, resulting in a clean, robust interface.
+</font></p><p>
+<font face="Verdana" size="2"><font color="#003366" face="Verdana" size="3"><b>Use 3: protecting nonvolatile memory</b></font><br>
+The last example contains elements from the first two examples. Many embedded systems contain directly addressable nonvolatile memory, such as battery-backed SRAM. It's usually important to detect if the contents of this memory have been corrupted. I usually group the data into a structure, compute a CRC (cyclic redundancy code) over that structure, and append it to the data structure. Thus, I often end up with something like this:
+</font></p><p>
+<font face="Verdana" size="2"><b>struct nv<br>
+{</b>
+<p>
+</p><p>
+</p><p>
+</p><table bgcolor="#ffffff" border="0" cellpadding="2">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>short</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_1;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_2;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_3;</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>uint16_t</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>crc;</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} nvram;</b>
+</font></p><p>
+<font face="Verdana" size="2">The intent of the CRC is that it be the CRC of "all the parameters in the data structure with the exception of itself." This seems reasonable enough. Thus, the question is, how does one compute the CRC? If we assume we have a function, crc16( ), that computes the CRC-16 over an array of bytes, then we might be tempted to use the following:
+</font></p><p>
+<font face="Verdana" size="2"><b>nvram.crc = crc16((char *) &nvram, sizeof(nvram)-sizeof(nvram.crc));</b>
+</font></p><p>
+<font face="Verdana" size="2">This code will only definitely work with compilers that pack all data on byte boundaries. For compilers that don't do this, the code will almost certainly fail. To see that this is the case, let's look at this example structure for a compiler that aligns everything on a 32-bit boundary. The effective structure could look like that in Listing 9.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 9: An example structure for a compiler that aligns everything on a 
+32-bit boundary
+</b></font></p><p>
+<font face="Verdana" size="2"><b>struct nv<br>
+{<br></b>
+<table bgcolor="#ffffff" border="0" cellpadding="4">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>short</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_1;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 0</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>pad1[2];</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Two byte pad</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_2;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 4</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_3;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 8</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>pad2[3];</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Three byte pad</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>uint16_t </b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>crc;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 12</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>pad3[2];</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Two byte pad</b></font>
+</td>
+</tr>
+</tbody></table><br>
+<b>} nvram;</b>
+</font></p><p>
+<font face="Verdana" size="2">The first two pads are expected. However, why is the compiler adding two bytes onto the end of the structure? It does this because it has to handle the case when you declare an array of such structures. Arrays are required to be contiguous in memory, too. So to meet this requirement and to maintain alignment, the compiler pads the structure out as shown.
+</font></p><p>
+<font face="Verdana" size="2">On this basis, we can see that the <b>sizeof(nvram)</b> is 16 bytes. Now our nave code in Listing 9 computes the CRC over <b>sizeof(nvram) - sizeof(nvram.crc)</b> bytes = 16 - 2 = 14 bytes. Thus the stored CRC now includes its previous value in its computation! We certainly haven't achieved what we set out to do.
+</font></p><p>
+<font face="Verdana" size="2"><b>Listing 10: Nested data structures
+</b></font></p><p>
+<font face="Verdana" size="2"><b>struct nv<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br></b>
+<table bgcolor="#ffffff" border="0" cellpadding="4">
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>short</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_1;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 0</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>float</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_2;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 4</b></font>
+</td>
+</tr>
+<tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>char</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>param_3;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 8</b></font>
+</td>
+</tr>
+</tbody></table><br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;} data;</b><br>
+<table bgcolor="#ffffff" border="0" cellpadding="4">	
+<tbody><tr valign="top">
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font face="Verdana" size="2"><b>uint 16_t</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>crc;</b></font>
+</td>
+<td>
+<font face="Verdana" size="2"><b>//Offset = 12</b></font>
+</td>
+</tr>
+</tbody></table>
+<b>} nvram;</b>
+</font></p><p>
+<font face="Verdana" size="2">The most common solution to this problem is to nest data structures as shown in Listing 10. Now we can compute the CRC using:
+</font></p><p>
+<font face="Verdana" size="2"><b>nvram.crc = crc16((uint8_t *) &nvram.data, sizeof(nvram.data));</b>
+</font></p><p>
+<font face="Verdana" size="2">This works well and is indeed the technique I've used over the years. However, it introduces an extra level of nesting within the structure&mdash;purely to overcome an artifact of the compiler. Another alternative is to place the CRC at the top of the structure. This overcomes most of the problems but feels unnatural to many people. On the basis that structures should always reflect the underlying system, a technique that doesn't rely on artifice is preferable&mdash;and that technique is to use the <b>offsetof()</b> macro. 
+</font></p><p>
+<font face="Verdana" size="2">Using the <b>offsetof()</b> macro, one can simply use the following (assuming the original structure definition):
+</font></p><p>
+<font face="Verdana" size="2"><b>nvram.crc = crc16((uint8_t *) &nvram, offsetof(struct nv, crc));</b>
+</font></p><p>
+<font face="Verdana" size="2"><font face="Verdana" size="3"><b>Keep looking</b></font><br>
+I've provided a few examples where the <b>offsetof()</b> macro can improve your code. I'm sure that I'll find further uses over the next few years. If you've found additional uses for the macro I would be interested to hear about them.	
+</font></p><p>
+<font face="Verdana" size="2"><b>Nigel Jones</b> is a consultant living in Maryland, where he slaves away on a wide range of embedded projects. He enjoys hearing from readers and can be reached at <a href="mailto:najones@rmbconsulting.us">najones@rmbconsulting.us</a>.</font>
+</p><p>
+</p><hr size="1">
+<hr size="1">
+<a name="response"></a><b>Reader Response</b>
+<p>
+
+Well whadya know! In my last large firmware project, I rolled my own offsetof() macro that looked like this:
+</p><p>
+
+//This macro is for hiding the tortured expression needed to extract<br>
+//the offset of the elements of the PAGE_TRAILER structure:<br>
+#define OFFSET_OF(element) ((char*)&(((PAGE_TRAILER*)0)-&gt;element) - (char*)0)
+</p><p>
+
+Had no idea it was provided in the standard library!
+</p><p>
+
+The IAR compiler which I use implements it like this:
+</p><p>
+
+#define offsetof(type,member) ((size_t)(&((type *)0)-&gt;member))
+</p><p>
+
+Even though it is in the STDDEF.H header file, it's not mentioned in the IAR documentation. Maybe that's why I missed it!
+</p><p>
+
+Thanks for pointing it out!
+</p><p>
+
+Brad Peeters<br>
+President<br>
+Theta Engineering<br>
+</p><p>
+</p><hr size="1">
+I enjoyed your article and would like to mention another use of the offsetof() macro. In the past I've found the offsetof() macro quite useful in providing an abstract interface, without having to use an object orientated high-level language (e.g. C++). For example, in the past I created a library function to calculate the standard deviation of a set of floats, through the use of a function with the following prototype:
+<p>
+
+&nbsp;&nbsp;float stdDev(void *start, \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;size_t stride, \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;size_t offset, \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;size_t num);<br>
+</p><p>
+
+The value of start is typically the starting address of a static array of structures, that contains collected data. The sizeof of array entry is provided by the stride parameter. While how many there are is given by num. The value of num is typically obtained through the use of:
+</p><p>
+
+&nbsp;&nbsp;#define NUM(_a) (sizeof(_a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/ sizeof(_a[0]))<br>
+</p><p>
+
+While the offset of the float type in the structure is given by the offset parameter. The nice thing about this function is that it has no idea of the structure type that it is dealing with. All it knows is that some specified number of bytes from the start of the structure is a value of type float.
+</p><p>
+
+I've also used similar techniques where the data is contained on a linked list or binary tree. If the data is on a linked list, instead of providing the stride and number of entries, the offset to the next pointer member can be provided. A common practice is to always have the next pointer at the begining of the structure. In this case a value of 0 is implied for the offset to the pointer to the next node. Sometimes the data I deal with is linked on multiple lists. When there are multiple lists, there will be multiple next pointers, usually with similar but always different member names. A function that takes the offset of the next pointer is very useful, in that it can work with structures that are linked onto multiple lists.
+</p><p>
+
+I made quick reference to also using this technique on binary trees. In this case the offset of the parent, left child, and right child nodes is needed. It tends to be awkward to pass the offset of these 3 pointers, plus the offset of the data to be processed as parameters. A solution to this issue is to maintain a structure that describes the entire tree. When the tree is created, a structure is created that contains the following:
+</p><p>
+
+&nbsp;&nbsp;struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct treeAttributes {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size_t parentOffset;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size_t leftChildOffset;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size_t rightChildOffset;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size_t nodeSize;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;struct *root;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;};<br>
+&nbsp;&nbsp;}<br>
+</p><p>
+
+For this technique, it is agreed upon all the trees that use the generic functions, to always have a treeAttribute structure as the first member. With this, it's now possible to create functions such as:
+</p><p>
+
+&nbsp;&nbsp;float stddevTree(void *tree,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;size_t floatOffset);<br>
+</p><p>
+
+In this case, the tree parameter points to a structure of an unknown type, but it's agreed that its first member will be of type treeAttribute.
+</p><p>
+
+In the example, treeAttribute structure, I've also provided the size of each node. This wouldn't be needed to calculate the standard deviation, but is quite useful with other generic functions. For example, it can be used to automatically create duplicates of nodes with a specified attribute. These nodes might be written to a caller specified file descriptor, as a means to write selected nodes out to a file.
+</p><p>
+
+Louis Huemiller</p></div>
+<!-- pagination -->
+<div class="article_pagination">
+<!-- previous page link -->
+<!-- individual page links -->
+<span style="color: rgb(0, 0, 0);">1</span>
+<!-- next page link -->
+</div>
+<!-- rate this article -->
+<a name="rate_it"></a>
+<p>
+</p><div style="border: 1px solid rgb(16, 93, 140);">
+<table align="center" border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr>
+<td align="center" width="18%">
+<span style="font-family: arial; font-style: normal; font-variant: normal; font-weight: bold; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;" id="rating_text">Rate this article:</span>
+</td>
+<td align="center" width="41%">
+<nobr>
+<span style="font-family: verdana; font-style: normal; font-variant: normal; font-weight: bold; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(255, 105, 0); padding-right: 3px;">Low</span>
+<span class="inline-rating" id="star_rating">
+<ul class="star-rating">
+<li><a href="javascript:void(0)" title="1 star out of 5" class="one-star" onclick="saveRating(18312031, 1, 4.742857, 166, 35)">1</a></li>
+<li><a href="javascript:void(0)" title="2 stars out of 5" class="two-stars" onclick="saveRating(18312031, 2, 4.742857, 166, 35)">2</a></li>
+<li><a href="javascript:void(0)" title="3 stars out of 5" class="three-stars" onclick="saveRating(18312031, 3, 4.742857, 166, 35)">3</a></li>
+<li><a href="javascript:void(0)" title="4 stars out of 5" class="four-stars" onclick="saveRating(18312031, 4, 4.742857, 166, 35)">4</a></li>
+<li><a href="javascript:void(0)" title="5 stars out of 5" class="five-stars" onclick="saveRating(18312031, 5, 4.742857, 166, 35)">5</a></li>
+</ul>
+</span>
+<span style="font-family: verdana; font-style: normal; font-variant: normal; font-weight: bold; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(255, 105, 0); padding-left: 3px;">High</span>
+</nobr>
+</td>
+<td align="center" bgcolor="#ffffff" width="41%">
+<div style="border-left: 1px solid rgb(16, 93, 140);">
+<span style="font-family: arial; font-style: normal; font-variant: normal; font-weight: bold; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;">Current rating</span>
+<span class="inline-rating">
+<ul class="star-rating" id="curr_star_rating">
+<li class="current-rating" style="width: 94.8571%;">.</li>
+</ul>
+</span>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<!--
+<hr>
+<img src="http://i.cmpnet.com/embedded/2007/stars_lg.gif" border="0"> 
+<img src="http://i.cmpnet.com/embedded/2007/stars_sm.gif" border="0"> 
+-->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td align="left" valign="top">
+<script language="JavaScript" type="text/javascript">
+
+var jiveTitle = "Comments for: \"Learn a new trick with the offsetof() macro\"";
+var sURL = unescape(window.location.href);
+var sQuery = sURL.indexOf("?")>0?sURL.substr(sURL.indexOf("?"),sURL.length):"";
+sURL = sURL.indexOf(";jsessionid")>0?sURL.substr(0,sURL.indexOf(";jsessionid"))+sQuery:sURL;
+var jiveDescription = "Read the article here: <a href\=\"" + sURL + "\">Learn a new trick with the offsetof() macro</a>";
+</script>
+<script language="JavaScript" type="text/javascript" src="780"></script>
+    
+
+<script type="text/javascript" language="JavaScript">
+
+    function getRefererURL() {
+        var url = location.href;
+        if (url.indexOf('#community') > 0) {
+            url = url.substring(0, url.indexOf('#community'));
+        }
+        if (url.charAt(url.length-1) == '/') {
+            url = url.substring(0, url.length-1);
+        }
+        return url;
+    }
+</script>
+
+<div id="jive-community">
+
+
+
+
+            <div id="jive-link">
+                <a href="http://www.techonline.com/tigforums/thread.jspa?threadID=1012" target="_top">
+
+                    Discuss This Article
+                </a>
+            </div>
+
+                <div id="jive-stats">
+                    <span>1 message(s). Last at: Mar 13, 2008 3:55:09 PM</span>
+                </div>
+
+                <div id="jive-message-list">
+                    <ul>
+                        <li>
+				     <div class="jive-odd">
+					  
+                                <div class="jive-header">
+                                    <div class="jive-author">
+                                        <span>
+                                                <i>Guest</i>
+                                        </span>
+                                    </div>
+                                    <div class="jive-date">
+                                        <span>commented on Mar 13, 2008 3:55:09 PM</span>
+                                    </div>
+                                </div>
+                                <div class="jive-body">
+                                    <span>However, offsetof will conflict with any class or structure with a user defined ctor. The problem is that ((class*)0)-&gt;member is now illegal. However, ((class*)1)-&gt;member is not (go figure), so redefine offsetof after any include of stddef.h as...<br>
+#define offsetof(c,m) ((size_t)&(((c*)1)-&gt;m)-1)<br>
+If the compiler complains with a warning about redefining it, undef it first.<br>
+<br>
+(See quantumreference.blogspot.com for more details.)</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+		<div id="jive-community-start">
+            <a name="community"></a>
+		</div>
+
+
+            <div id="jive-comment">
+
+					<div id="jive-login" class="enabled">
+						<script type="text/javascript" language="JavaScript">
+
+							function loginForm(form) {
+								var str =   "/profile/login.jhtml?successfulLoginRedirect=" + escape(getRefererURL() + "#community");
+								window.location = str;
+							}
+						</script>
+						<span>
+
+							Please <a href="javascript:loginForm(this.form)">login or register here</a> to post a comment or to get an email when other comments are made on this article
+						</span>
+                        	</div>
+
+
+
+                 <div id="jive-link">
+                   <a href="http://www.techonline.com/tigforums/watches%21add.jspa?forumID=23&threadID=1012" targe="" t="_blank">
+
+                    Track This Thread
+                   </a>
+                  </div>
+                  <div id="jive-stats">Sends you email alerts when someone comments on this article</div>
+
+            </div>
+</div>
+
+
+</td>
+</tr>
+</tbody></table>
+<!-- END MAIN CONTENT -->
+</td>
+</tr>
+</tbody></table>
+</td>
+<td class="vertical_line" width="1">
+<img src="spacer.gif" border="0" height="0" width="0">
+</td>
+<td align="center" valign="top" width="377">
+<table border="0" cellpadding="0" cellspacing="0" width="336">
+<tbody><tr>
+<td>
+<!-- career center box -->
+<center>
+<div id="cc_container" style="width: 336px;">
+<div class="cc_top_box">
+<div id="cc_header_box">Embedded.com Career Center</div>
+<div id="cc_control_box">
+<div id="cc_expression">Looking for a new job?</div>
+<div id="cc_controls"><a href="javascript:void(jobsopen())">Open</a> | <a href="javascript:void(jobsclose())">Close</a></div>
+<div id="cc_expression"><a href="http://www.eetimescareers.com/"><img src="banner_315x50_eetc_04292008.gif" border="0" width="315"></a></div>
+</div>
+</div>
+<div id="cc_bottomBox" class="cc_bottom_box">
+<div id="cc_header_box">SEARCH JOBS</div>
+<table class="cc_techcareerbox" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td valign="top">
+<form method="post" action="http://www.eetimescareers.com/JS/Action/SearchResults.asp" id="search" name="search" onsubmit="return setSearchParams();">
+<input name="FOrderBy" value="modifydate[d]" type="hidden">
+<input value="25" type="hidden">
+Keyword(s):<br><input name="FKeywords" size="14"><br>
+State:<br><input name="FState" size="2" maxlength="2"> <input value="Search" type="submit">
+</form>
+<p>
+<a href="http://www.eetimescareers.com/JS/JobSearch/">Browse all jobs</a>
+</p></td>
+<td>
+<ul class="jobsearch">
+<li><a href="http://www.eetimescareers.com/">Recent Articles</a>
+- industry trends, advice, and other career related content.
+</li><li><a href="http://www.eetimescareers.com/Companies/Pages/TechCareers/careerprofiles.asp">Career Profiles</a>
+- Advice from tech pros who've "made it".
+</li><li><a href="http://www.eetimescareers.com/Companies/Pages/TechCareers/hiringreports.asp">Hiring Reports</a>
+- Company hiring and recruiting strategies.
+</li><li><a href="http://www.eetimescareers.com/Companies/Pages/TechCareers/jobsearchtips.asp">Job Search Tips</a>
+- Experts share their secrets on job hunting.
+</li></ul>
+</td>
+</tr>
+</tbody></table>
+<div id="cc_header_box">SPONSOR</div>
+<div id="sponsorbox">
+<!-- http://as.cmpnet.com/html.ng/pagepos=logo11&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=142249&AdID=224642&TargetID=8600&Segments=3108,3448,12086&Targets=2625,2878,8600&Values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1715,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://www.resumerabbit.com/index.jsp%3Fpid%3D3ff9d75dae87c16aaa42b67811c85d5d%26aid%3D883701"><img src="300x250-resume-rabbit_03172009.gif" alt="" border="0"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=224642+flightid=142249+targetid=8600+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,12086+targets=2625,2878,8600+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1715,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=czwkutj,bfurjrpblqovx" border="0" height="1" width="1">
+</div>
+<div id="cc_header_box">RECENT JOB POSTINGS</div>
+<div class="cc_techcareerbox">
+<a href="http://www.eetimescareers.com/JS/General/Job.asp?id=22099480">
+
+Visa, Inc. seeking Sr. Business Leader in Foster City, CA
+</a>
+<p> 
+<a href="http://www.eetimescareers.com/JS/General/Job.asp?id=21678281">
+
+PricewaterhouseCoopers seeking PeopleSoft Sr Consultant in Washington, DC
+</a>
+</p><p> 
+<a href="http://www.eetimescareers.com/JS/General/Job.asp?id=22113294">
+
+Medtronic seeking Quality Systems Director in Memphis, TN
+</a>
+</p><p> 
+<a href="http://www.eetimescareers.com/JS/General/Job.asp?id=22056453">
+
+MaxLinear seeking Product Security Architect in Carlsbad, CA 
+</a>
+</p><p> 
+<a href="http://www.eetimescareers.com/JS/General/Job.asp?id=22089936">
+
+Vertellus Specialties seeking Director of Applications Development in Greensboro, NC
+</a>
+</p><p> 
+</p><div>
+
+For more great jobs, career related news, features and services, please visit EETimes
+<a href="http://www.eetimescareers.com/"><span style="color: rgb(20, 94, 141); text-decoration: none; font-weight: bold;">Career Center</span></a>
+</div>
+</div>
+</div>
+</div>
+</center>
+<!-- imu ad in shared template parts sub sub template -->
+<table>
+<tbody><tr><td align="center"><img src="advert_rule_sm.gif"></td></tr>
+<tr><td align="center">
+<!-- http://as.cmpnet.com/html.ng/pagepos=sec&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<script language="JavaScript1.1" src="1@7btime_date_stamp@7d@middle1">
+</script><script type="text/javascript"><!--
+google_ad_client = "pub-2368971208756776";
+/* 300x250, created 11/13/08 */
+google_ad_slot = "4715359050";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=244333+flightid=156169+targetid=8657+siteid=309+affiliateid=451+entitydefresetflag=0+segments=853,3108,3131,3448,12181,13822,13828+targets=679,2625,2878,8657+values=34,46,51,63,77,87,90,102,140,304,309,399,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=dpnyfab,bfurjrpblqovy" border="0" height="1" width="1">
+</td></tr>
+<tr><td align="center"><img src="advert_rule_sm.gif"></td></tr>
+<tr><td align="center">
+<!-- http://as.cmpnet.com/html.ng/pagepos=sec2&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=156169&AdID=244735&TargetID=8657&Segments=3108,3448,12181,14498&Targets=2625,2878,8657,10558&Values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3380,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://techonline.com/learning/course/"><img src="fundamentals_imu_revised.gif" alt="" border="0" height="280" width="336"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=244735+flightid=156169+targetid=8657+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,12181,14498+targets=2625,2878,8657,10558+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3380,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=bwdgxis,bfurjrpbluvmx" border="0" height="1" width="1">
+<br>
+<!-- http://as.cmpnet.com/html.ng/pagepos=buy&catid=imu&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=75634&AdID=125682&TargetID=2625&Segments=3108,3448,14919&Targets=2625,2878,10927&Values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3026,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://www.ubmtechnology.com"><img src="iopsblank.gif" alt="" border="0" height="1" width="1"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=125682+flightid=75634+targetid=2625+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,14919+targets=2625,2878,10927+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3026,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035+rawvalues=+random=cswlwsv,bfurjrpblpyza" border="0" height="1" width="1">
+</td></tr></tbody></table>
+<p>
+</p><div style="margin-left: 3px;">
+<!-- added to align box in column - MJT -->
+<!-- FIRSTLIGHT LIVE CODE -->
+<script type="text/javascript" language="JavaScript">
+
+var era_rc = {
+ERADomain: 'embedded.firstlightera.com'
+};
+</script>
+<script type="text/javascript" language="JavaScript" src="era_rl.aspx"></script><div id="ERA_RC"></div><iframe name="era_relatedLinks" src="printableArticle_1.html" marginwidth="0" marginheight="0" frameborder="0" height="275" scrolling="no" width="335"></iframe>
+<!-- END TEST LIVE CODE -->
+</div>
+<!-- related contents -->
+<!-- Related Content -->
+<!-- Display -->
+<hr>
+<!-- most popular articles -->
+<div style="padding-top: 2px;">
+<img src="most_pop_bl.gif" align="center" border="0" height="27" width="200">
+<ul class="purple">
+<li class="purple"><a href="http://www.embedded.com/design/222200229;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">What next for microcontrollers?</a></li>
+<li class="purple"><a href="http://www.embedded.com/design/multicore/222100218;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Multicore technologies and software challenges</a></li>
+<li class="purple"><a href="http://www.embedded.com/design/opensource/222002305;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">How to use a debugger as a bug preventive tool</a></li>
+<li class="purple"><a href="http://www.embedded.com/222200285;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Win a Microchip MPLAB Starter Kit for PIC18 MCUs</a></li>
+<li class="purple"><a href="http://www.embedded.com/columns/technicalinsights/222100282;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Designing for performance with software optimization</a></li>
+</ul>
+</div>
+<hr>
+<!-- highest rated articles -->
+<img src="highest_rated_bl.gif" align="center" border="0" height="27" width="200">
+<ul class="purple">
+<li class="purple"><a href="http://www.embedded.com/columns/technicalinsights/221601156;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Picking the right technologies for your home network design</a>
+</li><li class="purple"><a href="http://www.embedded.com/columns/technicalinsights/210602856;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">A Trillion Lines of Code?</a>
+</li><li class="purple"><a href="http://www.embedded.com/design/multicore/219401225;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Using open-source GNU, Eclipse & Linux to develop multicore Cell apps: Part 1</a>
+</li><li class="purple"><a href="http://www.embedded.com/design/222200229;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">What next for microcontrollers?</a>
+</li><li class="purple"><a href="http://www.embedded.com/design/opensource/208700818;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN">Getting down to basics: Running Linux on a 32-/64-bit RISC architecture - Part 4</a>
+</li></ul>
+<p>
+<!-- industry brains marketplace ads -->
+<script type="text/javascript" src="jsct"></script><table style="border: 1px solid rgb(229, 229, 229); width: 336px; height: 365px; border-collapse: collapse;" xmlns:ibn="urn:industrybrains.com:linkserver" cellspacing="0"><tbody><tr><td style="padding: 2px 2px 2px 8px; font-family: Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 12px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(255, 255, 255); text-align: left; background-color: rgb(0, 102, 164);" colspan="2">       SPONSORED LINKS</td></tr><tr><td style="padding: 1px;"></td><td style="border: 0px solid rgb(24, 77, 49); padding: 3px;"><div><a style="font-family: Verdana,Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 204); font-weight: bold; text-decoration: underline;" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=1&lid=626339&cid=146548&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/190576962/direct/01/">Access new Embedded Innovator magazine</a></div><div><a style="text-decoration: none; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0);" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=1&lid=626339&cid=146548&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/190576962/direct/01/">The hottest embedded news, tips, and designs-all in one place, and all for free.</a></div><div><a target="_top" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=1&lid=626339&cid=146548&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/190576962/direct/01/"><div style="text-decoration: underline; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(90, 170, 38);">community.edc.intel.com</div></a></div></td></tr><tr><td style="padding: 1px;"></td><td style="border: 0px solid rgb(24, 77, 49); padding: 3px;"><div><a style="font-family: Verdana,Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 204); font-weight: bold; text-decoration: underline;" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=2&lid=547132&cid=140869&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/156028873/direct/01/">Intel&reg; Embedded Design Center</a></div><div><a style="text-decoration: none; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0);" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=2&lid=547132&cid=140869&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/156028873/direct/01/">Access detailed Intel design documentation and validated reference designs.</a></div><div><a target="_top" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=2&lid=547132&cid=140869&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://clk.atdmt.com/DSF/go/156028873/direct/01/"><div style="text-decoration: underline; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(90, 170, 38);">www.intel.com/embedded</div></a></div></td></tr><tr><td style="padding: 1px;"></td><td style="border: 0px solid rgb(24, 77, 49); padding: 3px;"><div><a style="font-family: Verdana,Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 204); font-weight: bold; text-decoration: underline;" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=3&lid=478176&cid=6858&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.sgvsarc.comhttp://www.sgvsarc.com/adv_default.asp%3fsrcid%3dEmbROS">Flowcharts from C/C++ code -- Free trial...         </a></div><div><a style="text-decoration: none; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0);" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=3&lid=478176&cid=6858&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.sgvsarc.comhttp://www.sgvsarc.com/adv_default.asp%3fsrcid%3dEmbROS">Understand C/C++ code in less time. Flowcharts, DataFlow, Rich Trees, Static checking, Documentation</a></div><div><a target="_top" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=3&lid=478176&cid=6858&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.sgvsarc.comhttp://www.sgvsarc.com/adv_default.asp%3fsrcid%3dEmbROS"><div style="text-decoration: underline; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(90, 170, 38);">www.sgvsarc.com</div></a></div></td></tr><tr><td style="padding: 1px;"></td><td style="border: 0px solid rgb(24, 77, 49); padding: 3px;"><div><a style="font-family: Verdana,Arial,Helvetica,sans-serif; font-style: normal; font-variant: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 204); font-weight: bold; text-decoration: underline;" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=4&lid=617873&cid=146186&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.vpt-inc.com/Products/%3fcat%3d26">New VME Power Supply</a></div><div><a style="text-decoration: none; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0);" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=4&lid=617873&cid=146186&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.vpt-inc.com/Products/%3fcat%3d26">For rugged mil/avionics apps, fast delivery. White paper available.</a></div><div><a target="_top" href="http://links.industrybrains.com/click?sid=597&rqctid=51&pos=4&lid=617873&cid=146186&pr=2&tstamp=20100109105916&iip=123.193.211.92&url=http://www.vpt-inc.com/Products/%3fcat%3d26"><div style="text-decoration: underline; font-family: Verdana; font-style: normal; font-variant: normal; font-weight: normal; font-size: 10px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(90, 170, 38);">www.vpt-inc.com</div></a></div></td></tr><tr><td style="padding: 0.2em; font-family: Arial,Helvetica,sans-serif; font-style: italic; font-variant: normal; font-weight: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 51, 102); text-align: right;" colspan="2"><a href="http://www.industrybrains.com/ubm" target="_top" style="font-family: Verdana,Arial,Helvetica,sans-serif; font-style: italic; font-variant: normal; font-weight: normal; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 51, 102);">          Buy a Link Now         </a></td></tr></tbody></table><a href="http://shlinks.industrybrains.com/sh?sid=597&a=b07ca099f01203ad7462c683c5f6c87b0d4fbb237b9e98d3e62e563b266f2c39"></a>
+</p></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="4">
+<!-- bottom navigation -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td bgcolor="#cccccc" height="1"></td>
+</tr>
+<tr>
+<td>
+<!-- resource link - No content returned ... IsEmpty=true -->
+<debug name="resource link url" value="http://adserver1.eseohserve.com:8089/pull?v1=www.embedded.com&v2=/shared/printableArticle.jhtml&v3=/shared/printableArticle.jhtml">
+</debug></td>
+</tr>
+<tr>
+<td align="center">
+<br>
+<!-- bottom ad -->
+<!-- http://as.cmpnet.com/html.ng/pagepos=bottom&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<script language="JavaScript1.1" src="1@7btime_date_stamp@7d@top1">
+</script><script type="text/javascript"><!--
+google_ad_client = "pub-2368971208756776";
+/* 728x90, created 11/13/08 */
+google_ad_slot = "1584081730";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=244330+flightid=156168+targetid=10709+siteid=309+affiliateid=451+entitydefresetflag=0+segments=860,884,3108,3134,3448,13825,13831,14394,14698+targets=682,785,2625,2878,10709+values=34,46,51,63,77,87,90,102,140,204,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=bkmrmic,bfurjrqblqowc" border="0" height="1" width="1">
+<br>
+<!-- http://as.cmpnet.com/html.ng/pagepos=buy&catid=bottom&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=75634&AdID=125682&TargetID=2625&Segments=3108,3448,14920&Targets=2625,2878,10926&Values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1482,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://www.ubmtechnology.com"><img src="iopsblank.gif" alt="" border="0" height="1" width="1"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=125682+flightid=75634+targetid=2625+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,14920+targets=2625,2878,10926+values=34,46,51,63,77,87,90,102,140,304,309,442,451,774,1482,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6672,6967,7035+rawvalues=+random=cozijkw,bfurjrqblpyzk" border="0" height="1" width="1">
+</td>
+</tr>
+<tr>
+<td height="16" valign="top"></td>
+</tr>
+<tr>
+<td class="footer_red" align="center" valign="top">
+<strong>Embedded.com Links</strong>
+</td>
+</tr>
+<tr>
+<td align="center" height="9" valign="top"></td>
+</tr>
+<tr>
+<td class="footer_gray" align="center" valign="top">
+<a href="http://www.embedded.com/sitemap;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray"><strong>Site Map</strong></a> |
+<a href="http://www.embedded.com/about;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray"><strong>About Us</strong></a> |
+<a href="http://www.embedded.com/contact;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray"><strong>Contact Us</strong></a> |
+<a href="http://www.techinsights.com/" target="_new" class="footer_gray"><strong>Media Kit</strong></a> |
+<a href="http://www.eetimes.com/mediakit/calendar;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top">
+<strong>Editorial Calendar</strong>
+</a> |
+<a href="http://www.embedded.com/events/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray"><strong>Conferences</strong></a> |
+<a href="http://www.embedded.com/europe;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray"><strong>ESD Europe</strong></a> |
+<a href="http://www.embedded-on-demand.com/" class="footer_gray" target="_top"><strong>ESC on Demand</strong></a> |
+<a href="http://www.embeddedsystemsdesignsubscribe.com/" class="footer_gray" target="_top"><strong>Subscriptions</strong></a> |
+<a href="http://www.eetimes.com/newsletter;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Newsletter</strong></a> |
+<a href="http://www.wrightsreprints.com/reprints/index.cfm?magid=2211" class="footer_gray" target="_top"><strong>Reprints</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center" height="9" valign="top"></td>
+</tr>
+<tr>
+<td class="footer_red" align="center" valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="850"><tbody><tr><td valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr valign="top">
+<td rowspan="19" width="20"></td>
+<td rowspan="19" bgcolor="#92c6f8" width="1"></td>
+<td bgcolor="#92c6f8" height="1"></td>
+<td rowspan="19" bgcolor="#92c6f8" width="1"></td>
+<td rowspan="19" width="20"></td>
+</tr>
+<tr><td height="16" valign="top"></td></tr>
+<tr><td class="footer_red" align="center" valign="top"><strong>TechOnline Communities</strong></td></tr>
+<tr><td align="center" height="9" valign="top"></td></tr>
+<tr><td class="footer_gray" align="center" valign="top"><a href="http://www.audiodesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Audio DesignLine</strong></a> | <a href="http://www.automotivedesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Automotive DesignLine</strong></a> | <a href="http://www.commsdesign.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>CommsDesign</strong></a> | <a href="http://www.digitalhomedesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Digital Home DesignLine</strong></a> | <a href="http://www.dspdesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>DSP DesignLine</strong></a> | <a href="http://www.edadesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>EDA DesignLine</strong></a><br>
+<a href="http://www.eeproductcenter.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>eeProductCenter</strong></a> | <a href="http://www.greensupplyline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_green" target="_top"><strong>Green SupplyLine</strong></a><strong> | <a href="http://www.industrialcontroldesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Industrial Control DesignLine</strong></a> | <a href="http://www.mobilehandsetdesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Mobile Handset DesignLine</strong></a> | <a href="http://www.planetanalog.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Planet Analog</strong></a> | <a href="http://www.powermanagementdesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Power Management DesignLine</strong></a><br><a href="http://www.pldesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Programmable Logic DesignLine</strong></a> | <a href="http://www.rfdesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>RF DesignLine</strong></a> | <a href="http://www.teardown.com/" class="footer_gray" target="_top"><strong>Teardown.com</strong></a> | <a href="http://www.techonline.com/" class="footer_gray" target="_top"><strong>TechOnline</strong></a> | <a href="http://www.videsignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Video/Imaging DesignLine</strong></a> | <a href="http://www.wirelessnetdesignline.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Wireless Net DesignLine</strong></a>
+</strong></td></tr>
+<tr><td align="center" height="9" valign="top"></td></tr>
+<tr><td class="footer_red" align="center" valign="top"><strong>EE Times</strong></td></tr>
+<tr><td align="center" height="9" valign="top"></td></tr>
+<tr><td class="footer_gray" align="center" valign="top">
+<a href="http://www.eetimes.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>United States</strong></a> | <a href="http://www.eetasia.com/" class="footer_gray" target="_top"><strong>Asia</strong></a> | <a href="http://www.eetchina.com/" class="footer_gray" target="_top"><strong>China</strong></a> | <a href="http://www.eetimes.eu/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Europe</strong></a> | <a href="http://www.eetimes.eu/france/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>France</strong></a> | <a href="http://www.eetimes.eu/germany/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Germany</strong></a> | <a href="http://www.eetindia.com/" class="footer_gray" target="_top"><strong>India</strong></a> | <a href="http://www.eetimes.jp/" class="footer_gray" target="_top"><strong>Japan</strong></a> | <a href="http://www.eetkorea.com/" class="footer_gray" target="_top"><strong>Korea</strong></a> | <a href="http://www.eettaiwan.com/" class="footer_gray" target="_top"><strong>Taiwan</strong></a> | <a href="http://www.eetimes.eu/uk/%20;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>United Kingdom</strong></a> | <a href="http://www.eetimessupplynetwork.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>EE Times Supply Network</strong></a>
+</td></tr>
+<tr><td align="center" height="9" valign="top"></td></tr>
+<tr><td class="footer_red" align="center" valign="top"><strong>Additional Network Sites </strong></td></tr>
+<tr><td align="center" height="9" valign="top"></td></tr>
+<tr><td class="footer_gray" align="center" valign="top">
+<a href="http://www.analog-europe.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Analog Europe</strong></a> | <a href="http://www.automotivedesign-europe.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Automotive Designline Europe</strong></a> | <a href="http://www.deepchip.com/" class="footer_gray" target="_top"><strong>DeepChip</strong></a> | <a href="http://www.design-reuse.com/" class="footer_gray" target="_top"><strong>Design & Reuse</strong></a> | <a href="http://www.eetimes.eu/scandinavia/%20;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Electronik iNorden</strong></a> |
+<a href="http://www.embedded.com/" class="footer_gray" target="_top"><strong>Embedded.com</strong></a><br>
+<!--<a href="http://www.industrial-europe.com/" class="footer_gray" target="_blank"><strong>Industrial Control Europe</strong></a>--> | <a href="http://www.wdis.co.uk/webreg/CMP/MWEE/renew.php" class="footer_gray" target="_top"><strong>Microwave Engineering Europe</strong></a> | <a href="http://www.portelligent.com/" class="footer_gray" target="_top"><strong>Portelligent</strong></a> |
+<a href="http://www.powermanagement-europe.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Power Management Designline Europe</strong></a><br>
+<a href="http://www.rfid-world.com/" class="footer_gray" target="_top"><strong>The RF Edge</strong></a> | <a href="http://www.semiconductor.com/" class="footer_gray" target="_top"><strong>Semiconductor Insights</strong></a> | <a href="http://www.embedded-europe.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>Embedded-europe.com</strong></a> | <a href="http://www.mcadonline.com/" class="footer_gray" target="_top"><strong>Mechanical Design</strong></a> | <a href="http://www.techonlineindia.com/;jsessionid=KOGNAY2CIRKZ3QE1GHPSKH4ATMY32JVN" class="footer_gray" target="_top"><strong>TechOnline India</strong></a>
+</td></tr>
+<tr><td height="16" valign="top"></td></tr>
+<tr><td bgcolor="#92c6f8" height="1"></td></tr>
+</tbody></table>
+</td></tr>
+<tr><td valign="top">&nbsp;</td></tr>
+<tr><td class="footer_gold_text" align="center" valign="top">All materials on this site <a href="http://www.cmp.com/delivery/copyright.html" class="footer_gold_text" target="_top">Copyright &copy; 2010 TechInsights, a Division of United Business Media LLC</a> All rights reserved.</td></tr>
+<tr><td height="3" valign="top"></td></tr>
+<tr><td class="side_related_link1" align="center" valign="top"><a href="http://www.cmpnet.com/delivery/privacy.html" class="side_related_link1" target="_top">Privacy Statement</a> <!--| <a href="http://www.cmp.com/delivery/privacy.html#california" class="side_related_link1" target="_blank">Your California Privacy Rights</a>--> | <a href="http://www.cmp.com/delivery/terms.html" class="side_related_link1" target="_top">Terms of Service</a>
+</td></tr>
+<tr><td valign="top">&nbsp;</td>
+</tr>
+</tbody></table>
+<!-- Start Quantcast tag -->
+<script type="text/javascript">
+
+_qoptions={
+qacct:"p-74fmbvTZzwLDQ"
+};
+</script>
+<script type="text/javascript" src="quant.js"></script>
+<noscript>
+
+<a href="http://www.quantcast.com/p-74fmbvTZzwLDQ" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-74fmbvTZzwLDQ.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
+</noscript>
+<!-- End Quantcast tag -->
+<!-- Demandbase Tracking code -->
+<script type="text/javascript">var domainy = location.protocol == "https:" ? "https://leads.demandbase.com" : "http://leads.demandbase.com"; document.write(unescape("%3Cscript src='" + domainy +"/158048.js' type='text/javascript'%3E%3C/script%3E"));</script><script src="158048.js" type="text/javascript"></script><noscript><p><img alt="Demandbase Connect" width="1" height="1" src="http://leads.demandbase.com/158048-db7.gif" /></p></noscript><noscript><p><a href="http://www.demandbase.com/"><img src="http://www.demandbase.com/images/stream/demandbase.gif" alt="Demandbase" width="1" height="1"></a></p></noscript>
+</td>
+</tr>
+<tr><td>&nbsp;:</td></tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<!-- /main table -->
+</div> 
+<!-- added per maria p 2/11/08 in shared/main template -->
+<script language="javascript" src="872.js"></script>
+<!-- peel away ad in maintemplate -->
+<!-- http://as.cmpnet.com/html.ng/pagepos=toptile&affiliate=embedded&site=electronics&country=taiwan&server=atg&target=/shared/printableArticle.jhtml -->
+<a target="_parent" href="http://as.cmpnet.com/event.ng/Type=click&FlightID=75640&AdID=125688&TargetID=2878&Segments=3108,3448,6025&Targets=2625,2878,4798&Values=34,46,51,63,77,87,90,102,140,265,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035&RawValues=IP,66.77.24.210,&Redirect=http://www.ubmtechnology.com"><img src="iopsblank.gif" alt="" border="0" height="1" width="1"></a><img class=" itwvgbkrfznkaepunwfl" src="type=count+clienttype=2+adid=125688+flightid=75640+targetid=2878+siteid=309+affiliateid=451+entitydefresetflag=0+segments=3108,3448,6025+targets=2625,2878,4798+values=34,46,51,63,77,87,90,102,140,265,304,309,442,451,774,1767,1785,1925,1935,1936,1970,2181,2299,2310,2313,2352,2678,2942,3363,3714,3904,4079,6393,6422,6489,6541,6567,6967,7035+rawvalues=+random=docvhmh,bfurjrqblpyzl" border="0" height="1" width="1">
+<iframe src="printableArticle_2.html" style="border: 0pt none ; height: 1px; width: 1px; position: absolute; z-index: 100000; left: 0pt; top: 0pt;" id="_atssh"></iframe><div style="z-index: 1000000;" id="at20mc"><div id="at16lb" onclick="return _atw.clb()"></div><div id="at16pcc"><div id="at16p" style="display: none;"><a name="atpro"></a><a name="atclb"></a><a name="atopp"></a><a name="atcle"></a><a name="atcef"></a><div id="at16pib"><div id="at16pi"><div id="at16pp" style="display: none;"></div><div id="at16pm"><div id="at16pt"><h4><span id="at16ptc">添加到收藏? / 共享</span></h4><span id="at16_brand">Techinsights</span><a id="at16ptx" href="#" onclick="return _atw.clb()">X</a></div><div id="at16pc"><div id="at_feed" style="display: none;"><span style="display: block;">Select from these web-based feed readers:</span><br><div onclick="return addthis_sendto('aol');"><a class="fbtn at_baa aol">AOL</a></div><div class="at_litem" onclick="return addthis_sendto('bloglines');"><a class="fbtn at_baa bloglines">Bloglines</a></div><div onclick="return addthis_sendto('google');"><a class="fbtn at_baa google">Google Reader</a></div><div class="at_litem" onclick="return addthis_sendto('mymsn');"><a class="fbtn at_baa mymsn">My MSN</a></div><div onclick="return addthis_sendto('netvibes');"><a class="fbtn at_baa netvibes">Netvibes</a></div><div class="at_litem" onclick="return addthis_sendto('newsisfree');"><a class="fbtn at_baa newsisfree">Newsisfree</a></div><div onclick="return addthis_sendto('pageflakes');"><a class="fbtn at_baa pageflakes">Pageflakes</a></div><div class="at_litem" onclick="return addthis_sendto('technorati');"><a class="fbtn at_baa technorati">Technorati</a></div><div onclick="return addthis_sendto('yahoo');"><a class="fbtn at_baa yahoo">Yahoo</a></div></div><div style="display: none;" id="at_share"><div style="display: none; visibility: hidden;" id="at16psf"><input id="at16filt" class="atfxmode2" name="at16filt" tabindex="1" size="30" maxlength="50" onkeyup="_atw.filt(this.value,_atw.list)" type="text"></div><div id="at16ps"><div id="at16nms" style="display: none;">No matching services.</div><div id="ati_favorites" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('favorites');"><span class="at15t at15t_favorites">我的收藏</span></div><div id="ati_email" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('email');"><span class="at15t at15t_email">?子?件</span></div><div id="ati_print" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('print');"><span class="at15t at15t_print">打印</span></div><div id="ati_dotnetshoutout" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dotnetshoutout');"><span class="at15t at15t_dotnetshoutout">.netShoutout</span></div><div id="ati_100zakladok" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('100zakladok');"><span class="at15t at15t_100zakladok">100zakladok</span></div><div id="ati_a1webmarks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('a1webmarks');"><span class="at15t at15t_a1webmarks">A1?Webmarks</span></div><div id="ati_adifni" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('adifni');"><span class="at15t at15t_adifni">Adifni</span></div><div id="ati_aerosocial" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('aerosocial');"><span class="at15t at15t_aerosocial">Aero</span></div><div id="ati_aim" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('aim');"><span class="at15t at15t_aim">AIM Share</span></div><div id="ati_amazonwishlist" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('amazonwishlist');"><span class="at15t at15t_amazonwishlist">Amazon</span></div><div id="ati_amenme" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('amenme');"><span class="at15t at15t_amenme">Amen Me!</span></div><div id="ati_aolmail" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('aolmail');"><span class="at15t at15t_aolmail">AOL Mail</span></div><div id="ati_arto" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('arto');"><span class="at15t at15t_arto">Arto</span></div><div id="ati_ask" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('ask');"><span class="at15t at15t_ask">Ask</span></div><div id="ati_aviary" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('aviary');"><span class="at15t at15t_aviary">Aviary&nbsp;Capture</span></div><div id="ati_baidu" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('baidu');"><span class="at15t at15t_baidu">Baidu</span></div><div id="ati_bebo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bebo');"><span class="at15t at15t_bebo">Bebo</span></div><div id="ati_bitly" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bitly');"><span class="at15t at15t_bitly">Bit.ly</span></div><div id="ati_bizsugar" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bizsugar');"><span class="at15t at15t_bizsugar">BizSugar</span></div><div id="ati_bleetbox" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bleetbox');"><span class="at15t at15t_bleetbox">Bleetbox</span></div><div id="ati_blinklist" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('blinklist');"><span class="at15t at15t_blinklist">Blinklist</span></div><div id="ati_blip" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('blip');"><span class="at15t at15t_blip">Blip</span></div><div id="ati_blogger" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('blogger');"><span class="at15t at15t_blogger">Blogger</span></div><div id="ati_bloggy" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bloggy');"><span class="at15t at15t_bloggy">Bloggy</span></div><div id="ati_blogmarks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('blogmarks');"><span class="at15t at15t_blogmarks">Blogmarks</span></div><div id="ati_bobrdobr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bobrdobr');"><span class="at15t at15t_bobrdobr">Bobrdobr</span></div><div id="ati_bonzobox" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bonzobox');"><span class="at15t at15t_bonzobox">BonzoBox</span></div><div id="ati_bordom" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bordom');"><span class="at15t at15t_bordom">Bordom</span></div><div id="ati_box" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('box');"><span class="at15t at15t_box">Box.net</span></div><div id="ati_brainify" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('brainify');"><span class="at15t at15t_brainify">Brainify</span></div><div id="ati_bryderi" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('bryderi');"><span class="at15t at15t_bryderi">Bryderi.se</span></div><div id="ati_buddymarks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('buddymarks');"><span class="at15t at15t_buddymarks">BuddyMarks</span></div><div id="ati_buzz" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('buzz');"><span class="at15t at15t_buzz">Buzz</span></div><div id="ati_camyoo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('camyoo');"><span class="at15t at15t_camyoo">Camyoo</span></div><div id="ati_care2" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('care2');"><span class="at15t at15t_care2">Care2</span></div><div id="ati_cirip" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('cirip');"><span class="at15t at15t_cirip">Cirip</span></div><div id="ati_citeulike" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('citeulike');"><span class="at15t at15t_citeulike">CiteULike</span></div><div id="ati_classicalplace" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('classicalplace');"><span class="at15t at15t_classicalplace">ClassicalPlace</span></div><div id="ati_clickazoo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('clickazoo');"><span class="at15t at15t_clickazoo">Clickazoo</span></div><div id="ati_colivia" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('colivia');"><span class="at15t at15t_colivia">Colivia.de</span></div><div id="ati_connotea" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('connotea');"><span class="at15t at15t_connotea">Connotea</span></div><div id="ati_cosmiq" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('cosmiq');"><span class="at15t at15t_cosmiq">COSMiQ</span></div><div id="ati_delicious" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('delicious');"><span class="at15t at15t_delicious">Delicious</span></div><div id="ati_designbump" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('designbump');"><span class="at15t at15t_designbump">DesignBump</span></div><div id="ati_designmoo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('designmoo');"><span class="at15t at15t_designmoo">Designmoo</span></div><div id="ati_digg" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('digg');"><span class="at15t at15t_digg">Digg</span></div><div id="ati_diggita" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('diggita');"><span class="at15t at15t_diggita">Diggita</span></div><div id="ati_diglog" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('diglog');"><span class="at15t at15t_diglog">Diglog</span></div><div id="ati_digo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('digo');"><span class="at15t at15t_digo">Digo</span></div><div id="ati_diigo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('diigo');"><span class="at15t at15t_diigo">Diigo</span></div><div id="ati_dipdive" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dipdive');"><span class="at15t at15t_dipdive">Dipdive</span></div><div id="ati_domelhor" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('domelhor');"><span class="at15t at15t_domelhor">DoMelhor</span></div><div id="ati_doower" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('doower');"><span class="at15t at15t_doower">Doower</span></div><div id="ati_dosti" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dosti');"><span class="at15t at15t_dosti">Dosti</span></div><div id="ati_dotnetkicks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dotnetkicks');"><span class="at15t at15t_dotnetkicks">DotNetKicks</span></div><div id="ati_dropjack" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dropjack');"><span class="at15t at15t_dropjack">Dropjack</span></div><div id="ati_dzone" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('dzone');"><span class="at15t at15t_dzone">Dzone</span></div><div id="ati_edelight" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('edelight');"><span class="at15t at15t_edelight">Edelight</span></div><div id="ati_ekudos" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('ekudos');"><span class="at15t at15t_ekudos">eKudos</span></div><div id="ati_elertgadget" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('elertgadget');"><span class="at15t at15t_elertgadget">eLert Gadget</span></div><div id="ati_embarkons" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('embarkons');"><span class="at15t at15t_embarkons">Embarkons</span></div><div id="ati_eucliquei" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('eucliquei');"><span class="at15t at15t_eucliquei">euCliquei</span></div><div id="ati_evernote" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('evernote');"><span class="at15t at15t_evernote">Evernote</span></div><div id="ati_fabulously40" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('fabulously40');"><span class="at15t at15t_fabulously40">Fabulously40</span></div><div id="ati_facebook" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('facebook');"><span class="at15t at15t_facebook">Facebook</span></div><div id="ati_fark" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('fark');"><span class="at15t at15t_fark">Fark</span></div><div id="ati_farkinda" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('farkinda');"><span class="at15t at15t_farkinda">Farkinda</span></div><div id="ati_favable" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('favable');"><span class="at15t at15t_favable">FAVable</span></div><div id="ati_faves" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('faves');"><span class="at15t at15t_faves">Faves</span></div><div id="ati_favoritus" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('favoritus');"><span class="at15t at15t_favoritus">Favoritus</span></div><div id="ati_flaker" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('flaker');"><span class="at15t at15t_flaker">Flaker</span></div><div id="ati_flosspro" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('flosspro');"><span class="at15t at15t_flosspro">Floss.pro</span></div><div id="ati_fnews" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('fnews');"><span class="at15t at15t_fnews">Fnews</span></div><div id="ati_folkd" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('folkd');"><span class="at15t at15t_folkd">Folkd</span></div><div id="ati_fresqui" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('fresqui');"><span class="at15t at15t_fresqui">Fresqui</span></div><div id="ati_friendfeed" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('friendfeed');"><span class="at15t at15t_friendfeed">FriendFeed</span></div><div id="ati_friendster" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('friendster');"><span class="at15t at15t_friendster">Friendster</span></div><div id="ati_funp" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('funp');"><span class="at15t at15t_funp">funP</span></div><div id="ati_fwisp" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('fwisp');"><span class="at15t at15t_fwisp">fwisp</span></div><div id="ati_gabbr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gabbr');"><span class="at15t at15t_gabbr">Gabbr</span></div><div id="ati_gacetilla" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gacetilla');"><span class="at15t at15t_gacetilla">Gacetilla</span></div><div id="ati_gamesnetworks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gamesnetworks');"><span class="at15t at15t_gamesnetworks">GamesN</span></div><div id="ati_globalgrind" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('globalgrind');"><span class="at15t at15t_globalgrind">GlobalGrind</span></div><div id="ati_gluvsnap" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gluvsnap');"><span class="at15t at15t_gluvsnap">GluvSnap</span></div><div id="ati_gmail" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gmail');"><span class="at15t at15t_gmail">Gmail</span></div><div id="ati_google" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('google');"><span class="at15t at15t_google">Google</span></div><div id="ati_googlereader" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('googlereader');"><span class="at15t at15t_googlereader">Google&nbsp;Reader</span></div><div id="ati_gravee" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('gravee');"><span class="at15t at15t_gravee">Gravee</span></div><div id="ati_grumper" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('grumper');"><span class="at15t at15t_grumper">Grumper</span></div><div id="ati_habergentr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('habergentr');"><span class="at15t at15t_habergentr">Haber.gen.tr</span></div><div id="ati_hackernews" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hackernews');"><span class="at15t at15t_hackernews">Hacker News</span></div><div id="ati_hadashhot" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hadashhot');"><span class="at15t at15t_hadashhot">Hadash Hot</span></div><div id="ati_hatena" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hatena');"><span class="at15t at15t_hatena">Hatena</span></div><div id="ati_hazarkor" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hazarkor');"><span class="at15t at15t_hazarkor">Hazarkor</span></div><div id="ati_hedgehogs" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hedgehogs');"><span class="at15t at15t_hedgehogs">Hedgehogs.net</span></div><div id="ati_hellotxt" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hellotxt');"><span class="at15t at15t_hellotxt">HelloTxt</span></div><div id="ati_hemidemi" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hemidemi');"><span class="at15t at15t_hemidemi">HEMiDEMi</span></div><div id="ati_hipstr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hipstr');"><span class="at15t at15t_hipstr">Hipstr</span></div><div id="ati_hitmarks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hitmarks');"><span class="at15t at15t_hitmarks">Hitmarks</span></div><div id="ati_hotbookmark" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hotbookmark');"><span class="at15t at15t_hotbookmark">Hot Bookmark</span></div><div id="ati_hotklix" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hotklix');"><span class="at15t at15t_hotklix">Hotklix</span></div><div id="ati_hotmail" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hotmail');"><span class="at15t at15t_hotmail">Hotmail</span></div><div id="ati_w3validator" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('w3validator');"><span class="at15t at15t_w3validator">HTML&nbsp;Validator</span></div><div id="ati_hyves" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('hyves');"><span class="at15t at15t_hyves">Hyves</span></div><div id="ati_identica" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('identica');"><span class="at15t at15t_identica">Identi.ca</span></div><div id="ati_instapaper" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('instapaper');"><span class="at15t at15t_instapaper">Instapaper</span></div><div id="ati_investorlinks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('investorlinks');"><span class="at15t at15t_investorlinks">InvestorLinks</span></div><div id="ati_jamespot" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('jamespot');"><span class="at15t at15t_jamespot">Jamespot</span></div><div id="ati_jumptags" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('jumptags');"><span class="at15t at15t_jumptags">Jumptags</span></div><div id="ati_kaboodle" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('kaboodle');"><span class="at15t at15t_kaboodle">Kaboodle</span></div><div id="ati_kaevur" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('kaevur');"><span class="at15t at15t_kaevur">Kaevur</span></div><div id="ati_kirtsy" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('kirtsy');"><span class="at15t at15t_kirtsy">KiRTSY</span></div><div id="ati_kledy" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('kledy');"><span class="at15t at15t_kledy">Kledy</span></div><div id="ati_koornk" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('koornk');"><span class="at15t at15t_koornk">koornk</span></div><div id="ati_kudos" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('kudos');"><span class="at15t at15t_kudos">Kudos</span></div><div id="ati_laaikit" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('laaikit');"><span class="at15t at15t_laaikit">Laaikit</span></div><div id="ati_librerio" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('librerio');"><span class="at15t at15t_librerio">Librerio</span></div><div id="ati_linkninja" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('linkninja');"><span class="at15t at15t_linkninja">Link Ninja</span></div><div id="ati_linkagogo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('linkagogo');"><span class="at15t at15t_linkagogo">Link-a-Gogo</span></div><div id="ati_linkedin" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('linkedin');"><span class="at15t at15t_linkedin">LinkedIn</span></div><div id="ati_linkuj" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('linkuj');"><span class="at15t at15t_linkuj">Linkuj.cz</span></div><div id="ati_live" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('live');"><span class="at15t at15t_live">Live</span></div><div id="ati_livefavoris" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('livefavoris');"><span class="at15t at15t_livefavoris">Livefavoris</span></div><div id="ati_livejournal" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('livejournal');"><span class="at15t at15t_livejournal">LiveJournal</span></div><div id="ati_lunch" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('lunch');"><span class="at15t at15t_lunch">Lunch.com</span></div><div id="ati_lynki" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('lynki');"><span class="at15t at15t_lynki">Lynki</span></div><div id="ati_meccho" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('meccho');"><span class="at15t at15t_meccho">Meccho</span></div><div id="ati_meinvz" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('meinvz');"><span class="at15t at15t_meinvz">meinVZ</span></div><div id="ati_memori" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('memori');"><span class="at15t at15t_memori">Memori.ru</span></div><div id="ati_meneame" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('meneame');"><span class="at15t at15t_meneame">Men&eacute;ame</span></div><div id="ati_mindbodygreen" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('mindbodygreen');"><span class="at15t at15t_mindbodygreen">Mindbodygreen</span></div><div id="ati_misterwong" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('misterwong');"><span class="at15t at15t_misterwong">Mister Wong</span></div><div id="ati_mixx" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('mixx');"><span class="at15t at15t_mixx">Mixx</span></div><div id="ati_multiply" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('multiply');"><span class="at15t at15t_multiply">Multiply</span></div><div id="ati_myaol" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('myaol');"><span class="at15t at15t_myaol">myAOL</span></div><div id="ati_mylinkvault" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('mylinkvault');"><span class="at15t at15t_mylinkvault">Mylinkvault</span></div><div id="ati_myspace" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('myspace');"><span class="at15t at15t_myspace">MySpace</span></div><div id="ati_n4g" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('n4g');"><span class="at15t at15t_n4g">N4G</span></div><div id="ati_netlog" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('netlog');"><span class="at15t at15t_netlog">NetLog</span></div><div id="ati_netvibes" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('netvibes');"><span class="at15t at15t_netvibes">Netvibes</span></div><div id="ati_netvouz" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('netvouz');"><span class="at15t at15t_netvouz">Netvouz</span></div><div id="ati_newstrust" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('newstrust');"><span class="at15t at15t_newstrust">NewsTrust</span></div><div id="ati_newsvine" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('newsvine');"><span class="at15t at15t_newsvine">Newsvine</span></div><div id="ati_nujij" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('nujij');"><span class="at15t at15t_nujij">Nujij</span></div><div id="ati_oknotizie" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('oknotizie');"><span class="at15t at15t_oknotizie">OKNOtizie</span></div><div id="ati_oneview" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('oneview');"><span class="at15t at15t_oneview">Oneview</span></div><div id="ati_orkut" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('orkut');"><span class="at15t at15t_orkut">Orkut</span></div><div id="ati_osmosus" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('osmosus');"><span class="at15t at15t_osmosus">Osmosus</span></div><div id="ati_oyyla" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('oyyla');"><span class="at15t at15t_oyyla">Oyyla</span></div><div id="ati_pdfonline" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('pdfonline');"><span class="at15t at15t_pdfonline">PDF Online</span></div><div id="ati_phonefavs" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('phonefavs');"><span class="at15t at15t_phonefavs">PhoneFavs</span></div><div id="ati_pimpthisblog" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('pimpthisblog');"><span class="at15t at15t_pimpthisblog">PimpThisBlog</span></div><div id="ati_pingfm" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('pingfm');"><span class="at15t at15t_pingfm">Ping.fm</span></div><div id="ati_planypus" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('planypus');"><span class="at15t at15t_planypus">Planypus</span></div><div id="ati_plaxo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('plaxo');"><span class="at15t at15t_plaxo">Plaxo</span></div><div id="ati_plurk" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('plurk');"><span class="at15t at15t_plurk">Plurk</span></div><div id="ati_polladium" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('polladium');"><span class="at15t at15t_polladium">Polladium</span></div><div id="ati_posterous" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('posterous');"><span class="at15t at15t_posterous">Posterous</span></div><div id="ati_printfriendly" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('printfriendly');"><span class="at15t at15t_printfriendly">PrintFriendly</span></div><div id="ati_propeller" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('propeller');"><span class="at15t at15t_propeller">Propeller</span></div><div id="ati_pusha" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('pusha');"><span class="at15t at15t_pusha">Pusha</span></div><div id="ati_quantcast" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('quantcast');"><span class="at15t at15t_quantcast">Quantcast</span></div><div id="ati_readitlater" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('readitlater');"><span class="at15t at15t_readitlater">Read It Later</span></div><div id="ati_reddit" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('reddit');"><span class="at15t at15t_reddit">Reddit</span></div><div id="ati_scoopat" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('scoopat');"><span class="at15t at15t_scoopat">Scoop.at</span></div><div id="ati_segnalo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('segnalo');"><span class="at15t at15t_segnalo">Segnalo</span></div><div id="ati_sekoman" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('sekoman');"><span class="at15t at15t_sekoman">Sekoman</span></div><div id="ati_shaveh" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('shaveh');"><span class="at15t at15t_shaveh">Shaveh</span></div><div id="ati_shetoldme" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('shetoldme');"><span class="at15t at15t_shetoldme">She Told Me</span></div><div id="ati_simpy" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('simpy');"><span class="at15t at15t_simpy">Simpy</span></div><div id="ati_slashdot" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('slashdot');"><span class="at15t at15t_slashdot">Slashdot</span></div><div id="ati_smaknews" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('smaknews');"><span class="at15t at15t_smaknews">Smak News</span></div><div id="ati_sodahead" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('sodahead');"><span class="at15t at15t_sodahead">SodaHead</span></div><div id="ati_sonico" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('sonico');"><span class="at15t at15t_sonico">Sonico</span></div><div id="ati_speedtile" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('speedtile');"><span class="at15t at15t_speedtile">Speedtile</span></div><div id="ati_sphinn" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('sphinn');"><span class="at15t at15t_sphinn">Sphinn</span></div><div id="ati_springpad" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('springpad');"><span class="at15t at15t_springpad">springpad</span></div><div id="ati_spruzer" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('spruzer');"><span class="at15t at15t_spruzer">Spruzer</span></div><div id="ati_squidoo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('squidoo');"><span class="at15t at15t_squidoo">Squidoo</span></div><div id="ati_startaid" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('startaid');"><span class="at15t at15t_startaid">Startaid</span></div><div id="ati_startlap" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('startlap');"><span class="at15t at15t_startlap">Startlap</span></div><div id="ati_strands" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('strands');"><span class="at15t at15t_strands">Strands</span></div><div id="ati_studivz" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('studivz');"><span class="at15t at15t_studivz">studiVZ</span></div><div id="ati_stuffpit" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('stuffpit');"><span class="at15t at15t_stuffpit">Stuffpit</span></div><div id="ati_stumbleupon" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('stumbleupon');"><span class="at15t at15t_stumbleupon">StumbleUpon</span></div><div id="ati_stumpedia" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('stumpedia');"><span class="at15t at15t_stumpedia">Stumpedia</span></div><div id="ati_stylehive" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('stylehive');"><span class="at15t at15t_stylehive">Stylehive</span></div><div id="ati_surfpeoplenet" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('surfpeoplenet');"><span class="at15t at15t_surfpeoplenet">Surfpeople</span></div><div id="ati_svejo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('svejo');"><span class="at15t at15t_svejo">Svejo</span></div><div id="ati_symbaloo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('symbaloo');"><span class="at15t at15t_symbaloo">Symbaloo</span></div><div id="ati_tagza" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tagza');"><span class="at15t at15t_tagza">Tagza</span></div><div id="ati_technorati" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('technorati');"><span class="at15t at15t_technorati">Technorati</span></div><div id="ati_tellmypolitician" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tellmypolitician');"><span class="at15t at15t_tellmypolitician">TellMyPolitician</span></div><div id="ati_thisnext" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('thisnext');"><span class="at15t at15t_thisnext">ThisNext</span></div><div id="ati_tipd" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tipd');"><span class="at15t at15t_tipd">Tip'd</span></div><div id="ati_transferr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('transferr');"><span class="at15t at15t_transferr">Transferr</span></div><div id="ati_googletranslate" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('googletranslate');"><span class="at15t at15t_googletranslate">Translate</span></div><div id="ati_tulinq" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tulinq');"><span class="at15t at15t_tulinq">Tulinq</span></div><div id="ati_tumblr" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tumblr');"><span class="at15t at15t_tumblr">Tumblr</span></div><div id="ati_tusul" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tusul');"><span class="at15t at15t_tusul">Tusul</span></div><div id="ati_tweetmeme" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('tweetmeme');"><span class="at15t at15t_tweetmeme">TweetMeme</span></div><div id="ati_twitter" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('twitter');"><span class="at15t at15t_twitter">Twitter</span></div><div id="ati_typepad" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('typepad');"><span class="at15t at15t_typepad">Typepad</span></div><div id="ati_viadeo" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('viadeo');"><span class="at15t at15t_viadeo">Viadeo</span></div><div id="ati_virb" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('virb');"><span class="at15t at15t_virb">Virb</span></div><div id="ati_vyoom" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('vyoom');"><span class="at15t at15t_vyoom">Vyoom</span></div><div id="ati_webnews" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('webnews');"><span class="at15t at15t_webnews">Webnews</span></div><div id="ati_domaintoolswhois" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('domaintoolswhois');"><span class="at15t at15t_domaintoolswhois">Whois&nbsp;Lookup</span></div><div id="ati_windycitizen" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('windycitizen');"><span class="at15t at15t_windycitizen">Windy&nbsp;Citizen</span></div><div id="ati_wirefan" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('wirefan');"><span class="at15t at15t_wirefan">WireFan</span></div><div id="ati_wordpress" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('wordpress');"><span class="at15t at15t_wordpress">WordPress</span></div><div id="ati_worio" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('worio');"><span class="at15t at15t_worio">Worio</span></div><div id="ati_wovre" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('wovre');"><span class="at15t at15t_wovre">Wovre</span></div><div id="ati_wykop" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('wykop');"><span class="at15t at15t_wykop">Wykop</span></div><div id="ati_yahoobkm" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yahoobkm');"><span class="at15t at15t_yahoobkm">Y! Bookmarks</span></div><div id="ati_yahoomail" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yahoomail');"><span class="at15t at15t_yahoomail">Y! Mail</span></div><div id="ati_yammer" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yammer');"><span class="at15t at15t_yammer">Yammer</span></div><div id="ati_yardbarker" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yardbarker');"><span class="at15t at15t_yardbarker">Yardbarker</span></div><div id="ati_yazzem" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yazzem');"><span class="at15t at15t_yazzem">Yazzem</span></div><div id="ati_yigg" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yigg');"><span class="at15t at15t_yigg">Yigg</span></div><div id="ati_yoolink" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yoolink');"><span class="at15t at15t_yoolink">Yoolink</span></div><div id="ati_yorumcuyum" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('yorumcuyum');"><span class="at15t at15t_yorumcuyum">Yorumcuyum</span></div><div id="ati_youbookmarks" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('youbookmarks');"><span class="at15t at15t_youbookmarks">Youbookmarks</span></div><div id="ati_youmob" class="at_item" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('youmob');"><span class="at15t at15t_youmob">YouMob</span></div><div id="at16sas"><a href="http://www.addthis.com/services/submit" target="_top">Suggest a service &raquo;</a></div></div><div style="clear: both;"></div></div><div id="at_complete" style="display: none;"><button onclick="_atw.clb()">完成</button></div><div id="at_success" style="display: none;">消息送了! <a href="#" onclick="_atw.get('at16filt').value='';_atw.filt('',_atw.list);return _atw.sag()">Share again.</a></div><div id="at_error" style="display: none;" class="at_error"></div><div id="at_promo" style="display: none;"></div><div id="at_email" style="display: none;"><form action="http://www.embedded.com/shared/printableArticle.jhtml?articleID=18312031" onsubmit="addthis_send();return false;"><label for="at_to">收件人:  <span>(電子郵件地址)</span></label><textarea id="at_to" class="atfxmode2" cols="30" rows="4" onkeypress="if (window._atab) _atab.htkd(this, event)" onkeyup="_atw.filt(this.value.replace(/[;\n]/g,',').replace(/ /g,'').split(',').pop(), _atw.data.contacts.all, 'at16eatdr', '_ataddr', null, 'a')" tabindex="2" onfocus="_atw.rse();"></textarea><div id="at16eatdr" style="display: none;"></div><label for="at_from">?件人:  <span>(電子郵件地址)</span></label><input id="at_from" class="atfxmode2" name="at_from" tabindex="3" size="30" onfocus="_atw.rse();" type="text"><label for="at_msg">?注:  <span>(可選)</span></label><textarea id="at_msg" style="" class="atfxmode2" cols="30" rows="4" tabindex="4" onkeyup="return _atw.lml(this,250);" onfocus="_atw.rse();"></textarea><div id="ateml"><small>允?的255個字符。</small></div><div id="addthis-pop-email-btns"><input class="atbtn" tabindex="5" value="?送" onclick="return addthis_send();" type="submit"><input class="atbtn" tabindex="6" value="Cancel" onclick="return _atw.cef()" style="font-weight: normal; color: rgb(102, 102, 102);" type="reset"></div></form></div></div><div id="at16pf"><a class="at_baa" id="at-logo" href="http://www.addthis.com/?utm_source=mm&utm_medium=img&utm_content=ATLogo_orig&utm_campaign=AT_main" title="AddThis" target="_top">AddThis</a></div></div></div></div></div></div><div id="at15s" onmouseover="_atw.xwa()" onmouseout="if (this.className.indexOf('border')==-1) addthis_close()" style="z-index: 1000000; position: absolute; visibility: visible; top: 392px; left: 517px; display: none;"><div id="at15s_head"><span id="at15ptc">添加到收藏? / 共享</span><span id="at15s_brand">Techinsights</span></div><div id="at_pspromo" style="display: none; visibility: hidden;"><div style="border: 0pt none ; position: absolute; display: block;">    <div id="at_testpromo" style="display: block;"><div class="at-promo-single" align="center">    <h4>?分享Firefox与AddThis容易。</h4>    <div align="center"><a onclick="_ate.cev('adck','');" target="_top" href="http://www.addthis.com/landing?to=ffext&utm_source=ps&utm_medium=img&utm_content=ATFF&utm_campaign=ATSPF4_DL"><img src="btn_ff_dl120.jpg" alt="下?" border="0" height="44" vspace="10" width="120"></a></div></div>    </div></div></div><div id="at_email15" style="display: none; visibility: hidden;"><div class="at15e_row"><label for="">收件人:</label><input class="at15ti" size="20" maxlength="80" onfocus="_atw.cof(this)" id="at_to15" value=" email address" type="text"></div><div class="at15e_row"><label for="">?件人:</label><input class="at15ti" size="20" maxlength="80" onfocus="_atw.cof(this)" id="at_from15" value=" email address" type="text"></div><div class="at15e_row" style="height: 60px;"><label for="at_msg15">?注:</label><textarea id="at_msg15" name="" cols="30" rows="3" style="width: 150px;"></textarea></div><div class="at15e_row"><label for="">&nbsp;</label><input id="at_send" onclick="return addthis_send()" value="?送" type="button"></div><div style="clear: both;"></div></div><div id="at_hover" style="display: block;"><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('favorites');"><span class="at15t at15t_favorites">我的收藏</span></div><div class="at_item at_col1" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('email');"><span class="at15t at15t_email">?子?件</span></div><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('twitter');"><span class="at15t at15t_twitter">Twitter</span></div><div class="at_item at_col1" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('slashdot');"><span class="at15t at15t_slashdot">Slashdot</span></div><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('digg');"><span class="at15t at15t_digg">Digg</span></div><div class="at_item at_col1" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('delicious');"><span class="at15t at15t_delicious">Delicious</span></div><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('myspace');"><span class="at15t at15t_myspace">MySpace</span></div><div class="at_item at_col1" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('facebook');"><span class="at15t at15t_facebook">Facebook</span></div><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('google');"><span class="at15t at15t_google">Google</span></div><div class="at_item at_col1" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('newsvine');"><span class="at15t at15t_newsvine">Newsvine</span></div><div class="at_item at_col0" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('linkedin');"><span class="at15t at15t_linkedin">LinkedIn</span></div><div class="at_item at_colNaN" onmouseover="_atw.hov(this)" onmouseout="_atw.hov(this)" onclick="return addthis_sendto('more');"><span class="at15t at15t_more">查看更多</span></div><div style="clear: both;"></div></div><div id="at16pf"><a class="at_baa" id="at-logo" href="http://www.addthis.com/?utm_source=hm&utm_medium=img&utm_content=ATLogo_orig&utm_campaign=AT_main" title="AddThis" target="_top">AddThis</a></div></div></div></body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/354851/">
+<meta name="wpd_url" content="http://lwn.net/Articles/354851/">
+<meta name="wpd_date" content="2010-00-09T08:54Z">
+
+        
+        <title>In defense of per-BDI writeback [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/354851/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="354851.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        
+</p><div class="TextAd">
+    <p class="TextAdHeader">Advertisement</p>
+    <p class="TextAdLink"><a href="http://lwn.net/AdServer/click/178/">TrustCommerce</a></p>
+    <p class="TextAdBody">E-Commerce & credit card processing - the Open Source way!
+</p>
+    <p class="TextAdFooter"><a href="http://lwn.net/AdServer/">Advertise here</a></p>
+</div>
+<p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Weekly Edition</p>
+Return to the <a href="http://lwn.net/Articles/354013/">Kernel page</a></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/354851/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 468x60, created 4/3/08 */
+google_ad_slot = "6739810867";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</center></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>In defense of per-BDI writeback</h1>
+</div>
+<div class="ArticleText">
+<div class="FeatureByline">
+
+           By <b>Jonathan Corbet</b><br>September 30, 2009
+           </div>
+Last week's <a href="http://lwn.net/Articles/353253/">quotes of the
+week</a> included a complaint from Andrew Morton about the replacement of
+the writeback code in 2.6.32.  According to Andrew, a bunch of critical
+code had been redone, replacing a well-tested implementation with new code
+without any hard justification.  It's a complaint which should be taken
+seriously; replacing the writeback code has the potential to introduce
+performance regressions for specific workloads.  It should not be done
+without a solid reason.
+<p>
+
+Chris Mason has <a href="http://lwn.net/Articles/354852/">tried to provide that
+justification</a> with a combination of benchmark results and
+explanations.  The benchmarks show a clear - and large - performance
+improvement from the use of per-BDI writeback.  That is good, but does not,
+by itself, justify the switch to per-BDI writeback; Andrew had suggested
+that the older code was slower as the result of performance regressions
+introduced over time by other changes.  If the 2.6.31 code could be fixed, the
+performance improvement could be (re)gained without replacing the entire
+subsystem.
+</p><p>
+
+What Chris is saying is that the old, per-CPU pdflush method could not be
+fixed.  The fundamental problem with pdflush is that it would back off when
+the backing device appeared to be congested.  But congestion is easy to
+cause, and no other part of the system backs off in the same way.  So
+pdflush could end up not doing writeback for significant periods of time.
+Forcing all other writers to back off in the face of congestion could
+improve things, but that would be a big change which doesn't address the
+other problem: congestion-based backoff can defeat attempts by filesystem
+code and the block layer to write large, contiguous segments to disk.
+</p><p>
+
+As it happens, there is a more general throttling mechanism already built
+into the block layer: the finite number of outstanding requests allowed for
+any specific device.  Once requests are exhausted, threads generating block
+I/O operations are forced to wait until request slots become free again.
+Pdflush cannot use this mechanism, though, because it must perform
+writeback to multiple devices at once; it cannot block on request
+allocation.  A per-device writeback thread <i>can</i> block there, though,
+since it will not affect I/O to any other device.  The per-BDI patch
+creates these per-device threads and, as a result, it is able to keep
+devices busier.  That, it seems, is why the old writeback code needed to be
+replaced instead of patched.</p><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/354851/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+
+</p><div class="CommentBox">
+  <p class="CommentTitle">pdflush</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 1, 2009 8:33 UTC (Thu) by <b>axboe</b> (subscriber, #904)
+       [<a href="http://lwn.net/Articles/354978/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+pdflush() was not per-CPU, it didn't make any affinity guarantees of that nature.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/354978/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">In defense of per-BDI writeback</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 1, 2009 14:54 UTC (Thu) by <b>peter_w_morreale</b> (subscriber, #30066)
+       [<a href="http://lwn.net/Articles/355011/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+There were other problems with the old writeback code - most especially if you had storage devices of varying throughput on the same system. <br>
+<p>
+
+The old writeback code traversed super blocks in  order, skipping over those currently congested and without regard to the throughput of the devices backing the supers.  Recall that the old writeback code/pdflush indiscriminately issues writes until the memory threshold is reached.   <br>
+</p><p>
+
+This could have (and probably did) lead to possible performance penalties for applications referencing the *fast* devices while consequently improving the performance of apps on the slow devices.  It certainly lead to unfairness issues wrt who dirties memory and who cleans it.<br>
+</p><p>
+
+Consider the followed kludged example to illustrate the point.  Two apps, both dirtying pages at the same rate, one app backed by a "fast" device, the other by a "slow" device. Both apps are contributing to the dirty page count at the same rate, so now pdflush and writeback are kicking in. <br>
+</p><p>
+
+Since the slow device will maintain a "congested" state longer (since it is "slow"), the faster device will eventually account for more cleaning of pages than the slow device.  <br>
+</p><p>
+
+This has two effects: <br>
+</p><p>
+
+1) Dirty pages for the app on the slow device potentially stay in memory longer and have a better chance of being re-referenced without I/O. <br>
+</p><p>
+
+2) Dirty pages for the "fast" device are more likely to be written out and consequently require an I/O for re-reference.  <br>
+</p><p>
+
+So we wind up penalizing the app on the fast storage device.  In theory at least. :-)<br>
+</p><p>
+
+I haven't looked at the per-BDI code, but with such it is now possible to apply fairness to ensure that each device cleans its share of dirty pages. (Whether that is a good thing or not, I don't know, its just that it enables the capability.)<br>
+</p><p>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/355011/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">In defense of per-BDI writeback</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 3, 2009 15:00 UTC (Sat) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/355325/">Link</a>]
+    </p>
+    <blockquote> The fundamental problem with pdflush is that it
+would back off when the backing device appeared to be congested.
+</blockquote>
+
+That might explain the huge slowdowns I saw (on Linux 2.6.19 and
+2.6.27) when writing several GB to flash devices.  One was a pretty
+fast 8GB SD card (SDHC class 6 (i.e., &gt;6MB/s on a certain workload),
+and I typically saw &gt;10MB/s when writing several hundred MB), yet it
+took several hours to fill up; I no longer remember if the system also
+suffered in other ways.  Calling sync now and then seemed to help,
+but the whole thing still took a very long time.
+
+<p>I do not think that the problem was in the flash device, because it
+was originally new (no need to shuffle old data around), the slowdown
+occured pretty soon (not only near the end), and various measures
+taken at the host end helped (like invoking sync, or writing the data in
+smaller batches which syncing in between).
+
+</p><p>I had a similar experience when trying to fill my 8GB ogg player with
+music, except that this device was slow to begin with (3MB/s when
+writing a few hundred MB), but filling it up still should not have
+taken 8 hours (280KB/s).
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/355325/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">In defense of per-BDI writeback</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 11, 2009 6:30 UTC (Sun) by <b>mfedyk</b> (guest, #55303)
+       [<a href="http://lwn.net/Articles/356455/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I was doing a similar test, but over network filesystems (cifs in this case -- centos5 on both sides).<br>
+<p>
+
+If I copied files with cp or mv, I noticed a marked improvement in throughput compared to the gnome file manager.<br>
+</p><p>
+
+Try it again with mv or cp and see if there is a difference.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/356455/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">In defense of per-BDI writeback</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 11, 2009 12:59 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/356471/">Link</a>]
+    </p>
+    I did use cp.
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/356471/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 120x600, created 9/9/09 */
+google_ad_slot = "3391377719";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2009, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>

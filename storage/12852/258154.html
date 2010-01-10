@@ -1,0 +1,1305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/258154/">
+<meta name="wpd_url" content="http://lwn.net/Articles/258154/">
+<meta name="wpd_date" content="2010-00-09T06:12Z">
+
+        
+        <title>Memory part 8: Future technologies [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/258154/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="258154.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        
+</p><div class="TextAd">
+    <p class="TextAdHeader">Advertisement</p>
+    <p class="TextAdLink"><a href="http://lwn.net/AdServer/click/171/">LWN Merchandise</a></p>
+    <p class="TextAdBody">Stand out from the crowd. Get yourself some of these LWN T-shirts, stickers, mugs, and more.</p>
+    <p class="TextAdFooter"><a href="http://lwn.net/AdServer/">Advertise here</a></p>
+</div>
+<p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Weekly Edition</p>
+Return to the <a href="http://lwn.net/Articles/257826/">Front page</a></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/258154/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 468x60, created 4/3/08 */
+google_ad_slot = "6739810867";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</center></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>Memory part 8: Future technologies</h1>
+</div>
+<div class="ArticleText">
+<div class="GAByline">
+           <p>November 14, 2007</p>
+           <p>This article was contributed by  Ulrich Drepper</p>
+           </div>
+           [<i>Editor's note: Here, at last, is the final segment of Ulrich Drepper's
+"What every programmer should know about memory."  This eight-part series
+<a href="http://lwn.net/Articles/250967/">began back in September</a>.  The
+conclusion of this document looks at how future technologies may help to
+improve performance as the memory bottleneck continues to worsen.</i>
+<p>
+<i>We would like to thank Ulrich one last time for giving LWN the
+opportunity to help shape this document and bring it to our readers.
+Ulrich plans to post the entire thing in PDF format sometime in the near
+future; we'll carry an announcement when that happens.</i>]
+</p><p>
+
+
+</p><h2>8 Upcoming Technology</h2>
+<p>
+
+In the preceding sections about multi-processor handling we have seen that
+significant performance problems must be expected if the number of CPUs
+or cores is scaled up. But this scaling-up is exactly what has to be expected in
+the future. Processors will get more and more cores, and programs must
+be ever more parallel to take advantage of the increased potential of
+the CPU, since single-core performance will not rise as quickly as
+it used to.
+</p><p>
+</p><p>
+</p><h3>8.1 The Problem with Atomic Operations</h3>
+<p>
+
+Synchronizing access to shared data structures is traditionally done
+in two ways:
+</p><p>
+</p><ul>
+<p>
+</p><li> through mutual exclusion, usually by using functionality of the
+  system runtime to achieve just that;
+<p>
+</p></li><li> by using lock-free data structures.
+<p>
+</p></li></ul>
+<p>
+
+The problem with lock-free data structures is that the processor has
+to provide primitives which can perform the entire operation
+atomically.  This support is limited.  On most architectures support
+is limited to atomically read and write a word.  There are two basic
+ways to implement this (see Section 6.4.2):
+</p><p>
+</p><ul>
+<p>
+</p><li> using atomic compare-and-exchange (CAS) operations;
+<p>
+</p></li><li> using a load lock/store conditional (LL/SC) pair.
+<p>
+</p></li></ul>
+<p>
+
+It can be easily seen how a CAS operation can be implemented using
+LL/SC instructions.  This makes CAS operations the building block for
+most atomic operations and lock free data structures.
+</p><p>
+
+Some processors, notably the x86 and x86-64 architectures, provide a
+far more elaborate set of atomic operations.  Many of them are
+optimizations of the CAS operation for specific purposes.  For
+instance, atomically adding a value to a memory location can be
+implemented using CAS and LL/SC operations, but the native support for
+atomic increments on x86/x86-64 processors is faster. It is important for
+programmers to know about these operations, and the intrinsics which
+make them available when programming, but that is nothing new.
+</p><p>
+
+The extraordinary extension of these two architectures is that they
+have double-word CAS (DCAS) operations.  This is significant for some
+applications but not all (see [dcas]).  As an example of how DCAS
+can be used, let us try to write a lock-free array-based stack/LIFO
+data structure.  A first attempt using gcc's intrinsics can be seen in
+Figure 8.1.
+</p><p>
+</p><blockquote>
+<pre>  struct elem {
+    data_t d;
+    struct elem *c;
+  };
+  struct elem *top;
+  void push(struct elem *n) {
+    n-&gt;c = top;
+    top = n;
+  }
+  struct elem *pop(void) {
+    struct elem *res = top;
+    if (res != NULL)
+      top = res-&gt;c;
+    return res;
+  }
+</pre>
+
+<p><b>Figure 8.1: Not Thread-Safe LIFO</b>
+
+</p></blockquote>
+<p>
+
+This code is clearly not thread-safe.  Concurrent accesses in
+different threads will modify the global variable <tt>top</tt> without
+consideration of other thread's modifications.  Elements could be lost
+or removed elements can magically reappear.  It is possible to use
+mutual exclusion but here we will try to use only atomic operations.
+</p><p>
+
+The first attempt to fix the problem uses CAS operations when
+installing or removing list elements.  The resulting code looks like
+Figure 8.2.
+</p><p>
+</p><blockquote>
+<pre>  #define CAS __sync_bool_compare_and_swap
+  struct elem {
+    data_t d;
+    struct elem *c;
+  };
+  struct elem *top;
+  void push(struct elem *n) {
+    do
+      n-&gt;c = top;
+    while (!CAS(&top, n-&gt;c, n));
+  }
+  struct elem *pop(void) {
+    struct elem *res;
+    while ((res = top) != NULL)
+      if (CAS(&top, res, res-&gt;c))
+        break;
+    return res;
+  }
+</pre>
+
+<p><b>Figure 8.2: LIFO using CAS</b>
+
+</p></blockquote>
+<p>
+
+At first glance this looks like a working solution.  <tt>top</tt> is
+never modified unless it matches the element which was at the top of
+the LIFO when the operation started.  But we have to take concurrency
+at all levels into account.  It might be that another thread working
+on the data structure is scheduled at the worst possible moment.  One
+such case here is the so-called ABA problem.  Consider what happens if a second thread
+is scheduled right before the CAS operation in <tt>pop</tt> and it
+performs the following operation:
+</p><p>
+</p><ol>
+<li> <tt>l = pop()</tt>
+</li><li> <tt>push(newelem)</tt>
+</li><li> <tt>push(l)</tt>
+</li></ol>
+<p>
+
+The end effect of this operation is that the former top element of the
+LIFO is back at the top but the second element is different.  Back in
+the first thread, because the top element is unchanged, the CAS
+operation will succeed.  But the value <tt>res-&gt;c</tt> is not
+the right one.  It is a pointer to the second element of the original
+LIFO and not <tt>newelem</tt>.  The result is that this new element is
+lost.
+</p><p>
+
+In the literature [lockfree] you find suggestions to use a feature
+found on some processors to work around this problem.  Specifically,
+this is about the ability of the x86 and x86-64 processors to perform
+DCAS operations.  This is used in the third incarnation of the code in
+Figure 8.3.
+</p><p>
+</p><blockquote>
+<pre>  #define CAS __sync_bool_compare_and_swap
+  struct elem {
+    data_t d;
+    struct elem *c;
+  };
+  struct lifo {
+    struct elem *top;
+    size_t gen;
+  } l;
+  void push(struct elem *n) {
+    struct lifo old, new;
+    do {
+      old = l;
+      new.top = n-&gt;c = old.top;
+      new.gen = old.gen + 1;
+    } while (!CAS(&l, old, new));
+  }
+  struct elem *pop(void) {
+    struct lifo old, new;
+    do {
+      old = l;
+      if (old.top == NULL) return NULL;
+      new.top = old.top-&gt;c;
+      new.gen = old.gen + 1;
+    } while (!CAS(&l, old, new));
+    return old.top;
+  }
+</pre>
+
+<p><b>Figure 8.3: LIFO using double-word CAS</b>
+
+</p></blockquote>
+<p>
+
+Unlike the other two examples, this is (currently) pseudo-code since
+gcc does not grok the use of structures in the CAS intrinsics.
+Regardless, the example should be sufficient understand the approach.
+A generation counter is added to the pointer to the top of the LIFO.
+Since it is changed on every operation, <tt>push</tt> or <tt>pop</tt>, the
+ABA problem described above is no longer a problem.  By the time the
+first thread is resuming its work by actually exchanging the <tt>top</tt>
+pointer, the generation counter has been incremented three times. The
+CAS operation will fail and, in the next round of the loop, the correct
+first and second element of the LIFO are determined and the LIFO is
+not corrupted.  Voil&agrave;.
+</p><p>
+
+Is this really the solution?  The authors of [lockfree] certainly
+make it sound like it and, to their credit, it should be mentioned that
+it is possible to construct data structures for the LIFO which would
+permit using the code above.  But, in general, this approach is just as
+doomed as the previous one.  We still have concurrency problems, just
+now in a different place.  Let us assume a thread executes <tt>pop</tt>
+and is interrupted after the test for <tt>old.top&nbsp;==&nbsp;NULL</tt>.
+Now a second thread uses <tt>pop</tt> and receives ownership of the
+previous first element of the LIFO.  It can do anything with it,
+including changing all values or, in case of dynamically allocated
+elements, freeing the memory.
+</p><p>
+
+Now the first thread resumes.  The <tt>old</tt> variable is still filled
+with the previous top of the LIFO.  More specifically, the <tt>top</tt>
+member points to the element popped by the second thread.  In
+<tt>new.top&nbsp;=&nbsp;old.top-&gt;c</tt> the first thread dereferences a
+pointer in the element.  But the element this pointer references might
+have been freed. That part of the address space might be inaccessible
+and the process could crash. This cannot be allowed for a generic data
+type implementation.  Any fix for this problem is terribly expensive:
+memory must never be freed, or at least it must be verified that no
+thread is referencing the memory anymore before it is freed.  Given
+that lock-free data structures are supposed to be faster and more
+concurrent, these additional requirements completely destroy any
+advantage. In languages which support it, memory handling through
+garbage collection can solve the problem, but this comes with its price.
+</p><p>
+</p><p>
+
+The situation is often worse for more complex data structures.  The
+same paper cited above also describes a FIFO implementation (with
+refinements in a successor paper).  But this code has all the same
+problems.  Because CAS operations on existing hardware (x86,
+x86-64)
+are limited to modifying two words which are consecutive in memory,
+they are no help at all in other common situations. For instance,
+atomically adding or removing elements anywhere in a double-linked list is not
+possible.  {<i>As a side note, the developers of the IA-64 did
+ </i>not<i> include this feature. They allow </i>comparing<i> two
+ words, but replacing only one.</i>}
+</p><p>
+
+The problem is that more than one memory address is generally involved,
+and only if none of the values of these addresses is changed
+concurrently can the entire operation succeed.  This is a well-known
+concept in database handling, and this is exactly where one of the most
+promising proposals to solve the dilemma comes from.
+</p><p>
+</p><p>
+</p><h3>8.2 Transactional Memory</h3>
+<p>
+
+In their groundbreaking 1993 paper [transactmem] Herlihy and Moss
+propose to implement transactions for memory operations in hardware
+since software alone cannot deal with the problem efficiently.
+Digital Equipment Corporation, at that time, was already battling with
+scalability problems on their high-end hardware, which featured a few
+dozen processors.  The principle is the same as for database
+transactions: the result of a transaction becomes visible all at once
+or the transaction is aborted and all the values remain unchanged.
+</p><p>
+
+This is where memory comes into play and why the previous section
+bothered to develop algorithms which use atomic operations.
+Transactional memory is meant as a replacement for&mdash;and extension of&mdash;atomic
+operations in many situations, especially for lock-free data
+structures.  Integrating a transaction system into the processor
+sounds like a terribly complicated thing to do but, in fact, most
+processors, to some extent, already have something similar.
+</p><p>
+
+The LL/SC operations implemented by some processors form a transaction.
+The SC instruction aborts or commits the transaction based on whether
+the memory location was touched or not.  Transactional memory is an
+extension of this concept.  Now, instead of a simple pair of instructions,
+multiple instructions take part in the transaction.  To understand how
+this can work, it is worthwhile to first see how LL/SC instructions can
+be implemented. {<i>This does not mean it is actually implemented
+  like this.</i>}
+</p><p>
+</p><p>
+<b>8.2.1 Load Lock/Store Conditional Implementation</b>
+</p><p>
+
+If the LL instruction is issued, the value of the memory location is
+loaded into a register. As part of that operation, the value is loaded into L1d. The
+SC instruction later can only succeed if this value has not been
+tampered with.  How can the processor detect this?  Looking back at
+the description of the MESI protocol in Figure 3.18 should make the answer
+obvious. If another processor changes the value of the
+memory location, the copy of the value in L1d of the first processor
+must be revoked.  When the SC instruction is executed on the first
+processor, it will find it has to load the value again into L1d.  This
+is something the processor must already detect.
+</p><p>
+
+There are a few more details to iron out with respect to context
+switches (possible modification on the same processor) and accidental
+reloading of the cache line after a write on another processor.  This
+is nothing that policies (cache flush on context switch) and extra
+flags, or separate cache lines for LL/SC instructions, cannot fix. In
+general, the LL/SC implementation comes almost for free with the
+implementation of a cache coherence protocol like MESI.
+</p><p>
+</p><p>
+<b>8.2.2 Transactional Memory Operations</b>
+</p><p>
+</p><p>
+
+For transactional memory to be generally useful, a transaction must not
+be finished with the first store instruction.  Instead, an
+implementation should allow a certain number of load and store
+operations; this means we need separate commit and abort
+instructions.  In a bit we will see that we need one more instruction
+which allows checking on the current state of the transaction and
+whether it is already aborted or not.
+</p><p>
+
+There are three different memory operations to implement:
+</p><p>
+</p><ul>
+<li> Read memory
+</li><li> Read memory which is written to later
+</li><li> Write memory
+</li></ul>
+<p>
+
+When looking at the MESI protocol it should be clear how this special
+second type of read operation can be useful.  The normal read can be
+satisfied by a cache line in the `E' and `S' state.  The second type
+of read operation needs a cache line in state `E'.  Exactly why the
+second type of memory read is necessary can be glimpsed from the
+following discussion, but, for a more complete description, the
+interested reader is referred to literature about transactional
+memory, starting with [transactmem].
+</p><p>
+
+In addition, we need transaction handling which mainly consists
+of the commit and abort operation we are already familiar with from database
+transaction handling.  There is one more operation, though, which is
+optional in theory but required for writing robust programs using
+transactional memory.  This instruction lets a thread test whether the
+transaction is still on track and can (perhaps) be committed later, or
+whether the transaction already failed and will in any case be
+aborted.
+</p><p>
+
+We will discuss how these operations actually interact with the CPU
+cache and how they match to bus operation.  But before we do that we take a
+look at some actual code which uses transactional memory.  This will
+hopefully make the remainder of this section easier to understand.
+</p><p>
+</p><p>
+<b>8.2.3 Example Code Using Transactional Memory</b>
+</p><p>
+
+For the example we revisit our running example and show a LIFO
+implementation which uses transactional memory.
+</p><p>
+</p><blockquote>
+<pre>  struct elem {
+    data_t d;
+    struct elem *c;
+  };
+  struct elem *top;
+  void push(struct elem *n) {
+    while (1) {
+      n-&gt;c = LTX(top);
+      ST(&top, n);
+      if (COMMIT())
+        return;
+      ... delay ...
+    }
+  }
+  struct elem *pop(void) {
+    while (1) {
+      struct elem *res = LTX(top);
+      if (VALIDATE()) {
+        if (res != NULL)
+          ST(&top, res-&gt;c);
+        if (COMMIT())
+          return res;
+      }
+      ... delay ...
+    }
+  }
+</pre>
+
+<p><b>Figure 8.4: LIFO Using Transactional Memory</b>
+
+</p></blockquote>
+<p>
+
+This code looks quite similar to the not-thread-safe code, which is an
+additional bonus as it makes writing code using transactional memory
+easier.  The new parts of the code are the <tt>LTX</tt>, <tt>ST</tt>,
+<tt>COMMIT</tt>, and <tt>VALIDATE</tt> operations.  These four operations
+are the way to request accesses to transactional memory.  There is
+actually one more operation, <tt>LT</tt>, which is not used here.
+<tt>LT</tt> requests non-exclusive read access, <tt>LTX</tt> requests
+exclusive read access, and <tt>ST</tt> is a store into transactional memory.
+The <tt>VALIDATE</tt> operation is the operation which checks whether the
+transaction is still on track to be committed.  It returns true if
+this transaction is still OK.  If the transaction is already marked as
+aborting, it will be actually aborted and the next transactional memory
+instruction will start a new transaction. For this reason, the code uses a
+new <tt>if</tt> block in case the transaction is still going on.
+</p><p>
+
+The <tt>COMMIT</tt> operation finishes the transaction; if the
+transaction is finished successfully the operation returns true.  This
+means that this part of the program is done and the thread can move on.
+If the operation returns a false value, this usually means the whole
+code sequence must be repeated. This is what the outer <tt>while</tt>
+loop is doing here.  This is not absolutely necessary, though, in some
+cases giving up on the work is the right thing to do.
+</p><p>
+
+The interesting point about the <tt>LT</tt>, <tt>LTX</tt>, and <tt>ST</tt>
+operations is that they can fail without signaling this failure in any
+direct way. The way the program can request this information is through
+the <tt>VALIDATE</tt> or <tt>COMMIT</tt> operation. For the load operation,
+this can mean that the value actually loaded into the register might be
+bogus; that is why it is necessary in the example above to use
+<tt>VALIDATE</tt> before dereferencing the pointer. In the next section,
+we will see why this is a wise choice for an implementation.  It might
+be that, once transactional memory is actually widely available, the
+processors will implement something different. The results from
+[transactmem] suggest what we describe here, though.
+</p><p>
+
+The <tt>push</tt> function can be summarized as this: the transaction is
+started by reading the pointer to the head of the list.  The read
+requests exclusive ownership since, later in the function, this variable
+is written to. If another thread has already started a transaction, the
+load will fail and mark the still-born transaction as aborted; in this
+case, the
+value actually loaded might be garbage. This value is, regardless of
+its status, stored in the <tt>next</tt> field of the new list member.
+This is fine since this member is not yet in use, and it is accessed by
+exactly one thread.  The pointer to the head of the list is then
+assigned the pointer to the new element. If the transaction is
+still OK, this write can succeed. This is the normal case, it can only
+fail if a thread uses some code other than the provided <tt>push</tt> and
+<tt>pop</tt> functions to access this pointer.
+<!--  XXX concurrent push/pop makes transaction fail (unclear, talk to Markus) -->
+If the transaction
+is already aborted at the time the <tt>ST</tt> is executed, nothing at
+all is done. Finally, the thread tries to commit the transaction. If
+this succeeds the work is done; other threads can now start their
+transactions. If the transaction fails, it must be repeated from the
+beginning. Before doing that, however, it is best to insert an delay. If this
+is not done the thread might run in a busy loop (wasting energy,
+overheating the CPU).
+</p><p>
+
+The <tt>pop</tt> function is slightly more complex.  It also starts with
+reading the variable containing the head of the list, requesting
+exclusive ownership.  The code then immediately checks whether the
+<tt>LTX</tt> operation succeeded or not.  If not, nothing else is done in
+this round except delaying the next round.  If the <tt>top</tt> pointer
+was read successfully, this means its state is good; we can now
+dereference the pointer.  Remember, this was exactly the problem with
+the code using atomic operations; with transactional memory this case
+can be handled without any problem.  The following <tt>ST</tt> operation
+is only performed when the LIFO is not empty, just as in the original,
+thread-unsafe code. Finally the transaction is committed. If this
+succeeds the function returns the old pointer to the head; otherwise
+we delay and retry.  The one tricky part of this code is to remember
+that the <tt>VALIDATE</tt> operation aborts the transaction if it has
+already failed.  The next transactional memory operation would start a
+new transaction and, therefore, we must skip over the rest of the code
+in the function.
+</p><p>
+
+How the delay code works will be something to see when
+implementations of transactional memory are available in hardware.  If
+this is done badly system performance might suffer significantly.
+</p><p>
+</p><p>
+<b>8.2.4 Bus Protocol for Transactional Memory</b>
+</p><p>
+
+Now that we have seen the basic principles behind transactional memory,
+we can dive into the details of the implementation.  Note that this is
+<i>not</i> based on actual hardware.  It is based on the original
+design of transactional memory and knowledge about the cache
+coherency protocol. Some details are omitted, but it still should be
+possible to get insight into the performance characteristics.
+</p><p>
+
+Transactional memory is not actually implemented as separate
+memory; that would not make any sense given that transactions on
+any location in a thread's address space are wanted. Instead, it is
+implemented at the first cache level. The implementation could, in
+theory, happen in the normal L1d but, as [transactmem] points out,
+this is not a good idea.  We will more likely see the transaction cache
+implemented in parallel to L1d. All accesses will use the higher
+level cache in the same way they use L1d. The transaction
+cache is likely much smaller than L1d.  If it is fully associative its
+size is determined by the number of operations a transaction can
+comprise.  Implementations will likely have limits for the
+architecture and/or specific processor version.  One could easily
+imagine a transaction cache with 16 elements or even less.  In the
+above example we only needed one single memory location; algorithms
+with a larger transaction working sets get very complicated. It is possible that
+we will see processors which support more than one active transaction
+at any one time. The number of elements in the cache then
+multiplies, but it is still small enough to be fully associative.
+</p><p>
+
+The transaction cache and L1d are exclusive.  That means a cache line
+is in, at most, one of the caches but never in both. Each slot in the
+transaction cache is in, at any one time, one of the four MESI
+protocol states. In addition to this, a slot has a transaction state. The
+states are as follows (names according to [transactmem]):
+</p><p>
+</p><dl>
+<dt><b>EMPTY</b> </dt>
+<dd>
+
+the cache slot contains no data.  The MESI state is
+  always 'I'.
+</dd>
+
+<p>
+</p><dt><b>NORMAL</b></dt>
+<dd> the cache slot contains committed data.  The data could
+  as well exist in L1d.  The MESI state can be 'M', 'E', and 'S'.  The
+  fact that the 'M' state is allowed means that transaction commits do
+  <i>not</i> force the data to be written into the main memory (unless
+  the memory region is declared as uncached or write-through).  This
+  can significantly help to increase performance.</dd>
+<p>
+</p><dt><b>XABORT</b></dt>
+<dd> the cache slot contains data which is discarded on
+  abort.  This is obviously the opposite of XCOMMIT.  All the data
+  created during a transaction is kept in the transaction cache,
+  nothing is written to main memory before a commit.  This limits the
+  maximum transaction size but it means that, beside the transaction
+  cache, no other memory has to be aware of the XCOMMIT/XABORT duality
+  for a single memory location.  The possible MESI states are 'M',
+  'E', and 'S'.</dd>
+<p>
+</p><dt><b>XCOMMIT</b></dt>
+<dd> the cache slot contains data which is discarded on
+  commit. This is a possible optimization processors could implement.
+  If a memory location is changed using a transaction operation, the
+  old content cannot be just dropped: if the transaction fails the old
+  content needs to be restored.  The MESI states are the same as for
+  XABORT. One difference with regard to XABORT is that, if the transaction
+  cache is full, any XCOMMIT entries in the 'M' state could be written back to memory
+  and then, for all states, discarded.
+</dd>
+</dl>
+
+<p>
+
+When an <tt>LT</tt> operation is started, the processor allocates two slots
+in the cache.  Victims are chosen by first looking for NORMAL slots
+for the address of the operation, i.e., a cache hit.  If such an entry
+is found, a second slot is located, the value copied, one entry is
+marked XABORT, and the other one is marked XCOMMIT.
+</p><p>
+
+If the address is not already cached, EMPTY cache slots are located. If
+none can be found, NORMAL slots are looked for. The old content must
+then be flushed to memory if the MESI state is 'M'. If no NORMAL slot
+is available either, it is possible to victimize XCOMMIT entries. This
+is likely going to be an implementation detail, though.  The maximum
+size of a transaction is determined by the size of the transaction
+cache, and, since the number of slots which are needed for each
+operation in the transaction is fixed, the number of transactions can
+be capped before having to evict XCOMMIT entries.
+</p><p>
+
+If the address is not found in the transactional cache, a
+T_READ request is issued on the bus.  This is just like the normal
+READ bus request, but it indicates that this is for the transactional
+cache. Just like for the normal READ request, the caches in all
+other processors first get the chance to respond.  If none does the
+value is read from the main memory.  The MESI protocol determines
+whether the state of the new cache line is 'E' or 'S'.  The difference
+between T_READ and READ comes into play when the cache line is
+currently in use by an active transaction on another processor or
+core.  In this case the T_READ operation plainly fails, no data is
+transmitted.  The transaction which generated the T_READ bus request is
+marked as failed and the value used in the operation (usually a simple
+register load) is undefined. Looking back to the example, we can see
+that this behavior does not cause problems if the transactional memory
+operations are used correctly.  Before a value loaded in a transaction
+is used, it must be verified with <tt>VALIDATE</tt>. This is, in
+almost no cases, an extra burden. As we have seen in the attempts to
+create a FIFO implementation using atomic operations, the check which
+we added is the one missing feature which would make the lock-free
+code work.
+</p><p>
+
+The <tt>LTX</tt> operation is almost identical to <tt>LT</tt>.  The one
+difference is that the bus operation is T_RFO instead of T_READ.
+T_RFO, like the normal RFO bus request, requests exclusive ownership
+of the cache line. The state of the resulting cache line is 'E'. Like the
+T_READ bus request, T_RFO can fail, in which case the used value is
+undefined, too.  If the cache line is already in the local transaction
+cache with 'M' or 'E' state, nothing has to be done.  If the state in
+the local transaction cache is 'S' the bus request has to go out to
+invalidate all other copies.
+</p><p>
+
+The <tt>ST</tt> operation is similar to <tt>LTX</tt>.  The value is first
+made available exclusively in the local transaction cache.  Then the
+<tt>ST</tt> operation makes a copy of the value into a second slot in the
+cache and marks the entry as XCOMMIT.  Lastly, the other slot is marked
+as XABORT and the new value is written into it.  If the transaction is
+already aborted, or is newly aborted because the implicit <tt>LTX</tt>
+fails, nothing is written.
+</p><p>
+
+Neither the <tt>VALIDATE</tt> nor <tt>COMMIT</tt> operations automatically
+and implicitly create bus operations.  This is the huge advantage
+transactional memory has over atomic operations. With atomic operations,
+concurrency is made possible by writing changed values back
+into main memory. If you have read this document thus far, you should
+know how expensive this is. With transactional memory, no
+accesses to the main memory are forced.  If the cache has no EMPTY
+slots, current content must be evicted, and for slots in
+the 'M' state, the content must be written to main memory. This is not
+different from regular caches, and the write-back can be performed
+without special atomicity guarantees. If the cache size is sufficient,
+the content can survive for a long time.  If transactions are
+performed on the same memory location over and over again, the speed
+improvements can be astronomical since, in the one case, we have one or
+two main memory accesses in each round while, for transactional memory, all
+accesses hit the transactional cache, which is as fast as L1d.
+</p><p>
+
+All the <tt>VALIDATE</tt> and <tt>COMMIT</tt> operations do for an
+aborted transaction is to mark the cache slots marked XABORT as empty
+and mark the XCOMMIT slots as NORMAL. Similarly, when <tt>COMMIT</tt>
+successfully finishes a transaction, the XCOMMIT slots are marked empty
+and the XABORT slots are marked NORMAL. These are very fast
+operations on the transaction cache. No explicit notification to
+other processors which want to perform transactions happens; those
+processors just have to keep trying.  Doing this efficiently is
+another matter.  In the example code above we simply have
+<tt>...delay...</tt> in the appropriate place.  We might see actual
+processor support for delaying in a useful way.
+</p><p>
+
+To summarize, transactional memory operations cause bus operation only
+when a new transaction is started and when a new cache line, which is
+not already in the transaction cache, is added to a still-successful
+transaction.  Operations in aborted transactions do not cause bus
+operations.  There will be no cache line ping-pong due to multiple
+threads trying to use the same memory.
+</p><p>
+</p><p>
+<b>8.2.5 Other Considerations</b>
+</p><p>
+
+In Section 6.4.2, we already discussed how the <tt>lock</tt> prefix,
+available on x86 and x86-64, can be used to avoid the coding of atomic
+operations in some situations.  The proposed tricks falls short, though,
+when there are multiple threads in use which do not contend for
+the same memory. In this case, the atomic operations are used unnecessarily.
+With transactional memory this problem goes away. The
+expensive RFO bus requests are issued only if memory is used on
+different CPUs concurrently or in succession; this is only
+the case when they are needed. It is almost impossible to do any better.
+</p><p>
+
+The attentive reader might have wondered about delays. What is
+the expected worst case scenario? What if the thread with the active
+transaction is descheduled, or if it receives a signal and is possibly
+terminated, or decides to use <tt>siglongjmp</tt> to jump to an outer
+scope? The answer to this is: the transaction will be aborted. It is
+possible to abort a transaction whenever a thread makes a system call or
+receives a signal (i.e., a ring level change occurs).  It might also
+be that aborting the transaction is part of the OS's duties when
+performing system calls or handling signals.  We will have to wait
+until implementations become available to see what is actually done.
+</p><p>
+
+The final aspect of transactional memory which should be discussed
+here is something which people might want to think about even today.
+The transaction cache, like other caches, operates on cache lines.
+Since the transaction cache is an exclusive cache, using the same cache
+line for transactions and non-transaction operation will be a
+problem.  It is therefore important to
+</p><p>
+</p><ul>
+<p>
+</p><li> move non-transactional data off of the cache line
+<p>
+</p></li><li> have separate cache lines for data used in separate transactions
+<p>
+</p></li></ul>
+<p>
+
+The first point is not new, the same effort will pay off for atomic
+operations today. The second is more problematic since today objects are
+hardly ever aligned to cache lines due to the associated high cost.
+If the data used, along with the words
+modified using atomic operations, is on the same cache line, one less
+cache line is needed.  This does not apply to mutual exclusion (where
+the mutex object should always have its own cache line), but one can
+certainly make cases where atomic operations go together with other
+data.  With transactional memory, using the cache line for
+two purposes will most likely be fatal.  Every normal access to data
+{<i>From the cache line in question.  Access to arbitrary other
+ cache lines does not influence the transaction.</i>} would remove the
+cache line from the transactional cache, aborting the transaction in the process.
+Cache alignment of data objects will be in future not only a
+matter of performance but also of correctness.
+</p><p>
+
+It is possible that transactional memory implementations will use more
+precise accounting and will, as a result, not suffer from normal accesses to data on
+cache lines which are part of a transaction.  This requires a lot more
+effort, though, since then the MESI protocol information is not
+sufficient anymore.
+</p><p>
+</p><p>
+</p><h3>8.3 Increasing Latency</h3>
+<p>
+</p><p>
+
+One thing about future development of memory technology is almost
+certain: latency will continue to creep up. We already discussed, in
+Section 2.2.4, that the upcoming DDR3 memory technology will
+have higher latency than the current DDR2 technology.  FB-DRAM, if it
+should get deployed, also has potentially higher latency, especially
+when FB-DRAM modules are daisy-chained.  Passing through the requests
+and results does not come for free.
+</p><p>
+
+The second source of latency is the increasing use of NUMA.  AMD's
+Opterons are NUMA machines if they have more than one processor.
+ There is some local memory attached to the CPU with its own memory
+controller but, on SMP motherboards, the rest of the memory has to be
+accessed through the Hypertransport bus.  Intel's CSI technology will
+use almost the same technology.  Due to per-processor bandwidth
+limitations and the requirement to keep (for instance) multiple
+10Gb/s Ethernet ports busy, multi-socket motherboards will not vanish,
+even if the number of cores per socket increases.
+</p><p>
+</p><p>
+
+A third source of latency are co-processors.  We thought that we got
+rid of them after math co-processors for commodity processors were no longer
+necessary at the beginning of the 1990's, but they are making
+a comeback.  Intel's Geneseo and AMD's Torrenza are extensions of the
+platform to allow third-party hardware developers to integrate their
+products into the motherboards.  I.e., the co-processors will not have
+to sit on a PCIe card but, instead, are positioned much closer to the
+CPU.  This gives them more bandwidth.
+</p><p>
+</p><p>
+
+IBM went a different route (although extensions like Intel's and AMD's
+are still possible) with the Cell CPU.  The Cell CPU consists, beside
+the PowerPC core, of 8 Synergistic Processing Units (SPUs) which are
+specialized processors mainly for floating-point computation.
+</p><p>
+
+What co-processors and SPUs have in common is that they, most likely,
+have even slower memory logic than the real processors. This is, in
+part, caused by the necessary simplification: all the cache handling,
+prefetching etc is complicated, especially when cache coherency is
+needed, too.  High-performance programs will increasingly rely on
+co-processors since the performance differences can be dramatic.
+Theoretical peak performance for a Cell CPU is 210 GFLOPS, compared to
+50-60 GFLOPS for a high-end CPU.  The Graphics Processing Units (GPUs,
+processors on graphics cards) in use today achieve even higher numbers
+(north of 500 GFLOPS) and those could probably, with not too much
+effort, be integrated into the Geneseo/Torrenza systems.
+</p><p>
+
+As a result of all these developments, a programmer must conclude that
+prefetching will become ever more important.  For co-processors it
+will be absolutely critical.  For CPUs, especially with more and more
+cores, it is necessary to keep the FSB busy all the time instead of
+piling on the requests in batches.  This requires giving the CPU as
+much insight into future traffic as possible through the efficient use
+of prefetching instructions.
+</p><p>
+</p><p>
+</p><h3>8.4 Vector Operations</h3>
+<p>
+</p><p>
+
+The multi-media extensions in today's mainstream processors implement
+vector operations only in a limited fashion.  Vector instructions are
+characterized by large numbers of operations which are performed
+together. Compared with scalar operations, this can be said about the
+multi-media instructions, but it is a far cry from what vector
+computers like the Cray-1 or vector units for machines like the
+IBM&nbsp;3090 did.
+</p><p>
+
+To compensate for the limited number of operations performed for one
+instruction (four&nbsp;<tt>float</tt> or two&nbsp;<tt>double</tt> operations on most
+machines) the surrounding loops have to be executed more often.  The
+example in Section 9.1 shows this clearly, each cache
+line requires <tt>SM</tt> iterations.
+</p><p>
+
+With wider vector registers and operations, the number of loop
+iterations can be reduced. This results in more than just improvements in
+the instruction decoding etc.; here we are more interested in the
+memory effects.  With a single instruction loading or storing more
+data, the processor has a better picture about the memory use of the
+application and does not have to try to piece together the information
+from the behavior of individual instructions.  Furthermore, it becomes
+more useful to provide load or store instructions which do not affect
+the caches. With 16&nbsp;byte wide loads of an SSE register in an
+x86 CPU, it is a bad idea to use uncached loads since
+later accesses to the same cache line have to load the data from memory again
+(in case of cache misses). If, on the other hand, the vector registers
+are wide enough to hold one or more cache lines, uncached loads or stores
+do not have negative impacts.  It becomes more practical to perform
+operations on data sets which do not fit into the caches.
+</p><p>
+
+Having large vector registers does not necessarily mean the latency of
+the instructions is increased; vector instructions do not have to wait
+until all data is read or stored.  The vector units could start with
+the data which has already been read if it can recognize the code
+flow. That means, if, for instance, a vector register is to be loaded and
+then all vector elements multiplied by a scalar, the CPU could start
+the multiplication operation as soon as the first part of the vector has been
+loaded.  It is just a matter of sophistication of the vector unit.
+What this shows is that, in theory, the vector registers can grow really
+wide, and that programs could potentially be designed today with this
+in mind. In practice, there are limitations imposed on the vector
+register size by the fact that the processors are used in
+multi-process and multi-thread OSes.  As a result, the context switch
+times, which include storing and loading register values, is
+important.
+</p><p>
+
+With wider vector registers there is the problem that the input and
+output data of the operations cannot be sequentially laid out in
+memory.  This might be because a matrix is sparse, a matrix is
+accessed by columns instead of rows, and many other factors.  Vector
+units provide, for this case, ways to access memory in non-sequential
+patterns.  A single vector load or store can be parametrized and
+instructed to load data from many different places in the address
+space.  Using today's multi-media instructions, this is not possible at
+all.  The values would have to be explicitly loaded one by one and
+then painstakingly combined into one vector register.
+</p><p>
+
+The vector units of the old days had different modes to allow the most
+useful access patterns:
+</p><p>
+</p><ul>
+<p>
+</p><p>
+</p><li> using <i>striding</i>, the program can specify how big the gap
+  between two neighboring vector elements is.  The gap between all
+  elements must be the same but this would, for instance, easily allow
+  to read the column of a matrix into a vector register in one
+  instruction instead of one instruction per row.
+<p>
+</p></li><li> using indirection, arbitrary access patterns can be created.  The
+  load or store instruction would receive a pointer to an array which
+  contains addresses or offsets of the real memory locations which
+  have to be loaded.
+<p>
+</p></li></ul>
+<p>
+
+It is unclear at this point whether we will see a revival of true
+vector operations in future versions of mainstream processors.  Maybe
+this work will be relegated to co-processors.  In any case, should we
+get access to vector operations, it is all the more important to
+correctly organize the code performing such operations.  The code
+should be self-contained and replaceable, and the interface should be
+general enough to efficiently apply vector operations.  For instance,
+interfaces should allow adding entire matrixes instead of operating on
+rows, columns, or even groups of elements.  The larger the building
+blocks, the better the chance of using vector operations.
+</p><p>
+
+In [vectorops] the authors make a passionate plea for the revival
+of vector operations. They point out many advantages and try to debunk
+various myths. They paint an overly simplistic image, though. As
+mentioned above, large register sets mean high context switch
+times, which have to be avoided in general purpose OSes. See the
+problems of the IA-64 processor when it comes to context
+switch-intensive operations.  The long execution time for vector
+operations is also a problem if interrupts are involved.  If an
+interrupt is raised, the processor must stop its current work and start
+working on handling the interrupt. After that, it must resume
+executing the interrupted code.  It is generally a big problem to
+interrupt an instruction in the middle of the work; it is not
+impossible, but it is complicated. For long running instructions this has to
+happen, or the instructions must be implemented in a restartable fashion,
+since otherwise the interrupt reaction time is too high.  The latter
+is not acceptable.
+</p><p>
+
+Vector units also were forgiving as far as alignment of the memory
+access is concerned, which shaped the algorithms which were developed.
+Some of today's processors (especially RISC processors) require
+strict alignment so the extension to full vector operations is not
+trivial.  There are big potential upsides to having vector
+operations, especially when striding and indirection are supported,
+so that we can hope to see this functionality in the future.
+
+</p><p>
+</p><h2>Appendices and bibliography</h2>
+<p>
+
+The  <a href="http://lwn.net/Articles/258188/">appendices and bibliography page</a>
+contains, among other things, the source code for a number of the benchmark
+programs used for this document, more information on oprofile, some
+discussion of memory types, an introduction to libNUMA, and the
+bibliography.</p><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/258154/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+
+</p><div class="CommentBox">
+  <p class="CommentTitle">Transactional cache size</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 14, 2007 22:12 UTC (Wed) by <b>i3839</b> (subscriber, #31386)
+       [<a href="http://lwn.net/Articles/258604/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre>It seems that the transactional cache should use a smaller cache size than normal caches,
+around 16 bytes or so.
+
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/258604/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">latency can be hidden with enough parallelism</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2007 0:37 UTC (Thu) by <b>stevenj</b> (guest, #421)
+       [<a href="http://lwn.net/Articles/258617/">Link</a>]
+    </p>
+    <p>Another perspective that several people have advocated (e.g. Burton Smith), is that in the future if we can have enough fine-grained parallelism, then latency can be hidden.  (e.g. you do one instruction from thread 1, the one instruction from thread 2, then... by the time you get back to thread 1, it is many cycles later and any memory operation will have completed).  This was the underlying idea behind things like Intel's Hyper-threading stuff (which does it on a small scale) or the Tera MTA supercomputer (on a large scale).
+
+</p><p>One problem, of course, is extracting that much parallelism from most programs is still rather hard.  There are very few programs out there that are ready to use 100 or 1000 processors.
+
+</p><p>(Parallelism is actually a huge problem on the computer-science horizon.  Processors aren't getting much faster any more, and the only way to get increased performance is by exploiting parallelism, but writing parallel programs is still the province of an elite few.)
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/258617/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">latency can be hidden with enough parallelism</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2007 2:52 UTC (Thu) by <b>elanthis</b> (subscriber, #6227)
+       [<a href="http://lwn.net/Articles/258620/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre>I imagine you could get quite a huge performance boost out of many applications by just
+writing them to not be so inefficient.  That being one of the primary purposes of this series
+of articles.  A lot of modern software blows through cycles completely needlessly.  This has
+gone on because of the increase in processor speed - software could expand to fill the
+available increase in speed and reduce the complexity of the software in the process.  Now
+that the choice is between the complexity of efficient software designs or the complexity of
+intense parallelism, maybe we'll see a shift back towards efficient code instead of
+quickly-written code.
+
+Then again, probably not - it seems like it might end up being easier to make simple tools for
+parallel code than educating developers to write efficient code. :/
+
+Call me crazy, but I take pride in being able to write single-threaded daemons that outperform
+heavily threaded implementations for even moderately high workloads. :p
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/258620/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">latency can be hidden with enough parallelism</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 20, 2007 2:42 UTC (Tue) by <b>nagual_sorcerer</b> (guest, #49143)
+       [<a href="http://lwn.net/Articles/259266/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre>    You are not crazy.:) But when there are multiple cpu cores, you still write single
+threaded daemons? Or just one thread per cpu core? I don't know if that goes faster, or there
+is some other way of doing things faster?
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/259266/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Section 9.1 (appendix)</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2007 16:33 UTC (Thu) by <b>southey</b> (subscriber, #9466)
+       [<a href="http://lwn.net/Articles/258684/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre>In '8.4 Vector Operations' you refer to '[t]he example in Section 9.1'.
+
+Can you please make it clear that this Section is in the Appendix?
+
+Also the Appendix refers to 'matrix multiplication in section Section 6.2.1' which probably
+should be Section 8.2.1.
+
+
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/258684/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Section 9.1 (appendix)</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 20, 2007 22:58 UTC (Tue) by <b>cdarroch</b> (subscriber, #26812)
+       [<a href="http://lwn.net/Articles/259419/">Link</a>]
+    </p>
+    <div class="FormattedComment"><pre>Section 6.2.1 is correct -- see <a href="http://lwn.net/Articles/255364/">http://lwn.net/Articles/255364/</a> where
+he writes, "the program code is pushed out into Section 9.1".
+</pre></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/259419/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Memory part 8: Future technologies: transactional memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 21, 2007 23:17 UTC (Wed) by <b>PaulMcKenney</b> (subscriber, #9624)
+       [<a href="http://lwn.net/Articles/259569/">Link</a>]
+    </p>
+    Transactional memory is indeed a very interesting technology, and there has been quite a bit of work in this area of late!  Some researchers believe that they have solved the multiple-cache problem, for example.  However, there are a few remaining challenges:
+
+<ol>
+<li>  Non-idempotent operations (such as I/O) must be excluded from transactions.
+</li><li>  Transactions can be subject to priority inversion, see for example <a href="http://www.sosp2007.org/papers/sosp056-rossbach.pdf">Rossbach et al's SOSP paper</a>.
+</li><li>  Although there are proposals to handle very large transactions, these have performance consequences.  So the performance of transactional memory usually depends heavily on the size and associativity of the hardware caches.
+</li><li>  Resolving contention among transactions turns out to be non-trivial, though of course designing for low contention is the best approach, and not just for transactional memory!
+</li><li>  As far as I know, transactional memory implementations do not yet take realtime issues into account.
+</li><li>  Efficient handling of read-mostly situations is best served by allowing concurrent transactional and non-transactional access to the same locations, which causes extreme discomfort to most of the transactional-memory people I have talked with.
+</li></ol>
+
+<p>All that aside, transactional memory certainly does seem like a much better approach than non-blocking synchronization!
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/259569/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Section 8.3 </p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 22, 2007 22:38 UTC (Thu) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/259664/">Link</a>]
+    </p>
+    FB-DRAM has already been deployed for quite some time in current
+multi-socket Xeon systems, and IIRC also in Niagara-based Suns.
+However, the high power consumption and heat dissipation of FB-DIMMs
+leads Intel to also provide Dual-Xeon chipsets that support plain
+registered DIMMs; unfortunately, the higher pin count of the regular
+DDR2 interface mean that this chipset supports only two channels
+instead of four.  AMD still has an advantage here (two DDR2 channels
+per socket).
+
+<p>Concerning Cell SPUs and memory latency: the SPUs can only access
+their local memory (256KB), not the main memory.  If data or code
+needs to be loaded into the local memory, software has to program the
+transfer from main memory explicitly (unlike cache, which is
+automatic).  So, yes, explicit prefetching is necessary, otherwise the
+SPU won't get it's data at all.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/259664/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 120x600, created 9/9/09 */
+google_ad_slot = "3391377719";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2007, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>

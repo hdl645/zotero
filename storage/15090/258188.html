@@ -1,0 +1,1525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/258188/">
+<meta name="wpd_url" content="http://lwn.net/Articles/258188/">
+<meta name="wpd_date" content="2010-00-09T06:12Z">
+
+        
+        <title>Memory part 9: Appendices and bibliography [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/258188/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="258188.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        
+</p><div class="TextAd">
+    <p class="TextAdHeader">Advertisement</p>
+    <p class="TextAdLink"><a href="http://lwn.net/AdServer/click/171/">LWN Merchandise</a></p>
+    <p class="TextAdBody">Stand out from the crowd. Get yourself some of these LWN T-shirts, stickers, mugs, and more.</p>
+    <p class="TextAdFooter"><a href="http://lwn.net/AdServer/">Advertise here</a></p>
+</div>
+<p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/258188/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 728x90, created 8/29/08 */
+google_ad_slot = "1253766630";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>Memory part 9: Appendices and bibliography</h1>
+</div>
+<div class="ArticleText">
+<div class="GAByline">
+           <p>November 14, 2007</p>
+           <p>This article was contributed by  Ulrich Drepper</p>
+           </div>
+           [<i>Editor's note: what follows is the set of appendices and the
+bibliography from <a href="http://lwn.net/Articles/250967/">What every programmer should
+know about memory</a> by Ulrich Drepper.</i>]
+<p>
+
+
+</p><h2>9 Examples and Benchmark Programs</h2>
+<p>
+</p><h3>9.1 Matrix Multiplication</h3>
+
+<p>
+
+This is the complete benchmark program for the matrix multiplication
+in section Section 6.2.1.  For details on the intrinsics
+used the reader is referred to Intel's reference manual.
+</p><p>
+</p><blockquote>
+<pre>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;emmintrin.h&gt;
+#define N 1000
+double res[N][N] __attribute__ ((aligned (64)));
+double mul1[N][N] __attribute__ ((aligned (64)));
+double mul2[N][N] __attribute__ ((aligned (64)));
+#define SM (CLS / sizeof (double))
+<p>
+
+int
+main (void)
+{
+  // ... Initialize mul1 and mul2
+</p><p>
+
+  int i, i2, j, j2, k, k2;
+  double *restrict rres;
+  double *restrict rmul1;
+  double *restrict rmul2;
+  for (i = 0; i &lt; N; i += SM)
+    for (j = 0; j &lt; N; j += SM)
+      for (k = 0; k &lt; N; k += SM)
+        for (i2 = 0, rres = &res[i][j], rmul1 = &mul1[i][k]; i2 &lt; SM;
+             ++i2, rres += N, rmul1 += N)
+          {
+            _mm_prefetch (&rmul1[8], _MM_HINT_NTA);
+            for (k2 = 0, rmul2 = &mul2[k][j]; k2 &lt; SM; ++k2, rmul2 += N)
+              {
+                __m128d m1d = _mm_load_sd (&rmul1[k2]);
+                m1d = _mm_unpacklo_pd (m1d, m1d);
+                for (j2 = 0; j2 &lt; SM; j2 += 2)
+                  {
+                    __m128d m2 = _mm_load_pd (&rmul2[j2]);
+                    __m128d r2 = _mm_load_pd (&rres[j2]);
+                    _mm_store_pd (&rres[j2],
+                                  _mm_add_pd (_mm_mul_pd (m2, m1d), r2));
+                  }
+              }
+          }
+</p><p>
+
+  // ... use res matrix
+</p><p>
+
+  return 0;
+}
+</p></pre>
+</blockquote>
+<p>
+
+The structure of the loops is pretty much the same as in the final
+incarnation in Section 6.2.1.  The one big change is that
+loading the <tt>rmul1[k2]</tt> value has been pulled out of the inner loop
+since we have to create a vector where both elements have the same
+value.  This is what the <tt>_mm_unpacklo_pd()</tt> intrinsic does.
+</p><p>
+
+The only other noteworthy thing is that we explicitly aligned the
+three arrays so that the values we expect to be in the same cache line
+actually are found there.
+</p><p>
+</p><p>
+</p><h3>9.2 Debug Branch Prediction</h3>
+
+<p>
+
+If, as recommended, the definitions of <tt>likely</tt> and <tt>unlikely</tt>
+from Section 6.2.2 are used, it is easy {<i>At least with the
+  GNU toolchain.</i>} to have a debug mode to check whether the
+assumptions are really true.  The definitions of the macros could be
+replaced with this:
+</p><p>
+</p><blockquote>
+<pre>#ifndef DEBUGPRED
+# define unlikely(expr) __builtin_expect (!!(expr), 0)
+# define likely(expr) __builtin_expect (!!(expr), 1)
+#else
+asm (".section predict_data, \"aw\"; .previous\n"
+     ".section predict_line, \"a\"; .previous\n"
+     ".section predict_file, \"a\"; .previous");
+# ifdef __x86_64__
+#  define debugpred__(e, E) \
+  ({ long int _e = !!(e); \
+     asm volatile (".pushsection predict_data\n" \
+                   "..predictcnt%=: .quad 0; .quad 0\n" \
+                   ".section predict_line; .quad %c1\n" \
+                   ".section predict_file; .quad %c2; .popsection\n" \
+                   "addq $1,..predictcnt%=(,%0,8)" \
+                   : : "r" (_e == E), "i" (__LINE__), "i" (__FILE__)); \
+    __builtin_expect (_e, E); \
+  })
+# elif defined __i386__
+#  define debugpred__(e, E) \
+  ({ long int _e = !!(e); \
+     asm volatile (".pushsection predict_data\n" \
+                   "..predictcnt%=: .long 0; .long 0\n" \
+                   ".section predict_line; .long %c1\n" \
+                   ".section predict_file; .long %c2; .popsection\n" \
+                   "incl ..predictcnt%=(,%0,4)" \
+                   : : "r" (_e == E), "i" (__LINE__), "i" (__FILE__)); \
+    __builtin_expect (_e, E); \
+  })
+# else
+#  error "debugpred__ definition missing"
+# endif
+# define unlikely(expt) debugpred__ ((expr), 0)
+# define likely(expr) debugpred__ ((expr), 1)
+#endif
+</pre>
+</blockquote>
+<p>
+
+These macros use a lot of functionality provided by the GNU assembler and linker
+when creating ELF files. The first <tt>asm</tt> statement in the
+<tt>DEBUGPRED</tt> case defines three additional sections; it
+mainly gives the assembler information about how the sections should
+be created.  All sections are available at runtime, and the
+<tt>predict_data</tt> section is writable.  It is important that all
+section names are valid C identifiers.  The reason will be clear
+shortly.
+</p><p>
+
+The new definitions of the <tt>likely</tt> and <tt>unlikely</tt> macros
+refer to the machine-specific <tt>debugpred__</tt> macro.  This macro
+has the following tasks:
+</p><p>
+</p><ol>
+<p>
+</p><li> allocate two words in the <tt>predict_data</tt> section to
+  contain the counts for correct and incorrect predictions.  These two
+  fields get a unique name through the use of <tt>%=</tt>; the
+  leading dots makes sure the symbols do not pollute the symbol table.
+<p>
+</p></li><li> allocate one word in the <tt>predict_line</tt> section to contain
+  the line number of the <tt>likely</tt> or <tt>unlikely</tt> macro use.
+<p>
+</p></li><li> allocate one word in the <tt>predict_file</tt> section to contain
+  a pointer to the file name of the <tt>likely</tt> or <tt>unlikely</tt>
+  macro use.
+<p>
+</p></li><li> increment the &ldquo;correct&rdquo; or &ldquo;incorrect&rdquo; counter created for
+  this macro according to the actual value of the expression <tt>e</tt>.
+  We do not use atomic operations here because they are massively slower
+  and absolute precision in the unlikely case of a collision is not
+  that important.  It is easy enough to change if wanted.
+<p>
+</p></li></ol>
+<p>
+
+The <tt>.pushsection</tt> and <tt>.popsection</tt> pseudo-ops are described
+in the assembler manual.  The interested reader is asked to explore
+the details of these definition with the help of the manuals and some
+trial and error.
+</p><p>
+
+These macros automatically and transparently take care of collecting
+the information about correct and incorrect branch predictions.  What
+is missing is a method to get to the results.  The simplest way is to
+define a destructor for the object and print out the results there.
+This can be achieved with a function defined like this:
+</p><p>
+</p><blockquote>
+<pre>extern long int __start_predict_data;
+extern long int __stop_predict_data;
+extern long int __start_predict_line;
+extern const char *__start_predict_file;
+<p>
+
+static void
+__attribute__ ((destructor))
+predprint(void)
+{
+  long int *s = &__start_predict_data;
+  long int *e = &__stop_predict_data;
+  long int *sl = &__start_predict_line;
+  const char **sf = &__start_predict_file;
+  while (s &lt; e) {
+    printf("%s:%ld: incorrect=%ld, correct=%ld%s\n", *sf, *sl, s[0], s[1],
+           s[0] &gt; s[1] ? "   &lt;==== WARNING" : "");
+    ++sl;
+    ++sf;
+    s += 2;
+  }
+}
+</p></pre>
+</blockquote>
+<p>
+
+Here the fact that the section names are valid C
+identifiers comes into play; it is used by the GNU linker to automatically
+define, if needed, two symbols for the section.  The
+<tt>__start_<i>XYZ</i></tt> symbols corresponds to the beginning of the
+section <tt><i>XYZ</i></tt> and <tt>__stop_<i>XYZ</i></tt> is the
+location of the first byte following section <tt><i>XYZ</i></tt>.
+These symbols make it possible to iterate over the section content at
+runtime. Note that, since the content of the sections can come from
+all the files the linker uses at link time, the compiler and assembler
+do not have enough information to determine the size of the section.
+Only with these magic linker-generated symbols is it possible to
+iterate over the section content.
+</p><p>
+
+The code does not iterate over one section only, though; there are three
+sections involved. Since we know that, for every two words added to
+the <tt>predict_data</tt> section we add one word to each of the
+<tt>predict_line</tt> and <tt>predict_file</tt> sections, we do not have to
+check the boundaries of these two sections.  We just carry pointers
+along and increment them in unison.
+</p><p>
+
+The code prints out a line for every prediction which appears in the
+code. It highlights those uses where the prediction is
+incorrect. Of course, this can be changed, and the debug mode could be
+restricted to flag only the entries which have more incorrect
+predictions than correct ones.  Those are candidates for change.
+There are details which complicate the issue; for example, if the branch
+prediction happens inside a macro which is used in multiple places, all
+the macro uses must be considered together before making a final judgment.
+</p><p>
+
+Two last comments: the data required for this debugging operation is
+not small, and, in case of DSOs, expensive (the <tt>predict_file</tt>
+section must be relocated).  Therefore the debugging mode should not
+be enabled in production binaries.  Finally, each executable and DSO
+creates it own output, this must be kept in mind when analyzing the data.
+</p><p>
+</p><p>
+</p><h3>9.3 Measure Cache Line Sharing Overhead</h3>
+
+<p>
+
+This section contains the test program to measure the overhead of
+using variables on the same cache line versus variables on separate
+cache lines.
+</p><p>
+</p><blockquote>
+<pre>#include &lt;error.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define N (atomic ? 10000000 : 500000000)
+
+static int atomic;
+static unsigned nthreads;
+static unsigned disp;
+static long **reads;
+
+static pthread_barrier_t b;
+
+static void *
+tf(void *arg)
+{
+  long *p = arg;
+
+  if (atomic)
+    for (int n = 0; n &lt; N; ++n)
+      __sync_add_and_fetch(p, 1);
+  else
+    for (int n = 0; n &lt; N; ++n)
+      {
+        *p += 1;
+        asm volatile("" : : "m" (*p));
+      }
+
+  return NULL;
+}
+
+int
+main(int argc, char *argv[])
+{
+  if (argc &lt; 2)
+    disp = 0;
+  else
+    disp = atol(argv[1]);
+
+  if (argc &lt; 3)
+    nthreads = 2;
+  else
+    nthreads = atol(argv[2]) ?: 1;
+
+  if (argc &lt; 4)
+    atomic = 1;
+  else
+    atomic = atol(argv[3]);
+
+  pthread_barrier_init(&b, NULL, nthreads);
+
+  void *p;
+  posix_memalign(&p, 64, (nthreads * disp ?: 1) * sizeof(long));
+  long *mem = p;
+
+  pthread_t th[nthreads];
+  pthread_attr_t a;
+  pthread_attr_init(&a);
+  cpu_set_t c;
+  for (unsigned i = 1; i &lt; nthreads; ++i)
+    {
+      CPU_ZERO(&c);
+      CPU_SET(i, &c);
+      pthread_attr_setaffinity_np(&a, sizeof(c), &c);
+      mem[i * disp] = 0;
+      pthread_create(&th[i], &a, tf, &mem[i * disp]);
+    }
+
+  CPU_ZERO(&c);
+  CPU_SET(0, &c);
+  pthread_setaffinity_np(pthread_self(), sizeof(c), &c);
+  mem[0] = 0;
+  tf(&mem[0]);
+
+  if ((disp == 0 && mem[0] != nthreads * N)
+      || (disp != 0 && mem[0] != N))
+    error(1,0,"mem[0] wrong: %ld instead of %d",
+	  mem[0], disp == 0 ? nthreads * N : N);
+
+  for (unsigned i = 1; i &lt; nthreads; ++i)
+    {
+      pthread_join(th[i], NULL);
+      if (disp != 0 && mem[i * disp] != N)
+        error(1,0,"mem[%u] wrong: %ld instead of %d", i, mem[i * disp], N);
+    }
+
+  return 0;
+}
+</pre>
+</blockquote>
+<p>
+
+The code is provided here mainly as an illustration of how to write a program
+which measures effects like cache line overhead. The interesting
+parts are the bodies of the loops in <tt>tf</tt>.  The
+<tt>__sync_add_and_fetch</tt> intrinsic, known to the compiler,
+generates an atomic add instruction.  In the second loop we have to
+&ldquo;consume&rdquo; the result of the increment (through the inline <tt>asm</tt>
+statement). The <tt>asm</tt> does not introduce any actual code; instead, it
+prevents the compiler from lifting the increment operation out of the loop.
+</p><p>
+
+The second interesting part is that the program pins the threads onto
+specific processors.  The code assumes the processors are numbered 0
+to 3, which is usually the case if the machine has four or more logical
+processors.  The code could have used the interfaces from libNUMA to
+determine the numbers of the usable processors, but this test program should be widely
+usable without introducing this dependency. It is easy enough to fix up one
+way or another.
+</p><p>
+</p><p>
+</p><h2>10 Some OProfile Tips</h2>
+
+<p>
+
+The following is not meant as a tutorial on how to use oprofile.
+There are entire documents written on that topic.  Instead it is meant
+to give a few higher-level hints on how to look at one's programs to
+find possible trouble spots.  But before that we must at least have a
+minimal introduction.
+</p><p>
+</p><p>
+</p><h3>10.1 Oprofile Basics</h3>
+<p>
+
+Oprofile works in two phases: collection and then analysis.  The collection
+is performed by the kernel; it cannot be done at userlevel since the
+measurements use the performance counters of the CPU.  These counters
+require access to MSRs which, in turn, requires privileges.
+</p><p>
+
+Each modern processor provides its own set of performance counters.  On some
+architectures a subset of the counters are provided by all processor
+implementations while the others differ from version to version. This makes
+giving general advice about the use of oprofile hard. There is not (yet) a
+higher-level abstraction for the counters which could hide these
+details.
+</p><p>
+
+The processor version also controls how many events can be traced at any one
+time, and in which combination.  This adds yet more complexity to the picture.
+</p><p>
+
+If the user knows the necessary details about the performance counters, the
+opcontrol program can be used to select the events which should be counted.
+For each event it is necessary to specify the &ldquo;overrun number&rdquo; (the
+number of events which must occur before the CPU is interrupted to record
+an event), whether the
+event should be counted for userlevel and/or the kernel, and finally a
+&ldquo;unit mask&rdquo; (it selects sub-functions of the performance counter).
+</p><p>
+
+To count the CPU cycles on x86 and x86-64 processors, one has to
+issue the following command:
+</p><p>
+</p><pre>    opcontrol --event CPU_CLK_UNHALTED:30000:0:1:1
+</pre>
+<p>
+
+The number 30000 is the overrun number.  Choosing a reasonable value
+is important for the behavior of the system and the collected data.
+It is a bad idea ask to receive data about every single
+occurrence of the event. For many events, this would bring the machine
+to a standstill since all it would do is work on the data collection
+for the event overrun; this is why oprofile enforces a minimum value.
+The minimum values differ for each event since different events have a
+different probability of being triggered in normal code.
+</p><p>
+
+Choosing a very high number reduces the resolution of the profile.  At
+each overrun oprofile records the address of the instruction which is
+executed at that moment; for x86 and PowerPC it can, under some
+circumstances, record the backtrace as well. {<i>Backtrace support will
+  hopefully be available for all architectures at some point.</i>}  With a
+coarse resolution, the hot spots might not get a representative number
+of hits; it is all about probabilities, which is why oprofile is
+called a probabilistic profiler.  The lower the overrun number is the
+higher the impact on the system in terms of slowdown but the higher
+the resolution.
+</p><p>
+
+If a specific program is to be profiled, and the system is not used for
+production, it is often most useful to use the lowest possible overrun
+value.  The exact value for each event can be queried using
+</p><p>
+</p><pre>    opcontrol --list-events
+</pre>
+<p>
+
+This might be problematic if the profiled program interacts with another
+process, and the slowdown causes problems in the interaction. Trouble can
+also result if a
+process has some realtime requirements which cannot be met when it is interrupted
+often.  In this case a middle ground has to be found.  The same is true if
+the entire system is to be profiled for extended periods of time.  A low
+overrun number would mean the massive slowdowns. In any case, oprofile,
+like any other profiling mechanism, introduces uncertainty and inaccuracy.
+</p><p>
+
+The profiling has to be started with <tt>opcontrol --start</tt> and can
+be stopped with <tt>opcontrol --stop</tt>.  While oprofile is active it
+collects data; this data is first collected in the kernel and then
+send to a userlevel daemon in batches, where it is decoded and written
+to a filesystem.  With <tt>opcontrol --dump</tt> it is possible to
+request all information buffered in the kernel to be released to
+userlevel.
+</p><p>
+
+The collected data can contain events from different performance
+counters.  The numbers are all kept in parallel unless the user
+selects to wipe the stored data in between separate oprofile runs.  It
+is possible to accumulate data from the same event at different
+occasions.  If an event is encountered during different profiling runs
+the numbers are added if this is what is selected by the user.
+</p><p>
+
+The userlevel part of the data collection process demultiplexes the data.
+Data for each file is stored separately.  It is even possible to
+differentiate DSOs used by individual executable and, even, data for
+individual threads.  The data thus produced can be archived using
+<tt>oparchive</tt>.  The file produced by this command can be transported
+to another machine and the analysis can be performed there.
+</p><p>
+
+With the opreport program one can generate reports from the profiling
+results.  Using opannotate it is possible to see where the various events
+happened: which instruction and, if the data is available, in which
+source line. This makes it easy to find hot spots. Counting CPU cycles
+will point out where the most time is spent (this includes cache misses)
+while counting retired instructions allows finding where most of the executed
+instructions are&mdash;there is a big difference between the two.
+</p><p>
+
+A single hit at an address usually has no meaning.  A side effect of
+statistical profiling is that instructions which are only executed a few
+times, or even only once, might be attributed with a hit.  In such a case it
+is necessary to verify the results through repetition.
+</p><p>
+</p><p>
+</p><h3>10.2 What It Looks Like</h3>
+<p>
+
+An oprofile session can look as simple as this:
+</p><p>
+</p><blockquote>
+<pre>$ opcontrol -i cachebench
+$ opcontrol -e INST_RETIRED:6000:0:0:1 --start
+$ ./cachebench ...
+$ opcontrol -h
+</pre>
+</blockquote>
+<p>
+
+Note that these commands, including the actual program, are run as root.
+Running the program as root is done here only for simplicity;
+the program can be executed by any user and oprofile would pick up on
+it.  The next step is analyzing the data.  With opreport we  see:
+</p><p>
+</p><blockquote>
+<pre>CPU: Core 2, speed 1596 MHz (estimated)
+Counted INST_RETIRED.ANY_P events (number of instructions retired) with a unit mask of
+0x00 (No unit mask) count 6000
+INST_RETIRED:6000|
+  samples|      %|
+------------------
+   116452 100.000 cachebench
+</pre>
+</blockquote>
+<p>
+
+This means we collected a bunch of events; opannotate can now be used
+to look at the data in more detail.  We can see where in the program
+the most events were recorded.  Part of the <tt>opannotate --source</tt>
+output looks like this:
+</p><p>
+</p><blockquote>
+<pre>               :static void
+               :inc (struct l *l, unsigned n)
+               :{
+               :  while (n-- &gt; 0) /* inc total:  13980 11.7926 */
+               :    {
+     5  0.0042 :      ++l-&gt;pad[0].l;
+ 13974 11.7875 :      l = l-&gt;n;
+     1 8.4e-04 :      asm volatile ("" :: "r" (l));
+               :    }
+               :}
+</pre>
+</blockquote>
+<p>
+
+That is the inner function of the test, where a large portion of
+the time is spent.  We see the samples spread out over all three lines
+of the loop.  The main reason for this is that the sampling is not
+always 100% accurate with respect to the recorded instruction
+pointer. The CPU executes instructions out of order; reconstructing the exact
+sequence of execution to produce a correct instruction pointer is
+hard.  The most recent CPU versions try to do this for a select few
+events but it is, in general, not worth the effort&mdash;or simply not
+possible.  In most cases it does not really matter.  The programmer
+should be able to determine what is going on even if there is a
+normally-distributed set of samples.
+</p><p>
+</p><p>
+</p><h3>10.3 Starting To Profile</h3>
+<p>
+
+When starting to analyze a body of code, one certainly can start
+looking at the places in the program where the most time is spent.
+That code should certainly be optimized as well as possible.  But what
+happens next?  Where is the program spending <i>unnecessary</i> time?
+This question is not so easy to answer.
+</p><p>
+
+One of the problems in this situation is that absolute values do not
+tell the real story.  One loop in the program might demand the
+majority of the time, and this is fine. There are many possible
+reasons for the high CPU utilization, though. But what is more common,
+is that CPU usage is more evenly spread throughout the
+program. In this case, the absolute values point to many places, which
+is not useful.
+</p><p>
+
+In many situations it is helpful to look at ratios of two events.  For
+instance, the number of mispredicted branches in a function can be
+meaningless if there is no measure for how often a function was
+executed.  Yes, the absolute value is relevant for the program's
+performance.  The ratio of mispredictions per call is more meaningful for
+the code quality of the function.  Intel's optimization manual for x86
+and x86-64 [intelopt] describes ratios which should be
+investigated (Appendix B.7 in the cited document for Core&nbsp;2 events).
+A few of the ratios relevant for memory handling are the following.
+</p><p>
+</p><table cellspacing="3">
+
+<tbody><tr class="Odd"><td valign="top">
+
+Instruction Fetch Stall </td><td valign="top"> <tt>CYCLES_L1I_MEM_STALLED</tt> /
+<tt>CPU_CLK_UNHALTED.CORE</tt> </td><td valign="top"> Ratio of cycles during which in
+instruction decoder is waiting for new data due to cache or ITLB misses.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+ITLB Miss Rate </td><td valign="top"> <tt>ITLB_MISS_RETIRED</tt> / <tt>INST_RETIRED.ANY</tt> </td><td valign="top">
+
+ITLB misses per instruction.  If this ratio is high the code is spread
+over too many pages.</td></tr>
+
+<tr class="Odd"><td valign="top">
+
+L1I Miss Rate </td><td valign="top"> <tt>L1I_MISSES</tt> / <tt>INST_RETIRED.ANY</tt> </td><td valign="top">
+
+L1i misses per instruction.  The execution flow is unpredictable or
+the code size is too large.  In the former case avoiding indirect
+jumps might help.  In the latter case block reordering or avoiding
+inlining might help.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+L2 Instruction Miss Rate </td><td valign="top"> <tt>L2_IFETCH.SELF.I_STATE</tt> /
+<tt>INST_RETIRED.ANY</tt> </td><td valign="top"> L2 misses for program code per
+instruction.
+Any value larger than zero indicates code locality problems which are
+even worse than L1i misses.</td></tr>
+
+<tr class="Odd"><td valign="top">
+
+Load Rate </td><td valign="top"> <tt>L1D_CACHE_LD.MESI</tt> / <tt>CPU_CLK_UNHALTED.CORE</tt> </td><td valign="top">
+
+Read operations per cycle.  A Core&nbsp;2 core can service one load
+operation.  A high ratio means the execution is bound by memory
+reads.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+Store Order Block </td><td valign="top"> <tt>STORE_BLOCK.ORDER</tt> /
+<tt>CPU_CLK_UNHALTED.CORE</tt> </td><td valign="top">
+
+Ratio if stores blocked by previous stores which miss the cache.</td></tr>
+
+<tr class="Odd"><td valign="top">
+
+L1d Rate Blocking Loads </td><td valign="top"> <tt>LOAD_BLOCK.L1D</tt> /
+<tt>CPU_CLK_UNHALTED.CORE</tt> </td><td valign="top">
+
+Loads from L1d blocked by lack of resources.  Usually this means too
+many concurrent L1d accesses.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+L1D Miss Rate </td><td valign="top"> <tt>L1D_REPL</tt> / <tt>INST_RETIRED.ANY</tt> </td><td valign="top">
+
+L1d misses per instruction.  A high rate means that prefetching is not
+effective and L2 is used too often.</td></tr>
+
+<tr class="Odd"><td valign="top">
+
+L2 Data Miss Rate </td><td valign="top"> <tt>L2_LINES_IN.SELF.ANY</tt> /
+<tt>INST_RETIRED.ANY</tt> </td><td valign="top">
+
+L2 misses for data per instruction.  If the value is significantly
+greater than zero, hardware and software prefetching is ineffective. The
+processor needs more (or earlier) software prefetching help.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+L2 Demand Miss Rate </td><td valign="top"> <tt>L2_LINES_IN.SELF.DEMAND</tt> /
+<tt>INST_RETIRED.ANY</tt> </td><td valign="top">
+
+L2 misses for data per instruction for which the hardware prefetcher
+was not used at all.  That means, prefetching has not even started.</td></tr>
+
+<tr class="Odd"><td valign="top">
+
+Useful NTA Prefetch Rate </td><td valign="top"> <tt>SSE_PRE_MISS.NTA</tt> /
+<tt>SSS_PRE_EXEC.NTA</tt> </td><td valign="top">
+
+Ratio of useful non-temporal prefetch relative to the total number of all
+non-temporal prefetches.  A low value means many values are already in
+the cache.  This ratio can be computed for the other prefetch types as
+well.</td></tr>
+
+<tr class="Even"><td valign="top">
+
+Late NTA Prefetch Rate </td><td valign="top"> <tt>LOAD_HIT_PRE</tt> / <tt>SSS_PRE_EXEC.NTA</tt> </td><td valign="top">
+
+Ratio of load requests for data with ongoing prefetch relative to the
+total number of all non-temporal prefetches.  A high value means the
+software prefetch instruction is issued too late.  This ratio can be
+computed for the other prefetch types as well.</td></tr>
+
+</tbody></table>
+<p>
+
+For all these ratios, the program should be run with oprofile being
+instructed to measure both events.  This guarantees the two counts are
+comparable.  Before the division, one has to make sure that the
+possibly different overrun values are taken into account.  The
+simplest way is to ensure this is by multiplying each events counter
+by the overrun value.
+</p><p>
+
+The ratios are meaningful for whole programs, at the executable/DSO
+level, or even at the function level.  The deeper one looks into the
+program, the more errors are included in the value.
+</p><p>
+
+What is needed to make sense of the ratios are baseline values.  This
+ is not as easy as it might seem.  Different types of code has
+different characteristics and a ratio value which is bad in one
+program might be normal in another program.
+</p><p>
+</p><p>
+</p><h2>11 Memory Types</h2>
+
+<p>
+</p><p>
+
+Though it is not necessary knowledge for efficient programming, it might
+be useful to describe some more technical details of available memory
+types.  Specifically we are here interested in the difference of
+&ldquo;registered&rdquo; versus &ldquo;unregistered&rdquo; and ECC versus non-ECC DRAM types.
+
+</p><p>
+
+The terms &ldquo;registered&rdquo; and &ldquo;buffered&rdquo; are used synonymously when
+describing a DRAM type which has one additional component on the DRAM
+module: a buffer.  All DDR memory types can come in registered and
+unregistered form.  For the unregistered modules, the memory controller
+is directly connected to all the chips on the module.
+Figure 11.1 shows the setup.
+</p><p>
+</p><blockquote>
+<img src="cpumemory.51.png">
+<p><b>Figure 11.1: Unregistered DRAM Module</b>
+</p></blockquote>
+<p>
+
+Electrically this is quite demanding.  The memory controller must be
+able to deal with the capacities of all the memory chips (there are
+more than the six shown in the figure).  If the memory controller (MC)
+has a limitation, or if many memory modules are to be used, this setup
+is not ideal.
+</p><p>
+</p><blockquote>
+<img src="cpumemory.52.png">
+<p><b>Figure 11.2: Registered DRAM Module</b>
+</p></blockquote>
+<p>
+
+Buffered (or registered) memory changes the situation:
+instead of directly connecting the RAM chips on the DRAM module to the
+memory, they are connected to a buffer which, in turn, is then connected
+to the memory controller.  This significantly reduces the complexity
+of the electrical connections.  The ability of the memory controllers
+to drive DRAM modules increases by a factor corresponding to the
+number of connections saved.
+</p><p>
+
+With these advantages the question is: why aren't all DRAM modules
+buffered? There are several reasons. Obviously, buffered modules are
+a bit more complicated and, hence, more expensive. Cost is not the only
+factor, though.  The buffer delays the signals from the RAM chips a
+bit; the delay must be high enough to ensure that all signals from
+the RAM chips are buffered.  The result is that the latency of the
+DRAM module increases.  A last factor worth mentioning here is that
+the additional electrical component increases the energy cost.  Since
+the buffer has to operate at the frequency of the bus this component's
+energy consumption can be significant.
+</p><p>
+
+With the other factors of the use of DDR2 and DDR3 modules it is
+usually not possible to have more than two DRAM modules per bank.  The
+number of pins of the memory controller limit the number of banks (to
+two in commodity hardware).  Most memory controllers are able to drive
+four DRAM modules and, therefore, unregistered modules are sufficient.
+In server environments with high memory requirements the situation
+might be different.
+</p><p>
+
+A different aspect of some server environments is that they cannot
+tolerate errors. Due to the minuscule charges held by the capacitors in the
+RAM cells, errors are possible. People often joke about cosmic
+radiation but this is indeed a possibility.  Together with alpha
+decays and other natural phenomena, they lead to errors where the
+content of RAM cell changes from 0 to 1 or vice versa.  The more
+memory is used, the higher the probability of such an event.
+</p><p>
+
+If such errors are not acceptable, ECC (Error Correction Code) DRAM can
+be used.  Error correction codes enable the hardware to recognize
+incorrect cell contents and, in some cases, correct the errors.  In the
+old days, parity checks only recognized errors, and the machine had to
+be stopped when one was detected.  With ECC, instead, a small number of
+erroneous bits can be automatically
+corrected.  If the number of errors is too high, though, the memory
+access cannot be performed correctly and the machine still stops.
+This is a rather unlikely case for working DRAM modules, though, since
+multiple errors must happen on the same module.
+</p><p>
+
+When we speak about ECC memory we are actually not quite correct.  It
+is not the memory which performs the error checking; instead, it is the memory
+controller.  The DRAM modules simply provide more storage and
+transport the additional non-data bits along with the real data.
+Usually, ECC memory stores one additional bit for each 8 data bits.
+Why 8 bits are used will be explained a bit later.
+</p><p>
+
+Upon writing data to a memory address, the memory controller computes
+the ECC for the new content on the fly before sending
+that data and ECC onto the memory bus.  When reading, the data plus the
+ECC is received, the memory controller computes the ECC for the data,
+and compares it with the ECC transmitted from the DRAM module.  If the
+ECCs match everything is fine. If they do not match, the memory
+controller tries to correct the error. If this correction is not possible,
+the error is logged and the machine is possibly halted.
+</p><p>
+</p><blockquote>
+<table border="1" cellpadding="3">
+<tbody><tr><th></th><th colspan="2">SEC</th><th colspan="2">SEC/DED</th></tr>
+<tr><th>Data Bits W</th><th>ECC Bits E</th><th>Overhead</th>
+    <th>ECC Bits E</th><th>Overhead</th></tr>
+
+<tr><td>4</td><td>3</td><td>75.0%</td><td>4</td><td>100.0%</td></tr>
+<tr><td>8</td><td>4</td><td>50.0%</td><td>5</td><td>62.5%</td></tr>
+<tr><td>16</td><td>5</td><td>31.3%</td><td>6</td><td>37.5%</td></tr>
+<tr><td>32</td><td>6</td><td>18.8%</td><td>7</td><td>21.9%</td></tr>
+<tr><td>64</td><td>7</td><td>10.9%</td><td>8</td><td>12.5%</td></tr>
+</tbody></table>
+<p><b>Table 11.1: ECC and Data Bits Relationship</b>
+
+</p></blockquote>
+<p>
+
+Several techniques for error correction are in use but, for DRAM ECC,
+usually Hamming codes are used.  Hamming codes originally were used to
+encode four data bits with the ability to recognize and correct one
+flipped bit (SEC, Single Error Correction).  The mechanism can easily
+be extended to more data bits.  The relationship between the number of
+data bits W and the number of bits for the error code <b>E</b> is
+described by the equation
+</p><p>
+</p><blockquote>
+
+    E = &lceil;log<sub>2</sub> (W+E+1)&rceil;
+</blockquote>
+<p>
+
+Solving this equation iteratively results in the values shown in the
+second column of Table 11.1.  With an additional bit, we can
+recognize two flipped bits using a simple parity bit.  This is then
+called SEC/DED, Single Error Correction/Double Error Detection.  With
+this additional bit we arrive at the values in the fourth column of
+Table 11.1.  The overhead for W=64 is sufficiently low and the
+numbers (64, 8) are multiples of 8, so this is a natural selection
+for ECC.  On most modules, each RAM chip produces 8 bits and, therefore,
+any other combination would lead to less efficient solution.
+</p><p>
+</p><blockquote>
+<table>
+<tbody><tr><td></td>
+    <td bgcolor="pink">7</td>
+    <td bgcolor="pink">6</td>
+    <td bgcolor="pink">5</td>
+    <td bgcolor="#8888ff">4</td>
+    <td bgcolor="pink">3</td>
+    <td bgcolor="#8888ff">2</td>
+    <td bgcolor="#8888ff">1</td></tr>
+<tr><td>ECC Word</td><td bgcolor="pink">D</td><td bgcolor="pink">D</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">P</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">P</td><td bgcolor="#8888ff">P</td></tr>
+
+<tr><td>P<sub>1</sub> Parity</td><td bgcolor="pink">D</td><td bgcolor="pink">&mdash;</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">&mdash;</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">&mdash;</td><td bgcolor="#8888ff">P</td></tr>
+
+<tr><td>P<sub>2</sub> Parity</td><td bgcolor="pink">D</td><td bgcolor="pink">D</td><td bgcolor="pink">&mdash;</td><td bgcolor="#8888ff">&mdash;</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">P</td><td bgcolor="#8888ff">&mdash;</td></tr>
+
+<tr><td>P<sub>4</sub> Parity</td><td bgcolor="pink">D</td><td bgcolor="pink">D</td><td bgcolor="pink">D</td><td bgcolor="#8888ff">P</td><td bgcolor="pink">&mdash;</td><td bgcolor="#8888ff">&mdash;</td><td bgcolor="#8888ff"> &mdash;</td></tr>
+
+</tbody></table>
+<p><b>Figure 11.3: Hamming Generation Matrix Construction</b>
+</p></blockquote>
+<p>
+
+The Hamming code computation is easy to demonstrate with a code using
+W=4 and E=3.  We compute parity bits at strategic places in the
+encoded word.  Figure 11.3 shows the principle.  At the
+bit positions corresponding to the powers of two the parity bits are
+added.  The parity sum for the first parity bit P<sub>1</sub> contains every second bit.
+The parity sum for the second parity bit P<sub>2</sub> contains data bits 1,
+3, and 4 (encoded here as 3, 6, and 7).  Similar ly P<sub>4</sub> is
+computed.
+</p><p>
+
+The computation of the parity bits can be more elegantly described
+using a matrix multiplication.  We construction a matrix G&nbsp;=&nbsp;[I|A]
+where I is the identity matrix and A is the parity generation
+matrix we can determine from Figure 11.3.
+</p><p>
+</p><blockquote>
+<img src="g-matrix.png">
+</blockquote>
+<p>
+
+The columns of A are constructed from the bits used in the
+computation of P<sub>1</sub>, P<sub>2</sub>, and P<sub>4</sub>.  If we now represent each
+input data item as a 4-dimensional vector d we can compute r=d&sdot;G
+and get a 7-dimensional vector r.  This is the data which in the
+case of ECC DDR is stored.
+</p><p>
+
+To decode the data we construct a new matrix H=[A<sup>T</sup>|I]
+where A<sup>T</sup> is the transposed parity generation matrix from
+the computation of G.  That means:
+</p><p>
+</p><blockquote>
+<img src="h-matrix.png">
+</blockquote>
+<p>
+
+The result of H&sdot;r shows whether the stored data is defective. If
+this is not the case, the product is the 3-dimensional vector
+(0&nbsp;0&nbsp;0)<sup>T</sup>.
+  Otherwise the value of the product, when interpreted as the binary
+  representation of a number, indicates the column number with the
+  flipped bit.
+</p><p>
+
+As an example, assume d=(1&nbsp;0&nbsp;0&nbsp;1).  This results in
+</p><p>
+</p><blockquote>
+
+r = (1&nbsp;0&nbsp;0&nbsp;1&nbsp;0&nbsp;0&nbsp;1)
+</blockquote>
+<p>
+
+Performing the test using the multiplication with H results in
+</p><p>
+</p><blockquote>
+<img src="s-matrix.png">
+</blockquote>
+<p>
+
+Now, assume we have a corruption of the stored data and read back from
+memory 
+r'&nbsp;=&nbsp;(1&nbsp;0&nbsp;<font color="red"><b><u>1</u></b></font>&nbsp;1&nbsp;0&nbsp;0&nbsp;1).
+In this case we get
+</p><p>
+</p><blockquote>
+<img src="sprime-matrix.png">
+</blockquote>
+<p>
+
+The vector is not the null vector and, when interpreted as a number,
+s' has the value 5.  This is the number of the bit we flipped in
+r' (starting to count the bits from 1).  The memory controller can
+correct the bit and the programs will not notice that there has been a
+problem.
+</p><p>
+
+Handling the extra bit for the DED part is only slightly more complex.
+With more effort is it possible to create codes which can correct two
+flipped bits and more.  It is probability and risk which decide
+whether this is needed.  Some memory manufacturers say an error can
+occur in 256MB of RAM every 750&nbsp;hours.  By doubling the amount of
+memory the time is reduced by 75%.  With enough memory the
+probability of experiencing an error in a short time can be
+significant and ECC RAM becomes a requirement.  The time frame could even
+be so small that the SEC/DED implementation is not sufficient.
+</p><p>
+
+Instead of implementing even more error correction capabilities, server
+motherboards have the ability to automatically read all memory
+over a given timeframe.  That means, whether or not the memory was
+actually requested by the processor, the memory controller reads the
+data and, if the ECC check fails, writes the corrected data back to
+memory. As long as the probablity of incurring less than two memory
+errors in the time frame needed to read all of memory and write it back
+is acceptable, SEC/DED error correction is a perfectly reasonable
+solution.
+</p><p>
+
+As with registered DRAM, the question has to be asked: why is ECC DRAM
+not the norm? The answer to this question is the same as for the
+equivalent question about registered RAM: the extra RAM chip increases
+the cost and the parity computation increases the delay.  Unregistered,
+non-ECC memory can be significantly faster.  Because of the similarity
+of the problems of registered and ECC DRAM, one usually only finds
+registered, ECC DRAM and not registered, non-ECC DRAM.
+</p><p>
+</p><p>
+
+There is another method to overcome memory errors.  Some manufacturers
+offer what is often incorrectly called &ldquo;memory RAID&rdquo; where the data
+is distributed redundantly over multiple DRAM modules, or at least RAM
+chips.  Motherboards with this feature can use unregistered DRAM
+modules, but the increased traffic on the memory busses is likely to
+negate the difference in access times for ECC and non-ECC DRAM modules.
+</p><p>
+</p><p>
+</p><h2>12 libNUMA Introduction</h2>
+
+<p>
+
+Although much of the information programmers need to schedule threads
+optimally, allocate memory appropriately, etc. is available, this information is
+cumbersome to get at. The existing NUMA support library (libnuma, in
+the numactl package on RHEL/Fedora systems) does not, by a long shot, provide adequate
+functionality.
+</p><p>
+
+As a response, the author has proposed a new library which
+provides all the functionality needed for NUMA.  Due to the overlap of
+memory and cache hierarchy handling, this library is also useful for
+non-NUMA systems with multi-thread and multi-core processors&mdash;almost every
+currently-available machine.
+</p><p>
+
+The functionality of this new library is urgently needed to follow the
+advice given in this document.  This is the only reason why it is
+mentioned here.  The library (as of this writing) is not finished,
+not reviewed, not polished, and not (widely) distributed.  It might
+change significantly in future.  It is currently available at
+<a href="http://people.redhat.com/drepper/libNUMA.tar.bz2">http://people.redhat.com/drepper/libNUMA.tar.bz2</a>.
+</p><p>
+</p><p>
+
+The interfaces of this library depend heavily on the information
+exported by the <tt>/sys</tt> filesystem. If this filesystem is not
+mounted, many functions will simply fail or provide inaccurate
+information.  This is particularly important to remember if a process
+is executed in a <tt>chroot</tt> jail.
+</p><p>
+
+The interface header for the library contains currently the following
+definitions:
+</p><p>
+</p><blockquote>
+<pre>typedef memnode_set_t;
+<p>
+
+#define MEMNODE_ZERO_S(setsize, memnodesetp)
+#define MEMNODE_SET_S(node, setsize, memnodesetp)
+#define MEMNODE_CLR_S(node, setsize, memnodesetp)
+#define MEMNODE_ISSET_S(node, setsize, memnodesetp)
+#define MEMNODE_COUNT_S(setsize, memnodesetp)
+</p><p>
+
+#define MEMNODE_EQUAL_S(setsize, memnodesetp1, memnodesetp2)
+</p><p>
+
+#define MEMNODE_AND_S(setsize, destset, srcset1, srcset2)
+#define MEMNODE_OR_S(setsize, destset, srcset1, srcset2)
+#define MEMNODE_XOR_S(setsize, destset, srcset1, srcset2)
+</p><p>
+
+#define MEMNODE_ALLOC_SIZE(count)
+#define MEMNODE_ALLOC(count)
+#define MEMNODE_FREE(memnodeset)
+</p><p>
+
+int NUMA_cpu_system_count(void);
+int NUMA_cpu_system_mask(size_t destsize, cpu_set_t *dest);
+</p><p>
+
+int NUMA_cpu_self_count(void);
+int NUMA_cpu_self_mask(size_t destsize, cpu_set_t *dest);
+</p><p>
+
+int NUMA_cpu_self_current_idx(void);
+int NUMA_cpu_self_current_mask(size_t destsize, cpu_set_t *dest);
+</p><p>
+
+ssize_t NUMA_cpu_level_mask(size_t destsize, cpu_set_t *dest,
+                            size_t srcsize, const cpu_set_t *src,
+                            unsigned int level);
+</p><p>
+
+int NUMA_memnode_system_count(void);
+int NUMA_memnode_system_mask(size_t destsize, memnode_set_t *dest);
+</p><p>
+
+int NUMA_memnode_self_mask(size_t destsize, memnode_set_t *dest);
+</p><p>
+
+int NUMA_memnode_self_current_idx(void);
+int NUMA_memnode_self_current_mask(size_t destsize, memnode_set_t *dest);
+</p><p>
+
+int NUMA_cpu_to_memnode(size_t cpusetsize, const cpu_set_t *cpuset,
+                        size_t __memnodesize, memnode_set_t *memnodeset);
+int NUMA_memnode_to_cpu(size_t memnodesize, const memnode_set_t *memnodeset,
+                        size_t cpusetsize, cpu_set_t *cpuset);
+</p><p>
+
+int NUMA_mem_get_node_idx(void *addr);
+int NUMA_mem_get_node_mask(void *addr, size_t size,
+                           size_t destsize, memnode_set_t *dest);
+</p></pre>
+</blockquote>
+<p>
+
+The <tt>MEMNODE_*</tt> macros are similar in form and functionality to
+the <tt>CPU_*</tt> macros introduced in section Section 6.4.3.
+There are no non-<tt>_S</tt> variants of the macros, they all require a
+size parameter.  The <tt>memnode_set_t</tt> type is the equivalent of
+<tt>cpu_set_t</tt>, but this time for memory nodes.  Note that the number
+of memory nodes need not have anything to do with the number of CPUs
+and vice versa.  It is possible to have many CPUs per memory node or
+even no CPU at all.  The size of dynamically allocated memory node bit
+sets should, therefore, not be determined by the number of CPUs.
+</p><p>
+
+Instead, the <tt>NUMA_memnode_system_count</tt> interface should be used.
+It returns the number of nodes currently registered. This number might
+grow or shrink over time. More often than not, though, it will remain
+constant, and is therefore a good value to use for sizing
+memory node bit sets.  The allocation, again similar to the <tt>CPU_</tt>
+macros, happens using <tt>MEMNODE_ALLOC_SIZE</tt>, <tt>MEMNODE_ALLOC</tt>
+and <tt>MEMNODE_FREE</tt>.
+</p><p>
+
+As a last parallel with the <tt>CPU_*</tt> macros, the library also
+provides macros to compare memory node bit sets for equality and to
+perform logical operations.
+</p><p>
+
+The <tt>NUMA_cpu_*</tt> functions provide functionality to handle CPU
+sets.  In part, the interfaces only make existing functionality
+available under a new name.  <tt>NUMA_cpu_system_count</tt> returns the
+number of CPUs in the system, the <tt>NUMA_CPU_system_mask</tt> variant
+returns a bit mask with the appropriate bits set&mdash;functionality which is
+not otherwise available.
+</p><p>
+<tt>NUMA_cpu_self_count</tt> and <tt>NUMA_cpu_self_mask</tt> return
+information about the CPUs the current thread is currently allowed to run on.
+<tt>NUMA_cpu_self_current_idx</tt> returns the index of the currently
+used CPU. This information might already be stale when returned, due
+to scheduling decisions the kernel can make; it always has to be
+assumed to be inaccurate.  The <tt>NUMA_cpu_self_current_mask</tt>
+returns the same information and sets the appropriate bit in the bit
+set.
+</p><p>
+<tt>NUMA_memnode_system_count</tt> has already been introduced.
+<tt>NUMA_memnode_system_mask</tt> is the equivalent function which fills
+in a bit set.  <tt>NUMA_memnode_self_mask</tt> fills in a bit set
+according to the memory nodes which are directly attached to any of
+the CPUs the thread can currently run on.
+</p><p>
+
+Even more specialized information is returned by
+<tt>NUMA_memnode_self_current_idx</tt> and
+<tt>NUMA_memnode_self_current_mask</tt>.  The information returned is the
+memory node which is connected to the processor the thread is
+currently running on.  Just as for the <tt>NUMA_cpu_self_current_*</tt>
+functions, this information can already be stale when the function
+returns; it can only be used as a hint.
+</p><p>
+
+The <tt>NUMA_cpu_to_memnode</tt> function can be used to map a set of
+CPUs to the set of directly-attached memory nodes. If only a
+single bit is set in the CPU set, one can determine which memory node
+each CPU belongs to. Currently, there is no support in Linux for a
+single CPU belonging to more than one memory node; this could,
+theoretically, change in future. To map in the other direction the
+<tt>NUMA_memnode_to_cpu</tt> function can be used.
+</p><p>
+
+If memory is already allocated, it is sometimes useful to know where it
+is allocated.  This is what the <tt>NUMA_mem_get_node_idx</tt> and
+<tt>NUMA_mem_get_node_mask</tt> allow the programmer to determine.  The former function
+returns the index of the memory node on which the page corresponding
+to the address specified by the parameter is allocated&mdash;or will be
+allocated according to the currently installed policy if the
+page is not yet allocated.  The second function can perform the work
+for a whole address range; it returns the information in the form of
+a bit set.  The function's return value is the number of different
+memory nodes which are used.
+</p><p>
+</p><p>
+
+In the remainder of this section we will see a few example for use
+cases of these interfaces.  In all cases we skip the error handling
+and the case where the number of CPUs and/or memory nodes is too large
+for the <tt>cpu_set_t</tt> and <tt>memnode_set_t</tt> types respectively.
+Making the code robust is left as an exercise to the reader.
+</p><p>
+</p><p>
+</p><h3>12.1 Determine Thread Sibling of Given CPU</h3>
+<p>
+
+To schedule helper threads, or other threads which benefit from being
+scheduled on a thread of a given CPU, a code sequence like the
+following can be used.
+</p><p>
+</p><blockquote>
+<pre>cpu_set_t cur;
+CPU_ZERO(&cur);
+CPU_SET(cpunr, &cur);
+cpu_set_t hyperths;
+NUMA_cpu_level_mask(sizeof(hyperths), &hyperths, sizeof(cur), &cur, 1);
+CPU_CLR(cpunr, &hyperths);
+</pre>
+</blockquote>
+<p>
+
+The code first generates a bit set for the CPU specified by
+<tt>cpunr</tt>.  This bit set is then passed to <tt>NUMA_cpu_level_mask</tt>
+along with the fifth parameter specifying that we are looking for
+hyper-threads.  The result is returned in the <tt>hyperths</tt> bit set.
+All that remains to be done is to clear the bit corresponding to the
+original CPU.
+</p><p>
+</p><p>
+</p><h3>12.2 Determine Core Siblings of Given CPU</h3>
+<p>
+
+If two threads should not be scheduled on two hyper-threads, but can
+benefit from cache sharing, we need to determine the other cores of the
+processor.  The following code sequence does the trick.
+</p><p>
+</p><blockquote>
+<pre>  cpu_set_t cur;
+  CPU_ZERO(&cur);
+  CPU_SET(cpunr, &cur);
+  cpu_set_t hyperths;
+  int nhts = NUMA_cpu_level_mask(sizeof(hyperths), &hyperths, sizeof(cur), &cur, 1);
+  cpu_set_t coreths;
+  int ncs = NUMA_cpu_level_mask(sizeof(coreths), &coreths, sizeof(cur), &cur, 2);
+  CPU_XOR(&coreths, &coreths, &hyperths);
+  ncs -= nhts;
+</pre>
+</blockquote>
+<p>
+
+The first part of the code is identical to the code to determine
+hyper-threads.  This is no coincidence since we have to distinguish
+the hyper-threads of the given CPU from the other cores.  This is
+implemented in the second part which calls <tt>NUMA_cpu_level_mask</tt>
+again, but, this time, with a level of 2.  All that remains to be done is
+to remove all hyper-threads of the given CPU from the result.  The
+variables <tt>nhts</tt> and <tt>ncs</tt> are used to keep track of the
+number of bits set in the respective bit sets.
+</p><p>
+
+The resulting mask can be used to schedule another thread.  If no
+other thread has to be explicitly scheduled, the decision about the
+core to use can be left to the OS.  Otherwise one can iteratively
+run the following code:
+</p><p>
+</p><blockquote>
+<pre>  while (ncs &gt; 0) {
+    size_t idx = 0;
+    while (! CPU_ISSET(idx, &ncs))
+      ++idx;
+    CPU_ZERO(&cur);
+    CPU_SET(idx, &cur);
+    nhts = NUMA_cpu_level_mask(sizeof(hyperths), &hyperths, sizeof(cur), &cur, 1);
+    CPU_XOR(&coreths, &coreths, hyperths);
+    ncs -= nhts;
+<p>
+
+    ... schedule thread on CPU idx ...
+  }
+</p></pre>
+</blockquote>
+<p>
+
+The loop picks, in each iteration, a CPU number from the remaining, used
+cores.  It then computes all the hyper-threads for the this CPU.  The
+resulting bit set is then subtracted (using <tt>CPU_XOR</tt>) from the bit
+set of the available cores. If the XOR operation does not remove anything,
+something is really wrong. The <tt>ncs</tt> variable is
+updated and we are ready for the next round, but not before the
+scheduling decisions are made. At the end, any of <tt>idx</tt>,
+<tt>cur</tt>, or <tt>hyperths</tt> can be used to schedule a thread,
+depending on the requirements of the program.  Often it is best to
+leave the OS as much freedom as possible and, therefore, to use the
+<tt>hyperths</tt> bit set so that the OS can select the best hyper-thread.
+
+</p><p>
+</p><h2>Bibliography</h2>
+
+<dl>
+
+
+
+
+<p></p><dt><b>[amdccnuma]</b></dt><dd><em><a href="http://www.amd.com/us-en/assets/content_type/white_papers_and_tech_docs/40555.pdf">Performance guidelines for amd
+athlon&trade; 64 and amd opteron&trade; ccnuma multiprocessor
+systems</a></em>. Advanced Micro Devices, 2006. </dd> 
+
+<p></p><dt><b>[arstechtwo]</b></dt><dd>Stokes, Jon ``Hannibal''. Ars Technica RAM
+Guide, Part II: Asynchronous and Synchronous
+DRAM. <a href="http://arstechnica.com/paedia/r/ram_guide/ram_guide.part2-1.html">http://arstechnica.com/paedia/r/ram_guide/ram_guide.part2-1.html</a>,
+2004. </dd> 
+
+<p></p><dt><b>[continuous]</b></dt><dd>Anderson, Jennifer M., Lance M. Berc, Jeffrey
+Dean, Sanjay Ghemawat, Monika R. Henzinger, Shun-Tak A. Leung, Richard
+L. Sites, Mark T. Vandevoorde, Carl A. Waldspurger and William
+E. Weihl. <a href="http://citeseer.ist.psu.edu/anderson97continuous.html">Continuous profiling: Where have all the cycles
+gone</a>. <em>Proceedings of the 16th acm symposium of operating systems
+principles</em>, pages 1--14. 1997.</dd> 
+
+
+<p></p><dt><b>[dcas]</b></dt><dd>Doherty, Simon, David L. Detlefs, Lindsay
+Grove, Christine H. Flood, Victor Luchangco, Paul A. Martin, Mark Moir, Nir
+Shavit and Jr. Guy L. Steele. <a href="http://research.sun.com/scalable/pubs/SPAA04.pdf">DCAS is not a Silver Bullet for Nonblocking
+Algorithm Design</a>. <em>Spaa '04: proceedings of the sixteenth annual acm
+symposium on parallelism in algorithms and architectures</em>, pages
+216--224. New York, NY, USA, 2004. ACM Press. </dd> 
+
+<p></p><dt><b>[ddrtwo]</b></dt><dd>Dowler, M. Introduction to DDR-2: The DDR
+Memory
+Replacement. <a href="http://www.pcstats.com/articleview.cfm?articleID=1573">http://www.pcstats.com/articleview.cfm?articleID=1573</a>,
+2004. </dd> 
+
+<p></p><dt><b>[directcacheaccess]</b></dt><dd>Huggahalli, Ram, Ravi Iyer and Scott
+Tetrick. <a href="http://www.stanford.edu/group/comparch/papers/huggahalli05.pdf">Direct Cache Access for High Bandwidth Network I/O</a>. , 2005. </dd> 
+
+<p></p><dt><b>[dwarves]</b></dt><dd>Melo, Arnaldo Carvalho de. <a href="https://ols2006.108.redhat.com/2007/Reprints/melo-Reprint.pdf">The 7 dwarves:
+debugging information beyond gdb</a>. <em>Proceedings of the linux
+symposium</em>. 2007. </dd> 
+
+<p></p><dt><b>[futexes]</b></dt><dd>Drepper, Ulrich. Futexes Are Tricky., 2005. 
+<a href="http://people.redhat.com/drepper/futex.pdf">http://people.redhat.com/drepper/futex.pdf</a>.
+</dd>
+
+<p></p><dt><b>[goldberg]</b></dt><dd>Goldberg, David. <a href="http://citeseer.ist.psu.edu/goldberg91what.html">What Every Computer 
+Scientist Should Know About Floating-Point Arithmetic</a>. <em>ACM Computing
+Surveys</em>, 23(1):5--48, 1991. </dd> 
+
+<p></p><dt><b>[highperfdram]</b></dt><dd>Cuppu, Vinodh, Bruce Jacob, Brian Davis and
+Trevor Mudge. <a href="http://citeseer.ist.psu.edu/476689.html">High-Performance DRAMs in
+Workstation Environments</a>. <em>IEEE
+Transactions on Computers</em>, 50(11):1133--1153, 2001.</dd> 
+
+<p></p><dt><b>[htimpact]</b></dt><dd>Margo, William, Paul Petersen and Sanjiv
+Shah. <a href="ftp://download.intel.com/technology/itj/2002/volume06issue01/art06_computeintensive/vol6iss1_art06.pdf">Hyper-Threading
+Technology: Impact on Compute-Intensive 
+Workloads</a>. <em>Intel Technology Journal</em>, 6(1), 2002. </dd> 
+
+<p></p><dt><b>[intelopt]</b></dt><dd><em><a href="http://www.intel.com/design/processor/manuals/248966.pdf">Intel 64 and ia-32
+architectures optimization reference manual</a></em>. Intel Corporation,
+2007. </dd> 
+
+<p></p><dt><b>[lockfree]</b></dt><dd>Fober, Dominique, Yann Orlarey and Stephane
+Letz. <a href="http://www.grame.fr/pub/fober-JIM2002.pdf">Lock-Free
+Techiniques for Concurrent Access to Shared Objects</a>. In 
+GMEM, editor, <em>Actes des journ&eacute;es d'informatique musicale
+jim2002, marseille</em>, pages 143--150. 2002. </dd> 
+
+<p></p><dt><b>[micronddr]</b></dt><dd><em>Double Data Rate (DDR) SDRAM
+MT46V</em>. Micron Technology, 2003. </dd> 
+
+<p></p><dt><b>[mytls]</b></dt><dd>Drepper, Ulrich. <a href="http://people.redhat.com/drepper/tls.pdf">ELF Handling For
+Thread-Local Storage</a>. Technical report, Red Hat, Inc., 2003. </dd> 
+
+<p></p><dt><b>[nonselsec]</b></dt><dd>Drepper, Ulrich. <a href="http://people.redhat.com/drepper/nonselsec.pdf">Security Enhancements in Red
+Hat Enterprise Linux</a>. , 2004. </dd> 
+
+<p></p><dt><b>[oooreorder]</b></dt><dd>McNamara, Caol&aacute;n. Controlling symbol
+ordering. <a href="http://blogs.linux.ie/caolan/2007/04/24/controlling-symbol-ordering/">http://blogs.linux.ie/caolan/2007/04/24/controlling-symbol-ordering/</a>,
+2007. </dd> 
+
+<p></p><dt><b>[sramwiki]</b></dt><dd>Wikipedia. Static random access
+memory. <a href="http://en.wikipedia.org/wiki/Static_Random_Access_Memory">http://en.wikipedia.org/wiki/Static_Random_Access_Memory</a>,
+2006. </dd> 
+
+<p></p><dt><b>[transactmem]</b></dt><dd>Herlihy, Maurice and J. Eliot
+B. Moss. <a href="http://citeseer.ist.psu.edu/herlihy93transactional.html">Transactional
+memory: Architectural support for lock-free data 
+structures</a>. <em>Proceedings of 20th international symposium on computer
+architecture</em>. 1993. </dd> 
+
+<p></p><dt><b>[vectorops]</b></dt><dd>Gebis, Joe and David Patterson. Embracing and
+Extending 20<sup>th</sup>-Century Instruction Set
+Architectures. <em>Computer</em>, 40(4):68--75, 2007. </dd> 
+
+</dl><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/258188/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+</p></td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 120x600, created 9/9/09 */
+google_ad_slot = "3391377719";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2007, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>

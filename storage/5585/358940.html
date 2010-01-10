@@ -1,0 +1,1958 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/358940/">
+<meta name="wpd_url" content="http://lwn.net/Articles/358940/">
+<meta name="wpd_date" content="2010-00-09T13:19Z">
+
+        
+        <title>JLS2009: A Btrfs update [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/358940/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="358940.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        
+</p><div class="TextAd">
+    <p class="TextAdHeader">Advertisement</p>
+    <p class="TextAdLink"><a href="http://lwn.net/AdServer/click/178/">TrustCommerce</a></p>
+    <p class="TextAdBody">E-Commerce & credit card processing - the Open Source way!
+</p>
+    <p class="TextAdFooter"><a href="http://lwn.net/AdServer/">Advertise here</a></p>
+</div>
+<p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Weekly Edition</p>
+Return to the <a href="http://lwn.net/Articles/358221/">Kernel page</a></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/358940/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 468x60, created 4/3/08 */
+google_ad_slot = "6739810867";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</center></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>JLS2009: A Btrfs update</h1>
+</div>
+<div class="ArticleText">
+<div class="FeatureByline">
+
+           By <b>Jonathan Corbet</b><br>October 27, 2009
+           </div>
+Conferences can be a good opportunity to catch up with the state of ongoing
+projects.  Even a detailed reading of the relevant mailing lists will not
+always shed light on what the developers are planning to do next, but a
+public presentation can inspire them to set out what they have in mind.
+Chris Mason's Btrfs talk at the Japan Linux Symposium was a good example of
+such a talk.
+<p>
+
+The Btrfs filesystem was merged for the 2.6.29 kernel, mostly as a way to encourage wider
+testing and development.  It is certainly not meant for production use at
+this time.  That said, there are people doing serious work on top of Btrfs;
+it is getting to where it is stable enough for daring users.  Current Btrfs
+includes an all-caps warning in the <tt>Kconfig</tt> file stating that the
+disk format has not yet been stabilized; Chris is planning to remove that
+warning, perhaps for the 2.6.33 release.  Btrfs, in other words, is
+progressing quickly.
+</p><p>
+
+One relatively recent addition is full use of zlib compression.  Online
+resizing and defragmentation are coming along nicely.  There has also been
+some work aimed at making synchronous I/O operations work well.
+</p><p>
+
+Defragmentation in Btrfs is easy: any specific file can be defragmented by
+simply reading it and writing it back.  Since Btrfs is a copy-on-write
+filesystem, this rewrite will create a new copy of the file's data which
+will be as contiguous as the filesystem is able to make it.  This approach
+can also be used to control the layout of files on the filesystem.  As an
+experiment, Chris took a bunch of boot-tracing data from a Moblin system
+
+<a href="http://lwn.net/Articles/358959/"><img src="chris-mason-sm.jpg" alt="[Chris Mason]" align="right" border="0" height="160" hspace="2" width="125"></a>
+
+
+and analyzed it to figure out which files were accessed, and in which
+order.  He then rewrote the files in question to put them all in the same
+part of the disk.  The result was a halving of the I/O time during boot,
+resulting in a faster system initialization and smiles all around.
+</p><p>
+
+Performance of synchronous operations has been an important issue over the
+last year.  On filesystems like ext3, an <tt>fsync()</tt> call will flush
+out a lot of data which is not related to the actual file involved; that
+adds a significant performance penalty for <tt>fsync()</tt> use and
+discourages careful programming.  Btrfs has improved the situation by
+creating an entirely separate Btree on each filesystem which is used for
+synchronous I/O operations.  That tree is managed identically to, but
+separately from, the regular filesystem tree.  When an <tt>fsync()</tt>
+call comes along, Btrfs can use this tree to only force out operations for
+the specific file involved.  That gives a major performance win over ext3
+and ext4.
+</p><p>
+
+A further improvement would be the ability to write a set of files, then
+flush them 
+all out in a single operation.  Btrfs could do that, but there's no way in
+POSIX to tell the kernel to flush multiple files at once.  Fixing that is
+likely to involve a new system call.
+</p><p>
+
+Btrfs provides a number of features which are also available via the device
+mapper and MD subsystems; some people have wondered if this duplication of
+features makes sense.  But there are some good reasons for it; Chris gave a
+couple of examples:
+</p><p>
+</p><ul>
+<li> Doing snapshots at the device mapper/LVM layer involves making a lot
+     more copies of the relevant data.  Chris ran an experiment where he
+     created a 400MB file, created a bunch of snapshots, then overwrote the
+     file.  Btrfs is able to just write the new version, while allowing all
+     of the snapshots to share the old copy.  LVM, instead, copies the data
+     once for each snapshot.  So this test, which ran in less than two
+     seconds on Btrfs, took about ten <i>minutes</i> with LVM.
+<p>
+</p></li><li> Anybody who has had to replace a drive in a RAID array knows that the
+     rebuild process can be long and painful.  While all of that data is
+     being copied, the array runs slowly and does not provide the usual
+     protections.  The advantage of running RAID within Btrfs is that the
+     filesystem knows which blocks contain useful data and which do not.
+     So, while an MD-based RAID array must copy an entire drive's worth of
+     data, Btrfs can get by without copying unused blocks.
+</li></ul>
+<p>
+
+So what does the future hold?  Chris says that the 2.6.32 kernel will
+include a version of Btrfs which is stable enough for early adopters to
+play with.  In 2.6.33, with any luck, the filesystem will have RAID4 and
+RAID5 support.  Things will then stabilize further for 2.6.34.  Chris was
+typically cagey when talking about production use, though, pointing out
+that it always takes a number of years to develop complete confidence in a
+new filesystem.  So, while those of us with curiosity, courage, and good
+backups could maybe be making regular use of Btrfs within a year,
+widespread adoption is likely to be rather farther away than that.</p><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/358940/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+
+</p><div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 29, 2009 14:03 UTC (Thu) by <b>droundy</b> (subscriber, #4559)
+       [<a href="http://lwn.net/Articles/359383/">Link</a>]
+    </p>
+    <i>Anybody who has had to replace a drive in a RAID array knows that the 
+rebuild process can be long and painful. While all of that data is being 
+copied, the array runs slowly and does not provide the usual protections. 
+The advantage of running RAID within Btrfs is that the filesystem knows 
+which blocks contain useful data and which do not. So, while an MD-based 
+RAID array must copy an entire drive's worth of data, Btrfs can get by 
+without copying unused blocks.</i>
+<p> Isn't this something that could be achieved in an ordinary RAID if 
+filesystems supported the TRIM feature that has been touted for SSDs?
+</p><p> Does anyone know if this is being worked on?
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359383/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 29, 2009 20:19 UTC (Thu) by <b>bronson</b> (subscriber, #4806)
+       [<a href="http://lwn.net/Articles/359501/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Well, SSDs have hardware to track allocations anyway.  The trim command just manipulates that.<br>
+<p>
+
+Regular hard disks are basically big platters of bits.  They don't have any allocation tracking.  Because implementing a generic (filesystem-agnostic) trim would require adding another software layer and allocating space to bitmaps, I think it's unlikely the benefits would be worth the complexity.<br>
+</p><p>
+
+But who knows!  It's a little hard to predict the future of storage right now.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359501/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 29, 2009 22:30 UTC (Thu) by <b>filteredperception</b> (guest, #5692)
+       [<a href="http://lwn.net/Articles/359518/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Just a week ago I asked dm-devel about the narrow case of dm-snapshot optimally responding to discard-requests.  Simply discarding unneeded exception chunks to optimize the amount of cow storage used.  I have yet to get any buy-in.  One response I did get was about snapshot-origin, which in the article is the lvm snapshot 10minute vs 2 seconds example.  For snapshot-origin and other raids, it does as you say require additional bitmap/mask storage and complexity.  But for just dm-snapshots, I think it is really simple and beneficial to take advantage of discard requests (unless of course there is some preclusive aspect I don't grok yet).  The big benefit I'm interested in is the Fedora/CentOS persitent LiveUSB, utilizing dm-snapshot instead of the more typical unionfs.  Currently dm-snapshot suffers in file create/delete problem of cow blocks being used for blocks the filesystem doesn't care about any longer.  But if discard-requests can fix that...<br>
+<p>
+<a href="https://www.redhat.com/archives/dm-devel/2009-October/msg00319.html">https://www.redhat.com/archives/dm-devel/2009-October/msg...</a>  <br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359518/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 29, 2009 18:26 UTC (Thu) by <b>Yorick</b> (subscriber, #19241)
+       [<a href="http://lwn.net/Articles/359475/">Link</a>]
+    </p>
+    Fast <tt>fsync()</tt> is of course welcome, but only really needed by some applications. The ability to guarantee that a change has been committed to permanent storage (before replying to a network request, say) is nice, but even when optimised in the way the article suggests, likely to be unnecessarily expensive when such a guarantee isn't required.
+
+<p>Being able to specify dependencies between different changes - don't write this to disk until that change has been committed - would make more in many cases.sense to an application that want to avoid scrambling the user's files but doesn't really care whether a particular update has taken place or not if the system crashes. A barrier would do; full transactions would be wonderful. Nothing really needs to be written to disk as long as the change is eventually done in good order.
+
+</p><p>Of course we want fast <tt>fsync()</tt> as well for those servers that are required to send us promises that they've taken care of our data, but far from all applications are like that.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359475/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 13:53 UTC (Fri) by <b>mosfet</b> (subscriber, #45339)
+       [<a href="http://lwn.net/Articles/359575/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<font class="QuotedText">&gt; Fast fsync() is of course welcome, but only really needed by some applications.</font><br>
+<p>
+
+I know one: CouchDB. Beside the hype behind it right now, it's extreme robust append-only storage philosophy was enough to attract attention from the Google Chrome developers. In it's heart this algorithm relies on a fast and secure (as in not cheating) fsync().<br>
+</p><p>
+
+CouchDB also has a nice user base, it's installed, used and run by default on Ubuntu 9.10<br>
+</p><p>
+
+I guess other database systems also profit from a better fsync(). <br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359575/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 16:07 UTC (Fri) by <b>iq-0</b> (subscriber, #36655)
+       [<a href="http://lwn.net/Articles/359599/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<font class="QuotedText">&gt; Fast fsync() is of course welcome, but only really needed by some applications.</font><br>
+<p>
+
+Luckily that doesn't include particularly common programs like 'vim' or 'firefox', that many people use regularly ;-)<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359599/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 18:24 UTC (Fri) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/359644/">Link</a>]
+    </p>
+    Vim and firefox don't need fsync(), they just use it, because it's
+apparently the most portable way of praying for consistency across
+crashes.  A good file system guarantees POSIX logical ordering
+across crashes, and there applications like vim or firefox do not need
+fsync().  If the computer is used only for such applications (not, e.g.,
+remote transactional systems), then the sysadmin could use it in a
+mode where fsync() is a noop, and it would be really fast.  Let's hope
+that Btrfs is headed that way.
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359644/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 21:09 UTC (Fri) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359680/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I think I *do* want my text editor to fsync() stuff I just wrote to disk, <br>
+thank you very much. I don't want the OS deciding to hold on to it for 30s <br>
+or 300s or whatever before flushing it back. It's not keeping the FS <br>
+consistent across crashes I care about: it's preserving *the stuff I just <br>
+saved* across crashes!<br>
+<p>
+
+(not relevant for me, battery-backed RAID arrays now hold absolutely <br>
+everything I care about at home and at work, bwahaha)<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359680/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 31, 2009 22:01 UTC (Sat) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/359787/">Link</a>]
+    </p>
+    I don't mind losing a few seconds of my work on a crash, if I learn
+about the crash right away (as mentioned, remote servers can be a
+different issue).  I do mind it if the file system loses an hour of my
+work, as <a href="http://www.complang.tuwien.ac.at/anton/sync-metadata-updates.html">has
+happened to me</a> and as the ext4 author Ted T'so believes file
+systems should behave.
+
+<p>Many people don't want to wait for slow
+fsync()s; but if you only want to continue working after the fsync()
+has finished, just configure your system to stay with the slow
+fsync()s; fine with me.
+
+</p><p>BTW, your battery-backed RAID arrays will not help you when the
+kernel crashes, and the file system decides that it should empty or
+zero the files you have worked on when doing the fsck or journal
+replay.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359787/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 7:51 UTC (Sun) by <b>Cato</b> (subscriber, #7643)
+       [<a href="http://lwn.net/Articles/359801/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Interesting example - presumably ext3 with data=journal would ensure that the data and metadata hit the disk together.  This should avoid the scenario mentioned that metadata for the main and autosave files hit the disk, causing the OS to empty the autosave file, while the main file's data remains in memory and is wiped by the system crash.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359801/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 19:55 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/359846/">Link</a>]
+    </p>
+    Yes, data=journal should be ok, unless they introduce one of the file
+system corruption bugs like one I read about (for data=journal) some
+years ago.  I guess this was not noticed during development because
+it's a non-default mode, so it's tested by few (and typically those
+people who do use such hopefully-safer, slower features don't run bleeding-edge
+kernels).
+
+<p>The former default ext3 behaviour (data=ordered) should also be ok
+for simple cases such as this (i.e., no overwriting of existing blocks
+involved).  Unfortunately, Ted T'so, the current maintainer of ext3
+wants to degrade ext3 default functionality to the lowest common
+denominator (i.e., at least as bad as UFS), with better functionality
+available through mount options; will this work out any better than
+the non-default data=journal?
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359846/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 13:13 UTC (Sun) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359810/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+True, I realised I misspoke there a second before hitting publish. Of <br>
+course battery-backed disk storage doesn't help if in the absence of <br>
+fsync() the OS hasn't pushed any data anywhere near said storage yet!<br>
+<p>
+
+(And I do tend to assume that the journalling layer doesn't have lethal <br>
+data-eating bugs, or at least none that bite me. Should they do so, well, <br>
+that sort of rare disaster is what backups are for.)<br>
+</p><p>
+
+If fsync() is slow, the problem is that fsync() is slow; the solution is <br>
+to speed it up, not rip the calls out of things like your text editor. (FF <br>
+using fsync() for transient-but-bulky state like the awesome bar is nuts, <br>
+agreed.)<br>
+</p><p>
+
+FWIW I use KDE4 and ext4 and have turned barriers off (battery-backed RAID <br>
+array, again) and have had not a single instance of sudden death by <br>
+zeroing. So it doesn't happen to everyone.<br>
+</p><p>
+
+(Of course my system doesn't crash often either.)<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359810/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 20:01 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/359847/">Link</a>]
+    </p>
+    An fsync() that really synchronously writes to the disk is always
+going to be slow, because it lets the program wait for the disk(s).
+And with a good file system it's completely unnecessary for an
+application like an editor; editors just call it as a workaround for
+bad file systems.
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359847/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 20:32 UTC (Sun) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359851/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+So, er, you're suggesting that a good filesystem, what, calls sync() every <br>
+second? I can't see any way in which you could get the guarantees fsync() <br>
+does for files you really care about without paying some kind of price for <br>
+it in latency for those files.<br>
+<p>
+
+And I don't really like the idea of calling sync() every second (or every <br>
+five, thank you ext3).<br>
+</p><p>
+
+Being able to fsync() the important stuff *without* forcing everything <br>
+else to disk, like btrfs promises, seems very nice. Now my editor files <br>
+can be fsync()ed without also requiring me to wait for a few hundred Mb of <br>
+who-knows-what breadcrumb crud from FF to also be synced.<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359851/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 1, 2009 21:37 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/359854/">Link</a>]
+    </p>
+    In a good file system, the state after recovery is the logical state
+of the file system of some point in time (typically a few seconds)
+before the crash.  It's possible to implement that efficiently
+(especially in a copy-on-write file system).
+
+<p>For an editor that does not fsync(), that would mean that you lose
+a few seconds of work (at worst the few seconds between autosaves plus
+the few seconds that the file system delays writing).
+
+</p><p>For every application (including editors), it would mean that if
+the developers ensure the consistency of the persistent data in case
+of a process kill, they will also have ensured it in case of a system
+crash or power outage.  So they do not have to do extra work on
+consistency against crashes, which would also be extremely impractical
+to test.
+
+</p><p>It should not be too hard to turn Btrfs into a good file system.
+Unfortunately, the Linux file systems seem to regress into the dark
+ages (well, the 1980s) when it comes to data consistency (e.g., in the
+defaults for ext3).  And some things I have read from Chris Mason lead
+me to believe that Btrfs will be no better.
+
+</p><p>As for the guarantees that fsync() gives, it gives no useful
+guarantee.  It's just a prayer to the file system, and most file
+systems actually listen to this prayer in more or less the way you
+expect; but some require more prayers than others, and some ignore the
+prayer.  I wonder why Ted T'so does not apologize for implementing
+fsync() in a somewhat useful way instead of the fastest way that still
+satisfies the letter of the POSIX specification.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359854/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 0:22 UTC (Mon) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359861/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Ah, you're assuming an editor that saves the state of the program on <br>
+almost every keystroke plus a filesystem that preserves *some* consistent <br>
+state, but not necessarily the most recent one.<br>
+<p>
+
+In that case, I agree: editors should not fsync() their autosave state if <br>
+they're preserving it every keystroke or so (and the filesystem should not <br>
+destroy the contents of the autosave file: thankfully neither ext3 nor <br>
+ext4 do so, now that they recognize rename() as implying a <br>
+block-allocation ordering barrier). But I certainly don't agree that <br>
+editors shouldn't fsync() files *when you explicitly asked it to save <br>
+them*! No, I don't think it's acceptable to lose work, even a few seconds' <br>
+work, after I tell an editor 'save now dammit'. That's what 'save' <br>
+*means*.<br>
+</p><p>
+
+And that's why Ted's gone to some lengths to make fsync() fast in ext4: <br>
+because he wants people to actually *use* it.<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359861/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 21:09 UTC (Mon) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360013/">Link</a>]
+    </p>
+    Using fsync() does not prevent losing a bit of work when you press
+save, because the system can crash between the time when you hit save
+and when the application actually calls and completes fsync().  The only thing that
+fsync() buys is that the save takes longer, and once it's finished and
+the application lets you work again, you won't lose the few seconds.
+That may be worth the cost for you, but I wonder why?
+
+<p>As for Ted T'so, I would have preferred it if he went to some
+lengths to make ext4 a good file system; then fsync() would not be
+needed as much.  Hmm, makes me wonder if he made fsync() fast because
+ext4 is bad, or if he made ext4 bad in order to encourage use of
+fsync().
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360013/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 8:37 UTC (Mon) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/359868/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<font class="QuotedText">&gt; In a good file system, the state after recovery is the logical state of the file system of some point in time (typically a few seconds) before the crash. It's possible to implement that efficiently (especially in a copy-on-write file system).</font><br>
+<p>
+
+[Citation needed] -- or in other words, if this is so possible, why are no modern filesystem experts working on it, AFAICT? How are you going to be efficient when the requirement you stated requires that arbitrary requests be handled in serial order, forcing you to wait for disk seek latencies?<br>
+</p><p>
+<font class="QuotedText">&gt; I wonder why Ted T'so does not apologize for implementing fsync() in a somewhat useful way instead of the fastest way that still satisfies the letter of the POSIX specification. </font><br>
+</p><p>
+
+Err, why should he apologize for implementing things in a useful way?<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359868/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 21:34 UTC (Mon) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360016/">Link</a>]
+    </p>
+    <blockquote>
+
+[Citation needed]
+</blockquote>
+
+Yes, I have wanted to write this down for some time.  Real soon now,
+promised!
+
+<blockquote>
+
+if this is so possible, why are no modern filesystem experts working
+on it, AFAICT?
+</blockquote>
+
+Maybe they are, or they consider it a solved problem and have moved on
+to other challenges.  As for those file system experts that we read
+about on LWN (e.g., Ted T'so), they are not modern as far as data
+consistency is concerned, instead they are regressing to the 1980s.
+And they are so stuck in that mindset that they don't see the need for
+something better.  Probably something like: "Sonny, when we were
+young, we did not need data consistency from the file system; and if
+fsync() was good enough for us, it's certainly good enough for you!".
+
+<blockquote>How are you going to be efficient when the requirement you
+stated requires that arbitrary requests be handled in serial order,
+</blockquote>
+
+It doesn't.  All the changes between two commits can be written out in
+arbitrary order, only the commit has to come after all these
+writes.
+
+<blockquote>Err, why should [Ted T'so] apologize for implementing
+things in a useful way?</blockquote>
+
+He has <a href="http://lwn.net/Articles/327601/">done so before</a>.
+
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360016/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 3, 2009 19:56 UTC (Tue) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360232/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+That was an apology for introducing appalling latencies, not an apology <br>
+for doing things right.<br>
+<p>
+
+I find it odd that one minute you're complaining that filesystems are <br>
+useless because problems occur if you don't fsync(), then the next moment <br>
+you're complaining that it's too slow, then the next moment you're <br>
+complaining about the precise opposite.<br>
+</p><p>
+
+If you want the total guarantees you're aiming for, write an FS atop a <br>
+relational database. You *will* experience an enormous slowdown. This is <br>
+why all such filesystems (and there have been a few) have tanked: crashes <br>
+are rare enough that basically everyone is willing to trade off the chance <br>
+of a little rare corruption against a huge speedup all the time. (I can't <br>
+remember the time I last had massive filesystem corruption due to power <br>
+loss or system crashes. I've had filesystem corruption due to buggy drive <br>
+firmware, and filesystem corruption due to electrical storms... but <br>
+neither of these would be cured by your magic all-consistent filesystem, <br>
+because in both cases the drive wasn't writing what it was asked to write. <br>
+And *that* is more common than the sort of thing you're agonizing over. In <br>
+fact it seems to be getting more common all the time.)<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360232/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 13:49 UTC (Thu) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360560/">Link</a>]
+    </p>
+    I understood Ted T'so's apology as follows: He thinks that application
+should use fsync() in lots of places, and by contributing to a better
+file system where that is not necessary as much, application
+developers were not punished by the file system as they should be in
+his opinion, and he apologized for spoiling them in this way.
+
+<blockquote>
+
+I find it odd that one minute you're complaining that filesystems are
+useless because problems occur if you don't fsync(), then the next moment
+you're complaining that it's too slow, then the next moment you're
+complaining about the precise opposite.
+</blockquote>
+
+Are you confusing me with someone else, are you trying to put up a
+straw man, or was my position so hard to understand?  Anyway, here it
+is again:
+
+<dl>
+
+<dt>On data consistency</dt><dd>A good file system guarantees good data
+consistency across crashes without needing fsync() or any other
+prayers (unless synchronous persistence is also required).</dd>
+
+<dt>On fsync()</dt> <dd>A useful implementation of fsync() requires a disk
+access, and the application waits for it, so it slows down the
+application from CPU speeds to disk speeds.  If the file system
+provides no data consistency guarantees and the applications
+compensate for that by extensive use of fsync() (the situation that
+Ted T'so strives for), the overall system will be slow because of all
+these required synchronous disk accesses.  With a good file system
+where most applications don't need to fsync() all the time, the overall
+system will be faster.</dd>
+
+</dl>
+
+Your relational database file system is a <a href="http://en.wikipedia.org/wiki/Strawman">straw man</a>; I hope you
+had good fun beating it up.
+
+<p>If crashes are as irrelevant as you claim, why should anybody use
+fsync()?  And why are you and Ted T'so agonizing over fsync() speed?  Just
+turn it into a noop, and it will be fast.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360560/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 18:35 UTC (Thu) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360649/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I'm probably confusing you with someone else, or with myself, or something <br>
+like that. Sorry.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360649/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 18:44 UTC (Thu) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360650/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+You still don't get my point, though. I'd agree that when all the writes <br>
+that are going on is the system chewing to itself, all you need is <br>
+consistency across crashes.<br>
+<p>
+
+But when the system has just written out my magnum opus, by damn I want <br>
+that to hit persistent storage right now! The fsync() should bypass all <br>
+other disk I/O as much as possible and hit the disk absolutely as fast as <br>
+it can: slowing to disk speeds is fine, we're talking human reaction time <br>
+here which is much slower: I don't care if writing out my tax records <br>
+takes five seconds 'cos I just spent three hours slaving over them, five <br>
+seconds is nothing. But waiting behind a vast number of unimportant writes <br>
+(which were all asynchronous until our fsync() forced them out because of <br>
+filesystem infelicities) is not fine: if we have to wait for minutes for <br>
+our stuff to get out, we may as well have done an asynchronous write.<br>
+</p><p>
+
+With btrfs, this golden vision of fast fsync() even under high disk write <br>
+load is possible. With ext*, it mostly isn't (you have to force earlier <br>
+stuff to the disk even if I don't give a damn about it and nobody ever <br>
+fsync()ed it), and in ext3 without data=writeback, fsync() is so slow when <br>
+contending with write loads that app developers were tempted to drop this <br>
+whole requirement and leave my magnum opus hanging about in transient <br>
+storage for many seconds. With ext4 at least fsync() doesn't stall my apps <br>
+merely because bloody firefox decided to drop another 500Mb hairball.<br>
+</p><p>
+</p><p>
+
+Again: I'm not interested in fsync() to prevent filesystem corruption <br>
+(that mostly doesn't happen, thanks to the journal, even if the power <br>
+suddenly goes out). I'm interested in saving *the contents of particular <br>
+files* that I just saved. If you're writing a book, and you save a <br>
+chapter, you care much more about preserving that chapter in case of power <br>
+fail than you care about some random FS corruption making off <br>
+with /usr/bin; fixing the latter is one reinstall away, but there's <br>
+nothing you can reinstall to get your data back.<br>
+</p><p>
+
+I hope that's clearer :)<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360650/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 21:53 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/361008/">Link</a>]
+    </p>
+    Sure, if the only thing you care about in a file system is that
+fsync()s complete quickly and still hit the disk, use a file system
+that gives you that.
+
+<p>OTOH, I care more about data consistency.  If we want to combine
+these two concerns, we get to some interesting design choices:
+
+</p><p>Committing the fsync()ed file before earlier writes to other files
+would break the ordering guarantee that makes a file system good (of
+course, we would only see this in the case of a crash between the time
+of the fsync() and the next regular commit).  If the file system wants
+to preserve the write order, then fsync() pretty much becomes sync(),
+i.e., the performance behaviour that you do not want.
+
+</p><p>One can argue that an application that uses fsync() knows what it
+is doing, so it will do the fsync()s in an order that guarantees data
+consistency for its data anyway.
+
+</p><p>Counterarguments: 1) The crash case probably has not been tested
+extensively for this application, so it may have gotten the order of
+fsync()s wrong and doing the fsync()s right away may compromise the
+data consistency after all.  2) This application may interact with
+others in a way that makes the ordering of its writes relative to the
+others important; committing these writes in a different order opens a
+data inconsistency window.
+
+</p><p>Depending on the write volume of the applications on the machine,
+on the trust in the correctness of the fsync()s in all the
+applications, and on the way the applications interact with the users,
+the following are reasonable choices: 1) fsync() as sync (slowest); 2)
+fsync() as out-of-order commit; 3) fsync() as noop.
+
+</p><p>BTW, I find your motivating example still unconvincing: If you edit
+your magnum opus or your tax records, wouldn't you use an editor
+that autosaves regularly?  Ok, your editor does not fsync() the
+autosaves, so with a bad file system you will lose the work, but on a
+good file system you won't, so you will also use a good file system
+for that, won't you?  So it does not really matter for how long you
+slaved away on the file, a crash will only lose very little data.  Or
+if you work in a way that can lose everything, why was the tax records
+after 2h59' not important enough to merit more precautions, but after
+3h a fast fsync() is more important than anything else?
+
+</p><p>An example where a synchronous commit is really needed is a remote
+"cvs commit" (and maybe similar operations in other version control
+systems): Once a file is commited on the remote machine, the file's
+version number is updated on the local machine, so the remote commit
+should better stay commited, even if the remote machine crashes in the
+meantime.  Of course, the problem here is that a cvs commit can easily
+commit hundreds of files; if it fsync()s every one of them separately,
+the cumulated waiting for the disk may be quite noticable.  Doing the
+equivalent for all the files at once could be faster, but we have no
+good way to tell that to the file system (AFAIK CVS works a file at a
+time, so it wouldn't matter for CVS, but there may be other
+applications where it does).  Hmm, if there are few writes by other
+applications at the same time, and all the fsync()s were done in the
+end, then fsync()-as-sync could be faster than out-of-order fsync()s:
+The first fsync() would commit all the files, and the other fsync()s
+would just return immediately.
+
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/361008/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 8:45 UTC (Mon) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/359869/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I disabled fsync in emacs[1] because otherwise, when working on battery, hitting save makes the whole editor will block for a second or more waiting for the disk to spin up :-/. I have laptop-mode set for 10 minutes maximum lost work on battery failure (IIRC this is the default), and I'm pretty sure I hit save more than 600 times between battery failures. Actually, I'm not sure when the last time I had a battery failure was...<br>
+<p>
+
+[1] (setq write-region-inhibit-fsync t)<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359869/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 17:11 UTC (Mon) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359920/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Yeah, laptops are a case where perhaps you want to force fsync() to do nothing at all, as your largest failure case normally is power failures (not much of an issue with a laptop battery 'UPS'). You do still have the oops-OS-crashes problem, but hopefully Linux doesn't crash too much :/ if you have a crashy OS *and* a hard disk that has to spin up from a dead stop I don't think you have any good answers.<br>
+<p>
+
+(Did the force-fsync()-to-do-nothing patch ever get lumped into laptop_mode as people were suggesting? I don't have a laptop so I don't follow this sort of thing closely...)<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359920/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 17:39 UTC (Mon) by <b>mjg59</b> (subscriber, #23239)
+       [<a href="http://lwn.net/Articles/359933/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+fsync() is expected to provide certain guarantees. The kernel shouldn't preempt that just because <br>
+it assumes it knows better than applications - the applications should either change behaviour <br>
+themselves, or have an LD_PRELOADed library that makes fsync() behaviour conditional on battery <br>
+state.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359933/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 19:11 UTC (Mon) by <b>foom</b> (subscriber, #14868)
+       [<a href="http://lwn.net/Articles/359978/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Of course the kernel shouldn't make such assumptions by itself, but if the user configures it <br>
+intentionally to break fsync...<br>
+<p>
+
+What difference does it make if it's implemented in the kernel or in an LD_PRELOAD library?<br>
+</p><p>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359978/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 19:17 UTC (Mon) by <b>mjg59</b> (subscriber, #23239)
+       [<a href="http://lwn.net/Articles/359980/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+It lets you control it per-application.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359980/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 20:39 UTC (Mon) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/359997/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+But I don't want fsync() to do nothing at all, because there are lots of cases where a poorly-timed crash can cause you to lose not 10 minutes of work, but your entire data store. This applies to basically anything using a more complex data storage strategy than "rewrite the entire data store every time", e.g. dbm, sqlite, databases generally. They all have to transition through a state where their data structures are inconsistent, and if your rollback log hasn't hit disk yet, well...<br>
+<p>
+
+It's really *annoying* that firefox/sqlite issue fsync's when storing history information, but I actually find that history information valuable enough that I don't want it all blown away on every crash, and there's really no way to avoid that without fsync.<br>
+</p><p>
+
+I would love to see an API that allowed sqlite to express its data integrity requirements without forcing the disk to spin up, but this is not simple: <a href="http://www.sqlite.org/atomiccommit.html">http://www.sqlite.org/atomiccommit.html</a><br>
+</p><p>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359997/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 21:58 UTC (Mon) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360022/">Link</a>]
+    </p>
+    <blockquote> But I don't want fsync() to do nothing at all, because
+there are lots of cases where a poorly-timed crash can cause you to
+lose not 10 minutes of work, but your entire data store.  This applies
+to basically anything using a more complex data storage strategy than
+"rewrite the entire data store every time", e.g. dbm, sqlite,
+databases generally.
+</blockquote>
+
+If these applications don't corrupt their storage when they crash on
+their own or are killed, they won't corrupt it on a good file system
+even on a system crash.  So it's only on bad file systems where the
+absence of fsync() would cause consistency problems.  And how can you
+be sure that the fsync()s called from these applications are
+sufficient?  Testing this stuff is pretty hard.
+
+<p>There is a different reason for syncing in such applications: A
+remote user won't notice that the database server lost power or
+crashed right after his transaction went through, so the database
+should better ensure that the data is in permanent storage before
+reporting completion to remote users.
+
+</p><p>As for the firefox history, a good file system would be a way to
+avoid losing it completely, without requiring fsync().
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360022/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 23:14 UTC (Mon) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/360041/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+You're right that durability and atomicity are different, that fsync provides both, and that an ideal file system would provide atomicity by default. But there are no filesystems available that do make that guarantee (maybe one of those obscure flash-targeted ones does?), so the properties of what you call a "good filesystem" are unfortunately irrelevant.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360041/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 3, 2009 23:11 UTC (Tue) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360261/">Link</a>]
+    </p>
+    I think that ext3 with data=journal or data=ordered is pretty close to
+a good file system for applications that don't overwrite files in
+place (e.g., editors).  But I would be more confident if some file
+system developer actually made data consistency a design goal and gave
+some explicit guarantees.
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360261/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 4, 2009 0:01 UTC (Wed) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360264/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Unfortunately, both of those are only good filesystems if you really don't <br>
+care at all about either read or write speed. The latency figures Linus <br>
+posted (from one process dd(1)ing and another writing tiny files and <br>
+fsync()ing them) are appalling. We're not talking a mere few seconds, <br>
+we're talking over a minute at times.<br>
+<p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360264/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 14:04 UTC (Thu) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360574/">Link</a>]
+    </p>
+    ext3 with data=ordered is fast enough in my experience (which includes
+several multi-user servers).
+
+<p>What you write about these figures [citation needed] reminds me of
+my <a href="http://lwn.net/Articles/355325/">experiences with copying
+stuff to flash devices</a>.  However, no writing to an ext3 file
+system was involved there, and I suspect that the problem is sitting at a
+lower level than the msdos or vfat file system.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360574/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 18:08 UTC (Thu) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360634/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Yeah, that's (as you know from the comment you linked to) a problem that <br>
+the per-bdi writeback fix should solve. I saw it back in the days before <br>
+cheap USB hard drives, when I ran backups onto pcdrw...<br>
+<p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360634/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 4, 2009 8:40 UTC (Wed) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/360284/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Never overwriting data in place is a pretty huge constraint, though. There are some interesting data storage applications that can be efficiently implemented using append-only files, but they're a tiny minority...<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360284/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 14:09 UTC (Thu) by <b>nye</b> (subscriber, #51576)
+       [<a href="http://lwn.net/Articles/360570/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<font class="QuotedText">&gt;Never overwriting data in place is a pretty huge constraint, though</font><br>
+<p>
+
+Nevertheless, it's generally a requirement for consistency in the face of application crashes (never mind system crashes or power cuts), unless you want to be dealing with full-blown transactional operations at the application level - which could be very little work if performed using facilities provided by the filesystem, but then wouldn't be portable.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360570/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 5, 2009 14:14 UTC (Thu) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/360577/">Link</a>]
+    </p>
+    Most applications don't even append, they just write a new file in one go (and
+some then rename it, unlinking the old one).  I think that ext3 data=ordered
+is a good file system for these applications.
+
+<p>Of course, for applications that overwrite stuff in place (e.g.,
+usually data bases) it's not a good file system, and these applications need fsync() with it.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360577/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 2:36 UTC (Sun) by <b>butlerm</b> (subscriber, #13312)
+       [<a href="http://lwn.net/Articles/360973/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Ext3 is *great* for these applications, other than the fact that it is rather <br>
+slow for a number of important use cases.<br>
+<p>
+
+Most importantly a high performance filesystem needs to be able to sync the <br>
+data of one file independent of all the pending data for every other open <br>
+file.  That is the whole problem with ext3 - it doesn't do that, so an fsync <br>
+under competing write load is very slow.<br>
+</p><p>
+
+Ext4 fixes these problems, but either requires an fsync or inserts one to <br>
+make a rename replacement an atomic operation.  That delay could be avoided <br>
+with some reasonable internal modifications (keeping the old inode around <br>
+until the new inode's data commits, and then undoing the rename if necessary <br>
+on journal recovery), but I am not aware of any filesystem that actually does <br>
+that.  You have to call fsync to make your code portable anyway, but there <br>
+are a number of applications where that is too expensive.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360973/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 22:04 UTC (Sun) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/361017/">Link</a>]
+    </p>
+    I don't see that fsync() makes my code (or anyone else's) portable.
+POSIX gives no useful guarantees on fsync(); different file systems
+have different requirements for what you have to fsync() in order to
+really commit a file.  So use of fsync() is inherently non-portable.
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/361017/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 0:51 UTC (Fri) by <b>ojbyer@usa.net</b> (subscriber, #41909)
+       [<a href="http://lwn.net/Articles/359535/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I'd love to play with BTRFS RAID, but I also like to play with whole disk <br>
+encryption too. Right now I can take 4 hard drives and combine them into one <br>
+RAID block device, install LUKS on that block device and add file systems on <br>
+top of that.<br>
+<p>
+
+The only way to make this work with filesystem RAID is to create 4 separate <br>
+encrypted disks and enter 4 passphrases every time the system boots.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359535/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 10:20 UTC (Fri) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359568/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Sounds like the block-device encryption layer needs a key storage agent, like ssh-agent. :)<br>
+<p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359568/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 20:12 UTC (Fri) by <b>ojbyer@usa.net</b> (subscriber, #41909)
+       [<a href="http://lwn.net/Articles/359668/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I've always wondered if CONFIG_KEYS did something like that.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359668/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 21:15 UTC (Fri) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/359684/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I think it might, but I've never used it.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359684/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 16:11 UTC (Fri) by <b>giraffedata</b> (subscriber, #1954)
+       [<a href="http://lwn.net/Articles/359603/">Link</a>]
+    </p>
+    <blockquote>
+
+Doing snapshots at the device mapper/LVM layer involves making a lot more copies of the relevant data. Chris ran an experiment where he created a 400MB file, created a bunch of snapshots, then overwrote the file. Btrfs is able to just write the new version, while allowing all of the snapshots to share the old copy. LVM, instead, copies the data once for each snapshot. 
+</blockquote>
+<p>
+
+I don't follow.  LVM doesn't have snapshots of a volume share blocks?
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359603/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 8:50 UTC (Mon) by <b>njs</b> (subscriber, #40338)
+       [<a href="http://lwn.net/Articles/359871/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I believe that when you have a original volume and make multiple snapshots of it, then no, the snapshot volumes are logically independent. They can share blocks with the original volume, but cannot share blocks with each other (except when those blocks are also present in the original volume).<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359871/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 2, 2009 15:14 UTC (Mon) by <b>giraffedata</b> (subscriber, #1954)
+       [<a href="http://lwn.net/Articles/359894/">Link</a>]
+    </p>
+    OK, I see.  When you write to the base version, LVM copies the original data to a new block for each existing snapshot, then updates the original block.  Btrfs instead writes the new data to a new block for the base version and leaves the snapshots pointing to the original block.
+<p>
+
+What I was hoping to get to is whether this difference is an inherent difference between doing snapshots in the filesystem vs in the logical volume.  Apparently, it isn't, because LVM could use the same strategy if it wanted to.
+</p><p>
+
+Or maybe it's more important in LVM than Btrfs for the original block to stay with the base version?
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359894/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 3:18 UTC (Sun) by <b>butlerm</b> (subscriber, #13312)
+       [<a href="http://lwn.net/Articles/360975/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I understand that ZFS and Netapp use a very similar copy on write technique <br>
+to make read only snapshots of filesystems (hence the lawsuit).  NetApp uses <br>
+the same scheme to make read only snapshots of virtual block devices as well.<br>
+<p>
+
+The problem is something like that is probably much too complex for LVM, <br>
+comparable in complexity to BTRFS itself.  So for LVM to avoid the copy <br>
+before write problem, presumably it would have to use a scheme where the <br>
+physical locations of one or more versions of each block are stored in an <br>
+persistent segment somewhere.<br>
+</p><p>
+
+However, if the version tracking segment is itself on a typical storage <br>
+device, every random write to something that a snapshot has been taken of <br>
+requires both a write to a new block on the disk and a write to the version <br>
+pointer entry.  Short of locating the segment in NVRAM or a more reliable <br>
+than average flash device that is a bit of a problem.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360975/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 11:54 UTC (Sun) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/360991/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+If there's md in there as well, with its superblock updates to track the <br>
+array dirty state, one write could be amplified to, what, six? (of course <br>
+you don't get a superblock update with every write unless writes are quite <br>
+rare... but often writes *are* rare.)<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360991/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Oct 30, 2009 16:14 UTC (Fri) by <b>giraffedata</b> (subscriber, #1954)
+       [<a href="http://lwn.net/Articles/359605/">Link</a>]
+    </p>
+    <blockquote>
+
+but there's no way in POSIX to tell the kernel to flush multiple files at once. Fixing that is likely to involve a new system call.
+</blockquote>
+<p>
+
+Well it doesn't have to be anything fancy like an fsync call with multiple file descriptors.  It could be a new kind of fadvise() advice: "this file will be synchronized soon."  Do that for every file in the set, then fsync them all one at a time.
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/359605/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 1:27 UTC (Sun) by <b>butlerm</b> (subscriber, #13312)
+       [<a href="http://lwn.net/Articles/360970/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+There would also need to be synchronous fadvise call or the equivalent that <br>
+had the semantics of "wait on all the pseudo-synchronous fsync operations <br>
+that were just initiated".  Otherwise the semantics wouldn't be fsync like <br>
+at all.<br>
+<p>
+
+For example suppose you want to do a write rename replace for a set of <br>
+files. On many filesystems, the rename meta data operation will commit <br>
+before the data from the previous write commits, so the only safe way to do <br>
+this is fsync the new version before calling rename.  Otherwise, on a crash <br>
+you may get no version at all, not the old version, not the new version, <br>
+just a zero length file.<br>
+</p><p>
+
+If you are doing this with lots of files, a synchronous commit (or the <br>
+equivalent) of the data for the whole group prior to the renames for the <br>
+whole group is the only efficient way to go.  Short of that you would need <br>
+to spawn a large number of threads, issue fsync rename operations in each <br>
+one and wait for them all to finish.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360970/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 1:35 UTC (Sun) by <b>giraffedata</b> (subscriber, #1954)
+       [<a href="http://lwn.net/Articles/360971/">Link</a>]
+    </p>
+    <blockquote>
+
+There would also need to be synchronous fadvise call or the equivalent that 
+had the semantics of "wait on all the pseudo-synchronous fsync operations 
+that were just initiated"
+</blockquote>
+<p>
+
+All you need is fsync.  Do it on each file in turn, after having done the fadvise on every file.  The last fsync will complete at the same time as a single hypothetical "wait on all these files" would.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360971/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">JLS2009: A Btrfs update</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 8, 2009 2:52 UTC (Sun) by <b>butlerm</b> (subscriber, #13312)
+       [<a href="http://lwn.net/Articles/360974/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+I understand what you mean now, and that would be a considerable improvement <br>
+over serial fsyncs alone.  I think you can more or less do the same thing now  <br>
+on Linux with sync_file_range(...,SYNC_FILE_RANGE_WRITE).  Without additional <br>
+flags that schedules asynchronous write out of the specified part of the <br>
+file.  Then when you are all done, call fsync on every fd in the list, as you <br>
+say.<br>
+<p>
+
+That is still somewhat problematic though, since sync_file_range will not <br>
+initiate write out of the metadata, which could be significant. Depending on <br>
+the way the filesystem handles metadata you could have a very similar <br>
+problem, with a journal write and synchronous wait for every fsync...So <br>
+something like fadvise options that schedules data and/or metadata for <br>
+immediate writeout would be helpful there.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/360974/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+</td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 120x600, created 9/9/09 */
+google_ad_slot = "3391377719";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2009, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>

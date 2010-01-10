@@ -1,0 +1,834 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://lwn.net/Articles/306704/">
+<meta name="wpd_url" content="http://lwn.net/Articles/306704/">
+<meta name="wpd_date" content="2010-00-09T13:48Z">
+
+        
+        <title>/dev/ksm: dynamic memory sharing [LWN.net]</title>
+        
+	<meta name="verify-v1" content="aBh5bTXuz+W/pYg4ri96T7peLrzBx8JgU6A2hHmAjGs=">
+        <link rel="icon" href="about:blank?bookmark.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" ,="" href="http://lwn.net/headlines/newrss">
+<link rel="alternate" type="application/rss+xml" title="Comments posted to this article" ,="" href="http://lwn.net/headlines/306704/">
+        
+
+
+        
+<link rel="stylesheet" type="text/css" href="306704.css" media="all">
+</head>
+<body alink="Green" bgcolor="#ffffff" link="Blue" vlink="Green">
+        <table class="Page">
+<tbody><tr>
+<td class="LeftColumn">
+
+        <center>
+        <a href="http://lwn.net/"><img src="lcorner.png" alt="LWN.net Logo" border="0" height="120" width="153"></a>
+        </center>
+        <p>
+        <script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+google_ad_width = 120;
+google_ad_height = 240;
+google_ad_format = "120x240_as";
+google_ad_type = "text_image";
+//2007-10-07: side ads
+google_ad_channel = "0946045135";
+google_color_border = "ffcc99";
+google_color_bg = "ffcc99";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "008000";
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</p><p>
+</p><div class="SideBox">
+<p class="Header">Not logged in</p>
+<p><a href="http://lwn.net/login">Log in now</a></p><p>
+                                 </p><p><a href="http://lwn.net/newaccount">Create an account</a></p><p>
+                                 </p><p><a href="http://lwn.net/subscribe/">Subscribe to LWN</a></p></div>
+
+<div class="SideBox">
+<p class="Header">Weekly Edition</p>
+Return to the <a href="http://lwn.net/Articles/306169/">Kernel page</a></div>
+
+<div class="SideBox">
+<p class="Header">Recent Features</p>
+<p><a href="http://lwn.net/Articles/367947/">LWN.net Weekly Edition for January 7, 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/368861/">GSM encryption crack made public</a></p>
+            	<p><a href="http://lwn.net/Articles/368120/">Looking forward to 2010</a></p>
+            	<p><a href="http://lwn.net/Articles/367022/">LWN.net Weekly Edition for December 24, 2009</a></p>
+            	<p><a href="http://lwn.net/Articles/367879/">EtherPad source code is free, now what?</a></p>
+            	</div>
+
+<div class="SideBox">
+<a href="http://lwn.net/Articles/306704/?format=printable" rel="nofollow">Printable page</a>
+</div>
+
+</td><!-- LC -->
+
+<td><table><tbody><tr>
+<td class="MidColumn">
+           <table class="TopNavigation">
+
+<!-- First row - content links -->
+<tbody><tr>
+  <td class="NavLink"><a href="http://lwn.net/current/">Weekly edition</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Kernel/">Kernel</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Security/">Security</a></td>
+  <td class="NavLink">
+	<a href="http://lwn.net/Distributions/">Distributions</a></td>
+  <td class="NavLink"><a href="http://lwn.net/Search/">Search</a> </td>
+</tr>
+<!-- Second row: navigation links -->
+<tr>
+  <td class="NavLink"><a href="http://lwn.net/Archives/">Archives</a></td>
+  <td class="NavLink"><a href="http://www.linuxcalendar.com/">Calendar</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/Subscriptions.lwn">Subscribe</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/AuthorGuide.lwn">Write for LWN</a></td>
+  <td class="NavLink"><a href="http://lwn.net/op/FAQ.lwn">LWN.net FAQ</a></td>
+</tr>
+
+</tbody></table>
+</td><td></td></tr>
+<tr><td colspan="2" class="MCTopBanner">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 728x90, created 8/29/08 */
+google_ad_slot = "1253766630";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script></td></tr><tr><td class="MidColumn">
+<div class="PageHeadline">
+<h1>/dev/ksm: dynamic memory sharing</h1>
+</div>
+<div class="ArticleText">
+<div class="FeatureByline">
+
+           By <b>Jonathan Corbet</b><br>November 12, 2008
+           </div>
+The kernel generally goes out of its way to share identical memory pages between
+processes.  Program text is always shared, for example.  But writable pages
+will also be shared between processes when the kernel knows that the
+contents of the memory are the same for all processes involved.  When a
+process calls <tt>fork()</tt>, all writable pages are turned into
+copy-on-write (COW) pages and shared between the parent and child.  As long
+as neither process modified the contents of any given page, that sharing
+can continue, with a corresponding reduction in memory use.
+<p>
+
+Copy-on-write with <tt>fork()</tt> works because the kernel knows that each
+process expects to find the same contents in those pages.  When the kernel
+lacks that knowledge, though, it will generally be unable to arrange
+sharing of identical pages.  One might not think that this would ordinarily
+be a problem, but the KVM developers have come up with a couple of
+situations where this kind of sharing opportunity might come about.  Your
+editor cannot resist <a href="http://lwn.net/Articles/306706/">this case</a> proposed by
+Avi Kivity:
+</p><p>
+</p><div class="BigQuote">
+
+	Consider the typical multiuser gnome minicomputer with all 150
+	users reading lwn.net at the same time instead of working.  You
+	could share the firefox rendered page cache, reducing memory
+	utilization drastically.
+</div>
+<p>
+
+Beyond such typical systems, though, consider the case of a host running a
+number of virtualized guests.  Those guests will not share a process-tree
+relationship which makes the sharing of pages between them easy, but they
+may well be using a substantial portion of their memory to hold identical
+contents.  If that host could find a way to force the sharing of pages with
+identical contents, it should be able to make much better use of its memory
+and, as a result, run more guests.
+This is the kind of thing which gets the attention of virtualization
+developers.  So the hackers at <strike>Qumranet</strike> Red Hat (Izik
+Eidus, Andrea Arcanageli, and Chris Wright in particular) have put
+together a mechanism to make that kind of sharing happen.  The resulting
+code, called KSM, was recently <a href="http://lwn.net/Articles/306642/">posted</a> for wider review.
+</p><p>
+
+KSM takes the form of a device driver for a single, virtual device:
+<tt>/dev/ksm</tt>.  A process which wants to take part in the page sharing
+regime can open that device and register (with an <tt>ioctl()</tt> call) a
+portion of its address space with the KSM driver.  Once the page sharing
+mechanism is turned on (via another <tt>ioctl()</tt>), the kernel will
+start looking for pages to share.
+</p><p>
+
+The algorithm is relatively simple.  The KSM driver, inside a kernel
+thread, picks one of the memory regions registered with it and start
+scanning over it.  For each page which is resident in memory, KSM will
+generate an SHA1 hash of the page's contents.  That hash will then be used
+to look up other pages with the same hash value.  If a subsequent
+<tt>memcmp()</tt> call shows that the contents of the pages are truly
+identical, all processes with a reference to the scanned page will be
+pointed (in COW mode) to the other one, and the redundant page will be
+returned to the system.  As long as nobody modifies the page, the sharing
+can continue; once a write operation happens, the page will be copied and
+the sharing will end.
+</p><p>
+
+The kernel thread will scan up to a maximum number of pages before going to
+sleep for a while.  Both the number of pages to scan and the sleep period
+are passed in as parameters to the <tt>ioctl()</tt> call which starts
+scanning.  A user-space control process can also pause scanning via another
+<tt>ioctl()</tt> call.
+</p><p>
+
+The initial <a href="http://lwn.net/Articles/306710/">response</a> to the patch from
+Andrew Morton was not entirely enthusiastic:
+</p><p>
+</p><div class="BigQuote">
+
+	The whole approach seems wrong to me.  The kernel lost track of
+	these pages and then we run around post-facto trying to fix that up
+	again.  Please explain (for the changelog) why the kernel cannot
+	get this right via the usual sharing, refcounting and COWing
+	approaches.
+</div>
+<p>
+
+The <a href="http://lwn.net/Articles/306711/">answer</a> from Avi Kivity was reasonably
+clear:
+</p><p>
+</p><div class="BigQuote">
+
+	For kvm, the kernel never knew those pages were shared.  They are
+	loaded from independent (possibly compressed and encrypted) disk
+	images.  These images are different; but some pages happen to be
+	the same because they came from the same installation media.
+</div>
+<p>
+
+Izik Eidus <a href="http://lwn.net/Articles/306713/">adds</a> that, with this patch, a
+host running a bunch of Windows guests is able to overcommit its memory
+300% without terribly ill effects.  This technique, it seems, is especially
+effective with Windows guests: Windows apparently zeroes all freed memory,
+so each guest's list of free pages can be coalesced down to a single,
+shared page full of zeroes.
+</p><p>
+
+What has not been done (or, at least, not posted) is any sort of
+benchmarking of the impact KSM has on a running system.  The scanning,
+hashing, and comparing of pages will require some CPU time, and it is
+likely to have noticeable cache effects as well.  If you are trying to run
+dozens of Windows guests, cache effects may well be relatively low on your
+list of problems.  But that cost may be sufficient to prevent the more
+general use of KSM, even though systems which are not using virtualization
+at all may still have a lot of pages with identical contents.</p><hr align="left" width="60%">
+           (<a href="http://lwn.net/login?target=/Articles/306704/">Log in</a> to post comments)
+           <p>
+           
+</p></div> <!-- ArticleText -->
+<p><a name="Comments"></a>
+
+</p><div class="CommentBox">
+  <p class="CommentTitle">Zeroing freed memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 12, 2008 23:56 UTC (Wed) by <b>Felix_the_Mac</b> (guest, #32242)
+       [<a href="http://lwn.net/Articles/306869/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+"Windows apparently zeroes all freed memory"<br>
+<p>
+
+On the face of it that sounds pretty sensible (from a security perspective).<br>
+Why doesn't Linux do it?<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306869/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Zeroing freed memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 0:48 UTC (Thu) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/306871/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Because it pointlessly blows the dcache (a precious resource), generally <br>
+to very little gain, because a lot of freed userspace pages are reused for <br>
+something other than userspace pages and are filled with something else, <br>
+and those pages which *are* reused for other userspace pages are zeroed at <br>
+*that* point.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306871/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Zeroing freed memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 22:45 UTC (Thu) by <b>bdauvergne</b> (subscriber, #6989)
+       [<a href="http://lwn.net/Articles/307067/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+and there is still madvise(MADV_DONTNEED) to release the physical pages to the system.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307067/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Zeroing freed memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 9:19 UTC (Thu) by <b>dlang</b> (subscriber, #313)
+       [<a href="http://lwn.net/Articles/306915/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+zeroing the memory when it's freed is better from a security point of view, but it's expensive to do.<br>
+<p>
+
+since it may sometimes not need to be zeroed (besides the kernel uses noted in post above, if the page is going to be used to hold the executable code to be run, just load the appropriate code in the page, there's no benifit to zeroing it out first) and other times it can be zeroed when the system is idle, linux does the more efficant thing and zeros the page with as little impact tot he rest of the system as possible.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306915/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Linux can do it</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 15:07 UTC (Thu) by <b>wtogami</b> (subscriber, #32325)
+       [<a href="http://lwn.net/Articles/306965/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<a href="http://udrepper.livejournal.com/11429.html">http://udrepper.livejournal.com/11429.html</a><br>
+If you set MALLOC_PERTURB_=$NUMBER, it sets all malloc'ed bytes to $NUMBER, and the bitwise inverse upon free.  It is great to expose otherwise difficult to detect bugs, at the expense of speed.  It might also be useful for /dev/ksm. <br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306965/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Linux can do it</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 19:52 UTC (Thu) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/307043/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+It's a really cool feaure, but, well, Ulrich says that it 'Seems like the <br>
+number of people who know this feature is still almost zero'. Yes, that's <br>
+because it was never documented, as with pretty much everything glibc can <br>
+do above POSIX. (e.g., quick, how does LD_AUDIT work? How do you use it? <br>
+Good luck finding out without reading the source, and it's tricky to <br>
+understand even then.)<br>
+<p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307043/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Zeroing freed memory</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 14, 2008 15:10 UTC (Fri) by <b>PaXTeam</b> (subscriber, #24616)
+       [<a href="http://lwn.net/Articles/307154/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+<font class="QuotedText">&gt; On the face of it that sounds pretty sensible (from a security perspective).</font><br>
+<font class="QuotedText">&gt; Why doesn't Linux do it?</font><br>
+<p>
+
+PaX has had such a feature for some time, but its performance impact isn't negligible. i have only numbers for an early naive implementation (pages were zeroed twice effectively), the kernel time of kernel compilation went up by some 40%, IIRC, so even assuming the current implementation it's probably not better than 20%. now this is kernel time only, if your workload is mostly userland then you will care a lot less, otherwise you'll have to find out where on the user/kernel scale you fall and decide accordingly if it's worth it.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307154/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Blank pages</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 10:56 UTC (Thu) by <b>rvfh</b> (subscriber, #31018)
+       [<a href="http://lwn.net/Articles/306931/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+"Windows apparently zeroes all freed memory"<br>
+<p>
+
+Could not the system just release zero'd pages altogether until someone writes something in them, rather sharing them amongst KVM instances? Seems easier and less costly to do than the SHA1 thing and seems (in Windows' case) to yield some memory economies?<br>
+</p><p>
+
+Especially if it's freed memory...<br>
+</p><p>
+
+Or did I miss something?<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306931/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Blank pages</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 13, 2008 14:20 UTC (Thu) by <b>avik</b> (subscriber, #704)
+       [<a href="http://lwn.net/Articles/306957/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+There are also non-zero pages which can be shared, such as text and read-only data.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/306957/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Blank pages</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 14, 2008 16:34 UTC (Fri) by <b>im14u2c</b> (subscriber, #5246)
+       [<a href="http://lwn.net/Articles/307159/">Link</a>]
+    </p>
+    <p>I'm pretty sure Linux has hypervisor hooks to allow the hypervisor to tell a hosted OS to give back pages, and for a hosted OS to tell the hypervisor when it may have back pages.  I don't know what Windows offers here.</p>
+<p>I get the sense though that such changes in page ownership are coarse grain, not fine grain, since there's cost in passing the ownership back and forth.</p>
+<p>(Note that I'm not actually super familiar with the paravirt_ops interface.  I just remember reading about it here.)</p>
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307159/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2008 0:06 UTC (Sat) by <b>nevets</b> (subscriber, #11875)
+       [<a href="http://lwn.net/Articles/307281/">Link</a>]
+    </p>
+    <i>KSM will generate an SHA1 hash of the page's contents. That hash will then be used to look up other pages with the same hash value. If a subsequent memcmp() call shows that the contents of the pages are truly identical,</i>
+
+<p>I've been informed by the git Gods that the chances of a SHA1 collision is the same as the Earth being sucked up into the black hole created by the CERN accelerator. If this is indeed true, then there's no need for that extra memcmp.
+
+</p><p>I brought this up to the git God himself about git's use of SHA1. He did agree with me that if there were to be a collision of SHA1's in git, that the database would be corrupted. But he blew it off as a snowball's chance in hell. He did show some concern that there might be a way to crack the algorithm.
+
+</p><p>But who am I to question a git God?
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307281/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2008 8:25 UTC (Sat) by <b>dlang</b> (subscriber, #313)
+       [<a href="http://lwn.net/Articles/307309/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+actually the statement is that you can't deliberatly come up with a conflicting sha1.<br>
+<p>
+
+there are databases what hold the sha1 of various files, and there are a lot of known conflicts in them<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307309/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2008 14:46 UTC (Sat) by <b>jbh</b> (subscriber, #494)
+       [<a href="http://lwn.net/Articles/307322/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Are you sure? According to wikipedia, none have been found (although it is known that it can be found with complexity 2^63, less than the expected 2^80).<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307322/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2008 14:56 UTC (Sat) by <b>jbh</b> (subscriber, #494)
+       [<a href="http://lwn.net/Articles/307326/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Just to be clear: If you restrict yourself to "collision-prone" SHA1s, there's a 1/2^63 chance of conflict. With normal (random) SHA1s, the chance is 1/2^80. Deliberately creating a conflict with a given SHA1 (second preimage attack) is still 1/2^160, and the chance of that second preimage being non-gibberish substantially lower.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307326/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 15, 2008 19:45 UTC (Sat) by <b>scarabaeus</b> (subscriber, #7142)
+       [<a href="http://lwn.net/Articles/307337/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+IMHO nevets's suggestion is the wrong way round. For better performance, the initial checksum should be a very fast 64-bit checksum - possibly even simpler than CRC. (The style of weak+fast checksum used by rsync springs to mind...)<br>
+<p>
+
+Even on systems with huge amounts of pages, the likelihood of hash collisions will be far too low to affect performance - also because memcmp() will abort early if it detects differences between the compared pages.<br>
+</p><p>
+
+This way, you save memory for the checksums (which also improves hash lookup performance), and the checking will be faster.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307337/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 18, 2008 14:41 UTC (Tue) by <b>nevets</b> (subscriber, #11875)
+       [<a href="http://lwn.net/Articles/307620/">Link</a>]
+    </p>
+    Actually, my comment was a little facetious. My point was not a way to fix this algorithm, but a comment against what git is doing. The git repo really relies on absolutely no conflicts. If one happens then the database is corrupted. I keep hearing that the chances of this happening is astronomically low, but the fact that the chance <b>can</b> happen, bothers me.
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307620/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 18, 2008 16:07 UTC (Tue) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/307632/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Jean-Luc Herren did the maths recently on the git list, in <br>
+&lt;48E4ABC0.80100@gmx.ch&gt;:<br>
+<p>
+
+In case it's interesting to someone, I once calculated (and wrote<br>
+down) the math for the following scenario:<br>
+</p><p>
+
+  - 10 billion humans are programming<br>
+  - They *each* produce 5000 git objects every day<br>
+  - They all push to the same huge repository<br>
+  - They keep this up for 50 years<br>
+</p><p>
+
+With those highly exagerated assumptions, the probability of<br>
+getting a hash collision in that huge git object database is<br>
+6e-13.  Provided I got the math right.<br>
+</p><p>
+
+So, mathematically speaking you have to say "yes, it *is*<br>
+possible".  But math aside it's perfectly correct to say "no, it<br>
+won't happen, ever".  (Speaking about the *accidental* case.)<br>
+</p><p>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307632/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 18, 2008 18:37 UTC (Tue) by <b>dlang</b> (subscriber, #313)
+       [<a href="http://lwn.net/Articles/307674/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+git will never overwrite an object that it thinks that it has.<br>
+<p>
+
+so git could get corrupted, but it would not be corrupted by overwriting old data and loosing it, it would be corrupted by not saving new data (much easier to detect as that is the data that people would be trying to use)<br>
+</p><p>
+
+there is an option in git (I don't remember if it's compile time or not) to do additional checking when saving data to check that the data is the same even if it has the same hash, and give an error if it's not the same.<br>
+</p></div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307674/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 16, 2008 13:39 UTC (Sun) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/307367/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+It only generates a hash of the first, what, 128 bytes of the page, so any <br>
+pages with the same leading 128 bytes will 'collide' (in the sense that <br>
+the first 128 bytes are identical, but the rest are not).<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307367/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 18, 2008 4:30 UTC (Tue) by <b>nevets</b> (subscriber, #11875)
+       [<a href="http://lwn.net/Articles/307588/">Link</a>]
+    </p>
+    From your friends at Wikipedia, there is an <a href="http://en.wikipedia.org/wiki/SHA1">article on SHA-1</a>
+<p>
+<i>SHA-1 (as well as SHA-0) produces a 160-bit digest from a message with a maximum length of (2^64 &minus; 1) bits</i>
+</p><p>
+
+This looks like it can be much bigger than 128 bytes.
+
+  </p></div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307588/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+<div class="Comment">
+
+<div class="CommentBox">
+  <p class="CommentTitle">Why not just use the SHA1 only?</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 18, 2008 16:01 UTC (Tue) by <b>nix</b> (subscriber, #2304)
+       [<a href="http://lwn.net/Articles/307630/">Link</a>]
+    </p>
+    <div class="FormattedComment">
+
+Yeah, but for speed reasons they're only hashing the first N bytes (I <br>
+think it's 128), rather than the whole page. It's a sensible tradeoff, I <br>
+think.<br>
+</div>
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/307630/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+
+<div class="CommentBox">
+  <p class="CommentTitle">ksm and mergemem</p>
+  <div class="CommentBody">
+    <p class="CommentPoster">Posted Nov 25, 2008 21:46 UTC (Tue) by <b>anton</b> (subscriber, #25547)
+       [<a href="http://lwn.net/Articles/308592/">Link</a>]
+    </p>
+    KSM is essentially the same idea as <a rel="nofollow" href="http://mergemem.ist.org/">mergemen</a>, which was developed
+about 10 years ago. This is not just useful for virtual machines, but
+also for ordinary multi-user machines (as explained by the lwn-reading
+example), and that's what mergemem was developed for. Unfortunately
+for mergemem, RAM was cheap, and few people in the Linux community
+seemed to be interested in multi-user systems. Maybe with the current
+interest in virtual machines KSM will fare better.
+
+  </div>
+  <p>
+  </p><div class="CommentReplyButton">
+    <form action="http://lwn.net/Articles/308592/comment" method="post">
+      <input value="Reply to this comment" type="submit">
+    </form>
+  </div>
+  
+</div>
+</td> <!-- MC -->
+<td class="RightColumn">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4358676377058562";
+/* 300x250, created 3/15/09 */
+google_ad_slot = "5103603097";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="show_ads.js">
+</script>
+</td>
+</tr></tbody></table></td>
+</tr></tbody></table><!-- endpage -->
+
+        <center>
+        <p>
+        <font size="-2">
+
+        Copyright &copy; 2008, Eklektix, Inc.<br>
+        Comments and public postings are copyrighted by their creators.<br>
+        Linux  is a registered trademark of Linus Torvalds<br>
+        </font>
+        </p></center>
+        
+            <script type="text/javascript">
+
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script src="ga.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            try {
+            var pageTracker = _gat._getTracker("UA-2039382-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+            
+        </body>
+</html>
